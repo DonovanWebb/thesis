@@ -137,4 +137,5 @@ ax.text(
     horizontalalignment="left",
     fontsize=12,
 )
-plt.savefig("rbm_fit.pdf")
+# plt.savefig("rbm_fit.pdf")
+plt.show()
