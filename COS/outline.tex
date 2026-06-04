@@ -1,0 +1,77 @@
+\documentclass{report}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{geometry}
+\geometry{margin=1.5in}
+
+\title{Confirmation plan}
+\author{Donovan Webb }
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Outline}
+Here is an outline of the confirmation of status thesis chapter. This will be the \textit{Apparatus Characterisation} section, which will include both a description of the \textit{FastGates} experiment, as well as current benchmark values.\\
+
+The functions of this chapter are as follows.
+\begin{enumerate}
+    \item Provide a resource on the physical apparatus for future members of FastGates. This includes bare metal vacuum system, the NPL trap, Kasli control system, trap RF chain, laser access, imaging system (high NA, camera), and laser systems (emphasis on quadrupole laser). This will also include a smaller section of the planned single addressing and standing wave systems.
+    \item To collect a ``spec-sheet" of \textbf{relevant} bench marked measurements, comparing these values with both state-of-the-art and to what we estimate is required for our immediate experiments.
+    \item Outlining the methods in which we control the experiment, with an emphasis on the characterisation measurements we have performed to date and the morningly calibrations.
+\end{enumerate}
+
+\noindent With these points in mind (in brackets), a wish-list for figures and sections are as follows.
+\begin{itemize}
+    \item (1) Block diagram of control systems. Example figure 4.1 from Vera's thesis, figure 3.1 from Laurent's thesis, and figure 3.1 from Clemens's thesis.
+    \item (1) NPL trap with relevant size scales and voltage parameters (mention GW).
+    \item (1) Solidworks of vacuum system, especially trap placement with objectives for standing waves (mention MM and SS).
+    \item (1) Technical drawing of beam geometries and magnetic field to ion chain. Example figure 4.4 from Vera's thesis.
+    \item (1) Schematic of single addressing system (mention IO).
+    \item (1) $^{40}$Ca$^+$ level structure highlighting lasers we have access to and defined qubit.
+    \item (1) Quadrupole laser beam path and control loops. PDH lock, FNC (stabiliser mention AA), cavity creep over time, total power reached. Estimated power at ion and what interactions this allows us to do. Inside of the solstis cavity (mention repair and RT, also see figure 4.5 on Vera's thesis).
+    \item (1) Table of all AOMs and offset frequencies. Could have small comment of laser lab here?
+    \item (1) Table of laser powers in mW and with aimed saturation intensities for doppler idle, cooling, readout (see table 3.1 from Clemens's thesis).
+    \item (1) Section 3.5.1 in Clemens's thesis has a nice section on the sinara hardware.
+    \item (2) Thermometry after Doppler (include calculation of Doppler limit) and sideband cooling (include calculation of sideband cooling limit), using our closed loop. At this point a word on a sub-doppler cooling technique may be useful as this is a likely addition when we have longer chains.
+    \item (2) *Heating rate measurements at normal operating mode frequency and as frequency varies.
+    \item (2) *Motional mode stability. Measuring motional mode frequency by tickling and by quadrupole sideband scan. Comparing the two like in Clemens figure 7.5. There is also a section here about the squareatron and temperature stabilisation. Finding resonator frequency. Measuring stability by sitting at peak and at edge and looking at drifts over time. Looking at motional coherence times. This can be coupled with the heating rates.
+    \item (2) *Magnetic field gradient along ion chain.
+    \item (2) *SPAM. State preparation via optical pumping. Mention that we do not have desired polarisation control or frequency selectivity on the 397. Readout characterisation with NA 0.6 lens. Compare readout histograms of fast 30 us readout to Doppler cold 100 us readout.
+    \item (2) Randomised bench marking of single qubit gates.
+    \item (2) *Coherence times of various transitions and with box on/off and with 729 FNC in place. Here can extract the contributions of laser and magnetic field noise?
+    \item (2) Two-qubit Molmer Sorensen gate. Discuss likely limitations being nearby hot motional modes, no pulse ramping.
+    \item (3) all visible motional modes on large detuning scan at $5$~G. Can compare when have all quadrupole transitions available or when we selectively omit transitions via polarisation.
+    \item (3) *Intensity stabilisation. Description of control SUServo loop and measurements of stability?
+    \item (3) Autoload and recrystallisation routines.
+    \item (3) Rabi and Ramsey scans for magnetic field and laser offset calibrations. Also a mention on Robust Phase Estimation routine but not into detail.
+    \item (3) *SDF scans and extracting SDF strength and AC Stark shifts. Motional mode calibrations via tickle.
+    \item (3) Measuring tone imbalance, phase offsets, and non-linear effects of four tones on one AOM for squeezing experiments. Here a mention of upgrade from urukul to phaser or Qblox system could be nice. Also, a mention of pulse ramping requirements.
+\end{itemize}
+
+\noindent Out of these figures, what would still need to be measured in the lab:
+\begin{itemize}
+    \item Heating rate vs. motional mode frequency.
+    \item Displace ion and measure magnetic field.
+    \item Thermometry after Doppler cooling.
+    \item Motional mode frequency using sideband at multiple different powers (to account for light shift).
+    \item Readout thresholding for two ions (may have this somewhere already, but not with the updated readout).
+    \item Check which coherence time measurements are missing of the various combinations of quadrupole transition and MuMetal shield configuration.
+    \item Intensity stabilisation bench marking. Can use Vera's method but likely we do not need to be so precise. Perhaps can validate what level of intensity stabilisation we need for our desired experiments and verify that we are there?
+    \item Motional mode stability bench marking. Have a look at Sydney group thesis for how they measured this.
+    \item We have one method of finding SDF strength, but likely, off-resonant duration scans may be better.
+\end{itemize}
+
+Summary of other similar thesis chapters: \\
+
+\begin{tabular}{r|c|p{0.5\linewidth}}
+    \textbf{Name} & \textbf{Chapter} & \textbf{Description} \\
+    &&\\
+    Vera Sch\"{a}fer & 4, 5 & New Blade characterisations. \\
+     Keshav Thirumalai & 4 & New Blade. Mainly about vacuum design and laser systems. \\ 
+     Clemens L\"{o}schnauer & 3, 7 & Comet apparatus description and initial characterisation. \\
+     Laurent Stephenson & 2 & HOA2 apparatus description. \\
+     Ana Sotirova && Abaqus apparatus description. \\
+\end{tabular}
+
+\end{document}

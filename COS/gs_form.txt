@@ -1,0 +1,144 @@
+--------------------------------------------------------------------
+Progress report
+Please give a brief indication of the nature and progress of your research to date (please refer to any departmental or divisional guidance notes or handbooks that you have received for additional requirements). 
+--------------------------------------------------------------------
+
+The research in the FastGates group has three main streams: fast two-qubit entangling gates for use in discrete variable quantum computing DVQC, utilising the motion of the ion for quantum computation in continuous variable quantum computing CVQC, and using both spin and motion components of the ion as an efficient analog simulator.
+
+On a previous experimental apparatus within the group, Oana Băzăvan and Sebastian Saner demonstrated fast gates for two ion crystals, however the gate duration was limited due to maximum achievable laser intensity at the ion position [1]. Single mode squeezing, and higher order motional squeezing interactions were also demonstrated on a single ion [2]. Scaling of both these methods, either in number of ions, or number of accessible motional modes, was predicted to be difficult on this previous apparatus, and so in parallel a new system was designed.
+
+Year I: My first year consisted of building up the new apparatus, while in parallel learning from Oana and Sebastian how to operate the previous apparatus. 
+The new apparatus assembly consisted of: 
+- Clean room work to construct the ultra high vacuum system required for long term trapping of ions. 
+- Designing and building the required lasers, optics and imaging systems, for initial trapping.
+- Assembling and programming a real-time control system for interacting with the assembled hardware.
+During this time the final data for the fast-entangling gates via standing waves was taken on the old apparatus [1]. I contributed to this work by characterising standing wave driven single qubit gate error via randomised benchmarking.
+Together with summer student, Iver Oevergaard, we also developed a single-ion addressing system for use in the new setup.
+
+At the end of the first year, ions were successfully trapped in the new setup.
+
+Year II: The first half of this year was spent both improving the stability and reliability of the apparatus in trapping ions, as well as assembling the narrow linewidth Ti:Sapphire laser system required for coherent control of the two energy levels used as the qubit. Both these steps took longer than initially expected due to a faulty connection supplying the trap voltages, and due to a damaged mirror in the Ti:Sapph cavity. However, once these issues were fixed progress on coherent control of the ion was rapid.
+The second half of the year consisted of introducing and characterising the required spin and motion controls of the ion's quantum state. This work, including demonstrations of single- and two-qubit gates, is detailed in the chapter submitted in support of the Confirmation of Status. On the previous apparatus, we demonstrated squeezing, and other higher phonon order motional interactions following the method outlined in [3]. This motional control was further extended by utilising the interactions spin conditioning. This work resulted in the two preprints [2,4], which are in the process of publishing.
+Iver rejoined the group as a DPhil student, and Kai Shinbrough joined as a PostDoc on the new apparatus.
+
+Year III (first half): This year started with Oana finalising her thesis and Sebastian beginning to write his. 
+With the characterisations completed on the new setup, the focus has shifted towards the hybrid quantum computing demonstrations we wish to explore. Specifically, we are working to demonstrate squeezing of the motional state via spin-dependent forces.
+In parallel, the single-ion addressing system — led in design by Iver — is currently being commissioned. This will complete the major hardware requirements for progressing both research strands.
+
+
+1. Saner, S. et al. Breaking the Entangling Gate Speed Limit for Trapped-Ion Qubits Using a Phase-Stable Standing Wave. Phys. Rev. Lett. 131, 220601 (2023).
+2. Băzăvan, O. et al. Squeezing, trisqueezing, and quadsqueezing in a spin-oscillator system. Preprint at http://arxiv.org/abs/2403.05471 (2024).
+3. Sutherland, R. T. & Srinivas, R. Universal hybrid quantum computing in trapped ions. Phys. Rev. A 104, 032609 (2021).
+4. Saner, S. et al. Generating arbitrary superpositions of nonclassical quantum harmonic oscillator states. Preprint at https://doi.org/10.48550/arXiv.2409.03482 (2024).
+
+
+
+--------------------------------------------------------------------
+Timetable
+What is your proposed timetable for submission?
+--------------------------------------------------------------------
+
+The proposed thesis submission date is September 2026, corresponding to 12 terms from the start of the programme in October 2022.
+Thesis writing is expected to take approximately 4-5 months, with the transition from experimental work to writing anticipated around April 2026.
+
+The next 9 months of planned research is outlined in more detail in the Thesis Completion Plan document.
+
+Year III (second half): 
+Work will continue on demonstrating squeezing in the new setup, and, should we decide to pursue it, will likely lead to a publication on measuring Feynman diagrams via squeezing characteristic functions, as described in [5]. We aim for this experimental work to take between 1 and 3 months. 
+Once squeezing has been demonstrated, access to the full suite of single- and two-mode CVQC interactions can be explored. These are all based on the same core interaction, and the control code has been written for the previous apparatus. As such, it is predicted that this step will not take considerable time.
+
+The single-ion addressing system, alongside the coherent motional control, will allow us to demonstrate addressing and readout of individual motional modes - an important prerequisite for CVQC with trapped ions. This experimental work, and writing up the results for publication is predicted to take between 2-4 months.
+
+Year IV (first half): 
+With established control over both spin and motional degrees of freedom, the system is well-suited for implementing analogue simulations and algorithms that require interactions between spins and bosons. Experimental demonstrations of gauge theories [6] or fundamental operations from the quantum factoring algorithm [7] would be particularly interesting. 
+Similarly, with this control, and the laser intensities we can supply to the ions, a demonstration of fast-entangling gates on a multi-ion (>5) crystal would be both in reach and highly impactful. 
+It is highly unlikely these will both be explored in my thesis, however they are included for completeness.
+
+Should the last two projects prove unreasonable in the time remaining, possible other options are:
+- Further demonstrations of the full CVQC gate set, and demonstrations of short algorithms consisting of concatenated elementary gates.
+- Expand the study of motional mode readout, which is a critical requirement for scaling CVQC systems in trapped ions.
+
+Year IV (second half): 
+The final remaining months will be devoted to the writing of my Thesis.
+
+5. Varona, S. et al. Towards quantum computing Feynman diagrams in hybrid qubit-oscillator devices. Preprint at https://doi.org/10.48550/arXiv.2411.05092 (2024).
+6. Băzăvan, O. et al. Synthetic $\mathbb{Z}_2$ gauge theories based on parametric excitations of trapped ions. Preprint at http://arxiv.org/abs/2305.08700 (2023).
+7. Brenner, L., Caha, L., Coiteux-Roy, X. & Koenig, R. Factoring an integer with three oscillators and a qubit. Preprint at https://doi.org/10.48550/arXiv.2412.13164 (2024).
+
+--------------------------------------------------------------------
+Section A
+Please describe briefly any subject specific research skills that you have developed or improved in the course of your time as a Research Student. For example, these might include: research methodology; data analysis and management; record keeping; bibliographical skills; presentation of research.
+--------------------------------------------------------------------
+
+Writing both daily logs of apparatus characterisation, and explicit notes for future reference and troubleshooting.
+
+Organising and maintaining a functional lab where equipment (especially cables) are well labelled, documented, and kept secure against accidental use or damage.
+
+Aligning and operating laser systems safely.
+
+Running simulations (in Python and Julia) to model experimental interactions. This aids in parameter optimisation, debugging, and error analysis.
+
+Programming with emphasis on version control for good traceability.
+
+Managing references and literature using a digital reference manager (Zotero). 
+
+Developing scientific writing and presentation skills, with valuable and extensive feedback from other students, postdocs, and supervisors.
+
+
+--------------------------------------------------------------------
+Section B
+Please describe briefly any personal and professional skills in which you have received training or which you have enhanced during the course of your time as a Research Student. For example: time management, language skills, IT skills, team work, problem solving, presentation skills, teaching skills, career planning. 
+--------------------------------------------------------------------
+
+Attended Scientific writing seminars organised by the "Early Career Conference in Trapped Ions".
+
+Gained teaching experience by tutoring B3 Atomic and Laser Physics for New College, Maths for 2nd year Material Scientists at St Edmund Hall,
+and the MPLS bridging course.
+
+Over the last few years have improved supervision role by hosting two summer students (10 weeks each), 5 A-level students (one week), and one Masters student (one term). I organised their projects and acted as point of contact throughout their time.
+
+Developed time management and planning skills during the apparatus construction by critically assessing what is the next limiting task. This was crucial to mitigate delays due to purchase lead times, or malfunctioning equipment.
+
+--------------------------------------------------------------------
+Section C
+Please identify any subject-specific or personal and professional skills in which you (and your supervisor(s)) foresee the need for further development or training. 
+--------------------------------------------------------------------
+
+I would like to improve my CAD modelling skills. This could be achieved by taking on small design projects within the lab to gain practical experience with Solidworks and Zemax.
+
+--------------------------------------------------------------------
+Section D
+Please list any other activities which have contributed to the development of your work. For example, these might include courses attended, conference presentations given, publications, opportunities to undertake teaching, etc. 
+--------------------------------------------------------------------
+
+Poster presentations at:
+
+    DPG Spring Meeting of the Atomic, Molecular, Quantum Optics and Photonics Section (SAMOP) – 2023
+
+    UK Quantum Computing and Simulation (QCS) Hub Annual Meeting – 2023
+
+    Army Research Office Quantum Computing and Physics Research (ARO QCPR) Update Meeting – 2023
+
+    Okinawa School on Coherent Quantum Dynamics – 2024
+
+    European Conference on Trapped Ions (ECTI) – 2025 (upcoming)
+
+Conference Talks at:
+
+    Army Research Office Quantum Computing and Physics Research (ARO QCPR) Update Meeting – 2023
+
+    Early Career Conference in Trapped Ions – 2024
+
+Courses:
+    Okinawa School on Coherent Quantum Dynamics - gave an overview of different research areas in Quantum physics/computing, including lab tours at the Okinawa Institute of Science and Technology.
+
+Publications:
+    1. Saner, S. et al. Breaking the Entangling Gate Speed Limit for Trapped-Ion Qubits Using a Phase-Stable Standing Wave. Phys. Rev. Lett. 131, 220601 (2023).
+    2. Băzăvan, O. et al. Squeezing, trisqueezing, and quadsqueezing in a spin-oscillator system. Preprint at http://arxiv.org/abs/2403.05471 (2024).
+    3. Saner, S. et al. Generating arbitrary superpositions of nonclassical quantum harmonic oscillator states. Preprint at https://doi.org/10.48550/arXiv.2409.03482 (2024).
+
+Teaching:
+    
+    B3 Atomic and Laser Physics.
+
+    Mathematics for Material Scientists
