@@ -171,9 +171,16 @@
 %%%%% CHAPTERS
 % Add or remove any chapters you'd like here, by file name (excluding '.tex'):
 \flushbottom
+\immediate\write18{texcount -1 -sum main.tex > wordcount.txt}
+%\input{wordcount.txt}
 \include{chapters/overview}
 \include{chapters/ch0-motivation}
+\include{chapters/ch1-apparatus}
 \include{chapters/ch2-characterisation}
+\include{chapters/ch3-k_copy_rb}
+\include{chapters/ch4-motional_interactions}
+\include{chapters/ch5-virtual_distillation}
+\include{chapters/ch6-conclusion}
 
 
 %% APPENDICES %% 
@@ -181,8 +188,7 @@
 %    page that just says "Appendices" to signal the end of your main text.
 \startappendices
 % Add or remove any appendices you'd like here:
-%\include{chapters/appendix}
-\include{chapters/ch1-apparatus}
+\include{chapters/appendix}
 
 
 %%%%% REFERENCES

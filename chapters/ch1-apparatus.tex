@@ -36,7 +36,9 @@
     with the apparatus we have built, at the time scales set by our interaction
     strengths, we require a sophisticated and custom control system.
 
-
+\section{System Schematic}
+% Main points:
+    % Block diagram of the system
 
 \section{The Ion Trap}
 \label{sec:The Ion Trap}
@@ -45,6 +47,7 @@
     % Short intro into the parts of the ion trap DC/RF fields.
     % Trap package CAD
     % Solidworks models of CAD with labels
+    % Construction and S11 measurements of electrodes
     % Fastino channels
     % Experimental parameters for stable trapping
     % Quote the values we use for trapping/experiment
@@ -171,6 +174,11 @@
     % Quote values we use.
 % Pre reqs:
     % NPL trap geometry
+% Figures
+    % Block diagram of the RF chain with values for each element.
+    % Q factor of the resonator
+    % Central frequency using ion
+
     To utilise radial motional modes for low error quantum gates, we require the
     radio frequency (RF) field that produces the desired trapping
     pseudopotential to be both frequency and amplitude stable. Our \emph{NPL}
@@ -210,6 +218,7 @@
     % Quote values we use.
 % Pre reqs:
     % NPL trap geometry
+
     Voltage is supplied to the 40 DC electrodes using \emph{Fastino}, a
     multi-channel DAC part of the \emph{Artiq Sinara} hardware
     ecosystem.\\
@@ -218,7 +227,8 @@
     DC-b5 and DC-f5, where b and f correspond to the back and front plane of the trap. 
     The DAC provides $\sim 10$~V to these electrodes to produce an axial frequency of 1.6~MHz.
     % XXX include section on compensation fields?
-    
+    % Show filter boards and stages of filtering?
+ 
 \section{Magnetic Field}
 \label{sec:Magnetic Field}
 % Main points:
@@ -240,6 +250,8 @@
 \label{sec:Vacuum System}
 % Main points:
     % Technical drawing of beam geometries and magnetic field to ion chain.
+    % In vacuum prisms
+    % Materials and techniques used
     % Drawing of ion trap package with high NA lenses
         % High NA sandwich
     % Standing waves at the ion
@@ -335,6 +347,18 @@
     Interconnects}. \\
     % XXX seen in figure~\ref{fig:can} c.
 
+\section{System Grounding}
+% Main points:
+    % Describe Fastino DAC and the available electrodes on the NPL trap
+    % Quote values we use.
+% Pre reqs:
+    % NPL trap geometry
+    % RF chain
+    % DC voltages
+    % Block diagram of the system
+    % Vacuum system
+    Poor ground design (or no design at all).
+
 \section{Imaging System}
 \label{sec:Imaging System}
 % Main points:
@@ -355,9 +379,11 @@
 % Main points:
     % State which lasers we need access to
     % Calcium level structure 
+    % Beam paths
     % What frequency control do we need on each? PDH lock, AOM etc.
     % Table of all AOMs and offset frequencies
     % Table of laser powers in mW and with aimed saturation intensities for doppler idle, cooling, readout, and laser linewidths.
+    % Intesity stabilisation using SUServo
 % Pre reqs:
     % Calcium level structure
     % 5 G field
@@ -530,3 +556,14 @@
     (AODs)~\cite{nagourney2014quantum, li2023low-crosstalk} are used. The beam deflection angle is proportional to the
     drive frequency supplied to the AOD. \\
     %\mccorrect{XXX could extend this section substantially.} \\
+
+\section{Control System}
+% Main points:
+    % Artiq and Sinara
+    % FPGA control
+
+\section{Ion Loading}
+% Main points:
+    % Describe the ion loading process
+    % Describe the atomic source oven
+    % Describe the photoionisation process and lasers used
