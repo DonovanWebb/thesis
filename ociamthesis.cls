@@ -409,9 +409,12 @@
 
 % JEM: for crazy multi character set quotes and Unicode and all
 \usepackage{lmodern}
-\usepackage[LGR,TS1,T1]{fontenc}
+%\usepackage[LGR,TS1,T1]{fontenc}
+\usepackage[TS1,T1]{fontenc}
+
 \usepackage[utf8]{inputenc}
-\usepackage[greek,english]{babel}
+%\usepackage[greek,english]{babel}
+\usepackage[english]{babel}
 \usepackage{csquotes}
 \hyphenpenalty=500
 \def\longs{{\fontencoding{TS1}\selectfont s}}
