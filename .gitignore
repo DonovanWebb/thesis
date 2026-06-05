@@ -46,3 +46,11 @@ chapters/ch3-k_copy_rb.aux
 chapters/ch5-virtual_distillation.aux
 chapters/ch6-conclusion.aux
 chapters/ch4-motional_interactions.aux
+chapters/ch1-theory.aux
+chapters/ch2-apparatus.aux
+.gitignore
+chapters/ch3-characterisation.aux
+chapters/ch4-k_copy_rb.aux
+chapters/ch5-motional_interactions.aux
+chapters/ch6-virtual_distillation.aux
+chapters/ch7-conclusion.aux

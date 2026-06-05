@@ -10,35 +10,67 @@
 % Pre reqs:
     % Motivation for why we want this apparatus!
 
-    A vast effort is spent on the initial build-up of the ion trap system, but
-    throughout the life of the experiment, a greater effort is spent on its daily
-    maintenance.  I hope that this chapter will serve as a useful debugging-resource for future
-    members of the FastGates team, and as a detailed recipe for anyone
-    building a similar system. \\
+    After 70 years of ion confinement development (since the quadrupole mass
+    spectrometer in the 1950s~\cite{paul1990electromagnetic}), and the myriad
+    use-cases from time standards, to analytic chemistry, to quantum computing,
+    there are naturally many systems and thesi apparatus chapters in existance
+    today. As such, we structure this chapter in the following way: 
+    We start with the standard requirements of an ion trap system and introduce the unique motivation and design specifications of our system; 
+    We then present an abstract schematic of the system in
+    its current form, highlighting the constituent subsystems, and the optical
+    and electrical signal paths; 
+    The remaining sections of the chapter contain
+    the technical detail, perhaps more relevant to the practicing experimental
+    student, and the hardware enthusiastic.\\
 
-    Due to the size and complexity of the system, in this chapter we introduce an overview of
-    the design, motivated by the desired functions.  
-    Many such  ion trap experiment overviews exist in the theses of previous PhD
-    generations, and so we will limit the discussion here to the unique features
-    and capabilities of our system.\\
-    As a map for this section we state the landmark features of an ``ion trap''
-    experiment. First, to confine the ions, static and dynamic electric fields
-    are used which, due to ions possessing non-zero electric charge, can provide
-    trapping potentials, section~\ref{sec:The Ion Trap}. Due to the fragility of
-    the internal states of the ion (these are state -of-the-art sensors after
-    all), we must take great care in isolating the ion from any noisy
-    environment. This necessitates the use of ultra-high vacuum (UHV) systems,
-    section~\ref{sec:Vacuum System}, vibration isolation, and magnetic
-    shielding, section~\ref{sec:Magnetic Field}. To manipulate the internal
-    electronic states of the ion, local electric and magnetic fields
-    are created using RF antennae and, in this work, lasers, sections~\ref{sec:Laser
-    systems} and~\ref{sec:Narrow Line Width 729 Laser}.  Finally, to interface
-    with the apparatus we have built, at the time scales set by our interaction
-    strengths, we require a sophisticated and custom control system.
 
-\section{System Schematic}
+\section{Specification}
+\label{sec:Spec}
 % Main points:
     % Block diagram of the system
+    Ion-trap experiments are exceptionally versatile in their application, however in the vast search space of quantum-information applications, we want a system particularly tailored for three avenues of study: 
+    \begin{enumerate}
+        \item Error channels on multi-qubit chains.
+        \item Continuous variable quantum computing and simulation utilising the spin and motional degrees of freedom of the confined ions.
+        \item Fast two-qubit entangling gates via phase stabilised optical standing waves.
+    \end{enumerate}
+    These latter two research directions were explored within our group on a
+    previous apparatus, leading to state-of-the-art two-qubit entanglement rates
+    on the ion trap platform~\cite{schafer2018fast,saner2023breaking}, creation
+    of highly non-classical motional
+    states~\cite{bazavan2024squeezing,saner2024generating}, and a simulation of
+    Z2 gauge theories encoded via the spin and motional degrees of freedom of a
+    two-ion chain~\cite{bazavan2023synthetic, saner2025real-time}. However, hard
+    limitations of both scaling these demonstrations to longer ion chains, and
+    of interaction strength due to availible optical intensity, were often
+    restrictive. To solve both these issues, a new apparatus has been designed,
+    constructed, and characterised, motivated by these applications. Colloquilly
+    the system is named \textit{``FastGates''}, owing to its
+    experimental objectives, and we shall refer to it as such throughout this
+    chapter. \\
+    These objectives give the following specific control requirements:
+    \begin{itemize}
+        \item Storage of medium length (5-10) qubit registers~\ref{sec:The Ion Trap}.
+        \item Individual internal state control of each qubit~\ref{sec:Single Addressing System}.
+        \item Stable motional modes for storing quantum information~\ref{sec:Trap RF Chain}.
+        \item Dual high numerical apperture (NA) optical access for high-intensity standing waves~\ref{sec:Vacuum System}.
+    \end{itemize}
+    As the lifetime of such an apparatus extends past a single PhD generation, this thesis serves as a point-in-time description of the system, and where applicable, the planned future extensions will be highlighted as such. An abstract schematic of the current configuration is shown in figure~\ref{fig:apparatus} with blocks resembling either electronic, mechanical, or optical subsystems.
+
+    \begin{figure*}
+        \begin{center}
+        \includegraphics[width=\linewidth]{figures/pdf_figure/schem_combined.pdf}
+        \caption{Block diagram schematic of the \textit{FastGates} apparatus.
+        Blocks resemble discrete subsystems, which shall be discussed within
+        this chapter. lines resemble relevant optical (free-space or in-fibre),
+        RF, DC, and communication paths between subsystems. The right panel
+        highlights closed feedback loops for laser power and frequency
+        stabilisation. Block location signifies whether the device is in-vacuo,
+        within the magnetic shielded (MuMetal) box, within the ``trap-lab'', or
+        within the ``laser-lab''.  }
+        \label{fig:apparatus}
+        \end{center}
+    \end{figure*}
 
 \section{The Ion Trap}
 \label{sec:The Ion Trap}
@@ -181,24 +213,43 @@
 
     To utilise radial motional modes for low error quantum gates, we require the
     radio frequency (RF) field that produces the desired trapping
-    pseudopotential to be both frequency and amplitude stable. Our \emph{NPL}
-    trap is rated for a max peak-to-peak voltage of 400~Vpp on the RF
-    electrodes. Here we describe the elements of the ``RF chain'' that supplies
-    this voltage. \\
-    Our frequency source is a DDS-based synthesiser, named \emph{Urukul}, part
-    of the \emph{Artiq Sinara}~\cite{kasprowicz2020artiq} hardware ecosystem. The
-    \emph{Urukul} is operated at maximum output power, +10~dBm, and with a frequency $\sim 27.8$~MHz. This
-    signal is then fed to an ``ultra-low noise limiting amplifier'' named
-    \emph{Squareatron}. The purpose of \emph{Squareatron} is to
-    greatly reduce the amplitude noise of the RF signal, $V_{\rm RF}$, which is
-    key to low radial mode frequency drifts, as radial mode frequency $\omega_{x,y} \propto V_{\rm RF}$~\cite{wineland1998experimental}. The \emph{Squareatron} outputs +17.4~dBm,
-    which is subsequently attenuated by 19.5~dB. The signal is then amplified by a
-    further 33.7~dB using a \emph{Mini-Circuits ZHL-1-2W-S+}, high power
-    amplifier. The signal is now +32 dBm RF power, enough to drive the trap
-    electrodes. To impedance match the 50~$\Omega$ line from the amplifier to
+    pseudopotential to be both frequency and amplitude stable. Furthermore, as the natural time scale for two-qubit gate durations is $\tau = 2\pi/\omega_m$ (see section~\ref{sec:fast_gates}), where $\omega_m$ is the motional mode angular frequency, then greater motional mode frequency is desired for fast entanglement.
+    From equation~\ref{eqn:pseudo_pot}, it can be seen that radial motional mode frequency is proportional to RF voltage, and inversely proportional to the frequency.
+    Our \emph{NPL} trap is rated for a max peak-to-peak voltage of $400$~Vpp on the RF
+    electrodes. We currently operate with a 10\% safety margin at around $360$~Vpp. 
+    % See OneNote 2026-05-18 13.35 dBm +17 dB = 30.35 dBm -> 20.8 Vpp
+    % See Onenote 2023-10-24 20 pF Capacitance
+    The RF chain which provides this signal is abstractly shown as the chain:\\
+    \textit{DDS (Urukul) -> Non-linear voltage clamp (Squareatron) -> RF-amplifier +30 dB -> Resonator -> Vacuum feedthrough -> Trap rail electrodes} \\
+    and embedded within the schematic~\ref{fig:apparatus}.\\
+    The frequency source is a direct-digital-synthesiser (DDS), named \emph{Urukul}~\cite{kasprowicz2022urukul}, part
+    of the \emph{Artiq Sinara}~\cite{kasprowicz2020artiq} hardware ecosystem. Urukul is used extensively in our lab for driving AOMs and here used as the source drive of our trap RF.
+    The \emph{Urukul} is operated at maximum output power, +10~dBm, and with a frequency $\sim 35$~MHz.
+    As can be see in~\ref{eqn:pseudo_pot}, amplitude and frequency instability will directly lead to radial mode instability, which can limit motional mode coherence time (see section~\ref{sec:Motional Coherence} for characterisation with the ion). We measure the amplitude (AM) and phase noise (PN) across the RF chain to both verify low-noise operation, and to estimate error due to the inherent noise on the RF chain. Figure~\ref{fig:rf_chain}, panel $(a)$ displays the \emph{Urukul} AM/PN spectra when the control FPGA is either phase locked to an internal Silicon clock, or to an external $10~\unit{\mega\hertz}$ atomic clock. We measured a significant improvement of low frequency PN when the atomic reference is used.
+    Expanding equation~\ref{eqn:pseudo_pot} for small error terms... we find ... signifying that we are more sensitive to AM than PN noise, especially at the level measured from \emph{Urukul}.
+    The AM noise may be further reduced, at the cost of increased PN, by using a non-linear voltage clamp. We use an ``ultra-low noise limiting amplifier'' named
+    \emph{Squareatron} developed previously in the group, and further refined by \emph{Oxford Ionics}. 
+    The relatively AM noisy RF from \emph{Urukul} is input to 
+    \emph{Squareatron} and the output +17.4~dBm, signal is shown in panel $(b)$.
+    It can be seen that for the frequency range XX -XX  MHz, there is a significant XX dB suppression of AM. There is a measureable increase in PN across XX, but we consider this to have a negligible effect on mode stability.
+    Voltage is stepped up after this stage through a low-noise amplifier \emph{Mini-Circuits ZHL-1-2W-S+}, and subsequently through the custom matching resonator circuit.
+    A modest increase in PN and AM is introduced by the low-noise amplifier, as can be seen in panel $(c)$.
+    To impedance match the 50~$\Omega$ line from the amplifier to
     the small capacitance ($\sim 5$~pF) of the trap electrodes, an LC
-    impedance matching circuit is used. This LC circuit has a tuned resonant frequency of 27.84~MHz, and a
-    measured Q factor of 43.8 found using a vector network analyser and fitting S11 impedance measurements.
+    impedance matching circuit, with topology shown in figure~\ref{fig:resonator}, is required. 
+    This resonator has three main effects on our system
+    \begin{enumerate}
+    \item The source $50 \unit{\ohm}$ is matched to the (almost) purely capacitive load.
+    \item The voltage step up provides the neccesarry amplitude for high motional mode frequencies.
+    \item The input RF is bandpassed around the desired trapping frequency.
+    \end{enumerate}
+    The latter two points are practically useful, especially the bandpass effect of the resonator attenuating noise on the RF line, however, we have found thermal instability of the resonator quality factor and resonant frequency to 
+    be a previously limiting injection point of low frequency amplitude. As such multiple revisions of the resonator were trialled, and potentially a closed feedback loop will be neccessary for future experiments. 
+    The initial constructed resonator used an air core ``microspring'' inductor \emph{XXX}, which had two thermal load issues: first, the quality factor was limited by residual resistance of the inductor coil to $Q\sim 30$
+
+    This LC circuit has a tuned resonant frequency of 27.84~MHz, and a
+    measured Q factor of 66.7 found using a vector network analyser and fitting S11 impedance measurements.
+    % Q factor measurement 66.7 OneNote 2025-11-05
     This resonant matching circuit has three main effects: it ensures good power transfer
     between RF input and trap electrodes via impedance matching, it steps up the
     voltage to the required 400~Vpp, and it filters out RF noise and unwated harmonics due to
@@ -234,6 +285,11 @@
 % Main points:
     % Permanent magnets
     % MUMetal box
+    Due to the fragility of
+    the internal states of the ion (these are \textit{literally}
+    state-of-the-art magnetic field sensors), we must take great care in
+    isolating the ion from a noisy
+    environment.
     Stable Zeeman shifts of the ion energy levels are required for long spin
     coherence times (see section~\ref{sec:Coherence}), and for low error single-
     and two-qubit gates. A permanent magnet array of Samarium Cobalt,

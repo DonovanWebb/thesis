@@ -170,12 +170,12 @@ def log_chapters():
 def run_all():
     append_daily()
     log_chapters()
-    log_git_history()
+    # log_git_history()
 
     print("✔ LaTeX tracking complete:")
     print("  - daily word count logged")
     print("  - chapter structure logged")
-    print("  - git history updated")
+    # print("  - git history updated")
 
 
 if __name__ == "__main__":
