@@ -23,7 +23,6 @@
     the technical detail, perhaps more relevant to the practicing experimental
     student, and the hardware enthusiastic.\\
 
-
 \section{Specification}
 \label{sec:Spec}
 % Main points:
@@ -243,25 +242,13 @@
     \item The voltage step up provides the neccesarry amplitude for high motional mode frequencies.
     \item The input RF is bandpassed around the desired trapping frequency.
     \end{enumerate}
-    The latter two points are practically useful, especially the bandpass effect of the resonator attenuating noise on the RF line, however, we have found thermal instability of the resonator quality factor and resonant frequency to 
-    be a previously limiting injection point of low frequency amplitude. As such multiple revisions of the resonator were trialled, and potentially a closed feedback loop will be neccessary for future experiments. 
-    The initial constructed resonator used an air core ``microspring'' inductor \emph{XXX}, which had two thermal load issues: first, the quality factor was limited by residual resistance of the inductor coil to $Q\sim 30$
-
-    This LC circuit has a tuned resonant frequency of 27.84~MHz, and a
-    measured Q factor of 66.7 found using a vector network analyser and fitting S11 impedance measurements.
+    The latter two points are practically useful, especially the bandpass effect of the resonator attenuating noise on the RF line, however, changes to the resonators Q factor and central frequency due to thermal and mechanical noise can be a significant source of motional mode instability. Opting for stability, a PCB based design with good thermal management was seen as preferable to a large helical resonator, which is often used in ion trap experiments for its high Q factor. Aiming for a moderate Q factor of $\sim 50$ allows for a good voltage step up, and some bandpass filtering, without being overly sensitive to thermal and mechanical noise.  
+    The constructed resonator~\footnote{Credit to Emily Hirsch for construction of the recent resonator.} uses a hand wound inductor, $L\sim 0.8~\unit{\micro\henry}$, with toroidal iron powder core (Micrometals T80-6), and C0G (low tempco) rated ceramic capacitors, $C=5.4\unit{\pico\farad}$. The vacuum can feedthrough and trap were measured to present an $18 \unit{\pico\farad}$ load. The resonator had a measured  
+    Q factor of $66.7$, and a central frequency of $36.5 \unit{\mega\hertz}$.
     % Q factor measurement 66.7 OneNote 2025-11-05
-    This resonant matching circuit has three main effects: it ensures good power transfer
-    between RF input and trap electrodes via impedance matching, it steps up the
-    voltage to the required 400~Vpp, and it filters out RF noise and unwated harmonics due to
-    the narrow bandpass nature of the LC circuit. \\
-    If components are chosen well, and adequately protected from
-    environmental noise, this chain can produce the desired frequency and
-    amplitude stable RF. Characterisations of the motional mode
-    stability are discussed in section~\ref{sec:Motional Mode Stability}. We are
-    still yet to fully quantify and debug the motional stability against thermal
-    and mechanical noise, however it should be noted that other groups do opt
-    for active stabilisation of RF amplitude through closed feedback loops~\cite{milne2021construction}.\\
-    % Milne sydney trap RF chain 
+    % Remeasure Q factor and central frequency with ion as a probe.
+    Characterisations of the motional mode
+    stability are discussed in section~\ref{sec:Motional Mode Stability}.\\
 
 \subsection{Trap DC Voltages}
 % Main points:
@@ -269,16 +256,30 @@
     % Quote values we use.
 % Pre reqs:
     % NPL trap geometry
-
-    Voltage is supplied to the 40 DC electrodes using \emph{Fastino}, a
-    multi-channel DAC part of the \emph{Artiq Sinara} hardware
-    ecosystem.\\
+    Static fields are required for reshaping the trapping psuedo potential to the desired curvatures, for manipulating the ion chains, and for compensating stray electric fields. As shown in figure~\ref{fig:trap} a, the \emph{NPL} trap has $40$ DC electrodes and a direct connection to bias the substrate. 
+    Voltage is supplied to the $40$ DC electrodes using two
+    multi-channel DACs, known as \emph{Fastino}, part of the \emph{Artiq Sinara} hardware
+    ecosystem.
+    The Fastino outputs are filtered by a passive cascaded RC low pass filters with resistances, $R=2k$, and capacitances $C_1 = 2.2~\unit{\nano\farad}$ and $C_2 = 4.7~\unit{\nano\farad}$ yielding a $-3dB$ ``cut-off'' frequency of $7.4~\unit{\kilo\hertz}$. 
+    % Can calculate using 2-node KCL analysis to find transfer function H(s). Then go to H(jw), and take fact that |H(jw)| = 1/sqrt(2) at the cut-off frequency to find the value.
+    The final shunt capacitor is on an in-vacuum board within close proximity of the trap chip to mitigate RF pickup on the DC lines.
+    The in-vacuum board is connected to the trap chip via a custom PEEK interposer with embedded \emph{Fuzz buttons} for electrical feedthroughs.\\
     The ion is confined in the ``operation'' zone, seen in
     figure~\ref{fig:trap} c. The axial trapping is provided by electrodes
     DC-b5 and DC-f5, where b and f correspond to the back and front plane of the trap. 
-    The DAC provides $\sim 10$~V to these electrodes to produce an axial frequency of 1.6~MHz.
-    % XXX include section on compensation fields?
-    % Show filter boards and stages of filtering?
+    The DAC can provide up to $10$~V to these electrodes to produce an axial frequency of 1.6~MHz.
+
+\subsection{System Grounding}
+% Main points:
+    % Describe Fastino DAC and the available electrodes on the NPL trap
+    % Quote values we use.
+% Pre reqs:
+    % NPL trap geometry
+    % RF chain
+    % DC voltages
+    % Block diagram of the system
+    % Vacuum system
+    Poor ground design (or no design at all).
  
 \section{Magnetic Field}
 \label{sec:Magnetic Field}
@@ -396,24 +397,14 @@
     up is a potential issue for our DC lines. RF leaked onto our DC electrodes
     will create unwanted pseudopotential which can lead to unexpected mode
     geometries, or required compensation field. This leakage is mitigated through
-    an in-vacuum RC low pass filter board within close proximity of the trap
-    chip with a cutoff frequency of 17~kHz. The trap chip is mounted onto this
-    filter board via a custom Polyether ether ketone (PEEK) interposer with
-    electric feedthroughs via embedded \emph{Fuzz buttons}\footnote{Custom
-    Interconnects}. \\
+    the in-vacuum RC low pass filter board within close proximity of the trap
+    chip as mentioned in section~\ref{sec:The Ion Trap}.
     % XXX seen in figure~\ref{fig:can} c.
+\subsection{Trap Package}
+    % Trap chip 
+    % PEEK interposer, Fuzz buttons, in-vacuum PCB, Spider? arms, in-vacuum prisms, high NA sandwich
 
-\section{System Grounding}
-% Main points:
-    % Describe Fastino DAC and the available electrodes on the NPL trap
-    % Quote values we use.
-% Pre reqs:
-    % NPL trap geometry
-    % RF chain
-    % DC voltages
-    % Block diagram of the system
-    % Vacuum system
-    Poor ground design (or no design at all).
+\subsection{Beam Geometry}
 
 \section{Imaging System}
 \label{sec:Imaging System}
@@ -426,9 +417,20 @@
 
     The imaging system is used to collect fluorescence light from the ion chain
     for readout, and to image the ion chain for characterisation.
-    We aim for a separation of 5~\unit{\um} between ions, and require adequate distinguishability of ions in the imaged plane.
-    The system
-    consists of a high quantum-efficiency camera\footnote{Hamamatsu Orca-Fusion BT}, a f=200~\unit{\mm} relay lens, and the f=33~\unit{\mm} NA=0.6 objective. This gives a magnification of 6x, and considering the pixel size of 6.5~\unit{\um}, leads to a separation of 5 pixels between ions. The objective is on a 5-axis alignment stage with the z-axis focus controlled by a piezo micrometer for fine adjustment of the ion focus.
+    We aim for a
+    separation of 5~\unit{\um} between ions, and require adequate
+    distinguishability of ions in the imaged plane.
+    The system consists of a
+    high quantum-efficiency 
+    % How high?
+    camera\footnote{Hamamatsu Orca-Fusion
+    BT}, an $f=200~\unit{\mm}$ relay lens, and the $f=33~\unit{\mm}$ NA=0.6
+    objective. This gives a magnification of 6x, and considering the pixel size
+    of $6.5~\unit{\um}$, leads to a separation of 5 pixels between ions. The
+    objective is on a 5-axis alignment stage with the z-axis focus controlled by
+    a piezo micrometer for fine adjustment of the ion focus.\\
+    A PMT is also used...
+
 
 \section{Ca$^+$ Laser Systems}	
 \label{sec:Laser systems}
@@ -464,7 +466,13 @@
     %\mccorrect{XXX should quote finesse and FSR values here.}
     PDH locking is used to ensure that laser frequencies are stable to <1~MHz level, well below the natural line widths of all the dipole transitions listed above. The laser frequencies are continuosly monitored with a wavemeter\footnote{HighFinesse WS7}.\\
     Frequency and amplitude control for all lasers is achieved via acousto-optic modulators (AOMs) which are driven by Artiq integrated DDS chips, \emph{Urukuls}. The AOMs are used in a double pass configuration to allow shifts of the laser frequency by $\pm \sim 100$~MHz, with no significant angular shifts or loss of fibre coupling. 
+
+\subsection{Diode Lasers}
+\label{sec:Diode Lasers}
+% Four bore locking cavity
+% Beam paths? AOM DP and SP?
     
+
     
 \subsection{Narrow Line Width 729 Laser}
 \label{sec:Narrow Line Width 729 Laser} 
@@ -594,29 +602,47 @@
     % 729 system
     % High NA
     % Trap package
-    % Motivation for future experiments
-    A unique feature of our system is the ability to produce single ion addressing standing waves.
-    The design of this system is shown in
-    figure~\ref{fig:AOD}.  A single ion addressing system must be able to
-    illuminate selected ions in the crystal whilst the others remain
-    unperturbed. The advantage of single addressing, other than ion selectivity,
-    is the increased intensity of light due to the tight waist at the ion
-    location. \\
-    Our ions are separated by a distance $d\approx 5~\mu$m.  The diffraction limited radius for a
-    collimated 729-nm beam with an objective lens of NA = 0.6 is $\omega_0 = 386$~nm.  Aberrations present in real optical
-    components will cause the addressed spot to be increasingly non-Gaussian and
-    lead to unfavourable cross talk at the neighbouring ions. Therefore care was
-    taken in the optical design. See I. {\O}vergaard Master thesis~\cite{oevergaard2024limiting} for relevant design considerations and rationale.\\
-    To produce more than one addressed spot and to steer the spots along the ion
-    crystal, Acousto-Optical-Deflectors\footnote{ISOMET OAD1343-XY-T70S}
-    (AODs)~\cite{nagourney2014quantum, li2023low-crosstalk} are used. The beam deflection angle is proportional to the
-    drive frequency supplied to the AOD. \\
-    %\mccorrect{XXX could extend this section substantially.} \\
+    % Motivation f
+    Single ion addressing is a requirement for executing arbitrary circuits on a register of ion-qubits. Furthermore, it is advantageous to focus the optical drive onto the ion, increasing the intensity of light, and so driving faster gates.
+    % Cross talk errors link here?
+    A unique design feature of our system is the ability to produce single ion addressing standing waves whose spatial phase can be controlled individually for each ion, thus enabling any-to-any connectivity for fast engangling gates.
+    In the future we particularly wish to extend the fast two-qubit entangling gate work demonstrated in~\cite{saner2023breaking} on a multi-ion chain where multiple motional modes are present and contributing to the dynamics. \\
+    %
+    The design and construction of the single addressing system was led by Iver {\O}vergaard and, as of writing, has been in constant use in the experiment for around 1 year. Here we shall quote the design specification and relevant details of the single addressing system. In section~\ref{sec:Single Addressing char} we present the characterisation data upon installation. Further technical information can be found in IRO's Transfer report~\cite{oevergaard2025transfer}, availible upon request. \\
+    %
+    Multiple methods for single ion addressing have been developed in the ion trap community, including waveguide arrays~\cite{sotirova2024high-fidelity, integrated}, micro-mirrors~\cite{}, spatial-light-modulators~\cite{}, and acousto-optic deflectors~\cite{}. Each method has its own advantages and disadvantages in terms of speed, resolution, ease of integration, and scalability, and so choice of hardware is often a matter of experimental preference and constraints.
+    We require:
+    \begin{itemize}
+        \item Addressing of up to two ions in a $\sim 10$ ion chain with low crosstalk to neighbouring ions.
+        \item Fast reconfigureability of the beam position within a single experimental shot (i.e. between different gates within a single circuit execution).
+        \item Good optical power efficiency to ensure high intensity electric fields at the ion. 
+        \item Flexibility in beam positioning to allow for fine tuning of the overlap of two counterpropagating beams used to create the standing wave.
+        \item Individual phase control of each addressed beam.
+        \item Beam position stability to avoid power fluctuations.
+        \item A compact design to fit within the magnetic shielded region of the experiment.
+        \item Good telecentricity (fixed beam k-vector direction across the scanned area) to avoid unwanted travelling wave component in a standing wave gate scheme.
+        \item Zero frequency shift of the beam at the ion plane.
+    \end{itemize}
+    Crossed Acousto-Optic Deflectors (cAODs) are a popular choice for single ion addressing, offering fast rise times ($\sim 10~\unit{\micro\second}$), and good resolution over a large scanning area ($\sim 500$ resolvable spots with $2^\circ$ angular range) with zero frequency shift along the addressing axis. AODs operate through the same mechanism as AOMs, but are optimised for beam deflection rather than frequency modulation. As an addressing system
+    cAODs have poor scaling of power efficiency with the number of addressed spots, and so are not ideal for large scale systems. As we are interested in addressing $\leq 2$ ions at a time, this is not a significant issue for our system.\\
+    %
+    Figure~\ref{fig:single_address} (a) shows a schematic of the constructed addressing system. Due to space constraints within the magnetic shielded region, the optical elements are located on two height levels with a periscope steering the beam between them. The beam is delivered via single-mode polarisation maintaining fibre to the upper level. The beam is steered through the first AOD, with beam angle optimised for maximum diffraction efficiency into the $-1^{st}$ order. Two lenses in a 4f configuration re-image the deflection origin of the first AOD onto the second AOD. The second AOD is aligned for maximum diffraction efficiency into the $+1^{st}$ order. The cAOD arrangment is termed ``crossed'' as the second AOD is rotated by some angle $\alpha$ with respect to the first, so that the deflection from the second AOD has some orthogonal component to that of the first. When the two AODs are driven with RF tones of the same frequency, the output orders are listed: (0,0), (-1, +1), (-1,0), (0,+1). The second is the desired order for single ion addressing as it has zero frequency shift yet has some overall drive-frequency dependent deflection angle. To translate this deflection angle into some physical displacement at the ion plane, a telecentric scanning lens is used. The telecentricity ensures that the beam k-vector direction is fixed across the scanned area, which is important for standing wave gate schemes to avoid unwanted travelling wave components. At the intermediate focus after the scanning lens, the unwanted orders are blocked by an adjustable slit aperture. The beam polarisation is also cleaned and selected at this stage using a polarisation filter and half-wave plate. A plate beam splitter is used within the persicope to pick off $\sim 5\%$ of the light for monitoring on a photodiode, which is used in a feedback loop to stabilise the intensity at the ion plane (the same method as discussed in section~\ref{sec:Narrow Line Width 729 Laser}). The scan lens, in combination with a relay lens, forms a beam expander to increase the beam NA for the final objective lens to focus to a beam waist of $\approx 1.5~\unit{\micro\meter}$ at the ion plane.
+    %
+    % Wedge angle
+    % cAOD model numbers
+    % Degrees of freedom for beam alignment
+    Characterisation of the system (details given in section~\ref{sec:Single Addressing char}) showed that the addressing beam could be focused to a Gaussian waist of $1.50(1)~\unit{\micro\meter}$, measured by scanning a single trapped ion with Rabi experiments. The same beam was then tested in a five-ion chain, where the nearest-neighbour intensity crosstalk was measured to be $4.16(2)\times 10^{-4}$. 
+    % Expected errors?
+    % beam stability over time
+    % Other mitigations for crosstalk?
+    % How this links to k-copy RB?
+    % Standing wave design and phase control?
 
 \section{Control System}
 % Main points:
     % Artiq and Sinara
     % FPGA control
+    % Timing resolution
 
 \section{Ion Loading}
 % Main points:
