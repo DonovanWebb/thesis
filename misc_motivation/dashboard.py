@@ -1,5 +1,5 @@
 # file: app.py
-
+# streamlit run .\misc_motivation\dashboard.py
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt

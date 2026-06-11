@@ -1,0 +1,41 @@
+\documentclass[border=5pt]{standalone}
+
+\usepackage{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}
+
+% Main series path: Vin -> Rs -> C -> V1
+\draw
+(0,0) node[left] {$V_{\mathrm{in}}$}
+      to[R, l={$R_s$}] (2,0)
+      to[C, l={$C_1$}] (4,0)
+      node[circ, label=above:{$V_1$}] {};
+
+% Inductor branch
+\draw
+(4,0)
+      to[L, l_={$L$}] (4,-2)
+      node[ground] {};
+
+% Capacitive pick-off branch
+\draw
+(4,0) to[short] (6,0)
+      to[C, l_={$C_2$}] (6,-1)
+      node[circ] (pickoff) {}
+      to[C, l_={$C_3$}] (6,-2)
+      node[ground] {};
+
+% Pick-off annotation, vertical to avoid overlap
+\node at (6.45,-1) {$V_{\mathrm{p.o.}}$};
+
+% Load branch, moved further right
+\draw
+(6,0) to[short] (8,0)
+      to[generic, l={$Z_L$}] (8,-2)
+      node[ground] {};
+
+\end{circuitikz}
+
+\end{document}

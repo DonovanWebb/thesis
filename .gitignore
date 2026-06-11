@@ -54,3 +54,9 @@ chapters/ch4-k_copy_rb.aux
 chapters/ch5-motional_interactions.aux
 chapters/ch6-virtual_distillation.aux
 chapters/ch7-conclusion.aux
+.vscode/settings.json
+figures/make_figure/ch2/res_circ/resonator_circ.aux
+figures/make_figure/ch2/res_circ/resonator_circ.fdb_latexmk
+figures/make_figure/ch2/res_circ/resonator_circ.fls
+figures/make_figure/ch2/res_circ/resonator_circ.log
+figures/make_figure/ch2/res_circ/resonator_circ.synctex.gz
