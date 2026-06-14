@@ -89,59 +89,61 @@
 
     \begin{figure}
         \begin{center}
-        \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/NPL_trap.pdf}
+        \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/NPL_trap.pdf}
         \end{center}
         \caption{
             Schematics of the \emph{NPL} trap chip used in this experiment.
-            \textbf{a)} A front view of the trap chip. Axial confinement is provided by a subset of the segmented DC electrodes. Radial confinement is provided by the RF rails. 
-            \textbf{b)} A slice view of the trap. The red point here represents the ions, the gold are the RF and DC electrodes, and the grey is the silica substrate. It can be seen that the ion is $\sim 250 \mu$m away from the nearest electrode. The numerical aperture of the ion due to the electrodes is $\sim 0.71$.
-            \textbf{c)} A schematic of the electrode geometries and labelling for the front-face of the trap chip. A similar arrangement exists for the back-face. 
+            \textbf{a)} A photograph of the trap chip used in this experiment before being placed under vacuum. The top ``atomic shield'' can be seen here.
+            \textbf{b)} A front view of the trap chip. Axial confinement is provided by a subset of the segmented DC electrodes. Radial confinement is provided by the RF rails. The trap chip and leadless chip carrier (LCC) are highlighted.
+            \textbf{c)} A schematic of the electrode geometries and labelling for the front-face of the trap chip. A similar arrangement exists for the back-face however with the RF rail on the diagonally opposite electrode.
+            \textbf{d)} A slice view of the trap. The red point here represents the ions, the gold are the RF and DC electrodes, and the grey is the silica substrate. It can be seen that the ion is $350\times\sqrt{2}/2 \simeq 250 \mu$m away from the nearest electrode. The numerical aperture of the ion plane due to the electrodes is $\sim 0.71$.
             Figures from~\cite{choonee2017silicon}.
         \label{fig:trap}}
     \end{figure}
 
-    From Earnshaw's theorem,
-    $\nabla^2 V = 0,$ a stable stationary point in 3D cannot be realised
-    using only static electric potentials, $V$, as if the potential is confining
-    in two dimensions, it will be anti-confining in the third. Therefore, to
-    achieve stable trapping, either an oscillating electric field (Paul
-    trap~\cite{paul1990electromagnetic}), or a static magnetic field (Penning trap) is
-    used.\\
     Recently, the micro-fabricated surface style linear Paul trap has gained
     popularity due to the maturity of chip fabrication
     technologies~\cite{allcock2011surface-electrode} and the potential route
     to scalability this offers~\cite{kielpinski2002architecture}. In the surface trap, the 3D radial and axial
     electrodes of a ``macro'' trap are effectively projected onto a 2D surface.
-    The stable confining point of such a trap is typically on the order of $50-100$ $\mu$m
-    above the chip surface. The ease of fabrication of surface traps has allowed
+    The stable confining point of such a trap is typically designed to be on the order of $50-100~\unit{\micro\meter}$
+    above the chip surface. The maturity of chip fabrication has allowed
     the creation of complex multi-zone devices with many DC electrodes.  These
     multi-zone traps enable the shuttling of ions, a requirement for Quantum CCD
     type architectures~\cite{kielpinski2002architecture}. However, this
     surface style geometry typically comes with two costs: the depth of the
-    trapping potential is often greatly reduced, and the close proximity of the
+    trapping potential is often greatly reduced due to anharmonicity, and the close proximity of the
     surface to the ion can be a large contributor to motional heating
     rates~\cite{wineland1998experimental, turchette2000heating}. \\
     Our trap is provided by the \emph{National Physical Laboratory} in the UK. This is a micro-fabricated 3D trap, which brings together the
     advantages of chip fabrication as well as the low heating rates and high
     trapping depths of a 3D style trap with greater ion-surface distances. Details on its design and characterisations can be found in~\cite{see2013fabrication,
-    wilpers2012monolithic}. Figure~\ref{fig:trap} shows the electrode geometry of the trap and the relevant length scales.
-    The ion-surface distance is now of the order $250$ $\mu$m and we have
-    demonstrated heating rates of $ 33(3)$~q/s on a 4~MHz radial mode (see
-    section~\ref{sec:Heating}).\\
-    An axial ion separation of $\sim 5$~$\mu$m is desired. For
-    $^{40}$Ca$^{+}$ ions this means an axial mode frequency of $\omega_z \approx 2\pi
-    \cdot 1.6$~MHz. This ion separation was chosen as a balance between the
-    desire for high mode frequencies while keeping cross talk due to
-    laser-addressing negligible.\\ The mode frequencies that can be achieved are
-    ultimately limited by the breakdown voltage of the trap electrodes, $V_{\rm
-    MAX} = 400$~Vpp. Within this constraint, we are targeting $\sim 4$~MHz for
-    our radial frequencies. The choice of this higher frequency is motivated by
-    several factors: the Doppler cooling limit is reduced, and the frequency
-    separation between modes can be increased, which is useful for simplifying
-    interactions involving motion.\\ 
-    In the following two sections we describe the experimental parameters used
-    in our apparatus to achieve these mode frequencies.\\
-
+    wilpers2012monolithic, choonee2017silicon}. Figure~\ref{fig:trap} shows the electrode geometry of the trap and the relevant length scales.
+    The trap package consistes of an outer leadless chip carrier (LCC) with the outer
+    pads routing DC, RF, and ground connections to an intermediate
+    A\textsubscript{3}N\textsubscript{4} substrate. The connection to the front
+    and back surfaces of the trap chip is made through vias and wire bonds to
+    the intermediate substrate~\cite{wilpers2013compact}. The trap chip itself
+    is a monolithic double-sided silicon device with gold plated electrodes on
+    the front (Fr) and back (Ba) surfaces. These two layers are shown
+    schematically in the bottom panel of $(c)$. The electrode schematic for the
+    front surface is shown, and the electrode indexing convention is
+    highlighted. Electrodes recessed from the ion due to the RF rail are named
+    ``compensation''-electrodes (co), while electrodes on the opposite side
+    provide the strong DC potential required for axial
+    confinement\footnote{Note: Compensation electrodes co1 and co11 on both
+    front and back surfaces are grounded on the trap package, and so are not
+    available for use. There is a continuity fault on front dc11 and so this
+    electrode is also not available for use.}.
+    We typically
+    trap ions centered on electrode dc5. Panel $(d)$ shows a slice view of the
+    trapping region, highlighting the ion position between the front and back
+    surface electrodes. The dual RF rails and DC electrodes are shown in gold,
+    and the undercut silicon bulk is highlighted in dark grey.\\
+    The next two subsections describe the source of RF and DC voltages to the trap
+    electrodes. The physical mounting of the trap in the vacuum system is
+    discussed in section~\ref{sec:Vacuum System}, and the optical access to the
+    trap is discussed in section~\ref{sec:Optical Access}.\\
     %Figure like Milne would be nice here - but showing zig-zag for 5 ions is hard...
 
     %Using the pseudopotential approximation~\cite{madsen_planar_2004} for the
@@ -293,11 +295,28 @@
     moderate Q factor of $\sim 50$ allows for a good voltage step up, and some
     bandpass filtering, without being overly sensitive to thermal and mechanical
     noise.  
-    The circuit diagram of the constructed resonator~\footnote{Credit to Emily Hirsch for construction of the recent resonator.} is shown in figure~\ref{fig:res_H}. The inductor consists of XX(ToDo gauge and oxygen?) gauge Copper was made to have, $L\sim 0.8~\unit{\micro\henry}$, with toroidal iron powder core\footnote{Micrometals T80-6}, and C0G (low tempco) rated ceramic capacitors, $C=5.4~\unit{\pico\farad}$. The vacuum can feedthrough and trap were measured to present an $\sim 18~\unit{\pico\farad}$ load. The trap itself presents a $C_T=4~\unit{\pico\farad}$~\cite{wilpers2013compact}, the cable between the resonator and the vacuum feedthrough contributes $\sim 4~\unit{\pico\farad}$, and the remaining presented capacitance is expected to originate from the feedthrough and in-vacuum RF line.
+    The circuit diagram of the constructed resonator~\footnote{Credit to Emily
+    Hirsch for construction of the recent resonator.} is shown in
+    figure~\ref{fig:res_H}. The inductor consists of XX(ToDo gauge and oxygen?)
+    gauge Copper was made to have, $L\sim 0.8~\unit{\micro\henry}$, with
+    toroidal iron powder core\footnote{Micrometals T80-6}, and C0G (low tempco)
+    rated ceramic capacitors, $C=5.4~\unit{\pico\farad}$. The vacuum can
+    feedthrough and trap were measured to present an $\sim
+    18~\unit{\pico\farad}$ load. The trap itself presents a
+    $C_T=4~\unit{\pico\farad}$~\cite{wilpers2013compact}, the cable between the
+    resonator and the vacuum feedthrough contributes $\sim
+    4~\unit{\pico\farad}$, and the remaining presented capacitance is expected
+    to originate from the feedthrough and in-vacuum RF line. In vacuum, the RF line is a UHV coated 0.4mm diameter single strand copper wire, which connects to an in-vacuum distribution PCB. The RF connection to the trap LCC is made by a \emph{fuzz button} vias.\\
     The resonator had a measured  
-    quality factor of $Q=66.7(X)$(ToDo: get quality factor plot), and a central frequency of $36.5(X)~\unit{\mega\hertz}$.
-    The effect of the resonator on the AM and FM noise can be calculated through the transfer function, $H(f)$, of the resonator circuit. 
-    Capacitors ($C2$ and $C3$) are used to provide a pick-off (p.o.) voltage which can be monitored, and if required, used in a closed feedback loop. We however have not attempted this as of yet, and shall ignore the effect of the pick-off for this analysis. The transfer function of the simplified circuit is then given by,
+    quality factor of $Q=66.7(X)$(ToDo: get quality factor plot), and a central
+    frequency of $36.5(X)~\unit{\mega\hertz}$.
+    The effect of the resonator on the AM and FM noise can be calculated through
+    the transfer function, $H(f)$, of the resonator circuit. 
+    Capacitors ($C2$ and $C3$) are used to provide a pick-off (p.o.) voltage
+    which can be monitored, and if required, used in a closed feedback loop. We
+    however have not attempted this as of yet, and shall ignore the effect of
+    the pick-off for this analysis. The transfer function of the simplified
+    circuit is then given by,
     \begin{equation}
         H(f) = \frac{V_{out}}{V_{in}} = \frac{Z_p}{Z_s + Z_p},
     \end{equation}
@@ -314,7 +333,9 @@
     frequency (here $Q = 69$ and $f_0=36.8\unit{\mega\hertz}$). Final AM and FM
     spectra are calculated through considering both upper ($+\Delta f$) and
     lower sidebands ($-\Delta f$) following reference~\cite{danielsonAM2018}. We
-    find that for both AM$\rightarrow$AM and FM$\rightarrow$FM (where "$\rightarrow$" represents the transform from input noise type to output noise type) the input PSD are
+    find that for both AM$\rightarrow$AM and FM$\rightarrow$FM (where
+    "$\rightarrow$" represents the transform from input noise type to output
+    noise type) the input PSD are
     low pass filtered with a cut-off frequency of $\sim 0.25$~MHz.
     We also consider the cross term, FM$\rightarrow$AM, which here we expect to
     be non-negligible at higher offset frequencies due to the assymmetry of the
@@ -349,18 +370,29 @@
     % Quote values we use.
 % Pre reqs:
     % NPL trap geometry
-    Static fields are required for reshaping the trapping psuedo potential to the desired curvatures, for manipulating the ion chains, and for compensating stray electric fields. As shown in figure~\ref{fig:trap} a, the \emph{NPL} trap has $40$ DC electrodes and a direct connection to bias the substrate. 
-    Voltage is supplied to the $40$ DC electrodes using two
+    Static fields are required for reshaping the trapping psuedo-potential. This is useful for setting desired mode frequency splittings, for shuttling ions, and for
+    compensating stray electric fields. As shown in figure~\ref{fig:trap}, the
+    \emph{NPL} trap has $40$ independently controllable DC electrodes. A further DC bias voltage can be applied directly to the silicon bulk.  
+    DC Voltage is supplied to the LCC through the following chain:
+    % Include figure for RF chain
+    \begin{figure}[h!]
+        \begin{center}
+        \noindent\includegraphics[width=0.6\linewidth]{figures/pdf_figure/ch2/dc_chain.pdf}
+        \end{center}
+    \end{figure}
+    \vspace{-2em}
+
+    \noindent and embedded within the schematic~\ref{fig:apparatus}. Two
     multi-channel DACs, known as \emph{Fastino}, part of the \emph{Artiq Sinara} hardware
-    ecosystem.
-    The Fastino outputs are filtered by a passive cascaded RC low pass filters with resistances, $R=2k$, and capacitances $C_1 = 2.2~\unit{\nano\farad}$ and $C_2 = 4.7~\unit{\nano\farad}$ yielding a $-3dB$ ``cut-off'' frequency of $7.4~\unit{\kilo\hertz}$. 
-    % Can calculate using 2-node KCL analysis to find transfer function H(s). Then go to H(jw), and take fact that |H(jw)| = 1/sqrt(2) at the cut-off frequency to find the value.
-    The final shunt capacitor is on an in-vacuum board within close proximity of the trap chip to mitigate RF pickup on the DC lines.
-    The in-vacuum board is connected to the trap chip via a custom PEEK interposer with embedded \emph{Fuzz buttons} for electrical feedthroughs.\\
+    ecosystem, provide the initial $41$ DC channels. 
+    The Fastino outputs are filtered by a passive cascaded RC low pass filters with resistances, $R=2k$, and capacitances $C_1 = 2.2~\unit{\nano\farad}$ and $C_2 = 4.7~\unit{\nano\farad}$\footnote{For in-vacuum use. 1206 NPO 4.7nF 100V, SRT 1206A472JBCB} yielding a $-3$~dB ``cut-off'' frequency of $7.4~\unit{\kilo\hertz}$. The low pass filter circuit is shown in the above schematic, with the first stage on an external to vacuum PCB (Ext. Filt), and the 
+    final shunt capacitor on an in-vacuum PCB (Vac. Filt)\footnote{Vacuum compatible PCB using Rogers RT6002. Filter boards were designed by Mariella Minder.} within close proximity of the trap chip to mitigate RF pickup on the DC lines. The feedthrough to the vacuum system has 51 pins\footnote{\emph{Allectra} 51-way Micro-D} with non-DC pins used to provide ground connections.
+    On the external filter board, one channel, corresponding to electrode \textit{Ba co4}, has a capacitively coupled in AC signal. This originates from a DDS (\emph{Urukul}) and is used to resonantly excite the motional modes of the ion chain for characterisation and calibration purposes (see section~\ref{sec:Motional Mode Stability}).
+    The in-vacuum PCB is connected to the trap chip via a custom PEEK interposer with embedded \emph{Fuzz buttons} vias\footnote{\emph{Custom Interconnects} Au/BeCu 0.025" diameter x 0.104" length Fuzz Button}.\\
     The ion is confined in the ``operation'' zone, seen in
-    figure~\ref{fig:trap} c. The axial trapping is provided by electrodes
-    DC-b5 and DC-f5, where b and f correspond to the back and front plane of the trap. 
-    The DAC can provide up to $10$~V to these electrodes to produce an axial frequency of 1.6~MHz.
+    figure~\ref{fig:trap} $(c)$. The axial trapping is provided by electrodes
+    \textit{Ba dc5} and \textit{Fr dc5}, where $Ba$ and $Fr$ correspond to the back and front plane of the trap respectively.
+    The DAC can provide up to $10~\unit{\volt}$ to these electrodes to produce an axial frequency of $1.6~\unit{\mega\hertz}$.
 
 \subsection{System Grounding}
 % Main points:
@@ -373,6 +405,7 @@
     % Block diagram of the system
     % Vacuum system
     Poor ground design (or no design at all).
+    RF signal and return in vacuum may be important.
  
 \section{Magnetic Field}
 \label{sec:Magnetic Field}
@@ -386,14 +419,16 @@
     environment.
     Stable Zeeman shifts of the ion energy levels are required for long spin
     coherence times (see section~\ref{sec:Coherence}), and for low error single-
-    and two-qubit gates. A permanent magnet array of Samarium Cobalt,
+    and two-qubit gates. A permanent magnet array of Samarium Cobalt\footnote{\emph{Bunting Magnets} E643SM and E644SM.},
     Sm$_2$Co$_17$, is used in a Helmholtz configuration to create a stable magnetic
-    field of 5.4~G. Samarium Cobalt was chosen for its low temperature
+    field of $\simeq 5~\unit{\gauss}$\footnote{Designed and constructed by Sophie Howarth.}. Samarium Cobalt was chosen for its low temperature
     coefficient of remenance, -0.03\%/K.\\
-    The ion is shielded from unwanted external magnetic fields by two layers of
-    3~mm thick MuMetal shielding from \emph{MagneticShields}. The factory quoted
-    shielding factor is 546 for DC fields. Spin coherence time comparisons for
-    the ion with and without magnetic shielding are shown in
+    The ion is shielded from unwanted external magnetic fields by a custom designed MuMetal enclosure, with an internal dimension of $650\times 650\times 650~\unit{\milli\meter}$. The shielding consists of two layers of
+    MuMetal shielding with internal shield thickness of $1.5\unit{\milli\meter}$ and external shield thickness of $2.0\unit{\milli\meter}$\footnote{\emph{Magnetic Shields} custom
+    design.}. The factory quoted
+    shielding factor at the center of the box is
+    $546$ for DC fields. Spin coherence time comparisons with and without
+    magnetic shielding are shown in
     section~\ref{sec:Coherence}.\\
 
 \section{Vacuum System and Beam Geometry}
@@ -567,8 +602,8 @@
     
 
     
-\subsection{Narrow Line Width 729 Laser}
-\label{sec:Narrow Line Width 729 Laser} 
+\subsection{Narrow Linewidth 729 Laser}
+\label{sec:Narrow Linewidth 729 Laser} 
 % Main points:
     % What equipment does the 729 consist of.
     % Solstis cavity
