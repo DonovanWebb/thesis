@@ -548,18 +548,14 @@
     We aim for a
     separation of 5~\unit{\um} between ions, and require adequate
     distinguishability of ions in the imaged plane.
-    The system consists of a
-    high quantum-efficiency 
-    % How high?
-    camera\footnote{Hamamatsu Orca-Fusion
-    BT}, an $f=200~\unit{\mm}$ relay lens, and the $f=33~\unit{\mm}$ NA=0.6
-    objective. This gives a magnification of 6x, and considering the pixel size
-    of $6.5~\unit{\um}$, leads to a separation of 5 pixels between ions. The
-    objective is on a 5-axis alignment stage with the z-axis focus controlled by
-    a piezo micrometer for fine adjustment of the ion focus.\\
-    A PMT is also used...
-
-
+    We use a 
+    high quantum-efficiency ($\simeq 70\%$ at $397~\unit{\nano\meter}$) 
+    CMOS camera\footnote{\emph{Hamamatsu Orca-Fusion
+    BT} C15440-20UP} for spatially selective qubit readout on a multi-ion chain. We also divert $\simeq 10\%$ of the fluorescent light to a Photon multiplier tube (PMT)\footnote{\emph{Hamamatsu} Photon counting head H10682-210}, for experiments requiring time resolved photon counting (e.g. micromotion compensation, section~\ref{sec:Micromotion}).
+    The fluorescence from the ion is imaged at the camera and PMT through the optical chain shown in figure~\ref{fig:imaging}. The chain consists of a high numerical aperture objective\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} (effective focal length, $f=33~\unit{\milli\meter}$), $\mathrm{NA}=0.6$, a dichroic mirror\footnote{\emph{Thorlabs} TODO} (transmission: $397~\unit{\nano\meter}$; reflection: $729~\unit{\nano\meter}$), a relay lens\footnote{\emph{Thorlabs} Achromat Doublet, ACT508-200-A-ML} ($f=200~\unit{\milli\meter}$), a $90:10$ plate beamsplitter\footnote{\emph{Thorlabs} TODO}, and finallly the camera and PMT. \\
+    The objective lens is custom designed to compensate for aberrations due to the recessed vacuum viewport, and due to the high-NA, accurate alignment of all degrees of freedom of the objective is critical. As such, the NA is attached to a 5-axis alignment stage\footnote{\emph{Newport ULTRAlign} M-562-XYZ, M-36, SM-13}, which can be seen in figure~\ref{fig:solidworks}. The z-axis focus is controlled by a piezo micrometer\footnote{\emph{Newport CONEX-TRA12CC}} for fine adjustment of the ion focus with the MuMetal box closed (requires $<\unit{\micro\meter}$ precision).\\
+    Given the chosen lens focal lengths, we expect a magnification of $\simeq 6$ from the ion plane to the imaging plane. With an expected ion separation of $5~\unit{\micro\meter}$, and the camera pixel pitch of $6.5~\unit{\micro\meter}$, we expect around 4.5 pixels between ions, which, if the system is well aligned, is more than sufficient for low cross-talk spatial readout of qubits.
+    
 \section{Ca$^+$ Laser Systems}	
 \label{sec:Laser systems}
 % Main points:
@@ -579,26 +575,52 @@
     energy levels. In this thesis we use \ca.\\
     \ca has
     no nuclear spin giving the
-    (relatively) simple level structure shown in figure~\ref{fig:ion}. The external
-    magnetic field of $5.4$~G is applied to split the levels via the Zeeman
-    effect. The relevant laser transitions used in our apparatus are indicated.\\
-    A zero nuclear spin isotope of calcium was chosen due to this simple level
-    structure without hyperfine splitting. The greater number of levels due to
-    hyperfine splitting lead to more decay paths and therefore greater
-    complications in both cooling and gate schemes. However, due to the lack of hyperfine structure, there are no available magnetic field insensitive transitions, which are
-    often used in ion trap experiments to further decouple the ion from a noisy
-    environment~\cite{brewer201927al}. \\
-    We define our qubit by the quadrupole transition at 729-nm, which we describe in section~\ref{sec:Transitions}.\\
-    Access to other excited levels, outside of our defined two level system, are crucial for ion trap quantum logic to enable qubit readout via state selective fluorescence (397-nm, and 866-nm transitions), and state preparation via optical pumping (397-nm, 866-nm, and 854-nm transitions). Details on these schemes are given in chapter~\ref{ch:Characterisation}. Access to two additional transitions in neutral calcium for isotope selective ionisation, 422-nm and 372-nm, is also required~\cite{lucas2004isotope-selective}.\\
-    These transitions (apart from the 729-nm) are all driven by diode lasers\footnote{All Toptica diodes. Red lasers: MDL DL pro; Blue lasers: MDL DL pro HP; 372-nm: iBEAM-SMART-375-S}, which are frequency stabilised to a reference cavity\footnote{Stable Laser Systems SLS-6010 4-Bore Cylindrical Cavity} via Pound-Drever-Hall (PDH) locking. 
-    %\mccorrect{XXX should quote finesse and FSR values here.}
-    PDH locking is used to ensure that laser frequencies are stable to <1~MHz level, well below the natural line widths of all the dipole transitions listed above. The laser frequencies are continuosly monitored with a wavemeter\footnote{HighFinesse WS7}.\\
-    Frequency and amplitude control for all lasers is achieved via acousto-optic modulators (AOMs) which are driven by Artiq integrated DDS chips, \emph{Urukuls}. The AOMs are used in a double pass configuration to allow shifts of the laser frequency by $\pm \sim 100$~MHz, with no significant angular shifts or loss of fibre coupling. 
+    (relatively) simple level structure shown in figure~\ref{fig:ion} with the relevant laser transitions used in our apparatus are indicated. Details on the ion choice, and utility of the lasers is given in section~\ref{sec:Transitions}, here we only describe the hardware and feedback control to provide this stabilised light.\\
+    The relevant wavelengths are the following:
+    The qubit is defined by the quadrupole transition at 729-nm. Access to other excited levels, outside of our defined two level system, are crucial for ion trap quantum logic to enable qubit readout via state selective fluorescence (397-nm, and 866-nm transitions), and state preparation via optical pumping (397-nm, 866-nm, and 854-nm transitions). Access to two additional transitions in neutral calcium for isotope selective ionisation, 422-nm and 372-nm, are also required~\cite{lucas2004isotope-selective}.\\
+    All transitions, except for 729-nm, are driven by diode lasers, described in the following section. Subsequently, the 729-nm source is discussed. Finally, the global and single addressed beam arrangements for the 729-nm system are detailed at the end of this section.\\
+    
+\begin{figure}
+  \begin{center}
+   \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/diode_paths.pdf}
+  \end{center}
+  \caption{
+    All beam paths for diode laser systems.
+    }
+  \label{fig:diode_paths}
+\end{figure}
 
 \subsection{Diode Lasers}
 \label{sec:Diode Lasers}
 % Four bore locking cavity
-% Beam paths? AOM DP and SP?
+% Beam paths? AOM DP and SP?which are frequency stabilised to a reference cavity\footnote{\emph{Stable Laser Systems} SLS-6010 4-Bore Cylindrical Cavity} via Pound-Drever-Hall (PDH) locking. 
+    %\mccorrect{XXX should quote finesse and FSR values here.}
+    For transitions 397-nm, 854-nm, and 866-nm, we require light that is frequency stable
+    to $<1~\unit{\mega\hertz}$ level, well below the natural line widths of the dipole transitions, and power stable to $<1~\unit{\micro\watt}$. The former requirement is satisfied using a reference cavity and a Pound-Drever-Hall (PDH) locking scheme. The latter requirement is satisfied through a closed feedback loop between a pick-off photodiode signal before the ion monitoring the optical power, and the drive RF amplitude of an upstream AOM.\\
+    All beam paths and relevant control loops for the diode laser systems are
+    shown in figure~\ref{fig:diode_paths}. The laser diode
+    heads\footnote{\emph{Toptica} diodes. 854/866: MDL DL pro; 397: MDL DL pro
+    HP; 423: DL pro}, controllers\footnote{\emph{Toptica} DLC Pro with PDH
+    boards}, and splitterboards\footnote{Designed by \emph{OITG Cavities} group}
+    (fig~\ref{fig:diode_paths} (a)) are housed in a single 19" rack. The
+    splitterboard distributes the light between two ion-trap experiments, the
+    PDH lock cavity (fig~\ref{fig:diode_paths} (c)), and a diagnostic wavemeter
+    for checking wavelength and lock status\footnote{\emph{HighFinesse} WS7}.
+    The splitterboard also houses an Electro-optic modulator (EOM) module for
+    applying both offset and PDH sidebands for an offset PDH lock. For 397-nm
+    and 423-nm, resonant free space EOMs\footnote{\emph{Qubig} PM7-VIS-25, TODO}
+    are used, for 854-nm and 866-nm broadband fibre EOMs\footnote{TODO} are used
+    for convenience.
+
+
+372-nm: iBEAM-SMART-375-S.
+
+
+
+    PDH locking is used to ensure that laser frequencies are listed above. The laser frequencies and lock status are continuously monitored with a wavemeter.\\
+    Frequency and amplitude control for all lasers is achieved via acousto-optic modulators (AOMs) which are driven by \emph{Artiq} integrated DDS chips, \emph{Urukuls}. The AOMs are used in a double pass configuration to allow shifts of the laser frequency by $\pm \sim 100$~MHz, with no significant angular shifts or loss of fibre coupling. 
+
+
     
 
     

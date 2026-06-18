@@ -1,0 +1,48 @@
+\documentclass[border=5pt]{standalone}
+
+\usepackage{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}
+
+% Filter board 1
+\draw
+(0,0) node[left] {$V_{\mathrm{in}}$}
+      to[R, l={$2k$}] (2,0);
+
+\draw
+(2,0)
+      to[C, l_={$2.2$nF}] (2,-2)
+      node[ground] {};
+\draw (2,0) -- (4,0);
+\draw
+(4,0)
+      to[C, l_={$2.2$nF}] (4,2)
+      to[sinusoidal voltage source] (4,4)
+      node[right] {$V_{Tickle}$};
+
+\draw
+(4,0)
+      to[R, l={$2k$}] (6,0);
+\draw
+(6,0) node[right] {$V_{\mathrm{out}}$};
+
+% Filter board 2
+% \draw 
+% (0,0) node[left] {$V_{\mathrm{in}}$};
+% \draw (0,0) -- (2,0);
+% \draw
+% (2,0)
+%       to[C, l_={$4.7$nF}] (2,-2)
+%       node[ground] {};
+% \draw (2,0) -- (4,0);
+
+% \draw
+%   (4,0) node[right] {$V_{\mathrm{out}}$};
+
+
+
+\end{circuitikz}
+
+\end{document}
