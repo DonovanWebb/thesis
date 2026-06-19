@@ -543,18 +543,29 @@
 % Pre reqs:
     % High NA
 
+\begin{figure}
+  \begin{center}
+   \noindent\includegraphics[width=0.9\linewidth]{figures/pdf_figure/ch2/readout.pdf}
+  \end{center}
+  \caption{Optical path for fluorescent imaging of the ions using both a CMOS camera and a Photon-multiplier tube. Insets on right hand side show typical signal for: spatial resolution of eight ions in a linear chain (top), time resolution of detected photons from the ion chain (bottom).
+    }
+  \label{fig:readout}
+\end{figure}
+
     The imaging system is used to collect fluorescence light from the ion chain
     for readout, and to image the ion chain for characterisation.
     We aim for a
     separation of 5~\unit{\um} between ions, and require adequate
-    distinguishability of ions in the imaged plane.
+    distinguishability of ions in the imaged plane. Figure~\ref{fig:readout} shows the optical path schematic of the imaging system.
     We use a 
     high quantum-efficiency ($\simeq 70\%$ at $397~\unit{\nano\meter}$) 
     CMOS camera\footnote{\emph{Hamamatsu Orca-Fusion
-    BT} C15440-20UP} for spatially selective qubit readout on a multi-ion chain. We also divert $\simeq 10\%$ of the fluorescent light to a Photon multiplier tube (PMT)\footnote{\emph{Hamamatsu} Photon counting head H10682-210}, for experiments requiring time resolved photon counting (e.g. micromotion compensation, section~\ref{sec:Micromotion}).
-    The fluorescence from the ion is imaged at the camera and PMT through the optical chain shown in figure~\ref{fig:imaging}. The chain consists of a high numerical aperture objective\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} (effective focal length, $f=33~\unit{\milli\meter}$), $\mathrm{NA}=0.6$, a dichroic mirror\footnote{\emph{Thorlabs} TODO} (transmission: $397~\unit{\nano\meter}$; reflection: $729~\unit{\nano\meter}$), a relay lens\footnote{\emph{Thorlabs} Achromat Doublet, ACT508-200-A-ML} ($f=200~\unit{\milli\meter}$), a $90:10$ plate beamsplitter\footnote{\emph{Thorlabs} TODO}, and finallly the camera and PMT. \\
-    The objective lens is custom designed to compensate for aberrations due to the recessed vacuum viewport, and due to the high-NA, accurate alignment of all degrees of freedom of the objective is critical. As such, the NA is attached to a 5-axis alignment stage\footnote{\emph{Newport ULTRAlign} M-562-XYZ, M-36, SM-13}, which can be seen in figure~\ref{fig:solidworks}. The z-axis focus is controlled by a piezo micrometer\footnote{\emph{Newport CONEX-TRA12CC}} for fine adjustment of the ion focus with the MuMetal box closed (requires $<\unit{\micro\meter}$ precision).\\
+    BT} C15440-20UP} for spatially selective qubit readout on a multi-ion chain. A typical signal of which can be seen in the upper right inset for an eight ion chain. We also divert $\simeq 10\%$ of the fluorescent light to a Photon multiplier tube (PMT)\footnote{\emph{Hamamatsu} Photon counting head H10682-210}, for experiments requiring time resolved photon counting (e.g. micromotion compensation, section~\ref{sec:Micromotion}), a typical signal of which can be seen in the lower right inset.
+    The rest of the optical path consists of a high numerical aperture objective\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} (effective focal length, $f=33~\unit{\milli\meter}$), $\mathrm{NA}=0.6$, a dichroic mirror\footnote{\emph{Thorlabs} TODO} (transmission: $397~\unit{\nano\meter}$; reflection: $729~\unit{\nano\meter}$), a relay lens\footnote{\emph{Thorlabs} Achromat Doublet, ACT508-200-A-ML} ($f=200~\unit{\milli\meter}$), a $90:10$ plate beamsplitter\footnote{\emph{Thorlabs} TODO}, and finallly the camera and PMT. \\
+    The objective lens is custom designed to compensate for aberrations due to the recessed vacuum viewport, however, due to the large NA, accurate alignment of all degrees of freedom of the objective is critical. As such, the NA is attached to a 5-axis alignment stage\footnote{\emph{Newport ULTRAlign} M-562-XYZ, M-36, SM-13}, which can be seen in figure~\ref{fig:solidworks}. The z-axis focus is controlled by a piezo micrometer\footnote{\emph{Newport CONEX-TRA12CC}} for fine adjustment of the ion focus with the MuMetal box closed (requires $<\unit{\micro\meter}$ precision).\\
     Given the chosen lens focal lengths, we expect a magnification of $\simeq 6$ from the ion plane to the imaging plane. With an expected ion separation of $5~\unit{\micro\meter}$, and the camera pixel pitch of $6.5~\unit{\micro\meter}$, we expect around 4.5 pixels between ions, which, if the system is well aligned, is more than sufficient for low cross-talk spatial readout of qubits.
+    % Could add alignment tactics
+    % Could add how this can be improved?
     
 \section{Ca$^+$ Laser Systems}	
 \label{sec:Laser systems}
@@ -577,15 +588,16 @@
     no nuclear spin giving the
     (relatively) simple level structure shown in figure~\ref{fig:ion} with the relevant laser transitions used in our apparatus are indicated. Details on the ion choice, and utility of the lasers is given in section~\ref{sec:Transitions}, here we only describe the hardware and feedback control to provide this stabilised light.\\
     The relevant wavelengths are the following:
-    The qubit is defined by the quadrupole transition at 729-nm. Access to other excited levels, outside of our defined two level system, are crucial for ion trap quantum logic to enable qubit readout via state selective fluorescence (397-nm, and 866-nm transitions), and state preparation via optical pumping (397-nm, 866-nm, and 854-nm transitions). Access to two additional transitions in neutral calcium for isotope selective ionisation, 422-nm and 372-nm, are also required~\cite{lucas2004isotope-selective}.\\
+    The qubit is defined by the quadrupole transition at 729-nm. Access to other excited levels, outside of our defined two level system, are crucial for ion trap quantum logic to enable qubit readout via state selective fluorescence (397-nm, and 866-nm transitions), and state preparation via optical pumping (397-nm, 866-nm, and 854-nm transitions). Access to two additional transitions in neutral calcium for isotope selective ionisation, 422-nm and 373-nm, are also required~\cite{lucas2004isotope-selective}.\\
     All transitions, except for 729-nm, are driven by diode lasers, described in the following section. Subsequently, the 729-nm source is discussed. Finally, the global and single addressed beam arrangements for the 729-nm system are detailed at the end of this section.\\
+    % Add small section on PDH lock set up in general, and remove from subsequent sections.
     
 \begin{figure}
   \begin{center}
    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/diode_paths.pdf}
   \end{center}
   \caption{
-    All beam paths for diode laser systems.
+    All beam paths for diode laser systems. Dotted boxes resemble modular optical paths with fibre and control lines in and out only. Frequency and optical power control loops are included.
     }
   \label{fig:diode_paths}
 \end{figure}
@@ -778,17 +790,23 @@
     the form of thick foam tubing along the fibre length, as well as active
     stabilisation by a fibre-noise-cancellation (FNC) technique~\cite{ma1994delivering}, is used\footnote{FNC control consists of \emph{Sinara Stabilizer} and \emph{Pounder}
     mezzanine board with PID software 
-    developed by Ayush Agrawal.}. A comparison of spin coherence times
+    developed by Ayush Agrawal.}. A comparison of spin coherence times  
     is shown in section~\ref{sec:Coherence} with and without fibre noise
     cancellation enabled. \\
 
-\subsection{Global Addressing System}
-\label{sec:Global Addressing System}
-% Elliptical beam
 
 \subsection{Single Addressing System}
 \label{sec:Single Addressing System}
-% This section is not used in any characterisation - could be left for outlook!
+    \begin{figure}
+        \begin{center}
+        \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/AOD_setup.pdf
+            }
+        \end{center}
+        \caption{
+            AOD setup
+            }
+        \label{fig:AOD}
+    \end{figure}
 % Main points:
     % The advantages of single addressing using AODs
         % Ion selectivity
@@ -805,9 +823,21 @@
     A unique design feature of our system is the ability to produce single ion addressing standing waves whose spatial phase can be controlled individually for each ion, thus enabling any-to-any connectivity for fast engangling gates.
     In the future we particularly wish to extend the fast two-qubit entangling gate work demonstrated in~\cite{saner2023breaking} on a multi-ion chain where multiple motional modes are present and contributing to the dynamics. \\
     %
-    The design and construction of the single addressing system was led by Iver {\O}vergaard and, as of writing, has been in constant use in the experiment for around 1 year. Here we shall quote the design specification and relevant details of the single addressing system. In section~\ref{sec:Single Addressing char} we present the characterisation data upon installation. Further technical information can be found in IRO's Transfer report~\cite{oevergaard2025transfer}, availible upon request. \\
+    The design and construction of the single addressing system was led by Iver
+    {\O}vergaard and, as of writing, has been in constant use in the experiment
+    for around 1 year. Here we shall quote the design specification and relevant
+    details of the single addressing system. In section~\ref{sec:Single
+    Addressing char} we present the characterisation data upon installation.
+    Further technical information can be found in IRO's Transfer
+    report~\cite{oevergaard2025transfer}, availible upon request. \\
     %
-    Multiple methods for single ion addressing have been developed in the ion trap community, including waveguide arrays~\cite{sotirova2024high-fidelity, integrated}, micro-mirrors~\cite{}, spatial-light-modulators~\cite{}, and acousto-optic deflectors~\cite{}. Each method has its own advantages and disadvantages in terms of speed, resolution, ease of integration, and scalability, and so choice of hardware is often a matter of experimental preference and constraints.
+    Multiple methods for single ion addressing have been developed in the ion
+    trap community, including waveguide arrays~\cite{sotirova2024high-fidelity,
+    integrated}, micro-mirrors~\cite{}, spatial-light-modulators~\cite{}, and
+    acousto-optic deflectors~\cite{}. Each method has its own advantages and
+    disadvantages in terms of speed, resolution, ease of integration, and
+    scalability, and so choice of hardware is often a matter of experimental
+    preference and constraints.
     We require:
     \begin{itemize}
         \item Addressing of up to two ions in a $\sim 10$ ion chain with low crosstalk to neighbouring ions.
@@ -835,6 +865,22 @@
     % How this links to k-copy RB?
     % Standing wave design and phase control?
 
+\subsection{Global Addressing System}
+\label{sec:Global Addressing System}
+% Elliptical beam
+The single addressing provides the utility of spatially selecting a few ions to
+drive with the 729-nm light, however, the power efficiency scales as $O(n^2)$,
+with $n$ being the number of addressed spots. As such, we limit the single addressing to simultaneously illuminate only one or two ions at a time. It is therefore convenient to also
+have a global beam that has dimensions larger than the ion chain to address all the ions in parallel. This global branch is currently counterpropagating to the single addressing path, and shares the same optical path as the imaging system (see figure~\ref{fig:readout}). To increase
+the beam intensity at the ions, the global branch uses an anamorphic prism
+pair\footnote{\emph{ThorLabs} PS883-B} to elliptically shape the beam, with a
+4:1 aspect ratio, with major axis along the ion chain direction. The resulting
+major axis has a beam waist radius of $52(3)~\unit{\micro\meter}$\footnote{The
+beam profile was measured by extracting per-ion Rabi frequencies while driving
+on resonance quadrupole transitions (see section~\ref{sec:Single Qubit Gates}) and
+assuming a Gaussian
+cross section.}. As with the other beams directed to the ion, we use a final piezo controlled mirror\footnote{\emph{ThorLabs POLARIS}-K2S2P} for fine alignment and control when the MuMetal enclosure is closed.
+
 \section{Control System}
 % Main points:
     % Artiq and Sinara
@@ -846,3 +892,35 @@
     % Describe the ion loading process
     % Describe the atomic source oven
     % Describe the photoionisation process and lasers used
+    Atoms are provided to the trapping region by heating Calcium flakes housed
+    in the resistive tube oven described in section~\ref{sec:Vacuum System}. The
+    thermocouple, tag welded onto the tube oven, provides a temperature reading
+    for current feedback to reach a target temperature of $\simeq
+    200^\circ\mathrm{C}$. This requires $\simeq 2~\unit{A}$
+    across the $0.5~\unit{\ohm}$ load of the oven tube. The tube oven has a
+    pinhole that is aligned to the ion flux aperture, shown in
+    figure~\ref{fig:atom_flux}, and the atomic shield pinhole shown in
+    figure~\ref{fig:trap}. These apertures were included in the design to
+    improve the lifetime of the trap by ensuring neutral Calcium metal cannot
+    build up on the trap surface and cause shorts between RF, ground, and DC
+    electrodes. The aperture design \emph{luckily} failed. It failed as we
+    observe atomic flux at all electrode locations suggesting the aperture is
+    too large. It was \emph{lucky} as the planned trapping region of dc10 became
+    non-viable after electrode Fr dc11 developed a continuity fault (which we
+    believe is in-vacuum). As such, ions are loaded at dc5.\\
+    The neutral atom flux is ionised using a two-step photoionisation
+    scheme~\cite{}. The first stage involves a frequency stabilised 423-nm beam
+    that couples the 4S->XX transition in neutral calcium. The isotope shift is
+    XX, which is much larger than the transitions natural linewidth and the
+    lasers linewidth, as such the desired isotope can be selectively loaded. We
+    use natural abundance Calcium, with typical isotope proportions of
+    $XX\%:\mathrm{^{40}Ca},~XX\%:\mathrm{^{42}Ca},~XX\%:\mathrm{^{43}Ca}$. In
+    this work we use exclusively \ca, and so set the 423-nm to excite neutral
+    $\mathrm{^{40}Ca}$ only\footnote{We practically see no loading of other
+    Calcium isotopes, and only see rare non-fluorescent ions (once every few
+    weeks) after collisions with residual gas (we suspect this is
+    $\mathrm{CaH}^+$).}. The second ionisation stage couples XX->continuum using
+    a 373-nm UV laser source (although the exact wavelength does not matter as
+    long as <xxx-nm).\\
+    The 373-nm laser can cause charge build-up on the trap electrodes, and so we
+    use a physical shutter to block the beam when not actively loading ions.
