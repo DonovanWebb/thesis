@@ -596,7 +596,12 @@
 % Beam paths? AOM DP and SP?which are frequency stabilised to a reference cavity\footnote{\emph{Stable Laser Systems} SLS-6010 4-Bore Cylindrical Cavity} via Pound-Drever-Hall (PDH) locking. 
     %\mccorrect{XXX should quote finesse and FSR values here.}
     For transitions 397-nm, 854-nm, and 866-nm, we require light that is frequency stable
-    to $<1~\unit{\mega\hertz}$ level, well below the natural line widths of the dipole transitions, and power stable to $<1~\unit{\micro\watt}$. The former requirement is satisfied using a reference cavity and a Pound-Drever-Hall (PDH) locking scheme. The latter requirement is satisfied through a closed feedback loop between a pick-off photodiode signal before the ion monitoring the optical power, and the drive RF amplitude of an upstream AOM.\\
+    to $<1~\unit{\mega\hertz}$ level, well below the natural line widths of the
+    dipole transitions, and power stable to $<1~\unit{\micro\watt}$. The former
+    requirement is satisfied using a reference cavity and a Pound-Drever-Hall
+    (PDH) locking scheme. The latter requirement is satisfied through a closed
+    feedback loop between a pick-off photodiode signal before the ion monitoring
+    the optical power, and the drive RF amplitude of an upstream AOM.\\
     All beam paths and relevant control loops for the diode laser systems are
     shown in figure~\ref{fig:diode_paths}. The laser diode
     heads\footnote{\emph{Toptica} diodes. 854/866: MDL DL pro; 397: MDL DL pro
@@ -610,20 +615,60 @@
     applying both offset and PDH sidebands for an offset PDH lock. For 397-nm
     and 423-nm, resonant free space EOMs\footnote{\emph{Qubig} PM7-VIS-25, TODO}
     are used, for 854-nm and 866-nm broadband fibre EOMs\footnote{TODO} are used
-    for convenience.
+    for convenience. The path on the reference cavity board
+    (fig~\ref{fig:diode_paths} (c)) consists of a four-bore reference
+    cavity\footnote{\emph{Stable Laser Systems} ...} under vacuum and
+    temperature control, two lens for matching the collimated input beam to the
+    cavity mode, and a beamsplitter and $\lambda/4$ waveplate for directing the
+    reflected cavity light to a fast photodiode\footnote{\emph{Thorlabs} ...}.
+    The beatnote due to the carrier and PDH sidebands are mixed down and
+    low-passed by the \emph{Toptica} PDH module to produce the signature
+    asymmetric PDH trace. Gains for PID controllers of both the diode current
+    and voltage are set to stabilise the optical frequency.\\
+    The light from
+    the ``laser'' laboratory is carried to the ``trap" laboratory using 16~m
+    polarisation maintaining fibres\footnote{\emph{Schafter-Kirchoff} ...}. In
+    the ``trap'' laboratory we use AOMs in a double pass configuration for both
+    frequency shifting and power stabilising the light
+    (fig~\ref{fig:diode_paths} (d) and (e)). The power stabilisation feedback
+    loop consists of a signal proportional to the optical power measured by a
+    low-noise photodiode\footnote{\emph{QLNPD} system designed by David
+    Nadlinger, using \emph{Hamamatsu} ...} (optical pick-off in the MuMetal
+    enclosure fig~\ref{fig:diode_paths} (h)), being sampled using an ADC
+    (\emph{Sinara Sampler}), and feeding back to the output amplitude of the DDS
+    RF source (\emph{Sinara Urukul}) that drives the double pass
+    AOM\footnote{This feedback system, known as \emph{SUServo}, was written by
+    Peter Drmota.}.\\
+    As space inside the MuMetal enclosure is constrained, it is advantageous the
+    couple multiple beams in a single fibre before the enclosure.
+    The second stage photo-ionisation light, at 373-nm\footnote{\emph{Toptica} iBEAM-SMART-375-S.},
+    is combined with the 423-nm beam by a dichroic
+    (fig~\ref{fig:diode_paths} (f)) before being coupled to a 16~m fibre that
+    takes the light directly into the MuMetal enclosure. The PI light uses a
+    parabolic mirror outcoupler inside the MuMetal box, and care was taken for
+    the beam propagation to be perpendicular to both the lens and vacuum
+    viewport window as it was found that the difference in refractive index of
+    the optical materials at these two wavelengths was significant enough to
+    cause the two beams to be separated by more than one waist at the ion plane
+    after initial rough alignment. The 854-nm and 866-nm light is combined after
+    their respective double and single pass AOMs, and coupled into a 3~m PM\footnote{\emph{SK} ...}
+    fibre carrying the light into the enclosure.\\
+    Light from both the PI and 397/854/866-nm in-box path is directed onto the
+    ions via the in-vacuum prisms, discussed in section~\ref{sec:Vacuum System}.
+    The final mirrors prior to the vacuum system are
+    motorised\footnote{\emph{Newport} ...}, so that beam alignment to the ions
+    can be optimised when the MuMetal enclosure is closed. Practically we find
+    that these beams rarely need to be realigned (few months), unless there is a
+    significant ambient temperature change of a few degrees.\\
+    % Describe:
+        % PDH
+        % DP SP boards
+        % In box path
+        % SUServo
+        % PI light
 
 
-372-nm: iBEAM-SMART-375-S.
 
-
-
-    PDH locking is used to ensure that laser frequencies are listed above. The laser frequencies and lock status are continuously monitored with a wavemeter.\\
-    Frequency and amplitude control for all lasers is achieved via acousto-optic modulators (AOMs) which are driven by \emph{Artiq} integrated DDS chips, \emph{Urukuls}. The AOMs are used in a double pass configuration to allow shifts of the laser frequency by $\pm \sim 100$~MHz, with no significant angular shifts or loss of fibre coupling. 
-
-
-    
-
-    
 \subsection{Narrow Linewidth 729 Laser}
 \label{sec:Narrow Linewidth 729 Laser} 
 % Main points:
@@ -653,8 +698,8 @@
     two-qubit gate sections, but here it is sufficient to say we require >100 mW
     of light at the ion plane.  Here we describe the 729-nm system 
     consisting of a Ti:Sapph laser system pumped with by an Nd:YAG 532-nm laser.\\
-    An \emph{M2 Solstis} Ti:Sapph is pumped via 18 W of 532-nm light
-    from a \emph{Coherent Verdi-V} system to produce around 5W of
+    An \emph{M2 Solstis} Ti:Sapph is pumped via 18~W of 532-nm light
+    from a \emph{Coherent Verdi-V} system to produce around 5~W of
     729-nm light.  The Ti:Sapph is engineered to operate with a stable $<50$~kHz
     linewidth. Ti:Sapph crystals have broadband gain profiles, which
     are often exploited in research environments to create frequency tunable
@@ -726,20 +771,20 @@
     frequency. However, the majority is coupled to two output fibres for our
     experiment and another within the group. The 729-nm light is transported from
     a dedicated laser lab to a the trap apparatus lab by a 10~m
-    single mode polarization maintaining fibre.  The fibre is
+    single mode polarization maintaining fibre\footnote{\emph{SK} ...}.  The fibre is
     beneficial in cleaning up the mode from the Ti:Sapph, however it can
     introduce phase noise due to mechanical and thermal effects along the 10~m
     length. To remove this introduced noise, passive stabilisation in
     the form of thick foam tubing along the fibre length, as well as active
-    stabilisation by a fibre-noise-cancellation (FNC) technique~\cite{ma1994delivering}, is used. We use the \emph{Sinara Stabilizer} board, a
-    dual channel PID microcontroller, with the \emph{Pounder}
-    mezzanine board, a dual channel PDH lock generator. The FNC PID software was
-    developed by A. Agrawal. A comparison of spin coherence times
+    stabilisation by a fibre-noise-cancellation (FNC) technique~\cite{ma1994delivering}, is used\footnote{FNC control consists of \emph{Sinara Stabilizer} and \emph{Pounder}
+    mezzanine board with PID software 
+    developed by Ayush Agrawal.}. A comparison of spin coherence times
     is shown in section~\ref{sec:Coherence} with and without fibre noise
     cancellation enabled. \\
 
 \subsection{Global Addressing System}
 \label{sec:Global Addressing System}
+% Elliptical beam
 
 \subsection{Single Addressing System}
 \label{sec:Single Addressing System}
