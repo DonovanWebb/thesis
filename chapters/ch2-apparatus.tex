@@ -365,6 +365,7 @@
     
 
 \subsection{Trap DC Voltages}
+\label{sec:Trap DC Voltages}
 % Main points:
     % Describe Fastino DAC and the available electrodes on the NPL trap
     % Quote values we use.
@@ -451,9 +452,9 @@
    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/trap_package.pdf}
   \end{center}
   \caption{
-    \textbf{a)} 
-    \textbf{b)} 
-    \textbf{c)} 
+    \textbf{a)} Laser and atomic beam geometries with respect to the ion chain.
+    \textbf{b)} Compact trap housing with dual NA=0.6 access. The size of the high NA objectives restricts access for other beams, and so in-vacuum mirrors are used to redirect low-NA beams (373, 397, 423, 854, 866-nm) to the trap center.
+    \textbf{c)} Exploded view of the trap housing with components labelled.
   }
   \label{fig:trap_package}
 \end{figure}
@@ -464,63 +465,47 @@
    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/HNA_package.pdf}
   \end{center}
   \caption{
+    Cross section of the vacuum chamber and dual high NA objective sandwich. Lower right inset shows the vacuum chamber housed in the MuMetal enclosure, with dashed lines indicating the cross section region.
+    Custom recessed CF-100 viewports are used to provide optical access for the high NA objectives (working distance $= 24.4~\unit{mm}$).
     }
   \label{fig:HNA}
 \end{figure}
 
-    Ultra High Vacuum (UHV) is required to extend the ion storage lifetime.
+    Ultra High Vacuum (UHV) is required to prevent ion loss.
     However, UHV equipment is often bulky, and puts constraints on the access
-    and visibility of the ion chain. Here we describe the designed vacuum
-    system, and beam access.  The vacuum system and beam geometries were
-    designed by Sebastian Saner and Mariella Minder, and constructed by
+    and visibility of the ion chain. Here, we describe the custom vacuum
+    system, allowing for multiple beam access geometries including dual high numerical aperture (NA) objectives required for single addressed optical standing waves.  The vacuum system was
+    designed by Sebastian Saner, Chris Ballance, and Mariella Minder, and constructed by
     Sebastian Saner, Fabian Pokorny, and myself.\\
     A residual pressure of $<10^{-11}$ mbar is desired. For this strict
     requirement, care must be taken in selecting in-vacuum materials, and 
     thorough cleaning and baking procedures must be followed. A summary of tactics that were
     useful in the construction of the vacuum system can be found
     in~\cite{birnbaum2005ultra-high, wolf2019cryogenic}.\\
-    A schematic and photograph of the vacuum system can be seen in
-    Figure~\ref{fig:can}. The system consists of a 6" spherical-octagonal
+    The system consists of a 6" spherical-octagonal
     experimental chamber\footnote{Kimball MCF600-SphOct-F2C8} connected to a
     spherical chamber with ion pump\footnote{Agilent VacIon Plus 20 Pump}, ion
     gauge\footnote{Agilent UHV-24P Ion gauge} and Titanium sublimator pump
-    (TSP)\footnote{Scanwel custom housing} attached. The ion pump and TSP
-    maintain the UHV to the desired $<10^{-11}$~mbar. We find that on the ion
-    pump alone UHV cannot be maintained indefinitely, however, firing the TSP
-    every 4 weeks with 41~A for 60 seconds provides a sufficient pumping rate.
-    At the time of system baking, a He leak test was performed, however 
-    no external leaks were found. We suspect the gradual pressure increase is either due
-    to our use of in-vacuum optics, optics epoxy adhesive\footnote{EPO-TEK
-    353ND}, or our use of soldered PCB components.\\
-    For optical access, there are two recessed CF100 viewports\footnote{UK Atomic
-    Energy Authority P/N VPR100015} on the two large faces of the experiment
-    can, see figure~\ref{fig:AOD}. Recessed viewports were required due to the size of the chosen main
-    objectives\footnote{Photon Gear custom Atom Imager}. These custom objectives
-    have an effective focal length of 33~mm, a working distance of 24.4~mm, and
-    a numerical aperture, NA, of 0.6. They are coated for 397-nm and 729-nm.
-    The consideration for dual high NA objectives is relatively unique in ion trap experiments, and was mainly motivated by previous work on fast entangling gates via standing waves~\cite{saner2023breaking}. \\
-    There is further optical access via
-    two CF40 side viewports\footnote{LewVac ZFSVP-DUV-40CF-OUM} coated
-    for 397-nm, 422-nm, 729-nm, 854-nm and 866-nm, seen in figure~\ref{fig:can}.  Due to the spatial
-    constraints from the trap assembly and high NA objectives, 
-    multiple of our beams must enter the vacuum can through these side ports. For the ion chain to be visible from these side ports, in-vacuum dielectric
-    mirrors are used. These fused-silica mirrors are UHV rated and coated for 372-nm, 397-nm,
-    422-nm, 729-nm, 854-nm and 866-nm, with reflectivities of >99\% for both s-
-    and p-polarised light. Figure~\ref{fig:can} shows a schematic of the beam
-    geometries via the side ports. A limitation of this beam geometry is that due to the permanent B-field direction, it is not possible to provide pure $\pi$ or $\sigma_{\pm}$ light to the ion. However for applications where strict polarisation control is needed, the beams can be incident through the CF100 viewport.\\
-    An electrical feedthrough on a CF40 flange\footnote{Allectra custom} is used to supply our trap chip and atomic source oven with DC and RF voltages. As
-    the DC cables run within close proximity to the RF supply, electrical pick
-    up is a potential issue for our DC lines. RF leaked onto our DC electrodes
-    will create unwanted pseudopotential which can lead to unexpected mode
-    geometries, or required compensation field. This leakage is mitigated through
-    the in-vacuum RC low pass filter board within close proximity of the trap
-    chip as mentioned in section~\ref{sec:The Ion Trap}.
-    % XXX seen in figure~\ref{fig:can} c.
-\subsection{Trap Package}
-    % Trap chip 
-    % PEEK interposer, Fuzz buttons, in-vacuum PCB, Spider? arms, in-vacuum prisms, high NA sandwich
-
-\subsection{Beam Geometry}
+    (TSP)\footnote{Scanwel custom housing} attached. 
+    After the final system bake, a He leak test was performed and 
+    no external leaks were found. We do observe a gradual pressure increase that we suspect is either due
+    to the in-vacuum optics, the optics epoxy adhesive\footnote{EPO-TEK
+    353ND}, or the PCB solder. Regardless, the ion pump and TSP
+    maintain UHV at the desired $<10^{-11}$~mbar (the TSP
+    is fired every 4 weeks at 41~A for 60 seconds to provide a fresh Ti layer).\\
+    Figure~\ref{fig:trap_package} $(a)$ shows the beam geometries with respect
+    to the ion chain axis. The quadrupole 729-nm beam has high NA ($\mathrm{NA}=0.6$) access
+    perpendicular to the ion chain axis, while 397-nm, 423-nm, 854-nm and 866-nm
+    beams have low NA ($\mathrm{NA}<0.05$) access at an angle of $45^{\circ}$ to the ion chain axis.
+    The atomic beam from the oven is at an angle of $\sim 57^{\circ}$ to the ion
+    chain axis. As such, there is a doppler shift of the atomic beam with
+    respect to the 423-nm photoionisation laser, which is accounted for in the
+    set laser frequency (given $12^\circ$ angle between atomic and 423-nm
+    beam, and 500~K mean temperature, expect $+126~\unit{\mega\hertz}$ frequency
+    shift). Figure~\ref{fig:trap_package} $(b)$ shows the custom trap housing including NA=0.6 access for the 729-nm beams, and in-vacuum mirrors (prisms) to redirect the low NA beams to the trap center. The low NA beams enter the housing via one of the four beam access channels parallel to the trap chip plane, and are reflected through the trap slit. The exiting beam is reflected by a second mirror out of the housing to prevent scattered light incident on the ion chain.
+    Figure~\ref{fig:trap_package} $(c)$ shows an exploded view of the trap housing with components labelled. The trap chip is interfaced to an in-vacuum PCB (described in section~\ref{sec:Trap DC Voltages}) via a custom PEEK interposer with embedded \emph{Fuzzbutton} vias (one for each DC and RF channel). The trap chip is held in place by 4 steel clamp arms, which attach to a steel base plate which provides mechanical stability and houses the lower in-vacuum prisms. A top steel plate houses the upper prisms. The tube oven is mounted on two steel clamps which are electrically isolated from the base plate by a PEEK spacer. The trap housing is fastened to the vacuum can by 4 steel arms attached to alternating side ports of the octagonal chamber~\footnote{Using \emph{Kimball Groove grabbers} P/N 53-482610}. Figure~\ref{fig:HNA} shows a cross section of the vacuum chamber and recessed dual high NA objectives. 
+    Two recessed CF100 viewports\footnote{\emph{UK Atomic
+    Energy Authority} P/N VPR100015} are required to bring the custom objectives\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} to the designed working distance of 24.4~mm from the ion chain. 
 
 \section{Imaging System}
 \label{sec:Imaging System}
@@ -576,7 +561,7 @@
     no nuclear spin giving the
     (relatively) simple level structure shown in figure~\ref{fig:ion} with the relevant laser transitions used in our apparatus are indicated. Details on the ion choice, and utility of the lasers is given in section~\ref{sec:Transitions}, here we only describe the hardware and feedback control to provide this stabilised light.\\
     The relevant wavelengths are the following:
-    The qubit is defined by the quadrupole transition at 729-nm. Access to other excited levels, outside of our defined two level system, are crucial for ion trap quantum logic to enable qubit readout via state selective fluorescence (397-nm, and 866-nm transitions), and state preparation via optical pumping (397-nm, 866-nm, and 854-nm transitions). Access to two additional transitions in neutral calcium for isotope selective ionisation, 422-nm and 373-nm, are also required~\cite{lucas2004isotope-selective}.\\
+    The qubit is defined by the quadrupole transition at 729-nm. Access to other excited levels, outside of our defined two level system, are crucial for ion trap quantum logic to enable qubit readout via state selective fluorescence (397-nm, and 866-nm transitions), and state preparation via optical pumping (397-nm, 866-nm, and 854-nm transitions). Access to two additional transitions in neutral calcium for isotope selective ionisation, 423-nm and 373-nm, are also required~\cite{lucas2004isotope-selective}.\\
     All transitions, except for 729-nm, are driven by diode lasers, described in the following section. Subsequently, the 729-nm source is discussed. Finally, the global and single addressed beam arrangements for the 729-nm system are detailed at the end of this section.\\
     % Add small section on PDH lock set up in general, and remove from subsequent sections.
     
