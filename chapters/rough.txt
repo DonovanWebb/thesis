@@ -1,11 +1,59 @@
 Missing citations:
 
 saner2025real-time
-Ion shuttling
-Anharmonicity in surface traps
-Helmut Haeffner citation for anomalous heating
+Ion shuttling sterk2022closed, kaushal2020shuttling
+Anharmonicity in surface traps home2011normal
+citation for anomalous heating brownnutt2015ion, boldin2018measuring, 
 wilpers2013compact
 kasprowicz2022urukul
 danielsonAM2018
 oswald2022characterization
 black2001introduction
+oevergaard2025transfer
+Integrated waveguide array (ETH) mehta2020integrated
+MEMS citations (same as micromirror?) crain2014individual, wang2020high
+SLM citation for use with ions mazzanti2024alignment
+AOD citation from innsbruck? pernthaler2019single
+two-step ionisation scheme lucas2004isotope
+
+
+Chapters status and Timing plan:
+    Introduction
+        Should be trivial at end
+        ~ 1-2 week
+    Theory
+        This might take a while to be precise
+        ~ 2-3 week
+    Experimental Apparatus
+        Almost Done 
+        ~ 1 day
+    Experimental Characterisation
+        Needs update 
+        ~ 1 week
+    k-copy Randomised Benchmarking
+        Paper exists, but needs (a lot) more details
+        ~ 2-3 weeks
+    Motional Control
+        Unsure what content would be in here yet
+
+    Virtual Distillation
+        Experimental work outstanding
+        ~ 1 month
+
+    Conclusion and Outlook
+        Should be trivial at end
+        ~ 1 week
+
+Lower bound: 10 weeks
+Upper bound: 14 weeks
+I have 13 weeks until submission date
+
+Order to write:
+apparatus
+k-copy
+vir-dist
+characterisation
+theory
+introduction
+conclusion
+motional control
