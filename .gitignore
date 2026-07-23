@@ -78,3 +78,17 @@ chapters/ch4-k_copy_rb.fdb_latexmk
 chapters/ch4-k_copy_rb.fls
 chapters/ch4-k_copy_rb.log
 figures/make_figure/ch2/renders/Full_system/Thumbs.db
+figures/make_figure/ch4/__pycache__/fig_helper.cpython-312.pyc
+figures/make_figure/ch4/__pycache__/graph_style.cpython-312.pyc
+figures/make_figure/ch4/circs/k-copy/circuits.aux
+figures/make_figure/ch4/circs/k-copy/circuits.fdb_latexmk
+figures/make_figure/ch4/circs/k-copy/circuits.fls
+figures/make_figure/ch4/circs/k-copy/circuits.log
+figures/make_figure/ch4/circs/k-copy/circuits.out
+figures/make_figure/ch4/circs/k-copy/circuits.synctex.gz
+figures/make_figure/ch4/circs/parity/circuits.aux
+figures/make_figure/ch4/circs/parity/circuits.fdb_latexmk
+figures/make_figure/ch4/circs/parity/circuits.fls
+figures/make_figure/ch4/circs/parity/circuits.log
+figures/make_figure/ch4/circs/parity/circuits.out
+figures/make_figure/ch4/circs/parity/circuits.synctex.gz
