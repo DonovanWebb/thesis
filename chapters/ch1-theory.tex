@@ -40,3 +40,443 @@ Further, will use James to give ion spacing and non-COM mode frequencies as will
 % SDFs
 \subsection{Geometric Phase Gates}
 \label{sec:Geometric Phase Gates}
+%
+% Overlapped theory for chapters \ref{ch:virtual_distillation} and \ref{ch:rb} 
+\section{Randomised Benchmarking}
+Some overview and motivation for RB.
+    Need to cover:
+    \begin{itemize}
+        \item Twirling over a group
+        \item Liouville representation of a CPTP map
+        \item Irreps of the Clifford group
+        \item Clifford approximates twirling over the unitary group (Haar measure)
+        \item How Liouville representation is transformed under twirling
+        \item The specific representation-theory tools you use later: irreps, multiplicity spaces, invariant sectors, Schur basis.\\
+        \item RB protocol for single qubit Clifford group, generalisation to multi-qubit Clifford group.
+        \item How to extract error per Clifford from decay rate
+\end{itemize}
+
+\section{Noise channels}
+    As will also be used in virtual distillation, may move to theory sections\\
+    A description of the noise channels we consider in this work. Explicit CPTP maps for these channels.
+    \subsection{Why isn't everything white noise?}
+    \subsection{Unitary noise}
+        Both continuous and probabilistic.
+    \subsection{Depolarising noise}
+        An ensemble of unitary noise channels, with a uniform distribution over the Bloch sphere.
+        Get this from twirling over Clifford group!
+    \subsection{Spatially correlated noise}
+        \indent\textbf{Common noise}
+            An ensemble of unitary noise channels, with a uniform distribution over the Bloch sphere, but the same unitary is applied to multiple qubits. Can enforce some symmetry to this channel by twirling over the k-copy Clifford group. This is the channel we will use to model correlated noise in our experiments.
+        \indent\textbf{Entangling noise}
+            In SC ZZ entangling noise is common.
+    \subsection{Can we make everything white noise?}
+        Have a look at Balint paper, deep random circuits, etc.
+
+\section{v1}
+
+This chapter lays the theoretical groundwork for Chapter~\ref{chap:results}.
+It reviews standard Clifford randomised benchmarking (RB), develops the
+representation-theoretic machinery of group twirling in some generality
+before specialising it to the two-copy Clifford group, and surveys the
+classes of noise channel and prior characterisation strategies that motivate
+a symmetry-based approach to correlated-noise detection.
+
+% ==========================================================================
+\section{Standard Clifford randomised benchmarking}
+\label{sec:standard_rb}
+
+\subsection{Motivation: characterising noise without full tomography}
+
+As quantum processors scale, fault tolerance and error mitigation become
+necessary to overcome decoherence and systematic control
+errors~\cite{shor_fault-tolerant_1996, aharonov_fault-tolerant_2008,
+cai_quantum_2023}. Errors that induce correlations across multiple qubits ---
+variously termed spatial correlations or crosstalk
+errors~\cite{sarovar_detecting_2020} --- require that mitigation and
+correction strategies be built on noise models that faithfully capture their
+correlated structure. Assuming a globally depolarising (white) noise model
+where correlations are in fact present can lead to systematic
+underestimation of logical error rates~\cite{aharonov_fault-tolerant_2006},
+or systematic bias in the outcome of an error-corrected
+observable~\cite{foldager_can_2024}.
+
+Methods exist to simplify correlated noise channels into more favourable
+depolarising or white-noise forms, for example Pauli twirling and random
+circuit compilation~\cite{geller_efficient_2013, wallman_noise_2016,
+hashim_benchmarking_2023}. However, the efficacy of such methods must still
+be characterised, verified, and optimised on physical devices with realistic
+noise, which is only possible with a scalable diagnostic for the correlated
+component of that noise in the first place.
+
+\todo{Add a short paragraph situating this thesis chapter within the broader
+RB literature landscape (interleaved RB, cycle benchmarking, purity
+benchmarking, etc.), with a comparison table of scaling/expressiveness
+trade-offs. This context was compressed to a single sentence in the PRL and
+would benefit from a fuller literature review here.}
+
+\subsection{The single-qubit Clifford RB protocol}
+
+Standard single-qubit Clifford RB proceeds by applying a sequence of $M-1$
+Cliffords, sampled uniformly at random from the single-qubit Clifford group,
+followed by a single inverting Clifford, $C_{\mathrm{inv}}$, chosen so that
+the sequence implements the identity operation in the absence of
+errors~\cite{dankert_exact_2009, magesan_scalable_2011}. For each sequence
+length $M$, $r$ independent random sequences are generated, and each is
+repeated $s$ times to estimate the probability of the qubit returning to its
+target computational state. The target state is conventionally randomised
+between $\ket{0}$ and $\ket{1}$ from sequence to sequence, which reduces
+sensitivity to asymmetries in state preparation and
+measurement~\cite{knill_randomized_2008}.
+
+\todo{Circuit diagram: single-qubit Clifford RB sequence of length
+$M$, with per-step error box and final inverting Clifford $C_{\mathrm{inv}}$.}
+{Schematic single-qubit Clifford RB circuit (reproduced/adapted from
+Fig.~1(a) of the manuscript). \todo{Insert final figure once redrawn for
+thesis formatting; the manuscript version also shows $k$ parallel copies,
+which belongs in Chapter~\ref{chap:results} instead.}}
+
+The survival probability of a single qubit after $m$ Cliffords follows a
+single exponential decay,
+\begin{equation}
+    \mathcal{P}_0 = \frac{1}{2}\left(1 + (1-\varepsilon_c)^m\right),
+    \label{eqn:1q_rb_decay}
+\end{equation}
+where $\varepsilon_c$ is the ``error per Clifford'' (EPC), the single
+scalar figure of merit that standard RB is able to extract. This compression
+of an entire error channel into one averaged parameter is precisely what
+gives RB its scalability, but it is also the limitation that motivates the
+correlated-noise-resolving protocol developed in
+Chapter~\ref{chap:results}: two qubits with identical single-qubit EPC can
+have entirely different amounts of correlated error between them, and
+Eq.~\eqref{eqn:1q_rb_decay} cannot distinguish these cases.
+
+\subsection{State-preparation and measurement (SPAM) errors}
+\label{sec:background_spam}
+
+RB's scalability partly derives from its insensitivity to SPAM errors up to
+an overall scaling of the exponential decay. Modelling independent bit-flip
+type state-preparation error on a single qubit with probability
+$\varepsilon_{sp}^{(i)}/2$, the prepared state is
+\begin{equation}
+    \rho_{sp}^{(i)} = \left(1-\frac{\varepsilon_{sp}^{(i)}}{2}\right)\ket{0}\bra{0}
+    + \frac{\varepsilon_{sp}^{(i)}}{2}\ket{1}\bra{1},
+\end{equation}
+equivalently expressed as a probabilistic $X$ channel acting on an arbitrary
+input state,
+\begin{equation}
+    \rho \mapsto \mathcal{E}_{sp}^{(i)}(\rho)
+    = \left(1-\frac{\varepsilon_{sp}^{(i)}}{2}\right)\rho
+    + \frac{\varepsilon_{sp}^{(i)}}{2} X\rho X.
+    \label{eqn:spam_channel}
+\end{equation}
+In the Liouville picture this simply rescales the overlap of the initial
+state with each sub-representation of the twirled channel by a factor
+$A_{sp}^{(i)} = (1-\varepsilon_{sp}^{(i)})$ for every sub-representation in
+which qubit $i$ participates non-trivially. This single-qubit treatment
+generalises directly to the two-qubit setting used in
+Chapter~\ref{chap:results}: correlated SPAM errors, such as a correlated
+spin-flip channel, leave certain sub-representations (in particular the
+fully symmetric sector) invariant, and so can mimic a genuine correlated
+error signature if left unaccounted for in a fit.
+
+\todo{Expand this subsection with the general $n$-qubit SPAM formalism, and
+a short discussion of readout-error mitigation strategies compared against
+this multiplicative-scaling picture. The manuscript SM only develops the
+2-qubit special case, which is deferred to Chapter~\ref{chap:results}.}
+
+% ==========================================================================
+\section{Twirling and representation theory}
+\label{sec:twirling_rep_theory}
+
+\subsection{General twirling formalism}
+
+RB owes its practicality to the process of \emph{twirling}: averaging a
+general noise channel over a chosen group of unitaries. Consider a general
+CPTP error channel $\Lambda$, expressed in Liouville (transfer-matrix) form
+acting on a vectorised density matrix. Twirling $\Lambda$ over a discrete
+group $\mathcal{G}$ produces
+\begin{equation}
+    \Lambda \mapsto \tilde\Lambda
+    = \frac{1}{|\mathcal{G}|}\sum_{\mathcal{G}} G\Lambda G^\dagger,
+    \label{eqn:twirl_general}
+\end{equation}
+where $G$ denotes the vectorised representation of a group element. By
+construction, the twirled channel commutes with every representation
+element,
+\begin{equation}
+    G\tilde\Lambda G^\dagger = \tilde\Lambda \qquad \forall\, G \in \mathcal{G}.
+    \label{eqn:twirl_commute}
+\end{equation}
+
+The Hilbert space on which $\mathcal{G}$ acts decomposes into a direct sum
+of irreducible representations (irreps),
+\begin{equation}
+    \mathcal{H} = \bigoplus_\lambda \left(V_\lambda \otimes \mathbb{C}^{m_\lambda}\right),
+\end{equation}
+where $V_\lambda$ is the irrep space and $\mathbb{C}^{m_\lambda}$ is a
+multiplicity space of dimension $m_\lambda$. Schur's lemma then constrains
+any operator satisfying Eq.~\eqref{eqn:twirl_commute} to be block diagonal
+in this decomposition,
+\begin{equation}
+    \tilde\Lambda = \bigoplus_\lambda \left(I_\lambda \otimes \mathcal{A}_\lambda\right),
+    \label{eqn:block_diagonal}
+\end{equation}
+where $I_\lambda$ is the identity on $V_\lambda$ and $\mathcal{A}_\lambda$ is
+an $m_\lambda \times m_\lambda$ matrix acting only within the multiplicity
+space. Physically, Eq.~\eqref{eqn:block_diagonal} is the statement that
+twirling collapses an otherwise arbitrarily complex error channel down to a
+comparatively small number of scalar decay rates (diagonal terms of
+$\mathcal{A}_\lambda$) and couplings (off-diagonal terms), one set per irrep.
+This is the general mechanism underlying the scalability of every RB variant,
+and the choice of twirling group $\mathcal{G}$ determines which physical
+information survives the averaging and which is discarded.
+
+\todo{Add a short worked example here with a simple, well-known group (e.g.\
+the single-qubit Clifford group acting on one qubit, recovering standard RB's
+single decay parameter) to build intuition before jumping to the two-copy
+case below. This would also be a natural place to discuss the trade-off
+between expressiveness and scalability more formally, referencing
+Pauli-twirling as an alternative choice of $\mathcal{G}$.}
+
+\subsection{The two-copy Clifford group and its irreducible representations}
+\label{sec:two_copy_cliff}
+
+To characterise correlated noise between a pair of qubits, we are interested
+in the group generated by applying the \emph{same} randomly sampled
+single-qubit Clifford simultaneously to both qubits: the diagonal action of
+the Clifford group on two copies, denoted $Cl^{\otimes 2}$. The
+representation theory of this group has been analysed in detail
+elsewhere~\cite{helsen_representations_2018, wallman_randomized_2014}; the
+key results are summarised here.
+
+The general $16$-dimensional two-qubit Liouville space decomposes under
+$Cl^{\otimes 2}$ into four irreducible representations, of dimensions
+$\{1, 2, 3, 3'\}$ (the label $3'$ distinguishes the second, inequivalent,
+three-dimensional irrep from the first), with respective multiplicities
+$\{2, 1, 3, 1\}$. Table~\ref{table:irreps} lists the six sub-representations
+that follow from these irreps and multiplicities, together with a spanning
+set of Pauli-basis operators for each.
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{c|c|c}
+         Sub-representation & irrep & Basis operators\\
+         \hline\hline
+         Identity & $1$ & $II$ \\
+         \hline
+         Left qubit & $3$ & $XI,YI,ZI$ \\
+         \hline
+         Right qubit & $3$ & $IX,IY,IZ$ \\
+         \hline
+         Trace & $1$ & $(XX + YY + ZZ)/\sqrt{3}$ \\
+         \hline
+         Diagonal traceless & $2$ & $(XX + YY - 2ZZ)/\sqrt{6}$,\ $(XX - YY)/\sqrt{2}$\\
+         \hline
+         Symmetric off-diagonal & $3'$ & $(XY + YX)/\sqrt{2}$,\ $(XZ + ZX)/\sqrt{2}$,\ $(YZ + ZY)/\sqrt{2}$\\
+         \hline
+         Antisymmetric & $3$ & $(XY - YX)/\sqrt{2}$,\ $(XZ - ZX)/\sqrt{2}$,\ $(YZ - ZY)/\sqrt{2}$\\
+    \end{tabular}
+    \caption{Sub-representations of the $Cl^{\otimes 2}$ group, adapted from
+    Eq.~56 of Ref.~\cite{wallman_randomized_2014}. Each row gives the irrep
+    label, its dimension, and a spanning set of two-qubit Pauli-basis
+    operators.}
+    \label{table:irreps}
+\end{table}
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c}
+         irrep & $e$ & $(12)$ & $(12)(34)$ & $(123)$ & $(1234)$\\
+         \hline
+         Identity/Trace & 1 & 1 & 1 & 1 & 1 \\
+         \hline
+         Left/Right/Antisymmetric & 3 & 0 & $-1$ & 1 & 1 \\
+         \hline
+         Diagonal traceless & 2 & $-1$ & 2 & 0 & 0 \\
+         \hline
+         Symmetric off-diagonal & 3 & 0 & $-1$ & $-1$ & $-1$ \\
+    \end{tabular}
+    \caption{Character table for the irreps of Table~\ref{table:irreps},
+    listed against representative conjugacy classes: identity, transposition,
+    double transposition, 3-cycle, and 4-cycle.}
+    \label{table:character}
+\end{table}
+
+\todo{Insert the derivation connecting Tables~\ref{table:irreps} and
+\ref{table:character} explicitly (i.e.\ show the character-table computation
+step by step, rather than quoting the result). The manuscript SM states this
+result without full derivation; a thesis chapter is the appropriate place to
+walk through it, likely via Young-tableaux / permutation-representation
+arguments.}
+
+Given the block-diagonal structure of Eq.~\eqref{eqn:block_diagonal}, and
+further imposing that the twirled channel be trace preserving, a general
+twirled two-qubit channel is described by $13$ independent scalars: six
+diagonal decay rates,
+$\vec\alpha = \{\alpha_L, \alpha_R, \alpha_{tr}, \alpha_{dt}, \alpha_{so},
+\alpha_{as}\}$, one per sub-representation, and seven off-diagonal coupling
+terms,
+$\vec m = \{m_{id\to tr}, m_{L\to R}, m_{R\to L}, m_{L\to as}, m_{R\to as},
+m_{as\to L}, m_{as \to R}\}$, describing transitions between multiplicity
+spaces of the same irrep. Table~\ref{table:off-diag} associates each
+coupling term with a physical error mechanism capable of generating it.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{c|c|c}
+    Coupling & irrep & Mechanism \\
+    \hline\hline
+    $m_{id\rightarrow tr}$ & 1 & Decays (non-unital) \\
+    \hline
+    $m_{L\rightarrow R},\ m_{R\rightarrow L}$ & 3 &
+    Qubit swap, correlated decays (non-unital) \\
+    \hline
+    $m_{L\rightarrow as},\ m_{R\rightarrow as},\ m_{as\rightarrow L},\ m_{as\rightarrow R}$
+    & 3 & Entanglement \\
+\end{tabular}
+\caption{Physical mechanisms capable of coupling sub-representation sectors
+of the twirled $Cl^{\otimes 2}$ error channel.}
+\label{table:off-diag}
+\end{table}
+
+This decomposition is a purely group-theoretic statement: it is agnostic to
+any particular physical error model and simply enumerates the possible
+subspaces that a two-qubit error channel can populate once diagonal
+Clifford twirling has been applied. Section~\ref{sec:noise_models} below
+specialises this general structure to specific, physically motivated error
+channels, and Chapter~\ref{chap:results} uses the resulting scalar decay
+rates to build the observable population dynamics measured experimentally.
+
+\todo{Add a subsection discussing the multiplicity structure in more depth
+--- i.e.\ what it physically means for an irrep to appear with multiplicity
+$>1$, and how this connects to the existence of the coupling terms $\vec m$.
+Also worth adding a small worked example reducing a simple noise channel
+(e.g.\ pure local depolarisation) through Eq.~\eqref{eqn:block_diagonal} by
+hand for pedagogical value.}
+
+% ==========================================================================
+\section{Noise models}
+\label{sec:noise_models}
+
+Having established the general block-diagonal structure available to any
+twirled two-qubit channel, this section reviews the specific classes of
+physical error mechanism relevant to the results in
+Chapter~\ref{chap:results}, and how each maps onto the sub-representations
+of Table~\ref{table:irreps}.
+
+\subsection{Local depolarising noise}
+
+Independent noise acting separately on each qubit is, without loss of
+generality (following twirling), well modelled by a depolarising channel,
+\begin{equation}
+    \rho^{(1q)} \mapsto \mathcal{E}_{dp,a}(\rho^{(1q)})
+    = (1-\varepsilon_a)\rho^{(1q)} + \varepsilon_a \frac{I}{2}\mathrm{Tr}(\rho^{(1q)}),
+    \label{eqn:1q_depol}
+\end{equation}
+where the subscript $a \in \{L, R\}$ labels the qubit and $\varepsilon_a$ is
+its depolarising error per Clifford. In Liouville form, restricted to the
+two-qubit Pauli basis
+$\mathcal{P} = \{I\otimes I,\ \vec\sigma \otimes I,\ I \otimes \vec\sigma,\
+\vec\sigma \otimes \vec\sigma\}$, independent depolarisation on both qubits
+gives
+\begin{equation}
+    \Lambda_{dp} = \mathrm{diag}^{\mathcal{P}}
+    \Bigl(1,\ (1-\varepsilon_L)I_3,\ (1-\varepsilon_R)I_3,\
+    (1-\varepsilon_L)(1-\varepsilon_R)I_9\Bigr).
+    \label{eqn:local_depol_liouville}
+\end{equation}
+Local depolarising noise generates no couplings between sub-representations:
+it is diagonal in the Schur basis introduced in
+Section~\ref{sec:two_copy_cliff}, and drives the two-qubit state toward the
+fully mixed state.
+
+\subsection{Correlated (``common'') single-qubit rotation noise}
+\label{sec:common_noise}
+
+The central noise model of interest is correlated random-unitary noise, in
+which the \emph{same} randomly sampled single-qubit rotation error is
+applied to both qubits, here termed \emph{common noise}. This channel is
+\begin{equation}
+    \rho \mapsto \mathcal{E}^{\mathcal{A}}_{U\otimes U}(\rho)
+    = \sum_{a \in \mathcal{A}} p_a\, (U_a \otimes U_a)\, \rho\, (U_a\otimes U_a)^\dagger,
+    \label{eqn:rotation_channel}
+\end{equation}
+where $\mathcal{A}$ is an ensemble of unitaries applied with probabilities
+$p_a$ ($\sum_a p_a = 1$), and each $U_a(\theta_a, \hat n_a) =
+e^{-i(\theta_a/2)\hat n_a \cdot \hat\sigma}$ is a rotation of angle
+$\theta_a$ about axis $\hat n_a$. A subset $\mathcal{A}' \subseteq
+\mathcal{A}$ of this class produces genuinely non-separable two-qubit
+channels, i.e.\ $\mathcal{E}^{\mathcal{A}'}_{U\otimes U} \neq
+\mathcal{E}_U^{(L)} \otimes \mathcal{E}_U^{(R)}$, and it is precisely this
+subset that constitutes spatially correlated noise.
+
+Physically, this class captures correlated but non-entangling control and
+environmental fluctuations, which are particularly relevant to trapped-ion
+and neutral-atom qubits subject to common fluctuations of qubit drive phase,
+amplitude, and detuning; magnetic field noise and gradients; beam pointing
+and intensity drift; AC Stark-shift fluctuations; motional-state-dependent
+over-rotations; and gate-duration calibration errors.
+
+Twirling Eq.~\eqref{eqn:rotation_channel} over $Cl^{\otimes 2}$ reveals that
+only the fully symmetric ``trace'' sub-representation is exactly preserved
+by common single-qubit rotations, $\alpha_{tr} = 1$, regardless of the
+error angle. To second order in a small rotation angle $\theta$, the
+remaining scalar decay rates for a single common rotation are
+\begin{equation}
+    \alpha_L = \alpha_R = \alpha_{as} = 1 - \theta^2/3, \qquad
+    \alpha_{tr} = 1, \qquad
+    \alpha_{dt} = \alpha_{so} = 1 - \theta^2,
+\end{equation}
+so that, to leading order, the dynamics depend only on the magnitude of the
+error angle and not on its axis. Averaging over the ensemble $\mathcal{A}$
+gives $\alpha_i^{(\mathcal{A})} = \sum_{a} p_a \alpha_a$, leading to the
+convenient definition of a correlated error per Clifford,
+\begin{equation}
+    \varepsilon_{\mathrm{corr}} = \frac{1}{3}\sum_{a\in\mathcal{A}} p_a\, \theta_a^2.
+    \label{eqn:e_corr}
+\end{equation}
+
+\todo{Add the full (non-small-angle) expressions here for completeness, i.e.\
+$\alpha_L=\alpha_R=\alpha_{as}=(1+2\cos\theta)/3$ and the corresponding
+$\alpha_{dt}$, $\alpha_{so}$ including the anisotropic term $n_{an}$, together
+with a short discussion of when the small-angle approximation breaks down.
+Also worth adding the tensor-contraction derivation
+($s_{tr}, s_{id}, s_{swap}, s_{diag}$) that produces these $\alpha_i$ from
+first principles, since it is a reusable technique beyond this specific
+channel.}
+
+\subsection{Entangling coherent errors: $ZZ$-type noise}
+
+A distinct and experimentally important source of two-qubit correlation is
+coherent entangling coupling, exemplified in superconducting-qubit
+architectures by always-on $ZZ$ crosstalk~\cite{zhao_quantum_2022,
+fors_comprehensive_2024, alghadeer_crosstalk_2025}, described by the
+Hamiltonian
+\begin{equation}
+    H_{ZZ} = \frac{J_{ZZ}}{2} Z \otimes Z.
+\end{equation}
+Unlike common single-qubit rotation noise, $H_{ZZ}$ couples the two
+multiplicity copies of the $3$-dimensional irrep (the ``left'', ``right'',
+and ``antisymmetric'' sub-representations of Table~\ref{table:irreps}), and
+so cannot in general be described by a diagonal Liouville matrix in the
+Schur basis. A more tractable, stochastic variant of this error,
+\begin{equation}
+    \rho \mapsto \mathcal{E}_{ZZ}(\rho)
+    = (1-p_{ZZ})\rho + p_{ZZ}\, (Z\otimes Z)\rho (Z\otimes Z),
+\end{equation}
+does remain diagonal, with
+\begin{equation}
+    \alpha_L = \alpha_R = \alpha_{so} = \alpha_{as} = 1 - 4p_{ZZ}/3,
+    \qquad \alpha_{tr} = \alpha_{dt} = 1.
+\end{equation}
+This channel is included here for completeness and generality; it is not
+probed experimentally in this thesis (see Chapter~\ref{chap:results},
+Outlook).
+
+\todo{Expand this subsection substantially if $ZZ$-error characterisation
+numerics or a proposed experiment are added elsewhere in the thesis. As it
+stands this is a very compressed treatment inherited directly from the
+manuscript SM; a thesis-length treatment might derive the full coherent
+(non-stochastic) block-diagonal Liouville matrix, rather than only the
+stochastic special case.}

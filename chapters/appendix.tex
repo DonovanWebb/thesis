@@ -39,3 +39,63 @@
 % Prereqs:
     % SDFs
     % Motional characterisations
+
+\section{Detuning errors}
+To exemplify the method for calculating the effect of an error channel on a single qubit gate, we consider the simple case of a coherent detuning error. We define the Fidelity of a quantum channel $\mathcal{E}$ with respect to a unitary $U$ as
+\begin{equation}
+    \label{eqn:fid}
+    F(\mathcal{E},U) = \int d\psi \bra{\psi} U^\dagger \mathcal{E}(\ket{\psi}\bra{\psi}) U \ket{\psi},
+\end{equation}
+where the integral is taken over the uniform Haar measure on the space of pure states. We shall see that the language used for this analysis of single qubit gate fidelities closely resembles the group theory approach describing randomised benchmarking. The Haar measure is relevant here to consider the fidelity of the operation independent of the initial state (assuming it is pure), which is exactly the enforced criteria through Clifford twirling during RB. For a single qubit, this can be expressed as an integral over the Bloch sphere. 
+If we further assume that the error channel is unitary, as is the case of a detuned channel considered here, we shall find that the fidelity follows
+\begin{equation}
+    \label{eqn:fid_unitary}
+    F(V,U) = \frac{1}{d(d+1)} \left( |\text{Tr}(W)|^2 + d \right),
+\end{equation}
+ where $V$ is the error unitary, $W=U^\dagger V$ and $d$ is the dimension of the Hilbert space. \\
+Here we shall give a derivation of this result, by considering the symmetry imposed by the Haar measure.
+The standard fidelity of two unitaries following from equation~\ref{eqn:fid} is given by
+\begin{equation}
+\begin{split}
+    F(V,U) &= \int d\psi \bra{\psi} U^\dagger V \ket{\psi}\bra{\psi} V^\dagger U \ket{\psi},\\
+    &= \int d\psi |\bra{\psi} W \ket{\psi}|^2.\\
+\end{split}
+\end{equation}
+Using the identity $\text{Tr}(A)\text{Tr}(B) = \text{Tr}(A\otimes B)$, we can rewrite the fidelity as a two-copy expectation value,
+\begin{equation}
+    F(V,U) = \text{Tr}\left( \left(W \otimes W^\dagger\right) \int d\psi \left(\ket{\psi}\bra{\psi}\right)^{\otimes 2}\right),
+\end{equation}
+where we have now separated the fidelity into a part dependent on the error channel, and a part equivalent to the second moment of the Haar measure, explicitely rewritten as
+\begin{equation}
+    \mathcal{M}_2 = \int d\psi \left(\ket{\psi}\bra{\psi}\right)^{\otimes 2}.
+\end{equation}
+We now consider two apparent symmetries of $\mathcal{M}_2$: first, the Haar measure is invariant under unitary transformations, and so our expression must commute with $U \otimes U$ for any unitary $U$; second, the two states in the tensor product are identical, and so $\mathcal{M}_2$ must be invariant under the swap operator $S$ which exchanges the two copies. These two symmetries are sufficient to show that $\mathcal{M}_2$ is proportional to the projector onto the symmetric subspace of the two-copy Hilbert space, which is given by
+\begin{equation}
+    \Pi_{\text{sym}} = \frac{1}{2}(\mathbb{I} + S).
+\end{equation}
+To normalise the moment (as the Haar measure is a probability distribution), we enforce $\text{Tr}(\mathcal{M}_2) = 1$. In this two-copy expression, it is apparant that $\text{Tr}(I) = d^2$ and $\text{Tr}(S) = d$, resulting in,
+\begin{equation}
+    \mathcal{M}_2 = \frac{1}{d(d+1)} \left(\mathbb{I} + S\right). 
+\end{equation}
+Incorporating this result into the fidelity expression, we find
+\begin{equation}
+    F(V,U) = \frac{1}{d(d+1)} \text{Tr}\left[ (W \otimes W^\dagger)(\mathbb{I} + S) \right],
+\end{equation}
+where we can evaluate the two terms using the identities $\text{Tr}(A \otimes B) = \text{Tr}(A)\text{Tr}(B)$ and $\text{Tr}((A \otimes B)S) = \text{Tr}(AB)$, the latter of which is highly relevant to the mechanism of virtual distillation, described in chapter~\ref{ch:virtual_distillation}. This results in the final expression for the fidelity of a unitary error channel with respect to a target unitary, given above by equation~\ref{eqn:fid_unitary}.\\
+Considering the explicit case of a $R_x(\pi/2)$ gate with a coherent
+detuning error, we can write the error unitary as 
+\begin{equation}
+V = \text{exp}\left(-i\frac{\pi}{4}\left(\hat\sigma_x + \frac{\delta}{\Omega}\hat\sigma_z\right)\right),
+\end{equation}
+where $\delta$ is the detuning from resonance, and $\Omega$ is the Rabi frequency. The ideal unitary is given by $U = \text{exp}(-i\frac{\pi}{4}\hat\sigma_x)$, yielding trace of the product $W = U^\dagger V$ as
+\begin{equation}
+    \text{Tr}(W) = 2 - \frac{1}{2}\left(\frac{\delta}{\Omega}\right)^2 + \mathcal{O}\left(\frac{\delta}{\Omega}\right)^4,
+\end{equation}
+where we have assumed the detuning is small compared to the Rabi frequency. Inserting this into equation~\ref{eqn:fid_unitary}, we find the fidelity of the detuned gate is given by
+\begin{equation}
+    F(V,U) = 1 - \frac{1}{3}\left(\frac{\delta}{\Omega}\right)^2 + \mathcal{O}\left(\frac{\delta}{\Omega}\right)^4.
+\end{equation}
+To convert this to an error contribution to a single qubit Clifford gate, we introduce the scalar $\kappa$, which depends on the specific decomposition of the Clifford gate set into the native gate set of the system. The error contribution is then given by
+\begin{equation}
+    \epsilon = \kappa(1-F(V,U)) = \frac{\kappa}{3}\left(\frac{\delta}{\Omega}\right)^2 + \mathcal{O}\left(\frac{\delta}{\Omega}\right)^4.
+\end{equation}
