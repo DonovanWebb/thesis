@@ -10,7 +10,9 @@ def get_fig_width():
     """
     Get the figure width in inches.
     """
-    line_width_pt = 510.0  # 421.10046  # latex linewidth in points, check with \the\linewidth in latex
+    line_width_pt = (
+        421.10046  # latex linewidth in points, check with \the\linewidth in latex
+    )
     line_width_in = 1 / 72.27 * line_width_pt  # latex point to inches
     fig_width = line_width_in  # 7.05687 # 5.827 in
     return fig_width
