@@ -1,12 +1,46 @@
-\chapter{Virtual Distillation}
+\chapter{Virtual Distillation on an Ion Trap QC}
 \label{ch:virtual_distillation}
 \minitoc
 
-Presentation of the experimental results demonstrating virtual distillation.
+This chapter presents the theory of virtual distillation, a purification based error mitigation technique. We begin with the background and uses of error mitigation, and detail the virtual distillation protocol. Following this, we analyse the performance of virtual distillation under different physically motivated noise models, with 
+experimental results presented for two-copies in the presence of both spatially correlated and uncorrelated noise. We close this chapter with a discussion on extending this method to more than two-copies, and to hybrid systems.
+
+\section{Error Mitigation}
 \begin{itemize}
-    \item two copy, B matrix demonstration
-    \item Virtual distillation on spatially correlated noise
-    \item any-to-any two-qubit gate
-    \item pi/4 calibration
-    \item Motional virtual distillation. What errors does this mitigate? How to implement it? Results?
+    \item Error mitigation motivation. Mainly on contrasting to quantum error correction.
+        \item QEM is framed as finding expectation value of observable, rather than maintaining coherence for a long computation.
+        \item How QEM reduces bias (at the expense of required samples). Look at Cai paper for structured argument.
 \end{itemize}
+\section{Virtual Distillation Theory}
+\begin{itemize}
+    \item Introduce virtual distillation, a purification technique. Discuss scaling with copy number, and the error models it deals with.
+\end{itemize}
+\subsection{Protocol}
+    Either Hadamard test or B-matrix.
+\subsection{Mechanism}
+\begin{itemize}
+    \item It can be used for both spin and bosonic objects
+\end{itemize}
+\subsection{Noise Floor}
+\begin{itemize}
+    \item Discuss noisefloor (coherent mismatch)
+    \item Go into detail on how spatially correlated noise can be an issue here, discuss network paper as opposite case
+\end{itemize}
+\section{Experimental Implementation}
+\subsection{Calibrations}
+pi-4 gates, single addressing
+\subsection{Injected Spatial Correlations}
+\begin{itemize}
+        \item two copy, B matrix demonstration
+\end{itemize}
+\section{Extending to >2 copies}
+\begin{itemize}
+        \item plan for c-swap implementation.
+\end{itemize}
+\section{Error Mitigation on Hybrid Systems}
+\begin{itemize}
+        \item What errors does this mitigate? 
+        \item How to implement it? 
+        \item Results?
+\end{itemize}
+\section{Conclusions}

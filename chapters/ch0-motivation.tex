@@ -1,120 +1,63 @@
 \chapter{Introduction}
 \minitoc
+\todo{Should something go here?}
 
-\section{Motivation}
+\section{Classical and Quantum Computing}
+\todo{two paragraphs
+\begin{itemize}
+    \item Why we want to build a quantum computer. (Feynman, Shor, Grover)
+    \item What constitutes a quantum computer? (Qubits, gates, circuits)
+\end{itemize}}
+
+% QM and computing
+Quantum mechanics successfully describes the behaviour of sufficiently small things~\cite{}.
+The theory is useful in the description of sub-atomic particles, atoms, the molecule they compose, crystals, light, the vacuum, and many other parts of our reality. That is to say, given a choice, bet things obey quantum mechanics. From the 1980s? work began in earnest on marrying the fields of quantum mechanics and information, with the intuition that if reality is described by QM, then surely QM is the efficient language in which to ``compute'' reality~\footnote{Paraphrased, rather than the tired Feynman spiel~\cite{}.}.
+To discuss this idea, I will first donate a paragraph to the classical computers that have gone before.\\
+We will define ``compute'' as modelling some physical system with another, disparate, physical system. This could be an analogue simulacra with continuous input and outputs, or it could be some digital model that mimics the system at an arbitrary precision. Apart from the engineering practicalities of realising the device, this analogue and digital distinction does not matter. The \emph{Computer} enters when Turing proposed a class of these systems that not only mimic one specific system, but rather can model any physical system, provided enough time and memory. This remarkable result lends \emph{computers} their other name: the Turing machines. Suprisingly few operations are required for a device to be a Turing machine (i.e. is Turing complete), and so the 
+question of whether a Turing machine can be constructed was never up for debate (as this was likely answered at least XX years before Turing's birth by probably some astrolabe XX). But now comes the practicality -  although a physical device is a Turing machine, it may still not be feasible for an operator to ``code'' some desired behaviour~\footnote{play with esolangs for an hour to confirm this for yourself.}, or for a useful result to be returned in reasonable time~\footnote{factor a 256-bit number for \todo{1e10} years to confirm this for yourself.}. Regardless, highly advanced and operable computers have been constructed and have successfully  modelled and transformed almost all aspects of moden life. However, there still remains vast regions of computational problems that fall into this category of unfeasible on current hardware. Worse still, the scaling of resources and time required for some real-world problems suggest that classical computing will never be able to solve them. \\
+One category of problem that is often recognised to be unfeasible on classical computers, is that of modelling quantum systems. Fundamentally this is due to the concept of superposition (\todo{I have seen interference being the often quoted feature, check my understanding of this}) -- a quantum state is generally described by the superposition of all possible $2^n$ basis states, where $n$ is the system dimension~\todo{Check this}. Each basis state will have some amplitude and phase, and with some normalisating results in $2^n-1$ complex numbers required to track and accurately model the generic state. This exponential scaling is not kind to a digital computer, whose own internal classical state (something about how they scale...). \todo{Read deutsch a bit again to finalise the argument here}. Returning to the 80s?, it was thought that this detrimental scaling of quantum systems might offer a distinct advantage if we were to construct a Turing machine from quantum objects
+\footnote{As an aside, the implications of quantum mechanics on information extend further than purely mimicking other dynamic systems -- using and distributing quantum objects also allows for dominant strategies in cryptography~\cite{}, and some competitive (although currently esoteric) games~\cite{}.}. This prompted the requirements given by DiVincenzo on the components to construct such a device:
+Some aggregation of fundamental quantum information carrying units, most commonly two-level systems called quantum-bits (or qubits), although higher dimensional systems such as qudits~\cite{}, or continuous systems such as qumodes~\cite{} are areas of active research. We further require some way to prepare these quantum objects into a known initial state. Then, a set of unitary operations (quantum gates) are used to manipulate the state and perform the desired computation. Finally, some measurement of the state is required to extract information.
+The performance of a physical QC is then characterised by how faithfully each of these requirements is fulfilled in the error prone world.
+To realise a resource scaled quantum computer, we must recognise the double-edged sword that is superposition: this large state space in which to encode information, is increasingly sensitive to environmental noise~\cite{} due to this large state space. The loss of recoverable information due to noise is called decoherence, and is the major challenge to building a practical quantum computer~\cite{}.\\
+The physical origin and coupling of noise into the quantum system is highly dependent on the hardware implementation of the computer, although the effects of noise fall into a few classes, which we shall discuss in the next chapter. This thesis is concerned practically on the trapped ion platform, and so a specific focus will be lent to it, and we shall now spend some time outlining what it consists of.\\
+
+\section{Trapped Ion Platform}
+\todo{two paragraphs}
+\begin{itemize}
+    \item Atoms are convenient qubits.
+    \item Description and history of experimental trapped ion systems.
+\end{itemize}
+
+An effective quantum computer requires meticulous control over a collection of simple quantum systems. A good starting point is thus selecting that simple  system to build our control around. Nature provides us with a bounty of choices in this regard: Atoms. By definition it is difficult to choose a simpler object, and according to our understanding of physics, atoms of the same species are identical to one another no matter where or when you are.
+We may use their electronic energy structure, which atomic physicists have scrutinized for over a century, to define our quantum bits, and we can use an assortment of electromagnetic frequencies to manipulate these internal states.
+This is the strategy of both the ``neutral-atom'', and ``trapped-ion'' platforms, with the latter choosing to remove or add a few electrons to more easily manipulate the atoms position in space (although we note that the neutral-atom platform has made significant progress in optical traps, and I suspect this distinction could become a moot point relatively soon). \\
+Despite this gift of nature, there is wide interest in other ``manufactured" quantum systems, such as superconducting circuits, quantum dots and, NV centers; benefitting from control over the level structure, and owing to their solid state, presumably allowing for easier integration into existing semiconductor fabrication techniques. The final platform we name is photonic qubits, arguably another of natural origin, and unique in being a "flying-qubit": photons are able to transmit information over long distances (and it is in fact quite hard to keep them still). At this time, it is unclear whether one of these platforms, or an entirely new architecture, will be the first to reach a scaled device. Each have their own advantages and unique technical challenges, and each are in rapid active development. We shall focus almost exclusively on the trapped ion platform, however will give some discussion on common noise channels in other platforms in chapter~\ref{ch:theory} \\
+Atomic ions held in place through some combination of electric and/or magnetic fields. They are stored in ultra-high vacuum conditions, and physically distant (>10 $\unit{\micro\meter}$) from any bulk material to limit the coupling of environmental noise to our fragile state. Lasers, radio, and microwave drives are then used to effect the electronic and motional states of the ions.
+
+
+\section{Scaling Trapped Ion Systems}
+\begin{itemize}
+    \item Why we need to scale up trapped ion systems (Steane) in register, and in depth.
+    \item What are the technical challenges to scaling up trapped ion systems. Including motional control and hybrid systems.
+    \item What are the new errors that appear when we scale up trapped ion systems. This is a main contribution of this thesis.
+\end{itemize}
+Useful circuits are proposed to be of order x qubits, x gates.
+increased complexity changes the relevant error processes
+
+Errors increase with both space and time in QC, motivating hardware improvements, quantum error mitigation and correction techniques.
+Hardware challenges for scaling up trapped ion systems include number of qubits, addressing (control line problem), speed of operation, and motional control.
+Particularly, as the resource scales, new errors appear that are not present in small systems. These include spatially correlated noise, and crosstalk between qubits. This thesis focuses on the construction of a new experimental apparatus to enable the study of these errors, and the development of techniques to mitigate them.
+
+
+\section{Structure of this Thesis}
 % Main points:
-    % High overview of work.
-    % Describe that have spent two years building this system.
-    % Building a system with spin and motion control.
-    % List of unique requirements for the system
-        % Motional control
-        % Single addressing
-        % Standing waves
-    % Here characterisation
-    % But we want to use this experiment for...
-        % E.g. Feynman diagram simulation
-        % Here I would like to briefly describe the next steps in the project, as well
-        % as the future experiments we want to demonstrate.
-        % Discussion of single addressing could be here.
 
-    The following chapter details the characterisation work performed during the
-    commissioning of a new ion trap apparatus. Over the past two years, my
-    colleagues and I have been constructing this system, which is now
-    approaching readiness for our desired experiments. In this
-    \textit{Motivation} section, I will provide a high-level overview of the
-    physics we want to explore, state the unique aspects of the apparatus that
-    enable these experiments, and finally, give a timeline for planned future
-    work. The complexity of our system necessitates collaboration, and so I
-    would like to acknowledge the rest of the \emph{FastGates} team, for their
-    extensive contributions to bringing the system online. \\
+    This thesis is concerned with the construction, and characterisation of a new ion trap apparatus targetting spin and motional control of multi-ion chains; the errors that arise at this scale; and error mitigation through virtual distillation.\\
 
-    There are two research directions that we are pursuing with this apparatus.
-    Both involve the interplay between the ``spin'' electronic degrees
-    of freedom and the motion of the ions which we describe by quantum harmonic
-    oscillators.\\
-    The first is the demonstration of fast, high-fidelity two-qubit
-    entangling gates between trapped ions. High-fidelity entangling gates are
-    critical for developing a quantum computer which can perform useful
-    calculations with high success probability~\cite{steane2003overhead}. Gate errors associated with
-    decoherence of the quantum state are often dominated by incoherent
-    processes, such as spontaneous emission, or interactions between the qubit
-    and the environment~\cite{wineland1998experimental}. These errors accumulate with time, and so may be
-    mitigated by increasing the algorithm ``clock-speed'', hence our desire for
-    fast entanglement~\cite{steane2000speed,schafer2018fast}. Typically in ion traps, local two-qubit gates are
-    performed via the ion's shared motion, which may be excited by interaction
-    with a laser~\cite{cirac1995quantum, sorensen2000entanglement}. As the effective Rabi frequency approaches that of the
-    frequency separation of the motional modes, the dynamics between spin and
-    motion become complicated by multiple simultaneous mode excitations~\cite{schafer2018fast}. Our
-    apparatus is designed to provide the required laser intensities and mode
-    frequencies such that we can explore this regime, and demonstrate the
-    required control to tame these multiple mode excitations and perform
-    high-fidelity entangling gates.\\
-    The second direction is the use of the motion of the ion directly as a
-    quantum resource~\cite{liu2024hybrid,chen2021quantum}. This falls into the continuous variable quantum computing
-    paradigm (CVQC), where instead of discrete qubits, the quantum state is
-    described by bosonic ``qumodes''~\cite{lloyd1999quantum}. CVQC reduces the
-    technical overhead of scaling discrete systems, as larger Hilbert spaces are
-    easily accessed due to the many level nature of the individual qumodes.
-    We want to demonstrate a
-    universal set of gates for CVQC, which includes, single-mode Gaussian and
-    non-Gaussian gates (demonstrated in~\cite{bazavan2024squeezing}), and two-mode entangling gates. Further, we want to demonstrate the ability to simultaneously leverage both
-    bosonic and spin degrees of freedom of our ions to efficiently encode
-    problems in the full hybrid system we have access to~\cite{varona2024towards, brenner2024factoring}. Our apparatus has both
-    precise motional control and stability through our trap choice, and the
-    individual addressing system that is required when interacting with many-ion
-    chains.\\
-    
-    Details of the apparatus are presented in the Appendices. Summarised here are the unique aspects enabling the desired experiments:
-    \begin{itemize}
-    \item \textbf{High laser intensities:} The system is designed to provide
-        high laser intensities, which are required to drive fast entangling
-        gates. This is achieved through the use of a 5~W Ti:Sapph system (section~\ref{sec:Narrow Line Width 729 Laser}) and
-        two high numerical aperture (NA = 0.6) objectives (section~\ref{sec:Vacuum System}).
-    \item \textbf{Single ion addressing:} Using crossed acousto-optic
-        deflectors, we can selectively address individual ions in a multi-ion chain (section~\ref{sec:Single Addressing System}).
-        This enables fast entangling gates between ions in a long
-        chain, and the ability to perform motional interactions on selected modes.
-    \item \textbf{Standing wave addressing:} The system is designed to provide
-        standing optical waves at the ion position. Standing waves are required for
-        some fast gate schemes~\cite{saner2023breaking}. 
-    \item \textbf{Motional control:} The Paul trap used in the system, produced
-        by \emph{National Physical Laboratory} in the UK, has low heating rates (section~\ref{sec:Heating}),
-        deep trapping potentials relative to surface style ion traps, and flexible
-        control over DC confinement (section~\ref{sec:The Ion Trap}) (e.g. ion shuttling). Low heating rates are required for long motional
-        coherence times (section~\ref{sec:Motional Mode Stability}).
-    \end{itemize}
-
-    Here, the characterisation of the spin qubits is in the context of discrete
-    variable quantum computing. We are interested in the fidelity of qubit
-    state-preparation (section~\ref{sec:Stateprep}), measurement (section~\ref{sec:Measurement}), single- (section~\ref{sec:Single Qubit Gates}) and two-qubit gates (section~\ref{sec:Two-Qubit Entangling Gates}). These
-    individual elements comprise longer circuits, and so all contribute to the
-    overall fidelity of any chosen algorithm.\\
-    The motional characterisation is currently focused on the stability of the
-    modes (section~\ref{sec:Motional Mode Stability}), and the ability to perform spin-dependent forces, SDFs (section~\ref{sec:Spin-Dependent Forces}). SDFs are the
-    base interaction on which many of the desired CVQC gates are
-    comprised~\cite{sutherland2021universal}, and so these must be well
-    characterised and understood in our system.\\
-
-    To push the system forwards, in the next 6~months, we will focus on
-    commissioning the single addressing system, and on demonstrating squeezing of
-    the motional state of the ion.\\
-    As described above, the single addressing system is a critical component for
-    many of our planned experiments. Section~\ref{sec:Single Addressing System},
-    and~\cite{oevergaard2024limiting} describe the system in detail. The 
-    immediate next steps are to align the constructed optical system to the ion
-    chain, and to implement the logical and RF control system required to drive
-    the acousto-optic deflectors. Once this is complete, we will characterise
-    the crosstalk of the system by performing single addressing of ions in a
-    chain and measuring spin populations. We will then be able to demonstrate
-    fast entangling gates between ions in a chain, and the ability to perform
-    motional interactions on selected modes.\\
-    Squeezing of the motional mode via the method outlined
-    in~\cite{sutherland2021universal}, is a significant step towards
-    demonstrating the universal set of gates for CVQC. 
-    The constituent interactions of the effective squeezing gate (two SDFs), are
-    the same interactions needed for trisqueezing~\cite{braunstein1987generalised, bazavan2024squeezing} --- a non-Gaussian gate, and
-    for two-mode squeezing~\cite{lvovsky2015squeezed} --- an entangling gate. Furthermore, once we have
-    demonstrated generating squeezing characteristic functions, there is a clear
-    path to experimentally demonstrating the extraction of Feynman diagram terms
-    with the hybrid system being used as a quantum
-    simulator~\cite{varona2024towards}.\\
+    Chapter~\ref{ch:theory} provides motivation and theory required for the remainder of the thesis, including a background on randomised benchmarking and the relevant group theoretic results. \\
+    Then follows in chapter~\ref{ch:apparatus} a hardware description of apparatus constructed during my DPhil, followed by performance characterisations in chapter~\ref{ch:Characterisation}.\\
+    Chapter~\ref{ch:k_copy_rb} presents a novel randomised benchmarking method for detecting and quantifying spatially correlated errors in multi-qubit devices, including experimental results on up-to an 8-ion chain.\\
+    The motional states of the ions as a computational resource are discussed in chapter~\ref{ch:motional_interactions}, with relevant device characterisation including a demonstration of squeezing, numerical simulations supporting the expected leading errors for our device, and an outlook on future experiments on hybrid spin-motion computation.\\
+    Chapter~\ref{ch:virtual_distillation}, presents an experimental implementation of virtual distillation, an error mitigation technique with practical application to computation involving both spin and motional degrees of freedom.\\ 
+    The thesis is concluded in chapter~\ref{ch:conclusion} with details on the implication on this work to the field, and an outlook of future work planned on the constructed apparatus.\\
