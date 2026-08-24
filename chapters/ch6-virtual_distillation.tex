@@ -2,30 +2,81 @@
 \label{ch:virtual_distillation}
 \minitoc
 
-This chapter presents the theory of virtual distillation, a purification based error mitigation technique. We begin with the background and uses of error mitigation, and detail the virtual distillation protocol. Following this, we analyse the performance of virtual distillation under different physically motivated noise models, with 
-experimental results presented for two-copies in the presence of both spatially correlated and uncorrelated noise. We close this chapter with a discussion on extending this method to more than two-copies, and to hybrid systems.
+This chapter presents the theory of virtual distillation, a purification based
+error mitigation technique. We begin with the background and uses of error
+mitigation, and detail the virtual distillation protocol. Following this, we
+analyse the performance of virtual distillation under different physically
+motivated noise models, with experimental results presented for two-copies in
+the presence of both spatially correlated and uncorrelated noise. We close this
+chapter with a discussion on extending this method to more than two-copies, and
+to hybrid systems.
 
 \section{Error Mitigation}
+Noise coupled to a quantum system results in unintended coherent, and incoherent
+evolution. Deviations of the realised state from the target state are known as
+errors, and, if left unchecked, lead to the failure of quantum algorithms. 
+This failure can either be due to a reduction of signal to noise ratio, or a
+bias in the measured expectation value, resulting in misleading conclusions. 
+Ultimately, the goal of quantum error correction, QEC, is to detect and correct
+these errors through embedding information in a larger Hilbert space~\cite{qec_review}.
+Full QEC will allow for the execution of arbitrarily long algorithms ensuring errors (of
+up to a certain distance) do not accumulate over time. However, current QEC
+methods require large overheads in both qubit number and circuit depth, and are
+therefore not feasible on current quantum hardware. Furthermore, QEC is
+formulated for digital ``gate-based'' quantum computers, which although promise
+to be universal, pay for that privilege in often inefficient decompositions of
+target unitaries into a discrete set of gates. 
+This poses an opportunity for
+near term devices to show quantum advantage using either short depth,
+uncorrected circuits, or analog quantum simulators, which although not
+universal, can provide meaningful results for specific problems~\cite{nisq_review}. Particularly,
+phrasing the problem in terms of expectation values of an observable on a
+physical final state, rather than a sequence of measurements on a set of logical
+state, allows for a more efficient use of resources. As a tactile example,
+consider the problem of finding the ground state energy of a Hamiltonian. This
+can be done by preparing a trial state, and directly measuring the expectation
+value of the Hamiltonian on that state, building up statistics over many
+samples~\cite{variational_qc_review}. Increasing the number of samples will reduce the statistical error,
+however, if the trial state is not prepared perfectly due to either
+environmental noise, or to imperfect application of unitary evolutions, the
+measured expectation value will be biased. 
+To this end, quantum error
+mitigation (QEM) techniques have been developed to reduce the bias of measured
+expectation value of an observable at the expense of requiring more samples. 
+Reference~\cite{cai_quantum_2023} defines QEM as
+``... algorithmic schemes that reduce the noise-induced bias in the expectation value by postprocessing outputs from an ensemble of circuit runs, using circuits at the same noise level as the original unmitigated circuit or above.''
+This highlights the crux of how information on the system is collected by a QEM implementation, which I shall explore with the following thought experiment on the ``perfect'' QEM algorithm.
+Consider the problem of measuring the expectation value of an observable $\hat{O}$ on the target state $\rho_{id}$. The state is prepared by a quantum circuit, which due to noise, instead prepares the mixed state $\rho = (1-\lambda) \rho_{id} + \lambda \rho_{err}$, where $\rho_{err}$ is the error state. Each measurement of the observable $\hat{O}$ on the noisy state $\rho$ will return a value $o_i$, and the average of these measurements will converge to the expectation value $\langle \hat{O} \rangle = \mathrm{Tr}[\hat{O}\rho]$. Given $S$ total samples, the final result will be,
+$$ \langle \hat{O} \rangle = \frac{1}{S} \left(\sum_{i=1}^{S_{id}} o_i + \sum_{j=1}^{S_{err}} o_j\right),$$
+where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement outcome from the ideal and error states respectively, with $S = S_{id} + S_{err}$. The bias in the measured expectation value from the ideal is then given by contributions from the samples $S_{err}$. An ideal QEM algorithm would flag these error samples, and remove them from the final average, resulting in a bias free expectation value using the restricted samples $S_{id}$.
+
+
 \begin{itemize}
     \item Error mitigation motivation. Mainly on contrasting to quantum error correction.
         \item QEM is framed as finding expectation value of observable, rather than maintaining coherence for a long computation.
         \item How QEM reduces bias (at the expense of required samples). Look at Cai paper for structured argument.
 \end{itemize}
+
 \section{Virtual Distillation Theory}
 \begin{itemize}
     \item Introduce virtual distillation, a purification technique. Discuss scaling with copy number, and the error models it deals with.
 \end{itemize}
+
 \subsection{Protocol}
     Either Hadamard test or B-matrix.
+
 \subsection{Mechanism}
+This will be like Balint "main idea" section.
 \begin{itemize}
     \item It can be used for both spin and bosonic objects
 \end{itemize}
+
 \subsection{Noise Floor}
 \begin{itemize}
     \item Discuss noisefloor (coherent mismatch)
     \item Go into detail on how spatially correlated noise can be an issue here, discuss network paper as opposite case
 \end{itemize}
+
 \section{Experimental Implementation}
 \subsection{Calibrations}
 pi-4 gates, single addressing
@@ -33,14 +84,19 @@ pi-4 gates, single addressing
 \begin{itemize}
         \item two copy, B matrix demonstration
 \end{itemize}
-\section{Extending to >2 copies}
+
+\section{Outlook and Simulations}
+\subsection{Extending to >2 copies}
 \begin{itemize}
         \item plan for c-swap implementation.
 \end{itemize}
-\section{Error Mitigation on Hybrid Systems}
+
+\subsection{Error Mitigation on Hybrid Systems}
 \begin{itemize}
+        \item Quantum virtual cooling
         \item What errors does this mitigate? 
         \item How to implement it? 
         \item Results?
 \end{itemize}
+
 \section{Conclusions}
