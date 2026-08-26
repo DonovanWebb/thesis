@@ -1,24 +1,77 @@
 \chapter{k-copy Randomised Benchmarking}
 \minitoc
-%
-Building on the general twirling formalism and noise models of
-Chapter~\ref{chap:background}, this chapter introduces \emph{$k$-copy
-randomised benchmarking}: an RB protocol in which identical single-qubit
-Clifford sequences are applied in parallel across multiple qubits, and
-pairwise measurement correlations are retained rather than averaged away.
-We derive the resulting population dynamics for the common-noise model of
-Section~\ref{sec:common_noise}, and present experimental demonstrations on
-a trapped-ion processor, including isolation of correlated versus local
-error, a parity-based confirmation of the underlying symmetric-subspace
-occupation, a controlled noise-injection scan, and scaling to an eight-ion
-register.
+% Overview of chapter - <500
+To construct useful scale quantum processors we must house many qubits physically close together, and must ensure the full register operates with ``low error rates''. But how should we define our errors in a large system? Naively, one might hope that the error rate of a multi-qubit system could be inferred from the error rates of its constituent qubits, but unfortunately, not all errors are commensurable --- there are a zoo of possible error channels. They may be coherent, incoherent, continuous, stochastic, local, correlated, time dependent or independent (and I am sure a host of further adjectives exist).  In response, a zoo of error correction and mitigation techniques have been developed each with their own scaling overheads and assumptions on these noise models they treat.
+It is a large and intimidating search space, and so, to better equip ourselves for navigation, we require tools to characterise what errors are relevant in our physical systems. In this chapter we introduce a new tool for characterising correlated errors in multi-qubit systems: \emph{$k$-copy randomised benchmarking}. This technique extends single-qubit
+Clifford RB (discussed in chapter~\ref{sec:standard_rb}) to parallel application across multiple qubits, where now symmetry resolved dynamics provides evidence of, and quantifies various multi-qubit error channels.\\
+This chapter is structured as follows: we start by giving an overview on the problem of \emph{characterisation}, and what techniques already exist to address it. We then outline the $k$-copy protocol and discuss the relevant symmetric subspace structure. We derive the population dynamics when subject to simple noise models and discuss variations of the protocol that isolate specific subspaces. We provide experimental demonstrations of the protocol on a trapped-ion processor through injecting known correlated and uncorrelated errors. We end this chapter by demonstrating the scalability of the protocol on an 8-qubit register, and discuss the limitations and potential of this method for further scaling to larger systems.
 
 % ==========================================================================
+\section{Errors and Characterisation}
+% overview of the problem. Start with a description from sarovar on modularity.
+% Figure from sarovar
+Errors, which we shall give a broad definition as any deviations between the realised and ideal state of a quantum information processor (QIP), are due to unintentional environmental coupling and control imperfections. They are unavoidable, and if not carefully considered or mitigated, lead to unreliable or unverified computation. 
+The process of modelling and quantifying these errors is known as \emph{characterisation}.
+Characterising errors has two practical advantages: 1) for the engineer, quantifying an error allows for a clear signal to improve hardware and calibration routines, and 2) for the theorist, understanding physically motivated error channels allows for the development of error correction and mitigation techniques that are robust to real world noise. Both users are concerned ultimately with the same question: 
+How faithfully can we execute arbitrary circuits on our physical devices?
+Extracting metrics to this end is a wide research area in quantum information, with techniques of varying scalability and implicit assumptions on underlying noise models~\cite{eisert_quantum_2020}. On one end of the spectrum sits full
+process tomography\todo{citation} which reconstructs quantum channels, here represented as completely positive, trace preserving (CPTP) maps on the space of density matrices,
+\begin{equation}
+\mathcal{E}: \mathbb{C}^{d\times d} \to \mathbb{C}^{d\times d},
+\end{equation}
+where the dimension of the Hilbert space is $d=2^n$ for $n$ qubits. 
+The CPTP map is rich in information, capturing many relevant error channels, but has poor scaling with system size, generally required $O(d^4)$ parameters to describe, and $O(d^4)$ measurements to reconstruct. This scaling fundamentally limits tomography to small system sizes. 
+The goal then shifts to how to extract useful information in predicting the behaviour of a system executing a circuit, without full channel reconstruction. Now, two strategies emerge: 
+1) we make assumptions on the underlying noise model, or 
+2) we actively simplify the structure of the error channel through averaging. The first strategy leads to techniques such as 
+noise learning~\todo{citation} and the latter leads to random circuit methods, such as randomised benchmarking (RB)~\cite{magesan_scalable_2011, magesan_characterizing_2012, erhard_characterizing_2019}. Both approached dramatically reduce the number of parameters required to describe the system, and the number of measurements required to extract them. \\
+The assumptions on the noise model are cleanly motivated by considering the modularity of quantum circuits, and how errors may violate this modularity.
+Following the description of imperfect computation and crosstalk errors given in Refs.~\cite{hashim_practical_2025}, and~\cite{sarovar_detecting_2020}, respectively, we define the following models of QIPs, depicted graphically in figure~\ref{fig:}.
+Panel a) shows with the most desirable, yet technically unfeasible \emph{Ideal QIP}, described by a \emph{closed quantum system}. Here, the qubits comprise a quantum state represented by a single vector in Hilbert space. The state is isolated from the environment and may be decomposed into a collection of subsystems that remain uncoupled unless explicit multi-qubit operations are applied. Operations are all unitary evolutions, conveniently described by single and two-qubit unitaries, which we term \emph{gates}. Errors may exist, but are limited to reversible unitary interactions. In b) we introduce external and control field noise due to an environment with no history, i.e. a source of Markovian noise. We must now depart from the quantum state vector and unitary evolution description, and instead use density matrices and CPTP maps to describe the state and dynamics of the QIP.
+We highlight a subset of these models, termed \emph{Crosstalk-Free Markovian QIP}, where the dynamics of distinct subsystems are governed by locally acting CPTP maps. To satisfy this condition, operations are said to be \emph{local} and \emph{independent}~\cite{sarovar_detecting_2020} --- \emph{local} is the assumption that only explicitly applied multi-body operations lead to correlations between qubits that participate in the ideal multi-body operation; \emph{independent} is the assumption that the action of an applied gate on a subset of qubits is independent of any other gates applied in parallel on the other qubits. With these two criteria satisfied, we may retain the composibility of gates, convenientally allowing us good prediction of the behaviour of a many-qubit deep circuit, using only characterisations of each gate in a universal gate set applied to small subsystems. If these criteria are not met, to accurately predict the behaviour of a deep circuit, each unique layer must be characterised, which is intractable.\\
+Finally, we note that if we cannot assume nada, then we need custom models, out of scope, non-markovian.
+The last class of models, included for completeness, are \emph{Non-Markovian QIP}, where we relax the assumption that the effect of the environment has no history dependence. In this case, any instantaneous state may still be able to be described by a density matrix, however the dynamics can no longer be described by the application of a sequence of CPTP maps. To accurately characterise the system, full process tomography would need to be implemented for each possible circuit. \\ 
+Practically, to ensure we can reasonably characterise our physical systems, and predict their performance on novel circuits, we must design and appropriately isolate hardware to be well approximated by the \emph{Crosstalk-Free Markovian} models. The next section provides some background on existing techniques to verify crosstalk-free performance, and provide some quantification when the assumption is violated.
+
+
 \section{Existing approaches to correlated-noise characterisation}
 \label{sec:existing_approaches}
 % literature review of existing approaches to correlated-noise characterisation
+- RB methods
+    - gambetta_characterization_2012 Simultaneous RB, 
+    - mckay_correlated_2020 Correlated RB
+    - mckay_benchmarking_2023 EPLG
+    - erhard_characterising_2019 Cycle benchmarking
+    - flammia_averaged_2022 ACEs
+    - hockings_scalable_2025 ACEs applied to syndrome circuits
+    - girling_estimation_2022 Correlations and nonseparability
 
-\todo{Define spatial correlations (do in theory section?)}
+- Gate set tomography
+    - rudinger_experimental_2021 Simultaneous gate set tomography
+- single qubit gates 
+    - gulacsi_characterizing_2025
+- Learning models
+    - harper_learning_2023 on 39-qubit QIP
+    - harper_efficient_2021 theory and 14 qubit device
+    - nielsen_efficient_2021 ML approach?
+- Unknown
+    - rivas_quantifying_2015
+    - rudinger_probing_2019 context-dependence errors 
+    - sarovar_detecting_2020 follow on from context-dependence
+- drift
+    - proctor_detecting_2020 performance drift over time
+
+
+% Structure
+
+1) Twirling / symmetry reduction. RB-derived methods simplify the channel through randomisation or twirling. 
+
+Restricted noise models. Harper, ACES and the graphical-model work assume/exploit Pauli or otherwise structured error models. These approaches obtain scalability by restricting the space of possible correlated errors.
+
+Locality and conditional structure. Sarovar, Gulácsi and perhaps Harper 2023 fit here: exploit locality, conditional independence or known physical structure to infer correlations without reconstructing the complete global channel.
+
+General models with greater cost.
+GST
 
 Existing approaches to correlated-noise characterisation span a trade-off
 between expressiveness and scalability. Tomographic and noise-learning
@@ -75,7 +128,7 @@ cycle benchmarking, and $k$-copy RB. This would give the reader a single
 reference point before moving into Chapter~\ref{chap:results}.}
 
 % ==========================================================================
-\section{The $k$-copy RB protocol}
+\section{The $k$-copy RB scheme}
 \label{sec:protocol}
 \begin{figure}
     \begin{center}
@@ -88,6 +141,7 @@ reference point before moving into Chapter~\ref{chap:results}.}
     \label{fig:AOD}
 \end{figure}
 
+\subsection{The symmetric view}
 We introduce a symmetry-based viewpoint into randomised benchmarking through
 $k$-copy RB. In $k$-copy RB, the same single-qubit Clifford sequence is
 applied in parallel to multiple qubits. This diagonal Clifford twirl
@@ -132,6 +186,7 @@ pairs, so extracting pairwise correlations requires only additional
 classical post-processing and no extra trials on the quantum register
 (this scaling property is used explicitly in Section~\ref{sec:scaling}).
 
+\subsection{Irreps and sector decomposition}
 Formally, applying identical Cliffords across $k$ qubits implements the
 twirled representation of the single-qubit Clifford group, $Cl^{\otimes k}$.
 For two qubits, this is exactly the representation analysed generally in
@@ -356,7 +411,7 @@ from the Outlook (Section~\ref{sec:outlook}).}
     \label{fig:AOD}
 \end{figure}
 
-\section{Results}
+\section{Experimental Results}
 \label{sec:results}
 
 \subsection{Discerning correlated and uncorrelated error}

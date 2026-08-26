@@ -49,6 +49,7 @@ This highlights the crux of how information on the system is collected by a QEM 
 Consider the problem of measuring the expectation value of an observable $\hat{O}$ on the target state $\rho_{id}$. The state is prepared by a quantum circuit, which due to noise, instead prepares the mixed state $\rho = (1-\lambda) \rho_{id} + \lambda \rho_{err}$, where $\rho_{err}$ is the error state. Each measurement of the observable $\hat{O}$ on the noisy state $\rho$ will return a value $o_i$, and the average of these measurements will converge to the expectation value $\langle \hat{O} \rangle = \mathrm{Tr}[\hat{O}\rho]$. Given $S$ total samples, the final result will be,
 $$ \langle \hat{O} \rangle = \frac{1}{S} \left(\sum_{i=1}^{S_{id}} o_i + \sum_{j=1}^{S_{err}} o_j\right),$$
 where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement outcome from the ideal and error states respectively, with $S = S_{id} + S_{err}$. The bias in the measured expectation value from the ideal is then given by contributions from the samples $S_{err}$. An ideal QEM algorithm would flag these error samples, and remove them from the final average, resulting in a bias free expectation value using the restricted samples $S_{id}$.
+\todo{Add figure of unmitigated vs mitigated expectation value, showing how bias is reduced at the expense of more samples.}
 
 
 \begin{itemize}
@@ -58,45 +59,108 @@ where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement
 \end{itemize}
 
 \section{Virtual Distillation Theory}
+Estimate expectation value of observable on a state without ever physically preparing the state.
+Purification here refers to approaching the dominant pure state of a mixed state. The $k$th degree purified state is given by,
+\begin{equation}
+    \rho_\mathrm{corrected}^{(k)}=\frac{\rho^k}{\mathrm{Tr}[\rho^k]}=\sum_{i=1}^{d} \frac{\lambda_i }{\sum_{i=1}^d \lambda_i^k} \ket{\psi_i}\bra{\psi_i},
+\end{equation}
+where $d$ is the dimension of the Hilbert space, $\lambda_i$ are the eigenvalues of $\rho$, and $\ket{\psi_i}$ are the corresponding eigenvectors. If we assume that one eigenvalue is dominant, $\lambda_1 \gg \lambda_{i>1}$, then the normalised purified state exponentially approaches the dominant eigenvector, $\rho_\mathrm{corrected}^{(k)} \to \ket{\psi_1}\bra{\psi_1}$, as $k$ increases.
+The hope, which we shall verify in section XX on coherent mismatch, is that the dominant eigenvector of the noisy state closely approximates the ideal state, and therefore effective meaurements on the purified state yield accurate expectation values of the ideal state.
+The estimated expectation value of measuring an observable, $\hat{O}$, on this purified state is then,
+\begin{equation}
+    \langle\hat{O}\rangle_\mathrm{corrected}=\mathrm{Tr}[\hat{O}\rho_\mathrm{corrected}^{(k)}]=\frac{\mathrm{Tr}[\hat{O}\rho^k]}{\mathrm{Tr}[\rho^k]}.
+\end{equation}
+Next, how to access this corrected state on which to make these measurements? Kozcor and Huggins show that this can be accessed without explicit preparation of the purified state. Instead the numerator and denominator may be found through preparing $k$ copies of the noisy state, applying some derangement operation to entangle all copies together, and measuring the desired observable on one of the copies. This can be understood through the following identity,
+\begin{equation}
+    \mathrm{Tr}[\hat{O}\rho^k]=\mathrm{Tr}[\hat{O}^iS^{(k)}\rho^{\otimes k}],
+\end{equation}
+where $S^{(k)}$ is the derangement operator, which permutes the $k$ copies of the state, and $\hat{O}^i$ is the observable acting on the $i$th copy. We shall define the derangement operator explicitly as the cyclic permutation of $k$ objects,
+\begin{equation}
+    S^{(k)}\ket{\psi_1}\otimes\ket{\psi_2}\otimes...\otimes\ket{\psi_k}=\ket{\psi_2}\ket{\psi_3}\otimes...\otimes\ket{\psi_k}\otimes\ket{\psi_1}.
+\end{equation}
+Huggins provides a proof of this identity, which I reproduce here for the simple example of $k=2$.   The derangement operator for two copies is simply the swap operator, $S^{(2)}=\mathrm{SWAP}$, and we will assume the observable acts only on the first copy, giving $\hat{O}^1 = \hat{O}\otimes\mathbb{I}$. The identity is then,
+\begin{align}
+    \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
+    &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1,k_2}} \bra{i_1}\hat{O}\ket{k_1}\delta_{i_2,k_2}
+    \bra{k_1, k_2}S^{(2)}\ket{j_1,j_2}\bra{j_1}\rho\ket{i_1}\bra{j_2}\rho\ket{i_2}\\
+    &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1, k_2}} \hat{O}_{i_1, k_1}\delta_{i_2,k_2}\delta_{k_1,j_2}\delta_{k_2,j_1}\rho_{j_1,i_1}\rho_{j_2,i_2}
+\end{align}
+and contracting the Kronecker deltas, we find,
+\begin{align}
+    \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
+    &= \sum_{\substack{i_1,j_1, j_1}} \hat{O}_{i_1, j_2}\rho_{j_1,i_1}\rho_{j_2,j_1}\\
+    &= \mathrm{Tr}[\hat{O}\rho^2],
+\end{align}
+with the last equality following from the definition of matrix multiplication. \\
+The denominator of the corrected expectation value is found by replacing the observable with the identity and measuring the expectation value of the derangement operator on $k$ copies of the noisy state.\\
+Access to this corrected expectation value is then possible if we can measure the multi-qubit observable $\hat{O}^iS^{(k)}$ on $k$ copies of the noisy state. We will discuss two methods of implementing this measurement. First, a Hadamard test, given in Fig.~\ref{fig:hadamard_test}, which uses an ancilla qubit to control the derangement and desired observable operation, and then subsequent measurement of the ancilla only. The second method, given in Fig.~\ref{fig:b_matrix}, uses a B-matrix to implement the derangement operation, and then measures the observable on one of the copies. 
+The Hadamard test is more general, as it can be used to measure any observable, however, it requires an additional ancilla qubit and controlled operations. The B-matrix method has better qubit number and operation depth efficiency, however, requires simultaneous diagonalisation of $S^{(k)}$ and $\hat{O}^iS^{(k)}$, which is not always possible for an arbitrary observable and derangement operator.
+
+Next, need to derive scaling of bias with copy number. And finally, discuss the variance of measurement with shot number (and how this scales with copy number?).
+
 \begin{itemize}
     \item Introduce virtual distillation, a purification technique. Discuss scaling with copy number, and the error models it deals with.
 \end{itemize}
 
 \subsection{Protocol}
-    Either Hadamard test or B-matrix.
+    \subsubsection{Ancilla method}
+        Figure: circuit diagram for virtual distillation, could also include the tensor network notation diagram if I can understand the logic behind it (give 1 hr to see if possible).
+    \subsubsection{B-matrix protocol}
+        If we can diagonalise both S and SO.
+        Figure: Circuit diagram for B-matrix
+        Can apply transversally
 
-\subsection{Mechanism}
-This will be like Balint "main idea" section.
-\begin{itemize}
-    \item It can be used for both spin and bosonic objects
-\end{itemize}
+    \subsubsection{On hybrid systems}
+        It can be used for both spin and bosonic objects
 
 \subsection{Noise Floor}
 \begin{itemize}
     \item Discuss noisefloor (coherent mismatch)
     \item Go into detail on how spatially correlated noise can be an issue here, discuss network paper as opposite case
 \end{itemize}
+Figure: Simulation of vir dist on various noise models.
+
+Comparing to bias reduction with copy number, describe that this exponential reduction cannot hold indefinitely for arbitrary noise models, and that there is a noise floor. For a single qubit with depolarising noise, there is no such floor, however we note the effect of coherent mismatch, which for copys consisting of multiple qubits, even depol noise leads to coherent drift.
+Furthermore, we are particularly interested in the effect of correlated noise on the separate registers leading to irremovable errors. Correlated noise, as discussed in chapter 5, can dominate the error budget when copies are stored in similar physical locations, and within shared noisy fields. The practical mitigation for this is to separate the copies in space and environment, e.g. over a network (tenzan paper), or to decorrelate errors through local randomisation (randomised compiling, twirling, etc). We shall explore the effect of correlated noise on virtual distillation practically in section x. But first, here we show an analytic model of the effect of correlated noise on a small two-copy system.
+Describe model of k-copy clifford noise, likening it to a deep random circuit ran in parallel on each copy. This is the same noise channel enforced through k-copy twirling. As with chapter 5, this gives us a natural language of irreps to describe the action of our noise channel on an initial state. We may describe the B matrix in this irrep basis, and show the final populations of the copies after derangment. Finally, taking the <Z> measurements on both copies, we can recover the corrected expectation value of the observable. To conform with RB type decay curves, we show the decay of the corrected expectation value with number of Cliffords. We note that another view of this data, more common in error mitigation literature, is a plot of error suppression versus total error ?lambda. From chapter 5 we now that the uncorrected single qubit decay is given by,
+\begin{equation}
+    \langle Z \rangle_\mathrm{uncorrected} = (1-\varepsilon_{dp}-\varepsilon_{corr})^m,
+\end{equation}
+where $\varepsilon_{dp}$ is the depolarising error rate, $\varepsilon_{corr}$ is the correlated error rate, and $m$ is the number of Cliffords applied. This is plotted as dashed line.
+The corrected expectation value is given by $<Z>_{corrected}$ in the presence of both depolarising and correlated noise.
+We can see from the figure that under dominant depolarising noise we see a large suppression of error, however, under dominant correlated noise, the error is largely unaffected. Analytically we find that the final decay of the corrected expectation value is given by,
+\begin{equation}
+    \langle Z \rangle_\mathrm{corrected} = \frac{2\left(\left(1-\varepsilon_{corr}\right)\left(1-\varepsilon_{dp}\right)\right)^m}{1+\left(1-\varepsilon_{dp}\right)^{2m}},
+\end{equation}
+We see that for $\varepsilon_{corr} = 0$, we recover the expected exponential suppression of error with copy number, however, for $\varepsilon_{corr} > 0$, we find a noise floor in the corrected expectation value.
+Extend this analysis to copy number $k$. Currently, I get here through Liouville form, is there a way to go directly from symmetry on the states?
+
 
 \section{Experimental Implementation}
-\subsection{Calibrations}
-pi-4 gates, single addressing
-\subsection{Injected Spatial Correlations}
-\begin{itemize}
-        \item two copy, B matrix demonstration
-\end{itemize}
+    \subsection{Calibrations}
+    pi-4 gates, single addressing
+    Figure: pi-4 MS gate calibration
+    Figure?: Could be nice to have a process tomography of the B circuit.
+    Figure: Heuristic signal of B-matrix working
+    \subsection{Injected Spatial Correlations}
+    two copy, B matrix demonstration
+    Figure: noise floor for two copy B-matrix, with and without spatial correlations
 
 \section{Outlook and Simulations}
-\subsection{Extending to >2 copies}
-\begin{itemize}
-        \item plan for c-swap implementation.
-\end{itemize}
+    \subsection{Extending to >2 copies}
+    plan for c-swap implementation.
+    Figure: c-swap circuit diagram
 
 \subsection{Error Mitigation on Hybrid Systems}
-\begin{itemize}
+    \begin{itemize}
         \item Quantum virtual cooling
         \item What errors does this mitigate? 
+        \item How it looks on a thermal state and on various quantum states (sqz, coherent, fock)
+        \item Show sqz state exp data as example of hybrid system on our device
         \item How to implement it? 
         \item Results?
-\end{itemize}
+    \end{itemize}
+    Figure: c-swap circuit diagram for hybrid system
+    Figure: Show sqz state as example of hybrid system with simulation of virtual distillation on it.
 
 \section{Conclusions}
