@@ -298,11 +298,11 @@
 
     To evaluate the quality of both our
     state preparation and single qubit rotations, randomised benchmarking
-    (RBM)~\cite{knill2008randomized} is employed.  RBM consists of
+    (RB)~\cite{knill2008randomized} is employed.  RB consists of
     applying random combinations of gates from the single-qubit Clifford group to
     estimate an average error per gate. The single-qubit Clifford group is
     the set of unitaries which map the Pauli matrices to one another through
-    conjugation. The RBM protocol used here is described in~\cite{hughes2021benchmarking}.
+    conjugation. The RB protocol used here is described in~\cite{hughes2021benchmarking}.
     The sequence of operations is as follows:
     \begin{enumerate}
         \item Prepare the qubit in $\ket{\downarrow}$ via optical pumping, section~\ref{sec:Stateprep}.
@@ -325,7 +325,7 @@
     sequences of $\pi/2$- and $\pi$-pulses about either the $x$- or $y$-axes. Up to $m=100$ Clifford gates are probed, and the decay of the fidelity, $\mathcal{F}(m)$, is fit using the above model.
     The error per Clifford is found to be $\epsilon_c = 9.5(3) \times 10^{-4}$,
     while the SPAM error is $\epsilon_{\rm SPAM} = 1.46(6) \times 10^{-3}$. The decay plot for
-    this RBM sequence can be seen in figure~\ref{fig:rbm}.
+    this RB sequence can be seen in figure~\ref{fig:rbm}.
     The independently characterised state preparation (section~\ref{sec:Stateprep}) and measurement (section~\ref{sec:Measurement}) errors of $\sim 10^{-3}$, and $\sim 10^{-4}$ respectively, are consistent with the measured $\epsilon_{\rm SPAM}$.
 
 \subsubsection{sec:Single Addressing char}
