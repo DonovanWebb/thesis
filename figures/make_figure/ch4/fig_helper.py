@@ -184,10 +184,20 @@ class ErrModelBase:
         # check for zero uncertainties and replace with small value to avoid issues in curve_fit
         for i in range(len(sigmas)):
             if sigmas[i] == 0:
-                print(f"Warning: zero uncertainty for data point {i}, replacing with large value.")
+                print(
+                    f"Warning: zero uncertainty for data point {i}, replacing with large value."
+                )
                 sigmas[i] = 1.0
         x = df["Clifford Length"]
-        popt, pcov = curve_fit(self.model, x, P, sigma=sigmas, p0=self.p0, absolute_sigma=True, bounds=self.bounds)
+        popt, pcov = curve_fit(
+            self.model,
+            x,
+            P,
+            sigma=sigmas,
+            p0=self.p0,
+            absolute_sigma=True,
+            bounds=self.bounds,
+        )
         return popt, pcov
 
     def rb_to_fits(self, date, rid, sim_outcomes):
@@ -267,6 +277,26 @@ class ErrModelBase:
             return param1_arr, param2_arr, param3_arr, param4_arr
         return param1_arr, param2_arr, param3_arr, param4_arr, param5_arr
 
+    def fit_mult_1q_rbs(self, date, rids, sim_outcomes):
+        param1_arr = []
+        param2_arr = []
+        for rid in rids:
+            df, _, _ = self.rb_to_fits(date, rid, sim_outcomes)
+            x, P_L, P_L_err, P_R, P_R_err = self.get_single_qubit_pops(df)
+            popt, pcov = curve_fit(
+                self.single_qubit_model,
+                x,
+                P_L,
+                sigma=P_L_err,
+                p0=[0.01, 0.01],
+                absolute_sigma=True,
+            )
+            param1, param2 = popt
+            param1_err, param2_err = np.sqrt(np.diag(pcov))
+            param1_arr.append((param1, param1_err))
+            param2_arr.append((param2, param2_err))
+        return param1_arr, param2_arr
+
     def get_single_qubit_pops(self, df):
         P_00 = df["P00"].values
         P_01 = df["P01"].values
@@ -284,7 +314,7 @@ class ErrModelBase:
         P_L_err = np.sqrt(P_00_err**2 + P_01_err**2)
         P_R_err = np.sqrt(P_00_err**2 + P_10_err**2)
         return x, P_L, P_L_err, P_R, P_R_err
-    
+
     def get_single_qubit_errors(self, popt):
         e_corr = popt[0]
         e_L = popt[1]
@@ -294,10 +324,8 @@ class ErrModelBase:
         return e_cL, e_cR
 
     def single_qubit_model(self, m, e_c, spam):
-        return (1-spam) / 2 * (1-e_c)**m + 1/2
-
-        
-        
+        # From Hughes thesis eq. 3.120
+        return (1 - 2 * spam) / 2 * (1 - 2 * e_c) ** m + 1 / 2
 
 
 class PTMModel(ErrModelBase):
@@ -336,24 +364,57 @@ class PTMModel(ErrModelBase):
         return (2 / 3) * (term1 - term2)
 
 
+class SO3Model_SUM(ErrModelBase):
+    """Random small SO3 rotations mode for two-qubit RB, with sum params."""
+
+    name = "SO3"
+    p1_name = "$\\varepsilon_\mathrm{corr}$"
+    p2_name = "$\\varepsilon_{L}+\\varepsilon_{R}$"
+    p3_name = "$\\varepsilon_{L}-\\varepsilon_{R}$"
+    p4_name = "SPAM"
+    bounds = ([5e-4, 5e-4, 5e-4, 5e-4], [10.0, 10.0, 10.0, 0.1])
+    p0 = [0.1, 0.01, 0.01, 0.01]
+
+    def model(self, x, e_corr, e_LpR, e_LmR, spam):
+        """
+        Correlated rotations model for two-qubit RB.
+        """
+        atr = 1 - 2 * e_LpR
+        adt = 1 - 2 * e_LpR - 2 * 3 * e_corr
+        aL = 1 - (e_LpR + e_LmR) - 2 * e_corr
+        aR = 1 - (e_LpR - e_LmR) - 2 * e_corr
+        sp = 1 - 2 * spam
+        S1 = sp * aL**x
+        S2 = sp * aR**x
+        M1 = 2 * sp**2 * adt**x / 3
+        M2 = sp**2 * atr**x / 3
+        P00 = (1 + S1 + S2 + M1 + M2) / 4
+        P01 = (1 + S1 - S2 - M1 - M2) / 4
+        P10 = (1 - S1 + S2 - M1 - M2) / 4
+        P11 = (1 - S1 - S2 + M1 + M2) / 4
+        P = np.concatenate([P00, P01, P10, P11])
+        return P
+
+
 class SO3Model(ErrModelBase):
-    """ Random small SO3 rotations mode for two-qubit RB."""
+    """Random small SO3 rotations mode for two-qubit RB."""
+
     name = "SO3"
     p1_name = "$\\varepsilon_\mathrm{corr}$"
     p2_name = "$\\varepsilon_{L}$"
     p3_name = "$\\varepsilon_{R}$"
     p4_name = "SPAM"
-    bounds = ([0.0, 0.0, 0.0, 0.0], [10.0, 10.0, 10.0, 0.1])
+    bounds = ([1e-4, 1e-4, 1e-4, 1e-4], [10.0, 10.0, 10.0, 0.1])
     p0 = [0.1, 0.01, 0.01, 0.01]
 
     def model(self, x, e_corr, e_L, e_R, spam):
         """
         Correlated rotations model for two-qubit RB.
         """
-        atr = 1 - e_L - e_R
-        adt = 1 - e_L - e_R - 3 * e_corr
-        aL = 1 - e_L - e_corr
-        aR = 1 - e_R - e_corr
+        atr = 1 - 2 * e_L - 2 * e_R
+        adt = 1 - 2 * e_L - 2 * e_R - 2 * 3 * e_corr
+        aL = 1 - 2 * e_L - 2 * e_corr
+        aR = 1 - 2 * e_R - 2 * e_corr
         sp = 1 - 2 * spam
         S1 = sp * aL**x
         S2 = sp * aR**x
@@ -367,57 +428,14 @@ class SO3Model(ErrModelBase):
         return P
 
     def parity_model(self, x, e_corr, e_L_e_R):
-        atr = 1 - e_L_e_R
-        adt = 1 - e_L_e_R - 3 * e_corr
+        atr = 1 - 2 * e_L_e_R
+        adt = 1 - 2 * e_L_e_R - 2 * 3 * e_corr
         return (1 / 3) * (atr**x - adt**x)
-
-    # def fit_model(self, df):
-    #     P_SS = df["P00"].values
-    #     P_SF = df["P01"].values
-    #     P_FS = df["P10"].values
-    #     P_FF = df["P11"].values
-    #     m = df["Clifford Length"]
-
-    #     P_comb = [
-    #         p_ss + p_ff - p_fs - p_sf
-    #         for p_ss, p_ff, p_fs, p_sf in zip(P_SS, P_FF, P_FS, P_SF)
-    #     ]
-
-    #     def comb_model(m, a_tr, e_corr):
-    #         a_dt = a_tr - 3 * e_corr
-    #         return 1 / 3 * (a_tr**m + 2 * a_dt**m)
-
-    #     p0 = [0.995, 0.005]
-    #     bounds = ([0.0, 0.0], [1.0, 0.5])
-    #     popt, pcov = curve_fit(comb_model, m, P_comb, p0=p0, bounds=bounds)
-    #     a_tr_fit, e_corr_fit = popt
-
-    #     P_1 = [p_ss + p_sf for p_ss, p_sf in zip(P_SS, P_SF)]
-    #     P_2 = [p_ss + p_fs for p_ss, p_fs in zip(P_SS, P_FS)]
-
-    #     def single_qubit_model(m, a):
-    #         return 1 / 2 * (a**m + 1)
-
-    #     popt_1, pcov_1 = curve_fit(
-    #         single_qubit_model, m, P_1, p0=[0.995], bounds=([0.8], [1.0])
-    #     )
-    #     a_1_fit = popt_1[0]
-    #     print(a_1_fit)
-    #     popt_2, pcov_2 = curve_fit(
-    #         single_qubit_model, m, P_2, p0=[0.995], bounds=([0.8], [1.0])
-    #     )
-    #     a_2_fit = popt_2[0]
-    #     print(a_2_fit)
-    #     p1_fit = 1 - a_1_fit - e_corr_fit
-    #     p2_fit = 1 - a_2_fit - e_corr_fit
-    #     spam = 0.0
-    #     popt = [e_corr_fit, p1_fit, p2_fit, spam]
-    #     pcov = np.zeros((4, 4))  # Placeholder covariance matrix
-    #     return popt, pcov
 
 
 class CliffModel(ErrModelBase):
-    """ Stochastic Clifford model for two-qubit RB. Similar to SO3 but with different coefficients due to anistropy."""
+    """Stochastic Clifford model for two-qubit RB. Similar to SO3 but with different coefficients due to anistropy."""
+
     name = "Clifford"
     p1_name = "Correlated noise (\\varepsilon_{corr})"
     p2_name = "Left qubit depolarisation (\\varepsilon_{L})"
@@ -672,20 +690,18 @@ def clip_errs(err, clip_value):
     return min(err, clip_value)
 
 
-def inject_model(x, y0, a):
-    return np.sqrt(y0**2 + (x * a) ** 2)
+# outdated
+# def inject_model(x, y0, a):
+#     return np.sqrt(y0**2 + (x * a) ** 2)
 
-def inject_model_e(x, y0, a):
-    return y0 + a*x
+# def inject_model_e(x, y0, a):
+#     return y0 + a*x
 
+# def detuning_model(x, y0, a, d):
+#     return np.sqrt(y0**2 + ((x - d) * a) ** 2)
 
-
-def detuning_model(x, y0, a, d):
-    return np.sqrt(y0**2 + ((x - d) * a) ** 2)
-
-
-def detuning_model_e(x, y0, a, d):
-    return y0**2 + ((x - d) * a) ** 2
+# def detuning_model_e(x, y0, a, d):
+#     return y0**2 + ((x - d) * a) ** 2
 
 
 def two_times_analysis(
