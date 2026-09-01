@@ -236,7 +236,7 @@ describe coupling between the multiplicity spaces.\\
 In practice, different physical error mechanisms populate only a subset of the coefficients $\alpha$ and $m$, leading to simplified dynamics with characteristic signatures of the underlying process. Table~\ref{table:off-diag} provides possible physical mechanisms capable of coupling isotypic representation subspaces. We shall devote some time in the next two sections to a selection of error mechanisms, the first two containing no off-diagonal terms, which greatly simplifies the analytic description of the channel.
 
 \subsection{Common random unitary noise}
-\label{app:common_noise}
+\label{sec:common_noise}
 It can be seen that the error channels that lead to couplings neatly discern the physical origin of the noise channel. For example, in transmon superconducting qubit platforms, always on $ZZ$-couplings are a dominant crosstalk error source~\cite{zhao_quantum_2022, fors_comprehensive_2024, alghadeer_crosstalk_2025}, and so the couplings between single qubit subspaces and the antisymmetric subspace can be quantified; in the neutral atom platform, correlated non-unital errors may be observed if the physical qubit separation is of similar order to the qubit transition wavelength~\cite{rivas_quantifying_2015}; however, in ion trap platforms, environmental noise is often dominated by magnetic and electric field fluctuations, which may act globally on all qubits if they are stored in the same trapping potential. These field fluctuations induce both common and independent single-qubit rotations, but do not couple irrep subspaces together (i.e $m =0$ for $m\in \vec m$). 
 \begin{table}
 \centering
@@ -810,20 +810,20 @@ We demonstrate \emph{k-copy} RB using up to eight
 trapped $^{40}\text{Ca}^+$ ions separated by an average spacing of
 $\sim5~\unit{\micro\meter}$.  The qubit is encoded in the optical transition
 $\ket{4S_{1/2},m_j=-\frac{1}{2}}\leftrightarrow\ket{3D_{5/2},m_j=-\frac{5}{2}}$
-in a quantising field of $\sim5$~G. Single-qubit rotations were driven by
+in a quantising field of $\sim5$~G. Single-qubit rotations are driven by
 $729$-$\unit{\nano\meter}$ light, with details given in section~\ref{sec:Single
 Qubit Gates}.
-The two-qubit coherence and Stark shift measurements used the
+The two-qubit coherence and Stark shift measurements use the
 individual addressing system, detailed in section~\ref{sec:Single Addressing
-System}, while all other measurements used the global elliptical beam, detailed
+System}, while all other measurements use the global elliptical beam, detailed
 in section~\ref{sec:Global Addressing System}.\\
-The single-qubit Clifford gate set was
+The single-qubit Clifford gate set is
 decomposed into native $\pi/2$ single-qubit rotations of the form
-$\hat R_x(\pi/2)$ and $\hat R_z(\pi/2)$: $\hat\sigma_x$ rotations were
+$\hat R_x(\pi/2)$ and $\hat R_z(\pi/2)$: $\hat\sigma_x$ rotations are
 performed natively on resonance with the qubit transition, with relative
 phase set by modulating the 729-nm beam via an
-acousto-optic modulator (AOM), while $\hat\sigma_z$ rotations were performed
-virtually by updating the phase of subsequent $\hat\sigma_x$ rotations. On average each Clifford gate is composed of $2.17$ physical $\hat\sigma_x$ rotations.\\
+acousto-optic modulator (AOM), while $\hat\sigma_z$ rotations are performed
+virtually by updating the phase of subsequent $\hat\sigma_x$ rotations. Two decomposition strategies are used, crucially with varying average numbers of physical $\hat\sigma_x$ $\pi/2$-gates per Clifford. The first uses an average of $\kappa=2.17$ $\pi/2$-gates, while the second uses $\kappa=1.167$ gates.\\
 We begin by reproducing the multi-exponential decays seen in simulation, figure~\ref{fig:k-copy sim}, followed by parity measurements to observe the coherence of the intermediate symmetric state described in section~\ref{sec:parity}. We then present data with known injected errors through phase and detuning offsets to show the ability for \emph{k-copy} RB to discern correlated and uncorrelated errors for a range of magnitudes. We finish this section with evidence for scaling the protocol to more than two qubits. We show both data for three-qubit decay profiles, and pairwise analysis of an eight-ion chain with dominant correlated errors due to global drive field inhomogeneity.
 
 
@@ -840,13 +840,13 @@ We begin by reproducing the multi-exponential decays seen in simulation, figure~
     \label{fig:k-copy_asymp}
 \end{figure}
 The $k$-copy RB protocol, with circuit diagram shown in figure~\ref{fig:k-copy_circuit}, is executed on two qubits using a global field. 
-To ensure a visually clear intermediate asymptote is seen, we purposefully set a fixed $10~\unit{\kilo\hertz}$ frequency
-detuning of the 729-nm laser compared to the bare qubit. 
-To observe both the intermediate asymptote due to this common unitary error, and the final decay to the fully depolarised state, the Clifford sequence length is log-sampled up to $m=3200$ total Clifford gates. \\
-The recovered multi-exponential decay from the correlated success and failure rates of the two qubits is shown in figure~\ref{fig:k-copy_asymp} $c$. Each point in inferred through $r$ randomisations and $s$ shots per randomisation.
+To ensure a visually clear intermediate asymptote is seen, we set a fixed $10~\unit{\kilo\hertz}$ frequency
+detuning of the 729-nm laser compared to the bare qubit. As single qubits gates are calibrated for on-resonance pulses, this detuning will be a large \emph{common noise} source.
+The Clifford sequence length is log-sampled up to $m=3200$ total gates to capture both the intermediate asymptote due to this common unitary error, and the final decay to the fully depolarised state. \\
+The recovered multi-exponential decay from the correlated success and failure rates of the two qubits is shown in figure~\ref{fig:k-copy_asymp}(c). Each solid point is inferred through $r=50$ randomisations and $s=50$ shots per randomisation.
 For each random sequence $j$, the population $\mathcal{P}_{SS,j}$ is estimated from the $s$ binary measurement outcomes,
 $P_{SS,j} = \frac{1}{s}\sum_{i=1}^{s} X_{ij},$
-where $X_{ij}=1$ if the $i$th shot is measured in state $SS$, and $X_{ij}=0$ otherwise. The recovered population is then the mean over $r$ random sequences,
+where $X_{ij}=1$ if the $i$th shot is measured in state $SS$, and $X_{ij}=0$ otherwise. The recovered population is then the mean over the $r$ random sequences,
 $
 \mathcal{P}_{SS} = \frac{1}{r}\sum_{j=1}^{r} \mathcal{P}_{SS,j}.
 $
@@ -862,16 +862,16 @@ Error bars show the standard error of the mean across random sequences,
 \end{equation}
 The correlated populations exhibit a clear intermediate asymptote at
 $m \approx 100$ Cliffords, corresponding to the initial state $\ket{00}$
-approaching $\rho_{sym}$ (equation~\ref{eqn:bell}), with $\mathcal{P}_{SS}\rightarrow \frac{1}{3}$ asymptote highlighted by the red dashed line. The dashed blue line shows the fully depolarised $\mathcal{P}_{SS}\rightarrow\frac{1}{4}$ asymptote, which is reached by $m \approx 1000$ gates. 
-The solid lines are found by modelling errors by a combination of local depolarising errors and common random unitary noise, given by equation~\ref{eqn:app_pops} generalised to include independent state-preparation and measurement error (SPAM), $\varepsilon_{sp}$ (see equation.~\ref{eqn:app_pop_sp} for example). 
+approaching $\rho_{sym}$, equation~\ref{eqn:bell}, with $\mathcal{P}_{SS}\rightarrow \frac{1}{3}$ asymptote highlighted by the red dashed line. The dashed blue line shows the fully depolarised $\mathcal{P}_{SS}\rightarrow\frac{1}{4}$ asymptote, seen clearly by $m \approx 1000$ gates. 
+The solid lines are found through modelling errors by a combination of local depolarising errors and \emph{common noise}, given by equation~\ref{eqn:app_pops} generalised to include independent state-preparation and measurement error (SPAM), $\varepsilon_{sp}$ (see equation.~\ref{eqn:app_pop_sp} for example). 
 The model is fit using the non-linear Levenberg–Marquardt method, yielding
 extracted parameters
 $\varepsilon_{sp}=0(5)\times10^{-3}$, $\varepsilon_\mathrm{corr}=2.6(2)\times10^{-2}$, $\varepsilon_L=5(6)\times10^{-4}$, and
 $\varepsilon_R=0(6)\times10^{-4}$, confirming that correlated errors dominate with this global field detuning. 
 \footnote{The large relative uncertainty of both local depolarising rates is due to the large covariance between $\varepsilon_L$ and $\varepsilon_R$. The fitting may be constrained to the sum of local errors, to find $\varepsilon_L + \varepsilon_R = 5(1)\times10^{-4}$. However, 
 if precision measurements of this local error is of interest, either $r$, and $s$ could be increased, or the local error contributions could be isolated as discussed in section~\ref{sec:k-copy_singlet}.}\\
-From the same recorded shot data we can recover the single-qubit populations required for standard RB, as described in section~\ref{sec:standard_rb}. To match the naming of the relevant participating irreps, we label the two qubits $L$ and $R$ for left and right respectively. 
-The standard RB single exponential decay curves are shown in $a$ and $b$, with extracted single-qubit error per Cliffords of $\varepsilon_c^{(L)} = 2.6(2)\times10^{-2} $ and $\varepsilon_c^{(R)}=2.6(2)\times10^{-2}$. As expected, \emph{k-copy} RB provides evidence for this standard error per Clifford to be decomposed to local and correlated components, given by equation~\ref{eqn:L+corr}.
+From the same shot data record we recover the single-qubit populations required for standard RB, as described in section~\ref{sec:standard_rb}. To match the naming of the relevant participating irreps, we label the two qubits $L$ and $R$ for left and right respectively. 
+The standard RB single exponential decay curves are shown in (a) and (b), with extracted single-qubit error per Cliffords of $\varepsilon_c^{(L)} = 2.6(2)\times10^{-2} $ and $\varepsilon_c^{(R)}=2.6(2)\times10^{-2}$. As expected, \emph{k-copy} RB provides evidence for this standard error per Clifford to be decomposed to local and correlated components, given by equation~\ref{eqn:L+corr}.
 
 \subsection{Coherence measurements}
 \begin{figure}
@@ -885,11 +885,11 @@ The standard RB single exponential decay curves are shown in $a$ and $b$, with e
         }
     \label{fig:k-copy_par_data}
 \end{figure}
-A partial-tomography parity measurement, given by the circuit seen in figure~\ref{fig:parity_protocol} $a$, is used
+A partial-tomography parity measurement, given by the circuit seen in figure~\ref{fig:parity_protocol}(a), is used
 to independently confirm occupation of the symmetric sector, quantifying
 overlap of the final state with Bell state, $\ket{\Psi^+}$. 
-As the final differential rotation pulse requires local addressing of the ions, the single addressing system was used. 
-Each random sequence is repeated with varying final rotation angle,$\phi$, to produce parity fringes, shown in $c$ and $d$ in figure~\ref{fig:k-copy_par_data} for $m=25$ and $m=1600$ Clifford gates respectively. The contrast is extracted by equation~\ref{eqn:parity_contrast}, and plotted against sequence length in panel $b$.
+As the final differential rotation pulse requires local addressing of the ions, the single addressing system is used. 
+Each random sequence is repeated for varying final rotation angle, $\phi$, to produce parity fringes, examples shown in (c) and (d) in figure~\ref{fig:k-copy_par_data} for $m=25$ and $m=1600$ Clifford gates respectively. The contrast is extracted by equation~\ref{eqn:parity_contrast}, and a plot against sequence length is shown in (b).
 The contrast
 asymptote $\mathcal{C}\to 1/3$ is observed for
 $m \in [10,100]$, corresponding to the residual coherence of $\rho_{sym}$, equation~\ref{eqn:rho_sym}. 
@@ -898,19 +898,20 @@ equation~\ref{eqn:parity} to extract error per Cliffords of,
 $\varepsilon_\mathrm{corr}=2.1(2)\times10^{-2}$ and $\varepsilon_L=\varepsilon_R=3.9(3)\times10^{-4}$. \\
 
 \subsection{Controlled noise injection}
-To verify the ability for \emph{k-copy} RB to discern correlated and uncorrelated errors, we compare the magnitude of extracted errors to known injected errors. We limit the injected error method to those consisting of noise on common drive fields, and local depolarising type noise as both of these types can be induced through single qubit rotation errors, which are trivial to implement on our device. 
+To verify the ability for \emph{k-copy} RB to discern correlated and uncorrelated errors, we compare the magnitude of extracted errors to known injected errors. We limit the injected error method to those consisting of noise on common drive fields, and local depolarising type noise. Both of these noise models can be induced entirely through single qubit rotations, which are trivial to implement on our device. 
 
 \subsubsection{Laser phase jitter}
 \label{sec:phase_jitter}
 
-We shall first inject correlated errors via phase noise on a common drive field. This noise mechanism is prevalent in many platforms that use a common oscillator, such as laser, microwave, or radio-frequency (RF) fields to resonantly drive qubit transitions. \\
+We first inject correlated errors via phase noise on a common drive field. This noise mechanism is prevalent in many platforms that use a common oscillator, such as laser, microwave, or radio-frequency (RF) fields to resonantly drive qubit transitions. \\
+The injected error magnitude is inferred through considering the ideal and noisy unitary channel. 
 A unitary qubit rotation is given by,
 \begin{equation}
 \hat{U} = e^{-i\frac{\theta}{2}\vec n \cdot \vec \sigma},
 \end{equation}
 where $\theta$ is the rotation angle, and $\vec n \cdot \vec \sigma$ is the rotation axis. 
-We decompose the single-qubit Clifford gate set into a series of resonant $\theta=\pi/2$ qubit rotations around equatorial axes 
-$\hat{\sigma}_x$ and $\hat{\sigma}_y$. Practically, phase noise on either the qubit frequency or drive field will introduce some deviation of this rotation axis. We shall consider the effect of zero-mean phase noise on $\hat{\sigma}_x$ rotations, leading to an erroneous rotations axis,
+We decompose the single-qubit Clifford gate set into a series of resonant $\theta=\pi/2$ qubit rotations around axes 
+$\hat{\sigma}_x$ and $\hat{\sigma}_z$. Practically, phase noise on either the qubit frequency or drive field will introduce some deviation of this rotation axis. We shall consider the effect of zero-mean phase noise on $\hat{\sigma}_x$ rotations, leading to an erroneous rotations axis,
 \begin{equation}
 \hat{\sigma}_{\delta\phi} = \cos(\delta\phi)\hat{\sigma}_x + \sin(\delta\phi)\hat{\sigma}_y,
 \end{equation}
@@ -937,19 +938,19 @@ For small phase noise standard deviations, $\delta\phi \ll 1$, we find an expect
 \varepsilon_{\delta\phi} = \frac{\kappa}{3}(\delta\phi)^2.
 \end{equation}
 A known phase error may be conveniently injected through phase offsets sampled from a normal distribution with zero mean and standard deviation $=\delta\phi$ applied to the RF drive of a control AOM on the 729-nm global addressing path. The phase of the AOM RF is imprinted directly onto the 729-nm light leading to the expected drop in fidelity of the Clifford gates.
-We use a Clifford decomposition that uses an average of $\kappa=2.17$ $\pi/2$ rotations. A full \emph{k-copy} RB experiment is executed with logarithmic sampling up to 512 Clifford gates with $r=50$ randomisations and $s=50$ repeats. The resulting multi-exponential success and failure probability decay curves are fit to equation~\ref{eqn:app_pop_sp} (and variations for $\mathcal{P}_{SF}$...) to extract correlated and local error components for a range of injected phase noise standard deviations. The resulting measured errors are shown in figure~\ref{fig:phase_jitter}. The $x$-axis is the expected error injected $\varepsilon_{\delta\phi}$, while the $y$-axis is the extracted error magnitudes. The fit, shown by the solid red line, is following a model direct proportionality of injected error plus a baseline correlated error rate not due to phase injection,
+In this experiment $\kappa=2.17$ $\pi/2$ rotations. A full \emph{k-copy} RB experiment is executed with logarithmic sampling up to $m=512$ Clifford gates with $r=50$ randomisations and $s=50$ repeats. The resulting multi-exponential success and failure probability decay curves are fit to equation~\ref{eqn:app_pop}, again generalised to include state-preparation errors.  The correlated and local error components are found for a range of injected phase noise standard deviations. The resulting measured errors are shown in figure~\ref{fig:phase_jitter}. The $x$-axis is the expected error injected $\varepsilon_{\delta\phi}$, while the $y$-axis is the extracted error magnitudes. The fit, shown by the solid red line, is a direct proportionality of injected error plus a baseline correlated error rate not due to phase injection,
 \begin{equation}
 \varepsilon_\mathrm{corr} = \varepsilon_\mathrm{corr,0} + \varepsilon_{\delta\phi}.
 \end{equation}
-The baseline correlated error is the only parameter floated. $\kappa$ is inferred from Clifford decomposition and $\delta\phi$ set in experiment.
-We can see that \emph{k-copy} RB successfully extracts the injected phase noise error as a correlated error. The local depolarising error on both qubits remains relatively constant, with the left qubit having a larger local error compared to the right qubit. We believe this asymmetry in local error is due to the global 729-nm beam not being centrally aligned to both qubits. The uncertainty in extracted error is found through Levenberg-Marquadt non-linear fit, it can be seen that the uncertainty in the errors increases with the total correlated error. \todo{Compare this with analytic result when multi-exps are of different magnitudes.}
+The baseline correlated error is therefore the only parameter to fit. With $varepsilon_\mathrm{corr,0}= 1.71(4)\times10^{-3}$, we find good agreement between the model and data. 
+The local depolarising error on both qubits remains relatively constant, with the left qubit having a larger local error compared to the right qubit. We believe this asymmetry in local error is due to the global 729-nm beam not being centrally aligned to both qubits. The uncertainty in extracted error is found through Levenberg-Marquadt non-linear fit, it can be seen that the uncertainty in the errors increases with the total correlated error. \todo{Compare this with analytic result when multi-exps are of different magnitudes.}
 
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=0.75\linewidth]{figures/pdf_figure/ch4/phase_jitter.pdf}
     \end{center}
     \caption{
-        Injecting correlated noise via common drive phase jitter. }
+        Injecting correlated noise between two qubits via common drive phase noise. Points correspond to fitted error per Clifford from full \emph{k-copy} RB experiments. The solid red line is a linear fit between measured and injected error. }
     \label{fig:phase_jitter}
 \end{figure}
 
@@ -959,8 +960,8 @@ We can see that \emph{k-copy} RB successfully extracts the injected phase noise 
 $k$-copy RB can isolate errors arising from shared control fields, making it
 useful both for device characterisation and for optimising global control
 parameters. 
-A fixed detuning of the global drive, under the action of \emph{k-copy} Clifford twirling, also becomes a common random unitary error channel. 
-This is demonstrated by scanning the 729-nm
+A fixed detuning of the global drive, under the action of \emph{k-copy} Clifford twirling, is well modelled by the common random unitary error channel described in section~\ref{sec:common_noise}. 
+We demonstrate this by scanning the 729-nm
 laser frequency used for single-qubit rotations away from the bare qubit
 resonance.
 As with the previous section, we consider the fidelity of the error channel compared to the ideal $\pi/2$ $\hat{\sigma}_x$ single qubit rotation.\\ 
@@ -988,36 +989,34 @@ To convert this to an error contribution to a single qubit Clifford gate, we int
         Correlated and single-qubit depolarising errors extracted as a function of shared-drive detuning. The correlated error (red points) rises quadratically with laser detuning, while the local depolarising errors (blue points) remain approximately constant.
         Error bars are the extracted standard deviations from a non-linear Levenberg–Marquardt fit of the underlying correlated populations. The red shaded region signifies the 68\% confidence, generated through covariance-based parameter sampling.
         }
-    \label{fig:AOD}
+    \label{fig:k-copy_detuning}
 \end{figure}
 
-Each data point is obtained from a complete $k$-copy RB experiment with 11
+Each data point is obtained from a complete \emph{k-copy} RB experiment with $11$
 sequence lengths up to $m=1024$, using $r=50$ random sequences and $s=50$
-shots per sequence, with correlated populations fit to Eq.~\eqref{eqn:decay}
+shots per sequence, with correlated populations fit to equation~\ref{eqn:decay}
 to extract $\{\varepsilon_{\mathrm{corr}}, \varepsilon_L, \varepsilon_R\}$
-at each detuning. The correlated error is observed to increase
+at each detuning. The upper panels of figure~\ref{fig:k-copy_detuning} show example datasets for the \emph{k-copy} RB sequences, while the lower panel shows the extracted error per Cliffords as a function of detuning. The correlated error is observed to increase
 quadratically with detuning, while the local depolarising errors remain
 approximately constant, consistent with detuning of a shared drive
-producing common noise as defined in Section~\ref{sec:common_noise}. This
-dependence is modelled as
+producing \emph{common noise}. To fully parameterise the injected error, we include a background 
+correlated error not originating from
+detuning, $\varepsilon_0$, and a shift of the light-shifted qubit versus the bare qubit frequency, $\delta_0$. The solid red line is therefore fit to the model,
 \begin{equation}
     \varepsilon_{corr} = \varepsilon_0 + \frac{\kappa_\delta}{3}
-    \left(\frac{\delta_L - \delta_0}{\Omega}\right)^2,
+    \left(\frac{\delta_L - \delta_0}{\Omega}\right)^2.
     \label{eqn:detuning_model}
 \end{equation}
-where $\varepsilon_0$ is the residual correlated error not originating from
-detuning, $\delta_0$ accounts for the light-shifted resonance,
-$\Omega = 2\pi\times\SI{100(1)}{\kilo\hertz}$ is the independently measured
-Rabi frequency, and $\kappa_\delta$ depends on the Clifford decomposition to
-hardware-native gates. Fitting gives $\varepsilon_0 = 3.2(1)\times10^{-3}$,
-$\kappa_\delta = 15.9(7)$, and $\delta_0 = 2\pi \times \SI{0.80(5)}{\kilo\hertz}$.
+Here, $\Omega = 2\pi\times\SI{100(1)}{\kilo\hertz}$ is the independently measured
+Rabi frequency. Fitting gives $\varepsilon_0 = 3.2(1)\times10^{-3}$,
+$\kappa_\delta = 15.9(7)$, and $\delta_0 = 2\pi \times 0.80(5)\unit{\kilo\hertz}$.
 
 \subsubsection{Single addressed stark shifts}
 \label{sec:stark_shifts}
 
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=0.7\linewidth]{figures/pdf_figure/ch4/from_paper/figure_3_stark_shift.pdf
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4//stark_shift.pdf
         }
     \end{center}
     \caption{
@@ -1028,62 +1027,72 @@ $\kappa_\delta = 15.9(7)$, and $\delta_0 = 2\pi \times \SI{0.80(5)}{\kilo\hertz}
 \end{figure}
 
 Uncorrelated noise injection requires the introduction of noise with
-spatial inhomogeneity. This was implemented experimentally through an
+spatial inhomogeneity. This is implemented experimentally through an
 off-resonant single addressing beam inducing Stark-shifts between the
-on-resonant parallel single qubit rotations used to implement the $k$-copy
-twirling. The single addressing beam was detuned from the
-qubit resonance by $-15~\unit{\mega\hertz}$, and the Stark shift was measured
-while the total beam power was scanned to calibrate the expected error due to
-the injected $R_z$ error. Two experimental sequences were run, the first, shown
+on-resonant parallel single qubit rotations executing the \emph{k-copy}
+twirling. The single addressing beam is detuned from the
+qubit resonance by $-15~\unit{\mega\hertz}$, and the induced Stark shift with beam power, $\gamma$, is calibrated using a Ramsey sequence,
+here measured as $\gamma=8.69\times10^7 \unit{\hertz\per\watt}$\todo{uncertainty?}.
+The injected error,
+$\varepsilon_\mathrm{inj}$, is inferred by,
+\begin{equation}
+    \varepsilon_\mathrm{inj} = \frac{\kappa}{3}\phi^2,
+\end{equation}
+where the phase error, given in radians is,
+$\phi = P\tau\gamma$, with $P$ being the power in the single addressing beam, $\tau$ the duration of the Stark-shift pulse. 
+In these experiments, the duration of the Stark-shift pulse is fixed to $\tau=20~\unit{\micro\second}$, while the power of the beam is varied to supply a known error.\\
+Two experimental sequences were run, the first, shown
 in figure~\ref{fig:k-copy_ss}(a), implements stochastic \textit{common noise} through
 applying either two spots shifting both ions, or no Stark shift, with a $50:50$
-chance after each Clifford gate. The second experiment, shown in $(b)$, applies
+chance after each Clifford gate. The second experiment, shown in (b), applies
 local errors through a single spot either addressing the left or right qubit,
 again with $50:50$ chance after each Clifford gate. These two arrangements are
-shown schematically in the upper panels. When local errors are injected, an
-additional constant correlated error offset was injected through random phase
-fluctuations to ensure that correlated errors dominate. This reduces the number
+shown schematically in the upper panels. 
+To ensure correlated errors dominate even with injected local errors, an
+additional constant correlated error offset of $\varepsilon_{corr,0}\approx 2\times10^{-2}$ is applied through random phase
+fluctuations, as described in section~\ref{sec:phase_jitter}. This reduces the number
 of samples required to accurately estimate the correlated and uncorrelated error
 contributions, which is of practical importance in collecting data in reasonable
-time (for reference, this data was collected over $\sim 3$ hours). It can be
+time (for reference, this data was collected over $\sim 3$ hours). 
+It can be
 seen that $\varepsilon_\textrm{corr}$ increases only when injecting
 \textit{common noise}, and remains constant when local errors are injected.
 Dashed lines are simple linear fits given by
-$\varepsilon_\mathrm{fit}=\varepsilon_0+c\varepsilon_\mathrm{inj}$, where
+$\varepsilon_\mathrm{fit}=\varepsilon_0+\varepsilon_\mathrm{inj}$, where
 $\varepsilon_\mathrm{fit}$ are the extracted errors, $\varepsilon_0$ is some
-residual error baseline, $c$ is some scalar constant, and
-$\varepsilon_\mathrm{inj}$ is the injected error rate inferred by the Stark
-shift beam power.
+residual error baseline. These straight line fits show good agreement between measured and injected error when accounting for some fit baseline error rates.
 
 
 \subsection{Three-qubit decay}
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/AOD_setup.pdf
+    \noindent\includegraphics[width=0.75\linewidth]{figures/pdf_figure/ch4/3q_asymp.pdf
         }
     \end{center}
     \caption{
         Experimental data and analytic fit for 3-qubits subject to correlated random-unitary single-qubit noise injected via random phase jitter ($\sigma_\phi = 0.06$~turns).
         }
-    \label{fig:AOD}
+    \label{fig:3q}
 \end{figure}
+As an example, we show in figure~\ref{fig:3q} experimental data for three-qubits subject to \textit{common noise}, with an analytic fit parametrised by local depolarising channels for each qubit, and a single 3-body \textit{common noise} channel (note that this simple model excludes 2-body correlations). Here, $\mathcal{P}_{[SSF]}$ and $\mathcal{P}_{[SFF]}$ represent the sum of the permutations of single- and two-qubit failures respectively. Explicitly, $\mathcal{P}_{[SSF]}=\mathcal{P}_{SSF}+\mathcal{P}_{SFS}+\mathcal{P}_{FSS}$.
 
 \subsection{Scaling to a multi-ion register}
 \label{sec:scaling}
 
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/AOD_setup.pdf
+    \noindent\includegraphics[width=0.7\linewidth]{figures/pdf_figure/ch4/8_ion_gate_time.pdf
         }
     \end{center}
     \caption{
-        \todo{Calibrating global beam}
+        Variation of $\pi$-pulse gate duration along eight ion chain due to global beam Gaussian profile.
         }
-    \label{fig:AOD}
+    \label{fig:k-copy_8_gate_time}
 \end{figure}
+
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=0.7\linewidth]{figures/pdf_figure/ch4/from_paper/figure_4_small.pdf
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/8_ion.pdf
         }
     \end{center}
     \caption{
@@ -1092,66 +1101,47 @@ shift beam power.
         Panel~(a) displays the extracted correlated errors, $\varepsilon_\mathrm{corr}^{(i,j)}$ for each qubit pair, $(i,j)$. 
         Panel~(b) displays the sum of both independent depolarising errors, $(\varepsilon_L+\varepsilon_R)^{(i,j)}$. Panel~(c) displays the ratio of excess correlated noise (offset from phase noise injection), $(\varepsilon_\mathrm{corr}^>)^{(i,j)}=\varepsilon_\mathrm{corr}^{(i,j)}-\varepsilon_\mathrm{corr}^{(0)}$ to the sum of local errors given in~(b). This plot highlights the outer qubits are dominated by spatially correlated errors.
         }
-    \label{fig:AOD}
+    \label{fig:k-copy_8_ion}
 \end{figure}
 
-Pairwise $k$-copy RB extends simply to $>2$ qubits: correlated populations
-are fit to Eq.~\eqref{eqn:decay} independently for each qubit pair. This
-provides a practical diagnostic of pairwise spatial correlations across a
-large register, though it does not uniquely determine higher-order
-($\geq 3$-body) correlated error terms (see Outlook,
-Section~\ref{sec:outlook}). For a register of $k$ qubits, all $k(k-1)/2$
+Pairwise \emph{k-copy} RB extends simply to $>2$ qubits: correlated populations
+are fit to equation~\ref{eqn:decay} independently for each qubit pair. 
+For a register of $k$ qubits, all $k(k-1)/2$
 pairwise outcomes are extracted from the same shot record --- no additional
 trials on the quantum register are required, though classical
 post-processing scales with the number of pair combinations. The protocol
 itself requires only synchronised application of identical single-qubit
-Clifford sequences and spatially resolved readout.
-
-\todo{(a) Extracted pairwise correlated error
-$\varepsilon_{\mathrm{corr}}^{(i,j)}$ for all ion pairs in an 8-ion chain.
-(b) Sum of local depolarising errors $(\varepsilon_L+\varepsilon_R)^{(i,j)}$.
-(c) Ratio of excess correlated noise to local errors.}{Correlated and local
-error per Clifford measured for all qubit pairs in an 8-ion chain (adapted
-from manuscript Fig.~4). \todo{Redraw for thesis.}}
-
-This scaling is demonstrated on an eight-ion chain, with parallel
-single-qubit rotations driven by an elliptical \SI{729}{\nano\meter} beam of
-major-axis waist radius $\SI{52(3)}{\micro\meter}$ aligned to the ion
-chain. Addressing multiple qubits in parallel with a single shared drive is
-common to both ion-trap and neutral-atom platforms owing to its
-experimental simplicity, but unequal illumination across the register leads
-to position-dependent over- and under-rotation errors. With axial
-confinement of \SI{0.5}{\mega\hertz}, the chain extent is
-\SI{35}{\micro\meter}, giving an expected Rabi-frequency difference of
-$11(1)\%$ between the outer and inner ions (single-qubit gates were
-optimised for the inner ions, $i=4$). The extracted pairwise correlations
-show the resulting spatially dependent error structure: both neighbouring
-and distant outer-ion pairs exhibit large correlated errors, and in
-particular the maximally separated ions $i=1$ and $j=8$ experience similar
-under-rotations, producing a strong correlated error despite their spatial
-separation.
-
-To improve sensitivity to both correlated and local contributions
-simultaneously, a common error offset was intentionally added by randomising
-the phase of each implemented $R_x(\pi/2)$ pulse (drawn from a normal
-distribution with standard deviation $s_\phi = \SI{0.19}{\radian}$,
-producing $\varepsilon_{\mathrm{corr}}^{(0)}=0.025$). This separates the
-relevant exponential decay rates and improves the stability of the
-correlated-population fits.
-
-\todo{Add the noise-injection methodology in more detail here, including
-the complementary Stark-shift-beam injection experiments from the
-manuscript SM (App.~``Noise injection methods'', Fig.~S2): two addressing
-configurations (correlated two-spot vs.\ independent single-spot Stark
-shifts) used to independently calibrate and validate the
-$\varepsilon_{\mathrm{corr}}$ vs.\ $\varepsilon_L,\varepsilon_R$ separation
-against a known injected error rate.}
-
+Clifford sequences and spatially resolved readout.\\
+This scaling is demonstrated on an eight-ion chain, with parallel single-qubit
+rotations driven by an elliptical 729-nm beam. We expect to
+observe structured errors due to the Gaussian intensity profile of the beam. To
+verify the expected gate duration dependence due to the finite beam, we run
+parallel gate duration calibration experiments (see section~\ref{sec:Single
+Qubit Gates} for details). The gate duration, $\tau$, as a function of qubit position in
+the beam is expected to follow,
+\begin{equation}
+\tau(r)\propto\frac{1}{\sqrt{I(r)}},
+\end{equation}
+where $I(r)$ is a Gaussian distribution, $I=a \mathrm{exp}\left(\frac{-(r-r_0)^2}{2c^2}\right)$. Figure~\ref{fig:k-copy_8_gate_time} shows the measured $\pi$-pulse gate durations for each ion, with the fit given by the dashed line. From this, we find an expected
+major-axis waist radius of $27.7(9)\unit{\micro\meter}$ aligned to the ion
+chain. The qubit spacing, on the lower axis of the calibration plot, is inferred through the axial confinement of $0.5~\unit{\mega\hertz}$ using equilibrium positions of a linear chain given in~\cite{james_quantum_1998}.
+At this confinement, the chain extent is
+$35~\unit{\micro\meter}$, giving an expected Rabi-frequency difference of
+$10.3(6)\%$ between the outer and inner ions.
+We calibrate global single-qubit gates using
+the inner ion, $i=4$, leading to an expected per Clifford error of (using fidelity definition from appendix~\ref{sec:fidelity}),
+\begin{equation}
+\varepsilon_{c,max} = \frac{2}{3}\kappa \left(\alpha\frac{\pi}{4}\right)^2=5.08(2)\times10^{-3},
+\end{equation}
+where, here the Clifford decomposition used gives $\kappa=1.167$, and the fractional Rabi frequency difference is given by the above calibration curve, $\alpha=0.103(6)$.\\
+As with the single qubit Stark-shift dataset, we ensure that correlated errors dominate to improve the fitting sensitivity. This is done through a fixed phase noise error corresponding to $\varepsilon_{corr,0} = 1.3\times10^{-2}$. In the following data, we subtract this baseline offset to highlight the excess correlated noise due to the beam structure, $\varepsilon_{corr}^>=\varepsilon_{corr}-\varepsilon_{corr,0}$.\\
+Figure~\ref{fig:k-copy_8_ion} shows the 
+extracted pairwise correlations. The excess correlated error is shown in (a), with the largest values seen for the outer ion pairs, agreeing with the expected maximum error of $\varepsilon_{corr, max}^>=\varepsilon_{c, max}$. Panel (b) shows the sum of the local depolarisation error per Cliffords on both qubits, with the largest values now corresponding to pairs consisting of one central ion, and one outer ion. We plot the ratio of excess correlated error and depolarisation errors in panel (c) to further highlight the error distribution due to the beam shape.
 % ==========================================================================
 \section{Conclusions and outlook}
 \label{sec:outlook}
 
-$k$-copy RB efficiently discerns correlated and uncorrelated error channels
+\emph{k-copy} RB efficiently discerns correlated and uncorrelated error channels
 acting on a multi-qubit system. Because of the symmetry enforced by
 twirling over the diagonal Clifford representation $Cl^{\otimes k}$
 (Section~\ref{sec:two_copy_cliff}), structured errors drive the decay of
