@@ -264,7 +264,7 @@ m_{as\rightarrow L},
 m_{as\rightarrow R}
 )$
 describe coupling between the multiplicity spaces.\\
-In practice, different physical error mechanisms populate only a subset of the coefficients $\alpha$ and $m$, leading to simplified dynamics with characteristic signatures of the underlying process. Table~\ref{table:off-diag} provides possible physical mechanisms capable of coupling isotypic representation subspaces. We shall devote some time in the next two sections to a selection of error mechanisms, the first two containing no off-diagonal terms, which greatly simplifies the analytic description of the channel.
+In practice, different physical error mechanisms populate only a subset of the coefficients $\alpha$ and $m$, leading to simplified dynamics with characteristic signatures of the underlying process. Table~\ref{table:off-diag} provides possible physical mechanisms capable of coupling isotypic representation subspaces. We devote some time in the next two sections to describing noise due to fluctuations of a common field, and to local depolarising type errors. In appendix~\ref{sec:app_zz_noise} we discuss a $ZZ$-type noise model, relevant to the superconducting qubit platform.
 
 \subsection{Common random unitary noise}
 \label{sec:common_noise}
@@ -375,6 +375,7 @@ Comparing to equation~\ref{eqn:Liouville}, the general ensemble of common single
     \tilde\Lambda_{U\otimes U}^\mathcal{S} &= \mathrm{diag}\Bigl(I_1,~(1-2\varepsilon_{corr}) I_6,~I_1, \\ & (1-6\varepsilon_{corr}) I_2,~(1-2\varepsilon_{corr}) I_6\Bigr).
 \end{split}
 \end{equation}
+
 \subsection{Local depolarising noise}
 \label{app:depol_noise}
 Ultimately, environmental noise will not perfectly couple symmetrically to both qubits, and so independent local single-qubit error channels must also be considered.
@@ -387,6 +388,7 @@ Comparing to equation~\ref{eqn:Liouville}, the independent depolarisation channe
 \begin{equation}
     \Lambda_{dp}^\mathcal{P} = \mathrm{diag}\Bigl(1,(1-2\varepsilon_L)I_3,(1-2\varepsilon_R)I_3,(1-2\varepsilon_L)(1-2\varepsilon_R)I_9\Bigr).
 \end{equation}
+
 \subsection{Combined model}
 \label{app:combined_model}
 Combining the depolarisation channels with the twirled common single-qubit rotation channel, 
@@ -417,7 +419,7 @@ Using this equation, and the explicit transfer matrices, the final populations d
 \end{align}
 Considering the final state of the single qubit subspace, as probed by standard RB, we find the expected single exponential decay,
 \begin{equation}\label{eqn:app_1qdecay}
-    \mathcal{P}_S^{(L)}=\mathcal{P}_{SS}+\mathcal{P}_{SF}= \frac{1}{2}\left(1 + (1-2\left(\varepsilon_L+\varepsilon_{corr}\right)^m\right),
+    \mathcal{P}_S^{(L)}=\mathcal{P}_{SS}+\mathcal{P}_{SF}= \frac{1}{2}\left(1 + \left(1-2\left(\varepsilon_L+\varepsilon_{corr}\right)\right)^m\right),
 \end{equation}
 where the superscript $(L)$ refers to considering the left qubit only.
 Comparing to standard single qubit RB parameterisation,
@@ -508,40 +510,6 @@ noise produces uncorrelated sequence-to-sequence deviations, whereas common
 noise produces shared deviations between qubits acted on by the same random
 Clifford sequence. The parallel twirling during \emph{k-copy} RB preserves exactly this symmetry information that would be
 averaged away under independently sampled local Clifford sequences.
-
-
-\subsection{$ZZ$-type noise}
-\label{app:zz_err}
-\todo{Discuss ZZ-type errors, non-unitals, generalised depolarising channels, Stochastic vs coherent errors, etc.}
-The simplifying assumption of single qubit errors results in a diagonal matrix in the Schur representation for any rotation angle. Here we describe the possibility to extend this analysis to include $ZZ$-type errors, described by the Hamiltonian,
-\begin{equation}
-H_{ZZ} = \frac{J_{ZZ}}{2}Z\otimes Z,
-\end{equation}
-where $J_{ZZ}$ is undesired coupling strength.
-
-Generally, $H_{ZZ}$ will couple
-the subrepresentations of the $3$-irrep, given in table~\ref{table:irreps}. We
-note that the resulting block diagonal form is inconvenient to express as a
-general multi-exponential decay parametrised by small single qubit rotations and
-two-qubit couplings, $J_{ZZ}$, however, the resulting block diagonal Liouville
-form may be used directly with experimental data to fit these parameters of
-interest. We note that a convenient form is available for the stochastic variant of the $ZZ$-type error, given by,
-\begin{equation}
-\mathcal{E}_{ZZ}(\rho) = (1-p_{ZZ})\rho + p_{ZZ} (Z\otimes Z)\rho(Z\otimes Z),
-\end{equation}
-where $p_{ZZ}$ is the probability of a correlated phase flip error on both qubits.
-In the irrep basis, the following sector decays are found for the stochastic $ZZ$ error,
-\begin{equation}
-    \begin{split}
-        \alpha_L&=\alpha_R=\alpha_{so}=\alpha_{as}= 1- 4p_{ZZ}/3, \\
-        \alpha_{tr} &= \alpha_{dt} = 1.\\
-    \end{split}
-\end{equation}
-Comparing to correlated population decays given in equation~\ref{eqn:app_pops}, it can be seen that an intermediate asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty} = 0.5$ is expected. This highlights that twirling over $Cl_1^{\otimes2}$ both simplifies a generic error map to be measurable via RB, and, retains noise-dependent dynamics that can be used to discern spatially uncorrelated and correlated noise, as well as give evidence of the underlying error mechanism. 
-Including other error mechanisms that lead to spatial correlations necessitates including more parameters to be extracted experimentally.
-
-\subsection{Correlated non-unital noise}
-\todo{Simulation results}
 
 \subsection{State preparation errors}\label{app:spam}
 Similar to previous work on subspace leakage benchmarking~\cite{sutherland_subspace_2025}, state preparation errors can lead to non-trivial modifications of the correlated population decay curves. 
@@ -817,14 +785,6 @@ Here we have shown that the Fisher information gathered in an experimentally rea
     \label{fig:AOD}
 \end{figure}
 
-
-\begin{figure}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/AOD_setup.pdf}
-    \caption{
-    \label{fig:3q}
-    Experimental data and analytic fit for 3-qubits subject to correlated random-unitary single-qubit noise injected via random phase jitter ($\sigma_\phi = 0.06$~turns).
-    }
-\end{figure}
 The main text considers pairwise measurements to detect and quantify spatial correlations between qubits. This technique is inherently efficient and scalable to many qubits as single-shot survival populations of a $k$-qubit register can be collected simultaneously, with pairwise comparisons being made in a classical post-processing step. However, this limits the technique to detecting and quantifying only 2-body correlations. We define the weight of a crosstalk error as the number of qubits, $w$, comprising a subsystem that cannot be decomposed into a convex combination of single qubit channels, when the full system not under the action of the crosstalk channel, is a convex combination of single qubit channels. 
 The weight of physical error channels highly depends on processor type and topology, however, it is suggested in Ref.~\cite{sarovar_detecting_2020}, that many physically relevant spatial correlation errors are low-weight. As quantum computing platforms continue to scale, it will soon become apparent to the engineer what error channels dominate in physical implementations.\\
 \indent 
@@ -950,7 +910,7 @@ The standard RB single exponential decay curves are shown in (a) and (b), with e
     \end{center}
     \caption{
         Parity contrast versus sequence length; (a) shows the standard $Z$ measured correlated populations. (b) shows parity contrast --- a signal proportional 
-        to occupation of the symmetric-trace sector. Solid lines are multi-exponential decays given by equation~\ref{eqn:decay} and equation~\ref{eqn:parity} for (a) and (b) respectively. Dashed lines indicate the expected asymptotes. (c) and (d) show example parity fringes for sequences of $m=25$ and $m=1600$ Clifford gates respectively. 
+        to occupation of the symmetric-trace sector. Solid lines are multi-exponential decays given by equation~\ref{eqn:app_pops} and equation~\ref{eqn:parity_contrast} for (a) and (b) respectively. Dashed lines indicate the expected asymptotes. (c) and (d) show example parity fringes for sequences of $m=25$ and $m=1600$ Clifford gates respectively with solid lines given by equation~\ref{eqn:app_parcontrast}. 
         }
     \label{fig:k-copy_par_data}
 \end{figure}

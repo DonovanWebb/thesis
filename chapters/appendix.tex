@@ -91,3 +91,52 @@ Incorporating this result into the fidelity expression, we find
 \end{equation}
 where we can evaluate the two terms using the identities $\text{Tr}(A \otimes B) = \text{Tr}(A)\text{Tr}(B)$ and $\text{Tr}((A \otimes B)S) = \text{Tr}(AB)$, the latter of which is highly relevant to the mechanism of virtual distillation, described in chapter~\ref{ch:virtual_distillation}. This results in the final expression for the fidelity of a unitary error channel with respect to a target unitary, given above by equation~\ref{eqn:fid_unitary}.\\
 
+\section{$ZZ$-type noise}
+\label{sec:app_zz_noise}
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/liouville.pdf
+        }
+    \end{center}
+    \caption{
+        \todo{ZZ-noise}
+        }
+    \label{fig:ch4_zz_noise}
+\end{figure}
+\label{app:zz_err}
+In the main text we explore a separable error channel that induces correlations between qubits in a register. Here we shall explore entangling type noise, which although not prevalent on the ion-trap qubit platform, is a dominant error source in superconducting qubits. \\
+
+The always on $ZZ$-type error common to superconducting qubits is described by
+the Hamiltonian,
+\begin{equation}
+\label{eqn:app_HZZ}
+H_{ZZ} = \frac{J_{ZZ}}{2}Z\otimes Z,
+\end{equation}
+where $J_{ZZ}$ is the coupling strength.
+Generally, $H_{ZZ}$ will couple
+the subrepresentations of the $3$-irrep, given in table~\ref{table:irreps}. We can show the qualitative difference in the subspace dynamics by plotting the Liouville representation of the twirled \emph{common noise}, and the $ZZ$-type noise. Specifically we plot $\tilde\Lambda^m$, where $m$ is the sequence length. Figure~\ref{fig:ch4_fisher_1} plots the maps in the Schur basis
+ordered so isotypic representations are adjacent to one another. Orange blocks have entries of $1$, light green blocks are $0$, and red blocks represent some decay parameters dependent on $m$.
+Panel (a) shows the fully diagonal \emph{common noise} transfer matrix, where we can see the invariant trace subspace that was noted in the main text. Panel (b) shows the general case for twirled $ZZ$-type noise, given by equation~\ref{eqn:app_HZZ}. The off-diagonal entries exactly couple the three subspaces of the $3$-irrep.
+We note that the resulting block diagonal form is inconvenient to express as a
+general multi-exponential decay profile as given in the main text for \emph{common} and local depolarising type noise. However, the resulting block diagonal Liouville
+form may be used directly with experimental data to fit these parameters of
+interest. Further, we may still explore the expected asymptotic decays due to this model, and find that under dominant $ZZ$-type noise, we expect an asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty}=1/2$.\\
+
+We may recover a simple diagonal Liouville form in the case of stochastic $ZZ$ noise, given by,
+\begin{equation}
+\mathcal{E}_{ZZ}(\rho) = (1-p_{ZZ})\rho + p_{ZZ} (Z\otimes Z)\rho(Z\otimes Z),
+\end{equation}
+where $p_{ZZ}$ is the probability of a correlated phase flip error on both qubits.
+In the irrep basis, the following sector decays are found for the stochastic $ZZ$ error,
+\begin{equation}
+    \begin{split}
+        \alpha_L&=\alpha_R=\alpha_{so}=\alpha_{as}= 1- 4p_{ZZ}/3, \\
+        \alpha_{tr} &= \alpha_{dt} = 1.\\
+    \end{split}
+\end{equation}
+We show this dependence in figure~\ref{fig:ch4_zz_noise} (c).
+The same intermediate asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty} = 0.5$ is expected. \\
+
+The difference in correlated decay structure due to \emph{common}, depolarising, and $ZZ$-type errors suggests that twirling over $Cl_1^{\otimes2}$ both simplifies a generic error map to be measurable via RB, but also, retains some noise-dependent structure of the correlated decay profiles.  
+Designing optimal initial and final states, as well as optimal sampling strategies for extracting a larger set of error parameters covering multiple physical error mechanisms is left for future work. A possible strategy to avoid introducing arbitrary error channels, is to be agnostic of the physical error mechanisms, and rather directly extract the $\vec\alpha$ and $\vec m$ parameters described in section~\ref{app:reps}. An analogous protocol to this is described by character RB~\cite{helsen_new_2019}.
+
