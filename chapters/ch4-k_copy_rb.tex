@@ -700,8 +700,109 @@ Specifically the combinations
 % otherwise keep as a short ``future extensions'' note and cross-reference
 % from the Outlook (Section~\ref{sec:outlook}).}
 
-\section{Sample costs}
-\todo{Numerics on sample cost of method}
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/fisher_1_fig.pdf
+        }
+    \end{center}
+    \caption{
+        The performance of the \emph{k-copy} fitting as a function of maximum Clifford sequence length (probe depth). Probe depth, $\gamma$, is relative to the characteristic decay length for the slowest mode, $\alpha_{tr}^m$. Panel (a) uses the 
+        Cram\'er-Rao derived relative uncertainty for each extracted $\varepsilon$, while (b) shows the minimum eigenvalue of the Fisher information matrix, with associated eigenvectors highlighted.
+        }
+    \label{fig:ch4_fisher_1}
+\end{figure}
+\section{Sampling strategy}
+\label{sec:gt2q}
+
+In this section we find the Fisher information gained from a single shot of the \emph{k-copy} RB protocol, and use this to find a strategy for setting the sequence lengths, $m$. We then explore the shot efficiency of extracting error per Clifford parameters for a range of underlying noise magnitudes, using both the \emph{k-copy} protocol described in section~\ref{sec:protocol}, and using the parity measurement protocol described in section~\ref{sec:parity}.\\
+
+The Fisher information, $\mathcal{I}$, quantifies what we can learn from random observable, $X$, about a set of underlying unknown parameters, $\theta$, that models the probability of observing $X$. It is particularly informative to consider the Cram\'er-Rao bound, which states that the inverse of $\mathcal{I}$ is a lower bound for the variance of any unbiased estimator of $\theta$,
+\begin{equation}
+    \mathrm{Cov}(\theta)\gtrsim\mathcal{I}(\theta)^{-1}.
+\end{equation}
+The Fisher matrix is defined as,
+\begin{equation}
+    \mathcal{I}_{ij}(\theta)= \mathrm{E}_X\left[ \frac{\partial}{\partial\theta_i}\log f(X;\theta)\frac{\partial}{\partial\theta_j}\log f(X;\theta)\right],
+\end{equation}
+where $f(X;\theta)$ is the likelihood function, and $\theta$ is a set of parameters. Here, we are interested in a multinomial probability function, with each shot resulting in a categorical outcome $X\in\{SS,~SF,~FS,~FF\}$. The population functions given by equations~\ref{eqn:app_pops}, are then the probability of observing $X=x$ for a given set of parameters, $\theta=\{\varepsilon_{L},~ \varepsilon_R,~\varepsilon_\mathrm{corr}\}$, yielding,
+\begin{equation}
+    f(X=x;\theta)=P_x(\theta).
+\end{equation}
+We now find the Fisher matrix to be,
+\begin{equation}
+    \mathcal{I}_{ij}(\theta) = \mathrm{E}_X\left[\frac{1}{P^2_X}\frac{\partial P_X}{\partial \theta_i}\frac{\partial P_X}{\partial \theta_j}\right].
+\end{equation}
+For a discrete random variable, the expectation is,
+\begin{equation}
+    \mathrm{E}[g(X)] = \sum_x P_x g(x),
+\end{equation}
+giving our final expression for the single-shot multinomial Fisher matrix,
+\begin{equation}
+    \label{eqn:FI}
+    \mathcal{I}_{ij} = \sum_{x\in\{SS,SF,FS,FF\}} \frac{1}{P_x}\frac{\partial P_x}{\partial \theta_i}\frac{\partial P_x}{\partial \theta_j}.
+\end{equation}
+The information gained in any one shot depends on the underlying error
+magnitudes, as well as the chosen sequence length, $m$. As the correlated
+profiles, $P_x$, appear as multi-exponentials decays dependent on common
+parameters, $\theta$, we must choose a range of probe sequence lengths that
+yield large information over all the characteristic decays. As the
+characteristic decays are unknown, a good heuristic strategy for fitting an
+unknown exponential is logarithmic sampling~\todo{add citation here.}. However,
+the total extent of sequence lengths to test is non-obvious. It would be
+experimentally simple if the initial gradient of the correlated profiles
+successfully estimated the parameter $\theta$, however, expanding the populations around $m=0$, for small errors, we find that both 
+purely uncorrelated and purely \emph{common} noise decays 
+are indistinguishable,
+\begin{equation}
+    \mathcal{P}_{SS,LR}|_{m=0}\approx\mathcal{P}_{SS,\mathrm{corr}}|_{m=0}\approx 1-2\varepsilon,
+\end{equation}
+where we have assumed identical error
+magnitudes, $\varepsilon_L=\varepsilon_R=\varepsilon_\mathrm{corr}=\varepsilon$. This suggests that we must collect data near the asymptotic structure of the decays to distinguish uncorrelated and \emph{common} noise sources. To verify this, we set experimentally reasonable parameters for an underlying \emph{common noise} dominated decay, and vary the maximum sequence length, $m_\mathrm{max}$, while observing the expected uncertainty given by the Cram\'er-Rao bound of the Fisher information. We normalise by the magnitude of the parameter estimated to give the relative uncertainty, $\frac{\sigma_\varepsilon}{\varepsilon}$. We also find the minimum eigenvalue of the Fisher matrix, $\lambda_\mathrm{min}$, which corresponds to how accurately the least constrained vector in parameter space can be measured. Figure~\ref{fig:ch4_fisher_1} uses $N=5000$ samples per sequence length (e.g. $s=50$ shots, and $r=100$ random sequences), and $10$ total sequence lengths sampled logarithmically from $m_\mathrm{min}>2$ to $m_\mathrm{max}=\gamma\tau$. The scalar $\gamma$ is the relative probe depth and $\tau$ is the characteristic decay for the slow, $\alpha_{tr}$ mode,
+\begin{equation}
+    \tau = \frac{-1}{\log(\alpha_{tr})} = \frac{-1}{\log(1-2(\varepsilon_L+\varepsilon_R))}.
+\end{equation}
+We set error magnitudes of $\varepsilon_L = 1.0\times10^{-3},~\varepsilon_R = 1.2\times10^{-3},~\varepsilon_\mathrm{corr}=1.0\times10^{-2}$, which are similar magnitudes we observe experimentally (see section~\ref{sec:results}). It can be seen that the relative uncertainty for all $\theta$ are minimised when $\gamma\approx 1$. This length also corresponds to maximising $\lambda_\mathrm{min}$ --- lowering the cost of estimating the least constrained vector of parameters, where the vector is written in the basis $[\hat\varepsilon_L,\hat\varepsilon_R,\hat\varepsilon_\mathrm{corr}]$. It is interesting to note that the least constrained parameter vector, when $\gamma\ll 1$, roughly corresponds to $\vec\nu\approx\frac{1}{\sqrt{3}}[1,1,-1]$, confirming our suspicion that \emph{common} and depolarising noise is indistinguishable at small $m$. In the case that $\gamma\gg 1$, we find $\vec\nu\approx\frac{1}{\sqrt{2}}[1,-1,0]$, corresponding to the depolarisation rates on the left and right qubit are tending to be indistinguishable, however we note that even over a couple of orders of magnitude, the distinguishability of $\varepsilon_L$ and $\varepsilon_R$ does not dramatically drop. Here, we draw the conclusion that a good strategy for efficient information per shot, is to set $m_\mathrm{max}$ to the characteristic decay of the slowest mode.\\
+
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/fisher_2_fig.pdf
+        }
+    \end{center}
+    \caption{
+        (a) The Cram\'er-Rao derived relative uncertainty for a range of correlated and uncorrelated error ratios. The thin lines correspond to expected uncertainties using $\langle Z\rangle$ measurements from \emph{k-copy} RB, while thick lines use both $\langle Z\rangle$ and parity measurements, as described in section~\ref{sec:parity}. (b-c) The required number of shots, $N$, per sequence length, $m$, for unity fractional uncertainty, for a range of correlated and uncorrelated errors. In (b), only $\langle Z\rangle$ measurements are used, while in (c) both $\langle Z\rangle$ and parity measurements are used. A contour is shown for $5000$ samples, which is typically used in our experiments.
+        }
+    \label{fig:ch4_fisher_2}
+\end{figure}
+We now explore the ability for \emph{k-copy} RB to fit $\theta$ for a range of
+underlying error magnitudes. Figure~\ref{fig:ch4_fisher_2}(a) shows the relative
+uncertainty as a function of the error ratio, defined here as
+$\varepsilon_\mathrm{corr}/(\varepsilon_L+\varepsilon_R)$. We fix
+$\varepsilon_L = \varepsilon_R = 1\times10^{-3}$, and again set $N=5000$ samples per
+sequence length $m$, with $m_\mathrm{max}=\tau$, and vary
+$\varepsilon_\mathrm{corr}$ to vary the error ratio. The thin blue and red line
+show the expected relative uncertainty for $\varepsilon_L$ and
+$\varepsilon_\mathrm{corr}$ respectively. We can see that for the case that
+local noise dominates, $\varepsilon_L \gg \varepsilon_\mathrm{corr}$, the
+sufficient information for accurately estimating the correlated noise is not
+available. This limitation was found to be experimentally important, and
+motivates the injection of fixed \emph{common noise} offsets in
+sections~\ref{sec:stark_shifts}, and~\ref{sec:scaling}. Another strategy to
+alleviate this problem is by including data from the coherence probes described
+in section~\ref{sec:parity}. The thick blue and red lines correspond to
+measurements where $N=2500$ samples are collected by the typical $\langle Z \rangle$
+\emph{k-copy} protocol, and $N=2500$ samples are using the parity protocol, denoted as
+$\Pi$. We find that inclusion of the parity samples dramatically reduce the
+relative uncertainty of the fitted parameters when $\varepsilon_L \gg
+\varepsilon_\mathrm{corr}$. Panels (b) and (c) show the required number of
+samples, $N$, for a relative uncertainty 
+$\frac{\sigma_\varepsilon}{\varepsilon}=1$, for a range of local and
+\emph{common} noise magnitudes. We highlight the $N=5000$ sample contour as this may be
+collected in reasonable time on our apparatus. Again, we see that including
+measurements using the parity protocol dramatically reduces the required number of 
+samples in the regime of $\varepsilon_L \gg \varepsilon_\mathrm{corr}$ (top left corner of plots).\\
+
+Here we have shown that the Fisher information gathered in an experimentally realistic \emph{k-copy} protocol is sufficient to accurately determine the underlying error per Cliffords, $\theta=\{\varepsilon_L, \varepsilon_R, \varepsilon_\mathrm{corr}\}$, over many orders of magnitude of local and \emph{common} errors. We shall show experimentally in section~\ref{sec:noise_injection} that in the presence of experimental imperfections, and the fitting protocol (Levenberg-Marquadt), whose effects are not considered in this analysis, the proposed protocol still sufficiently recovers the magnitudes of the expected error per Cliffords with known noise injection.
+
 
 \section{Scaling to $k>2$ qubits}
 \label{sec:gt2q}
@@ -715,6 +816,7 @@ Specifically the combinations
         }
     \label{fig:AOD}
 \end{figure}
+
 
 \begin{figure}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/AOD_setup.pdf}
@@ -865,6 +967,7 @@ equation~\ref{eqn:parity_contrast} to extract error per Cliffords of,
 $\varepsilon_\mathrm{corr}=2.1(2)\times10^{-2}$ and $\varepsilon_L=\varepsilon_R=3.9(3)\times10^{-4}$. \\
 
 \subsection{Controlled noise injection}
+\label{sec:noise_injection}
 To verify the ability for \emph{k-copy} RB to discern correlated and uncorrelated errors, we compare the magnitude of extracted errors to known injected errors. We limit the injected error method to those consisting of noise on common drive fields, and local depolarising type noise. Both of these noise models can be induced entirely through single qubit rotations, which are trivial to implement on our device. 
 
 \subsubsection{Laser phase jitter}
