@@ -859,6 +859,15 @@ $\varepsilon_\mathrm{corr}=2.1(2)\times10^{-2}$ and $\varepsilon_L=\varepsilon_R
 \label{sec:noise_injection}
 To verify the ability for \emph{k-copy} RB to discern correlated and uncorrelated errors, we compare the magnitude of extracted errors to known injected errors. We limit the injected error method to those consisting of noise on common drive fields, and local depolarising type noise. Both of these noise models can be induced entirely through single qubit rotations, which are trivial to implement on our device. 
 
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=0.75\linewidth]{figures/pdf_figure/ch4/phase_jitter.pdf}
+    \end{center}
+    \caption{
+        Injecting correlated noise between two qubits via common drive phase noise. Points correspond to fitted error per Clifford from full \emph{k-copy} RB experiments. The solid red line is a linear fit between measured and injected error. }
+    \label{fig:phase_jitter}
+\end{figure}
+
 \subsubsection{Laser phase jitter}
 \label{sec:phase_jitter}
 
@@ -897,21 +906,13 @@ For small phase noise standard deviations, $\delta\phi \ll 1$, we find an expect
 \varepsilon_{\delta\phi} = \frac{\kappa}{3}(\delta\phi)^2.
 \end{equation}
 A known phase error may be conveniently injected through phase offsets sampled from a normal distribution with zero mean and standard deviation $=\delta\phi$ applied to the RF drive of a control AOM on the 729-nm global addressing path. The phase of the AOM RF is imprinted directly onto the 729-nm light leading to the expected drop in fidelity of the Clifford gates.
-In this experiment $\kappa=2.17$ $\pi/2$ rotations. A full \emph{k-copy} RB experiment is executed with logarithmic sampling up to $m=512$ Clifford gates with $r=50$ randomisations and $s=50$ repeats. The resulting multi-exponential success and failure probability decay curves are fit to equation~\ref{eqn:app_pop}, again generalised to include state-preparation errors.  The correlated and local error components are found for a range of injected phase noise standard deviations. The resulting measured errors are shown in figure~\ref{fig:phase_jitter}. The $x$-axis is the expected error injected $\varepsilon_{\delta\phi}$, while the $y$-axis is the extracted error magnitudes. The fit, shown by the solid red line, is a direct proportionality of injected error plus a baseline correlated error rate not due to phase injection,
+In this experiment $\kappa=2.17$ $\pi/2$ rotations. A full \emph{k-copy} RB experiment is executed with logarithmic sampling up to $m=512$ Clifford gates with $r=50$ randomisations and $s=50$ repeats. The resulting multi-exponential success and failure probability decay curves are fit to equation~\ref{eqn:app_pops}, again generalised to include state-preparation errors.  The correlated and local error components are found for a range of injected phase noise standard deviations. The resulting measured errors are shown in figure~\ref{fig:phase_jitter}. The $x$-axis is the expected error injected $\varepsilon_{\delta\phi}$, while the $y$-axis is the extracted error magnitudes. The fit, shown by the solid red line, is a direct proportionality of injected error plus a baseline correlated error rate not due to phase injection,
 \begin{equation}
 \varepsilon_\mathrm{corr} = \varepsilon_\mathrm{corr,0} + \varepsilon_{\delta\phi}.
 \end{equation}
-The baseline correlated error is therefore the only parameter to fit. With $varepsilon_\mathrm{corr,0}= 1.71(4)\times10^{-3}$, we find good agreement between the model and data. 
+The baseline correlated error is therefore the only parameter to fit. With $\varepsilon_\mathrm{corr,0}= 1.71(4)\times10^{-3}$, we find good agreement between the model and data. 
 The local depolarising error on both qubits remains relatively constant, with the left qubit having a larger local error compared to the right qubit. We believe this asymmetry in local error is due to the global 729-nm beam not being centrally aligned to both qubits. The uncertainty in extracted error is found through Levenberg-Marquadt non-linear fit, it can be seen that the uncertainty in the errors increases with the total correlated error. \todo{Compare this with analytic result when multi-exps are of different magnitudes.}
 
-\begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=0.75\linewidth]{figures/pdf_figure/ch4/phase_jitter.pdf}
-    \end{center}
-    \caption{
-        Injecting correlated noise between two qubits via common drive phase noise. Points correspond to fitted error per Clifford from full \emph{k-copy} RB experiments. The solid red line is a linear fit between measured and injected error. }
-    \label{fig:phase_jitter}
-\end{figure}
 
 \subsubsection{Laser detuning scan}
 \label{sec:detuning_scan}
@@ -941,20 +942,26 @@ To convert this to an error contribution to a single qubit Clifford gate, we int
 
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=0.75\linewidth]{figures/pdf_figure/ch4/from_paper/figure_3_detuning.pdf
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/detuning_scan_fig.pdf
         }
     \end{center}
     \caption{
-        \todo{Remake figure for thesis.}
-        Correlated and single-qubit depolarising errors extracted as a function of shared-drive detuning. The correlated error (red points) rises quadratically with laser detuning, while the local depolarising errors (blue points) remain approximately constant.
-        Error bars are the extracted standard deviations from a non-linear Levenberg–Marquardt fit of the underlying correlated populations. The red shaded region signifies the 68\% confidence, generated through covariance-based parameter sampling.
+        Correlated and single-qubit depolarising errors extracted as a function
+        of shared-drive detuning. The correlated error (red points) rises
+        quadratically with laser detuning, while the local depolarising errors
+        (blue points) remain approximately constant.
+        Error bars are the
+        extracted standard deviations from a non-linear Levenberg–Marquardt fit
+        of the underlying correlated populations. The red shaded region
+        signifies the 68\% confidence, generated through covariance-based
+        parameter sampling.
         }
     \label{fig:k-copy_detuning}
 \end{figure}
 
 Each data point is obtained from a complete \emph{k-copy} RB experiment with $11$
 sequence lengths up to $m=1024$, using $r=50$ random sequences and $s=50$
-shots per sequence, with correlated populations fit to equation~\ref{eqn:decay}
+shots per sequence, with correlated populations fit to equation~\ref{eqn:app_pops}
 to extract $\{\varepsilon_{\mathrm{corr}}, \varepsilon_L, \varepsilon_R\}$
 at each detuning. The upper panels of figure~\ref{fig:k-copy_detuning} show example datasets for the \emph{k-copy} RB sequences, while the lower panel shows the extracted error per Cliffords as a function of detuning. The correlated error is observed to increase
 quadratically with detuning, while the local depolarising errors remain
@@ -971,7 +978,7 @@ Here, $\Omega = 2\pi\times\SI{100(1)}{\kilo\hertz}$ is the independently measure
 Rabi frequency. Fitting gives $\varepsilon_0 = 3.2(1)\times10^{-3}$,
 $\kappa_\delta = 15.9(7)$, and $\delta_0 = 2\pi \times 0.80(5)\unit{\kilo\hertz}$.
 
-\subsubsection{Single addressed stark shifts}
+\subsubsection{Single addressed Stark shifts}
 \label{sec:stark_shifts}
 
 \begin{figure}
@@ -1031,7 +1038,7 @@ residual error baseline. These straight line fits show good agreement between me
         }
     \end{center}
     \caption{
-        \todo{Missing x axis labels} Variation of $\pi$-pulse gate duration along eight ion chain due to global beam Gaussian profile.
+        Variation of $\pi$-pulse gate duration along eight ion chain due to global beam Gaussian profile.
         }
     \label{fig:k-copy_8_gate_time}
 \end{figure}
