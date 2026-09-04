@@ -1,0 +1,17 @@
+\documentclass[tikz,border=6mm]{standalone}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{quantikz}
+
+\begin{document}
+
+\begin{quantikz}
+\lstick{$\ket{0}_{\text{1}}$} & \gate{C_1} & \gate{C_2} & \push{\mathrel{\phantom{C}} \cdots \mathrel{\phantom{C}}} & \gate{C_m} & \gate{C_\mathrm{inv}} && \meter{} \\
+\lstick{$\ket{0}_{\text{2}}$} &\gate{\Delta t}& \gate{C_1} & \gate{C_2} & \push{\mathrel{\phantom{C}} \cdots \mathrel{\phantom{C}}} & \gate{C_m} & \gate{C_\mathrm{inv}} & \meter{} \\
+\end{quantikz}
+
+
+\end{document}

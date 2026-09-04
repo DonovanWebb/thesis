@@ -1,0 +1,21 @@
+\documentclass[tikz,border=6mm]{standalone}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{quantikz}
+
+\begin{document}
+\begin{quantikz}
+\lstick{$\ket{0}_\text{1}$}          & \gate{C_i}\gategroup[5,steps=3,style={dashed,rounded
+corners,fill=blue!20, inner
+xsep=2pt},background,label style={label
+position=above,anchor=north,yshift=+0.2cm}]{{
+$m-1$ times}}  &\gate{U_{i,1}} &\wire{}&  \gate{C_\mathrm{inv}} & \meter{}  \\
+\lstick{$\ket{0}_\text{2}$}         & \gate{C_i} & \gate{U_{i,2}} &\wire{}& \gate{C_\mathrm{inv}}& \meter{}  \\
+\lstick{$\ket{0}_\text{3}$}         & \gate{C_i} & \gate{U_{i,3}} &\gate{U_{i,\mathrm{corr}}} &\gate{C_\mathrm{inv}}& \meter{}  \\
+\lstick{$\ket{0}_\text{4}$}         & \gate{C_i} & \gate{U_{i,4}} &\gate{U_{i,\mathrm{corr}}} &\gate{C_\mathrm{inv}}& \meter{}  \\[1cm]
+\lstick{$\ket{0}_\text{k}$}         & \gate{C_i} &\gate{U_{i,5}} &\wire{}&  \gate{C_\mathrm{inv}}& \meter{}  
+\end{quantikz}
+\end{document}

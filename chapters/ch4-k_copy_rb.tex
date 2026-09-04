@@ -9,6 +9,7 @@ This chapter is structured as follows: we start by giving an overview on the pro
 
 % ==========================================================================
 \section{Errors and Characterisation}
+\label{sec:k-copy_char}
 % overview of the problem. Start with a description from sarovar on modularity.
 % Figure from sarovar
 Errors, which we shall give a broad definition as any deviations between the realised and ideal state of a quantum information processor (QIP), are due to unintentional environmental coupling and control imperfections. They are unavoidable, and if not carefully considered or mitigated, lead to unreliable or unverified computation. 
@@ -161,9 +162,9 @@ The representation of the space, $\mathcal{L}$ decomposes to irreps $\lambda$ as
 where $V_\lambda$ is the irreducible representation space, and $\mathbb{C}^{m_\lambda}$ is a complex valued multiplicity space with dimension of the multiplicity $m_\lambda$.
 From Schur's lemma, equation~\ref{eqn:commute} implies the twirled error channel has the form,
 \begin{equation}\label{eqn:block-diag}
-    \tilde\Lambda=\bigoplus_\lambda(I_\lambda\otimes \mathcal A_{\lambda}),
+    \tilde\Lambda=\bigoplus_\lambda(I_\lambda\otimes \mathcal M_{\lambda}),
 \end{equation}
-where $\mathcal{A}_\lambda$ is the multiplicity matrix of dimensions $m_\lambda\times m_\lambda.$\\
+where $\mathcal{M}_\lambda$ is the multiplicity matrix of dimensions $m_\lambda\times m_\lambda.$\\
 \begin{table}[]
     \centering
     \begin{tabular}{c|c|c}
@@ -241,7 +242,7 @@ where $r_\lambda$ is the irreducible component of the representation of $G$ acti
 r_\lambda(g)_{i,j} = \mathrm{Tr}[B_i^\dagger g B_j g^\dagger],
 \end{equation}
 where $B_i$ are the orthonormal basis vectors for irrep $\lambda$.
-Taking the two-qubit subrepresentations reproduced in table~\ref{table:irreps}, the character table calculated is shown in table~\ref{table:character}. We can see confirmed that the left, right, and antisymmetric subrepresentations form a multiplicity of the $3D$-irrep labelled $3$, while the trace subrepresentation is a multiplicity of the $1D$ trivial irrep.\\
+Taking the two-qubit sub-representations reproduced in table~\ref{table:irreps}, the character table calculated is shown in table~\ref{table:character}. We can see confirmed that the left, right, and antisymmetric sub-representations form a multiplicity of the $3D$-irrep labelled $3$, while the trace sub-representation is a multiplicity of the $1D$ trivial irrep.\\
 Given the structure of a general twirled map is enforced to be block diagonal in the irrep basis, given by
 equation~\ref{eqn:block-diag}, we can do a simple count to find generally how many parameters are required to fully describe the CPTP map. Accounting for the multiplicities, and the constraint that the map is trace preserving, we find that at most $2^2+ 3^2 + 1 + 1 - 2 = 13$ independent scalars are needed to
 describe $\tilde\Lambda$. The diagonal terms, here labelled
@@ -297,71 +298,47 @@ It can be seen that the error channels that lead to couplings neatly discern the
 Thus, the general error map of this type is now parametrised by at most the $6$ scalars, $\vec\alpha$, and results
 in Liouville form diagonal in the Schur basis, $\mathcal{S}$, (ordered by table~\ref{table:irreps}),
 \begin{equation}\label{eqn:Liouville}
-    \tilde\Lambda^\mathcal{S} = diag\left(I_1, \alpha_{L} I_3, \alpha_{R} I_3, \alpha_{tr} I_1, \alpha_{dt} I_2, \alpha_{so} I_3, \alpha_{as} I_3\right),
+    \tilde\Lambda^\mathcal{S}(\mathcal{E}) = diag\left(I_1, \alpha_{L} I_3, \alpha_{R} I_3, \alpha_{tr} I_1, \alpha_{dt} I_2, \alpha_{so} I_3, \alpha_{as} I_3\right),
 \end{equation}
-where $I_d$ is the $d$-dimensional identity.
-Specifically, we consider the effect of noise due to common small-angle single-qubit rotations acting on two-qubits after each gate comprising the desired circuit. The general form for this error channel is given by the separable channel,
+where $I_d$ is the $d$-dimensional identity.\\
+We term noise due to common small-angle single-qubit rotations acting on $k$-qubits \emph{common noise}. For two qubits the general form is given by the separable channel,
 \begin{equation}\label{eqn:rotation_channel}
-    \mathcal{E}^\mathcal{A}_{U\otimes U}(\rho)=\sum_{a\in \mathcal{A}} p_a(U_a\otimes U_a)\rho(U_a\otimes U_a)^\dagger,
+    \mathcal{E}_\mathcal{A}(\rho)=\sum_{a\in \mathcal{A}} p_a(U_a\otimes U_a)\rho(U_a\otimes U_a)^\dagger,
 \end{equation}
 where $\mathcal{A}$ specifies the ensemble of unitaries applied with probabilities $p_a$, with $\sum_{a \in\mathcal{A}}p_a=1$, and $U_a(\theta_a,\hat{n}_a)=e^{-i(\theta_a/2)\hat n_a\cdot\hat\sigma}$, with rotation angle, $\theta_a$, axis, $\hat n_a$, and Pauli vector, $\hat\sigma$.
 A subset of error channels following this description cannot be described by a product channel map on a bipartite system, and so violate the \emph{local} condition given in equation~\ref{eqn:k-copy_local}. These errors therefore cannot be modelled by a crosstalk-free Markovian QIP although originating from separable channels.
 This is an important distinction: non-product channel are not limited to direct entangling noise.\\
-We now consider the effect of twirling on a single common unitary to build a structured error channel. The single qubit rotation is parametrised by rotation angle, $\theta$, and the axis of rotation $\vec{n}$, 
-\begin{equation}
-U(\theta,\hat{n})=e^{-i\frac{\theta}{2}\hat n\cdot\hat\sigma }.
-\end{equation}
-The channel comprised of unitary rotations $U_a$,
-\begin{equation}
-\mathcal{E}_a(\rho)= (U_a\otimes U_a)\rho(U_a\otimes U_a)^\dagger,
-\end{equation}
-is twirled over the discrete group $\mathcal{G}$, with twirling defined by equation~\ref{eqn:twirl}, leading to the simplified channel in Liouville form $\tilde\Lambda_a$.
-Reintroducing the stochastic application of common unitaries, given by equation~\ref{eqn:rotation_channel}, we find,
-\begin{equation}
-\tilde \Lambda=\sum_{a\in\mathcal{A}} p_a \tilde \Lambda_a.
-\end{equation}
-\todo{Rewrite section in own words. Could move to appendix?}
-Thus, it is sufficient to consider the decay due to a single rotation acting identically on both qubits which, in the Pauli-transfer matrix (PTM) representation, can be written as $\Lambda^\mathcal{P}=\mathrm{diag}(1, R, R, R\otimes R)$, 
-where superscript $\mathcal{P}$ represents the block diagonal matrix is ordered by the two-qubit Pauli basis $\mathcal{P}=\{I\otimes I, \vec\sigma\otimes I , I\otimes\vec\sigma, \vec\sigma\otimes\vec\sigma\}$, with $\vec\sigma = \{\hat\sigma_x, \hat\sigma_y, \hat\sigma_z\}$, and
-$R=R(\vec{n}, \theta)\in SO(3)$ describes a rotation by $\theta$ around $\vec{n}$. Finding the vector $\vec\alpha$ can now be done using Schur's lemma for the case of no mixing between irrep spaces:
-\begin{equation}\label{eqn:PTM projector decomposition}
-    \tilde\Lambda^\mathcal{P}=\sum_\lambda\alpha_\lambda\Pi_\lambda,\hspace{10pt} \alpha_\lambda=\frac{1}{d_\lambda}\mathrm{Tr}(\Pi_\lambda\Lambda^{\mathcal{P}}).
-\end{equation}
-Here, $\Pi_\lambda$ denotes the PTM projector onto the irrep space labelled $\lambda$ and with dimension $d_\lambda$. It follows immediately that the identity sector is fixed, while the left- and right-qubit sectors produce $\alpha_L=\alpha_R=\mathrm{Tr}(R)/3$. In principle, $\alpha_\lambda$ for the two-qubit sector can be evaluated by explicitly constructing the projectors from the basis operators in Table~\ref{table:irreps}. However, in this case the symmetries of these irrep spaces allow the projectors to be expressed more simply in terms of operators whose traces are easily evaluated:
-\begin{align}
-\label{eqn:irrep symmetry projector decomposition}
-    \Pi_{tr}&=T,\\
-    \Pi_{dt}&=D-T,\\
-    \Pi_{so}&=\frac{1}{2}(I_9+S)-D,\\
-    \Pi_{as}&=\frac{1}{2}(I_9-S),
-\end{align}
-where $T=1/3\sum_{ij}\ket{ii}\bra{jj}$, $D=\sum_i\ket{ii}\bra{ii}$, and $S=\sum_{ij}\ket{ji}\bra{ij}$ are the trace projector, diagonal projector, and swap operator, respectively. The required traces are
-\begin{align}
-     \mathrm{Tr}(I_3 R)&=\mathrm{Tr}(R)=(1+2c),\\
-     \mathrm{Tr}(I_9(R\otimes R))&=(\mathrm{Tr}(R))^2=(1+2c)^2,\\
-    \mathrm{Tr}(T(R\otimes R))&=\frac{1}{3}\mathrm{Tr}(R^TR)=1,\\
-    \mathrm{Tr}(D(R\otimes R))&=\sum_i R_{ii}^2=c^2+2c+(1-c)^2\kappa,\\
-    \mathrm{Tr}(S(R\otimes R))&=\mathrm{Tr}(R^2)=4c^2-1,
-\end{align}
-where $c=\cos(\theta)$,  and $\kappa=n_x^4+n_y^4+n_z^4$ is an anisotropy parameter reflecting the fact that Clifford twirling enforces symmetry under permutations of the Pauli axes, rather than under arbitrary rotations. Substituting these traces into equation~\ref{eqn:PTM projector decomposition} and using equation~\ref{eqn:irrep symmetry projector decomposition} yields 
+To find the twirled error channel of the common unitary channel, $\tilde\Lambda^\mathcal{S}(\mathcal{E}_\mathcal{A})$, we first consider the effect of twirling on a single common unitary channel, $\mathcal{E}_a(\rho) = (U_a\otimes U_a)\rho(U_a\otimes U_a)$. We outline two approaches to find $\tilde\Lambda^\mathcal{S}(\mathcal{E}_a)$:\\ 
+First, as the basis sets for the relevant
+sub-representations are known (see table~\ref{table:irreps}), and as the single qubit
+Clifford group only contains 24 elements, we may construct the common unitary
+channel in the Pauli transfer matrix (PTM) representation\cite{}\todo{PTM citation},  and, using equation~\ref{eqn:twirl}, we may explicitly calculate the twirled channel
+$\tilde\Lambda^\mathcal{P}(\mathcal{E}_a)$ utilising a symbolic computation
+program~\cite{}\todo{wolfram mathematica}. Here the superscript $\mathcal{P}$ denotes we are working in the Pauli basis.
+The $\alpha$ parameters are then simply read from the diagonal elements after transforming the PTM representation to the known basis operators for the sub-representations, i.e. transforming to $\tilde\Lambda^\mathcal{S}(\mathcal{E}_a)$.\\
+The second approach utilises the symmetries of the irrep spaces, and the separability of the error channel to construct the PTM projectors onto the irrep spaces. This method is outlined in appendix~\ref{sec:k-copy_projector}, and provides further insight into the symmetries each irrep possesses, and the naming convention for the sub-representations.\\
+Both approaches ultimately yield the alpha parameters,
 \begin{align}
     \alpha_{L}&=\alpha_R=\alpha_{as}=\frac{1}{3}(1+2c),\\
     \alpha_{tr}&=1,\\
     \alpha_{dt}&=\frac{1}{2}(c^2+2c-1+(1-c)^2\kappa),\\
-    \alpha_{so}&=\frac{1}{3}(3c^2-(1-c)^2\kappa).
+    \alpha_{so}&=\frac{1}{3}(3c^2-(1-c)^2\kappa),
 \end{align}
-Taking these scalar products to second order in error angle $\theta$,
+where $c=\cos(\theta_a)$,  and $\kappa=n_x^4+n_y^4+n_z^4$ is an anisotropy parameter reflecting the fact that Clifford twirling enforces symmetry under permutations of the Pauli axes, rather than under arbitrary rotations.
+Taking these scalar products to second order in error angle $\theta_a$,
 we find that the anisotropic term may be ignored for small errors,
 \begin{align}
-        \alpha_L&=\alpha_R=\alpha_{as}= 1- \theta^2/3, \\
+        \alpha_L&=\alpha_R=\alpha_{as}= 1- \theta_a^2/3, \\
         \alpha_{tr} &= 1,\\
-        \alpha_{dt} &= \alpha_{so} = 1- \theta^2. 
+        \alpha_{dt} &= \alpha_{so} = 1- \theta_a^2. 
 \end{align}
-As such, the dynamics are entirely described by the error angle magnitude.
-The ensemble of twirled common unitaries across some arbitrary distribution, $\mathcal{A}$, given in equation~\ref{eqn:rotation_channel}, thus 
-combine to give scalar parameters describing the contribution from each subspace to the observed decay,
+Reintroducing the stochastic application of common unitaries, given by equation~\ref{eqn:rotation_channel}, we find,
 \begin{equation}
-\alpha^{(\mathcal{A})}_i = \sum_{a\in\mathcal{A}} p_a \alpha_a.
+\tilde \Lambda^\mathcal{S}(\mathcal{E}_\mathcal{A})=\sum_{a\in\mathcal{A}} p_a \tilde \Lambda^\mathcal{S}(\mathcal{E}_a).
+\end{equation}
+As such, the dynamics for the twirled channel of an ensemble of common unitaries is entirely described by the error angle magnitudes, with alpha parameters,
+\begin{equation}
+\alpha_i = \sum_{a\in\mathcal{A}} p_a \alpha_a.
 \end{equation}
 This definition leads to a convenient (and conforming to previous RB work) definition for the correlated error per Clifford given by,
 \begin{equation}
@@ -372,7 +349,7 @@ where the correlated error per Clifford, $\varepsilon_\mathrm{corr}$, quantifies
 Comparing to equation~\ref{eqn:Liouville}, the general ensemble of common single-qubit rotations channel, after twirling over $Cl_1^{\otimes 2}$, is given by the diagonal matrix in the Schur basis,
 \begin{equation}
 \begin{split}
-    \tilde\Lambda_{U\otimes U}^\mathcal{S} &= \mathrm{diag}\Bigl(I_1,~(1-2\varepsilon_{corr}) I_6,~I_1, \\ & (1-6\varepsilon_{corr}) I_2,~(1-2\varepsilon_{corr}) I_6\Bigr).
+    \tilde\Lambda^\mathcal{S}(\mathcal{E}_\mathcal{A}) &= \mathrm{diag}\Bigl(I_1,~(1-2\varepsilon_{corr}) I_6,~I_1, \\ & (1-6\varepsilon_{corr}) I_2,~(1-2\varepsilon_{corr}) I_6\Bigr).
 \end{split}
 \end{equation}
 
@@ -381,13 +358,21 @@ Comparing to equation~\ref{eqn:Liouville}, the general ensemble of common single
 Ultimately, environmental noise will not perfectly couple symmetrically to both qubits, and so independent local single-qubit error channels must also be considered.
 Assuming an independent noise channel acting on each qubit, Clifford twirling leads to a fully depolarising noise channel of the form,
 \begin{equation}\label{eqn:1q_depol}
-    \mathcal{E}_{dp,a}(\rho^{(1q)})=(1-2\varepsilon_a)\rho^{(1q)}+ \varepsilon_aI_2\mathrm{Tr}(\rho^{(1q)}),
+    \mathcal{E}_{dp,i}(\rho)=(1-2\varepsilon_i)\rho+ \varepsilon_iI_2\mathrm{Tr}(\rho),
 \end{equation}
-where the superscript denotes that this is for a single qubit subspace, and the subscript $a$ signifies which qubit we are considering. For the ``left'' and ``right'' qubits the decay rates are parametrised by $\varepsilon_L$ and $\varepsilon_R$, respectively.
-Comparing to equation~\ref{eqn:Liouville}, the independent depolarisation channel may be expressed in Liouville form as the diagonal matrix in the Pauli basis,
+where $\rho$ is for a single qubit, and the subscript $i$ signifies which qubit we are considering. For the ``left'' and ``right'' qubits we describe the decay rates by $\varepsilon_L$ and $\varepsilon_R$, respectively.
+Parallel local depolarisation is given by the channel, $\mathcal{E}_{dp}=\mathcal{E}_{dp,L}\otimes \mathcal{I} + \mathcal{I}\otimes\mathcal{E}_{dp,R}$, with $\mathcal I$ being the identity channel on a single qubit.
+Comparing to equation~\ref{eqn:Liouville}, 
+this channel may be expressed in PTM form as the diagonal matrix,
 \begin{equation}
-    \Lambda_{dp}^\mathcal{P} = \mathrm{diag}\Bigl(1,(1-2\varepsilon_L)I_3,(1-2\varepsilon_R)I_3,(1-2\varepsilon_L)(1-2\varepsilon_R)I_9\Bigr).
+    \Lambda^\mathcal{P}(\mathcal{E}_{dp}) = \mathrm{diag}\Bigl(1,(1-2\varepsilon_L)I_3,(1-2\varepsilon_R)I_3,(1-2\varepsilon_L)(1-2\varepsilon_R)I_9\Bigr).
 \end{equation}
+We find that $\Lambda(\mathcal{E}_{dp})$ already commutes with the representations $r(g)$ for all elements $g$ in the single qubit Clifford group, as such the channel already obeys the symmetries enforced by twirling over $Cl_1^{\otimes 2}$ (see equation~\ref{eqn:commute}). Transforming to the Schur basis, we extract $\alpha$ parameters,
+\begin{align}
+    \alpha_L &= 1-2\varepsilon_L,\\
+    \alpha_R &= 1-2\varepsilon_R,\\
+    \alpha_{tr} = \alpha_{dt} &=\alpha_{so}=\alpha_{as} = 1 - 2\left(\varepsilon_L+ \varepsilon_R \right).
+\end{align}
 
 \subsection{Combined model}
 \label{app:combined_model}
@@ -476,32 +461,24 @@ induced between the two qubits by the shared rotation error, and motivates
 the alternative strategy of a coherence-sensitive probe developed in
 section~\ref{sec:parity}.
 
-%Figure 1 from paper
+
+\subsubsection{Schematic explanation}
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/k-copy_abstract.pdf
         }
     \end{center}
     \caption{
-        \todo{Bloch sphere schematic of corr vs uncorr noise. Include schematic of ion chain prev fig 1c.}
-        \todo{Change corr to unitary maybe?}
+        k-copy RB applies identical single-qubit Clifford sequences in parallel to all qubits. (a) shows the circuit diagram for a single RB random sequence. 
+        (b-d) illustrate the distinction between uncorrelated and \textit{common noise} (a type of correlated noise) in the final-state trajectories.
         }
     \label{fig:k-copy_abstract}
 \end{figure}
-
-\subsubsection{Schematic explanation}
 The distinction between correlated and uncorrelated noise is illustrated
 schematically in figure~\ref{fig:k-copy_abstract}. We consider a particularly simple unitary noise mechanism to highlight the qualitative difference of information gained between standard and \emph{k-copy} RB. \\
 After each Clifford gate we consider an independent unitary rotation errors on each qubit, and a common unitary rotation error on 
 qubits $i=3$ and $i=4$. Each unitary rotation axis is randomly drawn (isotropically from $SO3$), and the angle of the rotation is small. The error channels are explicitly included in the circuit diagram in (a). 
-The state of the qubits after the twirling procedure, and before measurement, are shown in (b). We see that all qubits are no longer in the eigenstate $\ket{0}$ due to the unitary noise \todo{add bloch sphere to fig}.
-We define the angular deviation of qubit $i$ from $\ket{0}$ as , $\theta_i$ \todo{add theta to fig}. The
-insets in (b) highlight a qualitative difference between common and
-independent noise --- the joint angle distribution of a qubit pair after many
-repeated trials either appears circular in the case of independence, or
-appear highly elliptical if common unitary noise dominates. The dashed lines
-indicate the probability for two-qubit errors, which are more prevalent in
-the case of common mode noise \todo{quantify more carefully}.\\
+The state of the qubits after the twirling procedure, and before measurement, are shown in (b). We see that all qubits are no longer in the eigenstate $\ket{0}$ (up arrow) due to the unitary noise. 
 Panels (c) and (d) display the final vectors resulting from 5 random sequences. 
  All qubits here exhibit identical single-qubit RB error
 rates, which are probed by standard RB, and shown here through the identical depolarised Bloch vectors (black arrows). 
@@ -684,7 +661,7 @@ Specifically the combinations
 
 In this section we find the Fisher information gained from a single shot of the \emph{k-copy} RB protocol, and use this to find a strategy for setting the sequence lengths, $m$. We then explore the shot efficiency of extracting error per Clifford parameters for a range of underlying noise magnitudes, using both the \emph{k-copy} protocol described in section~\ref{sec:protocol}, and using the parity measurement protocol described in section~\ref{sec:parity}.\\
 
-The Fisher information, $\mathcal{I}$, quantifies what we can learn from random observable, $X$, about a set of underlying unknown parameters, $\theta$, that models the probability of observing $X$. It is particularly informative to consider the Cram\'er-Rao bound, which states that the inverse of $\mathcal{I}$ is a lower bound for the variance of any unbiased estimator of $\theta$,
+The Fisher information~\cite{fisher_XXI_1923}, $\mathcal{I}$, quantifies what we can learn from random observable, $X$, about a set of underlying unknown parameters, $\theta$, that models the probability of observing $X$. It is particularly informative to consider the Cram\'er-Rao bound, which states that the inverse of $\mathcal{I}$ is a lower bound for the variance of any unbiased estimator of $\theta$,
 \begin{equation}
     \mathrm{Cov}(\theta)\gtrsim\mathcal{I}(\theta)^{-1}.
 \end{equation}
@@ -772,54 +749,6 @@ samples in the regime of $\varepsilon_L \gg \varepsilon_\mathrm{corr}$ (top left
 Here we have shown that the Fisher information gathered in an experimentally realistic \emph{k-copy} protocol is sufficient to accurately determine the underlying error per Cliffords, $\theta=\{\varepsilon_L, \varepsilon_R, \varepsilon_\mathrm{corr}\}$, over many orders of magnitude of local and \emph{common} errors. We shall show experimentally in section~\ref{sec:noise_injection} that in the presence of experimental imperfections, and the fitting protocol (Levenberg-Marquadt), whose effects are not considered in this analysis, the proposed protocol still sufficiently recovers the magnitudes of the expected error per Cliffords with known noise injection.
 
 
-\section{Scaling to $k>2$ qubits}
-\label{sec:gt2q}
-\begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/AOD_setup.pdf
-        }
-    \end{center}
-    \caption{
-        \todo{Asymptotic population decay for $k>2$ qubits via numerical simulation.}
-        }
-    \label{fig:AOD}
-\end{figure}
-
-The main text considers pairwise measurements to detect and quantify spatial correlations between qubits. This technique is inherently efficient and scalable to many qubits as single-shot survival populations of a $k$-qubit register can be collected simultaneously, with pairwise comparisons being made in a classical post-processing step. However, this limits the technique to detecting and quantifying only 2-body correlations. We define the weight of a crosstalk error as the number of qubits, $w$, comprising a subsystem that cannot be decomposed into a convex combination of single qubit channels, when the full system not under the action of the crosstalk channel, is a convex combination of single qubit channels. 
-The weight of physical error channels highly depends on processor type and topology, however, it is suggested in Ref.~\cite{sarovar_detecting_2020}, that many physically relevant spatial correlation errors are low-weight. As quantum computing platforms continue to scale, it will soon become apparent to the engineer what error channels dominate in physical implementations.\\
-\indent 
-We expect the symmetry resolved dynamics revealed by pairwise \emph{k-copy} RB to generalise to higher weight errors, however, without prior work on the subrepresentation structure of the single-qubit Clifford group applied diagonally to $>2$ qubits, extending the analysis for \emph{k-copy} RB is challenging. However, for the \textit{common noise} error model discussed throughout this work, a simple relation can be found for the asymptotic states. Namely, under \textit{common noise} the state is driven to the maximally mixed state on the symmetric subspace, as this is the SU(2)-invariant state on the symmetric irrep. This state is given by,
-\begin{equation}
-\rho_\mathrm{sym} = \frac{1}{k+1}\sum_{l=0}^k\ket{D_l^k}\bra{D_l^k},
-\end{equation}
-where $\ket{D_l^k}$ is the Dicke state for $l$ excitations (here successful recoveries of target state), out of $k$-qubits. From this expression we see that an asymptote of $\mathcal{P}_{SS...S}|_{m\rightarrow\infty}=1/(k+1)$ is expected under \textit{common noise}, while the maximally mixed state under local depolarisation leads to the familiar asymptote of $\mathcal{P}_{SS...S}|_{m\rightarrow\infty}=1/(2^k)$. This result suggests that the presence of \textit{common noise} affecting many qubits may be simply observed, however, without the explicit representation structure, it cannot be easily quantified.\\
-\indent For three-qubits, we leverage symbolic computation to diagonalise the resulting PTM representation of \textit{common noise} and recover analytic decays that quantify spatial correlations without deriving the representation structure. As an example, we show in figure~\ref{fig:3q} experimental data for three-qubits subject to \textit{common noise}, with an analytic fit parametrised by local depolarising channels for each qubit, and a single 3-body \textit{common noise} channel (note that this simple model excludes 2-body correlations). Here, $\mathcal{P}_{[SSF]}$ and $\mathcal{P}_{[SFF]}$ represent the sum of the permutations of single- and two-qubit failures respectively. Explicitly, $\mathcal{P}_{[SSF]}=\mathcal{P}_{SSF}+\mathcal{P}_{SFS}+\mathcal{P}_{FSS}$.
-
-% 3-body common noise:
-\begin{align}
-        \alpha_1 &= (1 - \varepsilon_1)^m,\\
-        \alpha_2 &= (1 - \varepsilon_2)^m,\\
-        \alpha_3 &= (1 - \varepsilon_3)^m,\\
-        \beta &= \alpha_1\alpha_2 + \alpha_1\alpha_3 + \alpha_2\alpha_3,\\
-        \alpha_\mathrm{corr1} &= (1 - \varepsilon_\mathrm{corr})^m,\\
-        \alpha_\mathrm{corr2} &= (1 - 3\varepsilon_\mathrm{corr})^m,\\
-        \alpha_\mathrm{corr3} &= (1 - 6\varepsilon_\mathrm{corr})^m,
-\end{align}
-\begin{align}
-        M_1 &= \beta,\\
-        M_2 &= 3(\alpha_1 + \alpha_2 + \alpha_3)  \alpha_\mathrm{corr1},\\
-        M_3 &= 2\beta\alpha_\mathrm{corr2},\\
-        M_4 &= \frac{6}{5}\alpha_1\alpha_2\alpha_3\alpha_\mathrm{corr3},\\
-        M_5 &= \frac{9}{5}\alpha_1\alpha_2\alpha_3\alpha_\mathrm{corr1},
-\end{align}
-\begin{align}
-        \mathcal{P}_{SSS} &= \frac{1}{8} + \frac{1}{24}(M_1 + M_2 + M_3 + M_4 + M_5),\\
-        \mathcal{P}_{FFF} &= \frac{1}{8} + \frac{1}{24}(M_1 - M_2 + M_3 - M_4 - M_5),\\
-        \mathcal{P}_{[SSF]} &= \frac{3}{8} + \frac{1}{24}(-M_1 + M_2 - M_3 - 3M_4-3M_5),\\
-        \mathcal{P}_{[SFF]} &= \frac{3}{8} + \frac{1}{24}(-M_1 - M_2 - M_3 + 3M_4 + 3M_5),
-\end{align}
-Limitation here is not including weight-2 errors.
-%
 
 \section{Experimental Results}
 \label{sec:results}
@@ -1093,20 +1022,6 @@ $\varepsilon_\mathrm{fit}=\varepsilon_0+\varepsilon_\mathrm{inj}$, where
 $\varepsilon_\mathrm{fit}$ are the extracted errors, $\varepsilon_0$ is some
 residual error baseline. These straight line fits show good agreement between measured and injected error when accounting for some fit baseline error rates.
 
-
-\subsection{Three-qubit decay}
-\begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=0.75\linewidth]{figures/pdf_figure/ch4/3q_asymp.pdf
-        }
-    \end{center}
-    \caption{
-        Experimental data and analytic fit for 3-qubits subject to correlated random-unitary single-qubit noise injected via random phase jitter ($\sigma_\phi = 0.06$~turns).
-        }
-    \label{fig:3q}
-\end{figure}
-As an example, we show in figure~\ref{fig:3q} experimental data for three-qubits subject to \textit{common noise}, with an analytic fit parametrised by local depolarising channels for each qubit, and a single 3-body \textit{common noise} channel (note that this simple model excludes 2-body correlations). Here, $\mathcal{P}_{[SSF]}$ and $\mathcal{P}_{[SFF]}$ represent the sum of the permutations of single- and two-qubit failures respectively. Explicitly, $\mathcal{P}_{[SSF]}=\mathcal{P}_{SSF}+\mathcal{P}_{SFS}+\mathcal{P}_{FSS}$.
-
 \subsection{Scaling to a multi-ion register}
 \label{sec:scaling}
 
@@ -1116,7 +1031,7 @@ As an example, we show in figure~\ref{fig:3q} experimental data for three-qubits
         }
     \end{center}
     \caption{
-        Variation of $\pi$-pulse gate duration along eight ion chain due to global beam Gaussian profile.
+        \todo{Missing x axis labels} Variation of $\pi$-pulse gate duration along eight ion chain due to global beam Gaussian profile.
         }
     \label{fig:k-copy_8_gate_time}
 \end{figure}
@@ -1169,44 +1084,99 @@ As with the single qubit Stark-shift dataset, we ensure that correlated errors d
 Figure~\ref{fig:k-copy_8_ion} shows the 
 extracted pairwise correlations. The excess correlated error is shown in (a), with the largest values seen for the outer ion pairs, agreeing with the expected maximum error of $\varepsilon_{corr, max}^>=\varepsilon_{c, max}$. Panel (b) shows the sum of the local depolarisation error per Cliffords on both qubits, with the largest values now corresponding to pairs consisting of one central ion, and one outer ion. We plot the ratio of excess correlated error and depolarisation errors in panel (c) to further highlight the error distribution due to the beam shape.
 % ==========================================================================
-\section{Conclusions and outlook}
+\section{Outlook}
 \label{sec:outlook}
 
 \emph{k-copy} RB efficiently discerns correlated and uncorrelated error channels
-acting on a multi-qubit system. Because of the symmetry enforced by
-twirling over the diagonal Clifford representation $Cl^{\otimes k}$
-(Section~\ref{sec:two_copy_cliff}), structured errors drive the decay of
-correlated populations into invariant subspaces in a way that is directly
-observable without full process reconstruction. Given a specified error
-model, these correlated decays can be used to directly quantify the
+acting on a multi-qubit system. The symmetry enforced by
+twirling over the diagonal single-qubit Clifford representation $Cl_1^{\otimes k}$
+(section~\ref{app:reps}), causes structured errors to drive the decay of
+correlated populations into invariant subspaces. Observing transient populations in these invariant subspaces allows for error characterisation without full process reconstruction. Given a specified error
+model, here focussing on common unitary errors due to fluctuating global fields, these correlated decays can be used to directly quantify the
 magnitude of the individual error channels contributing to the total error
-per Clifford.
+per Clifford that is typically measured in standard RB.\\
 
-This method has been proposed and experimentally demonstrated, and its
-application extended to an eight-qubit register through pairwise
-comparisons (Section~\ref{sec:scaling}). This approach permits highly
+In this chapter we proposed and experimentally demonstrated this method applied on on up to an eight-qubit register through pairwise
+comparisons (section~\ref{sec:scaling}). This approach permits highly
 efficient parallel data collection: the time required on the device is
 independent of qubit number, and the protocol requires exclusively local
 operations followed by classical post-processing of correlated survival
-rates.
+rates.\\
+\subsection{Limitations}
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=0.75\linewidth]{figures/pdf_figure/ch4/f_app_3q.pdf
+        }
+    \end{center}
+    \caption{
+        Experimental data and analytic fit for 3-qubits subject to correlated random-unitary single-qubit noise injected via random phase jitter ($\sigma_\phi = 0.06$~turns).
+        $\mathcal{P}_{[SSF]}$ and $\mathcal{P}_{[SFF]}$ represent the sum of the permutations of single- and two-qubit failures respectively. Explicitly, $\mathcal{P}_{[SSF]}=\mathcal{P}_{SSF}+\mathcal{P}_{SFS}+\mathcal{P}_{FSS}$.
+        }
+    \label{fig:3q}
+\end{figure}
+This chapter has analysed structured errors on two qubits, extending to more qubits only through pairwise comparisons.  The current pairwise protocol described here does not determine correlated errors between $>2$-qubits. These higher weight errors may be particularly detrimental to error correction circuits where the distance of the code, $d$, is less than the correlated error channel weight~\cite{}\todo{add citation}, therefore these errors would be advantageous to characterise.
+We expect the symmetry resolved dynamics revealed by pairwise \emph{k-copy} RB to generalise to higher weight errors, however, without prior work on the sub-representation structure of the single-qubit Clifford group applied diagonally to $>2$ qubits, extending the analysis for \emph{k-copy} RB is challenging.
+The number of relevant irreps does not increase, however, the multiplicity does increase dramatically.
+Some headway can be made if we consider the \emph{common noise} error mode discussed throughout this chapter.
+A simple relation can be found for the asymptotic states, namely, under \textit{common noise} the state is driven to the maximally mixed state on the symmetric subspace, as this is the SU(2)-invariant state on the symmetric irrep. This state is given by,
+\begin{equation}
+\rho_\mathrm{sym} = \frac{1}{k+1}\sum_{l=0}^k\ket{D_l^k}\bra{D_l^k},
+\end{equation}
+where $\ket{D_l^k}$ is the Dicke state for $l$ excitations (here successful recoveries of target state), out of $k$-qubits. From this expression we see that an asymptote of $\mathcal{P}_{SS...S}|_{m\rightarrow\infty}=1/(k+1)$ is expected under \textit{common noise}, while the maximally mixed state under local depolarisation leads to the familiar asymptote of $\mathcal{P}_{SS...S}|_{m\rightarrow\infty}=1/(2^k)$. This result suggests that the presence of \textit{common noise} affecting many qubits may be simply observed, however, without the explicit representation structure, it cannot be easily quantified.\\
+We confirm this asymptote experimentally with data shown in figure~\ref{fig:3q}. 
+For three-qubits, we leverage symbolic computation to diagonalise the resulting PTM representation of \textit{common noise} and recover the analytic decay used in this fit. This direct diagonalisation approach is possible for this small system, and with the highly structured \emph{common noise} error channel, however, for a full treatment of $k$-body error under $Cl_1^{\otimes k}$ twirling, we suspect the sub-representation structure will need to be found.
 
-\todo{Expand this Outlook section substantially for the thesis, drawing
-together the forward-looking threads seeded earlier in this chapter and in
-Chapter~\ref{chap:background}:
-\begin{itemize}
-    \item Extension to genuine $\geq 3$-body correlated error terms, beyond
-    the pairwise diagnostic of Section~\ref{sec:scaling}.
-    \item Experimental characterisation of $ZZ$-type entangling errors
-    (Section~\ref{sec:noise_models}), not demonstrated here.
-    \item Sample-cost / Fisher-information analysis for multi-exponential
-    fitting --- flagged as an open numerics question in the manuscript SM
-    and not yet resolved.
-    \item Non-Markovian (temporally correlated) noise, via repeated
-    identical Clifford RB sequences applied at different times on a single
-    qubit, exploiting the same correlated-outcome analysis used here for
-    spatial correlations.
-    \item Character-RB-style initial-state engineering
-    (Section~\ref{sec:analytic_predictions}) to isolate single exponential
-    decays and reduce sample cost.
-\end{itemize}
-}
+\subsection{Future work}
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/non_markov.pdf
+        }
+    \end{center}
+    \caption{
+        Circuit for probing time-dependent environmental errors by introducing a delay between random sequence execution on parallel copies in \emph{k-copy} RB.
+        }
+    \label{fig:ch4_time}
+\end{figure}
+
+One avenue for future work is captured by the above limitations section: scaling the analysis to multi-body errors through studying the sub-representation structure of the single qubit Clifford group applied diagonally to $k$-qubits. We propose two further dimensions in which to extend the \emph{k-copy} analysis: \\
+First, the subsystem on which the local twirling is applied could be extended to $>1$-qubit.
+As an example, the two-qubit Clifford group~\cite{}\todo{add citation} or the SLeRB~\cite{sutherland_subspace_2025} protocol could be applied in parallel to $k$-copies of 2-qubit subsystems. This would reveal correlated errors and leakage  that reduce the fidelity of two-qubit entangling gates.\\
+Second, we may utilise this method to probe correlations in time.
+As the protocol uses exclusively single-qubit rotations, with no explicit
+coupling made between qubits by the ideal circuit, we could apply some time
+delay, $\Delta t$, between the parallel gate sequences. A proposed circuit is
+shown in figure~\ref{fig:ch4_time} for the two-copy case. In the case that
+$\Delta t$ is much longer than the random sequence length, we are effectively
+probing the stability of the circuit over time (albeit on parallel subsystems)
+--- specifically we are looking for deviations in circuit fidelity due to the
+external context in which the circuit is executed.  This method is similar to
+the context dependent tests studied in reference~\cite{rudinger_probing_2019}.
+However, as we execute parallel sequences on two copies, we can also set
+$\Delta t$ to be significantly shorter than the random sequence length. In this
+regime, we could, for example, probe the frequency and coherence of noise on the
+common drive field used to execute the parallel gates. This would provide evidence and quantify violations of the Markovian QIP model, without full process tomography, as discussed in section~\ref{sec:k-copy_char}.
+
+% 3-body common noise:
+% \begin{align}
+%         \alpha_1 &= (1 - \varepsilon_1)^m,\\
+%         \alpha_2 &= (1 - \varepsilon_2)^m,\\
+%         \alpha_3 &= (1 - \varepsilon_3)^m,\\
+%         \beta &= \alpha_1\alpha_2 + \alpha_1\alpha_3 + \alpha_2\alpha_3,\\
+%         \alpha_\mathrm{corr1} &= (1 - \varepsilon_\mathrm{corr})^m,\\
+%         \alpha_\mathrm{corr2} &= (1 - 3\varepsilon_\mathrm{corr})^m,\\
+%         \alpha_\mathrm{corr3} &= (1 - 6\varepsilon_\mathrm{corr})^m,
+% \end{align}
+% \begin{align}
+%         M_1 &= \beta,\\
+%         M_2 &= 3(\alpha_1 + \alpha_2 + \alpha_3)  \alpha_\mathrm{corr1},\\
+%         M_3 &= 2\beta\alpha_\mathrm{corr2},\\
+%         M_4 &= \frac{6}{5}\alpha_1\alpha_2\alpha_3\alpha_\mathrm{corr3},\\
+%         M_5 &= \frac{9}{5}\alpha_1\alpha_2\alpha_3\alpha_\mathrm{corr1},
+% \end{align}
+% \begin{align}
+%         \mathcal{P}_{SSS} &= \frac{1}{8} + \frac{1}{24}(M_1 + M_2 + M_3 + M_4 + M_5),\\
+%         \mathcal{P}_{FFF} &= \frac{1}{8} + \frac{1}{24}(M_1 - M_2 + M_3 - M_4 - M_5),\\
+%         \mathcal{P}_{[SSF]} &= \frac{3}{8} + \frac{1}{24}(-M_1 + M_2 - M_3 - 3M_4-3M_5),\\
+%         \mathcal{P}_{[SFF]} &= \frac{3}{8} + \frac{1}{24}(-M_1 - M_2 - M_3 + 3M_4 + 3M_5),
+% \end{align}
+%

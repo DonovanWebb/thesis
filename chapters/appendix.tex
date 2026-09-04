@@ -91,6 +91,39 @@ Incorporating this result into the fidelity expression, we find
 \end{equation}
 where we can evaluate the two terms using the identities $\text{Tr}(A \otimes B) = \text{Tr}(A)\text{Tr}(B)$ and $\text{Tr}((A \otimes B)S) = \text{Tr}(AB)$, the latter of which is highly relevant to the mechanism of virtual distillation, described in chapter~\ref{ch:virtual_distillation}. This results in the final expression for the fidelity of a unitary error channel with respect to a target unitary, given above by equation~\ref{eqn:fid_unitary}.\\
 
+\section{Projectors of $Cl_1^{\otimes 2}$}
+\label{sec:k-copy_projector}
+We outline the method of recovering the $\alpha$ parameters described in section~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here \todo{IRO please check you are happy with me to include this appendix}. \\
+The decay due to a single rotation acting identically on both qubits which, in the Pauli-transfer matrix (PTM) representation, can be written as $\Lambda^\mathcal{P}=\mathrm{diag}(1, R, R, R\otimes R)$, 
+where superscript $\mathcal{P}$ represents the block diagonal matrix is ordered by the two-qubit Pauli basis $\mathcal{P}=\{I\otimes I, \vec\sigma\otimes I , I\otimes\vec\sigma, \vec\sigma\otimes\vec\sigma\}$, with $\vec\sigma = \{\hat\sigma_x, \hat\sigma_y, \hat\sigma_z\}$, and
+$R=R(\vec{n}, \theta)\in SO(3)$ describes a rotation by $\theta$ around $\vec{n}$. Finding the vector $\vec\alpha$ can now be done using Schur's lemma for the case of no mixing between irrep spaces:
+\begin{equation}\label{eqn:PTM projector decomposition}
+    \tilde\Lambda^\mathcal{P}=\sum_\lambda\alpha_\lambda\Pi_\lambda,\hspace{10pt} \alpha_\lambda=\frac{1}{d_\lambda}\mathrm{Tr}(\Pi_\lambda\Lambda^{\mathcal{P}}).
+\end{equation}
+Here, $\Pi_\lambda$ denotes the PTM projector onto the irrep space labelled $\lambda$ and with dimension $d_\lambda$. It follows immediately that the identity sector is fixed, while the left- and right-qubit sectors produce $\alpha_L=\alpha_R=\mathrm{Tr}(R)/3$. In principle, $\alpha_\lambda$ for the two-qubit sector can be evaluated by explicitly constructing the projectors from the basis operators in Table~\ref{table:irreps}. However, in this case the symmetries of these irrep spaces allow the projectors to be expressed more simply in terms of operators whose traces are easily evaluated:
+\begin{align}
+\label{eqn:irrep symmetry projector decomposition}
+    \Pi_{tr}&=T,\\
+    \Pi_{dt}&=D-T,\\
+    \Pi_{so}&=\frac{1}{2}(I_9+S)-D,\\
+    \Pi_{as}&=\frac{1}{2}(I_9-S),
+\end{align}
+where $T=1/3\sum_{ij}\ket{ii}\bra{jj}$, $D=\sum_i\ket{ii}\bra{ii}$, and $S=\sum_{ij}\ket{ji}\bra{ij}$ are the trace projector, diagonal projector, and swap operator, respectively. The required traces are
+\begin{align}
+     \mathrm{Tr}(I_3 R)&=\mathrm{Tr}(R)=(1+2c),\\
+     \mathrm{Tr}(I_9(R\otimes R))&=(\mathrm{Tr}(R))^2=(1+2c)^2,\\
+    \mathrm{Tr}(T(R\otimes R))&=\frac{1}{3}\mathrm{Tr}(R^TR)=1,\\
+    \mathrm{Tr}(D(R\otimes R))&=\sum_i R_{ii}^2=c^2+2c+(1-c)^2\kappa,\\
+    \mathrm{Tr}(S(R\otimes R))&=\mathrm{Tr}(R^2)=4c^2-1,
+\end{align}
+where $c=\cos(\theta)$,  and $\kappa=n_x^4+n_y^4+n_z^4$ is an anisotropy parameter reflecting the fact that Clifford twirling enforces symmetry under permutations of the Pauli axes, rather than under arbitrary rotations. Substituting these traces into equation~\ref{eqn:PTM projector decomposition} and using equation~\ref{eqn:irrep symmetry projector decomposition} yields 
+\begin{align}
+    \alpha_{L}&=\alpha_R=\alpha_{as}=\frac{1}{3}(1+2c),\\
+    \alpha_{tr}&=1,\\
+    \alpha_{dt}&=\frac{1}{2}(c^2+2c-1+(1-c)^2\kappa),\\
+    \alpha_{so}&=\frac{1}{3}(3c^2-(1-c)^2\kappa).
+\end{align}
+
 \section{$ZZ$-type noise}
 \label{sec:app_zz_noise}
 \begin{figure}
