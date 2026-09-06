@@ -53,7 +53,7 @@ an average operation fidelity given by,
     \label{eqn:fid}
     F(\mathcal{E},U) = \int d\psi \bra{\psi} U^\dagger \mathcal{E}(\ket{\psi}\bra{\psi}) U \ket{\psi},
 \end{equation}
-where the integral is taken over the uniform Haar measure on the space of pure states. We shall see that the language used for this analysis of single qubit gate fidelities closely resembles the group theory approach describing randomised benchmarking. The Haar measure is relevant here to consider the fidelity of the operation independent of the initial state (assuming it is pure), which is exactly the enforced criteria through Clifford twirling during RB. For a single qubit, this can be expressed as an integral over the Bloch sphere. 
+where the integral is taken over the uniform Haar measure on the space of pure states~\cite{bowdrey_fidelity_2002, nielsen_simple_2002}. We shall see that the language used for this analysis of single qubit gate fidelities closely resembles the group theory approach describing randomised benchmarking. The Haar measure is relevant here to consider the fidelity of the operation independent of the initial state (assuming it is pure), which is exactly the enforced criteria through Clifford twirling during RB. For a single qubit, this can be expressed as an integral over the Bloch sphere. 
 If we further assume that the error channel is unitary, as is the case of a detuned channel considered here, we shall find that the fidelity follows
 \begin{equation}
     \label{eqn:fid_unitary}
@@ -132,7 +132,7 @@ where $c=\cos(\theta)$,  and $\kappa=n_x^4+n_y^4+n_z^4$ is an anisotropy paramet
         }
     \end{center}
     \caption{
-        \todo{ZZ-noise}
+        Liouville operator representation of error channels after twirling over $Cl_1^{\otimes 2}$, ordered by the irrep basis (Schur basis). (a) \emph{Common noise}, (b) Continuous $ZZ$, (c) Stochastic $ZZ$. Orange blocks represent an entry of $1$, green represent $0$, and red represent a decay with dependence on $m$.
         }
     \label{fig:ch4_zz_noise}
 \end{figure}
@@ -171,5 +171,5 @@ We show this dependence in figure~\ref{fig:ch4_zz_noise} (c).
 The same intermediate asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty} = 0.5$ is expected. \\
 
 The difference in correlated decay structure due to \emph{common}, depolarising, and $ZZ$-type errors suggests that twirling over $Cl_1^{\otimes2}$ both simplifies a generic error map to be measurable via RB, but also, retains some noise-dependent structure of the correlated decay profiles.  
-Designing optimal initial and final states, as well as optimal sampling strategies for extracting a larger set of error parameters covering multiple physical error mechanisms is left for future work. A possible strategy to avoid introducing arbitrary error channels, is to be agnostic of the physical error mechanisms, and rather directly extract the $\vec\alpha$ and $\vec m$ parameters described in section~\ref{app:reps}. An analogous protocol to this is described by character RB~\cite{helsen_new_2019}.
+Designing optimal initial and final states, as well as optimal sampling strategies for extracting a larger set of error parameters covering multiple physical error mechanisms is left for future work. A possible strategy to avoid introducing arbitrary error channels, is to be agnostic of the physical error mechanisms, and rather directly extract the $\vec\alpha$ and $\vec m$ parameters described in section~\ref{app:reps}. Analogous protocols to this is described by character RB~\cite{helsen_new_2019}, and tomography via RB~\cite{kimmel_robust_2014}.
 
