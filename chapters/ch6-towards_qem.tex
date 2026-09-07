@@ -1,21 +1,140 @@
-\chapter{Towards Quantum Error Mitigation}
+\chapter{Towards Hybrid System Control and Quantum Error Mitigation}
+% or
+% \chapter{Future Directions: Hybrid Quantum Control and Error Mitigation}
 \label{ch:QEM}
-
-\section{Virtual Distillation on an Ion Trap QC}
-\label{ch:virtual_distillation}
 \minitoc
+\todo{Keep in mind: Want to make clear that this is future work, and not specifically QEM on CV!}
+Suggested rough intro: 
+Having established and characterised the experimental
+platform and demonstrated its application to \emph{k-copy} randomised
+benchmarking, this chapter considers future research goals utilising the
+multi-qubit array, and control over both the discrete qubits subsystems, as well
+as the continuous bosonic motional modes. In broad terms, we are interested in
+including the motional modes as computational resources, following recent
+progress in spin-conditioned bosonic operations demonstrated within our
+group~\cite{bazavan_squeezing_2024,saner_generating_2024, bazavan_thesis, saner_thesis, shinbrough_applications_2026}. In
+section~\ref{sec:CVQC} we estabilish a gateset required for continuous-variable
+control of the ion motion, and demonstrate the generation of a squeezed state on
+the new apparatus.\\
+The second half of this chapter considers an error mitigation technique applicable to both discrete and continuous systems.
+Simulation and computation utilising both discrete and continuous resources
+has been proposed to offer advantages over fully discrete systems due to
+resource scaling...~\cite{}. Demonstrations include~\cite{saner_real-time_2025,
+feynman}.
+However, to extract faithful results, we must reduce the impact of errors. We
+explore in section~\ref{sec:virtual_distillation}~\cite{virtual_cooling, balint, huggins} the error mitigation technique
+virtual distillation, which has applications on both
+discrete~\cite{huggins_virtual_2021,google} and continuous
+systems~\cite{}\todo{virtual cooling}\footnote{In fact, the intial proposal of virtual cooling was on a continuous system}. This section begins with the theory
+behind virtual distillation, and two protocols for its application. We then
+provide initial demonstrations of this protocol applied to a
+discrete-variable only system, and explore the performance under both local
+depolarising and under the correlated noise due to a common fluctuating control
+field, explored in detail in chapter~\ref{ch:k-copy}. We end this chapter with
+an outlook of how VD will be applied to larger system sizes, including the ultimate goal of
+application to hybrid systems.
 
-This chapter presents the theory of virtual distillation, a purification based
-error mitigation technique. We begin with the background and uses of error
-mitigation, and detail the virtual distillation protocol. Following this, we
-analyse the performance of virtual distillation under different physically
-motivated noise models, with experimental results presented for two-copies of a single qubit in
-the presence of both spatially correlated and uncorrelated noise.
-\todo{Then discuss CV systems} We close this
-chapter with a discussion on extending this method to more than two-copies, and
-to hybrid systems.
+\section{Continuous-Variable Control in Trapped Ions}
+\label{sec:CVQC}
+\todo{Short summary of section}
+One paragraph on why this apparatus is well placed for this work.
+\todo{this section develops the CV gateset that is a prerequisite for hybrid QEM, without yet performing error mitigation on it}
+\subsection{Motivation}
+\todo{One paragraphs on what is CV, and why it is interesting. One paragraph on its conception in ITQC. One paragraph on why error mitigation in this framework is important.}
+\subsection{Theory}
+    \subsubsection{Computing on a Hybrid System}
+    How information is stored in oscillator and spin, and retrieved via spin?\\
+    Summary from a couple of reviews (Liu?)\\
+    \begin{table}
+        \begin{center}
+        \begin{tabular}{|l|l|l|l|l|l|}
+            \hline
+            Gate                & $H_\mathrm{osc}$  & Gaussian  &modes num. & $\sigma$  & $m$  \\
+            \hline
+            Displacement        & $a+a^\dagger$     & yes       & 1         & $\sigma_x$& 0 \\
+            Squeezing           & $a+a^\dagger$     & yes       & 1         & $\sigma_z$& 1 \\
+            two-mode squeezing  & $a+a^\dagger$     & yes       & 2         & $\sigma_z$& 1 \\
+            dispersive          & $a+a^\dagger$     & yes       & 1         & $\sigma_z$& 1 \\
+            beam splitter       & $a+a^\dagger$     & yes       & 2         & $\sigma_z$& 1 \\
+            3rd order squeezing & $a+a^\dagger$     & no        & 1         & $\sigma_x$& 2 \\
+            \hline
+        \end{tabular}
+        \end{center}
+        \caption{\todo{Gateset, need to check factors and phases for all gates. Check if Hermitian!}
+            }
+        \label{tab:state_prep_parameters}
+    \end{table}
+    \subsubsection{Gate Implementation}
+    Two-SDF toolkit from TS+RS\\
+    Could also mention SW and higher order S.B. approaches.\\
+    Magnus expansion\\
+    \todo{point to gateset table of how to generate interaction using TS+RS method}
+    \subsubsection{Readout}
+    Define state for CV.\\
+    Define characteristic and Wigner function.\\
+    \begin{equation}
+    \mathcal{P}_a = \frac{1+Re(\xi(\beta))}{2},
+    \end{equation}
+    \begin{equation}
+    \mathcal{P}_a = \frac{1+Im(\xi(\beta))}{2},
+    \end{equation}
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/tomography.pdf
+        }
+    \end{center}
+    \caption{
+        \todo{Figure: circuit diagram for tomography. }
+        }
+    \label{fig:tomography}
+\end{figure}
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/tomography.pdf
+        }
+    \end{center}
+    \caption{
+        \todo{Figure: characteristic function of $\ket{0+1}$ Fock state. }
+        }
+    \label{fig:char_fn}
+\end{figure}
+\subsection{Experimental Demonstration}
+    \todo{Short description of what we will show}
+\subsubsection{Two Spin Dependent Forces}
+    Experimental sequence, hardware involved, thermal drifts\\
+    Four tones on one AOM.\\
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
+        }
+    \end{center}
+    \caption{
+    \todo{Figure: detuning for four tones, Z measurement with ramp}
+        }
+    \label{fig:2-SDF}
+\end{figure}
+\subsubsection{Squeezing}
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
+        }
+    \end{center}
+    \caption{
+        \todo{Figure: Sqz characteristic function with varying duration \\}
+        }
+    \label{fig:squeezing}
+\end{figure}
+    Experimental sequence, dephasing dominated, improved by grounding \\
+\subsection{Outlook}
+    Some next steps for demonstrating full CV control\\
 
-\section{Error Mitigation}
+
+\section{Virtual Distillation}
+\label{sec:virtual_distillation}
+\todo{Short summary of section}
+Here we develop experimental tools for demonstrating VD on the discrete variable portion of the full hybrid system.
+\subsection{Error Mitigation}
+\label{sec:QEM}
 Noise coupled to a quantum system results in unintended coherent, and incoherent
 evolution. Deviations of the realised state from the target state are known as
 errors, and, if left unchecked, lead to the failure of quantum algorithms. 
@@ -52,9 +171,17 @@ Reference~\cite{cai_quantum_2023} defines QEM as
 This highlights the crux of how information on the system is collected by a QEM implementation, which I shall explore with the following thought experiment on the ``perfect'' QEM algorithm.
 Consider the problem of measuring the expectation value of an observable $\hat{O}$ on the target state $\rho_{id}$. The state is prepared by a quantum circuit, which due to noise, instead prepares the mixed state $\rho = (1-\lambda) \rho_{id} + \lambda \rho_{err}$, where $\rho_{err}$ is the error state. Each measurement of the observable $\hat{O}$ on the noisy state $\rho$ will return a value $o_i$, and the average of these measurements will converge to the expectation value $\langle \hat{O} \rangle = \mathrm{Tr}[\hat{O}\rho]$. Given $S$ total samples, the final result will be,
 $$ \langle \hat{O} \rangle = \frac{1}{S} \left(\sum_{i=1}^{S_{id}} o_i + \sum_{j=1}^{S_{err}} o_j\right),$$
-where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement outcome from the ideal and error states respectively, with $S = S_{id} + S_{err}$. The bias in the measured expectation value from the ideal is then given by contributions from the samples $S_{err}$. An ideal QEM algorithm would flag these error samples, and remove them from the final average, resulting in a bias free expectation value using the restricted samples $S_{id}$.
-\todo{Add figure of unmitigated vs mitigated expectation value, showing how bias is reduced at the expense of more samples.}
-
+where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement outcome from the ideal and error states respectively, with $S = S_{id} + S_{err}$. The bias in the measured expectation value from the ideal is then given by contributions from the samples $S_{err}$. An ideal QEM algorithm would flag these error samples, and remove them from the final average, resulting in a bias free expectation value using the restricted samples $S_{id}$.\\
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
+        }
+    \end{center}
+    \caption{
+    \todo{Figure: unmitigated vs mitigated expectation value, showing how bias is reduced at the expense of more samples.}
+        }
+    \label{fig:qem}
+\end{figure}
 
 \begin{itemize}
     \item Error mitigation motivation. Mainly on contrasting to quantum error correction.
@@ -62,7 +189,9 @@ where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement
         \item How QEM reduces bias (at the expense of required samples). Look at Cai paper for structured argument.
 \end{itemize}
 
-\section{Virtual Distillation Theory}
+\subsection{Virtual Distillation Protocol}
+\label{sec:vir_dist_theory}
+\subsubsection{Purification}
 Estimate expectation value of observable on a state without ever physically preparing the state.
 Purification here refers to approaching the dominant pure state of a mixed state. The $k$th degree purified state is given by,
 \begin{equation}
@@ -102,114 +231,130 @@ The Hadamard test is more general, as it can be used to measure any observable, 
 
 Next, need to derive scaling of bias with copy number. And finally, discuss the variance of measurement with shot number (and how this scales with copy number?).
 
-\begin{itemize}
-    \item Introduce virtual distillation, a purification technique. Discuss scaling with copy number, and the error models it deals with.
-\end{itemize}
-
-\subsection{Protocol}
-    \subsubsection{Ancilla method}
-        Figure: circuit diagram for virtual distillation, could also include the tensor network notation diagram if I can understand the logic behind it (give 1 hr to see if possible).
-    \subsubsection{B-matrix protocol}
+\subsubsection{Circuit}
+    Ancilla method\\
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=0.6\linewidth]{figures/make_figure/ch6/circs/ancilla/circuits.pdf
+        }
+    \end{center}
+    \caption{
+        \todo{Figure: circuit diagram for ancilla based virtual distillation, Hadamard test, derangement operator by CSwap}
+        }
+    \label{fig:virdist_ancilla}
+\end{figure}
+    B-matrix protocol\\
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=0.5\linewidth]{figures/make_figure/ch6/circs/bmatrix/circuits.pdf
+        }
+    \end{center}
+    \caption{
+        \todo{Figure: circuit diagram for B matrix}
+        }
+    \label{fig:bmatrix}
+\end{figure}
         If we can diagonalise both S and SO.
-        Figure: Circuit diagram for B-matrix
-        Can apply transversally
-
-    \subsubsection{On hybrid systems}
+        Can apply transversally\\
+    On hybrid systems\\
         It can be used for both spin and bosonic objects
 
-\subsection{Noise Floor}
-\begin{itemize}
-    \item Discuss noisefloor (coherent mismatch)
-    \item Go into detail on how spatially correlated noise can be an issue here, discuss network paper as opposite case
-\end{itemize}
-Figure: Simulation of vir dist on various noise models.
+% \subsubsection{Noise Floor}
+% \begin{itemize}
+%     \item Discuss noisefloor (coherent mismatch)
+%     \item Go into detail on how spatially correlated noise can be an issue here, discuss network paper as opposite case
+% \end{itemize}
+% \todo{Figure: Simulation of vir dist on various noise models.}
 
-Comparing to bias reduction with copy number, describe that this exponential reduction cannot hold indefinitely for arbitrary noise models, and that there is a noise floor. For a single qubit with depolarising noise, there is no such floor, however we note the effect of coherent mismatch, which for copys consisting of multiple qubits, even depol noise leads to coherent drift.
-Furthermore, we are particularly interested in the effect of correlated noise on the separate registers leading to irremovable errors. Correlated noise, as discussed in chapter 5, can dominate the error budget when copies are stored in similar physical locations, and within shared noisy fields. The practical mitigation for this is to separate the copies in space and environment, e.g. over a network (tenzan paper), or to decorrelate errors through local randomisation (randomised compiling, twirling, etc). We shall explore the effect of correlated noise on virtual distillation practically in section x. But first, here we show an analytic model of the effect of correlated noise on a small two-copy system.
-Describe model of k-copy clifford noise, likening it to a deep random circuit ran in parallel on each copy. This is the same noise channel enforced through k-copy twirling. As with chapter 5, this gives us a natural language of irreps to describe the action of our noise channel on an initial state. We may describe the B matrix in this irrep basis, and show the final populations of the copies after derangment. Finally, taking the <Z> measurements on both copies, we can recover the corrected expectation value of the observable. To conform with RB type decay curves, we show the decay of the corrected expectation value with number of Cliffords. We note that another view of this data, more common in error mitigation literature, is a plot of error suppression versus total error ?lambda. From chapter 5 we now that the uncorrected single qubit decay is given by,
-\begin{equation}
-    \langle Z \rangle_\mathrm{uncorrected} = (1-\varepsilon_{dp}-\varepsilon_{corr})^m,
-\end{equation}
-where $\varepsilon_{dp}$ is the depolarising error rate, $\varepsilon_{corr}$ is the correlated error rate, and $m$ is the number of Cliffords applied. This is plotted as dashed line.
-The corrected expectation value is given by $<Z>_{corrected}$ in the presence of both depolarising and correlated noise.
-We can see from the figure that under dominant depolarising noise we see a large suppression of error, however, under dominant correlated noise, the error is largely unaffected. Analytically we find that the final decay of the corrected expectation value is given by,
-\begin{equation}
-    \langle Z \rangle_\mathrm{corrected} = \frac{2\left(\left(1-\varepsilon_{corr}\right)\left(1-\varepsilon_{dp}\right)\right)^m}{1+\left(1-\varepsilon_{dp}\right)^{2m}},
-\end{equation}
-We see that for $\varepsilon_{corr} = 0$, we recover the expected exponential suppression of error with copy number, however, for $\varepsilon_{corr} > 0$, we find a noise floor in the corrected expectation value.
-Extend this analysis to copy number $k$. Currently, I get here through Liouville form, is there a way to go directly from symmetry on the states?
+% Comparing to bias reduction with copy number, describe that this exponential reduction cannot hold indefinitely for arbitrary noise models, and that there is a noise floor. For a single qubit with depolarising noise, there is no such floor, however we note the effect of coherent mismatch, which for copys consisting of multiple qubits, even depol noise leads to coherent drift.
+% Furthermore, we are particularly interested in the effect of correlated noise on the separate registers leading to irremovable errors. Correlated noise, as discussed in chapter 5, can dominate the error budget when copies are stored in similar physical locations, and within shared noisy fields. The practical mitigation for this is to separate the copies in space and environment, e.g. over a network (tenzan paper), or to decorrelate errors through local randomisation (randomised compiling, twirling, etc). We shall explore the effect of correlated noise on virtual distillation practically in section x. But first, here we show an analytic model of the effect of correlated noise on a small two-copy system.
+% Describe model of k-copy clifford noise, likening it to a deep random circuit ran in parallel on each copy. This is the same noise channel enforced through k-copy twirling. As with chapter 5, this gives us a natural language of irreps to describe the action of our noise channel on an initial state. We may describe the B matrix in this irrep basis, and show the final populations of the copies after derangment. Finally, taking the <Z> measurements on both copies, we can recover the corrected expectation value of the observable. To conform with RB type decay curves, we show the decay of the corrected expectation value with number of Cliffords. We note that another view of this data, more common in error mitigation literature, is a plot of error suppression versus total error ?lambda. From chapter 5 we now that the uncorrected single qubit decay is given by,
+% \begin{equation}
+%     \langle Z \rangle_\mathrm{uncorrected} = (1-\varepsilon_{dp}-\varepsilon_{corr})^m,
+% \end{equation}
+% where $\varepsilon_{dp}$ is the depolarising error rate, $\varepsilon_{corr}$ is the correlated error rate, and $m$ is the number of Cliffords applied. This is plotted as dashed line.
+% The corrected expectation value is given by $<Z>_{corrected}$ in the presence of both depolarising and correlated noise.
+% We can see from the figure that under dominant depolarising noise we see a large suppression of error, however, under dominant correlated noise, the error is largely unaffected. Analytically we find that the final decay of the corrected expectation value is given by,
+% \begin{equation}
+%     \langle Z \rangle_\mathrm{corrected} = \frac{2\left(\left(1-\varepsilon_{corr}\right)\left(1-\varepsilon_{dp}\right)\right)^m}{1+\left(1-\varepsilon_{dp}\right)^{2m}},
+% \end{equation}
+% We see that for $\varepsilon_{corr} = 0$, we recover the expected exponential suppression of error with copy number, however, for $\varepsilon_{corr} > 0$, we find a noise floor in the corrected expectation value.
+% Extend this analysis to copy number $k$. Currently, I get here through Liouville form, is there a way to go directly from symmetry on the states?
 
+\subsection{Experimental Demonstration}
+\todo{Short description of following results.}
+\subsubsection{Implementation}
+Protocol, circuit diagram, hardware involved.
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
+        }
+    \end{center}
+    \caption{
+    \todo{Figure: B matrix decomposition.}
+        }
+    \label{fig:bmatrix_decomp}
+\end{figure}
+\subsubsection{B-matrix Calibration}
+    pi-4 gates, single addressing\\
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
+        }
+    \end{center}
+    \caption{
+    \todo{Figure: pi-4 MS gate calibration}. 
+    \todo{Figure: Heuristic signal of B-matrix working}. 
+    \todo{Tomography would be best!}
+        }
+    \label{fig:bmatrix_calib}
+\end{figure}
+\subsubsection{Injecting Spatial Correlations}
+    two copy, B matrix demonstration\\
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/noise_injection.pdf
+        }
+    \end{center}
+    \caption{
+        \todo{Figure: Cicruit diagram of RB + VD, exp data for noise floor for two copy B-matrix, with and without spatial correlations}
+        }
+    \label{fig:bmatrix_injection}
+\end{figure}
+    Analysis of this data.
 
-\section{Experimental Implementation}
-    \subsection{Calibrations}
-    pi-4 gates, single addressing
-    Figure: pi-4 MS gate calibration
-    Figure?: Could be nice to have a process tomography of the B circuit.
-    Figure: Heuristic signal of B-matrix working
-    \subsection{Injected Spatial Correlations}
-    two copy, B matrix demonstration
-    Figure: noise floor for two copy B-matrix, with and without spatial correlations
+\section{Proposed experiments and technical requirements}
+How CVDV and VD combine.\\
+\subsubsection{Extending to $>2$ copies}
+    plan for c-swap implementation.\\
+    What is difficult, what numbers we need (gate fidelities, shot number)\\
 
-\section{Outlook and Simulations}
-    \subsection{Extending to >2 copies}
-    plan for c-swap implementation.
-    Figure: c-swap circuit diagram
+\subsubsection{Virtual Distillation on Hybrid Systems}
+    Cite Quantum virtual cooling\\
+    Why important to develop \\
+    What errors does this mitigate? \\
+    How it looks on a thermal state and on various quantum states (sqz, coherent, fock)\\
+    What is difficult, what numbers we need (gate fidelities, shot number)\\
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=0.7\linewidth]{figures/make_figure/ch6/circs/fredkin/circuits.pdf
+        }
+    \end{center}
+    \caption{
+        \todo{Figure: Fredkin gate on oscillator, and how to compose derangement transversally.}
+        }
+    \label{fig:fredkin}
+\end{figure}
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
+        }
+    \end{center}
+    \caption{
+    \todo{Figure: Simulation of tri-sqz state with VD to show negativity!}
+        }
+    \label{fig:virdist_sim}
+\end{figure}
 
-\subsection{Error Mitigation on Hybrid Systems}
-    \begin{itemize}
-        \item Quantum virtual cooling
-        \item What errors does this mitigate? 
-        \item How it looks on a thermal state and on various quantum states (sqz, coherent, fock)
-        \item Show sqz state exp data as example of hybrid system on our device
-        \item How to implement it? 
-        \item Results?
-    \end{itemize}
-    Figure: c-swap circuit diagram for hybrid system
-    Figure: Show sqz state as example of hybrid system with simulation of virtual distillation on it.
-
-\section{Conclusions}
-
-\section{Motional Interactions}
-\minitoc
-\todo{Perhaps this should be chapter 4, as this is more like characterisation? I am also considering merging sqz and future work into virdist chapter, SDF and MS into characterisation}
-
-Presentation of the experimental results demonstrating motional control
-
-Move from characterisation: 
-    sideband cooling ?
-    Thermometry ?
-    Heating rates ?
-    Motional mode stability ?
-    Motional mode coherence ?
-    SDF
-    Two-qubit entangling gates
-
-And add:
-    Description of CVQC and hybrid QC.
-    pi/4 gates
-    Two-SDF toolkit
-    Tomography method
-    Squeezing
-    Fock state preparation
-    Planned Fredkin gate (would be amazing to show at least parity operation!)
-
-\begin{itemize}
-    \item Describe Two-SDF toolkit
-    \item Describe tomography method for motional states. Could show Fock state here.
-    \item Results:
-        \begin{itemize}
-            \item Squeezed state
-            \item Beam splitter
-            \item Parity operation
-            \item Fredkin gate
-        \end{itemize}
-\end{itemize}
-\section{Computing on a Hybrid System}
-\section{Gate Implementation}
-\section{System Characterisation}
-\subsection{Mode temp}
-\subsection{Heating}
-\subsection{Phase Noise}
-\subsection{SDF}
-\subsection{MS Gate}
-\subsection{Squeezing}
+\section{Outlook}
+\todo{Broader perspective of these QEM research directions, and also how we can play with our larger CVDV system}
