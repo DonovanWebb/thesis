@@ -1,0 +1,30 @@
+\documentclass[tikz,border=6mm]{article}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{quantikz}
+\usepackage{braket}
+\usetikzlibrary{shapes.geometric}
+\tikzset{
+  diamond control/.style={
+    shape=diamond,
+    draw,
+    fill=white,
+    inner sep=1.5pt,
+    minimum size=5pt
+  }
+}
+
+\begin{document}
+
+\begin{quantikz}
+\lstick{$\ket{0}_\text{a}$} & \gate{H} &\gate{I~\text{or}~S^\dagger}& \ctrl{1}          & \gate{H} &\meter{}\\
+\lstick{$\rho_\text{osc}$}  &          &                             & \gate{D (\beta)}  &          &
+\end{quantikz}\begin{quantikz}
+\lstick{$\ket{0}_\text{a}$} & \gate{I~\text{or}~R_y\left(\frac{\pi}{2}\right)}& \ctrl[style={diamond,draw,fill=black,minimum size=2mm}]{1}           &\meter{}\\
+\lstick{$\rho_\text{osc}$}  &                                                 & \gate{D \left(\pm\frac{\beta}{2}\right)} &
+\end{quantikz}
+
+\end{document}

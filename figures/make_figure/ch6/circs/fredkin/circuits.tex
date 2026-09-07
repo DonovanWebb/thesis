@@ -1,0 +1,37 @@
+\documentclass[tikz,border=6mm]{standalone}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{quantikz}
+\usepackage{braket}
+\usetikzlibrary{shapes.geometric}
+\tikzset{
+  diamond control/.style={
+    shape=diamond,
+    draw,
+    fill=white,
+    inner sep=1.5pt,
+    minimum size=5pt
+  }
+}
+
+\begin{document}
+
+\begin{quantikz}
+\setwiretype{n}&&\lstick{$\ket{\downarrow}_\text{a}$}&\setwiretype{q}           & \gate{H} & \ctrl{1} & \ctrl{2}  & \ctrl{1}     & \gate{H} &\meter{}\\
+\lstick[2,style={
+xshift=-2.2cm}]{copy 1}
+&\setwiretype{n}&
+\lstick{$\ket{\downarrow}_\text{1}$}  &\setwiretype{q} &\gate[2]{U}          & \swap{2} &           & \gate[2]{O}  &          &\\
+&\setwiretype{n}&
+\lstick{$\ket{0}_\text{1}$}         &\setwiretype{q} &         &          & \swap{2}  &              &          &\\
+\lstick[2,style={
+xshift=-2.2cm}]{copy 2}
+&\setwiretype{n}&
+\lstick{$\ket{\downarrow}_\text{2}$}  &\setwiretype{q} &\gate[2]{U}         & \targX{} &           &              &          &\\
+&\setwiretype{n}&
+\lstick{$\ket{0}_\text{2}$}         &\setwiretype{q} &         &          & \targX{}  &              &          &
+\end{quantikz}
+\end{document}

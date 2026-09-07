@@ -1,0 +1,28 @@
+\documentclass[tikz,border=6mm]{standalone}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{quantikz}
+\usepackage{braket}
+\usetikzlibrary{shapes.geometric}
+\tikzset{
+  diamond control/.style={
+    shape=diamond,
+    draw,
+    fill=white,
+    inner sep=1.5pt,
+    minimum size=5pt
+  }
+}
+
+\begin{document}
+
+\begin{quantikz}
+\lstick{$\rho_L$}           &   \gate{R_z}\gategroup[2,steps=4,style={inner
+sep=6pt}]{B-matrix}& \ctrl{1}  &\gate{R_z}     & \ctrl{1}  & \meter{}  \\
+\lstick{$\rho_R$}           &             & \control{}&\gate{R_z}     & \control{}&  \meter{}
+\end{quantikz}
+
+\end{document}

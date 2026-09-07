@@ -1,0 +1,32 @@
+\documentclass[tikz,border=6mm]{standalone}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{quantikz}
+\usepackage{braket}
+\usetikzlibrary{shapes.geometric}
+\tikzset{
+  diamond control/.style={
+    shape=diamond,
+    draw,
+    fill=white,
+    inner sep=1.5pt,
+    minimum size=5pt
+  }
+}
+
+\begin{document}
+
+\begin{quantikz}
+\lstick{$\ket{0}_{L}$}          & \gate{C_{i,L}}\gategroup[2,steps=1,style={dashed,rounded
+corners,fill=blue!20, inner
+xsep=2pt},background,label style={label
+position=above,anchor=north,yshift=+0.4cm}]{{
+$m-1$ times}}   &  \gate{C_{\mathrm{inv},L}} & \gate[2]{B}  &\meter{}\\
+\lstick{$\ket{0}_{R}$}         & \gate{C_{i,R}} &  \gate{C_{\mathrm{inv},R}}& &\meter{}
+\end{quantikz}
+
+
+\end{document}
