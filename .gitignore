@@ -127,3 +127,5 @@ figures/make_figure/ch6/circs/tomo/circuits.synctex.gz
 chapters/ch5-k_copy_rb.aux
 chapters/ch6-towards_qem.aux
 
+figures/make_figure/ch6/__pycache__/fig_helper.cpython-312.pyc
+figures/make_figure/ch6/__pycache__/graph_style.cpython-312.pyc
