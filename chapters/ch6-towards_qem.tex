@@ -174,11 +174,12 @@ $$ \langle \hat{O} \rangle = \frac{1}{S} \left(\sum_{i=1}^{S_{id}} o_i + \sum_{j
 where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement outcome from the ideal and error states respectively, with $S = S_{id} + S_{err}$. The bias in the measured expectation value from the ideal is then given by contributions from the samples $S_{err}$. An ideal QEM algorithm would flag these error samples, and remove them from the final average, resulting in a bias free expectation value using the restricted samples $S_{id}$.\\
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
+    \noindent\includegraphics[width=0.5\linewidth]{figures/pdf_figure/ch6/qem_schem.pdf
         }
     \end{center}
     \caption{
     \todo{Figure: unmitigated vs mitigated expectation value, showing how bias is reduced at the expense of more samples.}
+    $\rho = 0.1\rho_\mathrm{id}+0.9 \rho_\mathrm{err}$. Blue curve is PDF for $N$ shots, green is PDF for ideal shots, with $N_\mathrm{id} = 0.1N$.
         }
     \label{fig:qem}
 \end{figure}
