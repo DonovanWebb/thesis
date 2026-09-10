@@ -3,75 +3,107 @@
 % \chapter{Future Directions: Hybrid Quantum Control and Error Mitigation}
 \label{ch:QEM}
 \minitoc
-\todo{Keep in mind: Want to make clear that this is future work, and not specifically QEM on CV!}
-Suggested rough intro: 
+\todo{Keep in mind: Want to make clear that this is future work, and not
+specifically QEM on CV!}\\
 Having established and characterised the experimental
 platform and demonstrated its application to \emph{k-copy} randomised
 benchmarking, this chapter considers future research goals utilising the
-multi-qubit array, and control over both the discrete qubits subsystems, as well
-as the continuous bosonic motional modes. In broad terms, we are interested in
-including the motional modes as computational resources, following recent
+multi-qubit arrays enabled through the \emph{NPL} trap (section~\ref{sec:trap}),
+the single addressing system (section~\ref{sec:single_addressing}), and
+the developed control over both the discrete qubits, as well
+as the continuous motional modes. 
+Following on from recent
 progress in spin-conditioned bosonic operations demonstrated within our
-group~\cite{bazavan_squeezing_2024,saner_generating_2024, bazavan_thesis, saner_thesis, shinbrough_applications_2026}. In
-section~\ref{sec:CVQC} we estabilish a gateset required for continuous-variable
-control of the ion motion, and demonstrate the generation of a squeezed state on
-the new apparatus.\\
-The second half of this chapter considers an error mitigation technique applicable to both discrete and continuous systems.
-Simulation and computation utilising both discrete and continuous resources
-has been proposed to offer advantages over fully discrete systems due to
-resource scaling...~\cite{}. Demonstrations include~\cite{saner_real-time_2025,
-feynman}.
-However, to extract faithful results, we must reduce the impact of errors. We
-explore in section~\ref{sec:virtual_distillation}~\cite{virtual_cooling, balint, huggins} the error mitigation technique
-virtual distillation, which has applications on both
-discrete~\cite{huggins_virtual_2021,google} and continuous
-systems~\cite{}\todo{virtual cooling}\footnote{In fact, the intial proposal of virtual cooling was on a continuous system}. This section begins with the theory
-behind virtual distillation, and two protocols for its application. We then
-provide initial demonstrations of this protocol applied to a
-discrete-variable only system, and explore the performance under both local
-depolarising and under the correlated noise due to a common fluctuating control
-field, explored in detail in chapter~\ref{ch:k-copy}. We end this chapter with
-an outlook of how VD will be applied to larger system sizes, including the ultimate goal of
-application to hybrid systems.
+group~\cite{bazavan_squeezing_2024,saner_generating_2024, bazavan_thesis,
+saner_thesis, shinbrough_applications_2026}, we are interested in developing the
+required control to utilise multiple qubits and motional modes for computation
+and simulation.\\
+In section~\ref{sec:CVQC} we estabilish a set of unitary operations required for
+universal continuous-variable
+control of the ion motion and discuss the extensions to hybrid spin-oscillator
+systems. We outline the method we use to generate such spin-oscillator
+interactions experimentally, and demonstrate the generation of a squeezed state
+on the new apparatus. We then outline the next steps required for demonstrating
+the remaining single- and two-mode interactions, and the possible experiments
+this will enable. \\
+The second half of this chapter considers an error mitigation technique
+applicable to both discrete and continuous systems. Developing this, and
+associated methods on our trapped ion platform will allow substantial reductions
+of certain errors, with significantly less resources required than full error
+correction. We give a short introduction to the purpose of quantum error
+mitigation, followed by an outline of virtual
+distillation~\cite{cotler_quantum_2019,koczor_exponential_2021,huggins_virtual_2021}
+--- the specific method considered here.
+ We provide an initial demonstrations
+of this protocol applied to a discrete-variable only system, and explore the
+performance under both local depolarising and correlated noise due to a common
+fluctuating control field (see section~\ref{sec:common_noise} for details).\\  
+We conclude this chapter with a discussion on the application of virtual
+distillation to hybrid systems, presenting a scalable method within reach of our
+apparatus.
 
 \section{Continuous-Variable Control in Trapped Ions}
 \label{sec:CVQC}
-\todo{Short summary of section}
-One paragraph on why this apparatus is well placed for this work.
-\todo{this section develops the CV gateset that is a prerequisite for hybrid QEM, without yet performing error mitigation on it}
-\subsection{Motivation}
-\todo{One paragraphs on what is CV, and why it is interesting. One paragraph on its conception in ITQC. One paragraph on why error mitigation in this framework is important.}
+\todo{One paragraphs on what is CV, and why it is interesting. One paragraph on its conception in ITQC. }
+- CV offers an alternative strategy for universal computation, utilising oscillators, termed \emph{qumodes}~\cite{}\todo{Nice to get original ref here}, as the fundamental quantum object, rather than qubits. qumodes have large Hilbert spaces... Photonic platform has explored this for a while~\cite{}\todo{Photonic review citations}.\\
+- Although qubit control is mature on trapped ion platform, there has only recently been a spike of interest in developing continuous variable control on the collective motional modes of the ions~\cite{}\todo{Big citation dump here}\\
+- Benefit of using trapped ions for CV is that we have access to CV unitaries via spin-oscillator coupling via laser field, have long coherence times.\\
+- This highlights an extension, the trapped ion platform is an ideal hybrid system --- we could store information in both qubits and qumodes, and using an over-complete gate set, we may efficiently decompose circuits to utilise both subsystems~\cite{liu_hybrid_2026}. In the lab scale, this also offers the opportunity to access larger Hilbert spaces, without solving the problem of scaling the trapped ion system to QCCD type architectures (probably best left to companies) with orders of magnitude more qubits.\\
+- The apparatus developed in this thesis is a good fit for exploring and scaling CVQC in trapped ions as we have access to:\\
+    - Multiple qubits\\
+    - Multiple modes\\
+    - Good motional coherence times\\
+    - Single addressing \\
+    - We will have standing wave for generating strong qubit-oscillator couplings that are non-linear in ladder operators.\\
+
 \subsection{Theory}
     \subsubsection{Computing on a Hybrid System}
-    How information is stored in oscillator and spin, and retrieved via spin?\\
     Summary from a couple of reviews (Liu?)\\
+    - Intro representations of a mode. Number and quadrature, mention phase space, wigner, others.\\
+    - For CV gateset need Gaussian and at least one non-Gaussian operation (c.f. Clifford and non-Clifford gates), Wigner negativity. See table III.1 in Liu.\\
+    - Define gaussian as at most quadratic in $x$ and $p$.\\
+    - Freedom to choose the native operations, we present a particularly accessible set given light-matter interactions available on trapped ions. This is a cubic instruction set (Can expand details from Liu III.E.2). \\
+    - Quick overview of the interactions and where we have demonstrated them. Could give flow fields for single-mode operators (could be a nice figure, and I like that view).\\
     \begin{table}
         \begin{center}
-        \begin{tabular}{|l|l|l|l|l|l|}
+        \renewcommand{\arraystretch}{1.15}
+        \begin{tabular}{|r|c|c|c|c|c|c|}
             \hline
-            Gate                & $H_\mathrm{osc}$  & Gaussian  &modes num. & $\sigma$  & $m$  \\
-            \hline
-            Displacement        & $a+a^\dagger$     & yes       & 1         & $\sigma_x$& 0 \\
-            Squeezing           & $a+a^\dagger$     & yes       & 1         & $\sigma_z$& 1 \\
-            two-mode squeezing  & $a+a^\dagger$     & yes       & 2         & $\sigma_z$& 1 \\
-            dispersive          & $a+a^\dagger$     & yes       & 1         & $\sigma_z$& 1 \\
-            beam splitter       & $a+a^\dagger$     & yes       & 2         & $\sigma_z$& 1 \\
-            3rd order squeezing & $a+a^\dagger$     & no        & 1         & $\sigma_x$& 2 \\
+            &&&&
+            \multicolumn{3}{c|}{Two-SDF method} \\
+            \cline{5-7}
+            Interaction name    & Oscillator $H$                                & Gauss.           &$N_\mathrm{osc}$      & $m$& $\hat\sigma$ & $\Omega$ \\
+            \hline                                                                                                 
+            Displacement        & $a e^{i\phi}+a^\dagger e^{-i\phi}$            & \checkmark       & 1         & - & $\hat\sigma_x$ & $\Omega_\alpha$\\
+            Parity              & $aa^\dagger e^{i\phi}+a^\dagger a e^{-i\phi}$ & \checkmark       & 1         & +1 & $\hat\sigma_z$&$\Omega_2$\\
+            Beam splitter       & $ab^\dagger e^{i\phi}+a^\dagger b e^{-i\phi}$ & \checkmark       & 2         & +1 & $\hat\sigma_z$&$\Omega_2$\\
+            Squeezing           & $a^2 e^{i\phi}+a^{\dagger 2} e^{-i\phi}$      & \checkmark       & 1         & -1 & $\hat\sigma_z$&$\Omega_2$\\
+            Two-mode squeezing  & $ab e^{i\phi}+a^\dagger b^\dagger e^{-i\phi}$ & \checkmark       & 2         & -1 & $\hat\sigma_z$&$\Omega_2$\\
+            Trisqueezing        & $a^3 e^{i\phi}+a^{\dagger 3} e^{-i\phi}$      &\text{\sffamily X}& 1         & -2 & $\hat\sigma_x$&$\Omega_3$\\
             \hline
         \end{tabular}
         \end{center}
-        \caption{\todo{Gateset, need to check factors and phases for all gates. Check if Hermitian!}
+        \caption{
+            A suggested set of unitary interactions to compose a universal gate set for continuous variable computation. Using the protocol presented in reference~\cite{sutherland_universal_2021}, here termed the ``Two-SDF'' method, we show the required relative detuning setting, $m$, and the resulting spin conditioning, $\hat\sigma$, and coupling strength $\Omega$ of the resulting interaction. $\Omega_\alpha$ is the typical SDF strength given by equation~\ref{eqn:}\todo{ref eqn in SDF theory sec}. The other coupling strengths are found via the 2nd and 3rd terms of the Magnus expansion: $\Omega_2=2\Omega_\alpha\Omega_{\alpha'}/\Delta$, $\Omega_3=2\Omega_{\alpha}^2\Omega_{\alpha'}/\Delta^2$.
             }
         \label{tab:state_prep_parameters}
     \end{table}
     \subsubsection{Gate Implementation}
-    Two-SDF toolkit from TS+RS\\
-    Could also mention SW and higher order S.B. approaches.\\
-    Magnus expansion\\
-    \todo{point to gateset table of how to generate interaction using TS+RS method}
+    - Now how do we realise these interactions?
+    - Present concept of Two-SDF toolkit from TS+RS\\
+    - Give Magnus expansion, and commutations (check SS and OB thesis theory sections)\\
+    - This then gives $m$, $\Delta$, and $\Omega$ (point to table).\\
+    - Give short contrast with SB method. \\
+    - Here can also mention SW, cite recent ETH tweezer paper, and that we have even sharper gradient. \\
+
     \subsubsection{Readout}
-    Define state for CV.\\
-    Define characteristic and Wigner function.\\
+    - We don't have direct access to readout motion.\\
+    - So instead we map motional state to qubit.\\ 
+    - We can generally do this via Hadamard test (generalise to U in figure) for phase kickback on spin \\
+    - For full state tomography, we can measure characteristic function~\cite{}\todo{cite Fluhman, OB, SS thesis}.\\
+    - Give circuit for tomography using SDFs. \\
+    - Define Characteristic function.\\
+    - Can then compute Wigner or other representation of choice either through direct Fourier transform, or through ML methods (theorist we spoke to?)
     \begin{equation}
     \mathcal{P}_a = \frac{1+Re(\xi(\beta))}{2},
     \end{equation}
@@ -100,9 +132,14 @@ One paragraph on why this apparatus is well placed for this work.
 % \end{figure}
 \subsection{Experimental Demonstration}
     \todo{Short description of what we will show}
+    - Frame as demo of squeezing with added complexity of using single addressing system
+    - Point to motional coherence time. Was dephasing dominated, improved by grounding \\
+    - Demonstrate squeezing of motion conditioned on spin.\\
+    - One ion, one motional mode.\\
+    - Using single addressing system\\
 \subsubsection{Two Spin Dependent Forces}
-    Experimental sequence, hardware involved, thermal drifts\\
-    Four tones on one AOM.\\
+    - Experimental sequence, state prep, doppler, SBC, ramped 4 tones, SDF.\\
+    - Four tones on one AOM. How we set and calibrate phases. Maybe noise sidebands on AOM due to non-linearity. Balancing power.\\
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=0.5\linewidth]{figures/pdf_figure/ch6/four-tones.pdf
@@ -116,6 +153,23 @@ One paragraph on why this apparatus is well placed for this work.
     \label{fig:2-SDF}
 \end{figure}
 \subsubsection{Squeezing}
+    - Detuning and power selected (only 40 uW!), and predicted strength of interaction?\\
+    - Check if ramp is sufficient by looking at $\sigma_z$ dependence.\\
+    - Calibrate probe SDF and get strength.\\
+    - Calculate expected squeezing strength.\\
+    - Show char function of squeezed state.\\
+    - Show r vs duration, with detail of the ramp duration being accounted for.\\
+    - Discuss observed strength vs expected strength.\\
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/sqz_data.pdf
+        }
+    \end{center}
+    \caption{
+        \todo{Figure: Probe SDF calibration}\\
+        }
+    \label{fig:probe_sdf}
+\end{figure}
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/sqz_data.pdf
@@ -127,9 +181,8 @@ One paragraph on why this apparatus is well placed for this work.
         }
     \label{fig:squeezing}
 \end{figure}
-    Experimental sequence, dephasing dominated, improved by grounding \\
 \subsection{Outlook}
-    Some next steps for demonstrating full CV control\\
+    - Some next steps for demonstrating full CV control on $>1$ qubit and on $>1$ mode.
 
 
 \section{Virtual Distillation}
