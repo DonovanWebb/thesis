@@ -84,20 +84,20 @@ One paragraph on why this apparatus is well placed for this work.
         }
     \end{center}
     \caption{
-        \todo{Figure: circuit diagram for tomography. }
+        State tomography for a single mode through measurement of an ancilla qubit. (a) Displays the Hadamard test method for measuring the characteristic function, $\chi(\beta)$, of the oscillator using a displacement controlled by the qubit. The real and imaginary part of $\chi(\beta)$ is recovered through the application of either the identity, or the $S^\dagger$ gate before the displacement, respectively. (b) An equivalent measurement of $\chi(\beta)$ using native single qubit rotations and spin-dependent forces conditioned on $\sigma_x$ (represented by the diamond control symbol). 
         }
     \label{fig:tomography}
 \end{figure}
-\begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/tomography_sims.pdf
-        }
-    \end{center}
-    \caption{
-        \todo{Figure: characteristic function of tri-sqz state Fock state. TODO: verify axis convention with GC }
-        }
-    \label{fig:char_fn}
-\end{figure}
+% \begin{figure}
+%     \begin{center}
+%     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/tomography_sims.pdf
+%         }
+%     \end{center}
+%     \caption{
+%         \todo{Figure: characteristic function of tri-sqz state Fock state. TODO: verify axis convention with GC. Is this figure needed? }
+%         }
+%     \label{fig:char_fn}
+% \end{figure}
 \subsection{Experimental Demonstration}
     \todo{Short description of what we will show}
 \subsubsection{Two Spin Dependent Forces}
@@ -110,17 +110,20 @@ One paragraph on why this apparatus is well placed for this work.
     \end{center}
     \caption{
     \todo{Figure: detuning for four tones, Z measurement with ramp}
+    The two bichromatic fields required for generating non-linear motional interactions via the two-SDF method. Motional mode frequency is given by $\omega_m$, the first SDF is detuned by $\delta$, and the second is detuned by $m\delta$, with the desired interaction selected by varying $m$.
+    \todo{ change symbol m, and swap side of 2nd SDF.}
         }
     \label{fig:2-SDF}
 \end{figure}
 \subsubsection{Squeezing}
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/sqz_data.pdf
         }
     \end{center}
     \caption{
         \todo{Figure: Sqz characteristic function with varying duration \\}
+        Demonstration of the squeezing interaction through the two-SDF method. (a) The characteristic function, $\mathrm{Re}\left(\chi\left(\beta\right)\right)$, of the squeezed state measured using the state tomography method given by figure~\ref{fig:tomography}. (b) The simulated state taking fit parameters inferred by equation~\ref{eqn:sqz_char}. (c) The fitted squeezing parameter, $r$, as a function of two-SDF pulse duration.
         }
     \label{fig:squeezing}
 \end{figure}
@@ -179,7 +182,8 @@ where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement
     \end{center}
     \caption{
     \todo{Figure: unmitigated vs mitigated expectation value, showing how bias is reduced at the expense of more samples.}
-    $\rho = 0.1\rho_\mathrm{id}+0.9 \rho_\mathrm{err}$. Blue curve is PDF for $N$ shots, green is PDF for ideal shots, with $N_\mathrm{id} = 0.1N$.
+    $\rho = 0.1\rho_\mathrm{id}+0.9 \rho_\mathrm{err}$. Blue curve is PDF for $N$ shots, green is PDF for ideal shots, with $N_\mathrm{id} = 0.1N$.\\
+    A schematic explanation of the goal of quantum error mitigation. Deviations of the measured expectation value of an observable $\hat O$ on a noisy state, $\rho$, and on the ideal state $\rho_\mathrm{id}$ may be separated into components originating from shot noise, and from an underlying bias. Shot noise sets the variance of the distribution of estimated expectation values, while the underlying bias shifts the center of the distribution. Error mitigation reduces bias at the cost of increasing variance. Here we demonstrate this by the ideal QEM method introduced in section~\ref{sec:QEM}. The underlying noisy state is given by $\rho = (1-p)\rho_\mathrm{id} + p\rho_\mathrm{err}$. $N$ shots are taken measuring $\mathrm{Tr}(\hat O \rho)$. The ideal QEM flags and discards shots originating from $\rho_\mathrm{err}$, leaving $(1-p)N$ shots of the ideal state to estimate $\langle \hat O \rangle$.
         }
     \label{fig:qem}
 \end{figure}
@@ -236,25 +240,16 @@ Next, need to derive scaling of bias with copy number. And finally, discuss the 
     Ancilla method\\
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=0.6\linewidth]{figures/make_figure/ch6/circs/ancilla/circuits.pdf
+    \noindent\includegraphics[width=1.0\linewidth]{figures/pdf_figure/ch6/virdist_circuits.pdf
         }
     \end{center}
     \caption{
         \todo{Figure: circuit diagram for ancilla based virtual distillation, Hadamard test, derangement operator by CSwap}
+        Two circuits for implementing virtual distillation. (a) Hadamard test method using controlled derangement, $S_k$, over $k$ copies, and controlled observable, $\hat O$, applied on one copy. The ancilla qubit is measured to extract $\mathrm{Tr}(\hat O\rho^k)$. Repeating the circuit without the controlled observable measures normalisation factor, $\mathrm{Tr}(\rho^k)$, used to recover the virtually purified result, $\langle \hat O\rangle_\mathrm{VD}$. (b) Two-copy implementation using a $B$-circuit, here decomposed into two entangling gates and single qubit phase gates. Measurement of both qubits in the computational basis, and classical postprocessing recovers $\mathrm{Tr}(Z\rho^2)$ and purity, $\mathrm{Tr}(\rho^2)$, used to recover $\langle Z \rangle_\mathrm{VD}$.
         }
-    \label{fig:virdist_ancilla}
+    \label{fig:virdist_circuit}
 \end{figure}
     B-matrix protocol\\
-\begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=0.5\linewidth]{figures/make_figure/ch6/circs/bmatrix/circuits.pdf
-        }
-    \end{center}
-    \caption{
-        \todo{Figure: circuit diagram for B matrix}
-        }
-    \label{fig:bmatrix}
-\end{figure}
         If we can diagonalise both S and SO.
         Can apply transversally\\
     On hybrid systems\\
@@ -286,16 +281,6 @@ Next, need to derive scaling of bias with copy number. And finally, discuss the 
 \todo{Short description of following results.}
 \subsubsection{Implementation}
 Protocol, circuit diagram, hardware involved.
-\begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
-        }
-    \end{center}
-    \caption{
-    \todo{Figure: B matrix decomposition.}
-        }
-    \label{fig:bmatrix_decomp}
-\end{figure}
 \subsubsection{B-matrix Calibration}
     pi-4 gates, single addressing\\
 \begin{figure}
@@ -310,18 +295,19 @@ Protocol, circuit diagram, hardware involved.
         }
     \label{fig:bmatrix_calib}
 \end{figure}
-\subsubsection{Injecting Spatial Correlations}
-    two copy, B matrix demonstration\\
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/noise_injection.pdf
         }
     \end{center}
     \caption{
-        \todo{Figure: Cicruit diagram of RB + VD, exp data for noise floor for two copy B-matrix, with and without spatial correlations}
-        }
+        \todo{Figure: Cicruit diagram of RB + VD, exp data for noise floor for two copy B-matrix, with and without spatial correlations}\\
+        Verifying the performance of virtual distillation under either dominant local depolarising or correlated errors. Structured errors were injected through a fixed frequency detuning of the 729-nm laser, and the application of a sequence of random Clifford gates. In the case that identical Clifford gates, $C_{i,L} = C_{i,R}$, are applied on both qubits, the detuning error is twirled to a \emph{common noise} channel, while in the case that Clifford gates are sampled independently for both copies, the detuning is twirled to local depolarisation channels. The local and correlated injected error-per-Clifford for both regimes are quantified using \emph{k-copy} RB. Panel (a) shows the circuit of injected errors followed by the $B$-circuit. Panel (b) shows the effective reduction in error-per-Clifford by applying the virtual distillation circuit. The green points correspond to the raw single-qubit decay due to the physical errors, the solid green line is a fit of this decay to measure a total error-per-Clifford. The red and blue points correspond to the error mitigated $Z$ observables for the dominant correlated errors and local depolarising errors respectively. The dotted lines correspond to the expected error mitigated single qubit decays inferred by the model given in equation~\ref{eqn:vd_correlated}, and the error-per-Cliffords measured by \emph{k-copy} RB.
+               }
     \label{fig:bmatrix_injection}
 \end{figure}
+\subsubsection{Injecting Spatial Correlations}
+    two copy, B matrix demonstration\\
     Analysis of this data.
 
 \section{Proposed experiments and technical requirements}
@@ -342,7 +328,8 @@ How CVDV and VD combine.\\
         }
     \end{center}
     \caption{
-        \todo{Figure: Fredkin gate on oscillator, and how to compose derangement transversally.}
+        \todo{Figure: Fredkin gate on oscillator, and how to compose derangement transversally.}.
+        Proposed circuit for applying virtual distillation to a hybrid system. Using the ancilla method for measuring $\mathrm{Tr}(\hat O \rho^k)$, we may decompose the controlled derangement to the transversal application of Fredkin gates. 
         }
     \label{fig:fredkin}
 \end{figure}
