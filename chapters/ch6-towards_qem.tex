@@ -44,7 +44,7 @@ apparatus.
 
 \section{Continuous-Variable Control in Trapped Ions}
 \label{sec:CVQC}
-\todo{One paragraphs on what is CV, and why it is interesting. One paragraph on its conception in ITQC. }
+\todo{One paragraphs on what is CV, and why it is interesting. One paragraph on its conception in ITQC. }\\
 - CV offers an alternative strategy for universal computation, utilising oscillators, termed \emph{qumodes}~\cite{}\todo{Nice to get original ref here}, as the fundamental quantum object, rather than qubits. qumodes have large Hilbert spaces... Photonic platform has explored this for a while~\cite{}\todo{Photonic review citations}.\\
 - Although qubit control is mature on trapped ion platform, there has only recently been a spike of interest in developing continuous variable control on the collective motional modes of the ions~\cite{}\todo{Big citation dump here}\\
 - Benefit of using trapped ions for CV is that we have access to CV unitaries via spin-oscillator coupling via laser field, have long coherence times.\\
@@ -64,6 +64,7 @@ apparatus.
     - Define gaussian as at most quadratic in $x$ and $p$.\\
     - Freedom to choose the native operations, we present a particularly accessible set given light-matter interactions available on trapped ions. This is a cubic instruction set (Can expand details from Liu III.E.2). \\
     - Quick overview of the interactions and where we have demonstrated them. Could give flow fields for single-mode operators (could be a nice figure, and I like that view).\\
+    - End section by quick discussion on hybrid system, as our generated interactions have spin dependence.\\
     \begin{table}
         \begin{center}
         \renewcommand{\arraystretch}{1.15}
@@ -86,7 +87,7 @@ apparatus.
         \caption{
             A suggested set of unitary interactions to compose a universal gate set for continuous variable computation. Using the protocol presented in reference~\cite{sutherland_universal_2021}, here termed the ``Two-SDF'' method, we show the required relative detuning setting, $m$, and the resulting spin conditioning, $\hat\sigma$, and coupling strength $\Omega$ of the resulting interaction. $\Omega_\alpha$ is the typical SDF strength given by equation~\ref{eqn:}\todo{ref eqn in SDF theory sec}. The other coupling strengths are found via the 2nd and 3rd terms of the Magnus expansion: $\Omega_2=2\Omega_\alpha\Omega_{\alpha'}/\Delta$, $\Omega_3=2\Omega_{\alpha}^2\Omega_{\alpha'}/\Delta^2$.
             }
-        \label{tab:state_prep_parameters}
+        \label{tab:gateset}
     \end{table}
     \subsubsection{Gate Implementation}
     - Now how do we realise these interactions?
@@ -96,12 +97,51 @@ apparatus.
     - Give short contrast with SB method. \\
     - Here can also mention SW, cite recent ETH tweezer paper, and that we have even sharper gradient. \\
 
+    To implement the unitaries given in table~\ref{tab:gateset}, and to retain spin-dependent control of these interactions to fully utilising the large hybrid state space, we use the method developed in reference~\cite{sutherland_universal_2021}. Throughout this chapter we shall term this the ``two-SDF'' method, due to accessing these non-linear bosonic interactions through applying two linear spin-dependent forces, that have non-commuting spin conditioning, simultaneously to a qubit. We shall see that this method is practically convenient due to a common mechanism resulting in all of the desired gates, and that reasonable coupling strengths are accessible with experimentally practical laser powers. \\
+    We shall start with an outline of how this method may effectively drive the above unitaries.
+    Two simultaneous SDFs, here labelled by $SDF_\alpha$, and $SDF_\beta$, are applied relative to motional modes with creation operators $\hat a^\dagger$ and $\hat b^\dagger$, respectively, are given generally by,
+    \begin{align}
+    \label{eqn:two-sdf}
+      \hat H  &= \hat H_\alpha + \hat H_\beta\\
+      &=
+      \frac{\hbar \Omega_\alpha}{2}\sigma_\alpha \left(\hat a e^{i(\delta_\alpha t + \phi_\alpha)} + \hat a^\dagger e^{-i(\delta _\alpha t + \phi )}\right)\\
+      &~+ 
+      \frac{\hbar \Omega_{\beta}}{2}\sigma_{\beta} \left(\hat b e^{i(\delta_\beta t + \phi_\beta)} + \hat b^\dagger e^{-i(\delta_\beta t + \phi_\beta)}\right).
+    \end{align}
+    We consider the case that the spin conditioning of the two SDFs are non-commuting Paulis with, $[\sigma_\alpha,\sigma_\beta] = 2i\epsilon_{\alpha,\beta,\gamma}\sigma_\gamma$, where $\epsilon_{\alpha,\beta,\gamma}$ is the Levi-Civita symbol.
+    Ensuring the commutator is non-zero, we recover an infinite spectra of spin-oscillator dynamics, which we shall make clear by expanding the unitary time propagator by the Magnus expansion~\cite{magnus_exponential_1954}.\\
+    The unitary evolution due to a time dependent Hamiltonian may be written in the ordered, short-time limit as,
+    \begin{equation}
+        U(t) = \lim_{N\rightarrow\infty} e^{\frac{-i}{\hbar}\hat H(t_N)\Delta t}\cdots e^{\frac{-i}{\hbar}\hat H(t_2)\Delta t}e^{\frac{-i}{\hbar}\hat H(t_1)\Delta t} = e^{A(t)},
+    \end{equation}
+    where $\Delta t = t/N$, and $t_n = n\Delta t$, and $A(t)$ is a time dependent exponent, which is expanded in the Magnus construction to,
+    \begin{equation}
+        A(t) = \sum_{k=1}^{\infty} A_k(t).
+    \end{equation}
+    If the Hamiltonian at different times does not commute, then the first three $A_k(t)$ terms are given by,
+    \begin{align}
+        A_1(t) &= \frac{-i}{\hbar}\int_{0}^{t}dt_1 \hat H(t_1)\\
+        A_2(t) &= -\frac{1}{2\hbar^2}\int_{0}^{t}\int_{0}^{t_1}dt_1dt_2 [\hat H(t_1),\hat H(t_2)] \\
+        A_3(t) &= \frac{i}{6\hbar^3}\int_{0}^{t}\int_{0}^{t_1}\int_{0}^{t_2}dt_1dt_2dt_3\ \big(\big[\hat H(t_1),\left[\hat H(t_2),\hat H(t_3)\right]\big]+\big[\hat H(t_3),\left[\hat H(t_2),\hat H(t_1)\right]\big]\big).
+    \end{align}
+    Given the ``two-SDF'' Hamiltonian in equation~\ref{eqn:two-sdf}, we can evaluate $A(t)$ to a chosen order and may define an effective time-independent Hamiltonian for a given time, $T$, yielding $\hat H_\mathrm{eff} = \frac{i\hbar}{T}A(T)$.
+    We can immediately make two simplifying assumptions: first concerns the fast oscillating $A_1$ term. This looks like separate spin dependent phase-space loops originating from the off-resonant SDFs. As these loops close with periodicity $\tau = 2\pi/\Delta$, we may select a gate duration $T$ such that $T=n\tau$, to enforce $A_1(T)=0$. Second, as with the geometric phase gates seen in section~\ref{sec}\todo{phase gate section}, the second order Magnus term contains self-terms that appear as the accumulation of a geometric phase. In the case that this geometric phase acts globally on the system, it can be ignored. If the accumulated phase is spin, or oscillator state dependent, then interesting dynamics may be observed, however these effects are out of the scope of this thesis. With these two assumptions, we may now consider how the to
+    recover the general family of non-linear bosonic interactions given in table~\ref{tab:gateset}\\
+    We set $\phi_\alpha=0$, $\phi_\beta=\phi$, $\sigma_\alpha=\sigma_x$, $\sigma_\beta = \sigma_y$, and $\delta_\beta = m\delta_\alpha$, where $m$ is some integer. Integer $m$ also helps to select durations that both excursions of $A_1$ close.
+    For $m=+1$, we find that the effective Hamiltonian is,
+    \begin{equation}
+        H_\mathrm{eff} = ...
+    \end{equation}
+    \todo{This narrative is a bit tangled. I think potentially there is a simpler way to get to the effective interactions...}
+    
+
+
     \subsubsection{Readout}
     - We don't have direct access to readout motion.\\
     - So instead we map motional state to qubit.\\ 
-    - We can generally do this via Hadamard test (generalise to U in figure) for phase kickback on spin \\
+    - We can generally do this via Hadamard test \todo{(generalise to O in figure, and remove conditional I/S)} for phase kickback on spin \\
     - For full state tomography, we can measure characteristic function~\cite{}\todo{cite Fluhman, OB, SS thesis}.\\
-    - Give circuit for tomography using SDFs. \\
+    - Give circuit for tomography using $O=D(\beta)$, and then using $\sigma_x$ SDFs. \\
     - Define Characteristic function.\\
     - Can then compute Wigner or other representation of choice either through direct Fourier transform, or through ML methods (theorist we spoke to?)
     \begin{equation}
@@ -110,7 +150,33 @@ apparatus.
     \begin{equation}
     \mathcal{P}_a = \frac{1+Im(\xi(\beta))}{2},
     \end{equation}
-\begin{figure}
+
+    Final state readout of the qumode is done through mapping information to an
+    ancilla qubit, followed by typical state-dependent fluorescence, described
+    in section~\ref{sec:}\todo{char sec}. The Hadamard test, shown in
+    figure~\ref{fig:tomography} (a), offers a general method for measuring the
+    expectation of observable $\hat O$ on the oscillator, $\mathrm{Tr}(\hat
+    O\rho_\mathrm{osc})$, via exclusive measurements of the ancilla qubit. Full
+    state tomography in the form of the characteristic function, $\chi =
+    \mathrm{Tr}(D(\beta)\rho_\mathrm{osc})$, may be recovered through
+    conditional displacement operations, i.e. \todo{$\hat O =
+    e^{i\phi}D(\beta)$}, with $\beta$ defined in
+    equation~\ref{}\todo{either point to SDF section, or to above gate impl},
+    and $\phi$ set to either $0$ or \todo{$\pi/2$} to measure either
+    $\mathrm{Re}(\chi)$ or $\mathrm{Im}(\chi)$ respectively. As we have access
+    to the native $\sigma_x$ conditioned spin-dependent force, we may decompose
+    the general Hadamard test to a circuit of native gates, given in
+    figure~\ref{fig:tomography} (b), and first described in
+    reference~\cite{fluhmann_direct_2020}, where the proceeding $I$ or
+    $R_y(\pi/2)$ measure $\mathrm{Re}(\chi)$ or $\mathrm{Im}(\chi)$
+    respectively. The complete description of the oscillator state may now be
+    recovered with arbitrary precision by scanning the complex variable $\beta$.
+    We will keep to the characteristic function representation of the state,
+    however we note that other phase space representations, such as the Wigner,
+    and Q-function may be recovered through $2D$ Fourier transforms of
+    $\chi$~\cite{}\todo{give refs}.
+    
+    \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/tomography.pdf
         }
@@ -138,7 +204,7 @@ apparatus.
     - One ion, one motional mode.\\
     - Using single addressing system\\
 \subsubsection{Two Spin Dependent Forces}
-    - Experimental sequence, state prep, doppler, SBC, ramped 4 tones, SDF.\\
+    - Experimental sequence, give block, or check how we do this in characterisation section. State prep, doppler, SBC, ramped 4 tones, SDF.\\
     - Four tones on one AOM. How we set and calibrate phases. Maybe noise sidebands on AOM due to non-linearity. Balancing power.\\
 \begin{figure}
     \begin{center}
