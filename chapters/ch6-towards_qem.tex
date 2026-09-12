@@ -92,7 +92,7 @@ apparatus.
     \subsubsection{Gate Implementation}
     - Now how do we realise these interactions?
     - Present concept of Two-SDF toolkit from TS+RS\\
-    - Give Magnus expansion, and commutations (check SS and OB thesis theory sections)\\
+    - Give Magnus expansion, and commutations (check SS and OB thesis theory sections)\todo{I think this should be a citation and an appendix}
     - This then gives $m$, $\Delta$, and $\Omega$ (point to table).\\
     - Give short contrast with SB method. \\
     - Here can also mention SW, cite recent ETH tweezer paper, and that we have even sharper gradient. \\
@@ -110,6 +110,7 @@ apparatus.
     \end{align}
     We consider the case that the spin conditioning of the two SDFs are non-commuting Paulis with, $[\sigma_\alpha,\sigma_\beta] = 2i\epsilon_{\alpha,\beta,\gamma}\sigma_\gamma$, where $\epsilon_{\alpha,\beta,\gamma}$ is the Levi-Civita symbol.
     Ensuring the commutator is non-zero, we recover an infinite spectra of spin-oscillator dynamics, which we shall make clear by expanding the unitary time propagator by the Magnus expansion~\cite{magnus_exponential_1954}.\\
+    \todo{Move following details to appendix.}
     The unitary evolution due to a time dependent Hamiltonian may be written in the ordered, short-time limit as,
     \begin{equation}
         U(t) = \lim_{N\rightarrow\infty} e^{\frac{-i}{\hbar}\hat H(t_N)\Delta t}\cdots e^{\frac{-i}{\hbar}\hat H(t_2)\Delta t}e^{\frac{-i}{\hbar}\hat H(t_1)\Delta t} = e^{A(t)},
@@ -137,6 +138,7 @@ apparatus.
 
 
     \subsubsection{Readout}
+    \label{sec:tomography}
     - We don't have direct access to readout motion.\\
     - So instead we map motional state to qubit.\\ 
     - We can generally do this via Hadamard test \todo{(generalise to O in figure, and remove conditional I/S)} for phase kickback on spin \\
@@ -155,8 +157,8 @@ apparatus.
     ancilla qubit, followed by typical state-dependent fluorescence, described
     in section~\ref{sec:}\todo{char sec}. The Hadamard test, shown in
     figure~\ref{fig:tomography} (a), offers a general method for measuring the
-    expectation of observable $\hat O$ on the oscillator, $\mathrm{Tr}(\hat
-    O\rho_\mathrm{osc})$, via exclusive measurements of the ancilla qubit. Full
+    expectation of observable $\hat O$ on the oscillator, $\mathrm{Tr}(\hat O\rho_\mathrm{osc})$, 
+    via exclusive measurements of the ancilla qubit. Full
     state tomography in the form of the characteristic function, $\chi =
     \mathrm{Tr}(D(\beta)\rho_\mathrm{osc})$, may be recovered through
     conditional displacement operations, i.e. \todo{$\hat O =
@@ -198,26 +200,93 @@ apparatus.
 % \end{figure}
 \subsection{Experimental Demonstration}
     \todo{Short description of what we will show}
-    - Frame as demo of squeezing with added complexity of using single addressing system
-    - Point to motional coherence time. Was dephasing dominated, improved by grounding \\
-    - Demonstrate squeezing of motion conditioned on spin.\\
-    - One ion, one motional mode.\\
-    - Using single addressing system\\
-\subsubsection{Two Spin Dependent Forces}
-    - Experimental sequence, give block, or check how we do this in characterisation section. State prep, doppler, SBC, ramped 4 tones, SDF.\\
-    - Four tones on one AOM. How we set and calibrate phases. Maybe noise sidebands on AOM due to non-linearity. Balancing power.\\
-\begin{figure}
+    % - Frame as demo of squeezing with added complexity of using single addressing system
+    % - Point to motional coherence time. Was dephasing dominated, improved by grounding \\
+    % - Demonstrate squeezing of motion conditioned on spin.\\
+    % - One ion, one motional mode.\\
+    % - Using single addressing system\\
+    In our group, we have previously demonstrated higher order
+    squeezing~\cite{bazavan_squeezing_2024}, superpositions of non-linear
+    bosonic states~\cite{saner_generating_2024},
+    beam-splitter~\cite{saner_real-time_2025}, and two-mode squeezing
+    interactions. However, due to the constraints of the previous experimental
+    apparatus we were limited to global addressing fields, limiting the
+    application of these hybrid interactions to one- and two-qubits. Here we
+    demonstrate the creation and characterisation of a squeezed state on the
+    newly constructed apparatus, described in chapter~\ref{ch:apparatus},
+    utilising the single-qubit addressing system. Single addressing both
+    increases the power efficiency of the interactions, and allows the control
+    to select which qubit is used to couple to the motion --- this provides a
+    scalable route to generating hybrid interactions on larger qubit, and qumode
+    registers.\\
+    
+    \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=0.5\linewidth]{figures/pdf_figure/ch6/four-tones.pdf
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/four_tones.pdf
         }
     \end{center}
     \caption{
-    \todo{Figure: detuning for four tones, Z measurement with ramp}
-    The two bichromatic fields required for generating non-linear motional interactions via the two-SDF method. Motional mode frequency is given by $\omega_m$, the first SDF is detuned by $\delta$, and the second is detuned by $m\delta$, with the desired interaction selected by varying $m$.
-    \todo{ change symbol m, and swap side of 2nd SDF.}
+    The quadchromatic field required for generating non-linear motional interactions via the two-SDF method. (a) For single-mode interactions, both SDF fields are detuned around the sidebands of the same motional mode, $\omega_\alpha$. Integer $m$ is varied to select the desired interaction. (b) For two-mode interactions, each SDF is detuned from a different motional mode.
+    \todo{If want ramp have rid 120238, 119279}
         }
     \label{fig:2-SDF}
 \end{figure}
+\subsubsection{Two Spin Dependent Forces}
+    The individual SDFs are generated by the same bichromatic field method
+    described in section~\ref{sec:sdf} --- i.e. simultaneous off-resonant blue-
+    (BSB) and red-sidebands (RSB) of motional mode $\omega_\alpha$ are applied.
+    As such, we require four optical fields with, frequency, phase, and
+    amplitude control. The four required frequencies of the ``quadchromatic"
+    field are shown schematically in figure~\ref{fig:2-SDF} with respect to the
+    carrier frequency, $\omega_0$. Here, purple lines correspond to
+    SDF$_\alpha$, and orange lines to SDF$_\beta$. In this example we show the
+    SDFs acting on a shared motional mode, but in general they may act on
+    different modes. \todo{Add colour to 2-sdf plot, could also make two
+    examples for BS and sqz?} 
+    Similar to the generation of the bichromatic field, we may produce this
+    quadchromatic field through the application of four RF tones onto a
+    single-pass (SP) AOM. These tones are generated using an arbitrary waveform
+    generator (AWG)\footnote{\emph{Sinara Phaser} board}. We cannot control the
+    absolute optical phase at the ion, however we can set relative phases
+    between the four fields by applying phase offsets between the RF tones with
+    respect to some fixed time point.
+    As discussed in section~\ref{sec:sdf}, the spin phase of the SDFs is set by
+    the absolute phase of the RSB and BSB, $\hat\sigma_\phi =
+    \cos(\phi_s)\hat\sigma_x + \sin(\phi_s)\hat\sigma_y$. To ensure we saturate
+    the non-commutativity of the spin conditioning of the two SDFs, we require
+    $\pi/2$ phase difference between the two spin phases,
+    \begin{equation}
+        \phi_{\alpha, s} - \phi_{\beta,s} = \frac{\phi_{\alpha,\mathrm{RSB}}+\phi_{\alpha,\mathrm{BSB}}}{2}-\frac{\phi_{\beta,\mathrm{RSB}}+\phi_{\beta,\mathrm{BSB}}}{2}=\frac{\pi}{2}.
+    \end{equation}
+    In the following demonstration we set $\phi_{\alpha,\mathrm{RSB}}=
+    \phi_{\alpha,\mathrm{BSB}}=\pi/2,\phi_{\beta,\mathrm{RSB}}=\phi_{\beta,\mathrm{BSB}}=0$,
+    however we note that for composing multiple hybrid operations into a
+    circuit, the resulting motional phase of the SDFs can lead to further
+    constraints on the chosen RSB and BSB phases.\\
+    The intensity of the quadchromatic field is ramped on and off with a rise
+    envelope of $\sin^2(\pi t/(2t_\mathrm{ramp}))$ applied via the AWG, where
+    $t_ramp$ is the ramp duration. This ramp suppresses excess off-resonant
+    excitations of the $A_1$ phase loop term given in the previous section, and
+    so we must select its duration based on the characteristic scale,
+    $\frac{1}{\Delta}$. Here, we set the base detuning,
+    $\Delta=50~\unit{\kilo\hertz}$, and use a ramp duration
+    $t_\mathrm{ramp}=40~\unit{\micro\second}$.\\
+    We aim to balance the power in each of the 4 tones. This may be calibrated
+    using an optical pick-off before addressing the ion, directed onto a fast
+    photodiode, and measuring the beatnote contrast when applying any pair of
+    tones. In the following squeezing demonstration, we balance the tones
+    comprising the individual SDFs, but do not explicitly balance the power
+    between SDFs, as the desired interaction scales as
+    $\Omega_\alpha\Omega_\beta$, any imbalance leads to non-optimal interaction
+    efficiency, but unlike imbalance of the RSB and BSB, does not increase
+    coherent error terms.
+    We observe that the duty cycle of the SP AOM can dramatically shift the
+    power imbalance between all four tones, and so we take care ensuring that
+    the total RMS power to drive one-, two-, and four-tones is the same as for
+    the idle (no optical pulse) setting of the SP AOM, thus the only transient
+    power drop is that of the ramp sequence. \\
+    
+
 \subsubsection{Squeezing}
     - Detuning and power selected (only 40 uW!), and predicted strength of interaction?\\
     - Check if ramp is sufficient by looking at $\sigma_z$ dependence.\\
@@ -226,6 +295,36 @@ apparatus.
     - Show char function of squeezed state.\\
     - Show r vs duration, with detail of the ramp duration being accounted for.\\
     - Discuss observed strength vs expected strength.\\
+    - tickling calibration
+
+    We demonstrate the effective squeezing interaction on a single ion and radial
+    motional mode initiated in the vacuum state. We are limited to using the
+    radial modes due to the geometry single addressing system with respect to
+    the trap. We use the upper radial mode with frequency,
+    $\omega_{upper}=XX~\unit{\mega\hertz}$, and motional coherence given in
+    section~\ref{sec:motional_coherence}.
+    Squeezing is implemented by the
+    quadchromatic field, with total beam power of $40~\unit{\micro\watt}$, and
+    $m=-1$. The state is characterised by the tomography method given in
+    section~\ref{sec:tomography}. The tomography SDF strength,
+    $\Omega_\mathrm{split}$ is independently calibrated through on-resonance
+    splitting of a vacuum state to find, $\Omega_\mathrm{split}=2\pi
+    3.6(2)~\unit{\kilo\hertz}$. This strength is accounted for in the
+    displacement duration, $t_\mathrm{split}$, to provide the correct scaling
+    factor for the characteristic function axes, $t_\mathrm{split} =
+    \frac{|\beta|}{2\Omega_\mathrm{split}}$. 
+    The pulse sequence for squeeze state generation and characterisation is
+    given in figure~\ref{fig:squeeze_pulses}, and the resulting real part of the
+    characteristic function is shown in figure~\ref{fig:squeezing} (a).
+    The plot corresponds to scanning over a $35\times 35$ grid of displacement
+    values, $\beta$, each point corresponding to the average over $300$ samples.
+    Fitting the data to equation~\ref{eqn:sqz_char} we may extract both the
+    squeezing axis, $\phi$, and the strength, $r$. An example fit is shown in
+    panel (b), with extracted $r=0.85(2)$, for a quadchromatic FWHM pulse
+    duration of $t_\mathrm{sqz}=190~\unit{\micro\second}$. Panel (c) displays
+    the squeezing strength as a function $t_\mathrm{sqz}$, showing the expected
+    linear relationship between squeezing duration and $r$.\\
+
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/sqz_data.pdf
@@ -248,7 +347,17 @@ apparatus.
     \label{fig:squeezing}
 \end{figure}
 \subsection{Outlook}
-    - Some next steps for demonstrating full CV control on $>1$ qubit and on $>1$ mode.
+    Hybrid systems offer access to large Hilbert spaces, even with modest ion numbers.
+    In this section we outlined a convenient set of native interactions for universal hybrid qubit-qumode gates. We experimentally demonstrate the squeezing interaction generated via the ``two-SDF'' method of
+    reference~\cite{sutherland_universal_2021}. This demonstration replicated previous work using the ``two-SDF'' method~\cite{bazavan_squeezing_2024}, however now shown on the newly built apparatus utilising a single-ion addressing system, and applied to the radial motional modes.\\ 
+    Enabled by the single-addressing, and improved motional coherence times of
+    the new system, we are particularly interested in exploring short hybrid
+    circuits composed of multiple interactions acting on an array of qubits and
+    qumodes. Specifically, we are interested in utilising the hybrid system with
+    increased robustness against errors through the use of quantum error mitigation methods applicable to both 
+    spin and oscillator subsystems. We outline one such method in the next section, with a preliminary demonstration on the spin subsystem.\\
+    \todo{Standing wave extension}\\
+    \todo{Limitations: need to SBC all modes we want to use; readout of mode is expensive due to requiring map to spin;}
 
 
 \section{Virtual Distillation}
