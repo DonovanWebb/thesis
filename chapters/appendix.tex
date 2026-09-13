@@ -173,3 +173,30 @@ The same intermediate asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty} = 0.5
 The difference in correlated decay structure due to \emph{common}, depolarising, and $ZZ$-type errors suggests that twirling over $Cl_1^{\otimes2}$ both simplifies a generic error map to be measurable via RB, but also, retains some noise-dependent structure of the correlated decay profiles.  
 Designing optimal initial and final states, as well as optimal sampling strategies for extracting a larger set of error parameters covering multiple physical error mechanisms is left for future work. A possible strategy to avoid introducing arbitrary error channels, is to be agnostic of the physical error mechanisms, and rather directly extract the $\vec\alpha$ and $\vec m$ parameters described in section~\ref{app:reps}. Analogous protocols to this is described by character RB~\cite{helsen_new_2019}, and tomography via RB~\cite{kimmel_robust_2014}.
 
+
+\section{Magnus expansion}
+\label{app:magnus}
+
+    The unitary evolution due to a time dependent Hamiltonian may be written in the ordered, short-time limit as,
+    \begin{equation}
+        U(t) = \lim_{N\rightarrow\infty} e^{\frac{-i}{\hbar}\hat H(t_N)\Delta t}\cdots e^{\frac{-i}{\hbar}\hat H(t_2)\Delta t}e^{\frac{-i}{\hbar}\hat H(t_1)\Delta t} = e^{A(t)},
+    \end{equation}
+    where $\Delta t = t/N$, and $t_n = n\Delta t$, and $A(t)$ is a time dependent exponent, which is expanded in the Magnus construction to,
+    \begin{equation}
+        A(t) = \sum_{k=1}^{\infty} A_k(t).
+    \end{equation}
+    If the Hamiltonian at different times does not commute, then the first three $A_k(t)$ terms are given by,
+    \begin{align}
+        A_1(t) &= \frac{-i}{\hbar}\int_{0}^{t}dt_1 \hat H(t_1)\\
+        A_2(t) &= -\frac{1}{2\hbar^2}\int_{0}^{t}\int_{0}^{t_1}dt_1dt_2 [\hat H(t_1),\hat H(t_2)] \\
+        A_3(t) &= \frac{i}{6\hbar^3}\int_{0}^{t}\int_{0}^{t_1}\int_{0}^{t_2}dt_1dt_2dt_3\ \big(\big[\hat H(t_1),\left[\hat H(t_2),\hat H(t_3)\right]\big]+\big[\hat H(t_3),\left[\hat H(t_2),\hat H(t_1)\right]\big]\big).
+    \end{align}
+    Given the ``two-SDF'' Hamiltonian in equation~\ref{eqn:two-sdf}, we can evaluate $A(t)$ to a chosen order and may define an effective time-independent Hamiltonian for a given time, $T$, yielding $\hat H_\mathrm{eff} = \frac{i\hbar}{T}A(T)$.
+    We can immediately make two simplifying assumptions: first concerns the fast oscillating $A_1$ term. This looks like separate spin dependent phase-space loops originating from the off-resonant SDFs. As these loops close with periodicity $\tau = 2\pi/\Delta$, we may select a gate duration $T$ such that $T=n\tau$, to enforce $A_1(T)=0$. Second, as with the geometric phase gates seen in section~\ref{sec}\todo{phase gate section}, the second order Magnus term contains self-terms that appear as the accumulation of a geometric phase. In the case that this geometric phase acts globally on the system, it can be ignored. If the accumulated phase is spin, or oscillator state dependent, then interesting dynamics may be observed, however these effects are out of the scope of this thesis. With these two assumptions, we may now consider how the to
+    recover the general family of non-linear bosonic interactions given in table~\ref{tab:gateset}\\
+    We set $\phi_\alpha=0$, $\phi_\beta=\phi$, $\sigma_\alpha=\sigma_x$, $\sigma_\beta = \sigma_y$, and $\delta_\beta = m\delta_\alpha$, where $m$ is some integer. Integer $m$ also helps to select durations that both excursions of $A_1$ close.
+    For $m=+1$, we find that the effective Hamiltonian is,
+    \begin{equation}
+        H_\mathrm{eff} = ...
+    \end{equation}
+    \todo{This narrative is a bit tangled. I think potentially there is a simpler way to get to the effective interactions...}
