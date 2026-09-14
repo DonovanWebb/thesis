@@ -154,15 +154,18 @@ well-placed for studying methods for scaling hybrid-system control.
     The Magnus expansion expresses the generator of the unitary evolution as an infinite series of terms, with successive terms proportional to increasingly higher-order nested commutators of the Hamiltonian evaluated at different times. Due to the non-commuting spin conditioning, this series does not truncate, leading to highly non-linear bosonic terms effectively driven via the application of the linear SDFs.\\
     To utilise specific non-linear terms within this infinite series, matching the desired interactions given in table~\ref{tab:gateset}, we constrain the relative detunings of the two SDFs to $\Delta_\beta = m \Delta_\alpha$, where $m$ is some integer given in the table. This immediately brings components of the Magnus terms matching the desired non-linear $\hat H_\mathrm{osc}$ into resonance. Furthermore, non-resonant and higher-order terms of the expansion may be arbitrarily suppressed through ensuring $\Delta \gg \Omega_\alpha\Omega_\beta$. In this regime, the unitary dynamics of $\hat H_\mathrm{2SDF}$ are well approximated by the evolution of time-independent effective Hamiltonians, which for Gaussian operations ($|m| = 1$) are of the form,
     \begin{equation}
-        \hat H_\mathrm{eff,G} = \frac{\Omega_\alpha\Omega_\beta}{\Delta} 2i\epsilon_{\alpha\beta\gamma}\hat\sigma_\gamma a^{(\dagger)}b^{(\dagger)} + h.c.,
+        \hat H_\mathrm{eff,G} = \frac{\hbar\Omega_\alpha\Omega_\beta}{2\Delta} \epsilon_{\alpha\beta\gamma}\hat\sigma_\gamma (iab^{(\dagger)} + h.c.),
     \end{equation}
-    where $\epsilon_{\alpha\beta\gamma}$ is the Levi-Civita symbols. If $a=b$, the SDFs are detuned from the same motional mode, leading to squeezing, or parity effective interactions, while acting on two-modes leads to the beam splitter interaction.
+    \todo{need to add back phases. }
+    where $\epsilon_{\alpha\beta\gamma}$ is the Levi-Civita symbols. If $a^\dagger=b^\dagger$, the SDFs are detuned from the same motional mode, leading to squeezing, or parity effective interactions, while acting on two-modes leads to the beam splitter interaction.
     For the tri-squeezing interaction ($m=-2$) the effective Hamiltonian is,
     \begin{equation}
-        \hat H_\mathrm{eff,T} = \frac{\Omega^2_\alpha\Omega_\beta}{2\Delta^2} 4\hat\sigma_\beta a^3 + h.c.,
+        \hat H_\mathrm{eff,T} = \frac{\hbar\Omega^2_\alpha\Omega_\beta}{4\Delta^2} \hat\sigma_\beta (a^3 + a^{\dagger 3}),
     \end{equation}
-    where we have set $a=b$, as we act on a single mode.\\
-    Frequency and spin-conditioning control of two SDFs therefore allow for the generation of the entire proposed hybrid CV-DV gate-set. After a discussion on how we can characterise the oscillator state, we shall present the experimental scheme for generating these interactions, and demonstrate the creation of a squeezed state by this method.
+    where we have set $a^\dagger=b^\dagger$, as we act on a single mode.\\
+    Frequency and spin-conditioning control of two SDFs therefore allow for the generation of the entire proposed hybrid CV-DV gate-set. 
+    % As may be inferred from the general pattern of order $m$ and non-linear order of the effective interaction, this scheme may be used to create a family of spin-conditioned non-linear interactions, such as two-mode squeezing, and 4th order squeezing~\cite{bazavan_squeezing_2024}.\\
+    After a discussion on how we can characterise the oscillator state, we shall present the experimental scheme for generating these interactions, and demonstrate the creation of a squeezed state by this method.
 
 
     \subsubsection{Readout}
@@ -284,6 +287,7 @@ well-placed for studying methods for scaling hybrid-system control.
     the non-commutativity of the spin conditioning of the two SDFs, we require
     $\pi/2$ phase difference between the two spin phases,
     \begin{equation}
+        \label{eqn:spin_phase}
         \phi_{\alpha, s} - \phi_{\beta,s} = \frac{\phi_{\alpha,\mathrm{RSB}}+\phi_{\alpha,\mathrm{BSB}}}{2}-\frac{\phi_{\beta,\mathrm{RSB}}+\phi_{\beta,\mathrm{BSB}}}{2}=\frac{\pi}{2}.
     \end{equation}
     In the following demonstration we set $\phi_{\alpha,\mathrm{RSB}}=
@@ -296,9 +300,7 @@ well-placed for studying methods for scaling hybrid-system control.
     $t_ramp$ is the ramp duration. This ramp suppresses excess off-resonant
     excitations of the $A_1$ phase loop term given in the previous section, and
     so we must select its duration based on the characteristic scale,
-    $\frac{1}{\Delta}$. Here, we set the base detuning,
-    $\Delta=50~\unit{\kilo\hertz}$, and use a ramp duration
-    $t_\mathrm{ramp}=40~\unit{\micro\second}$.\\
+    $\frac{1}{\Delta}$. \\
     We aim to balance the power in each of the 4 tones. This may be calibrated
     using an optical pick-off before addressing the ion, directed onto a fast
     photodiode, and measuring the beatnote contrast when applying any pair of
@@ -316,7 +318,7 @@ well-placed for studying methods for scaling hybrid-system control.
     
 
 \subsubsection{Squeezing}
-    - Detuning and power selected (only 40 uW!), and predicted strength of interaction?\\
+    - Detuning and power selected (only 53 uW!), and predicted strength of interaction?\\
     - Check if ramp is sufficient by looking at $\sigma_z$ dependence.\\
     - Calibrate probe SDF and get strength.\\
     - Calculate expected squeezing strength.\\
@@ -326,43 +328,28 @@ well-placed for studying methods for scaling hybrid-system control.
     - tickling calibration
 
     We demonstrate the effective squeezing interaction on a single ion and radial
-    motional mode initiated in the vacuum state. We are limited to using the
+    motional mode. We are limited to using the
     radial modes due to the geometry single addressing system with respect to
     the trap. We use the upper radial mode with frequency,
-    $\omega_{upper}=XX~\unit{\mega\hertz}$, and motional coherence given in
+    $\omega_{upper}=2.87~\unit{\mega\hertz}$, and motional coherence given in
     section~\ref{sec:motional_coherence}.
-    Squeezing is implemented by the
-    quadchromatic field, with total beam power of $40~\unit{\micro\watt}$, and
-    $m=-1$. The state is characterised by the tomography method given in
-    section~\ref{sec:tomography}. The tomography SDF strength,
-    $\Omega_\mathrm{split}$ is independently calibrated through on-resonance
-    splitting of a vacuum state to find, $\Omega_\mathrm{split}=2\pi
-    3.6(2)~\unit{\kilo\hertz}$. This strength is accounted for in the
-    displacement duration, $t_\mathrm{split}$, to provide the correct scaling
-    factor for the characteristic function axes, $t_\mathrm{split} =
-    \frac{|\beta|}{2\Omega_\mathrm{split}}$. 
-    The pulse sequence for squeeze state generation and characterisation is
-    given in figure~\ref{fig:squeeze_pulses}, and the resulting real part of the
-    characteristic function is shown in figure~\ref{fig:squeezing} (a).
-    The plot corresponds to scanning over a $35\times 35$ grid of displacement
-    values, $\beta$, each point corresponding to the average over $300$ samples.
-    Fitting the data to equation~\ref{eqn:sqz_char} we may extract both the
-    squeezing axis, $\phi$, and the strength, $r$. An example fit is shown in
-    panel (b), with extracted $r=0.85(2)$, for a quadchromatic FWHM pulse
-    duration of $t_\mathrm{sqz}=190~\unit{\micro\second}$. Panel (c) displays
-    the squeezing strength as a function $t_\mathrm{sqz}$, showing the expected
-    linear relationship between squeezing duration and $r$.\\
-
-\begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/sqz_data.pdf
-        }
-    \end{center}
-    \caption{
-        \todo{Figure: Probe SDF calibration}\\
-        }
-    \label{fig:probe_sdf}
-\end{figure}
+    The initial near-vacuum motional state is prepared by Doppler and sideband cooling, with a typical thermal fock state distribution with mean $\bar{n} = 0.03(1)$\todo{Check for more recent values}, as described in section~\ref{sec:cooling}. The spin state is initialised into the ground state by optical pumping, described in section~\ref{sec:optical_pump}.
+    By setting the relative detuning between the SDFs to $m=-1$, and ensuring anti-commuting spin conditioning by setting the relative phases of the quadchromatic field according to equation~\ref{eqn:spin_phase}, we realise a $\hat\sigma_z-$ conditioned squeezing interaction.
+    As the spin-state is prepared in an eigenstate of the spin-conditioned squeezing, we expect squeezing on the qumode, without any change to the qubit state. We use a total quadchromatic beam power of $53~\unit{\micro\watt}$, and set the base detuning, $\Delta=2\pi~50~\unit{\kilo\hertz}$. We suppress excess excitation of the off-resonant error terms by using a ramp of $t_\mathrm{ramp}=40~\unit{\micro\second}$.\\
+    The state is characterised by the tomography method given in
+    section~\ref{sec:tomography}, with a discretization set to collect a $35\times 35$ grid of displacement
+    values, $\beta$, and $N = 300$ repeat samples to reduce shot noise. The full dataset for one of the tomographic scans takes around 1 hour to collect, and so we interleave mode calibration experiments (section~\ref{sec:tickle}) to run every 5 minutes.\\
+    The on-resonance splitting SDF used for tomography must have its strength, $\Omega_\mathrm{SDF}$, calibrated to infer the magnitude of $\beta$ applied. We use
+    a total bichromatic beam power of $40~\unit{\micro\watt}$, and through fitting the 
+    $\hat\sigma_z$ expectation for the time-dependent splitting of a vacuum state,
+    \begin{equation}
+        \langle \hat\sigma_z \rangle = e^{-2|\beta|^2},
+    \end{equation}
+    with 
+    \begin{equation}
+        |\beta| = \frac{\Omega_\mathrm{split}t}{2}.
+    \end{equation}
+    We find $\Omega_\mathrm{split}=2\pi~7.2(4)~\unit{\kilo\hertz}$. \\
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/sqz_data.pdf
@@ -374,6 +361,32 @@ well-placed for studying methods for scaling hybrid-system control.
         }
     \label{fig:squeezing}
 \end{figure}
+    The pulse sequence for squeeze state generation and characterisation is
+    given in figure~\ref{fig:squeeze_pulses}, and the resulting real part of the
+    characteristic function is shown in figure~\ref{fig:squeezing} (a).
+    Fitting the data to equation~\ref{eqn:sqz_char} we may extract both the
+    squeezing axis, $\phi$, and the strength, $r$, where $r$ is given by,
+    \begin{equation}
+    r=|\Omega_\mathrm{eff,S}|t=\frac{\Omega_\alpha\Omega_\beta}{2}t.
+    \end{equation}
+    An example fit is shown in
+    panel (b), with extracted $r=0.90(2)$, for a quadchromatic FWHM pulse
+    duration of $t_\mathrm{sqz}=190~\unit{\micro\second}$. Panel (c) displays
+    the squeezing strength as a function of $t_\mathrm{sqz}$, with fit values given by the points, and the black line is a linear fit. Assuming that the two SDF strengths are well balanced, $\Omega_\alpha=\Omega_\beta$, and taking the $53~\unit{\micro\watt}$ used for the quadchromatic field compared to the SDF strength calibration at $40~\unit{\micro\watt}$, we find an expected squeezing strength of $\Omega_\mathrm{eff,S} = 2\pi~0.86(9)~\unit{\kilo\hertz}$. This is shown as the red dashed line and shaded region.
+    The fitted strength of $\Omega_\mathrm{eff,S}= 2\pi~0.74(1)~\unit{\kilo\hertz}$ is lower than the expected, suggesting that either we are not sufficiently balancing the strengths of the two simultaneous SDFs, or that the power stabilisation routine for 4-tones is inaccurate. Further exploration is needed, including careful quantification of the individual SDF strengths constituting the quadchromatic field.\\
+    \todo{Wrap up section.}
+    
+
+% \begin{figure}
+%     \begin{center}
+%     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/sqz_data.pdf
+%         }
+%     \end{center}
+%     \caption{
+%         \todo{Figure: Probe SDF calibration}\\
+%         }
+%     \label{fig:probe_sdf}
+% \end{figure}
 \subsection{Outlook}
     Hybrid systems offer access to large Hilbert spaces, even with modest ion numbers.
     In this section we outlined a convenient set of native interactions for universal hybrid qubit-qumode gates. We experimentally demonstrate the squeezing interaction generated via the ``two-SDF'' method of
@@ -385,8 +398,31 @@ well-placed for studying methods for scaling hybrid-system control.
     increased robustness against errors through the use of quantum error mitigation methods applicable to both 
     spin and oscillator subsystems. We outline one such method in the next section, with a preliminary demonstration on the spin subsystem.\\
     \todo{Standing wave extension}\\
-    \todo{Limitations: Initialisation need to SBC all modes we want to use; readout of mode is expensive due to requiring map to spin; Spectral crowding of modes}
-
+    \subsubsection{Limitations}
+    Using a single multi-ion chain to access multiple qubits and qumodes for
+    scaling hybrid QC on the trapped-ion platform will be ultimately limited by
+    spectral crowding of the motional modes, i.e. the average frequency spacing
+    between neighbouring modes decreases as the number of accessible modes
+    increases. \\
+    The ``two-SDF'' method requires frequency selectivity to drive bosonic
+    interactions exclusively on the chosen mode. 
+    To selectively drive a single mode, the magnitude of the detuning $\Delta$ must follow $\Delta \ll \delta\omega$, where $\delta\omega$ is the frequency difference to the nearest neighbouring mode. As discussed in the ``two-SDF'' method section, the strength of each SDF must be less than the base detuning, $\Omega_\alpha \ll \Delta$, to well approximate the effective non-linear unitary dynamics. As a result of these two requirements, the
+    mode-frequency splitting directly limits the attainable strength of the non-linear interaction in the adiabatic regime, resulting in increasing gate duration with increasing register size.\\
+    A possible mitigation
+    would be to rather scale the hybrid system using a collection of fixed-length
+    chains with adequate mode-frequency splitting, and to transport quantum
+    information between these chains either through qubit transport~\cite{},
+    optical networks~\cite{}, or through inducing collective interactions
+    between separate ion-chains~\ref{valentini_demonstration_2025}. \\
+    Another
+    mitigation strategy could come from the pulse-shaping approach demonstrated
+    for use in fast two-qubit entangling gates in the non-adiabatic
+    regime~\cite{schafer_fast_2018}, i.e. when $\Delta > \delta\omega$.
+    Introducing extra degrees of freedom in the pulse amplitude envelope could allow for
+    driving the desired interaction on the selected modes, while returning all spectator modes to their initial state by the end of the pulse. However, we note that the accumulation of
+    non-global geometric phases, and possible non-commutativity of interactions
+    on shared qubit-oscillator states could prohibit the use of such a
+    pulse-shaping scheme. Ultimately, the desired interaction, mode frequency spectra, and target gate duration will determine the dominant coherent errors. We leave such an analysis for future work. \\
 
 \section{Virtual Distillation}
 \label{sec:virtual_distillation}
