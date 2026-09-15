@@ -20,8 +20,8 @@
 \begin{document}
 
 \begin{quantikz}
-\lstick{$\ket{0}_\text{a}$} & \gate{H} &\gate{I~\text{or}~S^\dagger}& \ctrl{1}          & \gate{H} &\meter{}\\
-\lstick{$\rho_\text{osc}$}  &          &                             & \gate{D (\beta)}  &          &
+\lstick{$\ket{0}_\text{a}$} & \gate{H} &\ctrl{1}          & \gate{H} &\meter{}\\
+\lstick{$\rho_\text{osc}$}  &          & \gate{O}  &          &
 \end{quantikz}\begin{quantikz}
 \lstick{$\ket{0}_\text{a}$} & \gate{I~\text{or}~R_y\left(\frac{\pi}{2}\right)}& \ctrl[style={diamond,draw,fill=black,minimum size=2mm}]{1}           &\meter{}\\
 \lstick{$\rho_\text{osc}$}  &                                                 & \gate{D \left(\pm\frac{\beta}{2}\right)} &
