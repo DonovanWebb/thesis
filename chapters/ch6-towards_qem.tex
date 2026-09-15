@@ -42,7 +42,7 @@ We conclude this chapter with a discussion on the application of virtual
 distillation to hybrid systems, presenting a scalable method within reach of our
 apparatus.
 
-\section{Hybrid Spin-Oscillator Control in Trapped Ions}
+\section{\textbf{Hybrid Spin-Oscillator Control in Trapped Ions}}
 \label{sec:CVQC}
 CV quantum computation offers an alternative strategy for encoding quantum information, utilising
 oscillators, termed \emph{qumodes}~\cite{}\todo{Nice to get original ref here},
@@ -132,13 +132,6 @@ well-placed for studying methods for scaling hybrid-system control.
         \label{tab:gateset}
     \end{table}
     \subsubsection{Gate Implementation}
-    - Now how do we realise these interactions?
-    - Present concept of Two-SDF toolkit from TS+RS\\
-    - Give Magnus expansion, and commutations (check SS and OB thesis theory sections)\todo{I think this should be a citation and an appendix}
-    - This then gives $m$, $\Delta$, and $\Omega$ (point to table).\\
-    - Give short contrast with SB method. \\
-    - Here can also mention SW, cite recent ETH tweezer paper, and that we have even sharper gradient. \\
-
     To implement the unitaries given in table~\ref{tab:gateset}, and to retain spin-dependent control of these interactions to fully utilising the large hybrid state space, we use the ``two-SDF'' method proposed in reference~\cite{sutherland_universal_2021}. The non-linear bosonic interactions are effectively driven through applying two linear spin-dependent forces with non-commuting spin conditioning, simultaneously on a single qubit. 
     The two simultaneous SDFs, here labelled $\mathrm{SDF}_\alpha$, and $\mathrm{SDF}_\beta$, are applied off-resonantly relative to motional modes with creation operators $\hat a^\dagger$ and $\hat b^\dagger$, respectively. The resulting Hamiltonian is given generally by,
     \begin{align}
@@ -170,19 +163,19 @@ well-placed for studying methods for scaling hybrid-system control.
 
     \subsubsection{Readout}
     \label{sec:tomography}
-    - We don't have direct access to readout motion.\\
-    - So instead we map motional state to qubit.\\ 
     - We can generally do this via Hadamard test \todo{(generalise to O in figure, and remove conditional I/S)} for phase kickback on spin \\
     - For full state tomography, we can measure characteristic function~\cite{}\todo{cite Fluhman, OB, SS thesis}.\\
     - Give circuit for tomography using $O=D(\beta)$, and then using $\sigma_x$ SDFs. \\
-    - Define Characteristic function.\\
-    - Can then compute Wigner or other representation of choice either through direct Fourier transform, or through ML methods (theorist we spoke to?)
-    \begin{equation}
-    \mathcal{P}_a = \frac{1+Re(\xi(\beta))}{2},
-    \end{equation}
-    \begin{equation}
-    \mathcal{P}_a = \frac{1+Im(\xi(\beta))}{2},
-    \end{equation}
+    \begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/tomography.pdf
+        }
+    \end{center}
+    \caption{
+        State tomography for a single mode through measurement of an ancilla qubit. (a) Displays the Hadamard test method for measuring the characteristic function, $\chi(\beta)$, of the oscillator using a displacement controlled by the qubit. The real and imaginary part of $\chi(\beta)$ is recovered through the application of either the identity, or the $S^\dagger$ gate before the displacement, respectively. (b) An equivalent measurement of $\chi(\beta)$ using native single qubit rotations and spin-dependent forces conditioned on $\sigma_x$ (represented by the diamond control symbol). 
+        }
+    \label{fig:tomography}
+    \end{figure}
 
     Final state readout of the qumode is done through mapping information to an
     ancilla qubit, followed by typical state-dependent fluorescence, described
@@ -204,21 +197,12 @@ well-placed for studying methods for scaling hybrid-system control.
     $R_y(\pi/2)$ measure $\mathrm{Re}(\chi)$ or $\mathrm{Im}(\chi)$
     respectively. The complete description of the oscillator state may now be
     recovered with arbitrary precision by scanning the complex variable $\beta$.
+    \todo{Give vacuum splitting and squeeze splitting here? Look at Burd for narrative example}\\
     We will keep to the characteristic function representation of the state,
     however we note that other phase space representations, such as the Wigner,
     and Q-function may be recovered through $2D$ Fourier transforms of
     $\chi$~\cite{}\todo{give refs}.
     
-    \begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/tomography.pdf
-        }
-    \end{center}
-    \caption{
-        State tomography for a single mode through measurement of an ancilla qubit. (a) Displays the Hadamard test method for measuring the characteristic function, $\chi(\beta)$, of the oscillator using a displacement controlled by the qubit. The real and imaginary part of $\chi(\beta)$ is recovered through the application of either the identity, or the $S^\dagger$ gate before the displacement, respectively. (b) An equivalent measurement of $\chi(\beta)$ using native single qubit rotations and spin-dependent forces conditioned on $\sigma_x$ (represented by the diamond control symbol). 
-        }
-    \label{fig:tomography}
-\end{figure}
 % \begin{figure}
 %     \begin{center}
 %     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/tomography_sims.pdf
@@ -230,7 +214,6 @@ well-placed for studying methods for scaling hybrid-system control.
 %     \label{fig:char_fn}
 % \end{figure}
 \subsection{Experimental Demonstration}
-    \todo{Short description of what we will show}
     % - Frame as demo of squeezing with added complexity of using single addressing system
     % - Point to motional coherence time. Was dephasing dominated, improved by grounding \\
     % - Demonstrate squeezing of motion conditioned on spin.\\
@@ -272,9 +255,7 @@ well-placed for studying methods for scaling hybrid-system control.
     carrier frequency, $\omega_0$. Here, purple lines correspond to
     SDF$_\alpha$, and orange lines to SDF$_\beta$. In this example we show the
     SDFs acting on a shared motional mode, but in general they may act on
-    different modes. \todo{Add colour to 2-sdf plot, could also make two
-    examples for BS and sqz?} 
-    Similar to the generation of the bichromatic field, we may produce this
+    different modes. Similar to the generation of the bichromatic field, we may produce this
     quadchromatic field through the application of four RF tones onto a
     single-pass (SP) AOM. These tones are generated using an arbitrary waveform
     generator (AWG)\footnote{\emph{Sinara Phaser} board}. We cannot control the
@@ -318,14 +299,7 @@ well-placed for studying methods for scaling hybrid-system control.
     
 
 \subsubsection{Squeezing}
-    - Detuning and power selected (only 53 uW!), and predicted strength of interaction?\\
-    - Check if ramp is sufficient by looking at $\sigma_z$ dependence.\\
-    - Calibrate probe SDF and get strength.\\
-    - Calculate expected squeezing strength.\\
-    - Show char function of squeezed state.\\
-    - Show r vs duration, with detail of the ramp duration being accounted for.\\
-    - Discuss observed strength vs expected strength.\\
-    - tickling calibration
+    - \todo{potential plot: check ramp is sufficient by looking at $\sigma_z$ dependence.}\\
 
     We demonstrate the effective squeezing interaction on a single ion and radial
     motional mode. We are limited to using the
@@ -356,7 +330,7 @@ well-placed for studying methods for scaling hybrid-system control.
         }
     \end{center}
     \caption{
-        \todo{Figure: Sqz characteristic function with varying duration \\}
+        \todo{Fix rasterise problem}\\
         Demonstration of the squeezing interaction through the two-SDF method. (a) The characteristic function, $\mathrm{Re}\left(\chi\left(\beta\right)\right)$, of the squeezed state measured using the state tomography method given by figure~\ref{fig:tomography}. (b) The simulated state taking fit parameters inferred by equation~\ref{eqn:sqz_char}. (c) The fitted squeezing parameter, $r$, as a function of two-SDF pulse duration.
         }
     \label{fig:squeezing}
@@ -424,9 +398,13 @@ well-placed for studying methods for scaling hybrid-system control.
     on shared qubit-oscillator states could prohibit the use of such a
     pulse-shaping scheme. Ultimately, the desired interaction, mode frequency spectra, and target gate duration will determine the dominant coherent errors. We leave such an analysis for future work. \\
 
-\section{Virtual Distillation}
+\section{\textbf{Virtual Distillation}}
 \label{sec:virtual_distillation}
-\todo{Short summary of section}
+- Motivation for applying QEM on our system. \\
+    - For NISQ era, pre FTQC, still methods to improve viability. \\
+- In our use case, we are interested in: few required resources, and need compatibility with DV and CV systems. Particularly without need to discretize our oscillator, like e.g. GKP. \\
+- Summary of what we will discuss in this chapter, highlighting preliminary results on DV subsystem.\\
+
 Here we develop experimental tools for demonstrating VD on the discrete variable portion of the full hybrid system.
 \subsection{Error Mitigation}
 \label{sec:QEM}
@@ -463,10 +441,7 @@ mitigation (QEM) techniques have been developed to reduce the bias of measured
 expectation value of an observable at the expense of requiring more samples. 
 Reference~\cite{cai_quantum_2023} defines QEM as
 ``... algorithmic schemes that reduce the noise-induced bias in the expectation value by postprocessing outputs from an ensemble of circuit runs, using circuits at the same noise level as the original unmitigated circuit or above.''
-This highlights the crux of how information on the system is collected by a QEM implementation, which I shall explore with the following thought experiment on the ``perfect'' QEM algorithm.
-Consider the problem of measuring the expectation value of an observable $\hat{O}$ on the target state $\rho_{id}$. The state is prepared by a quantum circuit, which due to noise, instead prepares the mixed state $\rho = (1-\lambda) \rho_{id} + \lambda \rho_{err}$, where $\rho_{err}$ is the error state. Each measurement of the observable $\hat{O}$ on the noisy state $\rho$ will return a value $o_i$, and the average of these measurements will converge to the expectation value $\langle \hat{O} \rangle = \mathrm{Tr}[\hat{O}\rho]$. Given $S$ total samples, the final result will be,
-$$ \langle \hat{O} \rangle = \frac{1}{S} \left(\sum_{i=1}^{S_{id}} o_i + \sum_{j=1}^{S_{err}} o_j\right),$$
-where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement outcome from the ideal and error states respectively, with $S = S_{id} + S_{err}$. The bias in the measured expectation value from the ideal is then given by contributions from the samples $S_{err}$. An ideal QEM algorithm would flag these error samples, and remove them from the final average, resulting in a bias free expectation value using the restricted samples $S_{id}$.\\
+This highlights the crux of how information on the system is collected by a QEM implementation, which I shall explore with the following thought experiment on the ``perfect'' QEM algorithm.\\
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=0.5\linewidth]{figures/pdf_figure/ch6/qem_schem.pdf
@@ -474,21 +449,35 @@ where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement
     \end{center}
     \caption{
     \todo{Figure: unmitigated vs mitigated expectation value, showing how bias is reduced at the expense of more samples.}
+    \todo{ Integrate figure into main text.}
     $\rho = 0.1\rho_\mathrm{id}+0.9 \rho_\mathrm{err}$. Blue curve is PDF for $N$ shots, green is PDF for ideal shots, with $N_\mathrm{id} = 0.1N$.\\
     A schematic explanation of the goal of quantum error mitigation. Deviations of the measured expectation value of an observable $\hat O$ on a noisy state, $\rho$, and on the ideal state $\rho_\mathrm{id}$ may be separated into components originating from shot noise, and from an underlying bias. Shot noise sets the variance of the distribution of estimated expectation values, while the underlying bias shifts the center of the distribution. Error mitigation reduces bias at the cost of increasing variance. Here we demonstrate this by the ideal QEM method introduced in section~\ref{sec:QEM}. The underlying noisy state is given by $\rho = (1-p)\rho_\mathrm{id} + p\rho_\mathrm{err}$. $N$ shots are taken measuring $\mathrm{Tr}(\hat O \rho)$. The ideal QEM flags and discards shots originating from $\rho_\mathrm{err}$, leaving $(1-p)N$ shots of the ideal state to estimate $\langle \hat O \rangle$.
         }
     \label{fig:qem}
 \end{figure}
 
-\begin{itemize}
-    \item Error mitigation motivation. Mainly on contrasting to quantum error correction.
-        \item QEM is framed as finding expectation value of observable, rather than maintaining coherence for a long computation.
-        \item How QEM reduces bias (at the expense of required samples). Look at Cai paper for structured argument.
-\end{itemize}
+Consider the problem of measuring the expectation value of an observable $\hat{O}$ on the target state $\rho_{id}$. The state is prepared by a quantum circuit, which due to noise, instead prepares the mixed state $\rho = (1-\lambda) \rho_{id} + \lambda \rho_{err}$, where $\rho_{err}$ is the error state. Each measurement of the observable $\hat{O}$ on the noisy state $\rho$ will return a value $o_i$, and the average of these measurements will converge to the expectation value $\langle \hat{O} \rangle = \mathrm{Tr}[\hat{O}\rho]$. Given $S$ total samples, the final result will be,
+$$ \langle \hat{O} \rangle = \frac{1}{S} \left(\sum_{i=1}^{S_{id}} o_i + \sum_{j=1}^{S_{err}} o_j\right),$$
+where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement outcome from the ideal and error states respectively, with $S = S_{id} + S_{err}$. The bias in the measured expectation value from the ideal is then given by contributions from the samples $S_{err}$. An ideal QEM algorithm would flag these error samples, and remove them from the final average, resulting in a bias free expectation value using the restricted samples $S_{id}$.\\
+- Finish argument about ideal QEM \\
+- Summary of QEM method types (quick overview) and transfer sentence to VD purity type approach. \\
+- Why VD:\\
+    - operates on noisy physical states rather than requiring logical encoding;\\
+    - is applicable to general Hilbert spaces, i.e. hybrid good \\
+    - exchanges additional copies/sampling/circuit resources for reduced bias with fixed length (given copy and register size) derangement and measure at end\\
+    - is therefore interesting for the multi-register and eventually hybrid architecture considered here.\\
 
 \subsection{Virtual Distillation Protocol}
 \label{sec:vir_dist_theory}
-\subsubsection{Purification}
+- Quick description of goal of purification method (first line of theory), and any particular merit of method e.g. very weak constraints on noise type, highlight we explore one of the failure cases in exp demo.\\
+- We will present some background theory on VD, to rationalise the action of the circuit decomposition, taken from references...\\
+- We present with exp demo on minimal DV system of two-copies. \\
+- And propose future extensions to the hybrid system. \\
+
+\subsubsection{Theory}
+\todo{This is rough notes. Be selective of what to present, rationalising by: 1) understanding action of applied circuit, 2) requirement for understanding experimental demo.}\\
+- narrative should be how we go from $\rho \rightarrow \rho^k/\rm{Tr}(\rho^k)$ \\
+- Followed by when this fails \\
 Estimate expectation value of observable on a state without ever physically preparing the state.
 Purification here refers to approaching the dominant pure state of a mixed state. The $k$th degree purified state is given by,
 \begin{equation}
@@ -508,6 +497,7 @@ where $S^{(k)}$ is the derangement operator, which permutes the $k$ copies of th
 \begin{equation}
     S^{(k)}\ket{\psi_1}\otimes\ket{\psi_2}\otimes...\otimes\ket{\psi_k}=\ket{\psi_2}\ket{\psi_3}\otimes...\otimes\ket{\psi_k}\otimes\ket{\psi_1}.
 \end{equation}
+\todo{Move following to appendix, or cut.}\\
 Huggins provides a proof of this identity, which I reproduce here for the simple example of $k=2$.   The derangement operator for two copies is simply the swap operator, $S^{(2)}=\mathrm{SWAP}$, and we will assume the observable acts only on the first copy, giving $\hat{O}^1 = \hat{O}\otimes\mathbb{I}$. The identity is then,
 \begin{align}
     \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
@@ -522,30 +512,31 @@ and contracting the Kronecker deltas, we find,
     &= \mathrm{Tr}[\hat{O}\rho^2],
 \end{align}
 with the last equality following from the definition of matrix multiplication. \\
+\todo{======================================================}\\
 The denominator of the corrected expectation value is found by replacing the observable with the identity and measuring the expectation value of the derangement operator on $k$ copies of the noisy state.\\
-Access to this corrected expectation value is then possible if we can measure the multi-qubit observable $\hat{O}^iS^{(k)}$ on $k$ copies of the noisy state. We will discuss two methods of implementing this measurement. First, a Hadamard test, given in Fig.~\ref{fig:hadamard_test}, which uses an ancilla qubit to control the derangement and desired observable operation, and then subsequent measurement of the ancilla only. The second method, given in Fig.~\ref{fig:b_matrix}, uses a B-matrix to implement the derangement operation, and then measures the observable on one of the copies. 
-The Hadamard test is more general, as it can be used to measure any observable, however, it requires an additional ancilla qubit and controlled operations. The B-matrix method has better qubit number and operation depth efficiency, however, requires simultaneous diagonalisation of $S^{(k)}$ and $\hat{O}^iS^{(k)}$, which is not always possible for an arbitrary observable and derangement operator.
+Access to this corrected expectation value is then possible if we can measure the multi-qubit observable $\hat{O}^iS^{(k)}$ on $k$ copies of the noisy state. \\
 
 Next, need to derive scaling of bias with copy number. And finally, discuss the variance of measurement with shot number (and how this scales with copy number?).
 
 \subsubsection{Circuit}
-    Ancilla method\\
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=1.0\linewidth]{figures/pdf_figure/ch6/virdist_circuits.pdf
         }
     \end{center}
     \caption{
-        \todo{Figure: circuit diagram for ancilla based virtual distillation, Hadamard test, derangement operator by CSwap}
+        \todo{Figure: circuit diagram for ancilla based virtual distillation, Hadamard test, derangement operator by CSwap}\\
+        \todo{Update B circ to pi/4 gates}\\
         Two circuits for implementing virtual distillation. (a) Hadamard test method using controlled derangement, $S_k$, over $k$ copies, and controlled observable, $\hat O$, applied on one copy. The ancilla qubit is measured to extract $\mathrm{Tr}(\hat O\rho^k)$. Repeating the circuit without the controlled observable measures normalisation factor, $\mathrm{Tr}(\rho^k)$, used to recover the virtually purified result, $\langle \hat O\rangle_\mathrm{VD}$. (b) Two-copy implementation using a $B$-circuit, here decomposed into two entangling gates and single qubit phase gates. Measurement of both qubits in the computational basis, and classical postprocessing recovers $\mathrm{Tr}(Z\rho^2)$ and purity, $\mathrm{Tr}(\rho^2)$, used to recover $\langle Z \rangle_\mathrm{VD}$.
         }
     \label{fig:virdist_circuit}
 \end{figure}
-    B-matrix protocol\\
-        If we can diagonalise both S and SO.
-        Can apply transversally\\
-    On hybrid systems\\
-        It can be used for both spin and bosonic objects
+- We present two possible physical implementations of VD. The first being a scalable strategy based on Hadamard test with ancilla, second being resource efficient but limited to XXX check flow chart in Huggins.\\
+    - Present ancilla method, describing circuit and maybe give intuition on phase kick back to ancilla?\\
+    - B-matrix protocol, if we diagonalise both S and SO, no need for ancilla and we get purity and TrO immediately. \\
+
+We will discuss two methods of implementing this measurement. First, a Hadamard test, given in Fig.~\ref{fig:hadamard_test}, which uses an ancilla qubit to control the derangement and desired observable operation, and then subsequent measurement of the ancilla only. The second method, given in Fig.~\ref{fig:b_matrix}, uses a B-matrix to implement the derangement operation, and then measures the observable on one of the copies. 
+The Hadamard test is more general, as it can be used to measure any observable, however, it requires an additional ancilla qubit and controlled operations. The B-matrix method has better qubit number and operation depth efficiency, however, requires simultaneous diagonalisation of $S^{(k)}$ and $\hat{O}^iS^{(k)}$, which is not always possible for an arbitrary observable and derangement operator.
 
 % \subsubsection{Noise Floor}
 % \begin{itemize}
@@ -570,11 +561,9 @@ Next, need to derive scaling of bias with copy number. And finally, discuss the 
 % Extend this analysis to copy number $k$. Currently, I get here through Liouville form, is there a way to go directly from symmetry on the states?
 
 \subsection{Experimental Demonstration}
-\todo{Short description of following results.}
-\subsubsection{Implementation}
-Protocol, circuit diagram, hardware involved.
-\subsubsection{B-matrix Calibration}
-    pi-4 gates, single addressing\\
+- First: establish that you can implement VD: implementation, calibration for minimal demo.\\
+- Second: use it to answer a scientific question: Injection of correlated noise \\
+
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
@@ -587,6 +576,14 @@ Protocol, circuit diagram, hardware involved.
         }
     \label{fig:bmatrix_calib}
 \end{figure}
+\subsubsection{Virtual Distillation on Two Copies}
+- Minimal demo is two single qubits. \\
+- B circuit demo, consisting of pi-4 gates.\\
+- For single qubit phase push, we use single addressing, push phase on AOD. \\
+- pi/4 gates are walsh 1, calibrated through applying two consecutive and applying same protocol as described in characterisation.\\
+- Give exact numbers for pi/4 gates: loops, power, detuning, duration, fidelity, ramp duration. \\
+- B circuit phases were checked using heuristic method, applying differential single qubit rotation to each. \\
+- Mention here that tomography would have been better? \\
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/noise_injection.pdf
@@ -598,22 +595,35 @@ Protocol, circuit diagram, hardware involved.
                }
     \label{fig:bmatrix_injection}
 \end{figure}
-\subsubsection{Injecting Spatial Correlations}
-    two copy, B matrix demonstration\\
-    Analysis of this data.
+\subsubsection{Virtual Distillation under Correlated Errors}
+- We target demo of suppression, of controlled injected errors, that are quantified by k-copy RB. \\
+- Give explicit form for suppression of correlated and uncorrelated channels. Look at IRO presentation\\
+- Mention this is found by B circuit applied in Pauli basis and using eqn kcopy pops\\
+- Give motivation of why k-copy RB is particularly relevant to untwirled VD\\
+- Present data in form of single qubit decay rates.\\
+- Give analysis and fits. \\
 
-\section{Proposed experiments and technical requirements}
-How CVDV and VD combine.\\
+\subsection{Outlook}
+- Summary of what we have shown experimentally so far.\\
+- Linker sentence to next experimental steps. \\
 \subsubsection{Extending to $>2$ copies}
-    plan for c-swap implementation.\\
-    What is difficult, what numbers we need (gate fidelities, shot number)\\
+    - plan for controlled swap implementation, requirements for this. \\
+    - How many gates, what fidelity we need to ensure tot-err $<1$ for derangement side. \\
+    - Given 98\% how many copies could we go to? Can we estimate shot numbers here? Summary in a table would be nice. \\
+    - copy number | derangement gates | circuit fidelity | expected sampling overhead\\
 
 \subsubsection{Virtual Distillation on Hybrid Systems}
-    Cite Quantum virtual cooling\\
-    Why important to develop \\
-    What errors does this mitigate? \\
-    How it looks on a thermal state and on various quantum states (sqz, coherent, fock)\\
-    What is difficult, what numbers we need (gate fidelities, shot number)\\
+    - Why important to develop, applications in simulations of QO demo, Feynman, gauge theories. \\
+    - Cite Quantum virtual cooling\\
+    - How it looks on a thermal state and on various quantum states (sqz, coherent, fock)\\
+    - How we can implement c-swap using CV gate set. \\
+
+\subsubsection{Limitations} 
+    - Never actually remove entropy from system, so we are limited to total error rate $<1$, unlike QEC. This places us firmly in NISQ applications.\\
+    - Coherent and structured errors. Mitigation is twirling.\\
+    - Coherent noise floor \\
+    - Slow readout if mapping to single ancilla?\\
+
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=0.7\linewidth]{figures/make_figure/ch6/circs/fredkin/circuits.pdf
@@ -625,17 +635,17 @@ How CVDV and VD combine.\\
         }
     \label{fig:fredkin}
 \end{figure}
-\begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
-        }
-    \end{center}
-    \caption{
-    \todo{Figure: Simulation of tri-sqz state with VD to show negativity!}
-        }
-    \label{fig:virdist_sim}
-\end{figure}
+% \begin{figure}
+%     \begin{center}
+%     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
+%         }
+%     \end{center}
+%     \caption{
+%     \todo{Figure: Simulation of tri-sqz state with VD to show negativity!}
+%         }
+%     \label{fig:virdist_sim}
+% \end{figure}
 
-\section{Outlook}
-\todo{Broader perspective of these QEM research directions, and also how we can play with our larger CVDV system}
-\todo{Can generate sqz using SW}
+\section{Conclusions}
+- Summary of chapter, saying this gives our future directions.\\
+- Future planned hardware extensions will give more options for CV. \\
