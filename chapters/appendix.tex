@@ -182,51 +182,56 @@ Designing optimal initial and final states, as well as optimal sampling strategi
         U(t) = \lim_{N\rightarrow\infty} e^{\frac{-i}{\hbar}\hat H(t_N)\Delta t}\cdots e^{\frac{-i}{\hbar}\hat H(t_2)\Delta t}e^{\frac{-i}{\hbar}\hat H(t_1)\Delta t} = e^{A(t)},
     \end{equation}
     where $\Delta t = t/N$, and $t_n = n\Delta t$, and $A(t)$ is a time
-    dependent exponent, which is expanded in the Magnus construction to,
+    dependent exponent, which is expanded in the Magnus construction to~\cite{magnus_exponential_1954},
     \begin{equation}
         A(t) = \sum_{k=1}^{\infty} A_k(t).
     \end{equation}
     If the Hamiltonian at different times does not commute, then the first three $A_k(t)$ terms are given by,
     \begin{align}
+        \label{eqn:magnus_A}
         A_1(t) &= \frac{-i}{\hbar}\int_{0}^{t}dt_1 \hat H(t_1)\\
         A_2(t) &= -\frac{1}{2\hbar^2}\int_{0}^{t}\int_{0}^{t_1}dt_1dt_2 [\hat H(t_1),\hat H(t_2)] \\
         A_3(t) &= \frac{i}{6\hbar^3}\int_{0}^{t}\int_{0}^{t_1}\int_{0}^{t_2}dt_1dt_2dt_3\ \big(\big[\hat H(t_1),\left[\hat H(t_2),\hat H(t_3)\right]\big]+\big[\hat H(t_3),\left[\hat H(t_2),\hat H(t_1)\right]\big]\big).
     \end{align}
-    \subsection{``Two-SDF'' dynamics}
-    Given the ``two-SDF'' Hamiltonian in equation~\ref{eqn:two-sdf}, reproduced here,
+    This may be understood as the continuous analogy of the Baker-Campbell-Hausdorff formula. It is particularly useful in this thesis to understand the origin of the geometric phase in the MS gate scheme, and the non-linear bosonic interactions generated in the ``two-SDF'' protocol given in~\S~\ref{sec:two-sdf}.
+
+\subsection{``Two-SDF'' dynamics}
+    Here we analyse the ``two-SDF'' Hamiltonian given in equation~\ref{eqn:two-sdf} using the Magnus expansion. We recover effective Hamiltonians for both Gaussian interactions, as well as for tri-squeezing. \\
+    The ``two-SDF'' Hamiltonian is reproduced for convenience here,
     \begin{align}
     \label{eqn:two-sdf}
       \hat H_\mathrm{2SDF}(t)  &= \hat H_\alpha(t) + \hat H_\beta(t)\\
       &=
-      \frac{\hbar \Omega_\alpha}{2}\hat\sigma_\alpha \left(\hat a e^{i(\Delta_\alpha t + \phi_\alpha)} + \hat a^\dagger e^{-i(\Delta _\alpha t + \phi_\alpha )}\right)\\
+      \frac{\hbar \Omega_\alpha}{2}\hat\sigma_\alpha \left(\hat a_\alpha e^{i(\Delta_\alpha t + \phi_\alpha)} + \hat a_\alpha^\dagger e^{-i(\Delta _\alpha t + \phi_\alpha )}\right)\\
       &~+ 
-      \frac{\hbar \Omega_{\beta}}{2}\hat\sigma_{\beta} \left(\hat b e^{i(\Delta_\beta t + \phi_\beta)} + \hat b^\dagger e^{-i(\Delta_\beta t + \phi_\beta)}\right),
+      \frac{\hbar \Omega_{\beta}}{2}\hat\sigma_{\beta} \left(\hat a_\beta e^{i(\Delta_\beta t + \phi_\beta)} + \hat a_\beta^\dagger e^{-i(\Delta_\beta t + \phi_\beta)}\right).
     \end{align}
-    we may
-    evaluate $A(t)$ to a chosen Magnus order. We shall consider the first two terms explicitly here, with similar arguments possible for higher order. \\
-    We can immediately make two simplifying assumptions: first concerns the fast
-    oscillating $A_1$ term,
+    The first three terms of the corresponding Magnus expansion are found by inserting $H_\mathrm{2SDF}$ into equations~\ref{eqn:magnus_A}. We shall later rationalise that with certain values of SDF magnitudes, detunings, and phases, we may arbitrarily suppress the higher order terms.\\
+    The $A_1$ term appears as separable fast
+    oscillations in phase space due to each SDF, 
     \begin{equation}
-        A_1 = ...
+        A_1(t) = -i\sum_{i\in\{\alpha,\beta\}}\left(\frac{\Omega_i\hat\sigma_i}{\Delta_i}\sin\left(\frac{\Delta_i t}{2}\right)
+        \left(\hat a_i e^{i\left(\frac{\Delta_i t}{2} + \phi_i \right)} + \hat a_i^\dagger e^{-i\left(\frac{\Delta_i t}{2} + \phi_i \right)}
+        \right)\right).
     \end{equation}
-    This looks like separate spin dependent phase-space
-    loops originating from the off-resonant SDFs. As these loops close with
-    periodicity $\tau_\alpha = 2\pi/\Delta_\alpha$ and $\tau_\beta = 2\pi/\Delta_\beta$, we may select a gate duration $T$ such
-    that $T=p\tau_\alpha=q\tau_\beta$, to enforce $A_1(T)=0$. \\
-    Second, we may further expand $A_2$ to reveal 4 components,
+    This is effectively the first-order only dynamics of the displacement operator leading to excursions in phase-space. The effects of this term may be entirely suppressed at certain gate durations, $A_1(T)=0$, where $T$ is an integer multiple of both
+    $\tau_\alpha = 2\pi/\Delta_\alpha$ and $\tau_\beta = 2\pi/\Delta_\beta$. Excursions may also be made arbitrarily small by ensuring $\Omega_i \ll \Delta_i$. \\
+    The commutator in $A_2$ term may be expanded to reveal four relevant components,
     \begin{equation}
-    A_2 = \int_{0}^{t}\int_{0}^{t_1} (S_\alpha + S_\beta + X_\mathrm{pair} + X_\mathrm{exch}),
+    A_2(t) = S_\alpha(t) + S_\beta(t) + X_\mathrm{pair}(t) + X_\mathrm{exch}(t),
     \end{equation}
-    where $S$ ``self-terms'', and $X$ ``cross-terms''. The self-terms, with the form
+    where $S$ denotes ``self-terms'', and $X$ ``cross-terms'' of the two simultaneously applied SDFs. The self-terms, with the form,
     \begin{equation}
-        S_i = ...,
+        S_i(t) = \frac{i\Omega_i^2}{4}\left(\frac{\sin(\Delta_i t)}{\Delta_i^2} - \frac{t}{\Delta_i}\right)
     \end{equation}
     are recognisable from section~\ref{sec:geometric_phase} as geometric phase factors.
+    Taking the assumption that $t\gg \frac{1}{\Delta_i}$, we get a linearly growing geometric phase term,
+    $S_i(t) \approx \frac{-i\Omega_i^2t}{4\Delta_i}$.
     In the case that this geometric phase acts globally on the
     system, they may be ignored. If the accumulated phase is spin, or oscillator
     state dependent, then interesting dynamics may be observed, however these
-    effects are out of the scope of this thesis. 
-    These remaining cross-terms contain the 2nd order non-linear bosonic interactions we are interested in emulating.
+    effects are out of the scope of this thesis. \\
+    The remaining cross-terms contain the 2nd order non-linear bosonic interactions we are interested in emulating.
     To recover the general family of non-linear bosonic interactions given in table~\ref{tab:gateset},
     motional phases are set to $\phi_\alpha=0$, $\phi_\beta=\phi$, and spin-conditioning is assumed to be the anti-commuting pair: $\sigma_\alpha=\sigma_x$,
     $\sigma_\beta = \sigma_y$. We set the detunings of the two SDF to be $\Delta_\beta = m\Delta_\alpha$, where $m$ is
