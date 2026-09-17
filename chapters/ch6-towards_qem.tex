@@ -185,9 +185,9 @@ well-placed for studying methods for scaling hybrid-system control.
     directly readout through state dependent fluorescence. This is due to the much larger state-space of
     the qumode, and the technical difficulty in direct motional readout on the ion-trap platform. To solve these issues, a modular readout scheme is used, involving indirect readout of the oscillator state via a discrete collection of controlled unitaries subject to an ancillary qubit, and computational basis measurements of that ancilla.\\
     The information is mapped to the ancilla by a Hadamard test~\cite{cleve_quantum_1998}, shown in
-    figure~\ref{fig:tomography} (a). Here the expectation of observable $\hat O$ on the oscillator, $\langle \hat O\rangle=\mathrm{Tr}(\hat O\rho_\mathrm{osc})$, 
+    figure~\ref{fig:tomography} (a). Here the expectation of value due to the operator $\hat O$ on the oscillator, $\langle \hat O\rangle=\mathrm{Tr}(\hat O\rho_\mathrm{osc})$, 
     is recovered through exclusive measurements of the ancilla qubit after qumode-dependent phase ``kick-backs'' are applied. 
-    The Hadamard test has the convenient relation between computational basis measurements of the ancilla, and the expectation of the state-under-test observable, $\langle\hat\sigma_z\rangle = \mathrm{Re}\big[\mathrm{Tr}(\hat O\rho_\mathrm{osc})\big]$.\\
+    The Hadamard test has the convenient relation between computational basis measurements of the ancilla, and the applied operator, $\langle\hat\sigma_z\rangle = \mathrm{Re}\big[\mathrm{Tr}(\hat O\rho_\mathrm{osc})\big]$.\\
     Full state tomography may now be formulated by repeat measurements of the conditional displacement operation, 
     $\hat O = e^{-i\theta}\hat D(\beta)$, to recover the characteristic function, defined as $\chi =
     \mathrm{Tr}(D(\beta)\rho_\mathrm{osc})$, $\beta$ is a complex parameter with displacement magnitude, $|\beta|$, and displacement axis, $\arg(\beta)$.
@@ -394,12 +394,19 @@ well-placed for studying methods for scaling hybrid-system control.
 
 \section{\textbf{Virtual Distillation}}
 \label{sec:virtual_distillation}
-- Motivation for applying QEM on our system. \\
-    - For NISQ era, pre FTQC, still methods to improve viability. \\
-- In our use case, we are interested in: few required resources, and need compatibility with DV and CV systems. Particularly without need to discretize our oscillator, like e.g. GKP. \\
-- Summary of what we will discuss in this chapter, highlighting preliminary results on DV subsystem.\\
 
-Here we develop experimental tools for demonstrating VD on the discrete variable portion of the full hybrid system.
+With access to noisy, intermediate-scale quantum information processors, the
+natural question is whether useful computations may be executed, without
+requiring full fault-tolerant error correction codes. 
+In this section, we explore a resource-efficient error mitigation technique, known
+as virtual distillation, that can dramatically suppress the effect of errors on
+the final measured outcome for expectation value problems.\\
+This sections starts with outlining the goals of quantum error mitigation (QEM),
+with the following section giving details on the virtual distillation method. We
+then present an experimental demonstration suppressing errors a single qubit system. 
+We finish this section with a discussion on future plans, and the extension of virtual distillation to hybrid
+CV-DV systems.
+
 \subsection{Error Mitigation}
 \label{sec:QEM}
 Noise coupled to a quantum system results in unintended coherent, and incoherent
@@ -407,35 +414,47 @@ evolution. Deviations of the realised state from the target state are known as
 errors, and, if left unchecked, lead to the failure of quantum algorithms. 
 This failure can either be due to a reduction of signal to noise ratio, or a
 bias in the measured expectation value, resulting in misleading conclusions. 
-Ultimately, the goal of quantum error correction, QEC, is to detect and correct
-these errors through embedding information in a larger Hilbert space~\cite{qec_review}.
+Ultimately, the goal of quantum error correction (QEC) is to detect and correct
+these errors through embedding information in larger Hilbert spaces~\cite{qec_review}.
 Full QEC will allow for the execution of arbitrarily long algorithms ensuring errors (of
 up to a certain distance) do not accumulate over time. However, current QEC
 methods require large overheads in both qubit number and circuit depth, and are
-therefore not feasible on current quantum hardware. Furthermore, QEC is
+therefore not feasible on current quantum hardware~\cite{}~\cite{is this fair to say?}. \\
+
+Furthermore, QEC is
 formulated for digital ``gate-based'' quantum computers, which although promise
 to be universal, pay for that privilege in often inefficient decompositions of
 target unitaries into a discrete set of gates. 
 This poses an opportunity for
 near term devices to show quantum advantage using either short depth,
-uncorrected circuits, or analog quantum simulators, which although not
-universal, can provide meaningful results for specific problems~\cite{nisq_review}. Particularly,
+uncorrected circuits, or analog quantum simulators consisting of tailored, often
+continuous, unitary evolution~\cite{nisq_review}. Particularly,
 phrasing the problem in terms of expectation values of an observable on a
 physical final state, rather than a sequence of measurements on a set of logical
-state, allows for a more efficient use of resources. As a tactile example,
+states, allows for a more efficient use of resources. As a tactile example,
 consider the problem of finding the ground state energy of a Hamiltonian. This
 can be done by preparing a trial state, and directly measuring the expectation
 value of the Hamiltonian on that state, building up statistics over many
-samples~\cite{variational_qc_review}. Increasing the number of samples will reduce the statistical error,
-however, if the trial state is not prepared perfectly due to either
-environmental noise, or to imperfect application of unitary evolutions, the
-measured expectation value will be biased. 
-To this end, quantum error
-mitigation (QEM) techniques have been developed to reduce the bias of measured
-expectation value of an observable at the expense of requiring more samples. 
+samples~\cite{variational_qc_review}. \\
+
+However, the impact of errors on uncorrected computation must be carefully managed.
+Uncertainty of the approximated expectation value due to averaging over a finite
+number of discrete samples, known as shot-noise, may be arbitrarily reduced by
+increasing the samples, $N$. However, due to imperfect execution of a given
+circuit, and coupling to the environment, there will be some systematic shift of
+the estimated average value ideal value in the noise-less limit. This shift, or
+bias, of the approximated observable may be reduced by the application of
+quantum error
+mitigation (QEM) techniques. \\ 
 Reference~\cite{cai_quantum_2023} defines QEM as
-``... algorithmic schemes that reduce the noise-induced bias in the expectation value by postprocessing outputs from an ensemble of circuit runs, using circuits at the same noise level as the original unmitigated circuit or above.''
-This highlights the crux of how information on the system is collected by a QEM implementation, which I shall explore with the following thought experiment on the ``perfect'' QEM algorithm.\\
+``... algorithmic schemes that reduce the noise-induced bias in the expectation
+value by postprocessing outputs from an ensemble of circuit runs, using circuits
+at the same noise level as the original unmitigated circuit or above.''
+This highlights the main distinction to QEC protocols: the physical noisy state
+is never corrected (often it is in fact degraded through the use of QEM) ---
+rather the output from the noisy circuits is manipulated and postprocessed in
+such a way that we \textit{effectively} recover an expectation value with
+suppressed deviation from the ideal value.\\
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=0.5\linewidth]{figures/pdf_figure/ch6/qem_schem.pdf
@@ -444,14 +463,29 @@ This highlights the crux of how information on the system is collected by a QEM 
     \caption{
     \todo{ Integrate figure into main text.}
     $\rho = 0.1\rho_\mathrm{id}+0.9 \rho_\mathrm{err}$. Blue curve is PDF for $N$ shots, green is PDF for ideal shots, with $N_\mathrm{id} = 0.1N$.\\
-    A schematic explanation of the goal of quantum error mitigation. Deviations of the measured expectation value of an observable $\hat O$ on a noisy state, $\rho$, and on the ideal state $\rho_\mathrm{id}$ may be separated into components originating from shot noise, and from an underlying bias. Shot noise sets the variance of the distribution of estimated expectation values, while the underlying bias shifts the center of the distribution. Error mitigation reduces bias at the cost of increasing variance. Here we demonstrate this by the ideal QEM method introduced in \S~\ref{sec:QEM}. The underlying noisy state is given by $\rho = (1-p)\rho_\mathrm{id} + p\rho_\mathrm{err}$. $N$ shots are taken measuring $\mathrm{Tr}(\hat O \rho)$. The ideal QEM flags and discards shots originating from $\rho_\mathrm{err}$, leaving $(1-p)N$ shots of the ideal state to estimate $\langle \hat O \rangle$.
+    A schematic explanation of the goal of quantum error mitigation. Deviations of the measured expectation value of an operator $\hat O$ on a noisy state, $\rho$, and on the ideal state $\rho_\mathrm{id}$ may be separated into components originating from shot noise, and from an underlying bias. Shot noise sets the variance of the distribution of estimated expectation values, while the underlying bias shifts the center of the distribution. Error mitigation reduces bias at the cost of increasing variance. Here we demonstrate this by the ideal QEM method introduced in \S~\ref{sec:QEM}. The underlying noisy state is given by $\rho = (1-p)\rho_\mathrm{id} + p\rho_\mathrm{err}$. $N$ shots are taken measuring $\mathrm{Tr}(\hat O \rho)$. The ideal QEM flags and discards shots originating from $\rho_\mathrm{err}$, leaving $(1-p)N$ shots of the ideal state to estimate $\langle \hat O \rangle$.
         }
     \label{fig:qem}
 \end{figure}
+\todo{rethink narrative here}
+% To exemplify the typical cost of QEM, we will consider the fictitious ``perfect'' mitigation algorithm:
+% Consider the problem of measuring the expectation value of an observable $\hat{O}$ on the target state $\rho_{id} = \ket{\psi_{id}}\bra{\psi_{id}}$. The state is prepared by a quantum circuit, which due to noise, instead prepares the mixed state $\rho = (1-\lambda) \rho_{id} + \lambda \rho_{err}$, where $\rho_{err}$ is some collection of error states $\rho_{err}=\frac{1}{\mathcal{N}}\sum_i \lambda_i \ket{\psi_{i}}\bra{\psi_{i}}$, where $\mathcal{N}$ is some normalisation factor. Each measurement of the observable $\hat{O}$ on the noisy state $\rho$ will return a value $o_i$, and the average of these measurements will converge to the expectation value $\langle \hat{O} \rangle = \mathrm{Tr}[\hat{O}\rho]$. Given $S$ total samples, the final result will be,
+% \begin{equation}
+% \langle \hat{O} \rangle = \frac{1}{S} \left(\sum_{i=1}^{S_{id}} o_i + \sum_{j=1}^{S_{err}} o_j\right),
+% \end{equation}
+% where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement
+% outcome from the ideal and error states respectively, with $S = S_{id} +
+% S_{err}$. The bias in the measured expectation value from the ideal is
+% thus \todo{Need to check accuracy and narrative here}
+% $\frac{S_{err}}{S}(\mathrm{Tr}[\hat{O}\rho_{err}] -
+% \mathrm{Tr}[\hat{O}\rho_{id}] )$.
+% The ``perfect'' QEM somehow has knowledge of, and records, the associated final
+% pure state with the measured sample. If the pure state was the ideal state
+% $\rho_{id}$, it keeps the measured outcome, while if the state was contained
+% within $\rho_{err}$, the outcome is discarded. As such, the bias in the
+% estimated expectation value is entirely suppressed, however, the shot-noise is
+% increased, as $S_{id} \leq S$. Many QEM methods operate in a similar (yet not as perfect) manner --- the 
 
-Consider the problem of measuring the expectation value of an observable $\hat{O}$ on the target state $\rho_{id}$. The state is prepared by a quantum circuit, which due to noise, instead prepares the mixed state $\rho = (1-\lambda) \rho_{id} + \lambda \rho_{err}$, where $\rho_{err}$ is the error state. Each measurement of the observable $\hat{O}$ on the noisy state $\rho$ will return a value $o_i$, and the average of these measurements will converge to the expectation value $\langle \hat{O} \rangle = \mathrm{Tr}[\hat{O}\rho]$. Given $S$ total samples, the final result will be,
-$$ \langle \hat{O} \rangle = \frac{1}{S} \left(\sum_{i=1}^{S_{id}} o_i + \sum_{j=1}^{S_{err}} o_j\right),$$
-where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement outcome from the ideal and error states respectively, with $S = S_{id} + S_{err}$. The bias in the measured expectation value from the ideal is then given by contributions from the samples $S_{err}$. An ideal QEM algorithm would flag these error samples, and remove them from the final average, resulting in a bias free expectation value using the restricted samples $S_{id}$.\\
 - Finish argument about ideal QEM \\
 - Summary of QEM method types (quick overview) and transfer sentence to VD purity type approach. \\
 - Why VD:\\
@@ -460,102 +494,141 @@ where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement
     - exchanges additional copies/sampling/circuit resources for reduced bias with fixed length (given copy and register size) derangement and measure at end\\
     - is therefore interesting for the multi-register and eventually hybrid architecture considered here.\\
 
+Error mitigation protocols are diverse in their resource efficiency, assumptions
+on error-types, and scaling with system size. In this thesis, we consider the
+virtual
+distillation
+protocol~\cite{cotler_quantum_2019,koczor_exponential_2021,huggins_virtual_2021}, a QEM method, applicable to both general Hilbert spaces,
+including both DV and CV systems, with few assumptions on the underlying noise
+model~\cite{koczor_dominant_2021,foldager_can_2024}. The following section gives details on the mechanism and practical
+circuits.
+
 \subsection{Virtual Distillation Protocol}
 \label{sec:vir_dist_theory}
-- Quick description of goal of purification method (first line of theory), and any particular merit of method e.g. very weak constraints on noise type, highlight we explore one of the failure cases in exp demo.\\
-- We will present some background theory on VD, to rationalise the action of the circuit decomposition, taken from references...\\
-- We present with exp demo on minimal DV system of two-copies. \\
-- And propose future extensions to the hybrid system. \\
 
-\subsubsection{Theory}
-\todo{This is rough notes. Be selective of what to present, rationalising by: 1) understanding action of applied circuit, 2) requirement for understanding experimental demo.}\\
-- narrative should be how we go from $\rho \rightarrow \rho^k/\rm{Tr}(\rho^k)$ \\
-- Followed by when this fails \\
-Estimate expectation value of observable on a state without ever physically preparing the state.
-Purification here refers to approaching the dominant pure state of a mixed state. The $k$th degree purified state is given by,
+Virtual distillation is a purification-based QEM, utilising $k$-copies of a circuit to reduce the final bias of the measured expectation value of a noisy state, $\rho$. The term \textit{purification} is used to signify that the method effectively approximates the pure state closest to $\rho$, with the underlying assumption that the dominant eigenvector of $\rho$ approximates the ideal pure state, $\rho_\mathrm{id}=\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}}$. 
+The validity of this approximation is explored in detail in reference~\cite{koczor_dominant_2021}, where they derive a bound for the deviation between the ideal state and dominant eigenvector, termed the ``coherent mismatch'', $c$. This error provides the noise-floor for purification based techniques. Favourably, for many error models and circuit types, $c$ is negligible to relevant applications, and in fact scales inversely proportionally to the number of qubits in a single copy, $N$, for fixed depth circuits.\\
+The purified state may be accessed by,
 \begin{equation}
-    \rho_\mathrm{corrected}^{(k)}=\frac{\rho^k}{\mathrm{Tr}[\rho^k]}=\sum_{i=1}^{d} \frac{\lambda_i }{\sum_{i=1}^d \lambda_i^k} \ket{\psi_i}\bra{\psi_i},
+    \label{eqn:purification}
+    \rho_\mathrm{pur}(k) = \frac{\rho^k}{\mathrm{Tr}[\rho^k]},
 \end{equation}
-where $d$ is the dimension of the Hilbert space, $\lambda_i$ are the eigenvalues of $\rho$, and $\ket{\psi_i}$ are the corresponding eigenvectors. If we assume that one eigenvalue is dominant, $\lambda_1 \gg \lambda_{i>1}$, then the normalised purified state exponentially approaches the dominant eigenvector, $\rho_\mathrm{corrected}^{(k)} \to \ket{\psi_1}\bra{\psi_1}$, as $k$ increases.
-The hope, which we shall verify in section XX on coherent mismatch, is that the dominant eigenvector of the noisy state closely approximates the ideal state, and therefore effective meaurements on the purified state yield accurate expectation values of the ideal state.
-The estimated expectation value of measuring an observable, $\hat{O}$, on this purified state is then,
+where the denominator acts as a normalisation factor, and for $k=2$ is the usual definition for the purity of a mixed state. To elucidate the claim that this is the form of the purified state, we expand the spectrum of $\rho$, assuming that the dominant eigenvector is the ideal state, 
 \begin{equation}
-    \langle\hat{O}\rangle_\mathrm{corrected}=\mathrm{Tr}[\hat{O}\rho_\mathrm{corrected}^{(k)}]=\frac{\mathrm{Tr}[\hat{O}\rho^k]}{\mathrm{Tr}[\rho^k]}.
+\rho = \lambda_\mathrm{id} \ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}} + \sum_{i=1}^{2^N-1}\lambda_i\ket{\psi_i}\bra{\psi_i},
 \end{equation}
-Next, how to access this corrected state on which to make these measurements? Kozcor and Huggins show that this can be accessed without explicit preparation of the purified state. Instead the numerator and denominator may be found through preparing $k$ copies of the noisy state, applying some derangement operation to entangle all copies together, and measuring the desired observable on one of the copies. This can be understood through the following identity,
+with $\lambda_\mathrm{id} > \lambda_i$ for all $i$, and from normalisation, $\lambda_\mathrm{id}+\sum_{i=1}^{2^N-1}\lambda_i = 1$.
+Inserting this expansion into equation~\ref{eqn:purification}, we find,
 \begin{equation}
-    \mathrm{Tr}[\hat{O}\rho^k]=\mathrm{Tr}[\hat{O}^iS^{(k)}\rho^{\otimes k}],
+    \rho_\mathrm{pur}(k) = \frac{1}{\mathcal{N}}\left( \lambda_\mathrm{id}^k\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}} + \sum_{i=1}^{2^N-1}\lambda_i^k\ket{\psi_i}\bra{\psi_i} \right),
 \end{equation}
-where $S^{(k)}$ is the derangement operator, which permutes the $k$ copies of the state, and $\hat{O}^i$ is the observable acting on the $i$th copy. We shall define the derangement operator explicitly as the cyclic permutation of $k$ objects,
+with normalisation factor $\mathcal{N} = \lambda_\mathrm{id}^k  + \sum_{i=1}^{2^N-1}\lambda_i^k$. The exponentiation acts to relatively attenuate all error eigenvalues compared to $\lambda_\mathrm{id}$, with the limit in $k$ recovering the pure ideal state, $\lim_{k\rightarrow\infty}\rho_\mathrm{pur}(k)=\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}}$.\\
+The remaining question is how can we experimentally access $\rho_\mathrm{pur}(k)$? In references~\cite{koczor_exponential_2021,huggins_virtual_2021}, it is shown that the expectation value of the purified state with respect to the applied operator $\hat O$ is,
 \begin{equation}
-    S^{(k)}\ket{\psi_1}\otimes\ket{\psi_2}\otimes...\otimes\ket{\psi_k}=\ket{\psi_2}\ket{\psi_3}\otimes...\otimes\ket{\psi_k}\otimes\ket{\psi_1}.
+    \label{eqn:pure_observable}
+    \langle\hat{O}\rangle_\mathrm{pur}=\mathrm{Tr}[\hat{O}\rho_\mathrm{pur}(k)]=\frac{\mathrm{Tr}[\hat{O}\rho^k]}{\mathrm{Tr}[\rho^k]},
 \end{equation}
-\todo{Move following to appendix, or cut.}\\
-Huggins provides a proof of this identity, which I reproduce here for the simple example of $k=2$.   The derangement operator for two copies is simply the swap operator, $S^{(2)}=\mathrm{SWAP}$, and we will assume the observable acts only on the first copy, giving $\hat{O}^1 = \hat{O}\otimes\mathbb{I}$. The identity is then,
-\begin{align}
-    \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
-    &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1,k_2}} \bra{i_1}\hat{O}\ket{k_1}\delta_{i_2,k_2}
-    \bra{k_1, k_2}S^{(2)}\ket{j_1,j_2}\bra{j_1}\rho\ket{i_1}\bra{j_2}\rho\ket{i_2}\\
-    &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1, k_2}} \hat{O}_{i_1, k_1}\delta_{i_2,k_2}\delta_{k_1,j_2}\delta_{k_2,j_1}\rho_{j_1,i_1}\rho_{j_2,i_2}
-\end{align}
-and contracting the Kronecker deltas, we find,
-\begin{align}
-    \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
-    &= \sum_{\substack{i_1,j_1, j_1}} \hat{O}_{i_1, j_2}\rho_{j_1,i_1}\rho_{j_2,j_1}\\
-    &= \mathrm{Tr}[\hat{O}\rho^2],
-\end{align}
-with the last equality following from the definition of matrix multiplication. \\
-\todo{======================================================}\\
-The denominator of the corrected expectation value is found by replacing the observable with the identity and measuring the expectation value of the derangement operator on $k$ copies of the noisy state.\\
-Access to this corrected expectation value is then possible if we can measure the multi-qubit observable $\hat{O}^iS^{(k)}$ on $k$ copies of the noisy state. \\
+and crucially may be estimated without ever physically preparing $\rho_\mathrm{pur}(k)$.  
+Instead the numerator and denominator may be found through preparing $k$-copies
+of the noisy state, applying some derangement operation to entangle all copies
+together, and measuring the desired observable on one of the copies. This can be
+understood through the following identity\footnote{\todo{Is this footnote on wrong page?} Huggins~\cite{huggins_virtual_2021} provides a proof of the identity, which we give an example for the case $k=2$ in appendix~\ref{app:derange}.} providing the numerator,
+\begin{equation}
+    \mathrm{Tr}[\hat{O}\rho^k]=\mathrm{Tr}[\hat{O}^{(i)}\hat S^{(k)}\rho^{\otimes k}],
+\end{equation}
+where $\hat S^{(k)}$ is the derangement operator, which permutes the $k$ copies of the state, and $\hat{O}^{(i)}$ is the operator acting on the $i$th copy. 
+The denominator of the corrected expectation value is found by replacing the operator with the identity operator.
+There is some freedom in the form of the derangement, here we shall give it explicitly as the cyclic permutation of $k$ objects,
+\begin{equation}
+    \label{eqn:derange}
+    \hat S^{(k)}\ket{\psi_1}\otimes\ket{\psi_2}\otimes...\otimes\ket{\psi_k}=\ket{\psi_2}\ket{\psi_3}\otimes...\otimes\ket{\psi_k}\otimes\ket{\psi_1}.
+\end{equation}
+Practically, if we can perform this multi-copy derangement, $\hat S^{(k)}$, and single-copy operator $\hat{O}^{(i)}$, on $k$-copies of the noisy state, we can postprocess a collection of circuit repetitions to recover the $k$th purified expectation value $\langle\hat O \rangle_\mathrm{pur}$. In the following section we provide two possible approaches for implementing these unitaries and measurements, and give explicit circuit decompositions for both.
 
-Next, need to derive scaling of bias with copy number. And finally, discuss the variance of measurement with shot number (and how this scales with copy number?).
+\todo{Add sample efficiency point}
 
-\subsubsection{Circuit}
+
+\subsubsection{Circuits}
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=1.0\linewidth]{figures/pdf_figure/ch6/virdist_circuits.pdf
         }
     \end{center}
     \caption{
-        \todo{Figure: circuit diagram for ancilla based virtual distillation, Hadamard test, derangement operator by CSwap}\\
-        \todo{Update B circ to pi/4 gates}\\
-        Two circuits for implementing virtual distillation. (a) Hadamard test method using controlled derangement, $S_k$, over $k$ copies, and controlled observable, $\hat O$, applied on one copy. The ancilla qubit is measured to extract $\mathrm{Tr}(\hat O\rho^k)$. Repeating the circuit without the controlled observable measures normalisation factor, $\mathrm{Tr}(\rho^k)$, used to recover the virtually purified result, $\langle \hat O\rangle_\mathrm{VD}$. (b) Two-copy implementation using a $B$-circuit, here decomposed into two entangling gates and single qubit phase gates. Measurement of both qubits in the computational basis, and classical postprocessing recovers $\mathrm{Tr}(Z\rho^2)$ and purity, $\mathrm{Tr}(\rho^2)$, used to recover $\langle Z \rangle_\mathrm{VD}$.
+        Two circuits for implementing virtual distillation. (a) Hadamard test
+        method using controlled derangement, $\hat S^{(k)}$, over $k$ copies,
+        and controlled operator, $\hat O$, applied on one copy. The ancilla
+        qubit is measured to extract $\mathrm{Tr}(\hat O\rho^k)$. Repeating the
+        circuit without the controlled operator measures normalisation factor,
+        $\mathrm{Tr}(\rho^k)$, used to recover the virtually purified result,
+        $\langle \hat O\rangle_\mathrm{pur}$. (b) Two-copy implementation using
+        a $B$-circuit, here decomposed into two entangling gates and single
+        qubit phase gates. Measurement of both qubits in the computational
+        basis, and classical postprocessing recovers $\mathrm{Tr}(\hat Z\rho^2)$
+        and purity, $\mathrm{Tr}(\rho^2)$, used to recover $\langle \hat Z
+        \rangle_\mathrm{pur}$.
         }
     \label{fig:virdist_circuit}
 \end{figure}
-- We present two possible physical implementations of VD. The first being a scalable strategy based on Hadamard test with ancilla, second being resource efficient but limited to XXX check flow chart in Huggins.\\
-    - Present ancilla method, describing circuit and maybe give intuition on phase kick back to ancilla?\\
-    - B-matrix protocol, if we diagonalise both S and SO, no need for ancilla and we get purity and TrO immediately. \\
 
-We will discuss two methods of implementing this measurement. First, a Hadamard test, given in Fig.~\ref{fig:hadamard_test}, which uses an ancilla qubit to control the derangement and desired observable operation, and then subsequent measurement of the ancilla only. The second method, given in Fig.~\ref{fig:b_matrix}, uses a B-matrix to implement the derangement operation, and then measures the observable on one of the copies. 
-The Hadamard test is more general, as it can be used to measure any observable, however, it requires an additional ancilla qubit and controlled operations. The B-matrix method has better qubit number and operation depth efficiency, however, requires simultaneous diagonalisation of $S^{(k)}$ and $\hat{O}^iS^{(k)}$, which is not always possible for an arbitrary observable and derangement operator.
+We discuss two methods of implementing virtual distillation. The first being a general approach able to act on arbitrary Hilbert spaces using Hadamard tests, and the second being more resource efficient, however not simply generalisable to arbitrary sizes of each copy, and to multi-qubit observables.\\
 
-% \subsubsection{Noise Floor}
-% \begin{itemize}
-%     \item Discuss noisefloor (coherent mismatch)
-%     \item Go into detail on how spatially correlated noise can be an issue here, discuss network paper as opposite case
-% \end{itemize}
-% \todo{Figure: Simulation of vir dist on various noise models.}
+We begin with the Hadamard test, to build further intuition on virtual distillation based on similar circuit topology discussed in~\S~\ref{sec:tomography} for CV-tomography.
+The circuit for virtual distillation via an ancilla is shown in figure~\ref{fig:virdist_circuit} (a).
+The derangement and desired operator, $\hat O$, are applied conditioned on
+the ancilla qubit, with a final measurement only made on the ancilla. The
+circuit is repeated for $N_\mathrm{shot}$ times and the outcomes are averaged to
+recover the estimated real part of the numerator in equation~\ref{eqn:pure_observable}. The circuit is again repeated
+$N_\mathrm{shot}$ times with the controlled operator replaced with the
+identity operator. Subsequent averaging recovers the denominator, which may then
+be used to recover $\mathrm{Re}\big[\langle \hat{O} \rangle_\mathrm{pur}\big]$.\\
+The controlled derangement operation may be decomposed into a series of
+controlled-swap gates~\cite{koczor_exponential_2021}, which for DV systems may
+be decomposed to native single and two-qubit gates accessible on the ion trap
+platform. For CV-systems, the derangement can be decomposed to a series of
+Fredkin gates~\cite{fredkin_conservative_1982, gao_entanglement_2019}, which in
+turn may be accessible by either
+controlled-beam-splitters~\cite{gan_hybrid_2020,jeon_two-mode_2025} and/or
+controlled-parity operations~\cite{choi_multimode_2026}.\\
 
-% Comparing to bias reduction with copy number, describe that this exponential reduction cannot hold indefinitely for arbitrary noise models, and that there is a noise floor. For a single qubit with depolarising noise, there is no such floor, however we note the effect of coherent mismatch, which for copys consisting of multiple qubits, even depol noise leads to coherent drift.
-% Furthermore, we are particularly interested in the effect of correlated noise on the separate registers leading to irremovable errors. Correlated noise, as discussed in chapter 5, can dominate the error budget when copies are stored in similar physical locations, and within shared noisy fields. The practical mitigation for this is to separate the copies in space and environment, e.g. over a network (tenzan paper), or to decorrelate errors through local randomisation (randomised compiling, twirling, etc). We shall explore the effect of correlated noise on virtual distillation practically in section x. But first, here we show an analytic model of the effect of correlated noise on a small two-copy system.
-% Describe model of k-copy clifford noise, likening it to a deep random circuit ran in parallel on each copy. This is the same noise channel enforced through k-copy twirling. As with chapter 5, this gives us a natural language of irreps to describe the action of our noise channel on an initial state. We may describe the B matrix in this irrep basis, and show the final populations of the copies after derangment. Finally, taking the <Z> measurements on both copies, we can recover the corrected expectation value of the observable. To conform with RB type decay curves, we show the decay of the corrected expectation value with number of Cliffords. We note that another view of this data, more common in error mitigation literature, is a plot of error suppression versus total error ?lambda. From chapter 5 we now that the uncorrected single qubit decay is given by,
-% \begin{equation}
-%     \langle Z \rangle_\mathrm{uncorrected} = (1-\varepsilon_{dp}-\varepsilon_{corr})^m,
-% \end{equation}
-% where $\varepsilon_{dp}$ is the depolarising error rate, $\varepsilon_{corr}$ is the correlated error rate, and $m$ is the number of Cliffords applied. This is plotted as dashed line.
-% The corrected expectation value is given by $<Z>_{corrected}$ in the presence of both depolarising and correlated noise.
-% We can see from the figure that under dominant depolarising noise we see a large suppression of error, however, under dominant correlated noise, the error is largely unaffected. Analytically we find that the final decay of the corrected expectation value is given by,
-% \begin{equation}
-%     \langle Z \rangle_\mathrm{corrected} = \frac{2\left(\left(1-\varepsilon_{corr}\right)\left(1-\varepsilon_{dp}\right)\right)^m}{1+\left(1-\varepsilon_{dp}\right)^{2m}},
-% \end{equation}
-% We see that for $\varepsilon_{corr} = 0$, we recover the expected exponential suppression of error with copy number, however, for $\varepsilon_{corr} > 0$, we find a noise floor in the corrected expectation value.
-% Extend this analysis to copy number $k$. Currently, I get here through Liouville form, is there a way to go directly from symmetry on the states?
+The second method, known as the ``$B$-matrix''~\cite{huggins_virtual_2021}, is slightly more resource efficient, not requiring ancilla qubits, however does not simply scale for $k>2$, and for non-$Z$ measurements. The approach recognises that for $k=2$ the symmetrised computational observable $\hat Z_2 = \frac{1}{2}(\hat Z\hat I + \hat I\hat Z)$ commutes with the SWAP operator, $\hat S^{(2)}$, and consequently so too do both observables required for virtual distillation,
+\begin{equation}
+    [\hat S^{(2)}, \hat Z_2 \hat S^{(2)}] = 0.
+\end{equation}
+Thus the two observables possess a common eigenbasis and may be simultaneously diagonalised by a single matrix\footnote{Note, we use a different convention than reference~\cite{huggins_virtual_2021}. This is done for a simpler decomposition to native gates on our apparatus.}, 
+\begin{equation}
+        \hat B =
+    \begin{pmatrix}
+        -1&0&0&0\\
+        0&\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0\\
+        0&-\frac{i}{\sqrt{2}}&\frac{i}{\sqrt{2}}&0\\
+        0&0&0&-i\\
+    \end{pmatrix}.
+\end{equation}
+In the computational eigenbasis, the observable is now given by,
+\begin{align}
+    \langle \hat A \rangle &= \mathrm{Tr}[\hat B^\dagger\hat D\hat B\rho],\\
+    &= \sum_{x\in\{0,1\}^2}d_x p(x),
+\end{align}
+where $\hat A$ is either $\hat Z_2$ or $\hat S^{(2)}\hat Z_2$, and the second line follows by the definition of the diagonalised operator $\hat D=\sum_xd_x\ket{x}\bra{x}$, and $p(x)=\bra{x}\hat B\rho \hat B^\dagger\ket{x}$ is the probability of observing computational state $\ket{x}$ after the basis change given by $\hat B$.\\
+As a result, both numerator and denominator from equation~\ref{eqn:pure_observable} may be simultaneously measured by computational basis measurements after applying a two-qubit basis rotation\footnote{Although not discussed here, this method scales simply to $Z$ measurements on copies containing multiple qubits through parallel pairwise rotations~\cite{huggins_virtual_2021}.}. 
+The values are related to computational expectation values by,
+\begin{align}
+    \mathrm{Tr}[\hat Z \rho^2] &= \frac{1}{2}(1-\langle \hat Z\otimes \hat I\rangle +\langle \hat I\otimes \hat Z\rangle +\langle \hat Z\otimes \hat Z\rangle  ), \\
+    \mathrm{Tr}[\rho^2] &= \frac{1}{2}(\langle \hat Z\otimes \hat I\rangle + \langle \hat I\otimes \hat Z\rangle).
+\end{align}
+Figure~\ref{fig:virdist_circuit} (b) shows the $B$-matrix decomposition into native gates to our platform. A demonstration of this simple two-copy example of virtual distillation is given in the following section.
 
 \subsection{Experimental Demonstration}
-- First: establish that you can implement VD: implementation, calibration for minimal demo.\\
-- Second: use it to answer a scientific question: Injection of correlated noise \\
+
+This section begins with experimental details on implementing virtual
+distillation via the $B$-matrix decomposed to native $R_{xx}$ gates and single qubit
+phase shifts. With this protocol we can then study the efficacy of virtual distillation in two
+different noise regimes --- independent depolarisation, and correlated noise due
+to common random-unitary noise (see~\S~\ref{sec:common_noise} for the noise
+model). This work provides evidence of the performance of virtual distillation
+under realistic structured errors originating from fluctuations of a common
+external field.
 
 \begin{figure}
     \begin{center}

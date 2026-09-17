@@ -257,3 +257,27 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     which for a single mode, $a^\dagger = b^\dagger$, is the squeezing operation, and for two modes, is the two-mode squeezing.\\
     Similar arguments hold for $m=2$, where now the $A_2$ cross terms appear off-resonant by..., and the on resonant cross terms in $A_3$ coherently sum over time yielding effective 3rd order bosonic operators, such as the tri-squeezing interaction.\\
     Higher order error term scaling...
+
+
+
+    \section{Derangement for $k=2$}
+    \label{app:derange}
+    Huggins~\cite{huggins_virtual_2021} provides a proof of the identity given
+    in equation~\ref{eqn:derange}, which I reproduce here for the simple example
+    of $k=2$.   The derangement operator for two copies is simply the swap
+    operator, $S^{(2)}=\mathrm{SWAP}$, and we will assume the observable acts
+    only on the first copy, giving $\hat{O}^1 = \hat{O}\otimes\mathbb{I}$. The
+    identity is then,
+    \begin{align}
+        \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
+        &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1,k_2}} \bra{i_1}\hat{O}\ket{k_1}\delta_{i_2,k_2}
+        \bra{k_1, k_2}S^{(2)}\ket{j_1,j_2}\bra{j_1}\rho\ket{i_1}\bra{j_2}\rho\ket{i_2}\\
+        &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1, k_2}} \hat{O}_{i_1, k_1}\delta_{i_2,k_2}\delta_{k_1,j_2}\delta_{k_2,j_1}\rho_{j_1,i_1}\rho_{j_2,i_2}
+    \end{align}
+    and contracting the Kronecker deltas, we find,
+    \begin{align}
+        \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
+        &= \sum_{\substack{i_1,j_1, j_1}} \hat{O}_{i_1, j_2}\rho_{j_1,i_1}\rho_{j_2,j_1}\\
+        &= \mathrm{Tr}[\hat{O}\rho^2],
+    \end{align}
+    with the last equality following from the definition of matrix multiplication. \\
