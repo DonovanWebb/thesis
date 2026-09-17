@@ -614,6 +614,7 @@ where $\hat A$ is either $\hat Z_2$ or $\hat S^{(2)}\hat Z_2$, and the second li
 As a result, both numerator and denominator from equation~\ref{eqn:pure_observable} may be simultaneously measured by computational basis measurements after applying a two-qubit basis rotation\footnote{Although not discussed here, this method scales simply to $Z$ measurements on copies containing multiple qubits through parallel pairwise rotations~\cite{huggins_virtual_2021}.}. 
 The values are related to computational expectation values by,
 \begin{align}
+    \label{eqn:VD_ZZ}
     \mathrm{Tr}[\hat Z \rho^2] &= \frac{1}{2}(1-\langle \hat Z\otimes \hat I\rangle +\langle \hat I\otimes \hat Z\rangle +\langle \hat Z\otimes \hat Z\rangle  ), \\
     \mathrm{Tr}[\rho^2] &= \frac{1}{2}(\langle \hat Z\otimes \hat I\rangle + \langle \hat I\otimes \hat Z\rangle).
 \end{align}
@@ -643,13 +644,39 @@ external field.
     \label{fig:bmatrix_calib}
 \end{figure}
 \subsubsection{Virtual Distillation on Two Copies}
-- Minimal demo is two single qubits. \\
-- B circuit demo, consisting of pi-4 gates.\\
-- For single qubit phase push, we use single addressing, push phase on AOD. \\
-- pi/4 gates are walsh 1, calibrated through applying two consecutive and applying same protocol as described in characterisation.\\
-- Give exact numbers for pi/4 gates: loops, power, detuning, duration, fidelity, ramp duration. \\
-- B circuit phases were checked using heuristic method, applying differential single qubit rotation to each. \\
-- Mention here that tomography would have been better? \\
+
+We demonstrate virtual distillation on two-copies of a single qubit using via the $B$-circuit shown in figure~\ref{fig:virdist_circuit} (b). 
+The qubit is encoded in the optical transition
+$\ket{4S_{1/2},m_j=-\frac{1}{2}}\leftrightarrow\ket{3D_{5/2},m_j=-\frac{5}{2}}$ of a $^{40}\text{Ca}^+$ ion 
+in a quantising field of $\sim5$~G. Gates are driven using 729-nm light focussed onto the ions by the
+individual addressing system detailed in~\S~\ref{sec:Single Addressing
+System}. Two-qubit entangling gates of the form $R_{xx}$ are implemented using
+Walsh-1 MS gates on the in-phase upper radial mode, as described in~\S~\ref{sec:MS}\todo{characterisation section}. For this decomposition, we specifically require $R_{xx}(\frac{\pi}{4})$-gates. For calibration, we apply two consecutive $R_{xx}(\frac{\pi}{4})$ pulses and use the same partial state-tomography protocol~\cite{sackett_experimental_2000} as summarised by equation~\ref{eq:Fidelity}.\\
+\todo{Rough until ==========}\\
+\todo{rid:}
+We use $XX~\unit{\micro\watt}$ total beam power, $XX~\unit{\kilo\hertz}$ detuning from motional mode, $XX~\unit{\micro\second}$ ramp duration, $XX~\unit{\micro\second}$ FWHM pulse duration. Ramp needed due to nearby motional mode. We calibrate Stark-shift using a SDF on a single ion, and find a calibrated shift of $XX~\unit{\kilo\hertz}$. We track this Stark-shift and update the phase of SP AOM to ensure the laser and ions remain in the same frame for the second pulse.
+With these settings we measure a two-pulse fidelity of $9X(X)$, corresponding to a single $\frac{\pi}{4}$-pulse fidelity of $9X(X)$.\\
+\todo{=============}\\
+Single qubit rotations around
+$\hat\sigma_z$ are executed virtually. As we require non-common $\hat\sigma_z$ phase shifts on the two qubits, we update the relative phases of the two
+pairs of RF tones applied to the acousto-optic deflector. As these single-qubit gates are virtual, we expect negligible error contributions.\\
+The final
+computational-basis measurements are executed by state-dependent fluorescence,
+described in~\S~\ref{sec:readout}. 
+From the single-shot outcomes, the joint probabilities $p_{ij}$, with $i,j\in\{0,1\}$ denoting the bright and dark states of ions 1 and 2 are recovered, respectively.
+The required expectation values given in equations~\ref{eqn:VD_ZZ} are then simply,
+\begin{align}
+\langle Z\otimes I\rangle
+    &= p_{00}+p_{01}-p_{10}-p_{11},\\
+\langle I\otimes Z\rangle
+    &= p_{00}-p_{01}+p_{10}-p_{11},\\
+\langle Z\otimes Z\rangle
+    &= p_{00}-p_{01}-p_{10}+p_{11}.
+\end{align}
+\todo{Quick description of heuristic tests, maybe a plot also}\\
+To initially verify the physical implementation of the $B$-circuit is correct, a heuristic test is used: applying differential single qubit rotation to each. Quick note on tomography. \\
+
+
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/noise_injection.pdf
