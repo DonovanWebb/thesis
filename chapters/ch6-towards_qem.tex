@@ -597,6 +597,7 @@ The second method, known as the ``$B$-matrix''~\cite{huggins_virtual_2021}, is s
 \end{equation}
 Thus the two observables possess a common eigenbasis and may be simultaneously diagonalised by a single matrix\footnote{Note, we use a different convention than reference~\cite{huggins_virtual_2021}. This is done for a simpler decomposition to native gates on our apparatus.}, 
 \begin{equation}
+    \label{eqn:bmatrix}
         \hat B =
     \begin{pmatrix}
         -1&0&0&0\\
@@ -625,38 +626,35 @@ Figure~\ref{fig:virdist_circuit} (b) shows the $B$-matrix decomposition into nat
 This section begins with experimental details on implementing virtual
 distillation via the $B$-matrix decomposed to native $R_{xx}$ gates and single qubit
 phase shifts. With this protocol we can then study the efficacy of virtual distillation in two
-different noise regimes --- independent depolarisation, and correlated noise due
-to common random-unitary noise (see~\S~\ref{sec:common_noise} for the noise
+different noise regimes --- independent depolarisation, and correlated errors due
+to common random-unitaries (see~\S~\ref{sec:common_noise} for the noise
 model). This work provides evidence of the performance of virtual distillation
 under realistic structured errors originating from fluctuations of a common
 external field.
 
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
-        }
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/bmat_calib.pdf}
     \end{center}
     \caption{
-    \todo{Figure: pi-4 MS gate calibration}. 
-    \todo{Figure: Heuristic signal of B-matrix working}. 
-    \todo{Tomography would be best!}
+        Verification of the physically implemented $B$-circuit. (a-b) Preparing the initial state $\ket{01}$, applying global $R_x(\theta)$ rotations, and measuring the two-qubit joint probabilities provides a clear signal for the correct application of the $B$-matrix. (a) No $B$-circuit is applied. (b) $B$-circuit applied. (c) Globally applied Ramsey experiment followed by the $B$-circuit and subsequent postprocessing to recover the purity and numerator term given by equations~\ref{eqn:VD_ZZ}.
         }
     \label{fig:bmatrix_calib}
 \end{figure}
 \subsubsection{Virtual Distillation on Two Copies}
 
-We demonstrate virtual distillation on two-copies of a single qubit using via the $B$-circuit shown in figure~\ref{fig:virdist_circuit} (b). 
+We demonstrate virtual distillation via the $B$-circuit shown in figure~\ref{fig:virdist_circuit} (b) on two-copies of a single qubit. 
 The qubit is encoded in the optical transition
 $\ket{4S_{1/2},m_j=-\frac{1}{2}}\leftrightarrow\ket{3D_{5/2},m_j=-\frac{5}{2}}$ of a $^{40}\text{Ca}^+$ ion 
 in a quantising field of $\sim5$~G. Gates are driven using 729-nm light focussed onto the ions by the
 individual addressing system detailed in~\S~\ref{sec:Single Addressing
 System}. Two-qubit entangling gates of the form $R_{xx}$ are implemented using
-Walsh-1 MS gates on the in-phase upper radial mode, as described in~\S~\ref{sec:MS}\todo{characterisation section}. For this decomposition, we specifically require $R_{xx}(\frac{\pi}{4})$-gates. For calibration, we apply two consecutive $R_{xx}(\frac{\pi}{4})$ pulses and use the same partial state-tomography protocol~\cite{sackett_experimental_2000} as summarised by equation~\ref{eq:Fidelity}.\\
-\todo{Rough until ==========}\\
-\todo{rid:}
-We use $XX~\unit{\micro\watt}$ total beam power, $XX~\unit{\kilo\hertz}$ detuning from motional mode, $XX~\unit{\micro\second}$ ramp duration, $XX~\unit{\micro\second}$ FWHM pulse duration. Ramp needed due to nearby motional mode. We calibrate Stark-shift using a SDF on a single ion, and find a calibrated shift of $XX~\unit{\kilo\hertz}$. We track this Stark-shift and update the phase of SP AOM to ensure the laser and ions remain in the same frame for the second pulse.
-With these settings we measure a two-pulse fidelity of $9X(X)$, corresponding to a single $\frac{\pi}{4}$-pulse fidelity of $9X(X)$.\\
-\todo{=============}\\
+Walsh-1 MS gates on the in-phase upper radial mode, as described in~\S~\ref{sec:MS}\todo{characterisation section}. For this decomposition, we specifically require $R_{xx}(\frac{\pi}{4})$-gates. To calibrate these gates, two consecutive $R_{xx}(\frac{\pi}{4})$ pulses are applied, and a partial state-tomography protocol~\cite{sackett_experimental_2000} is utilised (as summarised by equation~\ref{eq:Fidelity}).\\
+% rid: 129415 2026-06-06
+After calibration, the Walsh-1 $R_{xx}(\frac{\pi}{4})$ gate settings are the following:
+$21~\unit{\micro\watt}$ total 729-nm beam power, $-15~\unit{\kilo\hertz}$ detuning from in-phase upper radial motional mode, $10~\unit{\micro\second}$ ramp duration (ramped on and off for both arms of the Walsh), and a $67.5~\unit{\micro\second}$ FWHM pulse duration for each arm. The total pulse duration including ramp durations is then $155~\unit{\micro\second}$.
+Stark-shifts must be carefully calibrated to ensure consecutive MS gates have spin-phases set relative to the qubit. The Stark-shift for this power is calibrated using an SDF on a single ion (described in~\S~\ref{sec:SDF}), finding a shift of $2.49~\unit{\kilo\hertz}$. This phase is accounted for by updating the RF-tones on the SP AOM for subsequent pulses.
+With these settings we measure a fidelity for two-consecutive $R_{xx}(\frac{\pi}{4})$ gates of $\mathcal{F}_2 = 96.0(8)\%$, with population component of $p_{01}+p_{10}=0.010(3)$, and parity contrast of $C=0.93(2)$. The inferred single $R_{xx}(\frac{\pi}{4})$  gate fidelity, assuming depolarising errors, is then $\mathcal{F} = 98.0(4)\%$. \\
 Single qubit rotations around
 $\hat\sigma_z$ are executed virtually. As we require non-common $\hat\sigma_z$ phase shifts on the two qubits, we update the relative phases of the two
 pairs of RF tones applied to the acousto-optic deflector. As these single-qubit gates are virtual, we expect negligible error contributions.\\
@@ -666,6 +664,7 @@ described in~\S~\ref{sec:readout}.
 From the single-shot outcomes, the joint probabilities $p_{ij}$, with $i,j\in\{0,1\}$ denoting the bright and dark states of ions 1 and 2 are recovered, respectively.
 The required expectation values given in equations~\ref{eqn:VD_ZZ} are then simply,
 \begin{align}
+    \label{eqn:bmat_jointprobs}
 \langle Z\otimes I\rangle
     &= p_{00}+p_{01}-p_{10}-p_{11},\\
 \langle I\otimes Z\rangle
@@ -673,9 +672,29 @@ The required expectation values given in equations~\ref{eqn:VD_ZZ} are then simp
 \langle Z\otimes Z\rangle
     &= p_{00}-p_{01}-p_{10}+p_{11}.
 \end{align}
-\todo{Quick description of heuristic tests, maybe a plot also}\\
-To initially verify the physical implementation of the $B$-circuit is correct, a heuristic test is used: applying differential single qubit rotation to each. Quick note on tomography. \\
-
+To initially verify the performance of the physical implementation of the $B$-circuit, two heuristic tests are used\footnote{Process-tomography would be ideal for this two-qubit implementation, however we have not yet implemented this on our apparatus.}.
+First, we want a clear indication that the transformation due to the applied $B$-circuit matches the convention given by the $B$-matrix in equation~\ref{eqn:bmatrix}.
+Inspecting the
+$B$-matrix, we see the central block acts
+distinctly on the $\{\ket{01},\ket{10}\}$ subspace. As such, a method that preferentially probes this subspace would give a clear signal for conformity between the applied $B$-circuit and the desired $B$-matrix.
+To access this subspace, a singly addressed $R_x(\pi)$-pulse is applied to prepare the initial state $\ket{01}$. A global $R_x(\theta)$ is then applied with variable rotation angle, $\theta$. Figure~\ref{fig:bmatrix_calib} (a) shows the measured two-qubit populations as a function of $\theta$ without the $B$-circuit applied. Panel (b) shows the populations with the global rotation and the $B$-circuit applied. The solid lines correspond to the expected populations inferred from equation~\ref{eqn:bmatrix}, while points are experimental data with $N=150$ samples per probed rotation angle. We can see good qualitative agreement between the observed data, and the desired behaviour suggesting the phase relationships enforced by the $B$-circuit indeed conform with the ideal $B$-matrix.\\
+The second heuristic check verifies the conventions for recovering the numerator
+and denominator in equations~\ref{eqn:VD_ZZ}, from the qubits measured
+joint probabilities, given in equations~\ref{eqn:bmat_jointprobs}. 
+To test this, a simple Ramsey experiment is performed on both
+qubits simultaneously. The qubits are initially prepared in $\ket{00}$. 
+A global pulse $R_x(\frac{\pi}{2})$ is then applied, followed by a final analysis pulse
+$R_\phi(\frac{\pi}{2})$, applied with variable spin-phase, $\phi$. After these
+pulses, the $B$-circuit is applied, and the two-qubit populations are measured. 
+As the two qubits remain in identical pure-states to one another (up to errors in the parallel single-qubit
+ gates), we expect the inferred purity to remain unity,
+$\mathrm{Tr}[\rho^2]=1$. Given this, we expect the recovered numerator term to
+be equivalent to typical Ramsey oscillations on a single qubit,
+\begin{equation}
+    \mathrm{Tr}[\hat Z \rho^2] = \langle \hat Z \rangle_\phi = -\cos(\phi).
+\end{equation}
+Figure~\ref{fig:bmatrix_calib} (c) displays the post-processed purity and numerator terms extracted as a function of analysis pulse phase, $\phi$, with solid lines showing the expected behaviour of the ideal $B$-circuit. Again we see excellent conformity between experimental and desired behaviour, giving evidence that we are successfully applying virtual-distillation.\\
+In the next section we use virtual distillation for its intended purpose --- to suppress the impact of errors. We will discuss the efficacy of virtual distillation under two different noise models, providing experimental evidence for both.
 
 \begin{figure}
     \begin{center}
@@ -688,6 +707,7 @@ To initially verify the physical implementation of the $B$-circuit is correct, a
                }
     \label{fig:bmatrix_injection}
 \end{figure}
+
 \subsubsection{Virtual Distillation under Correlated Errors}
 - We target demo of suppression, of controlled injected errors, that are quantified by k-copy RB. \\
 - Give explicit form for suppression of correlated and uncorrelated channels. Look at IRO presentation\\
@@ -695,6 +715,10 @@ To initially verify the physical implementation of the $B$-circuit is correct, a
 - Give motivation of why k-copy RB is particularly relevant to untwirled VD\\
 - Present data in form of single qubit decay rates.\\
 - Give analysis and fits. \\
+
+To quantify the achieved suppression of errors through the use of virtual distillation, we must characterise and inject errors with a known structure. As such, applying randomised Clifford sequences, the same as those used in standard randomised benchmarking (RB), are a convenient method for error injection. Figure~\ref{fig:bmatrix_injection} (a) shows the circuit implemented for controlled error injection --- random Clifford sequences with a final inverting gate are applied in parallel to both qubit copies, effectively driving a local depolarising channel. The $B$-circuit is then applied followed by $\hat Z$ measurements. Postprocessing of the two-qubit joint probabilities recover the error-suppressed expectation value, $\langle \hat Z\rangle_\mathrm{pur}$. The sequence is repeated without the applied $B$-circuit to recover the standard single-qubit exponential decays, $\langle Z\rangle_\mathrm{raw}$ and the corresponding error-per-Clifford, $\varepsilon_c$.
+
+In this section we explore two different error channels. First we apply independent single-qubit Clifford sequences to each copy 
 
 \subsection{Outlook}
 - Summary of what we have shown experimentally so far.\\
