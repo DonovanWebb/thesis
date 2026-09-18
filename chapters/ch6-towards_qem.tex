@@ -716,13 +716,48 @@ In the next section we use virtual distillation for its intended purpose --- to 
 - Present data in form of single qubit decay rates.\\
 - Give analysis and fits. \\
 
-To quantify the achieved suppression of errors through the use of virtual distillation, we must characterise and inject errors with a known structure. As such, applying randomised Clifford sequences, the same as those used in standard randomised benchmarking (RB), are a convenient method for error injection. Figure~\ref{fig:bmatrix_injection} (a) shows the circuit implemented for controlled error injection --- random Clifford sequences with a final inverting gate are applied in parallel to both qubit copies, effectively driving a local depolarising channel. The $B$-circuit is then applied followed by $\hat Z$ measurements. Postprocessing of the two-qubit joint probabilities recover the error-suppressed expectation value, $\langle \hat Z\rangle_\mathrm{pur}$. The sequence is repeated without the applied $B$-circuit to recover the standard single-qubit exponential decays, $\langle Z\rangle_\mathrm{raw}$ and the corresponding error-per-Clifford, $\varepsilon_c$.
+To quantify the achieved suppression of errors through the use of virtual
+distillation, we must characterise and inject errors with a known structure. As
+such, applying randomised Clifford sequences, the same as those used in standard
+randomised benchmarking (RB), are a convenient method for error injection. As such we frame the task of quantifying error suppression in the context of single-qubit RB by comparing the physical error-per-Clifford, $\varepsilon_\mathrm{raw}$, to the effective error-per-Clifford of the purified observables, $\varepsilon_\mathrm{pur}$.\\
+Figure~\ref{fig:bmatrix_injection} (a) shows the circuit implemented for
+controlled error injection --- random Clifford sequences with a final inverting
+gate are applied in parallel to both qubit copies, effectively driving
+depolarising channels with total circuit error rate variable by sequence length.
+The $B$-circuit is then applied followed by $\hat Z$ measurements.
+Postprocessing of the two-qubit joint probabilities recover the error-suppressed
+expectation value, $\langle \hat Z\rangle_\mathrm{pur}$, and
+$\varepsilon_\mathrm{pur}$ may be inferred by its exponential decay.\\
+The sequence is repeated without the applied $B$-circuit to recover the standard single-qubit
+exponential decays, $\langle Z\rangle_\mathrm{raw}$ and the corresponding
+error-per-Clifford, $\varepsilon_\mathrm{raw}$.\\
+Crucially, with this circuit we may explore two different error regimes: first,
+we may apply independent single-qubit Clifford sequences to each copy, which
+independently twirls each copy, with the aim of decorrelating errors between the
+two copies~\cite{Clifford twirling}. Decorrelating errors between qubits ensures the dominant eigenvector of the noisy state is well approximates the ideal pure state, $\rho_\mathrm{id}$.\\
+In contrast, the second regime we consider purposefully appling the same
+Clifford sequence to each qubit, i.e. by enforcing $C_{i,L}=C_{i,R}$.
+In this regime, any coherent errors acting globally on both qubits will not be
+decorrelated. These errors cause common drifts of the dominant eigenvector away from the ideal pure state, and as such significantly degrade the performance of
+virtual distillation. Correlated errors arising from global coherent noise is
+studied in the previous chapter. Applying identical parallel Clifford gates
+simplifies the structure of the error channel, but retains these adverse
+correlations. Such correlated errors are commonplace in the ion-trap platform
+due to noisy global control fields interacting with the ions. Under parallel
+Clifford twirling, these global control field errors appear as the random common
+unitary channel, discussed in~\S~\ref{sec:common_noise}. As such, the relative proportions of uncorrelated, depolarising type errors, to correlated \emph{common noise} errors is required for predicting the performance of virtual distillation. The task of quantifying these errors is addressed in~\S~\ref{ch:k-copy}, and we shall use the developed protocol here.\\
 
-In this section we explore two different error channels. First we apply independent single-qubit Clifford sequences to each copy 
+\todo{correlated error channel with VD, do this in words? already done? -> need to show we dont get suppression}\\
+\todo{Then give analytic form for RB type experiment decomposed to error-per-cliffords}\\
+\todo{Next give description of experimental data, using detuning to add correlated error, and extracted error per clifford from k-copy RB}\\
+\todo{Discuss that even in the case of independent Clifford twirling, we still measure a substantial correlated error.}\\
+\todo{Discuss extracted e-raw and e-pur and the suppression factor}\\
+\todo{Summarise section, leaning on importance of local twirling.}\\
 
 \subsection{Outlook}
 - Summary of what we have shown experimentally so far.\\
 - Linker sentence to next experimental steps. \\
+
 \subsubsection{Extending to $>2$ copies}
     - plan for controlled swap implementation, requirements for this. \\
     - How many gates, what fidelity we need to ensure tot-err $<1$ for derangement side. \\
