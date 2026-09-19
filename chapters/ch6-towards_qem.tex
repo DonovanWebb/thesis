@@ -35,7 +35,8 @@ distillation~\cite{cotler_quantum_2019,koczor_exponential_2021,huggins_virtual_2
  We provide an initial demonstrations
 of this protocol applied to a discrete-variable only system, and explore the
 performance under both local depolarising and correlated noise due to a common
-fluctuating control field (see \S~\ref{sec:common_noise} for details).\\  
+fluctuating control field (see \S~\ref{sec:common_noise} for details).
+\todo{add harder connection to k-copy chapter.}\\  
 We conclude this chapter with a discussion on the application of virtual
 distillation to hybrid systems, presenting a scalable method within reach of our
 apparatus.
@@ -486,7 +487,7 @@ suppressed deviation from the ideal value.\\
 % estimated expectation value is entirely suppressed, however, the shot-noise is
 % increased, as $S_{id} \leq S$. Many QEM methods operate in a similar (yet not as perfect) manner --- the 
 
-- Finish argument about ideal QEM \\
+- Finish argument about ideal QEM \todo{Use term Oracle}\\
 - Summary of QEM method types (quick overview) and transfer sentence to VD purity type approach. \\
 - Why VD:\\
     - operates on noisy physical states rather than requiring logical encoding;\\
@@ -506,8 +507,19 @@ circuits.
 \subsection{Virtual Distillation Protocol}
 \label{sec:vir_dist_theory}
 
-Virtual distillation is a purification-based QEM, utilising $k$-copies of a circuit to reduce the final bias of the measured expectation value of a noisy state, $\rho$. The term \textit{purification} is used to signify that the method effectively approximates the pure state closest to $\rho$, with the underlying assumption that the dominant eigenvector of $\rho$ approximates the ideal pure state, $\rho_\mathrm{id}=\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}}$. 
-The validity of this approximation is explored in detail in reference~\cite{koczor_dominant_2021}, where they derive a bound for the deviation between the ideal state and dominant eigenvector, termed the ``coherent mismatch'', $c$. This error provides the noise-floor for purification based techniques. Favourably, for many error models and circuit types, $c$ is negligible to relevant applications, and in fact scales inversely proportionally to the number of qubits in a single copy, $N$, for fixed depth circuits.\\
+Virtual distillation is a purification-based QEM, utilising $k$-copies of a
+circuit to reduce the final bias of the measured expectation value of a noisy
+state, $\rho$. The term \textit{purification} is used to signify that the method
+effectively approximates the pure state closest to $\rho$, with the underlying
+assumption that the dominant eigenvector of $\rho$ approximates the ideal pure
+state, $\rho_\mathrm{id}=\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}}$. 
+The validity of this approximation is explored in detail in
+reference~\cite{koczor_dominant_2021}, where they derive a bound for the
+deviation between the ideal state and dominant eigenvector, termed the
+``coherent mismatch'', $c$. This error provides the noise-floor for purification
+based techniques. Favourably, for many error models and circuit types, $c$ is
+negligible to relevant applications, and in fact scales inversely proportionally
+to the number of qubits in a single copy, $N$, for fixed depth circuits.\\
 The purified state may be accessed by,
 \begin{equation}
     \label{eqn:purification}
@@ -520,6 +532,7 @@ where the denominator acts as a normalisation factor, and for $k=2$ is the usual
 with $\lambda_\mathrm{id} > \lambda_i$ for all $i$, and from normalisation, $\lambda_\mathrm{id}+\sum_{i=1}^{2^N-1}\lambda_i = 1$.
 Inserting this expansion into equation~\ref{eqn:purification}, we find,
 \begin{equation}
+    \label{eqn:rho_pur}
     \rho_\mathrm{pur}(k) = \frac{1}{\mathcal{N}}\left( \lambda_\mathrm{id}^k\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}} + \sum_{i=1}^{2^N-1}\lambda_i^k\ket{\psi_i}\bra{\psi_i} \right),
 \end{equation}
 with normalisation factor $\mathcal{N} = \lambda_\mathrm{id}^k  + \sum_{i=1}^{2^N-1}\lambda_i^k$. The exponentiation acts to relatively attenuate all error eigenvalues compared to $\lambda_\mathrm{id}$, with the limit in $k$ recovering the pure ideal state, $\lim_{k\rightarrow\infty}\rho_\mathrm{pur}(k)=\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}}$.\\
@@ -534,6 +547,7 @@ of the noisy state, applying some derangement operation to entangle all copies
 together, and measuring the desired observable on one of the copies. This can be
 understood through the following identity\footnote{\todo{Is this footnote on wrong page?} Huggins~\cite{huggins_virtual_2021} provides a proof of the identity, which we give an example for the case $k=2$ in appendix~\ref{app:derange}.} providing the numerator,
 \begin{equation}
+    \label{eqn:vd_identity}
     \mathrm{Tr}[\hat{O}\rho^k]=\mathrm{Tr}[\hat{O}^{(i)}\hat S^{(k)}\rho^{\otimes k}],
 \end{equation}
 where $\hat S^{(k)}$ is the derangement operator, which permutes the $k$ copies of the state, and $\hat{O}^{(i)}$ is the operator acting on the $i$th copy. 
@@ -545,6 +559,7 @@ There is some freedom in the form of the derangement, here we shall give it expl
 \end{equation}
 Practically, if we can perform this multi-copy derangement, $\hat S^{(k)}$, and single-copy operator $\hat{O}^{(i)}$, on $k$-copies of the noisy state, we can postprocess a collection of circuit repetitions to recover the $k$th purified expectation value $\langle\hat O \rangle_\mathrm{pur}$. In the following section we provide two possible approaches for implementing these unitaries and measurements, and give explicit circuit decompositions for both.
 
+\todo{Add linker to when correlated errors cause issues}
 \todo{Add sample efficiency point}
 
 
@@ -589,7 +604,7 @@ platform. For CV-systems, the derangement can be decomposed to a series of
 Fredkin gates~\cite{fredkin_conservative_1982, gao_entanglement_2019}, which in
 turn may be accessible by either
 controlled-beam-splitters~\cite{gan_hybrid_2020,jeon_two-mode_2025} and/or
-controlled-parity operations~\cite{choi_multimode_2026}.\\
+controlled-parity operations~\cite{choi_multimode_2026}.\todo{link to above CV table}.\\
 
 The second method, known as the ``$B$-matrix''~\cite{huggins_virtual_2021}, is slightly more resource efficient, not requiring ancilla qubits, however does not simply scale for $k>2$, and for non-$Z$ measurements. The approach recognises that for $k=2$ the symmetrised computational observable $\hat Z_2 = \frac{1}{2}(\hat Z\hat I + \hat I\hat Z)$ commutes with the SWAP operator, $\hat S^{(2)}$, and consequently so too do both observables required for virtual distillation,
 \begin{equation}
@@ -696,67 +711,135 @@ be equivalent to typical Ramsey oscillations on a single qubit,
 Figure~\ref{fig:bmatrix_calib} (c) displays the post-processed purity and numerator terms extracted as a function of analysis pulse phase, $\phi$, with solid lines showing the expected behaviour of the ideal $B$-circuit. Again we see excellent conformity between experimental and desired behaviour, giving evidence that we are successfully applying virtual-distillation.\\
 In the next section we use virtual distillation for its intended purpose --- to suppress the impact of errors. We will discuss the efficacy of virtual distillation under two different noise models, providing experimental evidence for both.
 
+\subsubsection{Virtual Distillation under Correlated Errors}
+
+To quantify the achieved suppression of errors through the use of virtual
+distillation, we must characterise and inject errors with a known structure. As
+such, applying randomised Clifford sequences, the same as those used in standard
+randomised benchmarking (RB), are a convenient method for known error injection.
+We frame the task of quantifying error suppression in the context of
+single-qubit RB by comparing the exponential decay due to some
+error-per-Clifford, $\varepsilon_\mathrm{raw}$, to the effective decay profile
+of the error-mitigated observable, $\langle \hat Z\rangle_\mathrm{pur}$.\\
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/noise_injection.pdf
         }
     \end{center}
     \caption{
-        \todo{Figure: Cicruit diagram of RB + VD, exp data for noise floor for two copy B-matrix, with and without spatial correlations}\\
-        Verifying the performance of virtual distillation under either dominant local depolarising or correlated errors. Structured errors were injected through a fixed frequency detuning of the 729-nm laser, and the application of a sequence of random Clifford gates. In the case that identical Clifford gates, $C_{i,L} = C_{i,R}$, are applied on both qubits, the detuning error is twirled to a \emph{common noise} channel, while in the case that Clifford gates are sampled independently for both copies, the detuning is twirled to local depolarisation channels. The local and correlated injected error-per-Clifford for both regimes are quantified using \emph{k-copy} RB. Panel (a) shows the circuit of injected errors followed by the $B$-circuit. Panel (b) shows the effective reduction in error-per-Clifford by applying the virtual distillation circuit. The green points correspond to the raw single-qubit decay due to the physical errors, the solid green line is a fit of this decay to measure a total error-per-Clifford. The red and blue points correspond to the error mitigated $Z$ observables for the dominant correlated errors and local depolarising errors respectively. The dotted lines correspond to the expected error mitigated single qubit decays inferred by the model given in equation~\ref{eqn:vd_correlated}, and the error-per-Cliffords measured by \emph{k-copy} RB.
+        Verifying the performance of virtual distillation under either dominant
+        local depolarising or correlated errors. 
+        Panel (a) shows the circuit of
+        injected errors followed by the $B$-circuit. Panel (b) shows the
+        effective suppression of errors in the single-qubit $\hat Z$ observable using virtual distillation on two-copies. 
+        The green points correspond to the raw
+        single-qubit decay due to the physical errors, with the solid green line being an exponential fit.
+        The dotted lines correspond to the expected error mitigated single qubit
+        decays inferred by the model given in equation~\ref{eqn:vd_correlated},
+        and the error-per-Cliffords measured by \emph{k-copy} RB.
+        The red and
+        blue points correspond to the error mitigated $Z$ observables for in the
+        regime of dominant correlated errors and local depolarising errors
+        respectively.
                }
     \label{fig:bmatrix_injection}
 \end{figure}
 
-\subsubsection{Virtual Distillation under Correlated Errors}
-- We target demo of suppression, of controlled injected errors, that are quantified by k-copy RB. \\
-- Give explicit form for suppression of correlated and uncorrelated channels. Look at IRO presentation\\
-- Mention this is found by B circuit applied in Pauli basis and using eqn kcopy pops\\
-- Give motivation of why k-copy RB is particularly relevant to untwirled VD\\
-- Present data in form of single qubit decay rates.\\
-- Give analysis and fits. \\
-
-To quantify the achieved suppression of errors through the use of virtual
-distillation, we must characterise and inject errors with a known structure. As
-such, applying randomised Clifford sequences, the same as those used in standard
-randomised benchmarking (RB), are a convenient method for error injection. As such we frame the task of quantifying error suppression in the context of single-qubit RB by comparing the physical error-per-Clifford, $\varepsilon_\mathrm{raw}$, to the effective error-per-Clifford of the purified observables, $\varepsilon_\mathrm{pur}$.\\
 Figure~\ref{fig:bmatrix_injection} (a) shows the circuit implemented for
 controlled error injection --- random Clifford sequences with a final inverting
 gate are applied in parallel to both qubit copies, effectively driving
-depolarising channels with total circuit error rate variable by sequence length.
+depolarising channels with total circuit error rate variable by sequence length, $m$.
 The $B$-circuit is then applied followed by $\hat Z$ measurements.
 Postprocessing of the two-qubit joint probabilities recover the error-suppressed
-expectation value, $\langle \hat Z\rangle_\mathrm{pur}$, and
-$\varepsilon_\mathrm{pur}$ may be inferred by its exponential decay.\\
-The sequence is repeated without the applied $B$-circuit to recover the standard single-qubit
-exponential decays, $\langle Z\rangle_\mathrm{raw}$ and the corresponding
+expectation value, $\langle \hat Z\rangle_\mathrm{pur}$\\
+The RB protocol is repeated without the applied $B$-circuit to recover the standard single-qubit
+exponential decays, $\langle \hat Z\rangle_\mathrm{raw}$, and the corresponding
 error-per-Clifford, $\varepsilon_\mathrm{raw}$.\\
 Crucially, with this circuit we may explore two different error regimes: first,
 we may apply independent single-qubit Clifford sequences to each copy, which
-independently twirls each copy, with the aim of decorrelating errors between the
-two copies~\cite{Clifford twirling}. Decorrelating errors between qubits ensures the dominant eigenvector of the noisy state is well approximates the ideal pure state, $\rho_\mathrm{id}$.\\
-In contrast, the second regime we consider purposefully appling the same
+independently twirls the error channel acting on each qubit. This decorrelates errors between the
+two copies~\cite{Clifford twirling} leading to favourable performance of virtual distillation.\\
+In contrast, with the second regime we purposefully apply the same
 Clifford sequence to each qubit, i.e. by enforcing $C_{i,L}=C_{i,R}$.
-In this regime, any coherent errors acting globally on both qubits will not be
-decorrelated. These errors cause common drifts of the dominant eigenvector away from the ideal pure state, and as such significantly degrade the performance of
-virtual distillation. Correlated errors arising from global coherent noise is
-studied in the previous chapter. Applying identical parallel Clifford gates
-simplifies the structure of the error channel, but retains these adverse
-correlations. Such correlated errors are commonplace in the ion-trap platform
+In this regime, any common-mode coherent errors acting on both qubits will not be
+decorrelated by the parallel twirling (see \emph{k-copy} twirling in chapter~\ref{ch:k-copy}). These correlated errors can significantly degrade the performance of virtual distillation. We shall spend some time now to make this connection concrete.\\
+Consider the $k$-copy mixed state, $\rho^{(k)}$, for a common-mode error channel,
+\begin{equation}
+    \rho^{(k)} = \sum_{i}\kappa_i \rho_i^{\otimes k}.
+\end{equation}
+Applying virtual distillation, using equation~\ref{eqn:pure_observable}, and the identity equation~\ref{eqn:vd_identity}, the effective measured observable is,
+\begin{equation}
+    \langle\hat{O}\rangle_\mathrm{pur,c}=\frac{\sum_{i}\kappa_i\mathrm{Tr}[\hat{O}\rho_i^k]}{\sum_i\kappa_i\mathrm{Tr}[\rho_i^k]},
+\end{equation}
+where crucially the trace operator is now within the sum.
+Clearly, the components $\kappa$ are not exponentiated in the same manner as the $\lambda$ coefficients of the previously purified density matrix, $\rho_\mathrm{pur}$, in equation~\ref{eqn:rho_pur} --- as such the dominant state is no longer effectively amplified through derangement. In the specific case of common random unitary noise, discussed in~\S~\ref{sec:common_noise}, $\rho_i$ remains a pure state, $\rho_i = U_i\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}}U_i^\dagger$, as such the effective observable reduces to $\langle\hat O\rangle_\mathrm{pur,c}= \mathrm{Tr}[\hat O \rho] = \langle\hat O\rangle_\mathrm{raw}$, where $\langle\hat O\rangle_\mathrm{raw}$ is the expectation value of a single copy, $\rho=\sum_i\kappa\rho_i$. For this particular correlated error channel, virtual distillation is entirely ineffective.\\
+Such correlated errors are commonplace in the ion-trap platform
 due to noisy global control fields interacting with the ions. Under parallel
-Clifford twirling, these global control field errors appear as the random common
-unitary channel, discussed in~\S~\ref{sec:common_noise}. As such, the relative proportions of uncorrelated, depolarising type errors, to correlated \emph{common noise} errors is required for predicting the performance of virtual distillation. The task of quantifying these errors is addressed in~\S~\ref{ch:k-copy}, and we shall use the developed protocol here.\\
+Clifford twirling, these global control field errors are simplified such that they can be quantified by a single value ``correlated error-per-Clifford'', $\varepsilon_\mathrm{corr}$, as discussed extensively in~\S~\ref{sec:common_noise}. As such, the relative proportions of uncorrelated, depolarising type errors, to correlated \emph{common noise} errors is required for predicting the performance of virtual distillation. The task of quantifying these errors is the subject of chapter~\ref{ch:k-copy}, and we shall use the developed \emph{k-copy} RB protocol here.\\
+The analytic decay of the mitigated observable $\langle \hat Z\rangle_\mathrm{pur}$ when the two-copies are subject to a shared error channel, $\Lambda_T$, consisting of \emph{k-copy} twirled common random unitaries (parameterised by $\varepsilon_\mathrm{corr}$) and local depolarising errors on the two copies (parameterised by $\varepsilon_L$ and $\varepsilon_R$) is given by,
+\begin{equation}
+\label{eqn:vd_correlated}
+\langle \hat Z\rangle_\mathrm{pur} = (1-2\varepsilon_\mathrm{corr})^m\frac{\cosh\left(m\left(\varepsilon_L-\varepsilon_R\right)\right)}{\cosh\left(m\left(\varepsilon_L+\varepsilon_R\right)\right)},
+\end{equation}
+where we have assumed small errors.
+This is simply calculated by extending equation~\ref{eqn:rb_meas} to include the action of the $B$-matrix, here using the superoperator form,
+\begin{equation}
+    p_{LR}=\langle\langle L,R|B\Lambda_T^m|00\rangle\rangle,
+\end{equation}
+where $p_{LR}$ is the probability of measuring bit string $LR\in\{0,1\}^2$. The effective observable $\langle \hat Z \rangle$ is then recovered by equations~\ref{eqn:bmat_jointprobs}. 
+For small $m$, and assuming small errors, this may be expanded to second order as,
+\begin{equation}
+\langle \hat Z\rangle_\mathrm{pur} \approx 1-2m\varepsilon_\mathrm{corr} - 2m^2\varepsilon_L\varepsilon_R,
+\end{equation}
+where we can see that correlated errors maintain a linear decay, while depolarising errors are suppressed to a quadratic decay. We can also see that in the ideal case of exlusively depolarising type errors of equal magnitude, the effective observable decays as $\langle\hat Z\rangle_\mathrm{pur} = \mathrm{sech}(2m\varepsilon_L)$.\\
+\begin{table}
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Twirling type &$\varepsilon_L$&$\varepsilon_R$ & $\varepsilon_\mathrm{corr}$& $\varepsilon_\mathrm{raw}$\\
+        \hline                                                                                                 
+        Independent &7(1)  & 7(1)  & 4(1) & 11(2)\\
+        Identical   &2.0(4)  &1.4(4)  &9.3(5) & 11.2(6)\\
+        \hline
+    \end{tabular}
+    \end{center}
+    \caption{
+        \todo{Errors found from \emph{k-copy} RB, they are all 1e-3}
+        }
+    \label{tab:VD_k-copy}
+\end{table}
 
-\todo{correlated error channel with VD, do this in words? already done? -> need to show we dont get suppression}\\
-\todo{Then give analytic form for RB type experiment decomposed to error-per-cliffords}\\
-\todo{Next give description of experimental data, using detuning to add correlated error, and extracted error per clifford from k-copy RB}\\
-\todo{Discuss that even in the case of independent Clifford twirling, we still measure a substantial correlated error.}\\
-\todo{Discuss extracted e-raw and e-pur and the suppression factor}\\
-\todo{Summarise section, leaning on importance of local twirling.}\\
+We demonstrate this behaviour experimentally by applying interleaved
+single-qubit Clifford gate sequences on two qubits followed by the derangement
+protocol given in the previous section. The interleaved sequences are
+implemented by alternating the position of the single-ion addressing beam after
+each Clifford, requiring a delay of $\approx 10~\unit{\micro\second}$ between
+gates.
+To ensure a baseline correlated
+unitary error is present, the single-qubit gates comprising the Clifford
+sequence are driven off-resonantly by $\delta = 1~\unit{\kilo\hertz}$. 
+For both identical and independent Clifford twirling, the correlated and
+depolarising errors are quantified by \emph{k-copy} RB, with errors summarised
+in table~\ref{tab:VD_k-copy}. The different twirling approaches change the
+distribution of errors between correlating and depolarising, while retaining a
+consistent total single-qubit error rate. It is interesting to note that the
+independent twirling is not sufficient in this case to entirely decorrelate the
+errors between the two qubits. These errors are used to predict the effective
+error-mitigated decay profiles, and are plotted as a function of sequence
+length, $m$, in figure~\ref{fig:bmatrix_injection} (b). The RB sequences are
+repeated with the $B$-circuit applied, and the postprocessed $\langle \hat Z
+\rangle_\mathrm{pur}$ are plotted. We can see that there is good agreement
+between the expected mitigated decay profiles and the observed data. This
+demonstration highlights the negative impact of correlated errors on the
+performance of virtual distillation, as well as the importance of sufficiently
+decorrelating errors, which we do here by local Clifford twirling.
+
 
 \subsection{Outlook}
 - Summary of what we have shown experimentally so far.\\
 - Linker sentence to next experimental steps. \\
+
+Quantum error mitigation is accessible to near-term quantum computers, under some circumstances allowing for resource-efficient, and substantial reductions in measurement bias. In this section we have provided some background on quantum error mitigation via virtual distillation, highlighting two practical implementations: a Hadamard test, and the $B$-circuit. We demonstrate a physical implementation of the $B$-circuit on the trapped-ion platform, and use the protocol to explore the ability to suppress errors under unfavourable correlated error channels. These demonstrations provide the groundwork for two future research directions --- exploring the practical achievable advantage when extending to more than two copies; and extending to error-mitigation acting on a hybrid system.
 
 \subsubsection{Extending to $>2$ copies}
     - plan for controlled swap implementation, requirements for this. \\
@@ -764,6 +847,28 @@ unitary channel, discussed in~\S~\ref{sec:common_noise}. As such, the relative p
     - Given 98\% how many copies could we go to? Can we estimate shot numbers here? Summary in a table would be nice. \\
     - copy number | derangement gates | circuit fidelity | expected sampling overhead\\
 
+    For $n$ copies of noisy state, $\rho$, will require a minimum of $n-1$ controlled-SWAP gates. We may decompose controlled-SWAP into $11$ $R_{xx}(\frac{\pi}{4})$ gates and at most $7$ single qubit $R_x(\frac{\pi}{2})$ rotations. Assume here that we can implement $R_{xx}(\frac{\pi}{4})$ with $\mathcal{F} = 99\%$, and single qubit gates with $\mathcal{F}=99.9\%$. Table summarises the expected fault number ($n(1-\mathcal{F})$) for the derangement operation. 
+    Comment that errors occurring during derangement may still be suppressed, depending strongly on error structure. As such, it is non-obvious what total fault to tolerate, however we expect $O(1)$ for practically accessible sample number. Make conclusion on table, and state practicality of exploring this in our system (need to improve 2q errors).
+
+\begin{table}
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Copy Num, $k$ & Total $R_{xx}(\frac{\pi}{4})$ & Total $R_x(\frac{\pi}{2})$ & Total Faults \\
+        \hline                                                                                                 
+        2($B$) & 2 & 0 & 0.02\\
+        2 & 22 & 7 & 0.117\\
+        3 & 33 & 14 & 0.234\\
+        4 & 44 & 21 & 0.351\\
+        5 & 55 & 28 & 0.468\\
+        \hline
+    \end{tabular}
+    \end{center}
+    \caption{
+        \todo{Fault for Derangement circuit}
+        }
+    \label{tab:VD_k-copy}
+\end{table}
 \subsubsection{Virtual Distillation on Hybrid Systems}
     - Why important to develop, applications in simulations of QO demo, Feynman, gauge theories. \\
     - Cite Quantum virtual cooling\\

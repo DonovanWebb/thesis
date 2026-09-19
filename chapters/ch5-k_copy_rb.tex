@@ -360,6 +360,7 @@ Comparing to equation~\ref{eqn:Liouville}, the general ensemble of common single
     \tilde\Lambda^\mathcal{S}(\mathcal{E}_\mathcal{A}) &= \mathrm{diag}\Bigl(I_1,~(1-2\varepsilon_{corr}) I_6,~I_1, \\ & (1-6\varepsilon_{corr}) I_2,~(1-2\varepsilon_{corr}) I_6\Bigr).
 \end{split}
 \end{equation}
+\todo{I think AS and SO sectors should not have the same decays. Check this.}
 
 \subsection{Local depolarising noise}
 \label{app:depol_noise}
@@ -398,7 +399,7 @@ we find scalar parameters,
 \end{align}
 To reproduce the decay dynamics observed in the RB sequence, we must consider an initial prepared state, and the final measurement basis.
 For the RB sequence given in figure~\ref{fig:k-copy_circuit}, the initial state is prepared as $\ket{00}$, and the final correlated populations are measured in the computational eigenstates, $\{\ket{00}\leftrightarrow SS, \ket{01}\leftrightarrow SF, \ket{10}\leftrightarrow FS, \ket{11}\leftrightarrow FF\}$, where $S$ and $F$ denote ``success'' and ``failure'' of recovering the target state outcome for each qubit.
-The correlated populations may be given analytically using the derived Liouville operators, and by the vectorized initial and final states,
+The correlated populations may be given analytically using the derived Liouville-space superoperators, and by the vectorized initial and final states,
 \begin{equation}\label{eqn:rb_meas}
     \mathcal{P}_{LR}=\langle\langle L,R|\Lambda_T^m|00\rangle\rangle,
 \end{equation}
