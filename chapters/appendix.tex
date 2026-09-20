@@ -206,7 +206,7 @@ Designing optimal initial and final states, as well as optimal sampling strategi
       &~+ 
       \frac{\hbar \Omega_{\beta}}{2}\hat\sigma_{\beta} \left(\hat a_\beta e^{i(\Delta_\beta t + \phi_\beta)} + \hat a_\beta^\dagger e^{-i(\Delta_\beta t + \phi_\beta)}\right).
     \end{align}
-    The first three terms of the corresponding Magnus expansion are found by inserting $H_\mathrm{2SDF}$ into equations~\ref{eqn:magnus_A}. We shall later rationalise that with certain values of SDF magnitudes, detunings, and phases, we may arbitrarily suppress the higher order terms.\\
+    The first three terms of the corresponding Magnus expansion are found by inserting $\hat H_\mathrm{2SDF}$ into equations~\ref{eqn:magnus_A}. We shall later rationalise that with certain values of SDF magnitudes, detunings, and phases, we may arbitrarily suppress the higher order terms.\\
     The $A_1$ term appears as separable fast
     oscillations in phase space due to each SDF, 
     \begin{equation}
@@ -220,7 +220,9 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     \begin{equation}
     A_2(t) = S_\alpha(t) + S_\beta(t) + X_\mathrm{pair}(t) + X_\mathrm{exch}(t),
     \end{equation}
-    where $S$ denotes ``self-terms'', and $X$ ``cross-terms'' of the two simultaneously applied SDFs. The self-terms, with the form,
+    where $S$ denotes ``self-terms'', and $X$ ``cross-terms'' of the two simultaneously applied SDFs.
+    We label the first cross-term ``pair'' due to the pair creation and annihilation of excitations, and the second group, ``exch'' is labelled due to driving the exchange of excitation. \\
+    The self-terms, with the form,
     \begin{equation}
         S_i(t) = \frac{i\Omega_i^2}{4}\left(\frac{\sin(\Delta_i t)}{\Delta_i^2} - \frac{t}{\Delta_i}\right)
     \end{equation}
@@ -231,33 +233,44 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     system, they may be ignored. If the accumulated phase is spin, or oscillator
     state dependent, then interesting dynamics may be observed, however these
     effects are out of the scope of this thesis. \\
-    The remaining cross-terms contain the 2nd order non-linear bosonic interactions we are interested in emulating.
-    To recover the general family of non-linear bosonic interactions given in table~\ref{tab:gateset},
-    motional phases are set to $\phi_\alpha=0$, $\phi_\beta=\phi$, and spin-conditioning is assumed to be the anti-commuting pair: $\sigma_\alpha=\sigma_x$,
-    $\sigma_\beta = \sigma_y$. We set the detunings of the two SDF to be $\Delta_\beta = m\Delta_\alpha$, where $m$ is
-    some integer. 
-    Expanding the commutator of the cross terms we find,
+    The remaining cross-terms contain the 2nd order non-linear bosonic interactions we are interested in emulating. 
+    We set the two detunings relative to one another by, $\Delta_\beta = m\Delta_\alpha$.
+    Expanding the commutator of the cross terms we find for general $m$ the following interactions, grouped by their effect on the oscillator state,
     \begin{align}
-        X_\mathrm{pair} &= ,\\
-        X_\mathrm{exch} &= ,\\
+        X_\mathrm{pair} &= \frac{i\epsilon_{\alpha\beta\gamma} \Omega_\alpha\Omega_\beta  }{4\Delta }\hat\sigma_\gamma \left(\hat a\hat b e^{i\phi_p}J(m,t)+\hat a^{\dagger}b^\dagger e^{-i\phi_p}J(m,t)^\dagger\right),\\
+        X_\mathrm{exch} &= \frac{i\epsilon_{\alpha\beta\gamma}\Omega_\alpha\Omega_\beta }{8\Delta}\left(\{\hat a, \hat b^\dagger\}e^{i\phi_m}F(m,t) + \{\hat a^\dagger, \hat b \} e^{-i\phi_m}F(m,t)^\dagger\right),
     \end{align}
-    where...
-    We see now the freedom to ``tune'' the desired interaction, if we set $m=+1$, we resonanly drive..., alternatively if we set $m=-1$, we recover...
+    with $\phi_p = \phi_\alpha + \phi_\beta$, and $\phi_m = \phi_\alpha - \phi_\beta$, and $J$ and $F$ containing resonance like terms,
+    \begin{align}
+        J(m,t) &=\frac{1-m}{m}\left(\frac{e^{i(m+1)\Delta t}-1}{(m+1)\Delta t}\right)t,\\
+        F(m,t) &= \left(\frac{m+1}{m}\frac{e^{-i (m-1)\Delta t}-1}{(m-1)\Delta t} + \frac{e^{i\Delta t}-e^{-im\Delta t}}{m\Delta t}\right)t.
+    \end{align}
+    We now may find the effective Hamiltonians governing the dynamic evolution for certain resonance conditions.
     We can convert from the generator form, $A(T)$, to familiar effective 
-    time-independent Hamiltonian, $H_\mathrm{eff}$ for a given time, $T$, by $\hat H_\mathrm{eff} = \frac{i\hbar}{T}A(T)$.\\
-    For $m=+1$, we find that the effective Hamiltonian is,
+    time-independent Hamiltonian, $\hat H_\mathrm{eff}$ for a given time, $T$, by $\hat H_\mathrm{eff} = \frac{i\hbar}{T}A(T)$.\\
+    Taking the limit, $m=-1$, we find $F(-1,t)=0$ and $J(-1,t) = -2it$, leading to a time-linear term $X_\mathrm{pair}$,
+    with effective Hamiltonian,
     \begin{equation}
-        H_\mathrm{eff, exch} = ...
+        \hat H_\mathrm{eff, pair} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma\left(\hat a \hat b e^{i\phi_p'}+\hat a^\dagger \hat b^\dagger e^{-i\phi_p'}\right),
     \end{equation}
-    which for a single mode, $a^\dagger = b^\dagger$, is the parity operation, and for two modes, is the beam splitter.\\
-    For $m=-1$, we find,
+    where $\Omega_2 = \frac{\Omega_\alpha\Omega_\beta}{\Delta}$, and $\phi_p' = \phi_\alpha +\phi_\beta + \frac{\pi}{2}$. For $a^\dagger = b^\dagger$ this is the squeezing interaction, whereas for $a^\dagger \neq b^\dagger$ this is two-mode squeezing.\\
+    Taking the limit, $m=+1$, we find $J(1,t)=0$ and $F(1,t) = -2it\left(1-\mathrm{sinc}(\Delta t)\right)$. If we consider the secular term only, we find the time-linear term $X_\mathrm{exch}$. Now considering the anticommutation relationships between ladder operators we find for $a^\dagger = b^\dagger$, an effective Hamiltonian,
     \begin{equation}
-        H_\mathrm{eff, pair} = ...
+        \hat H_\mathrm{eff, parity} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma\sin(\phi_m) (2\hat a^\dagger \hat a +1),
     \end{equation}
-    which for a single mode, $a^\dagger = b^\dagger$, is the squeezing operation, and for two modes, is the two-mode squeezing.\\
-    Similar arguments hold for $m=2$, where now the $A_2$ cross terms appear off-resonant by..., and the on resonant cross terms in $A_3$ coherently sum over time yielding effective 3rd order bosonic operators, such as the tri-squeezing interaction.\\
-    Higher order error term scaling...
-
+    which is the parity, or in this case ``dispersive'' Hamiltonian due to the spin-conditioning.\\
+    Finally, considering $a^\dagger \neq b^\dagger$, we recover the beamsplitter interaction, with effective Hamiltonian,
+    \begin{equation}
+        \hat H_\mathrm{eff, bs} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma \left(\hat a \hat b^\dagger e^{i\phi_m'}+\hat a^\dagger \hat b e^{-i\phi_m'}\right),
+    \end{equation}
+    with $\phi_m' = \phi_\alpha - \phi_\beta + \frac{\pi}{2}$.\\
+    Similar arguments hold for the higher order terms, where, for example, we recover the tri-squeezing interaction for $m=-2$, with effective Hamiltonian of the form,
+    \begin{equation}
+        \hat H_\mathrm{eff, tri} = \frac{\hbar \Omega_3}{2}\hat\sigma_\beta \left(\hat a^3 e^{i\phi}+\hat a^{\dagger 3}  e^{-i\phi}\right),
+    \end{equation}
+    with $\Omega_3 = \frac{\Omega_\alpha^2\Omega_\beta}{2\Delta^2}$.\\
+    For further details on the use of these higher order effective interactions refer to the following two theses:\cite{bazavan_easy_nodate,saner_quantum_2026}.
+    
 
 
     \section{Derangement for $k=2$}

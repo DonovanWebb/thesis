@@ -33,10 +33,13 @@ mitigation, followed by an outline of virtual
 distillation~\cite{cotler_quantum_2019,koczor_exponential_2021,huggins_virtual_2021}
 --- the specific method considered here.
  We provide an initial demonstrations
-of this protocol applied to a discrete-variable only system, and explore the
-performance under both local depolarising and correlated noise due to a common
-fluctuating control field (see \S~\ref{sec:common_noise} for details).
-\todo{add harder connection to k-copy chapter.}\\  
+of this protocol applied to a discrete-variable only system. We explore the
+impact of structured error channels on the efficacy of virtual distillation,
+particularly focussing on correlated noise due to a common
+fluctuating control field as discussed in the
+chapter~\ref{ch:k-copy}~\S~\ref{sec:common_noise}. We use the \emph{k-copy}
+protocol developed in that chapter to quantify this unfavourable error to
+predict the perfomance of virtual distillation in this context.\\
 We conclude this chapter with a discussion on the application of virtual
 distillation to hybrid systems, presenting a scalable method within reach of our
 apparatus.
@@ -308,13 +311,15 @@ well-placed for studying methods for scaling hybrid-system control.
     
 
 \subsubsection{Squeezing}
-    - \todo{potential plot: check ramp is sufficient by looking at $\sigma_z$ dependence. If want ramp have rid 120238, 119279}\\
+    % - \todo{potential plot: check ramp is sufficient by looking at $\sigma_z$ dependence. If want ramp have rid 120238, 119279}\\
 
     We demonstrate the effective squeezing interaction on a single ion and radial
     motional mode. We are limited to using the
     radial modes due to the geometry single addressing system with respect to
     the trap. We use the upper radial mode with frequency,
-    $\omega_{upper}=2.87~\unit{\mega\hertz}$, and motional coherence $\tau_\mathrm{upper}=19(1)$\todo{rid 135596} given in
+    $\omega_{upper}=2.87~\unit{\mega\hertz}$, and motional coherence $\tau_\mathrm{upper}=19(1)$ 
+    % \todo{rid 135596}
+    given in
     \S~\ref{sec:motional_coherence}.
     The initial near-vacuum motional state is prepared by Doppler and sideband cooling, with a typical thermal fock state distribution with mean $\bar{n} = 0.03(1)$, as described in \S~\ref{sec:cooling}. The spin state is initialised into the ground state by optical pumping, described in \S~\ref{sec:optical_pump}.
     By setting the relative detuning between the SDFs to $m=-1$, and ensuring anti-commuting spin conditioning by setting the relative phases of the quadchromatic field according to equation~\ref{eqn:spin_phase}, we realise a $\hat\sigma_z-$ conditioned squeezing interaction.
@@ -349,14 +354,14 @@ well-placed for studying methods for scaling hybrid-system control.
     Fitting the data to equation~\ref{eqn:sqz_char} we may extract both the
     squeezing axis, $\phi$, and the strength, $r$, where $r$ is given by,
     \begin{equation}
-    r=|\Omega_\mathrm{eff,S}|t=\frac{\Omega_\alpha\Omega_\beta}{2}t.
+    r=|\Omega_\mathrm{eff,S}|t=\frac{\Omega_\alpha\Omega_\beta}{2\Delta}t.
     \end{equation}
     An example fit is shown in
     panel (b), with extracted $r=0.90(2)$, for a quadchromatic FWHM pulse
     duration of $t_\mathrm{sqz}=190~\unit{\micro\second}$. Panel (c) displays
     the squeezing strength as a function of $t_\mathrm{sqz}$, with fit values given by the points, and the black line is a linear fit. Assuming that the two SDF strengths are well balanced, $\Omega_\alpha=\Omega_\beta$, and taking the $53~\unit{\micro\watt}$ used for the quadchromatic field compared to the SDF strength calibration at $40~\unit{\micro\watt}$, we find an expected squeezing strength of $\Omega_\mathrm{eff,S} = 2\pi~0.86(9)~\unit{\kilo\hertz}$. This is shown as the red dashed line and shaded region.
     The fitted strength of $\Omega_\mathrm{eff,S}= 2\pi~0.74(1)~\unit{\kilo\hertz}$ is lower than the expected, suggesting that either we are not sufficiently balancing the strengths of the two simultaneous SDFs, or that the power stabilisation routine for 4-tones is inaccurate. Further exploration is needed, including careful quantification of the individual SDF strengths constituting the quadchromatic field. However, this preliminary result confirms that the motional coherence, and stability of the single-addressing system is sufficient to create, and characterise non-classical motional states using the apparatus developed for this thesis.\\
-    \todo{Comment on heating rate}
+    % \todo{Comment on heating rate}
 
 \subsection{Outlook}
     Hybrid systems offer access to large Hilbert spaces, even with modest ion numbers.
@@ -404,7 +409,7 @@ as virtual distillation, that can dramatically suppress the effect of errors on
 the final measured outcome for expectation value problems.\\
 This sections starts with outlining the goals of quantum error mitigation (QEM),
 with the following section giving details on the virtual distillation method. We
-then present an experimental demonstration suppressing errors a single qubit system. 
+then present an experimental demonstration suppressing errors on two-copies of a single qubit system. 
 We finish this section with a discussion on future plans, and the extension of virtual distillation to hybrid
 CV-DV systems.
 
@@ -416,38 +421,30 @@ errors, and, if left unchecked, lead to the failure of quantum algorithms.
 This failure can either be due to a reduction of signal to noise ratio, or a
 bias in the measured expectation value, resulting in misleading conclusions. 
 Ultimately, the goal of quantum error correction (QEC) is to detect and correct
-these errors through embedding information in larger Hilbert spaces~\cite{qec_review}.
+these errors through embedding information in larger Hilbert spaces~\cite{terhal_quantum_2015}.
 Full QEC will allow for the execution of arbitrarily long algorithms ensuring errors (of
 up to a certain distance) do not accumulate over time. However, current QEC
 methods require large overheads in both qubit number and circuit depth, and are
-therefore not feasible on current quantum hardware~\cite{}~\cite{is this fair to say?}. \\
+therefore technically challenging on current quantum hardware.\\
 
-Furthermore, QEC is
-formulated for digital ``gate-based'' quantum computers, which although promise
+Furthermore, QEC is typcially discussed with respect to
+discrete ``gate-based'' quantum computers, which although promise
 to be universal, pay for that privilege in often inefficient decompositions of
 target unitaries into a discrete set of gates. 
 This poses an opportunity for
 near term devices to show quantum advantage using either short depth,
-uncorrected circuits, or analog quantum simulators consisting of tailored, often
-continuous, unitary evolution~\cite{nisq_review}. Particularly,
-phrasing the problem in terms of expectation values of an observable on a
-physical final state, rather than a sequence of measurements on a set of logical
-states, allows for a more efficient use of resources. As a tactile example,
-consider the problem of finding the ground state energy of a Hamiltonian. This
-can be done by preparing a trial state, and directly measuring the expectation
-value of the Hamiltonian on that state, building up statistics over many
-samples~\cite{variational_qc_review}. \\
-
+uncorrected circuits~\cite{preskill_quantum_2018}, or leveraging CV systems to access larger computational spaces~\cite{liu_hybrid_2026}. \\
 However, the impact of errors on uncorrected computation must be carefully managed.
+We consider algorithms that prepare some final state of interest and then take expectation-value measurements of some observable on that state.
 Uncertainty of the approximated expectation value due to averaging over a finite
 number of discrete samples, known as shot-noise, may be arbitrarily reduced by
 increasing the samples, $N$. However, due to imperfect execution of a given
 circuit, and coupling to the environment, there will be some systematic shift of
-the estimated average value ideal value in the noise-less limit. This shift, or
+the estimated expectation value compared to the ideal value of the noiseless state, $\rho_\mathrm{id}$. This shift, or
 bias, of the approximated observable may be reduced by the application of
 quantum error
-mitigation (QEM) techniques. \\ 
-Reference~\cite{cai_quantum_2023} defines QEM as
+mitigation (QEM) techniques~\cite{temme_error_2017, cai_quantum_2023}. \\ 
+QEM protocols are varied in nature, making it difficult to give an overarching mechanism of operation. Reference~\cite{cai_quantum_2023} defines QEM as
 ``... algorithmic schemes that reduce the noise-induced bias in the expectation
 value by postprocessing outputs from an ensemble of circuit runs, using circuits
 at the same noise level as the original unmitigated circuit or above.''
@@ -462,47 +459,50 @@ suppressed deviation from the ideal value.\\
         }
     \end{center}
     \caption{
-    \todo{ Integrate figure into main text.}
-    $\rho = 0.1\rho_\mathrm{id}+0.9 \rho_\mathrm{err}$. Blue curve is PDF for $N$ shots, green is PDF for ideal shots, with $N_\mathrm{id} = 0.1N$.\\
-    A schematic explanation of the goal of quantum error mitigation. Deviations of the measured expectation value of an operator $\hat O$ on a noisy state, $\rho$, and on the ideal state $\rho_\mathrm{id}$ may be separated into components originating from shot noise, and from an underlying bias. Shot noise sets the variance of the distribution of estimated expectation values, while the underlying bias shifts the center of the distribution. Error mitigation reduces bias at the cost of increasing variance. Here we demonstrate this by the ideal QEM method introduced in \S~\ref{sec:QEM}. The underlying noisy state is given by $\rho = (1-p)\rho_\mathrm{id} + p\rho_\mathrm{err}$. $N$ shots are taken measuring $\mathrm{Tr}(\hat O \rho)$. The ideal QEM flags and discards shots originating from $\rho_\mathrm{err}$, leaving $(1-p)N$ shots of the ideal state to estimate $\langle \hat O \rangle$.
+    A schematic explanation of the goal and cost of quantum error mitigation.
+    Deviations of the measured expectation value of an operator $\hat O$ on a
+    noisy state, $\rho$, and on the ideal state $\rho_\mathrm{id}$ may be
+    separated into components originating from shot noise, and from an
+    underlying bias. Shot noise sets the variance of the distribution of
+    estimated expectation values, while the underlying bias shifts the center of
+    the distribution. Error mitigation reduces bias at the cost of increasing
+    variance. Here we demonstrate this by a (non-physical) oracle, filtering out
+    all samples originating from measurements of the non-ideal state to
+    reconstruct a bias-free estimate of the ideal expectation value.
         }
     \label{fig:qem}
 \end{figure}
-\todo{rethink narrative here}
-% To exemplify the typical cost of QEM, we will consider the fictitious ``perfect'' mitigation algorithm:
-% Consider the problem of measuring the expectation value of an observable $\hat{O}$ on the target state $\rho_{id} = \ket{\psi_{id}}\bra{\psi_{id}}$. The state is prepared by a quantum circuit, which due to noise, instead prepares the mixed state $\rho = (1-\lambda) \rho_{id} + \lambda \rho_{err}$, where $\rho_{err}$ is some collection of error states $\rho_{err}=\frac{1}{\mathcal{N}}\sum_i \lambda_i \ket{\psi_{i}}\bra{\psi_{i}}$, where $\mathcal{N}$ is some normalisation factor. Each measurement of the observable $\hat{O}$ on the noisy state $\rho$ will return a value $o_i$, and the average of these measurements will converge to the expectation value $\langle \hat{O} \rangle = \mathrm{Tr}[\hat{O}\rho]$. Given $S$ total samples, the final result will be,
-% \begin{equation}
-% \langle \hat{O} \rangle = \frac{1}{S} \left(\sum_{i=1}^{S_{id}} o_i + \sum_{j=1}^{S_{err}} o_j\right),
-% \end{equation}
-% where $S_{id}$ and $S_{err}$ are the number of samples that return a measurement
-% outcome from the ideal and error states respectively, with $S = S_{id} +
-% S_{err}$. The bias in the measured expectation value from the ideal is
-% thus \todo{Need to check accuracy and narrative here}
-% $\frac{S_{err}}{S}(\mathrm{Tr}[\hat{O}\rho_{err}] -
-% \mathrm{Tr}[\hat{O}\rho_{id}] )$.
-% The ``perfect'' QEM somehow has knowledge of, and records, the associated final
-% pure state with the measured sample. If the pure state was the ideal state
-% $\rho_{id}$, it keeps the measured outcome, while if the state was contained
-% within $\rho_{err}$, the outcome is discarded. As such, the bias in the
-% estimated expectation value is entirely suppressed, however, the shot-noise is
-% increased, as $S_{id} \leq S$. Many QEM methods operate in a similar (yet not as perfect) manner --- the 
-
-- Finish argument about ideal QEM \todo{Use term Oracle}\\
-- Summary of QEM method types (quick overview) and transfer sentence to VD purity type approach. \\
-- Why VD:\\
-    - operates on noisy physical states rather than requiring logical encoding;\\
-    - is applicable to general Hilbert spaces, i.e. hybrid good \\
-    - exchanges additional copies/sampling/circuit resources for reduced bias with fixed length (given copy and register size) derangement and measure at end\\
-    - is therefore interesting for the multi-register and eventually hybrid architecture considered here.\\
+As a short example, consider a noisy state $\rho=\lambda\rho_\mathrm{id} +
+(1-\lambda)\rho_\mathrm{err}$, where we have some probability of preparing the
+ideal state, and some probability of preparing an error state,
+$\rho_\mathrm{err}$. We take $N$ measurements of some observable on this mixed
+state, collecting $n$ sample, $n=(n_0,n_1,...,n_N)$. Now consider the
+(unphysical) perfect QEM, consisting of an oracle that ``knows'' if each sample
+originated from a measurement of $\rho_\mathrm{id}$ or of $\rho_\mathrm{err}$,
+and flags them as such. In a postprocessing step, we may discard all samples
+associated with the error state, and retain the subset of samples of the ideal
+state, $N_\mathrm{id}\subset N$. With this subset we may calculate the bias-free
+expectation value, however at the cost of increased shot noise, and therefore
+increased variance of the estimated observable under many such experimental
+trials. This example, although fictitious, retains two important aspects of many
+QEM methods. First, we effectively ``filter out'' undesired information by some
+form of postprocessing, and second, this comes at a sample cost, where we
+effectively exchange a suppression of bias to an increase in shot noise. This
+trade-off is shown schematically in figure~\ref{fig:qem}, for this oracle QEM.\\
 
 Error mitigation protocols are diverse in their resource efficiency, assumptions
 on error-types, and scaling with system size. In this thesis, we consider the
-virtual
-distillation
-protocol~\cite{cotler_quantum_2019,koczor_exponential_2021,huggins_virtual_2021}, a QEM method, applicable to both general Hilbert spaces,
-including both DV and CV systems, with few assumptions on the underlying noise
-model~\cite{koczor_dominant_2021,foldager_can_2024}. The following section gives details on the mechanism and practical
-circuits.
+virtual distillation
+protocol~\cite{cotler_quantum_2019,koczor_exponential_2021,huggins_virtual_2021} ---
+a QEM method, applicable to both DV and
+CV systems, with few assumptions on the underlying noise
+model~\cite{koczor_dominant_2021,foldager_can_2024}. It requires a fixed depth
+circuit appended to the probed state-preparation circuit, and a reasonable
+resource overhead of $k\times$ more physical qubits (or qumodes) for a
+$k$-exponential decrease in error bias. With the apparatus constructed for this
+thesis, we may begin to explore this exponential error suppression for small
+system sizes. The following section gives
+details on the mechanism and practical circuits.
 
 \subsection{Virtual Distillation Protocol}
 \label{sec:vir_dist_theory}
@@ -545,7 +545,7 @@ and crucially may be estimated without ever physically preparing $\rho_\mathrm{p
 Instead the numerator and denominator may be found through preparing $k$-copies
 of the noisy state, applying some derangement operation to entangle all copies
 together, and measuring the desired observable on one of the copies. This can be
-understood through the following identity\footnote{\todo{Is this footnote on wrong page?} Huggins~\cite{huggins_virtual_2021} provides a proof of the identity, which we give an example for the case $k=2$ in appendix~\ref{app:derange}.} providing the numerator,
+understood through the following identity\footnote{Huggins~\cite{huggins_virtual_2021} provides a proof of the identity, which we give an example for the case $k=2$ in appendix~\ref{app:derange}.} providing the numerator,
 \begin{equation}
     \label{eqn:vd_identity}
     \mathrm{Tr}[\hat{O}\rho^k]=\mathrm{Tr}[\hat{O}^{(i)}\hat S^{(k)}\rho^{\otimes k}],
@@ -557,11 +557,9 @@ There is some freedom in the form of the derangement, here we shall give it expl
     \label{eqn:derange}
     \hat S^{(k)}\ket{\psi_1}\otimes\ket{\psi_2}\otimes...\otimes\ket{\psi_k}=\ket{\psi_2}\ket{\psi_3}\otimes...\otimes\ket{\psi_k}\otimes\ket{\psi_1}.
 \end{equation}
-Practically, if we can perform this multi-copy derangement, $\hat S^{(k)}$, and single-copy operator $\hat{O}^{(i)}$, on $k$-copies of the noisy state, we can postprocess a collection of circuit repetitions to recover the $k$th purified expectation value $\langle\hat O \rangle_\mathrm{pur}$. In the following section we provide two possible approaches for implementing these unitaries and measurements, and give explicit circuit decompositions for both.
-
-\todo{Add linker to when correlated errors cause issues}
-\todo{Add sample efficiency point}
-
+Practically, if we can perform this multi-copy derangement, $\hat S^{(k)}$, and single-copy operator $\hat{O}^{(i)}$, on $k$-copies of the noisy state, we can postprocess a collection of circuit repetitions to recover the $k$th purified expectation value $\langle\hat O \rangle_\mathrm{pur}$.\\
+In the following section we provide two possible approaches for implementing these unitaries and measurements, and give explicit circuit decompositions for both.
+In section~\S~\ref{sec:vd_exp} we explore the scheme experimentally, and particularly study the breakdown of error suppression due to correlated noise \emph{between} copies. We give details of the impact on suppression when the underlying independence assumption of the errors on each noisy copy is violated.
 
 \subsubsection{Circuits}
 \begin{figure}
@@ -604,7 +602,7 @@ platform. For CV-systems, the derangement can be decomposed to a series of
 Fredkin gates~\cite{fredkin_conservative_1982, gao_entanglement_2019}, which in
 turn may be accessible by either
 controlled-beam-splitters~\cite{gan_hybrid_2020,jeon_two-mode_2025} and/or
-controlled-parity operations~\cite{choi_multimode_2026}.\todo{link to above CV table}.\\
+controlled-parity operations~\cite{choi_multimode_2026}. These interactions are available in our system by the ``two-SDF'' method, as highlighted in table~\ref{tab:gateset}.\\
 
 The second method, known as the ``$B$-matrix''~\cite{huggins_virtual_2021}, is slightly more resource efficient, not requiring ancilla qubits, however does not simply scale for $k>2$, and for non-$Z$ measurements. The approach recognises that for $k=2$ the symmetrised computational observable $\hat Z_2 = \frac{1}{2}(\hat Z\hat I + \hat I\hat Z)$ commutes with the SWAP operator, $\hat S^{(2)}$, and consequently so too do both observables required for virtual distillation,
 \begin{equation}
@@ -637,6 +635,7 @@ The values are related to computational expectation values by,
 Figure~\ref{fig:virdist_circuit} (b) shows the $B$-matrix decomposition into native gates to our platform. A demonstration of this simple two-copy example of virtual distillation is given in the following section.
 
 \subsection{Experimental Demonstration}
+\label{sec:vd_exp}
 
 This section begins with experimental details on implementing virtual
 distillation via the $B$-matrix decomposed to native $R_{xx}$ gates and single qubit
@@ -664,7 +663,7 @@ $\ket{4S_{1/2},m_j=-\frac{1}{2}}\leftrightarrow\ket{3D_{5/2},m_j=-\frac{5}{2}}$ 
 in a quantising field of $\sim5$~G. Gates are driven using 729-nm light focussed onto the ions by the
 individual addressing system detailed in~\S~\ref{sec:Single Addressing
 System}. Two-qubit entangling gates of the form $R_{xx}$ are implemented using
-Walsh-1 MS gates on the in-phase upper radial mode, as described in~\S~\ref{sec:MS}\todo{characterisation section}. For this decomposition, we specifically require $R_{xx}(\frac{\pi}{4})$-gates. To calibrate these gates, two consecutive $R_{xx}(\frac{\pi}{4})$ pulses are applied, and a partial state-tomography protocol~\cite{sackett_experimental_2000} is utilised (as summarised by equation~\ref{eq:Fidelity}).\\
+Walsh-1 MS gates on the in-phase upper radial mode, as described in~\S~\ref{sec:MS}. For this decomposition, we specifically require $R_{xx}(\frac{\pi}{4})$-gates. To calibrate these gates, two consecutive $R_{xx}(\frac{\pi}{4})$ pulses are applied, and a partial state-tomography protocol~\cite{sackett_experimental_2000} is utilised (as summarised by equation~\ref{eq:Fidelity}).\\
 % rid: 129415 2026-06-06
 After calibration, the Walsh-1 $R_{xx}(\frac{\pi}{4})$ gate settings are the following:
 $21~\unit{\micro\watt}$ total 729-nm beam power, $-15~\unit{\kilo\hertz}$ detuning from in-phase upper radial motional mode, $10~\unit{\micro\second}$ ramp duration (ramped on and off for both arms of the Walsh), and a $67.5~\unit{\micro\second}$ FWHM pulse duration for each arm. The total pulse duration including ramp durations is then $155~\unit{\micro\second}$.
@@ -738,7 +737,7 @@ of the error-mitigated observable, $\langle \hat Z\rangle_\mathrm{pur}$.\\
         decays inferred by the model given in equation~\ref{eqn:vd_correlated},
         and the error-per-Cliffords measured by \emph{k-copy} RB.
         The red and
-        blue points correspond to the error mitigated $Z$ observables for in the
+        blue points correspond to the error mitigated $\hat Z$ observables for in the
         regime of dominant correlated errors and local depolarising errors
         respectively.
                }
@@ -758,7 +757,7 @@ error-per-Clifford, $\varepsilon_\mathrm{raw}$.\\
 Crucially, with this circuit we may explore two different error regimes: first,
 we may apply independent single-qubit Clifford sequences to each copy, which
 independently twirls the error channel acting on each qubit. This decorrelates errors between the
-two copies~\cite{Clifford twirling} leading to favourable performance of virtual distillation.\\
+two copies~\cite{dankert_exact_2009,wallman_noise_2016} leading to favourable performance of virtual distillation.\\
 In contrast, with the second regime we purposefully apply the same
 Clifford sequence to each qubit, i.e. by enforcing $C_{i,L}=C_{i,R}$.
 In this regime, any common-mode coherent errors acting on both qubits will not be
@@ -796,7 +795,7 @@ where we can see that correlated errors maintain a linear decay, while depolaris
     \begin{center}
     \begin{tabular}{|c|c|c|c|c|}
         \hline
-        Twirling type &$\varepsilon_L$&$\varepsilon_R$ & $\varepsilon_\mathrm{corr}$& $\varepsilon_\mathrm{raw}$\\
+        Twirling type &$\varepsilon_L / 10^{-3}$&$\varepsilon_R/ 10^{-3}$ & $\varepsilon_\mathrm{corr}/ 10^{-3}$& $\varepsilon_\mathrm{raw}/ 10^{-3}$\\
         \hline                                                                                                 
         Independent &7(1)  & 7(1)  & 4(1) & 11(2)\\
         Identical   &2.0(4)  &1.4(4)  &9.3(5) & 11.2(6)\\
@@ -804,7 +803,10 @@ where we can see that correlated errors maintain a linear decay, while depolaris
     \end{tabular}
     \end{center}
     \caption{
-        \todo{Errors found from \emph{k-copy} RB, they are all 1e-3}
+        Local depolarising and correlated errors contributions of both the
+        independently and identically twirled channels on two copies of a
+        single-qubit. These error-per-Cliffords are characterised by the
+        \emph{k-copy} RB method described in~\S~\ref{sec:k-copy_protocol}.
         }
     \label{tab:VD_k-copy}
 \end{table}
@@ -836,25 +838,14 @@ decorrelating errors, which we do here by local Clifford twirling.
 
 
 \subsection{Outlook}
-- Summary of what we have shown experimentally so far.\\
-- Linker sentence to next experimental steps. \\
 
 Quantum error mitigation is accessible to near-term quantum computers, under some circumstances allowing for resource-efficient, and substantial reductions in measurement bias. In this section we have provided some background on quantum error mitigation via virtual distillation, highlighting two practical implementations: a Hadamard test, and the $B$-circuit. We demonstrate a physical implementation of the $B$-circuit on the trapped-ion platform, and use the protocol to explore the ability to suppress errors under unfavourable correlated error channels. These demonstrations provide the groundwork for two future research directions --- exploring the practical achievable advantage when extending to more than two copies; and extending to error-mitigation acting on a hybrid system.
-
-\subsubsection{Extending to $>2$ copies}
-    - plan for controlled swap implementation, requirements for this. \\
-    - How many gates, what fidelity we need to ensure tot-err $<1$ for derangement side. \\
-    - Given 98\% how many copies could we go to? Can we estimate shot numbers here? Summary in a table would be nice. \\
-    - copy number | derangement gates | circuit fidelity | expected sampling overhead\\
-
-    For $n$ copies of noisy state, $\rho$, will require a minimum of $n-1$ controlled-SWAP gates. We may decompose controlled-SWAP into $11$ $R_{xx}(\frac{\pi}{4})$ gates and at most $7$ single qubit $R_x(\frac{\pi}{2})$ rotations. Assume here that we can implement $R_{xx}(\frac{\pi}{4})$ with $\mathcal{F} = 99\%$, and single qubit gates with $\mathcal{F}=99.9\%$. Table summarises the expected fault number ($n(1-\mathcal{F})$) for the derangement operation. 
-    Comment that errors occurring during derangement may still be suppressed, depending strongly on error structure. As such, it is non-obvious what total fault to tolerate, however we expect $O(1)$ for practically accessible sample number. Make conclusion on table, and state practicality of exploring this in our system (need to improve 2q errors).
 
 \begin{table}
     \begin{center}
     \begin{tabular}{|c|c|c|c|}
         \hline
-        Copy Num, $k$ & Total $R_{xx}(\frac{\pi}{4})$ & Total $R_x(\frac{\pi}{2})$ & Total Faults \\
+        Copy Num, $k$ & Total $R_{xx}(\frac{\pi}{4})$ & Total $R_x(\frac{\pi}{2})$ & Expected Faults \\
         \hline                                                                                                 
         2($B$) & 2 & 0 & 0.02\\
         2 & 22 & 7 & 0.117\\
@@ -865,21 +856,50 @@ Quantum error mitigation is accessible to near-term quantum computers, under som
     \end{tabular}
     \end{center}
     \caption{
-        \todo{Fault for Derangement circuit}
+        Required number of $R_{xx}(\frac{\pi}{4})$ and $R_x(\frac{\pi}{2})$
+        gates to implement the derangement circuit for virtual distillation on
+        multiple copies. Apart from $n=2(B)$, which uses the $B$-circuit, all
+        other rows are using the ancilla-based Hadamard test circuit,
+        implemented by controlled-SWAP gates. We give the expected total faults
+        assuming fidelities of $99\%$ for two-qubit operations, and $99.9\%$ for
+        single qubit operations.
         }
     \label{tab:VD_k-copy}
 \end{table}
-\subsubsection{Virtual Distillation on Hybrid Systems}
-    - Why important to develop, applications in simulations of QO demo, Feynman, gauge theories. \\
-    - Cite Quantum virtual cooling\\
-    - How it looks on a thermal state and on various quantum states (sqz, coherent, fock)\\
-    - How we can implement c-swap using CV gate set. \\
+\subsubsection{Extending to $>2$ copies}
 
-\subsubsection{Limitations} 
-    - Never actually remove entropy from system, so we are limited to total error rate $<1$, unlike QEC. This places us firmly in NISQ applications.\\
-    - Coherent and structured errors. Mitigation is twirling.\\
-    - Coherent noise floor \\
-    - Slow readout if mapping to single ancilla?\\
+    From equation~\ref{eqn:rho_pur}, we can see that increasing the copy number
+    should exponentially approximate the dominant pure state. We want to observe
+    this exponential behaviour, and so want to scale past two copies. To do
+    this, we will use the ancilla-based Hadamard circuit, as shown in
+    figure~\ref{fig:virdist_circuit} (a).\\
+    For $n$ copies of noisy state, $\rho$, the controlled derangement can be
+    decomposed to a minimum of $n-1$ controlled-SWAP
+    gates~\cite{araki_space-time_2025}. Using accessible native gates, these
+    controlled-SWAP are decomposed to $n_\mathcal{MS} = 11$
+    $R_{xx}(\frac{\pi}{4})$ gates and at most $n_\mathcal{SQ} = 7$ single qubit
+    $R_x(\frac{\pi}{2})$ rotations. Assume here that we can implement
+    $R_{xx}(\frac{\pi}{4})$ with fidelity, $\mathcal{F} = 99\%$, and single qubit gates
+    with fidelity, $\mathcal{F}=99.9\%$, we may calculate the expected total faults per
+    circuit for a given copy size. Here, we assume the error on each gate is
+    independent, and define expected fault number as $N_f =
+    n_i(1-\mathcal{F}_i)$. Table~\ref{tab:VD_k-copy}
+    summarises the gate scaling and expected fault number for the derangement
+    operation. The first row gives the two-copy method via the $B$-circuit for
+    reference.\\
+    To effectively suppress errors, we (heuristically) desire that the
+    derangement operation contributes less faults than the state-preparation of
+    the noisy copy. Further, we desire that the total circuit has at most
+    $N_f\approx 1$. From the table, we see that although it might be possible to
+    demonstrate up to $k=5$ with our expected gate errors, this might be
+    currently out of reach. The difficulty in predicting the efficacy of the
+    noisy derangement is that the impact of the errors on the performance of
+    virtual distillation highly depends on their structure. Practically
+    observing the suppression of circuit errors with copy number $k$, will thus
+    provide evidence of the impact of individual gate errors on the derangement.
+    It may also be useful to further characterise the individual gate errors
+    using tomographic methods to predict the performance of the
+    noisy-derangement.
 
 \begin{figure}
     \begin{center}
@@ -887,23 +907,60 @@ Quantum error mitigation is accessible to near-term quantum computers, under som
         }
     \end{center}
     \caption{
-        \todo{Figure: Fredkin gate on oscillator, and how to compose derangement transversally.}.
-        Proposed circuit for applying virtual distillation to a hybrid system. Using the ancilla method for measuring $\mathrm{Tr}(\hat O \rho^k)$, we may decompose the controlled derangement to the transversal application of Fredkin gates. 
+        Proposed circuit for applying virtual distillation to a hybrid system. Using the ancilla method for measuring $\mathrm{Tr}(\hat O \rho^k)$, we may decompose the controlled derangement to the transversal application of Fredkin gates acting on either qubit or qumode subsystems.
         }
     \label{fig:fredkin}
 \end{figure}
-% \begin{figure}
-%     \begin{center}
-%     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch4/asymptote.pdf
-%         }
-%     \end{center}
-%     \caption{
-%     \todo{Figure: Simulation of tri-sqz state with VD to show negativity!}
-%         }
-%     \label{fig:virdist_sim}
-% \end{figure}
+\subsubsection{Virtual Distillation on Hybrid Systems}
 
-\section{Conclusions}
-\todo{
-- Summary of chapter, saying this gives our future directions.\\
-- Future planned hardware extensions will give more options for CV. Standing wave extension}\\
+    Hybrid systems, as discussed in section~\S~\ref{sec:CVQC}, offer advantages
+    in computation, due to the large accessible state space, with low numbers of
+    physical information carriers. Quantum harmonic oscillators (qumodes) also have
+    applications in quantum simulation~\cite{kang_seeking_2024} and sensing~\cite{degen_quantum_2017, valahu_quantum-enhanced_2025}. However, due
+    to environmental and control noise, the performance and reliability of these
+    systems has strong limitations. Virtual distillation offers a resource
+    efficient method for suppressing errors in CV systems if a pure state is
+    targetted. The proposal for virtual distillation originated from measuring
+    an observable on a thermal qumode state effectively prepared at a lower
+    temperature than the constituent noisy copies~\cite{cotler_quantum_2019}. \\
+    We want to extend this protocol to a register of qubits and qumodes,
+    applying transversal derangement, as seen in figure~\ref{fig:fredkin}, to
+    suppress errors in hybrid systems. Particularly, the mitigation of dephasing
+    and Gaussian errors on the qumode is an under-explored topic, and poses an
+    opportunity for greatly reducing the bias in quantum simulation
+    tasks~\cite{varona_towards_2024}.\\
+    To access this, we require a Fredkin (controlled-SWAP) operation acting
+    between an ancilla qubit and two qumodes. For certain Fock-state
+    distributions, this may be realised by a single controlled-beamsplitter
+    interaction~\cite{gan_hybrid_2020}, which we have simple access to via the
+    ``two-SDF'' method in section~\S~\ref{sec:two-sdf}. However, for the general
+    case, we require both parity and beamsplitter operations, with control on
+    either gate~\cite{filip_overlap_2002}. Demonstrating the Fredkin on a hybrid
+    system is also of particular interest due to its reversible nature, and 
+    the practical advantage that it conserves the total
+    excitation number of the system~\cite{fredkin_conservative_1982}.\\
+
+\subsubsection{Limitations} 
+
+    Error mitigation is resource efficient, but only allows access to
+    measurements of an \emph{effectively} error suppressed state,
+    $\rho_\mathrm{pur}$ --- entropy is never physically removed from the
+    system, as is the case for QEC. 
+    The required samples for a fixed variance
+    of the measured observable scales exponentially with the expected total
+    number of faults in the circuit, $N_f$~\cite{cai_quantum_2023}.
+    As such, QEM is only practically
+    advantageous up to $N_f \approx 1$ (although this is somewhat a heuristic
+    bound, and depends on many implementation details). QEM is thus suited for
+    near-term applications on non-fault tolerant short depth circuits. \\
+
+    As shown in~\S~\ref{sec:vd_exp}, correlated and structured errors between
+    copies can greatly reduce the efficacy of virtual distillation. This may
+    limit the practicality of virtual distillation on some experimental
+    platforms relying on global addressing fields. This may be somewhat
+    mitigated either through appropriate independent twirling of the
+    copies or through random circuit compositions~\cite{wallman_noise_2016}. Furthermore,
+    physically separating the copies using networked modules can ensure that
+    errors originating from external environmental factors are no longer
+    common-mode between copies~\cite{araki_space-time_2025}. \\
+

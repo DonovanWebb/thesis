@@ -12,6 +12,7 @@ globally depolarising noise models (white noise), can lead to systematic underes
 In this chapter we introduce a scalable method for characterising correlated errors in multi-qubit systems: \emph{k-copy randomised benchmarking}. This technique extends single-qubit
 Clifford RB~\cite{magesan_scalable_2011,knill_randomized_2008,dankert_exact_2009} (discussed in chapter~\ref{sec:standard_rb}) to parallel application across multiple qubits, where now symmetry resolved dynamics provides evidence of, and quantifies various multi-qubit error channels.\\
 This chapter is structured as follows: we start by giving an overview on the problem of \emph{characterisation}, and what techniques already exist to address it. We then outline the \emph{k-copy} protocol and discuss the relevant symmetric subspace structure. We derive the population dynamics when subject to simple noise models and discuss variations of the protocol that isolate specific subspaces. We provide experimental demonstrations of the protocol on a trapped-ion processor through injecting known correlated and uncorrelated errors. We end this chapter by demonstrating the scalability of the protocol on an 8-qubit register, and discuss the limitations and potential of this method for further scaling to larger systems.
+\todo{add link to qem chapter.}
 
 % ==========================================================================
 \section{Errors and Characterisation}
@@ -120,7 +121,7 @@ crosstalk-free violating errors from local noise. The next section details the s
 
 % ==========================================================================
 \section{The \emph{k-copy} RB scheme}
-\label{sec:protocol}
+\label{sec:k-copy_protocol}
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=0.4\linewidth]{figures/make_figure/ch5/circs/k-copy/circuits.pdf
@@ -360,7 +361,8 @@ Comparing to equation~\ref{eqn:Liouville}, the general ensemble of common single
     \tilde\Lambda^\mathcal{S}(\mathcal{E}_\mathcal{A}) &= \mathrm{diag}\Bigl(I_1,~(1-2\varepsilon_{corr}) I_6,~I_1, \\ & (1-6\varepsilon_{corr}) I_2,~(1-2\varepsilon_{corr}) I_6\Bigr).
 \end{split}
 \end{equation}
-\todo{I think AS and SO sectors should not have the same decays. Check this.}
+\todo{I think AS and SO sectors should not have the same decays. Check this.}\\
+\todo{add link to qem chapter.}
 
 \subsection{Local depolarising noise}
 \label{app:depol_noise}
@@ -614,7 +616,7 @@ Specifically the combinations
 \section{Sampling strategy}
 \label{sec:fisher}
 
-In this section we find the Fisher information gained from a single shot of the \emph{k-copy} RB protocol, and use this to find a strategy for setting the sequence lengths, $m$. We then explore the shot efficiency of extracting error per Clifford parameters for a range of underlying noise magnitudes, using both the \emph{k-copy} protocol described in section~\ref{sec:protocol}, and using the parity measurement protocol described in section~\ref{sec:parity}.\\
+In this section we find the Fisher information gained from a single shot of the \emph{k-copy} RB protocol, and use this to find a strategy for setting the sequence lengths, $m$. We then explore the shot efficiency of extracting error per Clifford parameters for a range of underlying noise magnitudes, using both the \emph{k-copy} protocol described in section~\ref{sec:k-copy_protocol}, and using the parity measurement protocol described in section~\ref{sec:parity}.\\
 
 The Fisher information~\cite{fisher_xxidominance_1923}, $\mathcal{I}$, quantifies what we can learn from random observable, $X$, about a set of underlying unknown parameters, $\theta$, that models the probability of observing $X$. It is particularly informative to consider the Cram\'er-Rao bound, which states that the inverse of $\mathcal{I}$ is a lower bound for the variance of any unbiased estimator of $\theta$,
 \begin{equation}
