@@ -186,20 +186,20 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     \begin{equation}
         A(t) = \sum_{k=1}^{\infty} A_k(t).
     \end{equation}
-    If the Hamiltonian at different times does not commute, then the first three $A_k(t)$ terms are given by,
+    The first three $A_k(t)$ terms are given by,
     \begin{align}
         \label{eqn:magnus_A}
         A_1(t) &= \frac{-i}{\hbar}\int_{0}^{t}dt_1 \hat H(t_1)\\
         A_2(t) &= -\frac{1}{2\hbar^2}\int_{0}^{t}\int_{0}^{t_1}dt_1dt_2 [\hat H(t_1),\hat H(t_2)] \\
-        A_3(t) &= \frac{i}{6\hbar^3}\int_{0}^{t}\int_{0}^{t_1}\int_{0}^{t_2}dt_1dt_2dt_3\ \big(\big[\hat H(t_1),\left[\hat H(t_2),\hat H(t_3)\right]\big]+\big[\hat H(t_3),\left[\hat H(t_2),\hat H(t_1)\right]\big]\big).
+        A_3(t) &= \frac{i}{6\hbar^3}\int_{0}^{t}\int_{0}^{t_1}\int_{0}^{t_2}dt_1dt_2dt_3\ \big(\big[\hat H(t_1),\left[\hat H(t_2),\hat H(t_3)\right]\big]+\big[\hat H(t_3),\left[\hat H(t_2),\hat H(t_1)\right]\big]\big),
     \end{align}
+    where we can see that if the Hamiltonian fails to commute with itself at different times, the higher-order Magnus terms become relevant.
     This may be understood as the continuous analogy of the Baker-Campbell-Hausdorff formula. It is particularly useful in this thesis to understand the origin of the geometric phase in the MS gate scheme, and the non-linear bosonic interactions generated in the ``two-SDF'' protocol given in~\S~\ref{sec:two-sdf}.
 
 \subsection{``Two-SDF'' dynamics}
     Here we analyse the ``two-SDF'' Hamiltonian given in equation~\ref{eqn:two-sdf} using the Magnus expansion. We recover effective Hamiltonians for both Gaussian interactions, as well as for tri-squeezing. \\
     The ``two-SDF'' Hamiltonian is reproduced for convenience here,
     \begin{align}
-    \label{eqn:two-sdf}
       \hat H_\mathrm{2SDF}(t)  &= \hat H_\alpha(t) + \hat H_\beta(t)\\
       &=
       \frac{\hbar \Omega_\alpha}{2}\hat\sigma_\alpha \left(\hat a_\alpha e^{i(\Delta_\alpha t + \phi_\alpha)} + \hat a_\alpha^\dagger e^{-i(\Delta _\alpha t + \phi_\alpha )}\right)\\
@@ -216,7 +216,7 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     \end{equation}
     This is effectively the first-order only dynamics of the displacement operator leading to excursions in phase-space. The effects of this term may be entirely suppressed at certain gate durations, $A_1(T)=0$, where $T$ is an integer multiple of both
     $\tau_\alpha = 2\pi/\Delta_\alpha$ and $\tau_\beta = 2\pi/\Delta_\beta$. Excursions may also be made arbitrarily small by ensuring $\Omega_i \ll \Delta_i$. \\
-    The commutator in $A_2$ term may be expanded to reveal four relevant components,
+    The commutator in the $A_2$ term may be expanded to reveal four relevant components,
     \begin{equation}
     A_2(t) = S_\alpha(t) + S_\beta(t) + X_\mathrm{pair}(t) + X_\mathrm{exch}(t),
     \end{equation}
@@ -237,8 +237,8 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     We set the two detunings relative to one another by, $\Delta_\beta = m\Delta_\alpha$.
     Expanding the commutator of the cross terms we find for general $m$ the following interactions, grouped by their effect on the oscillator state,
     \begin{align}
-        X_\mathrm{pair} &= \frac{i\epsilon_{\alpha\beta\gamma} \Omega_\alpha\Omega_\beta  }{4\Delta }\hat\sigma_\gamma \left(\hat a\hat b e^{i\phi_p}J(m,t)+\hat a^{\dagger}b^\dagger e^{-i\phi_p}J(m,t)^\dagger\right),\\
-        X_\mathrm{exch} &= \frac{i\epsilon_{\alpha\beta\gamma}\Omega_\alpha\Omega_\beta }{8\Delta}\left(\{\hat a, \hat b^\dagger\}e^{i\phi_m}F(m,t) + \{\hat a^\dagger, \hat b \} e^{-i\phi_m}F(m,t)^\dagger\right),
+        X_\mathrm{pair} &= \frac{i\epsilon_{\alpha\beta\gamma} \Omega_\alpha\Omega_\beta  }{4\Delta }\hat\sigma_\gamma \left(\hat a_\alpha\hat a_\beta e^{i\phi_p}J(m,t)+\hat a_\alpha^{\dagger}a_\beta^\dagger e^{-i\phi_p}J(m,t)^\dagger\right),\\
+        X_\mathrm{exch} &= \frac{i\epsilon_{\alpha\beta\gamma}\Omega_\alpha\Omega_\beta }{8\Delta}\left(\{\hat a_\alpha, \hat a_\beta^\dagger\}e^{i\phi_m}F(m,t) + \{\hat a_\alpha^\dagger, \hat a_\beta \} e^{-i\phi_m}F(m,t)^\dagger\right),
     \end{align}
     with $\phi_p = \phi_\alpha + \phi_\beta$, and $\phi_m = \phi_\alpha - \phi_\beta$, and $J$ and $F$ containing resonance like terms,
     \begin{align}
@@ -251,22 +251,22 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     Taking the limit, $m=-1$, we find $F(-1,t)=0$ and $J(-1,t) = -2it$, leading to a time-linear term $X_\mathrm{pair}$,
     with effective Hamiltonian,
     \begin{equation}
-        \hat H_\mathrm{eff, pair} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma\left(\hat a \hat b e^{i\phi_p'}+\hat a^\dagger \hat b^\dagger e^{-i\phi_p'}\right),
+        \hat H_\mathrm{eff, pair} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma\left(\hat a_\alpha \hat a_\beta e^{i\phi_p'}+\hat a_\alpha^\dagger \hat a_\beta^\dagger e^{-i\phi_p'}\right),
     \end{equation}
-    where $\Omega_2 = \frac{\Omega_\alpha\Omega_\beta}{\Delta}$, and $\phi_p' = \phi_\alpha +\phi_\beta + \frac{\pi}{2}$. For $a^\dagger = b^\dagger$ this is the squeezing interaction, whereas for $a^\dagger \neq b^\dagger$ this is two-mode squeezing.\\
-    Taking the limit, $m=+1$, we find $J(1,t)=0$ and $F(1,t) = -2it\left(1-\mathrm{sinc}(\Delta t)\right)$. If we consider the secular term only, we find the time-linear term $X_\mathrm{exch}$. Now considering the anticommutation relationships between ladder operators we find for $a^\dagger = b^\dagger$, an effective Hamiltonian,
+    where $\Omega_2 = \frac{\Omega_\alpha\Omega_\beta}{\Delta}$, and $\phi_p' = \phi_\alpha +\phi_\beta + \frac{\pi}{2}$. For $a_\alpha^\dagger = a_\beta^\dagger$ this is the squeezing interaction, whereas for $a_\alpha^\dagger \neq a_\beta^\dagger$ this is two-mode squeezing.\\
+    Taking the limit, $m=+1$, we find $J(1,t)=0$ and $F(1,t) = -2it\left(1-\mathrm{sinc}(\Delta t)\right)$. If we consider the secular term only, we find the time-linear term $X_\mathrm{exch}$. Now considering the anticommutation relationships between ladder operators we find for $a_\alpha^\dagger = a_\beta^\dagger$, an effective Hamiltonian,
     \begin{equation}
-        \hat H_\mathrm{eff, parity} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma\sin(\phi_m) (2\hat a^\dagger \hat a +1),
+        \hat H_\mathrm{eff, parity} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma\sin(\phi_m) (2\hat a_\alpha^\dagger \hat a_\alpha +1),
     \end{equation}
     which is the parity, or in this case ``dispersive'' Hamiltonian due to the spin-conditioning.\\
-    Finally, considering $a^\dagger \neq b^\dagger$, we recover the beamsplitter interaction, with effective Hamiltonian,
+    Finally, considering $a_\alpha^\dagger \neq a_\beta^\dagger$, we recover the beamsplitter interaction, with effective Hamiltonian,
     \begin{equation}
-        \hat H_\mathrm{eff, bs} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma \left(\hat a \hat b^\dagger e^{i\phi_m'}+\hat a^\dagger \hat b e^{-i\phi_m'}\right),
+        \hat H_\mathrm{eff, bs} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma \left(\hat a_\alpha \hat a_\beta^\dagger e^{i\phi_m'}+\hat a_\alpha^\dagger \hat a_\beta e^{-i\phi_m'}\right),
     \end{equation}
     with $\phi_m' = \phi_\alpha - \phi_\beta + \frac{\pi}{2}$.\\
     Similar arguments hold for the higher order terms, where, for example, we recover the tri-squeezing interaction for $m=-2$, with effective Hamiltonian of the form,
     \begin{equation}
-        \hat H_\mathrm{eff, tri} = \frac{\hbar \Omega_3}{2}\hat\sigma_\beta \left(\hat a^3 e^{i\phi}+\hat a^{\dagger 3}  e^{-i\phi}\right),
+        \hat H_\mathrm{eff, tri} = \frac{\hbar \Omega_3}{2}\hat\sigma_\beta \left(\hat a_\alpha^3 e^{i\phi}+\hat a_\alpha^{\dagger 3}  e^{-i\phi}\right),
     \end{equation}
     with $\Omega_3 = \frac{\Omega_\alpha^2\Omega_\beta}{2\Delta^2}$.\\
     For further details on the use of these higher order effective interactions refer to the following two theses:\cite{bazavan_easy_nodate,saner_quantum_2026}.
