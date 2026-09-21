@@ -1,63 +1,182 @@
 \chapter{Introduction}
 \minitoc
-\todo{Should something go here?}
 
 \section{Classical and Quantum Computing}
-\todo{two paragraphs
-\begin{itemize}
-    \item Why we want to build a quantum computer. (Feynman, Shor, Grover)
-    \item What constitutes a quantum computer? (Qubits, gates, circuits)
-\end{itemize}}
+\todo{Somewhat fun narrative framing and motivating QC.}\\
+Quantum mechanics (QM) successfully describes the behaviour of sufficiently small things~\cite{}.
+The theory is useful in the description of sub-atomic particles, atoms, the
+molecule they compose, crystals, light, the vacuum, and many other parts of our
+reality. That is to say, given a choice, bet things obey quantum mechanics. From
+the 1980s? work began in earnest on marrying the fields of quantum mechanics and
+information, with the intuition that if reality is described by QM, then surely
+QM is the efficient language in which to ``compute''
+reality~~\cite{feynman_}.
+To discuss this idea, I will first donate a paragraph to the classical computers
+that have gone before.\\
+What is the goal of computing? We will define ``compute'' as modelling some physical system with another,
+disparate, physical system. This could be an analogue simulator with continuous
+input and outputs, or it could be some digital model that mimics the system at
+an arbitrary precision. Apart from the engineering practicalities of realising
+the device, this analogue and digital distinction may be abstracted away. The
+\emph{Computer} enters when Turing and Church proposed a class of these systems that not
+only mimic one specific system, but rather can model any physical system,
+provided enough time and memory~\cite{turing, church}. A universal simulator is of course a
+useful tool. With enough understanding of the physical system to model it, we
+may observe \emph{simulated} behaviour without requiring control over the actual
+system. A real plus for the astrophysicists with no previous hope of table-top
+experiments.\\
+What is also surprising is the few elementary operations required
+for a device to be a Turing machine (i.e. is Turing complete).\todo{give detail for classical computing}.\\ 
+But now comes the
+practicality ---  although a physical device
+is a Turing machine, it may still not be feasible for an operator to ``code''
+some desired behaviour~\footnote{play with esolangs for an hour to confirm this
+for yourself.}, or for a useful result to be returned in reasonable
+time~\footnote{factor a 256-bit number for \todo{1e10} years to confirm this for
+yourself.}. Regardless, highly advanced and operable computers have been
+constructed and have successfully  modelled and transformed almost all aspects
+of modern life. However, there still remains vast regions of computational
+problems that fall into the category of unfeasible on current hardware. Worse
+still, the scaling of resources and time required for some real-world problems
+suggest that classical computing will never be able to solve them~\cite{}. \\
+One category of problem that is often recognised to be unfeasible on classical
+computers, is that of modelling quantum systems~\cite{feynman_1982}. Fundamentally this is due to
+the concepts of superposition and interference(\todo{I have seen interference being the often
+quoted feature, check my understanding of this}) -- a quantum state is generally
+described by the superposition of all possible $2^n$ basis states, where $n$ is
+the system dimension~\todo{Check this}. Each basis state will have some
+amplitude and phase, resulting in $2^n-1$ complex
+numbers required to track and accurately model the generic state. This
+exponential scaling is not kind to a digital computer, whose own internal
+classical state (something about how they scale...). \todo{Read deutsch a bit
+again to finalise the argument here}.\\
+Returning to the 80s?, it was thought that
+this detrimental scaling of simulating quantum systems is suggestive that the use of these
+very systems may offer some distinct scaling advantage. Can we construct a Turing machine that utilises the resource scaling of a quantum system\footnote{As an aside, the implications of quantum mechanics on information
+extend further than purely mimicking other dynamic systems -- using and
+distributing quantum objects also allows for dominant strategies in
+cryptography~\cite{}, and some competitive (although currently esoteric)
+games~\cite{}.}\cite{deutch_1985} --- a quantum computer (QC)? This prompted the requirements given by DiVincenzo on the
+components to construct such a device~\cite{divincenzo_physical_2000}:\\
+\todo{Match with DiVen paper.}
+\begin{enumerate}
+    \item Some aggregation of fundamental quantum information carrying units, most
+    commonly two-level systems called quantum-bits (or qubits), although higher
+    dimensional systems such as qudits~\cite{}, or continuous systems such as
+    qumodes~\cite{} are areas of active research. \\
+    \item We further require some way to
+    prepare these quantum objects into a known initial state. \\
+    \item Then, a set of unitary
+    operations (quantum gates) are used to manipulate the state and perform the
+    desired computation. \\
+    \item Finally, some measurement of the state is required to
+    extract information.\\
+\end{enumerate}
+Why is it difficult to build a QC?
+We must recognise the
+double-edged sword that is this large state space: we gain significant
+computational resources, but the superposition and phases between states are
+increasingly sensitive to environmental noise~\cite{}. The loss of recoverable
+information due to noise is
+ called decoherence, and is a major challenge to
+building a practical quantum
+ computer~\cite{}.\\
+The physical origin and coupling of noise into the quantum system is highly
+dependent on the hardware implementation of the computer, \todo{maybe we wont anymore...} although the effects
+of noise fall into a few classes, which we shall discuss in the next chapter.
+This thesis is concerned practically on the trapped ion platform, and so a
+specific focus will be lent to it, and we shall now spend some time outlining
+what it consists of.\\
 
-% QM and computing
-Quantum mechanics successfully describes the behaviour of sufficiently small things~\cite{}.
-The theory is useful in the description of sub-atomic particles, atoms, the molecule they compose, crystals, light, the vacuum, and many other parts of our reality. That is to say, given a choice, bet things obey quantum mechanics. From the 1980s? work began in earnest on marrying the fields of quantum mechanics and information, with the intuition that if reality is described by QM, then surely QM is the efficient language in which to ``compute'' reality~\footnote{Paraphrased, rather than the tired Feynman spiel~\cite{}.}.
-To discuss this idea, I will first donate a paragraph to the classical computers that have gone before.\\
-We will define ``compute'' as modelling some physical system with another, disparate, physical system. This could be an analogue simulacra with continuous input and outputs, or it could be some digital model that mimics the system at an arbitrary precision. Apart from the engineering practicalities of realising the device, this analogue and digital distinction does not matter. The \emph{Computer} enters when Turing proposed a class of these systems that not only mimic one specific system, but rather can model any physical system, provided enough time and memory. This remarkable result lends \emph{computers} their other name: the Turing machines. Suprisingly few operations are required for a device to be a Turing machine (i.e. is Turing complete), and so the 
-question of whether a Turing machine can be constructed was never up for debate (as this was likely answered at least XX years before Turing's birth by probably some astrolabe XX). But now comes the practicality -  although a physical device is a Turing machine, it may still not be feasible for an operator to ``code'' some desired behaviour~\footnote{play with esolangs for an hour to confirm this for yourself.}, or for a useful result to be returned in reasonable time~\footnote{factor a 256-bit number for \todo{1e10} years to confirm this for yourself.}. Regardless, highly advanced and operable computers have been constructed and have successfully  modelled and transformed almost all aspects of moden life. However, there still remains vast regions of computational problems that fall into this category of unfeasible on current hardware. Worse still, the scaling of resources and time required for some real-world problems suggest that classical computing will never be able to solve them. \\
-One category of problem that is often recognised to be unfeasible on classical computers, is that of modelling quantum systems. Fundamentally this is due to the concept of superposition (\todo{I have seen interference being the often quoted feature, check my understanding of this}) -- a quantum state is generally described by the superposition of all possible $2^n$ basis states, where $n$ is the system dimension~\todo{Check this}. Each basis state will have some amplitude and phase, and with some normalisating results in $2^n-1$ complex numbers required to track and accurately model the generic state. This exponential scaling is not kind to a digital computer, whose own internal classical state (something about how they scale...). \todo{Read deutsch a bit again to finalise the argument here}. Returning to the 80s?, it was thought that this detrimental scaling of quantum systems might offer a distinct advantage if we were to construct a Turing machine from quantum objects
-\footnote{As an aside, the implications of quantum mechanics on information extend further than purely mimicking other dynamic systems -- using and distributing quantum objects also allows for dominant strategies in cryptography~\cite{}, and some competitive (although currently esoteric) games~\cite{}.}. This prompted the requirements given by DiVincenzo on the components to construct such a device:
-Some aggregation of fundamental quantum information carrying units, most commonly two-level systems called quantum-bits (or qubits), although higher dimensional systems such as qudits~\cite{}, or continuous systems such as qumodes~\cite{} are areas of active research. We further require some way to prepare these quantum objects into a known initial state. Then, a set of unitary operations (quantum gates) are used to manipulate the state and perform the desired computation. Finally, some measurement of the state is required to extract information.
-The performance of a physical QC is then characterised by how faithfully each of these requirements is fulfilled in the error prone world.
-To realise a resource scaled quantum computer, we must recognise the double-edged sword that is superposition: this large state space in which to encode information, is increasingly sensitive to environmental noise~\cite{} due to this large state space. The loss of recoverable information due to noise is called decoherence, and is the major challenge to building a practical quantum computer~\cite{}.\\
-The physical origin and coupling of noise into the quantum system is highly dependent on the hardware implementation of the computer, although the effects of noise fall into a few classes, which we shall discuss in the next chapter. This thesis is concerned practically on the trapped ion platform, and so a specific focus will be lent to it, and we shall now spend some time outlining what it consists of.\\
+\section{Quantum Computing Platforms}
+\todo{More exposition but adding some detail on ion-traps}\\
 
-\section{Trapped Ion Platform}
-\todo{two paragraphs}
-\begin{itemize}
-    \item Atoms are convenient qubits.
-    \item Description and history of experimental trapped ion systems.
-\end{itemize}
+\todo{Start with motivation}\\
+e.g. How can we construct a QC to reach that promise of xx?\\
+An effective quantum computer requires meticulous control over a collection of
+simple quantum systems. A good starting point is thus selecting that simple
+system to build our control around. Nature provides us with a bounty of choices
+in this regard: Atoms. By definition it is difficult to choose a simpler object,
+and according to our understanding of physics, atoms of the same species are
+identical to one another no matter where or when you are.
+We may use their electronic energy structure, which atomic physicists have
+scrutinized for over a century, to define our quantum bits, and we can use an
+assortment of electromagnetic frequencies to manipulate these internal states.
+This is the strategy of both the ``neutral-atom'', and ``trapped-ion''
+platforms, with the latter choosing to remove or add a few electrons to more
+easily manipulate the atoms position in space (although we note that the
+neutral-atom platform has made significant progress in optical traps, and I
+suspect this distinction could become a moot point relatively soon). \\
+Despite this gift of nature, there is wide interest in other ``manufactured''
+quantum systems, such as superconducting circuits, quantum dots, and NV centers;
+benefitting from control over the level structure, and owing to their solid
+state, presumably allowing for easier integration into existing semiconductor
+fabrication techniques. The final platform we name is photonic qubits, arguably
+another of natural origin, and unique in being a ``flying-qubit'': photons are
+able to transmit information over long distances (and it is in fact quite hard
+to keep them still). At this time, it is unclear whether one of these platforms,
+or an entirely new architecture, will be the first to reach a scaled device.
+Each have their own advantages and unique technical challenges, and each are in
+rapid active development. \\
 
-An effective quantum computer requires meticulous control over a collection of simple quantum systems. A good starting point is thus selecting that simple  system to build our control around. Nature provides us with a bounty of choices in this regard: Atoms. By definition it is difficult to choose a simpler object, and according to our understanding of physics, atoms of the same species are identical to one another no matter where or when you are.
-We may use their electronic energy structure, which atomic physicists have scrutinized for over a century, to define our quantum bits, and we can use an assortment of electromagnetic frequencies to manipulate these internal states.
-This is the strategy of both the ``neutral-atom'', and ``trapped-ion'' platforms, with the latter choosing to remove or add a few electrons to more easily manipulate the atoms position in space (although we note that the neutral-atom platform has made significant progress in optical traps, and I suspect this distinction could become a moot point relatively soon). \\
-Despite this gift of nature, there is wide interest in other ``manufactured" quantum systems, such as superconducting circuits, quantum dots and, NV centers; benefitting from control over the level structure, and owing to their solid state, presumably allowing for easier integration into existing semiconductor fabrication techniques. The final platform we name is photonic qubits, arguably another of natural origin, and unique in being a "flying-qubit": photons are able to transmit information over long distances (and it is in fact quite hard to keep them still). At this time, it is unclear whether one of these platforms, or an entirely new architecture, will be the first to reach a scaled device. Each have their own advantages and unique technical challenges, and each are in rapid active development. We shall focus almost exclusively on the trapped ion platform, however will give some discussion on common noise channels in other platforms in chapter~\ref{ch:theory} \\
-Atomic ions held in place through some combination of electric and/or magnetic fields. They are stored in ultra-high vacuum conditions, and physically distant (>10 $\unit{\micro\meter}$) from any bulk material to limit the coupling of environmental noise to our fragile state. Lasers, radio, and microwave drives are then used to effect the electronic and motional states of the ions.
+\todo{Zoom into trapped ions}\\
+Atomic ions held in place through some combination of electric and/or magnetic
+fields. They are stored in ultra-high vacuum conditions, and physically distant
+(>10 $\unit{\micro\meter}$) from any bulk material to limit the coupling of
+environmental noise to our fragile state. Lasers, radio, and microwave drives
+are then used to effect the electronic and motional states of the ions.
+\todo{end with point on scaling, and required scale for useful QC}
 
 
 \section{Scaling Trapped Ion Systems}
+\todo{I want this section to motivate narrative of thesis.}\\
+\todo{
 \begin{itemize}
-    \item Why we need to scale up trapped ion systems (Steane) in register, and in depth.
-    \item What are the technical challenges to scaling up trapped ion systems. Including motional control and hybrid systems.
-    \item What are the new errors that appear when we scale up trapped ion systems. This is a main contribution of this thesis.
+    \item General motivation: Why we need to scale up trapped ion systems (Steane) in register, and in depth. 
+    \item in this thesis... Then unpack
+    \item Control: How to scale? More qubits, using qumodes *contribution: Single addressing + using qumodes.
+    \item But what appears? Noise.
+    \item Characterise: Characterisation and scaled characterisation methods are important *contribution k-copy.
+    \item Utilise: Making imperfect resources useful by error tolerance *contribution vd
 \end{itemize}
-Useful circuits are proposed to be of order x qubits, x gates.
-increased complexity changes the relevant error processes
+}
+\todo{Start with motivation}\\
+How do we scale the system? We require many qubits and deep circuits to complete useful computational tasks.
 
-Errors increase with both space and time in QC, motivating hardware improvements, quantum error mitigation and correction techniques.
-Hardware challenges for scaling up trapped ion systems include number of qubits, addressing (control line problem), speed of operation, and motional control.
-Particularly, as the resource scales, new errors appear that are not present in small systems. These include spatially correlated noise, and crosstalk between qubits. This thesis focuses on the construction of a new experimental apparatus to enable the study of these errors, and the development of techniques to mitigate them.
+
+Increased complexity changes the relevant error processes. 
+
+There is a reason that ``random''-algorithms have currently shown supremacy -> enforces simple noise mode.
+
 
 
 \section{Structure of this Thesis}
 % Main points:
+    \todo{Start with motivation}\\
 
-    This thesis is concerned with the construction, and characterisation of a new ion trap apparatus targetting spin and motional control of multi-ion chains; the errors that arise at this scale; and error mitigation through virtual distillation.\\
+    This thesis describes the development of a trapped-ion platform for
+    multi-ion spin–motion control, and its application to the characterisation
+    of correlated errors, hybrid spin–oscillator control, and quantum error
+    mitigation.
 
-    Chapter~\ref{ch:theory} provides motivation and theory required for the remainder of the thesis, including a background on randomised benchmarking and the relevant group theoretic results. \\
-    Then follows in chapter~\ref{ch:apparatus} a hardware description of apparatus constructed during my DPhil, followed by performance characterisations in chapter~\ref{ch:Characterisation}.\\
-    Chapter~\ref{ch:k_copy_rb} presents a novel randomised benchmarking method for detecting and quantifying spatially correlated errors in multi-qubit devices, including experimental results on up-to an 8-ion chain.\\
-    The motional states of the ions as a computational resource are discussed in chapter~\ref{ch:motional_interactions}, with relevant device characterisation including a demonstration of squeezing, numerical simulations supporting the expected leading errors for our device, and an outlook on future experiments on hybrid spin-motion computation.\\
-    Chapter~\ref{ch:virtual_distillation}, presents an experimental implementation of virtual distillation, an error mitigation technique with practical application to computation involving both spin and motional degrees of freedom.\\ 
-    The thesis is concluded in chapter~\ref{ch:conclusion} with details on the implication on this work to the field, and an outlook of future work planned on the constructed apparatus.\\
+    Chapter~\ref{ch:theory} provides motivation and theory required for the
+    remainder of the thesis, including a background on randomised benchmarking
+    and the relevant group theoretic results. \\
+    Chapter~\ref{ch:apparatus} details the ion-trap 
+    apparatus constructed for this thesis, enabling the study of multi-qubit and
+    qumode registers.\\
+    Chapter~\ref{ch:characterisation} presents the hardware performance.\\
+    Chapter~\ref{ch:k-copy} presents a novel randomised benchmarking method
+    for characterising and quantifying spatially correlated errors in multi-qubit
+    devices, including experimental results on up-to an 8-ion chain.\\
+    Chapter~\ref{ch:QEM} gives details on two on-going projects utilising the
+    newly constructed apparatus. Roughly, the first half of this chapter is
+    concerned with utilising the motion of the ions as a computational resource,
+    and provides a demonstration of motional state squeezing. The second half of
+    this chapter presents an experimental
+    implementation of virtual distillation, an error mitigation technique with
+    practical application to computation involving both spin and motional
+    degrees of freedom.\\ 
+    The thesis is concluded in chapter~\ref{ch:conclusion} with details on the
+    implication on this work to the field, and an outlook of future work planned
+    on the constructed apparatus.\\
