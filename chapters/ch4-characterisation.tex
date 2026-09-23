@@ -32,7 +32,7 @@
     % Can compare when have all quadrupole transitions available or when we selectively omit transitions via polarisation.
 % Pre reqs:
     % 5 G field
-    \todo{Move some to theory start?}
+    \todo{Move some (or all!) to theory start?}
     \begin{figure}[ht]
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ion.pdf}
@@ -73,7 +73,19 @@
         \label{fig:quadrupole}
     \end{figure}
 
-    The \ca~ion has a rich level structure, shown in figure~\ref{fig:ion}, with many accessible quadrupole transitions $4S_{1/2}\leftrightarrow 3D_{5/2}$. The quadrupole transition is ideal for use as a qubit due to the long-lived metastable level ($\tau=1.1$~\unit{\s})~\cite{barton2000measurement}, and the ability to optically couple the transition via a laser. As mentioned in section~\ref{sec:Narrow Line Width 729 Laser}, the 729-nm beam is used for this purpose. By selecting the appropriate frequency of the 729-nm beam, qubit operations such as state preparation (section~\ref{sec:Stateprep}) and single qubit gates (section~\ref{sec:Single Qubit Gates}) may be driven, or by setting the detuning such that a motional sideband is near resonance, to couple the spin and motional degrees of freedom (section~\ref{sec:Spin-Dependent Forces}). Here, we discuss which quadrupole transitions are used, and the rationale behind their choice.\\ 
+    The \ca~ion has a rich level structure, shown in figure~\ref{fig:ion}, with
+    many accessible quadrupole transitions $4S_{1/2}\leftrightarrow 3D_{5/2}$.
+    The quadrupole transition is ideal for use as a qubit due to the long-lived
+    metastable level ($\tau=1.1$~\unit{\s})~\cite{barton2000measurement}, and
+    the ability to optically couple the transition via a laser. As mentioned in
+    section~\ref{sec:Narrow Line Width 729 Laser}, the 729-nm beam is used for
+    this purpose. By selecting the appropriate frequency of the 729-nm beam,
+    qubit operations such as state preparation (section~\ref{sec:Stateprep}) and
+    single qubit gates (section~\ref{sec:Single Qubit Gates}) may be driven, or
+    by setting the detuning such that a motional sideband is near resonance, to
+    couple the spin and motional degrees of freedom
+    (section~\ref{sec:Spin-Dependent Forces}). Here, we discuss which quadrupole
+    transitions are used, and the rationale behind their choice.\\ 
     Zeeman splitting of the $4S_{1/2}$ and $3D_{5/2}$ states leads to 2 and 6
     non-degenerate sublevels, respectively. Due to the magnetic field strength of 5.4~G (section~\ref{sec:Magnetic Field}),
     the $S$-levels are split by $\sim$15~\unit{\MHz}, and the $D$-levels by $\sim$9~\unit{\MHz}.
@@ -104,6 +116,7 @@
 
 \subsection{State Preparation}
 \label{sec:Stateprep}
+\todo{Point to theory section\\}
 % Main points:
     % Method of preparation via optical pumping
     % Quote state prep error (back this from RBM + measurement histograms)
@@ -164,6 +177,7 @@
 % Main points:
     % Readout characterisation with NA 0.6 lens
     % Compare readout histograms of fast 30 us readout to Doppler cold 100 us readout
+\todo{Point to theory section\\}
     \begin{figure}
         \begin{center}
         \noindent\includegraphics[width=0.75\linewidth]{
@@ -244,6 +258,7 @@
     % Spin coherence times
     % Possible transitions
     % Calibrating gate times
+\todo{Move to theory section\\}
     A qubit is fully described by $\ket{\psi} = \alpha\ket{\downarrow} + \beta\ket{\uparrow}$, where $\alpha$ and $\beta$ are complex numbers satisfying $|\alpha|^2 + |\beta|^2 = 1$. The qubit state can be manipulated by applying single qubit rotations, $R_{x,y}(\theta)$, commonly referred to as gates. In the Bloch sphere, $x$- and $y$-rotations are performed by pertubations resonant with the qubit transition, here, using the 729-nm laser. The rotation angle, $\theta$, is given by $\theta=\Omega t/2$, where $\Omega$, is the Rabi frequency, and $t$ is the pulse duration. The rotation axis, is determined by the relative phase of the light field and the qubit. We define the initial relative phase to correspond to a $y$-rotation.
 
 \subsubsection{Gate Time Calibration}
@@ -406,7 +421,7 @@
     4.0$~\unit{\MHz}, and $\omega_{\rm lower}/2\pi = 2.5$~\unit{\MHz}, and the
     axial mode frequency is $\omega_{\rm axial}/2\pi = 1.6$~\unit{\MHz}. All
     work here is using the upper radial mode. \\
-    The motional mode, $i$, leads to sidebands in the 729-nm spectrum at $\omega_0 \pm \omega_{i}$~\cite{ozeri2011tutorial}, where $\omega_0$, the carrier, is the frequency of the 729-nm laser when on resonance with the qubit transition. The $+\omega_i$ sideband is referred to as the blue sideband (BSB), and the $-\omega_i$ is the red sideband (RSB).
+    The motional mode, $i$, leads to sidebands in the 729-nm spectrum at $\omega_0 \pm \omega_{i}$~\cite{ozeri2011tutorial}\todo{Point to theory section}, where $\omega_0$, the carrier, is the frequency of the 729-nm laser when on resonance with the qubit transition. The $+\omega_i$ sideband is referred to as the blue sideband (BSB), and the $-\omega_i$ is the red sideband (RSB).
     The RSB, BSB, and RF fields near to resonance with the motional modes, are the tools used in this section to manipulate the motion of the ion.\\
     The motional state preparation, heating rate, frequency stabilities, and coherence times are characterised in this section.
 
@@ -420,6 +435,7 @@
     % Motional mode and beam geometry
     % Laser systems 
     % Trapping
+    \todo{Point to theory section\\}
 
     For any interaction that involves the motion of the ion, it is essential to
     both prepare and measure the motional state with high fidelity. For all
@@ -597,6 +613,7 @@
 
 \subsection{Motional Mode Stability}
 \label{sec:Motional Mode Stability}
+\todo{Currently this contains the tickle protocol, which is also used for general calibrations. Ref in ch6}
 \todo{Requires plot and main text numbers update, but we dont yet have data...\\}
 % Main points:
     % Quote motional mode drift 
@@ -698,6 +715,7 @@
 
 
 \section{Spin-Motion}
+    \todo{Point to theory\\}
     For full control of the spin-motion hybrid system, we require interactions
     that couple the two. Perhaps the simplest of this class of interactions
     are the red- and blue-sidebands (RSB and BSB respectively). The  RSB
@@ -721,6 +739,7 @@
     % Motional mode spectra
     % 729 system
     % AOM control of 729
+    \todo{Move to theory\\}
     The optical Mølmer-Sørensen (MS) scheme~\cite{sorensen2000entanglement} is used to generate the
     SDF via a bichromatic laser field. Bichromatic refers to the simultaneous
     application of two tones symmetrically detuned around the qubit carrier
@@ -763,6 +782,7 @@
     % Motional mode spectra
     % 729 system
     % AOM control of 729
+    \todo{Currently ref this in ch6 for stark shift calibration\\}
 
     \begin{figure}
         \begin{center}
@@ -913,6 +933,11 @@
     Parity measurements are defined as $P = P_{00} + P_{11} - P_{01} - P_{10}$, where $P_{ij}$ is the population of the two ions in state $\ket{i}\ket{j}$ after the gate sequence and variable $\pi/2$-pulse. 
     Creating a Bell state is essential for two-qubit entanglement, but its basis can vary as long as it is consistent across experiments. This allows the Bell state phase, $\phi_0$, to float, which in practice means using only the amplitude of the fitted parity oscillations to compute fidelity, ignoring any phase offset.\\
     The best two-qubit entangling gate fidelity currently achieved on our system is $\mathcal{F}=92(2)\%$. As shown in figure~\ref{fig:ms_gate}, the magnitude of the parity scan was measured to be 0.90(2), while the populations $\left( \rho_{00,00} + \rho_{11,11} \right) = 0.95(2)$. Each population point in these figures are found by taking the average of 200 shots of the gate sequence.\\
+
+
+
+\section{Summary}
+    \todo{Need to update summary for current thesis framing\\}
     These results serve as both a proof of principle for full spin control on
     our system, but also as a benchmark to which we can compare future system
     improvements.  For future work, we will require the use of this entangling

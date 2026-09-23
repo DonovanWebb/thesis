@@ -6,8 +6,8 @@
 Having established and characterised the experimental
 apparatus and demonstrated its application to \emph{k-copy} randomised
 benchmarking, this chapter considers future research goals utilising the
-multi-qubit arrays enabled through the \emph{NPL} trap (\S~\ref{sec:trap}),
-the single addressing system (\S~\ref{sec:single_addressing}), and
+multi-qubit arrays enabled through the \emph{NPL} trap (\S~\ref{sec:The Ion Trap}),
+the single addressing system (\S~\ref{sec:Single Addressing System}), and
 the developed control over both the discrete qubits, as well
 as the continuous motional modes. \\
 In \S~\ref{sec:CVQC} we estabilish a set of unitary operations required for
@@ -53,7 +53,12 @@ Experimentally, we will not be able to realise arbitrarily high energy oscillato
 Hybrid spin-oscillator computation has been studied in the context of superconducting cavity-QED~\cite{hillmann_universal_2020, blais_circuit_2021, majer_coupling_2007, pan_continuous-variable_2023, eickbusch_fast_2022}, neutral atom in optical tweezers~\cite{kaufman_cooling_2012,lienhard_generation_2025, hwang_hybrid_2026}, and in the trapped-ion plaform~\cite{sutherland_universal_2021,gan_hybrid_2020,fluhmann_encoding_2019}. 
 We shall focus on the trapped-ion implementation, where the DV system is the collection of qubits embedded in the electron energy levels, and the qumodes are the shared secular motional modes of the ion crystal within the trapping pseudopotential.\\
 Trapped ions benefit from multiple native methods to drive, and couple qubit and qumode: 
-The qumodes may be directly driven through parametric trap potential modulation~\cite{heinzen_quantum-limited_1990, burd_quantum_2019, burd_quantum_2021}, or through near mode-resonance RF fields; the qubit may be driven either by optical fields (in the case of optical qubit encoding), or through microwaves (in the case of ground state encoding) resonant with the energy-state transition; 
+The qumodes may be directly driven through parametric trap potential
+modulation~\cite{heinzen_quantum-limited_1990, burd_quantum_2019,
+burd_quantum_2021}, or through near mode-resonance RF fields; the qubit may be
+driven either by optical fields (in the case of optical qubit encoding), or
+through microwaves (in the case of ground state encoding) resonant with the
+energy-state transition; 
 the qubit and qumode may be coupled through qubit-state dependent potential shifts~\cite{drechsler_state-dependent_2020,leindecker_state-dependent_2026}, or through optical fields tuned near to motional-mode frequency sidebands of the qubit-carrier transition, for example through the Jaynes-Cummings interaction (\S~\ref{sec:Motional Coupling}), or the Mølmer-Sørensen (MS) SDF~\cite{sorensen_entanglement_2000}.
 Taken together, these native control and coupling mechanisms, combined with the long coherence times of both the qubit and qumode, make the trapped-ion platform well-suited for exploring hybrid CV–DV quantum computation.\\
 The apparatus developed in this thesis has demonstrated good qubit and radial
@@ -109,7 +114,7 @@ well-placed for studying methods for scaling hybrid-system control.
     \end{equation}
     Spin-conditioned tri-squeezing has been shown previously in our group~\cite{bazavan_squeezing_2024}, utilising the protocol given in reference~\cite{sutherland_universal_2021}, here termed the ``two-SDF'' method.\\
     The remaining non-linear Gaussian operations; squeezing, parity, and beam-splitter, may be generated through the same ``two-SDF'' mechanism, which we shall detail in the following section, and have also been previously demonstrated~\cite{bazavan_squeezing_2024,saner_real-time_2025,bazavan_easy_nodate,saner_quantum_2026}.\\
-    The displacement operation can be realised either spin-independently by RF fields near resonance to the motional-mode frequencies (\S~\ref{sec:tickle}), or spin-conditioned using various SDF implementations, such as by the MS method using bichromatic fields (\S~\ref{sec:sdf}), or by static Stark-shift gradients due to an optical tweezer~\cite{leindecker_state-dependent_2026}.\\
+    The displacement operation can be realised either spin-independently by RF fields near resonance to the motional-mode frequencies (\S~\ref{sec:trap_charge}), or spin-conditioned using various SDF implementations, such as by the MS method using bichromatic fields (\S~\ref{sec:SDF}), or by static Stark-shift gradients due to an optical tweezer~\cite{leindecker_state-dependent_2026}.\\
 
     As highlighted in this section, the required unitaries for universal hybrid CV-DV control may all be accessed by a common protocol: The ``two-SDF'' method. This greatly simplifies experimental hardware and control complexity. 
     We shall give an overview of this method in the following section, and provide a practical route and demonstration utilising four optical frequencies with fixed relative detunings and phases.\\
@@ -255,7 +260,7 @@ well-placed for studying methods for scaling hybrid-system control.
 \end{figure}
 \subsubsection{Two Spin Dependent Forces}
     The individual SDFs are generated by the same bichromatic field method
-    described in \S~\ref{sec:sdf} --- i.e. simultaneous off-resonant blue-
+    described in \S~\ref{sec:SDF} --- i.e. simultaneous off-resonant blue-
     (BSB) and red-sidebands (RSB) of motional mode $\omega_\alpha$ are applied.
     To generate two simultaneously SDFs, we then require four optical fields with, frequency, phase, and
     amplitude control. The four required frequencies of the ``quadchromatic''
@@ -270,7 +275,7 @@ well-placed for studying methods for scaling hybrid-system control.
     absolute optical phase at the ion, however we can set relative phases
     between the four fields by applying phase offsets between the RF tones with
     respect to some fixed time point.
-    As discussed in \S~\ref{sec:sdf}, the spin phase of the SDFs is set by
+    As discussed in \S~\ref{sec:SDF}, the spin phase of the SDFs is set by
     the absolute phase of the RSB and BSB, $\hat\sigma_\phi =
     \cos(\phi_s)\hat\sigma_x + \sin(\phi_s)\hat\sigma_y$. To ensure we saturate
     the non-commutativity of the spin conditioning of the two SDFs, we require
@@ -316,13 +321,21 @@ well-placed for studying methods for scaling hybrid-system control.
     $\omega_{upper}=2\pi\times 2.87~\unit{\mega\hertz}$, and motional coherence $\tau_\mathrm{upper}=19(1)$ 
     % \todo{rid 135596}
     given in
-    \S~\ref{sec:motional_coherence}.
-    The initial near-vacuum motional state is prepared by Doppler and sideband cooling, with a typical thermal fock state distribution with mean $\bar{n} = 0.03(1)$, as described in \S~\ref{sec:cooling}. The spin state is initialised into the ground state by optical pumping, described in \S~\ref{sec:optical_pump}.
-    By setting the relative detuning between the SDFs to $m=-1$, and ensuring anti-commuting spin conditioning by setting the relative phases of the quadchromatic field according to equation~\ref{eqn:spin_phase}, we realise a $\hat\sigma_z$-conditioned squeezing interaction, given by equation~\ref{eqn:H_sqz}.
+    \S~\ref{sec:Motional Coherence}.
+    The initial near-vacuum motional state is prepared by Doppler and sideband
+    cooling, with a typical thermal fock state distribution with mean $\bar{n} =
+    0.03(1)$, as described in \S~\ref{sec:Cooling}. The spin state is
+    initialised into the ground state by optical pumping, as characterised in
+    \S~\ref{sec:Stateprep}.
+    By setting the relative detuning between the SDFs to $m=-1$, and ensuring
+    anti-commuting spin conditioning by setting the relative phases of the
+    quadchromatic field according to equation~\ref{eqn:spin_phase}, we realise a
+    $\hat\sigma_z$-conditioned squeezing interaction, given by
+    equation~\ref{eqn:H_sqz}.
     As the spin-state is prepared in an eigenstate of the spin-conditioned squeezing, we expect squeezing on the qumode, without any change to the qubit state. We use a total quadchromatic beam power of $53~\unit{\micro\watt}$, and set the base detuning, $\Delta=2\pi\times 50~\unit{\kilo\hertz}$. We suppress excess excitation of the off-resonant error terms by using a ramp of $t_\mathrm{ramp}=40~\unit{\micro\second}$.\\
     The state is characterised by the tomography method given in
     \S~\ref{sec:tomography}, with a discretisation set to collect a $35\times 35$ grid of displacement
-    values, $\beta$, and $N = 300$ repeat samples to reduce shot noise. The full dataset for one of the tomographic scans takes around 1 hour to collect, and so we interleave mode calibration experiments (\S~\ref{sec:tickle}) to run every 5 minutes.\\
+    values, $\beta$, and $N = 300$ repeat samples to reduce shot noise. The full dataset for one of the tomographic scans takes around 1 hour to collect, and so we interleave mode calibration experiments (\S~\ref{sec:Motional Mode Stability}) to run every 5 minutes.\\
     The on-resonance splitting SDF used for tomography must have its strength, $\Omega_\mathrm{SDF}$, calibrated to infer the magnitude of $\beta$ applied. We use
     a total bichromatic beam power of $40~\unit{\micro\watt}$, and through fitting the 
     $\hat\sigma_z$ expectation for the time-dependent splitting of a vacuum state,
@@ -654,7 +667,7 @@ $\ket{4S_{1/2},m_j=-\frac{1}{2}}\leftrightarrow\ket{3D_{5/2},m_j=-\frac{5}{2}}$ 
 in a quantising field of $\sim5$~G. Gates are driven using 729-nm light focussed onto the ions by the
 individual addressing system detailed in~\S~\ref{sec:Single Addressing
 System}. Two-qubit entangling gates of the form $R_{xx}$ are implemented using
-Walsh-1 MS gates on the in-phase upper radial mode, as described in~\S~\ref{sec:MS}. For this decomposition, we specifically require $R_{xx}(\frac{\pi}{4})$-gates. To calibrate these gates, two consecutive $R_{xx}(\frac{\pi}{4})$ pulses are applied, and a partial state-tomography protocol~\cite{sackett_experimental_2000} is utilised (as summarised by equation~\ref{eq:Fidelity}).\\
+Walsh-1 MS gates on the in-phase upper radial mode, as characterised in~\S~\ref{sec:Two-Qubit Entangling Gates}. For this decomposition, we specifically require $R_{xx}(\frac{\pi}{4})$-gates. To calibrate these gates, two consecutive $R_{xx}(\frac{\pi}{4})$ pulses are applied, and a partial state-tomography protocol~\cite{sackett_experimental_2000} is utilised (as summarised by equation~\ref{eq:Fidelity}).\\
 % rid: 129415 2026-06-06
 After calibration, the Walsh-1 $R_{xx}(\frac{\pi}{4})$ gate settings are the following:
 $21~\unit{\micro\watt}$ total 729-nm beam power, $-15~\unit{\kilo\hertz}$ detuning from in-phase upper radial motional mode, $10~\unit{\micro\second}$ ramp duration (ramped on and off for both arms of the Walsh), and a $67.5~\unit{\micro\second}$ FWHM pulse duration for each arm. The total pulse duration including ramp durations is then $155~\unit{\micro\second}$.
@@ -665,7 +678,7 @@ $R_z$, are executed virtually. As we require non-common $R_z$ phase shifts on th
 pairs of RF tones applied to the acousto-optic deflectors, used for generating the addressed spots. As these single-qubit gates are virtual, we expect negligible error contributions.\\
 The final
 computational-basis measurements are executed by state-dependent fluorescence,
-described in~\S~\ref{sec:readout}. 
+described in~\S~\ref{sec:Stateprep}. 
 From the single-shot outcomes, the joint probabilities $p_{ij}$, with $i,j\in\{0,1\}$ denoting the bright and dark states of ions 1 and 2 are recovered, respectively.
 The required expectation values given in equations~\ref{eqn:VD_ZZ} are then simply,
 \begin{align}

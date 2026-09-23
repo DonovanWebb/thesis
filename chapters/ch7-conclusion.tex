@@ -1,34 +1,43 @@
 \chapter{Conclusion}
 \label{ch:conclusion}
 \section{Summary}
-Par1
-- Reiterate aims of thesis in one paragraph\\
-- Perhaps reiterate some of the content in introduction ``Scaling Trapped Ion Systems''.\\
-    In this thesis...\\
+
+    In this thesis we constructed an experimental apparatus to enable access to
+    a multi-qubit and qumode register. We characterised this apparatus, and have
+    fully demonstrated the required elementary control for the qubit subsystem.
+    We developed a novel and scalable method to characterise noise that induces correlated error on multi-qubit registers,
+    and explored this experimentally with the apparatus. We provided an outline
+    for fully utilising the qumodes in a hybrid qubit-qumode system using
+    spin-conditioned bosonic interactions and experimentally verified the
+    underlying method to drive these interactions in a scalable way using
+    single-ion-addressing optical beams. Finally, we identify
+    virtual-distillation as an error mitigation technique amenable to hybrid
+    qubit-qumode registers, demonstrate its efficacy on the qubit subsystem
+    under both depolarising and correlated errors, and give a future perspective
+    on its implementation on the full hybrid system.\\
 
 
-- Then a bit of details:\\
+\subsubsection{The Experimental Platform}
+The constructed apparatus was initially designed to enable the study of fast two-qubit entangling gates on multi-ion chains, which on a previous apparatus was limited by the attainable optical field intensity, and the inability to selectively drive only two qubits in a multi-qubit register. As such the new apparatus features: a modern segmented Paul RF trap with large-solid-angle optical access, dual high-NA objective lenses for providing near-diffraction-limited high-intensity optical fields at the ion plane, and a crossed-AOD single-ion addressing system for spatial selectivity. 
+The construction of the apparatus began in earnest at the start of 2023, with first ions trapped in December that year. Commissioning the apparatus lasted until mid-2025, when the single-addressing system was installed. This marked a transition from build-up and characterisation, to investigating novel methods and demonstrations on the apparatus. At the time of writing, there still remains one considerable apparatus upgrade: the optical standing waves. \\
+The work in this thesis has utilised travelling-wave single-addressing beams. The next major hardware extension, planned for the end of 2026, is installation of the counter-propagating addressing system. With active phase stabilisation, using a similar scheme to the previous apparatus~\cite{bazavan_easy_nodate}, this will enable an array of single-ion addressed optical standing waves. These standing waves allow for two major capabilities: first, we will have access to sharp electric field and intensity spatial gradients. These sharp features can strongly drive spin-dependent forces, enabling fast spin-boson-gates and boson-mediated two-qubit entangling-gates. Second, the ion may be placed in the structured optical field to suppress unwanted interactions. For example, sitting on the maximum curvature of the optical field suppressed the undesired carrier-interaction that was limiting gate-speed in two-qubit MS gates~\cite{saner_breaking_2023}. Further, the spatial Stark-shift profiles due to the structured optical field intensity can be used to directly access spin-mediated bosonic interactions, which have been previously proposed and shown with the radial gradients of tightly focussed beams~\cite{leindecker_state-dependent_2026}, and by the axial structure of phase-stable standing waves~\cite{drechsler_state-dependent_2020,vasquez_control_2023}. Completion of this hardware upgrade will place our apparatus as a versatile, and modern platform for studying both fast interactions on multi-qubit chains, and the control of hybrid systems with multiple qubits and qumodes.\\
 
-Par2\\
-- Describe constructed apparatus by reiterating design criteria and capability gaines.\\
-    - Longer chains\\
-    - Was initially motivated by increased control with SA + segmented trap, increased optical intensity by 729 and HNA, as this was limitation on previous apparatus.\\
-- Built and characterised an apparatus with these specs.  And allows us to go to longer chains.\\
-Par3\\
-- Now we have longer chains, we considered problem of characterising errors -> structured errors.\\
-- Developed characterisation protocol for looking at structured errors on longer chains. Provided both theoretical contribution of the method, and experimental validation using the apparatus. Significance?\\
-Par4\\
-- Next, we want to push into fully utilising resources at our disposal. Scaling doesnt just mean qubits. If we access both CV and DV, we have a considerable register size, even in our lab scale QIP.\\
-- Explored feasibility of hybrid computing on our platform, giving a practical set of interactions to control both CV and DV, 
-and demonstrated that the new single-addressing architecture can implement the spin-conditioned motional-control mechanism required for the proposed hybrid instruction set.\\
-Par5\\
-- If we want to explore utilising the system for near-term QIP, need to suppress errors acting on our register. We gave details on vd, and how it may act on both DV and CV subsystems. We found VD performance depends on structure of errors. Linking back to k-copy.\\
+\subsubsection{Scaling Characterisation}
+With access and control of $\approx 10$ qubits, full tomography is already unfeasible on our system. We considered the problem of characterising structured errors on a multi-qubit register, and
+developed \emph{k-copy RB} to provide accessible metrics of commonplace correlated noise sources. This method has practical utility in benchmarking scaled systems, and verifying the efficacy of noise tailoring techniques, as we found when studying virtual-distillation. We have demonstrated this method on the trapped-ion platform under common-mode noise due to fluctuating globally acting fields, however this method may be applied to all quantum computing platforms with access to qubit-resolved readout. The method is also applicable to other correlating noise-sources, such as always on $ZZ$-interactions relevant to superconducting qubits, and to certain non-Markovian error channels leading to correlations over time. 
+This work contributes a useful and scalable tool for benchmarking, and categorising the errors impacting experimental quantum computers.
 
-\section{Future Perspective}
-- Detailed future experiments have been discussed in the individual chapter outlooks; here focus on the next major platform capability.\\
-- SW single addressing. \\
-    - Allows for sharp intensity/field gradients. \\
-    - Enables strong coupling, and suppression of errors. Is basis for fastgates demo.\\
-The work in this thesis has exploited the travelling-wave single-addressing architecture. The next major hardware extension completes the counterpropagating branch...
+\subsubsection{Scaling Resources}
+Trapped ions provide two possible quantum information carriers, the discrete electronic energy levels, and the continuous collective motional modes. We considered a strategy to fully utilise both these resources, and access a considerable sized, and controllable Hilbert space. The coherence of both subsystems was characterised on the constructed apparatus, a practical gate-set for universal hybrid control was discussed, and the experimental method for driving the spin-conditioned bosonic gates was demonstrated. This work was a continuation of previous demonstrations in our group~\cite{bazavan_squeezing_2024,saner_generating_2024,saner_real-time_2025}, now utilising the improved motional coherence times, and the single-ion addressing system of the new apparatus. By establishing this control on the new apparatus, we enable further research into hybrid systems on the trapped-ion platform. Recent work by our group has identified multiple protocols and tools utilising spin-conditioned non-linear bosonic interactions applied to multiple qubits~\cite{shinbrough_applications_2026}. These include squeezing-mediated geometric phase gates, bosonic state preparation, and effective $N$-body spin interactions. With this new platform, we have the ability to explore these proposals, and develop the further experimental control for their implementation.\\
 
-- Zoom out, apparatus is out of the characterisation stage, and is now pursuing several distinct research programmes, with multiple generations of future students.
+\subsubsection{Scaling Imperfect Systems}
+To suppress the impact of errors, we experimentally investigated an implementation of virtual distillation. We demonstrated that under common-mode noise, which is typical when using qubits that are spatially near to one another or when using global control fields, virtual distillation is rendered ineffective. This evidence was further supported through \emph{k-copy} RB characterisation and through structured error injection. This constitutes a demonstration for the need of noise-tailoring techniques~\cite{wallman_noise_2016}, to enforce the underlying assumption of independent, or low-weight errors required in many error mitigation and correction strategies. Furthermore, we discussed the application of virtual distillation to more than two copies, and to hybrid CV-DV systems. Error mitigation on the large accessible Hilbert space of multi-qubit and qumode present on our apparatus will enable short hybrid computations, and simulations. These extended resources can allow for further development of experimentally simulated lattice gauge theories~\cite{saner_real-time_2025,bazavan_synthetic_2023}, computing Feynman diagrams through phase-space measurements~\cite{varona_towards_2024}, and resource efficient simulation of chemical systems~\cite{kang_seeking_2024,navickas_experimental_2025,olaya-agudelo_simulating_2025}.
+
+\begin{center}
+  \pgfornament[width=4cm]{89}
+\end{center}
+
+This thesis followed the build-up, characterisation, and first experimental
+demonstrations of a new ion-trap apparatus. The resulting platform now supports 
+several distinct research programmes, and is intended to enable experiments
+extending well beyond the work presented here.

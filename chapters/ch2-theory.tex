@@ -2,16 +2,18 @@
 \label{ch:theory}
 \minitoc
 
-\section{Trapping Ions}
-\label{sec:Intro Ion trap}
+\todo{Here give a broad overview of all control required for ion trap. (This is pointed to at beginning of apparatus section)}
 
-\subsection{Trapping Potential}
-% Main points:
-    % Give useful equations for describing trapping pseudopotential
-    % Give ion spacing and mode frequencies
-    % Could put tickle interaction here
-% Pre reqs:
-    % 
+\section{Trapping Charged Particles}
+\label{sec:trap_charge}
+\todo{
+Main points:\\
+    -Give useful equations for describing trapping pseudopotential\\
+    -Give ion spacing and mode frequencies from James\\
+    -Put tickle interaction here (ref in ch6)\\
+}
+
+
     From Earnshaw's theorem,
     $\nabla^2 V = 0,$ a stable stationary point in 3D cannot be realised
     using only static electric potentials, $V$, as if the potential is confining
@@ -20,75 +22,82 @@
     trap~\cite{paul1990electromagnetic}), or a static magnetic field (Penning trap) is
     used.\\
 Will include pseudopotential relating $V_{RF}$ and $\Omega_{RF}$ to the radial mode frequencies $\omega_m$ (see Vera eqn 3.4),
+
+\todo{following eqn needed in apparatus iontrap section}
 \begin{equation}\label{eqn:pseudo_pot}
     \omega_r \propto \frac{V_{RF}}{M\Omega_{RF}}.
 \end{equation}
 Further, will use James to give ion spacing and non-COM mode frequencies as will be relevant for single addressing, fast gates (if discussed), and for motional mode excitati as will be relevant for single addressing, fast gates (if discussed), and for motional mode excitation.
 
-\section{Light Matter Interactions}
+\section{The Ions}
+\todo{- Give Calcium level structure \\
+- photoionisation\\
+- Give wavelengths, with details on quadrupole\\
+- Doppler cooling?\\
+- Discuss qubit encoding - highlighting optical here \\
+- Readout?\\
+}
+
+
+\section{Coherent Light-Matter Interactions}
 % Main points:
     % Give useful equations for describing Rabi flopping
     % For motional mode coupling
     % SDF
 % Pre reqs:
     % 
+\todo{- Give general Hamiltonian for trapped ion in light field\\
+Do we need: dipole and quadrupole interactions... If so, can give multipole definition.}
 
 \subsection{Rabi Flopping}
 \label{sec:Rabi Flopping}
-Explain this is how we do single qubit gates.\\
-\todo{Define propagator as $R_{x}$ to match QEM chapter}\\
+\todo{ Discuss two-level Hamiltonian\\
+- show general off-resonance\\
+- then on resonance is how we do single qubit gates.\\
+Define propagator as $R_{x}$ to match QEM chapter}\\
 
-\subsection{Coupling to Motion}
+\subsection{Coupling to the Motion}
 \label{sec:Motional Coupling}
-\todo{Expand in Lamb-Dicke limit to get Jaynes Cummings}
+\todo{ Show full H\\
+- Define Lamb-Dicke\\
+- Expand in Lamb-Dicke, take limit to get Jaynes Cummings (ref in ch6)\\
+- Discuss three-regimes, RSB, BSB, carrier}\\
 
-% Sidebands
-% SDFs
-\subsubsection{Spin-Dependent Force}
+\subsection{The Spin-Dependent Force}
 \label{sec:SDF}
+\todo{ref in ch6\\}
 
+\todo{
 - basics - look at Ozeri and other thesis\\ 
-- on res and off res\\
+- on res and off res, figure here.\\
 - Hamiltonian. Give motional and spin phase definition \\
 - Derivation of MS bichromatic field implementation leading to $\hat\sigma x$ conditioning. \\
 - Need to at least find following relationships:\\
     - $\phi_s = \frac{\phi_\mathrm{RSB} + \phi_\mathrm{BSB}}{2}$\\
     - $\phi_m = \frac{\phi_\mathrm{RSB} - \phi_\mathrm{BSB}}{2}$\\
+}
 
 \subsection{Geometric Phase Gates}
 \label{sec:Geometric Phase Gates}
-- Use Magnus expansion
-\todo{Define propagator as $R_{xx}$ to match QEM chapter}\\
-%
-% Overlapped theory for chapters \ref{ch:virtual_distillation} and \ref{ch:rb} 
+\todo{- Discuss goal of entangling gate\\
+- Point to Magnus + geo phase there\\
+- Show duration and detuning scans\\
+- Define propagator as $R_{xx}$ to match QEM chapter\\
+- Give very quick overview on adiabatic limit for this gate (mentioned in trap RF chain)\\
+- Walsh modulation (Amy has section)}\\
+
 \section{Randomised Benchmarking}
 Some overview and motivation for RB.\\
+\todo{Currently dont point to too much of this in k-copy chapter}
 Take some from ch4\\
     Need to cover:
     \begin{itemize}
-        \item Twirling over a group
-        \item Liouville representation of a CPTP map
-        \item Irreps of the Clifford group
-        \item Clifford approximates twirling over the unitary group (Haar measure)
-        \item How Liouville representation is transformed under twirling
-        \item The specific representation-theory tools you use later: irreps, multiplicity spaces, invariant sectors, Schur basis.\\
+        \item Twirling over a group \todo{defined in k-copy}
+        \item Liouville representation of a CPTP map\todo{defined in k-copy}
+        \item Irreps of the Clifford group\todo{defined in k-copy}
+        \item Clifford approximates twirling over the unitary group (Haar measure)\todo{defined in k-copy}
+        \item How Liouville representation is transformed under twirling\todo{defined in k-copy}
+        \item The specific representation-theory tools you use later: irreps, multiplicity spaces, invariant sectors, Schur basis.\\\todo{defined in k-copy}
         \item RB protocol for single qubit Clifford group, generalisation to multi-qubit Clifford group.
         \item How to extract error per Clifford from decay rate
 \end{itemize}
-
-\section{Noise channels}
-    As will also be used in virtual distillation, may move to theory sections\\
-    A description of the noise channels we consider in this work. Explicit CPTP maps for these channels.
-    \subsection{Why isn't everything white noise?}
-    \subsection{Unitary noise}
-        Both continuous and probabilistic.
-    \subsection{Depolarising noise}
-        An ensemble of unitary noise channels, with a uniform distribution over the Bloch sphere.
-        Get this from twirling over Clifford group!
-    \subsection{Spatially correlated noise}
-        \indent\textbf{Common noise}
-            An ensemble of unitary noise channels, with a uniform distribution over the Bloch sphere, but the same unitary is applied to multiple qubits. Can enforce some symmetry to this channel by twirling over the k-copy Clifford group. This is the channel we will use to model correlated noise in our experiments.
-        \indent\textbf{Entangling noise}
-            In SC ZZ entangling noise is common.
-    \subsection{Can we make everything white noise?}
-        Have a look at Balint paper, deep random circuits, etc.

@@ -2,181 +2,195 @@
 \minitoc
 
 \section{Classical and Quantum Computing}
-\todo{Somewhat fun narrative framing and motivating QC.}\\
-Quantum mechanics (QM) successfully describes the behaviour of sufficiently small things~\cite{}.
-The theory is useful in the description of sub-atomic particles, atoms, the
+% What is QM
+Quantum mechanics (QM) successfully describes the behaviour of sufficiently small things.
+The theory is indispensable in the description of sub-atomic particles, atoms, the
 molecule they compose, crystals, light, the vacuum, and many other parts of our
-reality. That is to say, given a choice, bet things obey quantum mechanics. From
-the 1980s? work began in earnest on marrying the fields of quantum mechanics and
-information, with the intuition that if reality is described by QM, then surely
-QM is the efficient language in which to ``compute''
-reality~~\cite{feynman_}.
-To discuss this idea, I will first donate a paragraph to the classical computers
-that have gone before.\\
+reality. That is to say, given a choice, bet things obey quantum mechanics. 
+It was recognised in the 1980s that quantum mechanics and information must be unified for fully unlocking the burgeoning field of computation~\cite{benioff_computer_1980, feynman_simulating_1982}. Motivated with the intuition that if reality is described by QM, then surely
+quantum objects will offer more efficient strategies to simulate reality, the idea of the \emph{Quantum Comptuter} was formed. We will elaborate this concept, but first 
+we donate a paragraph to the classical computers that have gone before.\\
+% Classical Computing
 What is the goal of computing? We will define ``compute'' as modelling some physical system with another,
 disparate, physical system. This could be an analogue simulator with continuous
 input and outputs, or it could be some digital model that mimics the system at
 an arbitrary precision. Apart from the engineering practicalities of realising
 the device, this analogue and digital distinction may be abstracted away. The
-\emph{Computer} enters when Turing and Church proposed a class of these systems that not
+\emph{Computer} enters when Turing and Church proposed a class of these simulators that not
 only mimic one specific system, but rather can model any physical system,
-provided enough time and memory~\cite{turing, church}. A universal simulator is of course a
-useful tool. With enough understanding of the physical system to model it, we
+provided enough time and memory~\cite{turing_computable_1937, church_unsolvable_1936}. A universal simulator is of course a
+useful tool. With sufficient understanding of the physical system we wish to model, we
 may observe \emph{simulated} behaviour without requiring control over the actual
-system. A real plus for the astrophysicists with no previous hope of table-top
-experiments.\\
-What is also surprising is the few elementary operations required
-for a device to be a Turing machine (i.e. is Turing complete).\todo{give detail for classical computing}.\\ 
-But now comes the
-practicality ---  although a physical device
-is a Turing machine, it may still not be feasible for an operator to ``code''
-some desired behaviour~\footnote{play with esolangs for an hour to confirm this
+system. 
+A profound result in the study of digital universal simulators is the small set of elementary operations required for this universality, for example, the boolean set \{AND,OR,NOT\}, are sufficient to simulate any function to an arbitrary precision.\\
+% Why we need QC
+However, \emph{universal} does not mean \emph{practical} ---  although a physical device
+is able to simulate anything, it may still not be feasible for an operator to ``code''
+some desired model\footnote{play with esolangs for a few hours to confirm this
 for yourself.}, or for a useful result to be returned in reasonable
-time~\footnote{factor a 256-bit number for \todo{1e10} years to confirm this for
+time --- i.e. is tractable\footnote{factor a 2048-bit number for a few billion years to confirm this for
 yourself.}. Regardless, highly advanced and operable computers have been
-constructed and have successfully  modelled and transformed almost all aspects
-of modern life. However, there still remains vast regions of computational
-problems that fall into the category of unfeasible on current hardware. Worse
-still, the scaling of resources and time required for some real-world problems
-suggest that classical computing will never be able to solve them~\cite{}. \\
-One category of problem that is often recognised to be unfeasible on classical
-computers, is that of modelling quantum systems~\cite{feynman_1982}. Fundamentally this is due to
-the concepts of superposition and interference(\todo{I have seen interference being the often
-quoted feature, check my understanding of this}) -- a quantum state is generally
-described by the superposition of all possible $2^n$ basis states, where $n$ is
-the system dimension~\todo{Check this}. Each basis state will have some
-amplitude and phase, resulting in $2^n-1$ complex
-numbers required to track and accurately model the generic state. This
-exponential scaling is not kind to a digital computer, whose own internal
-classical state (something about how they scale...). \todo{Read deutsch a bit
-again to finalise the argument here}.\\
-Returning to the 80s?, it was thought that
-this detrimental scaling of simulating quantum systems is suggestive that the use of these
-very systems may offer some distinct scaling advantage. Can we construct a Turing machine that utilises the resource scaling of a quantum system\footnote{As an aside, the implications of quantum mechanics on information
+constructed and have successfully modelled and transformed almost all aspects
+of modern life. \\
+Unfortunately, many problems intractable using classical computers are of great
+practical importance, for example accurately modelling chemical systems for
+industrial, and drug design, and simulating solid-state systems for fundamental
+material, and physical research.\\
+Both these examples intentionally fall into the simulation of quantum systems.
+Models of quantum systems are notoriously expensive to encode, 
+fundamentally due to
+the concepts of superposition and interference --- a pure quantum state is generally
+described by the superposition of all possible $d$ basis states, where $d$ is
+the system dimension. Given an underlying number, $n$, of $q$-level subsystems that compose the system, we find the dimension exponentially scales as $d=q^n$. Each basis state of the $n$-body system will have some
+associated amplitude and phase, resulting in $2q^n-2$ real
+parameters required to track and accurately model the pure quantum state. This
+exponential scaling is not kind to a digital computer.\\
+% What is QC
+Returning to the 1980s, it was realised that this exponential scaling could provide the very resources required to simulate other quantum systems. Can we construct a Turing
+machine that utilises the resource scaling of a quantum system~\cite{deutsch_quantum_1985}\footnote{As an
+aside, the implications of quantum mechanics on information
 extend further than purely mimicking other dynamic systems -- using and
 distributing quantum objects also allows for dominant strategies in
-cryptography~\cite{}, and some competitive (although currently esoteric)
-games~\cite{}.}\cite{deutch_1985} --- a quantum computer (QC)? This prompted the requirements given by DiVincenzo on the
-components to construct such a device~\cite{divincenzo_physical_2000}:\\
-\todo{Match with DiVen paper.}
-\begin{enumerate}
-    \item Some aggregation of fundamental quantum information carrying units, most
-    commonly two-level systems called quantum-bits (or qubits), although higher
-    dimensional systems such as qudits~\cite{}, or continuous systems such as
-    qumodes~\cite{} are areas of active research. \\
-    \item We further require some way to
-    prepare these quantum objects into a known initial state. \\
-    \item Then, a set of unitary
-    operations (quantum gates) are used to manipulate the state and perform the
-    desired computation. \\
-    \item Finally, some measurement of the state is required to
-    extract information.\\
-\end{enumerate}
-Why is it difficult to build a QC?
-We must recognise the
-double-edged sword that is this large state space: we gain significant
-computational resources, but the superposition and phases between states are
-increasingly sensitive to environmental noise~\cite{}. The loss of recoverable
-information due to noise is
- called decoherence, and is a major challenge to
-building a practical quantum
- computer~\cite{}.\\
-The physical origin and coupling of noise into the quantum system is highly
-dependent on the hardware implementation of the computer, \todo{maybe we wont anymore...} although the effects
-of noise fall into a few classes, which we shall discuss in the next chapter.
-This thesis is concerned practically on the trapped ion platform, and so a
-specific focus will be lent to it, and we shall now spend some time outlining
-what it consists of.\\
+cryptography~\cite{bennett_quantum_2014}, and some competitive (although currently esoteric)
+games~\cite{drmota_experimental_2025}.} --- a quantum computer (QC)? \\
+The ingredients for such a device are well
+known~\cite{divincenzo_physical_2000}, and have been demonstrated on multiple
+physical platforms to date. Theoretical work is placing ever-more lenient
+constraints on resource requirements, as algorithmic strategies are developed,
+while experimental work is pushing to scale the avaiable resources, and
+performance of actual hardware. The two frontiers are yet to meet at a
+realisation of a useful universal QC, however the list of prerequirements is
+shortening rapidly.
+ We shall give a short overview of the distinct platforms in
+development for scaling QC, and then concentrate on trapped-ions  --- the
+experimental platfrom we use in this thesis.
 
 \section{Quantum Computing Platforms}
-\todo{More exposition but adding some detail on ion-traps}\\
 
-\todo{Start with motivation}\\
-e.g. How can we construct a QC to reach that promise of xx?\\
 An effective quantum computer requires meticulous control over a collection of
 simple quantum systems. A good starting point is thus selecting that simple
 system to build our control around. Nature provides us with a bounty of choices
-in this regard: Atoms. By definition it is difficult to choose a simpler object,
-and according to our understanding of physics, atoms of the same species are
+in this regard: atoms. It is definitively difficult to choose a simpler and more reproducible object: atoms of the same species are
 identical to one another no matter where or when you are.
 We may use their electronic energy structure, which atomic physicists have
 scrutinized for over a century, to define our quantum bits, and we can use an
 assortment of electromagnetic frequencies to manipulate these internal states.
 This is the strategy of both the ``neutral-atom'', and ``trapped-ion''
 platforms, with the latter choosing to remove or add a few electrons to more
-easily manipulate the atoms position in space (although we note that the
-neutral-atom platform has made significant progress in optical traps, and I
-suspect this distinction could become a moot point relatively soon). \\
-Despite this gift of nature, there is wide interest in other ``manufactured''
-quantum systems, such as superconducting circuits, quantum dots, and NV centers;
-benefitting from control over the level structure, and owing to their solid
+easily manipulate the position of the atoms in space\footnote{We note that the
+neutral-atom platform has made significant progress in the spatial control of atoms in optical tweezer traps, however, the trap depths between the two platforms is incomparable.}. The trapped-ion platform also has access to the motion of the ions, which may be used as continuous variable quantum resources --- so called qumodes --- that
+can be coherently controlled, and initialised to highly non-classical states.\\
+Photons are another ``natural'' choice for the quantum-resource. They may either be treated also as continuous quantum systems, or have some discrete level system encoded, such as a qubit. The photonic qubit is unique in being a ``flying-qubit'': photons are
+able to transmit information over long distances, lending them particular interest in their use for interconnecting distant quantum computers.\\
+The final class of platforms is that of
+``manufactured'' quantum systems, such as superconducting circuits, quantum dots, and NV centers;
+benefiting from control over the level structure, and owing to their solid
 state, presumably allowing for easier integration into existing semiconductor
-fabrication techniques. The final platform we name is photonic qubits, arguably
-another of natural origin, and unique in being a ``flying-qubit'': photons are
-able to transmit information over long distances (and it is in fact quite hard
-to keep them still). At this time, it is unclear whether one of these platforms,
+fabrication techniques.\\
+At this time, it is unclear whether one of these platforms,
 or an entirely new architecture, will be the first to reach a scaled device.
 Each have their own advantages and unique technical challenges, and each are in
-rapid active development. \\
-
-\todo{Zoom into trapped ions}\\
-Atomic ions held in place through some combination of electric and/or magnetic
-fields. They are stored in ultra-high vacuum conditions, and physically distant
-(>10 $\unit{\micro\meter}$) from any bulk material to limit the coupling of
-environmental noise to our fragile state. Lasers, radio, and microwave drives
-are then used to effect the electronic and motional states of the ions.
-\todo{end with point on scaling, and required scale for useful QC}
-
+rapid active development. The next section outlines some technical challenges in
+scaling current quantum hardware, focussing on the trapped-ion platform studied in this thesis.
 
 \section{Scaling Trapped Ion Systems}
-\todo{I want this section to motivate narrative of thesis.}\\
-\todo{
-\begin{itemize}
-    \item General motivation: Why we need to scale up trapped ion systems (Steane) in register, and in depth. 
-    \item in this thesis... Then unpack
-    \item Control: How to scale? More qubits, using qumodes *contribution: Single addressing + using qumodes.
-    \item But what appears? Noise.
-    \item Characterise: Characterisation and scaled characterisation methods are important *contribution k-copy.
-    \item Utilise: Making imperfect resources useful by error tolerance *contribution vd
-\end{itemize}
-}
-\todo{Start with motivation}\\
-How do we scale the system? We require many qubits and deep circuits to complete useful computational tasks.
 
+For useful quantum computation and simulation, we require access to a sufficiently large Hilbert space,
+with sufficiently accurate control with which to traverse it. How do we scale the ion-trap
+platform to provide those resources? In principle, we know \emph{how}, but the required engineering and control presents unique and technical challenges. I identify three
+specific challenges associated to scaling, that motivate the work presented in this thesis:
+increasing the available quantum resources, controlling those resources, and characterising and mitigating the errors that arise as the system grows.\\
 
-Increased complexity changes the relevant error processes. 
+\subsubsection{Challenge I: Scaling Quantum Resources}
+We need larger Hilbert spaces --- to solve a ``useful'' computation, such as
+Shor's algorithm~\cite{shor_polynomial-time_1997} applied to factoring RSA-2048
+integers, it is currently estimated that
+$10^4-10^5$ physical qubits will be required~\cite{cain_shors_2026,
+webster_pinnacle_2026}. Architectures for such scaling include quantum charge-coupled device (QCCD)~\cite{kielpinski_architecture_2002},
+to reconfigure an array of qubits using multi-zone surface traps; and optical
+networked modules~\cite{luo_protocols_2009}, using photonic interconnects to combine many small
+qubit registers into a single traversable Hilbert space. Another disparate strategy
+--- continuous variable quantum computing (CVQC) --- replaces many low-dimensional
+qubits, with few high-dimensional qumodes. Qumodes store information in the continuous states of a quantum harmonic oscillator, as such, in principle have an infinite-dimensional Hilbert space. This exchanges the
+technical issues of controlling vast numbers of qubits, to instead requiring
+truly exquisite control of a few qumodes. The innate utility of this continuous
+system, is exemplified by a CVQC scheme for
+factoring RSA-2048 integers using only three qumodes and a single
+qubit~\cite{brenner_factoring_2024}. Although this particular protocol is
+unfeasible due to technically prohibitive required high-energy
+oscillator states, scaling accessible Hilbert spaces via qumodes remains a promising
+strategy. Trapped ions therefore provide two complementary routes to increasing the accessible Hilbert space: increasing the total number of ions in the register, and utilising the motional modes of the ions already present within that register.
 
-There is a reason that ``random''-algorithms have currently shown supremacy -> enforces simple noise mode.
+\subsubsection{Challenge II: Scaling Control}
+Access to a sufficiently large Hilbert
+space is useful only if we can reliably and selectively navigate it.
+What are the elementary operations we require, and how do we
+physically implement them on our system? The elementary unitary operations often
+are expressed as minimal gate-sets allowing for universal quantum computing.
+These are typically comprised of one, and two-body
+interactions~\cite{divincenzo_two-bit_1995,
+kitaev_quantum_1997,braunstein_quantum_2005,lloyd_quantum_1999}, which greatly
+simplifies the elementary operation, and the required number of implementable
+interactions. This does comes at the considerable cost of
+``addressability'' --- we must be able to selectively drive interactions locally
+on either one, or two physical carriers. For trapped-ion qubits, this requires a
+form of spatial selectivity, while for motional-state qumodes, often requires a combination of
+frequency and spatial selectivity. This technical constraint is that of
+``control-signal delivery'', a common problem to both classical and quantum
+computing. Trapped-ion systems require hardware for delivering spatially, and spectrally selective electronic control, and optical-beam
+delivery, both of which are under active development to enable
+scalability~\cite{malinowski_how_2023,mehta_integrated_2020}.\\
 
+\subsubsection{Challenge III: Scaling with Imperfect Systems}
+The last specific challenge we discuss is that of unwanted evolution due to \emph{noise}.
+Qubits stored in the electronic states of ions are sensitive to external electric
+and magnetic fields, while qumodes are particularly sensitive to electric fields originating from the trap electrodes. The effects of noise on the desired
+state evolution are varied, but
+if left unchecked, inevitably lead to information loss. 
+Furthermore, increased system scale and complexity changes the relevant error
+processes. In particular, noise leading to unintended correlations across the register, and across time can be difficult to quantify and mitigate.
+To combat this noise, we first require methods to characterise performance, and
+quantify how this noise leads to logical errors in an executed algorithm.
+This motivates the wide field of
+quantum characterisation and verification~\cite{eisert_quantum_2020,
+hashim_benchmarking_2023}. A varied collection of characterisation protocols
+exist due to an unavoidable trade-off between \emph{expressibility} and
+\emph{scalability} --- The systems we wish to characterise are inherently large,
+and thus full descriptions require vast amounts of information. So we often sit
+in two regimes: we may either fully characterise few-body
+interactions~\cite{chuang_prescription_1997}, or we must use abstracted, and
+system-wide metrics to gauge performance of the scaled
+system~\cite{erhard_characterizing_2019,mckay_benchmarking_2023}.\\
+When noise is suitably suppressed
+through hardware engineering, we may then utilise algorithmic techniques to be
+robust to the remaining imperfections. Foremost, analogous to classical
+computing, it is possible to detect and correct errors during the execution of
+an algorithm~\cite{aharonov_fault-tolerant_2006}. This comes at a considerable
+overhead in both register size and circuit depth, only recently in reach of
+experimental platforms, but only for small numbers of logical qubits~\cite{steane_overhead_2003}. A
+complimentary method for suppressing the impact of errors is through myriad
+error mitigation techniques, using repeat measurements to infer error-suppressed
+algorithmic outputs~\cite{cai_quantum_2023}. \\
+Therefore, even with imperfect physical qubits or qumodes, it appears to still be physically possible to construct useful, universal quantum computers.
 
 
 \section{Structure of this Thesis}
-% Main points:
-    \todo{Start with motivation}\\
 
     This thesis describes the development of a trapped-ion platform for
     multi-ion spin–motion control, and its application to the characterisation
     of correlated errors, hybrid spin–oscillator control, and quantum error
-    mitigation.
+    mitigation.\\
 
-    Chapter~\ref{ch:theory} provides motivation and theory required for the
-    remainder of the thesis, including a background on randomised benchmarking
-    and the relevant group theoretic results. \\
+    \noindent Chapter~\ref{ch:theory} provides further details on the trapped-ion platform, and the underlying light-matter interactions enabling the use of ions as quantum-information carriers. \\
     Chapter~\ref{ch:apparatus} details the ion-trap 
     apparatus constructed for this thesis, enabling the study of multi-qubit and
     qumode registers.\\
-    Chapter~\ref{ch:characterisation} presents the hardware performance.\\
-    Chapter~\ref{ch:k-copy} presents a novel randomised benchmarking method
+    Chapter~\ref{ch:characterisation} presents the hardware characterisation, giving details on experimental calibrations, the initialisation of the qubits and qumodes, and elementary single- and two-qubit gate performance. \\
+    Chapter~\ref{ch:k-copy} presents a novel and scalable randomised benchmarking method
     for characterising and quantifying spatially correlated errors in multi-qubit
     devices, including experimental results on up-to an 8-ion chain.\\
-    Chapter~\ref{ch:QEM} gives details on two on-going projects utilising the
-    newly constructed apparatus. Roughly, the first half of this chapter is
-    concerned with utilising the motion of the ions as a computational resource,
-    and provides a demonstration of motional state squeezing. The second half of
-    this chapter presents an experimental
-    implementation of virtual distillation, an error mitigation technique with
+    Chapter~\ref{ch:QEM} explores two ongoing research directions enabled by the
+    newly constructed apparatus. First, we outline how to utilise the qumodes in our system, providing a gate-set for full qubit-qumode control. We discuss a practical way to drive this full gate-set, and by this method, demonstrate spin-conditioned motional squeezing. Second, we experimentally investigate virtual distillation, an error mitigation technique with
     practical application to computation involving both spin and motional
     degrees of freedom.\\ 
-    The thesis is concluded in chapter~\ref{ch:conclusion} with details on the
-    implication on this work to the field, and an outlook of future work planned
-    on the constructed apparatus.\\
+    Chapter~\ref{ch:conclusion} concludes this thesis by summarising its contributions, and providing an outlook for future research enabled by the experimental platform.\\

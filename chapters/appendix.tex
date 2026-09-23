@@ -1,44 +1,14 @@
 \chapter{Appendix}
 
 \section{Generating Ions}
-% Main points:
-    % Atomic oven 
-        % Really this is just for future members.
-        % What temperature/current we go to
-    % PI lasers
-        % What powers/ saturation/ frequencies we use for trapping
-        % Concerns of charging the trap with the UV lasers
-% Pre reqs:
-    % Atomic source
-
-\section{Extracting Laser Offset and Magnetic Field}
-\label{sec:Laser Offset}
-% Main points:
-    % How we fit out laser offset and field using multiple transitions
-    % We have cavity and magnetic field drift.
-    % We are on a magnetically sensitive transition
-% Pre reqs:
-    % The MUMetal box
-    % 5 G field
-
-\section{Experimental Control}
-\label{sec:Experimental Control}
-% figures for section
-    % Recrystallisation routines
-    % Autoload routines
-    % Morningly calibrations
-
-\section{Creating Squeezed States}
-\label{sec:Squeezed States}
-% Main points:
-    % Creating two simultaneous SDFs (requires section on SDFs!)
-    % Four tones on one AOM
-    % Phase relationships between SDFs (requires description of urukul?)
-    % Limitations due to motional mode stability
-
-% Prereqs:
-    % SDFs
-    % Motional characterisations
+\todo{split and move between PI in ch2, and hardware in ch3\\
+-Main points:\\
+    -Atomic oven \\
+        -Really this is just for future members.\\
+        -What temperature/current we go to\\
+    -PI lasers\\
+        -What powers/ saturation/ frequencies we use for trapping\\
+        -Concerns of charging the trap with the UV lasers}
 
 \section{Gate Fidelity}
 \label{sec:fidelity}
@@ -93,7 +63,7 @@ where we can evaluate the two terms using the identities $\text{Tr}(A \otimes B)
 
 \section{Projectors of $Cl_1^{\otimes 2}$}
 \label{sec:k-copy_projector}
-We outline the method of recovering the $\alpha$ parameters described in section~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here \todo{IRO please check you are happy with me to include this appendix}. \\
+We outline the method of recovering the $\alpha$ parameters described in section~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver Romvig {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here. \\
 The decay due to a single rotation acting identically on both qubits which, in the Pauli-transfer matrix (PTM) representation, can be written as $\Lambda^\mathcal{P}=\mathrm{diag}(1, R, R, R\otimes R)$, 
 where superscript $\mathcal{P}$ represents the block diagonal matrix is ordered by the two-qubit Pauli basis $\mathcal{P}=\{I\otimes I, \vec\sigma\otimes I , I\otimes\vec\sigma, \vec\sigma\otimes\vec\sigma\}$, with $\vec\sigma = \{\hat\sigma_x, \hat\sigma_y, \hat\sigma_z\}$, and
 $R=R(\vec{n}, \theta)\in SO(3)$ describes a rotation by $\theta$ around $\vec{n}$. Finding the vector $\vec\alpha$ can now be done using Schur's lemma for the case of no mixing between irrep spaces:
@@ -196,7 +166,10 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     where we can see that if the Hamiltonian fails to commute with itself at different times, the higher-order Magnus terms become relevant.
     This may be understood as the continuous analogy of the Baker-Campbell-Hausdorff formula. It is particularly useful in this thesis to understand the origin of the geometric phase in the MS gate scheme, and the non-linear bosonic interactions generated in the ``two-SDF'' protocol given in~\S~\ref{sec:two-sdf}.
 
-\subsection{``Two-SDF'' dynamics}
+\subsection{Geometric Phase}
+\todo{For Geometric phase gates derivation}
+
+\subsection{``Two-SDF'' Dynamics}
     Here we analyse the ``two-SDF'' Hamiltonian given in equation~\ref{eqn:two-sdf} using the Magnus expansion. We recover effective Hamiltonians for both Gaussian interactions, as well as for tri-squeezing. \\
     The ``two-SDF'' Hamiltonian is reproduced for convenience here,
     \begin{align}
