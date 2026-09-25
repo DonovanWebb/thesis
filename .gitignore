@@ -134,3 +134,9 @@ chapters/ch1-intro.aux
 chapters/ch2-theory.aux
 chapters/ch3-apparatus.aux
 chapters/ch4-characterisation.aux
+figures/make_figure/ch4/circs/rb/circuits.aux
+figures/make_figure/ch4/circs/rb/circuits.fdb_latexmk
+figures/make_figure/ch4/circs/rb/circuits.fls
+figures/make_figure/ch4/circs/rb/circuits.log
+figures/make_figure/ch4/circs/rb/circuits.out
+figures/make_figure/ch4/circs/rb/circuits.synctex.gz

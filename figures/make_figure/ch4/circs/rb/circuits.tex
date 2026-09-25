@@ -1,0 +1,19 @@
+\documentclass[tikz,border=6mm]{standalone}
+
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{quantikz}
+
+\begin{document}
+
+\begin{quantikz}
+\lstick{$\ket{0}$}          & \gate{C_i}\gategroup[1,steps=1,style={dashed,rounded
+corners,fill=blue!20, inner
+xsep=2pt},background,label style={label
+position=above,anchor=north,yshift=+0.4cm}]{{
+$m-1$ times}}   &  \gate{C_\mathrm{inv}} & \gate{P}& \meter{}  
+\end{quantikz}
+
+\end{document}
