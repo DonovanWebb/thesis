@@ -402,6 +402,8 @@ well-placed for studying methods for scaling hybrid-system control.
     on shared qubit-oscillator states could prohibit the use of such a
     pulse-shaping scheme. Ultimately, the desired interaction, mode frequency spectra, and target gate duration will determine the dominant coherent errors. We leave such an analysis for future work. \\
 
+    \todo{Add point on number of accessible Fockstates for our trap, for 1eV trap depth, and 3MHz mode, have available $\approx 10^8$ Fock states, providing the equivalent dimension as $\log_2(10^8)\approx 26$ qubits. Assuming that the trap remains harmonic}
+
 \section{\textbf{Virtual Distillation}}
 \label{sec:virtual_distillation}
 
@@ -655,7 +657,7 @@ external field.
     \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch6/bmat_calib.pdf}
     \end{center}
     \caption{
-        Verification of the physically implemented $B$-circuit. (a-b) Preparing the initial state $\ket{01}$, applying global $R_x(\theta)$ rotations, and measuring the two-qubit joint probabilities provides a clear signal for the correct application of the $B$-matrix. (a) No $B$-circuit is applied. (b) $B$-circuit applied. (c) Globally applied Ramsey experiment followed by the $B$-circuit and subsequent postprocessing to recover the purity and numerator term given by equations~\ref{eqn:VD_ZZ}.
+        Verification of the physically implemented $B$-circuit. (a-b) Preparing the initial state $\ket{\da\ua}$, applying global $R_x(\theta)$ rotations, and measuring the two-qubit joint probabilities provides a clear signal for the correct application of the $B$-matrix. (a) No $B$-circuit is applied. (b) $B$-circuit applied. (c) Globally applied Ramsey experiment followed by the $B$-circuit and subsequent postprocessing to recover the purity and numerator term given by equations~\ref{eqn:VD_ZZ}.
         }
     \label{fig:bmatrix_calib}
 \end{figure}
@@ -672,35 +674,35 @@ Walsh-1 MS gates on the in-phase upper radial mode, as characterised in~\S~\ref{
 After calibration, the Walsh-1 $R_{xx}(\frac{\pi}{4})$ gate settings are the following:
 $21~\unit{\micro\watt}$ total 729-nm beam power, $-15~\unit{\kilo\hertz}$ detuning from in-phase upper radial motional mode, $10~\unit{\micro\second}$ ramp duration (ramped on and off for both arms of the Walsh), and a $67.5~\unit{\micro\second}$ FWHM pulse duration for each arm. The total pulse duration including ramp durations is then $155~\unit{\micro\second}$.
 Stark-shifts must be carefully calibrated to ensure consecutive MS gates have spin-phases set relative to the qubit. The Stark-shift for this power is calibrated using an SDF on a single ion (described in~\S~\ref{sec:SDF}), finding a shift of $2.49~\unit{\kilo\hertz}$. This phase is accounted for by updating the RF-tones on the SP AOM for subsequent pulses.
-With these settings we measure a fidelity for two-consecutive $R_{xx}(\frac{\pi}{4})$ gates of $\mathcal{F}_2 = 96.0(8)\%$, with population component of $p_{01}+p_{10}=0.010(3)$, and parity contrast of $C=0.93(2)$. The inferred single $R_{xx}(\frac{\pi}{4})$  gate fidelity, assuming depolarising errors, is then $\mathcal{F} = 98.0(4)\%$. \\
+With these settings we measure a fidelity for two-consecutive $R_{xx}(\frac{\pi}{4})$ gates of $\mathcal{F}_2 = 96.0(8)\%$, with population component of $P_{\da\ua}+P_{\ua\da}=0.010(3)$, and parity contrast of $C=0.93(2)$. The inferred single $R_{xx}(\frac{\pi}{4})$  gate fidelity, assuming depolarising errors, is then $\mathcal{F} = 98.0(4)\%$. \\
 Single qubit phase shifts, 
 $R_z$, are executed virtually. As we require non-common $R_z$ phase shifts on the two qubits, we update the relative phases of the two
 pairs of RF tones applied to the acousto-optic deflectors, used for generating the addressed spots. As these single-qubit gates are virtual, we expect negligible error contributions.\\
 The final
 computational-basis measurements are executed by state-dependent fluorescence,
 described in~\S~\ref{sec:Stateprep}. 
-From the single-shot outcomes, the joint probabilities $p_{ij}$, with $i,j\in\{0,1\}$ denoting the bright and dark states of ions 1 and 2 are recovered, respectively.
+From the single-shot outcomes, the joint probabilities $P_{ij}$, with $i,j\in\{\da,\ua\}$ denoting the bright and dark states of ions 1 and 2 are recovered, respectively.
 The required expectation values given in equations~\ref{eqn:VD_ZZ} are then simply,
 \begin{align}
     \label{eqn:bmat_jointprobs}
 \langle \hat Z\otimes \hat I\rangle
-    &= p_{00}+p_{01}-p_{10}-p_{11},\\
+    &= P_{\da\da}+P_{\da\ua}-P_{\ua\da}-P_{\ua\ua},\\
 \langle \hat I\otimes \hat Z\rangle
-    &= p_{00}-p_{01}+p_{10}-p_{11},\\
+    &= P_{\da\da}-P_{\da\ua}+P_{\ua\da}-P_{\ua\ua},\\
 \langle \hat Z\otimes \hat Z\rangle
-    &= p_{00}-p_{01}-p_{10}+p_{11}.
+    &= P_{\da\da}-P_{\da\ua}-P_{\ua\da}+P_{\ua\ua}.
 \end{align}
 To initially verify the performance of the physical implementation of the $B$-circuit, two heuristic tests are used\footnote{Process-tomography would be ideal for this two-qubit implementation, however we have not yet implemented this on our apparatus.}.
 First, we want a clear indication that the transformation due to the applied $B$-circuit matches the convention given by the $B$-matrix in equation~\ref{eqn:bmatrix}.
 Inspecting the
 $B$-matrix, we see the central block acts
-distinctly on the $\{\ket{01},\ket{10}\}$ subspace. As such, a method that preferentially probes this subspace would give a clear signal for conformity between the applied $B$-circuit and the desired $B$-matrix.
-To access this subspace, a singly addressed $R_x(\pi)$-pulse is applied to prepare the initial state $\ket{01}$. A global $R_x(\theta)$ is then applied with variable rotation angle, $\theta$. Figure~\ref{fig:bmatrix_calib} (a) shows the measured two-qubit populations as a function of $\theta$ without the $B$-circuit applied. Panel (b) shows the populations with the global rotation and the $B$-circuit applied. The solid lines correspond to the expected populations inferred from equation~\ref{eqn:bmatrix}, while points are experimental data with $N=150$ samples per probed rotation angle. We can see good qualitative agreement between the observed data, and the desired behaviour suggesting the phase relationships enforced by the $B$-circuit indeed conform with the ideal $B$-matrix.\\
+distinctly on the $\{\ket{\da\ua},\ket{\ua\da}\}$ subspace. As such, a method that preferentially probes this subspace would give a clear signal for conformity between the applied $B$-circuit and the desired $B$-matrix.
+To access this subspace, a singly addressed $R_x(\pi)$-pulse is applied to prepare the initial state $\ket{\da\ua}$. A global $R_x(\theta)$ is then applied with variable rotation angle, $\theta$. Figure~\ref{fig:bmatrix_calib} (a) shows the measured two-qubit populations as a function of $\theta$ without the $B$-circuit applied. Panel (b) shows the populations with the global rotation and the $B$-circuit applied. The solid lines correspond to the expected populations inferred from equation~\ref{eqn:bmatrix}, while points are experimental data with $N=150$ samples per probed rotation angle. We can see good qualitative agreement between the observed data, and the desired behaviour suggesting the phase relationships enforced by the $B$-circuit indeed conform with the ideal $B$-matrix.\\
 The second heuristic check verifies the conventions for recovering the numerator
 and denominator in equations~\ref{eqn:VD_ZZ}, from the qubits measured
 joint probabilities, given in equations~\ref{eqn:bmat_jointprobs}. 
 To test this, a simple Ramsey experiment is performed on both
-qubits simultaneously. The qubits are initially prepared in $\ket{00}$. 
+qubits simultaneously. The qubits are initially prepared in $\ket{\da\da}$. 
 A global pulse $R_x(\frac{\pi}{2})$ is then applied, followed by a final analysis pulse
 $R_\phi(\frac{\pi}{2})$, applied with variable spin-phase, $\phi$. After these
 pulses, the $B$-circuit is applied, and the two-qubit populations are measured. 
@@ -787,9 +789,9 @@ The analytic decay of the mitigated observable $\langle \hat Z\rangle_\mathrm{pu
 where we have assumed small errors.
 This is simply calculated by extending equation~\ref{eqn:rb_meas} to include the action of the $B$-matrix, here using the superoperator form,
 \begin{equation}
-    p_{LR}=\langle\langle L,R|B\Lambda_T^m|00\rangle\rangle,
+    P_{LR}=\langle\langle L,R|B\Lambda_T^m\lvert\da\da\rangle\rangle,
 \end{equation}
-where $p_{LR}$ is the probability of measuring bit string $LR\in\{0,1\}^2$. The effective observable $\langle \hat Z \rangle$ is then recovered by equations~\ref{eqn:bmat_jointprobs}. 
+where $P_{LR}$ is the joint probability for the two qubits, with $L,R\in\{\da,\ua\}$. The effective observable $\langle \hat Z \rangle$ is then recovered by equations~\ref{eqn:bmat_jointprobs}. 
 For small $m$, and assuming small errors, this may be expanded to second order as,
 \begin{equation}
 \langle \hat Z\rangle_\mathrm{pur} \approx 1-2m\varepsilon_\mathrm{corr} - 2m^2\varepsilon_L\varepsilon_R,

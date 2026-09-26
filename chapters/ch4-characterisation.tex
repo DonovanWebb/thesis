@@ -133,7 +133,7 @@
     finite lifetime of the metastable $3D_{5/2}$ level, which dominate $\epsilon_\uparrow$. The expected error due
     to the finite lifetime, $\tau$, is $\epsilon_{\rm decay} = 1 - e^{-t/\tau}$, where $t$ is the readout duration. For \ca, $\tau \sim 1.1$~s, $\epsilon_\uparrow \approx \epsilon_{\rm decay}  = 
     10^{-4}$. 
-    Assuming the metastable lifetime is limited only by spontaneous decay overlooks leakage from the 854-nm deshelving beam, which could significantly shorten $\tau$~\cite{sotirova2024high-fidelity}. \\
+    Assuming the metastable lifetime is limited only by spontaneous decay overlooks leakage from the 854-nm deshelving beam, which could significantly shorten $\tau$~\cite{sotirova_high-fidelity_2024}. \\
     
 
 
@@ -281,85 +281,132 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     subsequently calibrated by rescaling the original pulse in time by factor $s
     = \frac{\pi}{2\theta_0}$.\\
 
-    This method, along with the transition frequency calibrations given above, provide an efficient method to calibrate systematic offsets of single qubit rotation gates driven through on-resonant carrier excitation. Next we discuss randomised benchmarking, a characterisation technique that provides a measure of remaining incoherent and systematic errors for the calibrated gates.
+    This method, along with the transition frequency calibrations given above,
+    provide an efficient method to calibrate systematic offsets of single qubit
+    rotation gates driven through on-resonant carrier excitation. Next we
+    discuss randomised benchmarking, a characterisation technique that provides
+    a measure of remaining incoherent and systematic errors for the calibrated
+    gates.
 
 \subsection{Single-Qubit Randomised Benchmarking}
+\label{sec:standard_rb}
+
 
     \begin{figure}
         \begin{center}
-        \noindent\includegraphics[width=0.5\linewidth]{
-            figures/make_figure/ch4/circs/rb/circuits.pdf
+        \noindent\includegraphics[width=\linewidth]{
+            figures/pdf_figure/ch4/rb.pdf
             }
         \end{center}
         \caption{
-            }
-        \label{fig:rbm_circ}
-    \end{figure}
-
-    \begin{figure}
-        \begin{center}
-        \noindent\includegraphics[width=0.75\linewidth]{
-            figures/pdf_figure/ch4/rbm_fit.pdf
-            }
-        \end{center}
-        \caption{
-            Estimating single qubit Clifford fidelities, $\mathcal{F}$, and errors due to state preparation and measurement, using randomised benchmarking. 
-            The data points are the average survival population after applying a sequence of $m$ random Clifford gates, and a final inverting Clifford gate. The dashed line is the fit to the decay model given by equation~\ref{eq:RBM_decay}. The error bars are given by the standard deviation of the survival populations.
+            Standard randomised benchmarking applied to a single qubit. Panel a)
+            shows the required circuit for a random sequence of Clifford gates,
+            $C_i$, of total length $m-1$, with a final inverting Clifford,
+            $C_\mathrm{inv}$, and a random Pauli gate, $P$, before measurement
+            in the computational basis. Panel b) shows the survival probability,
+            $\mathcal{P}_S$, versus Clifford sequence length, $m$.
+            Each point is found by averaging over $r=50$ and $s=50$ repeats for each
+            $m$. The solid line is a fit using the decay model given by
+            equation~\ref{eq:RBM_decay}, the dashed line is the expected
+            asymptote for a fully depolarised single qubit.
             }
         \label{fig:rbm}
     \end{figure}
 
-    - Motivation\\
+    A further characterisation protocol is required to quantify the performance
+    of single-qubit gates under both systematic and incoherent noise.
+    A scalable class of methods, prevalent in quantum
+    computation, is that of randomised benchmarking (RB). We will give a short
+    description of RB here, but further details of the goals of
+    characterisation, and complementary techniques to RB are discussed in
+    chapter~\ref{ch:k-copy}~\S~\ref{sec:k-copy_char}.\\
 
-    To evaluate the quality of both our
-    state preparation and single qubit rotations, randomised benchmarking
-    (RB)~\cite{knill2008randomized} is employed.  
+    The purpose of RB is to simplify a general completely positive, trace preserving (CPTP) error channel by enforcing the
+    symmetry of a chosen group on the channel~\cite{hashim_practical_2025}.
+    The general error channel is described by the map acting on the space of density matrices,
+    \begin{equation}
+    \mathcal{E}(\rho): \mathbb{C}^{d\times d}\rightarrow\mathbb{C}^{d\times d}
+    \end{equation}
+    where $d$ is the Hilbert space dimension.
+    The symmetry is enforced on the channel through twirling --- averaging a channel $\mathcal{E}$
+    over a group $\mathcal{G}$.
+    A treatment of the action of twirling on a CPTP channel is given
+    in~\S~\ref{app:reps} in the context of \emph{k-copy}
+    RB, an extension to standard RB methods for a single-qubit~\cite{knill_randomized_2008}.\\
+    The resulting simplified channel is
+    then quantified to obtain metrics of the performance of the executed circuit.
+    This protocol thus can reduce the problem to measuring $O(1)$
+    parameters, rather than the $O(d^4)$ parameters required for a general
+    quantum channel acting on a Hilbert space with dimension $d$. Furthermore, RB is
+    particularly robust to state-preparation and measurement errors (SPAM),
+    allowing for the isolation of errors originating from imperfect SPAM, to
+    errors originating from the qubits idling or from the execution of gates.\\
 
-    - short theory on twirling \\
-    \todo{Figure PTM transformation?}\\
+    Practically RB protocols are simple to implement, approximating the twirling procedure to the generation
+    and execution of an ensemble of
+    random gate sequences of varying lengths,
+    $m$. We focus on the ``standard'' RB sequence, enforcing the single-qubit
+    Clifford group symmetry onto a single-qubit
+    error channel~\cite{knill_randomized_2008}. The aim of standard RB is to twirl
+    over the single-qubit unitary group, $SU(2)$, which takes the Haar measure,
+    and transforms single-qubit error channels to highly-symmetric depolarising
+    type channels, fully expressed by a single parameter, $\lambda$,
+    \begin{equation}
+    \mathcal{E}_{dp}(\rho) = (1-2\lambda)\rho + \lambda I_2 \mathrm{Tr}(\rho),
+    \end{equation}
+    where $\mathcal{E}_{dp}$ is the resulting twirled channel, and $I_2$ is the $2\times 2$ identity matrix.
+    Unfortunately, $SU(2)$ is continuous, as such it is impractical to average over the entire group.
+    However, there are certain subgroups of $SU(2)$ that can be averaged over to
+    recover an approximation of the Haar measure over $SU(2)$, up to the moment
+    $t$. These subgroups are known as unitary $t$-designs of $SU(2)$.
+    The single-qubit Clifford group, $Cl_1$, is a known 2-design, and consists of only 24 elements~\cite{dankert_exact_2009}.\\
 
-    - protocol\\
-    - include random Pauli \\
-    RB consists of
-    applying random combinations of gates from the single-qubit Clifford group to
-    estimate an average error per gate. The single-qubit Clifford group is
-    the set of unitaries which map the Pauli matrices to one another through
-    conjugation. 
-
-    The sequence of operations is as follows:
+    The standard RB implementation for one sequence is presented in figure~\ref{fig:rbm}~(a), and the full sequence is as follows:
     \begin{enumerate}
-        \item Prepare the qubit in $\ket{\downarrow}$ via optical pumping, section~\ref{sec:Stateprep}.
-        \item Apply a random sequence of $m-1$ single qubit Clifford gates, where $m$ is the length of the sequence.
-        \item Apply a final ``inverting'' Clifford gate, which is chosen such that the full sequence performs the identity operation.
-        \item Measure the population in $\ket{\downarrow}$, $P_\downarrow$, via state-selective fluorescence, section~\ref{sec:Measurement}.
-        \item Repeat steps 1-4 multiple times to find the average survival population, $\langle P_\downarrow \rangle$.
-        \item Repeat steps 1-5 for many different random sequences with a range of sequence lengths, $m$.
-        \item Fit the decay of the average survival population, $\mathcal{F}(m) = \langle P_\downarrow(m) \rangle$, to a decay model to find the average error per Clifford gate.
+        \item The qubit is initialised to $\ket{\downarrow}$. 
+        \item A sequence of $m-1$ single qubit Clifford gates, $C_i$, are applied, with each gate randomly sampled from the Clifford gate-set. 
+        \item A final ``inverting'' Clifford gate, $C_\mathrm{inv}$, is applied which is chosen such that the full Clifford gate sequence is equivalent to the identity operation.
+        \item A random Pauli gate, $P\in\{I,X,Y,Z\}$, is applied
+        with equal probabilities\footnote{This acts to randomise the final outcome between
+        computational states $\ket{\downarrow}$ and $\ket{\uparrow}$, enforcing a further symmetry
+        on any state-preparation and measurement error component.}.
+        \item The population is measured in the computational basis, with shots resulting in the expected outcome (accounting for the random Pauli) labelled as survivals, $S$, and opposite outcomes labelled as failures, $F$.
+        \item Steps 1-5 are repeated $s$ times to find the average survival population, $\mathcal{P}_S$.
+        \item Steps 1-6 are repeated $r$ times with different random sequences for sequence with length $m$. 
+        \item Steps 1-7 are repeated for a chosen set of sequence lengths, $m$, here log-sampling $m$ up to some $m_\mathrm{max}$.
+        \item The average survival populations versus sequence length, $m$, are fit to a decay model to extract a depolarising error per Clifford gate, $\varepsilon_c$, and a SPAM error $\varepsilon_\mathrm{sp}$.
     \end{enumerate}
-
-    The decay model used to find 
-    the fidelity versus number of Clifford gates is given by,
-    \todo{Check consistency}
+    The decay model used to find the fidelity versus number of Clifford gates is given by,
     \begin{equation}
     \label{eq:RBM_decay}
-        \mathcal{F}(m) = \frac{1}{2}\left( 1+\left(1-2\epsilon_{\rm SPAM}\right)\left(1-2\epsilon_c\right)^m\right),
+        \mathcal{P}_S(m) = \frac{(1 - 2 \varepsilon_\mathrm{sp}) (1 - 2\varepsilon_c)^m + 1}{2},
     \end{equation}
-    where $\mathcal{F}(m)$ is the fidelity of the sequence with length $m$,
-    $\epsilon_{\rm SPAM}$ is the state preparation and measurement error, and
-    $\epsilon_c$ is the average error per Clifford gate.  The Clifford gates are decomposed into
-    sequences of $\pi/2$- and $\pi$-pulses about either the $x$- or $y$-axes. 
+    where the first term in brackets is the probability of no error during SPAM, and the second, exponential term provides the probability of not depolarising during a sequence of length $m$.\\
 
-    - exp detail for figure\\
-    
-    Up to $m=100$ Clifford gates are probed, and the decay of the fidelity, $\mathcal{F}(m)$, is fit using the above model.
-    The error per Clifford is found to be $\epsilon_c = 9.5(3) \times 10^{-4}$,
-    while the SPAM error is $\epsilon_{\rm SPAM} = 1.46(6) \times 10^{-3}$. The decay plot for
-    this RB sequence can be seen in figure~\ref{fig:rbm}.
-    The independently characterised state preparation (section~\ref{sec:Stateprep}) and measurement (section~\ref{sec:Measurement}) errors of $\sim 10^{-3}$, and $\sim 10^{-4}$ respectively, are consistent with the measured $\epsilon_{\rm SPAM}$.
+    \begin{figure}
+        \begin{center}
+        \noindent\includegraphics[width=0.5\linewidth]{
+            figures/pdf_figure/ch4/rb_detuning.pdf
+            }
+        \end{center}
+        \caption{
+            Calibrating the relative detuning between the 729-nm laser and the
+            qubit during the application of $\frac{\pi}{2}$-pulses. 
+            Each point
+            corresponds to the extracted error-per-Clifford from standard RB.
+            The solid line is the fit of a quadratic model, the dashed line is
+            the extracted center frequency.
+            }
+        \label{fig:rb_detuning}
+    \end{figure}
+    This scheme is applied experimentally to characterise the performance of the calibrated single-qubit gates.
+    The 24 Clifford gates are decomposed into
+    sequences of $R_x(\pm \frac{\pi}{2})$ and $R_x(\pm \frac{\pi}{2})$, with an average of 2.17 $\frac{\pi}{2}$-pulses per Clifford gate.
+    Figure~\ref{fig:rbm}~(b) shows the average survival populations for a log-sampled range of sequence lengths up to $m_\mathrm{max} = 2048$ Clifford gates. Each point corresponds to an average over $r=50$ randomisations, and $s=50$ sample repeats per randomisation. The solid line follows equation~\ref{eq:RBM_decay}, with fit parameters, $\varepsilon_c=1.9(1)\times10^{-3}$, and $\varepsilon_\mathrm{sp}=3(1)\times10^{-3}$. The dashed line is the expected asymptote for a fully depolarised qubit. Error bars show the standard error of the average survivals for each random sequence for a given length $m$. From $\varepsilon_c$, we find a single $R_x(\frac{\pi}{2})$ average fidelity of $\mathcal{F}_{\pi/2}=1-\frac{\varepsilon_c}{2.17}=99.913(2)\%$.
+    The measured SPAM is consistent with the independently characterised state preparation (section~\ref{sec:Stateprep}) and measurement (section~\ref{sec:Measurement}) errors of $\sim 10^{-3}$, and $\sim 10^{-4}$ respectively.\\
 
-    - Calibration of detuning with RB\\
-
-    - Comment on link to k-copy\\
+    RB can be used to calibrate systematic errors, however requiring many more samples than the RPE protocol described above. Figure~\ref{fig:rb_detuning} presents the detuning of the 729-nm laser with respect to the resonant frequency extracted by RPE. The points correspond to the extracted $\varepsilon_c$ from RB sequences with the same parameters as used for figure~\ref{fig:rbm_circ}~(b). The solid line is a quadratic fit, with center frequency $\delta=2\pi\times 0.76(8)~\unit{\kilo\hertz}$. The RPE protocol does not account for the Stark-shift due to the 729-nm beam, as such we see a frequency shift between the qubit and laser when probing by RB.\\
+    We use standard RB as a daily characterisation experiment to verify consistent performance of the single-qubit gates. In chapter~\ref{ch:k-copy} we show further utility of single-qubit Clifford RB using a novel extension to parallel single-qubit Clifford application in a multi-qubit register.
 
 \subsection{Spin Coherence Times}
 \label{sec:Coherence}
@@ -401,14 +448,97 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     \end{enumerate}
     With this tool, the efficacy of the fibre noise cancellation (FNC, see section~\ref{sec:Narrow Line Width 729 Laser}) can be measured. Figure~\ref{fig:coherence_times} $a$ shows the coherence time of the $\ket{4S_{1/2},~m_j=-1/2}\leftrightarrow\ket{3D_{5/2},~m_j=-3/2}$  transition with and without FNC. The coherence time is increased from 1.9(1)~\unit{\ms} to 6.2(3)~\unit{\ms} with FNC, showing that without FNC, the coherence times are limited by laser phase noise. \\
     With FNC enabled, to see if the coherence time is now limited by magnetic field noise, transitions with varying magnetic field sensitivities are compared. Figure~\ref{fig:coherence_times} $b$ shows the coherence time of three quadrupole transitions with varying $D_{5/2}$, $m_j$ numbers: $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=\lbrace -5/2, -3/2, +3/2}$. These transitions have magnetic field sensitivities\todo{calculated by?} $-0.446$, $-0.178$, $+0.624$~\unit{\MHz\per\gauss} respectively. The contrast decays for all three qubits are shown in the figure. The inset plot shows a well correlated linear fit between the coherence time and the magnetic field sensitivity, suggesting that the coherence time is limited by magnetic field noise. For both $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=-5/2}$ and $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=+3/2}$, revivals in contrast can be seen which suggest that the dominant noise source is oscillatory and coherent over the Ramsey scan duration.\\
-    These measurements were taken without the MuMetal enclosure (section~\ref{sec:Magnetic Field}) fully assembled around the vacuum system, which we expect will greatly reduce external magnetic field noise, and therefore increase the coherence times.
+    These measurements were taken without the MuMetal enclosure (\S~\ref{sec:Magnetic Field}) fully assembled around the vacuum system, which we expect will greatly reduce external magnetic field noise, and therefore increase the coherence times.
 
-\subsection{Single Addressing}
+\subsection{Single-ion Addressing}
 \label{sec:Single Addressing char}
-\todo{minimal characterisations needed}\\
-\todo{Check figs from IRO report}\\
-\todo{Throw in RB numbers here}\\
+    \begin{figure}
+        \begin{center}
+        \noindent\includegraphics[width=\linewidth]{
+            figures/pdf_figure/ch4/sa.pdf
+            }
+        \end{center}
+        \caption{
+            Characterisation of the single-ion addressing system using the ion as a probe. a) The normalised intensity of the 
+            focussed 729-nm beam at the ion-plane. The $1/e^2$-waist is highlighted by the contour. b) Demonstration of spatial selective addressing by scanning the beam across a 5-ion chain while applying $R_x(\pi)$-gates calibrated for ion 3. The probability of observing $\ket{\downarrow}$, $P_\downarrow$ is shown for each ion.
+            }
+        \label{fig:sa_char}
+    \end{figure}
 
+The single-ion addressing system, introduced in~\S~\ref{sec:Single Addressing
+System}, is calibrated and characterised using the ion as a sensor. We verify
+that the beam waist at the ion plane approximately matches the designed
+specification, and we measure the crosstalk due to an addressed neighbouring
+ion. Crosstalk can cause structured coherent errors acting on the qubit
+register, which can have particularly adverse effects to error correction and
+mitigation protocols that assume independent, uncorrelated noise on each qubit.
+As such, designing an addressing system for low-crosstalk, and verifying its
+performance is critical.
+\\
+
+The intensity profile of the beam in the ion plane is measured by Rabi
+oscillations on a single-trapped ion while scanning the beam position in a 2D
+grid. To efficiently measure this 2D array, a fixed Rabi pulse duration is used,
+although we note that similar measurements can be made with adaptive pulse
+durations, or through using RPE type protocols to improve the sensitivity of
+these measurement. To avoid ambiguity of the accumulated phase, we ensure that
+at the point of maximum field amplitude the accumulated phase does not wrap,
+$\theta_\mathrm{max} < \pi$.
+The relative optical intensity may then be extracted by considering
+equation~\ref{eqn:decay_rabi}, assuming a negligible decay rate, $\lambda$, and
+recalling that $\Omega\propto\sqrt{I}$, yielding,
+\begin{equation}
+    \frac{I(x,y)}{I_\mathrm{max}} = \left(\frac{\mathrm{acos}\left(\sqrt{P_\downarrow(x,y)}\right)}{\theta_\mathrm{max}}\right)^2.
+\end{equation}
+The normalised intensity profile extracted by this method is shown in
+figure~\ref{fig:sa_char}~(a). The qubit is initialised in $\ket{\downarrow}$
+using the global addressing beam, and the total single-addressing beam power is
+stabilised to $20~\unit{\micro\watt}$. The black contour signifies the
+$\frac{1}{e^2}$
+waist. The spot closely resembles the expected Gaussian shape, with some
+aberrations, especially leading to a shoulder in the $-x$ direction. Fitting a
+2D Gaussian distribution, we find $\frac{1}{e^2}$-waists of
+$\omega_x=1.584(3)~\unit{\micro\meter}$, and
+$\omega_y=1.386(2)~\unit{\micro\meter}$. These closely match the target waist of $1.5~\unit{\micro\meter}$.\\
+The crosstalk is measured by scanning a single beam across a 5-ion chain. The
+axial frequency of the trap is set to $0.7~\unit{\mega\hertz}$, to provide an
+ion spacing of $\approx 5\unit{\micro\meter}$. When addressing the central ion
+of the chain, ion 3, we may observe Rabi oscillations on all qubits
+simultaneously to extract the relative Rabi frequency crosstalk. The Rabi
+frequency is determined through fitting equation~\ref{eqn:decay_rabi}, finding
+frequencies of $2\pi\times\{1.0(1), 1.67(5), 281.7(5), 7.96(1),
+5.29(1)\}~\unit{\kilo\hertz}$ for ions 1 to 5 respectively. This corresponds to
+intensity crosstalks of $\{0.12(4), 0.35(2),-,7.99(3),3.53(1)\}\times10^{-4}$ respectively.\\
+To highlight this spatial selectivity, we show the beam scanning across the 5-ion chain with a fixed pulse duration.
+For reference, above this plot we show fluorescence of the 5-ion chain as viewed by the imaging camera. 
+The fixed Rabi-pulse duration is calibrated to be a $R_x(\pi)$-pulse when acting
+on the central ion. Figure~\ref{fig:sa_char}~(b) shows the measured populations,
+$P_\downarrow$, as a function of beam position along the axial ion-chain
+direction. The points correspond to populations averaged over $200$ samples,
+with the population for each ion gathered simultaneously using the spatially
+resolved readout, as discussed in~\S~\ref{sec:Measurement}. The solid lines
+follow the simple model inferred from the expected Gaussian waist of the beams, 
+\begin{equation}
+P_{\downarrow,i} = 1 - \sin\left(A_i\mathrm{exp}\left(\frac{-(x - x_i)^2} {\omega^2}\right)\right)^ 2,
+\end{equation}
+where $x_i$ is the central position for ion, $i$, and $A_i$ is included to account for a drop in field amplitude due to any
+misalignment between the addressing axis and the ion-chain, or due to changes in
+diffraction efficiency of the AODs when driving them at different frequencies.
+Practically we may calibrate the beam power set-point to balance any
+Rabi-frequencies for every addressing configuration to mitigate these small
+misalignments and limited bandwidths of the AODs.\\
+
+The achieved waist of $\approx 1.5~\unit{\micro\meter}$ allows for high
+intensity fields at the qubits, exemplified here by the low
+$20~\unit{\micro\watt}$ 729-nm beam power required for driving $\approx
+1~\unit{\micro\second}$ $R_x(\frac{\pi}{2})$ gates. The low intensity crosstalk
+of $<10^{-3}$ for neighbouring ions is sufficient for the projects demonstrated
+in this thesis. If lower crosstalk errors are required, it is likely this may be
+reduced to $<10^{-4}$ solely through further optimisation of beam alignment
+through the optical train. This is suggested by the current asymmetry of
+crosstalk errors either side of the addressed qubit. Furthermore, as the
+crosstalk error is coherent, it may be further suppressed using composite pulse
+sequences~\cite{fang_crosstalk_2022}.
 
 \section{Motion}
 \label{sec:Motion}
@@ -422,7 +552,7 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     % Laser systems
 
     Motion of ions trapped in the same potential can be described by a set of
-    normal modes~\cite{james1998quantum}. These modes are labelled with respect
+    normal modes~\cite{james_quantum_1998}. These modes are labelled with respect
     to the ion chain geometry: axial modes oscillate parallel with the chain,
     and radial modes oscillate perpendicular to the chain. Due to the geometry
     of the 729-nm beam access with respect to the ion chain (see
@@ -433,7 +563,7 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     4.0$~\unit{\MHz}, and $\omega_{\rm lower}/2\pi = 2.5$~\unit{\MHz}, and the
     axial mode frequency is $\omega_{\rm axial}/2\pi = 1.6$~\unit{\MHz}. All
     work here is using the upper radial mode. \\
-    The motional mode, $i$, leads to sidebands in the 729-nm spectrum at $\omega_0 \pm \omega_{i}$~\cite{ozeri2011tutorial}\todo{Point to theory section}, where $\omega_0$, the carrier, is the frequency of the 729-nm laser when on resonance with the qubit transition. The $+\omega_i$ sideband is referred to as the blue sideband (BSB), and the $-\omega_i$ is the red sideband (RSB).
+    The motional mode, $i$, leads to sidebands in the 729-nm spectrum at $\omega_0 \pm \omega_{i}$~\cite{ozeri_tutorial_2011}\todo{Point to theory section}, where $\omega_0$, the carrier, is the frequency of the 729-nm laser when on resonance with the qubit transition. The $+\omega_i$ sideband is referred to as the blue sideband (BSB), and the $-\omega_i$ is the red sideband (RSB).
     The RSB, BSB, and RF fields near to resonance with the motional modes, are the tools used in this section to manipulate the motion of the ion.\\
     The motional state preparation, heating rate, frequency stabilities, and coherence times are characterised in this section.
 
@@ -480,8 +610,8 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     Doppler cooling relies on the fact that light incident on a moving ion 
     appears frequency-shifted in the ion's rest frame. For Doppler cooling
     of \ca, both the 397-nm and 866-nm lasers are applied. The 397-nm laser is red-detuned from the dipole $\ket{4S_{1/2}}\leftrightarrow\ket{4P_{1/2}}$ transition, leading to preferential
-    scattering of 397-nm photons that have a net cooling effect~\cite{wineland1979laser}. The excited $4P_{1/2}$ level decays via two channels: emission of a 397-nm photon back to $\ket{4S_{1/2}}$, or an 866-nm photon to $\ket{3D_{3/2}}$, with a branching
-    ratio of 14.5~\cite{ramm2013precision}. Since many photon scattering events are required, the cooling cycle must be closed. To prevent population trapping in the metastable $\ket{3D_{3/2}}$ level, the 866-nm laser is applied on resonance during cooling.\\
+    scattering of 397-nm photons that have a net cooling effect~\cite{wineland_laser_1979}. The excited $4P_{1/2}$ level decays via two channels: emission of a 397-nm photon back to $\ket{4S_{1/2}}$, or an 866-nm photon to $\ket{3D_{3/2}}$, with a branching
+    ratio of 14.5~\cite{ramm_precision_2013}. Since many photon scattering events are required, the cooling cycle must be closed. To prevent population trapping in the metastable $\ket{3D_{3/2}}$ level, the 866-nm laser is applied on resonance during cooling.\\
     Equilibrium
     is reached when the cooling rate balances
     photon recoil heating. Assuming the 397-nm transition is broadened only by its natural linewidth $\gamma$, 
@@ -489,10 +619,10 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     \begin{equation}
     T_{\rm Doppler} \approx \frac{\hbar\gamma}{2k_B},
     \end{equation}
-    where $\hbar$ is the reduced Planck constant, and $k_B$ is Boltzmann's constant~\cite{wineland1979laser}.\\
+    where $\hbar$ is the reduced Planck constant, and $k_B$ is Boltzmann's constant~\cite{wineland_laser_1979}.\\
      For
     $^{40}$Ca$^+$, the natural linewidth of the 397-nm transition is $\frac{\gamma}{2\pi} =
-    21$~\unit{\MHz}\cite{morton2003atomic}, giving $T_{\rm Doppler} = 0.5$~\unit{\milli\kelvin}. For a radial mode frequency of $\frac{\omega}{2\pi} = 4$~\unit{\MHz}, the expected mean phonon number is,
+    21$~\unit{\MHz}\cite{morton_atomic_2003}, giving $T_{\rm Doppler} = 0.5$~\unit{\milli\kelvin}. For a radial mode frequency of $\frac{\omega}{2\pi} = 4$~\unit{\MHz}, the expected mean phonon number is,
     \begin{equation}
         \bar{n} = \frac{1}{e^{\hbar\omega/k_B T}-1},
     \end{equation}
@@ -572,7 +702,7 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     sequences. The time dynamics of population flopping is measured as RSB
     pulse length, $t$, is varied. In the case of Fock state $\ket{0}$, there should be full contrast 
     ``BSB'' oscillations, and no visible oscillations when probed with RSB pulses. A thermal
-    Fock state distribution~\cite{meekhof1996generation} (with truncation at Fock state = 100) is fitted to these
+    Fock state distribution~\cite{meekhof_generation_1996} (with truncation at Fock state = 100) is fitted to these
     signals to extract the mean occupation number, and $\eta\Omega$, the carrier
     Rabi frequency multiplied by the Lamb-Dicke parameter. A typical thermometry
     scan after Doppler and sideband cooling can be seen in
@@ -619,10 +749,10 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
         \label{fig:heating rates}
     \end{figure}
 
-    After cooling the motion, the ion will return to a temperature in equilibrium with the environment. However, this process can be slowed by adequate isolation of the ion. In UHV ion trap systems (see section~\ref{sec:Vacuum System}), motional heating is predominantly caused by electric field noise from the ion trap~\cite{wineland1998experimental}. Noise due to thermal charge fluctuations at the trap surface can be 
+    After cooling the motion, the ion will return to a temperature in equilibrium with the environment. However, this process can be slowed by adequate isolation of the ion. In UHV ion trap systems (see section~\ref{sec:Vacuum System}), motional heating is predominantly caused by electric field noise from the ion trap~\cite{wineland_experimental_1998}. Noise due to thermal charge fluctuations at the trap surface can be 
     mitigated by increasing ion-electrode distances. The \emph{NPL} trap (section~\ref{sec:The Ion Trap}), used here, has an ion-electrode 
     distance of 250~\unit{\um}, larger than most surface traps, but less than that of a
-    macroscopic blade or rod style trap~\cite{milne2021construction}. Heating rates were probed by a series of thermometry experiments, explained above, with varying delay
+    macroscopic blade or rod style trap~\cite{milne_construction_nodate}. Heating rates were probed by a series of thermometry experiments, explained above, with varying delay
     times, $t_{\rm delay}$, between cooling and thermometry pulses. A typical plot can be seen in
     figure~\ref{fig:heating rates}. The heating rate of the system
     was found by a linear fit, shown by the dashed line, to be $33(3)$~quanta per second on the upper radial 4~\unit{\MHz} mode on
@@ -733,19 +863,19 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     \item Repeat steps 1-7 for different values of $\phi$ to find the contrast of the Ramsey fringe.
     \item Repeat steps 1-8 for different values of $t_{\rm RAM}$ to find the decay in contrast with time. The coherence time is defined as the time at which the contrast has decayed to $1/e$ of its initial value.
     \end{enumerate}
-    There are two main mechanisms for motional decoherence\cite{turchette2000decoherence}: motional heating, as
+    There are two main mechanisms for motional decoherence\cite{turchette_decoherence_2000}: motional heating, as
     characterised in section~\ref{sec:Heating}, and motional dephasing due to
     mode frequency instability, as discussed in section~\ref{sec:Motional Mode Stability}. \\
     A heating rate dominated coherence time is given by, $\tau_{\rm HEAT} =
-    (\sqrt{e}-1)/\dot{\bar{n}}$~\cite{turchette2000decoherence}, where $\dot{\bar{n}}$ is the heating
-    rate. A dephasing dominated coherence time, if noise is correlated on timescales long compared to the Ramsey delay~\cite{omalley2015qubit}, is characterised by a Gaussian decay profile with a coherence time
+    (\sqrt{e}-1)/\dot{\bar{n}}$~\cite{turchette_decoherence_2000}, where $\dot{\bar{n}}$ is the heating
+    rate. A dephasing dominated coherence time, if noise is correlated on timescales long compared to the Ramsey delay~\cite{omalley_qubit_2015}, is characterised by a Gaussian decay profile with a coherence time
     of $\tau_{DEPH} = \sqrt{2}/\sigma_{\omega}$.\\
     Evaluating both of these models with $\dot{\bar{n}}=33(3)$~q/s, and
     $\sigma_{\omega}/(2\pi) = 94(4)$~\unit{\Hz}, the expected motional coherence times of $\tau_{\rm
     HEAT} \approx 20$~ms and $\tau_{\rm DEPH} \approx 2.3$~ms respectively, are found. From these auxiliary characterisations of the motional modes, it is expected that the coherence time will be limited by motional dephasing. \\
     Figure~\ref{fig:motional_coherence} shows the decaying coherence when probed by the above sequence. It can be seen that the contrast has a good fit assuming an exponential decay (green dashed line),
     defined by $C(t_{\rm RAM}) = C(0) e^{-t_{\rm RAM}/\tau},$ where $C(t_{\rm RAM})$ is the contrast at time $t_{\rm RAM}$, and $\tau$ is the coherence time. The fit yields a motional coherence time of $\tau = 4.6(4)$~\unit{\ms}, defined as the time at which the contrast decays to $1/e$ of its initial value. 
-    An exponential decay suggests that the noise source causing the dephasing is correlated only for durations much shorter than the Ramsey delay times~\cite{omalley2015qubit}.
+    An exponential decay suggests that the noise source causing the dephasing is correlated only for durations much shorter than the Ramsey delay times~\cite{omalley_qubit_2015}.
     The Gaussian decay, (red dashed line), which was appropriate for the previous spin coherence time measurements in section~\ref{sec:Coherence}, is a poor fit here. \\
 
 \section{Spin-Motion}
@@ -870,13 +1000,13 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
             \textbf{a)} Populations versus duration scan of the MS interaction.
             Each point corresponds to the average of 200 shots, and the error
             bars are given by the standard deviation of these averages. The blue
-            points are the populations of both ions being in the $\ket{0}$
-            state, $P_{00}$, the green points are the populations of both ions
-            being in the $\ket{1}$ state, $P_{11}$, and the red points are the
-            ions being the the opposite states, $(P_{01}+P_{10})/2$. The desired
+            points are the populations of both ions being in the $\ket{\downarrow}$
+            state, $P_{\downarrow\downarrow}$, the green points are the populations of both ions
+            being in the $\ket{1}$ state, $P_{\uparrow\uparrow}$, and the red points are the
+            ions being the the opposite states, $(P_{\downarrow\uparrow}+P_{\uparrow\downarrow})/2$. The desired
             entangling gate corresponds here to $t_g =  75$\unit{\us}. 
             \textbf{b)} Parity oscillations after the MS interaction. The parity
-            is defined as $P_{00} + P_{11} - P_{01} - P_{10}$. The fitted
+            is defined as $P_{\downarrow\downarrow} + P_{\uparrow\uparrow} - P_{\downarrow\uparrow} - P_{\uparrow\downarrow}$. The fitted
             contrast here is $0.90(2)$.
             \textbf{c)} Populations at the desired entangling gate duration, $t_g =
             75$~\unit{us}.  
@@ -906,23 +1036,23 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     %of the average fidelity over the input state space~\cite{}.\\
     %---------------
     Here for a two-qubit entangling gate, we target the creation of the Bell
-    state $\ket{\Phi^+_{\phi_0}} = 1/\sqrt{2} \left( \ket{00} +
-    e^{i\phi_0}\ket{11} \right)$, from an initial state of $\ket{00}$, where $phi_0$, is some fixed phase.
+    state $\ket{\Phi^+_{\phi_0}} = 1/\sqrt{2} \left( \ket{\downarrow\downarrow} +
+    e^{i\phi_0}\ket{\uparrow\uparrow} \right)$, from an initial state of $\ket{\downarrow\downarrow}$, where $phi_0$, is some fixed phase.
     The fidelity between our mixed state $\rho$, and the pure Bell state may be
     given by,
     \begin{equation}
-        \mathcal{F} = \bra{\Phi^+_{\phi_0}} \rho \ket{\Phi^+_{\phi_0}} = \frac{1}{2} \left( \rho_{00,00} + \rho_{11,11} \right) + \frac{1}{2}\left( e^{i\phi_0}\rho_{11,00}+e^{-i\phi_0}\rho_{00,11}\right),
+        \mathcal{F} = \bra{\Phi^+_{\phi_0}} \rho \ket{\Phi^+_{\phi_0}} = \frac{1}{2} \left( \rho_{\da\da,\da\da} + \rho_{\ua\ua,\ua\ua} \right) + \frac{1}{2}\left( e^{i\phi_0}\rho_{\ua\ua,\da\da}+e^{-i\phi_0}\rho_{\da\da,\ua\ua}\right),
         \label{eq:Fidelity}
     \end{equation}
     where $\rho_{ij,kl} = \braket{ij|\rho|kl}$. To extract the fidelity experimentally, a partial state tomography 
-    protocol is used~\cite{sackett2000experimental}, where the first bracketed term of
+    protocol is used~\cite{sackett_experimental_2000}, where the first bracketed term of
     equation~\ref{eq:Fidelity} is measured by performing projective measurements
     of the two ions after the gate sequence to extract populations, and the second bracketed term,
     known as the coherence terms, are measured by applying a global analysis
     $R_\phi(\pi/2)$ pulse to the two ions and applying parity measurements. 
-    Parity measurements are defined as $P = P_{00} + P_{11} - P_{01} - P_{10}$, where $P_{ij}$ is the population of the two ions in state $\ket{i}\ket{j}$ after the gate sequence and variable $\pi/2$-pulse. 
+    Parity measurements are defined as $P = P_{\da\da} + P_{\ua\ua} - P_{\da\ua} - P_{\ua\da}$, where $P_{ij}$ is the population of the two ions in state $\ket{i}\ket{j}$ after the gate sequence and variable $\pi/2$-pulse. 
     Creating a Bell state is essential for two-qubit entanglement, but its basis can vary as long as it is consistent across experiments. This allows the Bell state phase, $\phi_0$, to float, which in practice means using only the amplitude of the fitted parity oscillations to compute fidelity, ignoring any phase offset.\\
-    The best two-qubit entangling gate fidelity currently achieved on our system is $\mathcal{F}=92(2)\%$. As shown in figure~\ref{fig:ms_gate}, the magnitude of the parity scan was measured to be 0.90(2), while the populations $\left( \rho_{00,00} + \rho_{11,11} \right) = 0.95(2)$. Each population point in these figures are found by taking the average of 200 shots of the gate sequence.
+    The best two-qubit entangling gate fidelity currently achieved on our system is $\mathcal{F}=92(2)\%$. As shown in figure~\ref{fig:ms_gate}, the magnitude of the parity scan was measured to be 0.90(2), while the populations $\left( \rho_{\da\da,\da\da} + \rho_{\ua\ua,\ua\ua} \right) = 0.95(2)$. Each population point in these figures are found by taking the average of 200 shots of the gate sequence.
     \todo{Flag pi/4 gates used in VD}\\
 
 
@@ -933,11 +1063,11 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     our system, but also as a benchmark to which we can compare future system
     improvements.  For future work, we will require the use of this entangling
     gate either as Bell state preparation for input to analogue simulation
-    experiments~\cite{bazavan2023synthetic}, or as a primitive gate for the spin component of hybrid
-    algorithms~\cite{varona2024towards,brenner2024factoring}.  In both these cases, especially any use that requires
+    experiments~\cite{bazavan_synthetic_2023-1}, or as a primitive gate for the spin component of hybrid
+    algorithms~\cite{varonevarona_towards_2024,brenner_factoring_2024}.  In both these cases, especially any use that requires
     multiple concatenated entangling gates, we will likely require improved gate
     fidelities. 
-    Current gate fidelities are limited by the motional dephasing. The gate error due to motional dephasing follows (see section 4.4.6 in~\cite{ballance2017high-fidelity})
+    Current gate fidelities are limited by the motional dephasing. The gate error due to motional dephasing follows (see section 4.4.6 in~\cite{ballance_high-fidelity_2017})
     \begin{equation}
         \epsilon_{\rm DEPH} = 0.686 \frac{t_g}{\tau_{\rm DEPH}},
     \end{equation}
