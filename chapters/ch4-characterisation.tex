@@ -64,7 +64,7 @@
     \end{center}
     \caption{
         * With respect to qubit transition frequency.\\
-        Experimental parameters used for state preparation of the ion into the $\ket{\downarrow} = \ket{4S_{1/2},~m_j = -1/2}$ state.
+        \todo{Update table?} Experimental parameters used for state preparation of the ion into the $\ket{\downarrow} = \ket{4S_{1/2},~m_j = -1/2}$ state.
         }
     \label{tab:state_prep_parameters}
 \end{table}
@@ -113,6 +113,7 @@
         \end{tabular}
         \end{center}
         \caption{
+            \todo{Update table}
             Experimental parameters used for Doppler cooling and state-selective fluorescence of the ion. 
             }
         \label{tab:397_parameters}
@@ -755,7 +756,7 @@ sequences~\cite{fang_crosstalk_2022}.
     sideband cooling is used. As mentioned above, the motion of the ion
     modulates the absorption spectrum of the ion, leading to red and blue sidebands (RSB and BSB). For the $\ket{4S_{1/2}} \leftrightarrow
     \ket{3D_{5/2}}$ transition, at appropriate motional mode
-    frequencies, interaction strengths, and using a narrow linewidth laser (section~\ref{sec:Narrow Line Width 729 Laser}), these sidebands can be resolved spectroscopically. The pulsed
+    frequencies, interaction strengths, and using a narrow linewidth laser (section~\ref{sec:Narrow Linewidth 729 Laser}), these sidebands can be resolved spectroscopically. The pulsed
     sideband technique employed consists of RSB pulses on the 729-nm transition, followed by
     deshelving, and repumping pulses on the 854-nm and 866-nm transitions
     respectively. 
@@ -1018,6 +1019,7 @@ sequences~\cite{fang_crosstalk_2022}.
 
 \section{Spin-Motion}
     \todo{Point to theory\\}
+    \todo{Outdated intro - rewrite\\}
     For full control of the spin-motion hybrid system, we require interactions
     that couple the two. Perhaps the simplest of this class of interactions
     are the red- and blue-sidebands (RSB and BSB respectively). The  RSB
@@ -1051,8 +1053,6 @@ sequences~\cite{fang_crosstalk_2022}.
     % Motional mode spectra
     % 729 system
     % AOM control of 729
-    \todo{Currently ref this in ch6 for stark shift calibration\\}
-
     \begin{figure}
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{
@@ -1061,26 +1061,25 @@ sequences~\cite{fang_crosstalk_2022}.
         \end{center}
         \caption{
             Detuning and duration scans of the spin-dependent force applied to an initial thermal state with $\bar{n} = 0.03(1)$. 
-            \textbf{a)} Detuning scan, where the detuning, $\delta_g$, is varied, and the duration is fixed at $t=100$~\unit{\us}. The green line is a fit to the expected behaviour given by equation~\ref{eqn:sdf_pop}. 
-            \textbf{b)} Detuning scan with a mis-set qubit frequency of $0.5$~\unit{\kHz}. The green line is the same fit as in $a$ to guide the eye. 
-            \textbf{c)} Duration scan, where the duration, $t$, is varied, and the detuning is fixed at $\delta_g = 0$. The dashed line is a fit to the expected behaviour given by equation~\ref{eqn:sdf_pop} with only $\Omega_{\rm SDF}$ as a free parameter.
+            (a) Detuning scan, where the detuning, $\delta_g$, is varied, and the duration is fixed at $t=100$~\unit{\us}.  
+            (b) Detuning scan with a mis-set qubit frequency of $0.5$~\unit{\kHz}. 
+            (c) Duration scan, where the duration, $t$, is varied, and the detuning is fixed at $\delta_g = 0$. The solid line is a fit to the expected behaviour given by equation~\ref{eqn:sdf_pop} with only $\Omega_{\rm SDF}$ as a free parameter. The extracted $\Omega_{\rm SDF}$ is used with equation~\ref{eqn:sdf_pop} to plot the dashed red lines in (a) and (b) to guide the eye.
             }
         \label{fig:SDF}
     \end{figure}
 
     Spin-dependent forces (SDF), as described in~\S~\ref{sec:SDF}, are used in this thesis for both two-qubit entangling gates (following section), and for generating and characterising non-linear bosonic states (~\S~\ref{sec:tomography} and \S~\ref{sec:two-sdf}). Here we describe the calibration strategy and characterisation of a single SDF.\\
 
-    The SDF is generated using the bichromatic field method introduced by M\/{o}lmer and S\/{o}rensen~\cite{molmer_multiparticle_1999}, using simultaneous detuned red- and blue-sidebands.
-    In practice, this SDF interaction involves relatively few degrees of freedom:
-    the central qubit ``carrier'' frequency, the motional mode frequency, the power in each
-    optical tone, and the durations of the pulses.
-    \todo{bichromatic field H, to highlight the d.o.f.}
+    For convenience the SDF given by equation~\ref{eqn:sdf} is reproduced here\todo{check phases, make sigma x},
     \begin{equation}
-        \hat H_\mathrm{bi} = 
+        \tag{\ref{eqn:sdf}}
+        \hat{H}_\mathrm{SDF} \approx \frac{i\hbar \eta\Omega}{2}~\hat{\sigma}_\phi \left( \hat{a} e^{-i\delta_g t} + \hat{a}^\dagger e^{i\delta_g t} \right).
     \end{equation}
-    
-    Complexity
-    comes when we consider spectator interactions due to other available electronic and motional transitions.\\
+
+    The SDF is generated using the bichromatic field method introduced by M\/{o}lmer and S\/{o}rensen~\cite{molmer_multiparticle_1999}, using simultaneous detuned red- and blue-sidebands.
+    In practice, this SDF interaction involves relatively few degrees of freedom to calibrate:
+    the central qubit ``carrier'' frequency, the motional mode frequency, the power in each
+    optical tone, and ensuring negligible off-resonant excitation of other spin, and spin-motion interactions.\\
 
     The bichromatic field is generated by providing two simultaneous RF tones to the single-pass (SP) AOM, as seen in the \emph{TrapLab} panel of figure~\ref{fig:729}. The SDF may be driven by either the single-ion addressing system (path 729\#1), or by a global field (path 729\#2). The SP AOMs are driven by an arbitrary waveform generator\footnote{\emph{Phaser Sinara} board} to provide phase, frequency, and amplitude control over the two tones.\\
     The bichromatic field is measured using a high-bandwidth photodiode after an optical pick-off before addressing the ions. The intensity measured by the photodiode has a beat-note with frequency $\omega_b \approx 2\omega_\mathrm{upper}$. The contrast of this beat-note is optimised to calibrate the power balance between the two optical frequencies. The power balance is varied by updating the RF amplitude supplied to the SP AOMs.
@@ -1089,35 +1088,29 @@ sequences~\cite{fang_crosstalk_2022}.
     single mode fibre, as such the AOMs introduce a
     frequency- and temperature-dependent loss. These losses can lead to significant errors in power-balance between the two tones. We found that optimising for short optical path-lengths between the SP AOM and the fibre, careful alignment to the fibre, and ensuring the SP AOM is supplied with a constant duty cycle were all required for stable power-balance.\\
     Off-resonant excitations of other interactions are negated through selecting trap parameters to spectrally isolate a single-motional mode, and ensuring that gates are driven adiabatically --- the SDF Rabi frequency, $\Omega$, is significantly less than the frequency spacing to nearby interactions. Ensuring the interaction is smoothly ramped on and off also reduces excess off-resonant excitations.\\
-    The bichromatic field leads to both a dipole and quadrupole Stark shift of the central qubit frequency. As such, the bare-qubit frequency measured by RPE in~\S~\ref{sec:RPE} is insufficient.
-    The Stark-shift calibration is thus done through observing the application of the SDF to the ion when all other parameters are already well calibrated.
-    When the qubit frequency is set incorrectly, the two tones no
-    longer have the same absolute detuning from their respective RSB or BSB.
-    This manifests as a ``skewness'' of the SDF detuning trace. By varying the qubit frequency and
-    inspecting these detuning scans, the desired SDF behaviour can be found. \\
-    To verify the behaviour of the calibrated SDF, the experimental data is compared with theory. Both
-    ``detuning'' and ``duration'' scans are used. The ``detuning'' scan is performed by
-    varying the detuning, $\delta_g$, of the interaction, whilst keeping the
-    SDF duration, $t$, constant, and vice-versa for the ``duration'' scan. \\
-    Figure~\ref{fig:SDF} $c$ shows the measured duration scan described by equation~\ref{eqn:sdf_pop}, with $\delta_g = 0$ and the the motional state assumed to be thermal with average Fock state $\bar{n}
-    = 0.03(1)$ which was found previously from thermometry measurements.
-    Here, the displacement, $|\alpha(t)| = \Omega_{\rm SDF} t/2$, where $\Omega_{\rm SDF}$ is the
-    SDF amplitude. The dashed line fit is given by floating $\Omega_{\rm SDF}$ only, and finds $\Omega_{\rm SDF}/(2\pi) = 6.6(2)$~\unit{kHz}.
-    These measurements were performed with total 729-nm power of 2~mW and $\delta_{\rm LS}/(2\pi) = 3.5$~\unit{\kHz}, the light shift due to the 729-nm laser relative to the unperturbed qubit frequency. \\
-    The detuning scan, shown in figure~\ref{fig:SDF} $a$, has the same experimental parameters, but with fixed duration $t=100$~\unit{us}. The fit in green is taking the 
-    displacement to be $|\alpha(t)| = \Omega_{\rm SDF} \sin(\delta_g t/2)/\delta_g$, given the value for $\Omega_{\rm SDF}$ measured from the duration scan. Here,
-    a qualitatively good agreement between the measured data and the
-    expected behaviour is seen, with the main features being the ``closure''
-    at $\delta_g = 2\pi/t$ where the motional state returns to the initial state,
-    and the central flat region around $P_{\downarrow, \mathrm{th}} =0.5$ where
-    the two motional wave packets are non-overlapping.\\
-    Figure $b$ shows an example detuning scan when the qubit frequency is mis-set by $0.5$~\unit{\kHz}. The central region now displays a clear asymmetry around $\delta_g = 0$. The green line here is the fit from $a$ to guide the eye.
-    \todo{Flag Two-SDF gates used in DVCV}\\
+    The bichromatic field leads to a Stark shift, $\delta_s$, of the central qubit frequency due to off-resonant coupling of both dipole and nearby quadrupole transitions. As such, the bare-qubit frequency measured by RPE in~\S~\ref{sec:RPE} is insufficient for low-error SDFs.
+    The Stark-shift calibration is thus done through observing the application of the SDF to the ion when all other parameters are well calibrated.
+    When the qubit frequency is set incorrectly, by $\Delta$, the two tones no
+    longer have the same absolute detuning from their respective RSB or BSB. The impact of this error depends on the detuning of the SDF compared to the motional mode, $\delta_g$. When $\delta_g \gg \Delta$ the induced phase space dynamics are similar to the desired interaction, however when $\delta_g \approx \Delta$, we see a strong deviation from ideal behaviour due to the resonant driving of only one of the sidebands. We utilise this frequency dependent non-ideal behaviour of the uncalibrated SDF to manually calibrate the induced qubit Stark shift.  
+    The phase space dynamics can be observed through projective spin measurements. 
+    An SDF square pulse of duration $t_\mathrm{pulse}$ with spin conditioning, $\hat\sigma_x$, and variable detuning, $\delta_g$, is applied to the initial prepared state $\ket{\da,0}$.
+    The spin-population returns to $P_\da=1$ only when the pulse duration and SDF detuning are related by $\delta_g = \frac{2\pi}{nt_\mathrm{pulse}}$, for integer $n$. These spin dynamics are described by~\cite{burd_squeezing_nodate},
+    \begin{equation}
+        \label{eqn:sdf_pop}
+        P_{\downarrow,\mathrm{th}} = \frac{1}{2} \left( 1 + e^{-4\left( \bar{n} + \frac{1}{2} \right) |\beta(t, \delta_g)|^2} \right),
+    \end{equation}
+    where $\bar{n}$ is the initial thermal phonon occupation, and $|\beta(t, \delta_g)| = \Omega_{\rm SDF} \sin(\delta_g t/2)/\delta_g$, is the absolute displacement of the initial state. Deviations from this behaviour indicate either a miscalibration of Stark shift, or unintended off-resonant excitation of nearby transitions.\\
+    To give an example of this calibration procedure we show experimental data of both a well calibrated, and a miscalibrated SDF, in figure~\ref{fig:SDF}~(a), and (b) respectively. For these detuning scans we set $t_\mathrm{pulse}=100~\unit{\micro\second}$, and use the global addressing beam with $2~\unit{\milli\watt}$ of total power. The points indicate the spin population averaged from 200 samples. The calibrated scan assumes a Stark-shift $\delta_s=2\pi\times4\unit{\kilo\hertz}$, while the miscalibrated scan assumes $\delta_s=2\pi\times3.5\unit{\kilo\hertz}$.
+    The dashed red lines in both (a) and (b) are the expected population dynamics inferred using an independently measured SDF strength of $\Omega_{\rm SDF}$. The well-calibrated SDF shows good agreement to the expected dynamics, while the qubit-frequency mis-calibrated SDF displays a clear asymmetry near $\delta_g=0$.\\
+    Panel (c) displays a ``splitting'' experiment, applying the SDF on resonance $\delta_g = 0$, and varying the duration. The solid black line is a fit of the spin populations using equation~\ref{eqn:sdf_pop}, and assuming $\bar{n}=0$. We find here $\Omega_\mathrm{SDF}=2\pi\times6.6(2)~\unit{\kilo\hertz}$. Splitting of the motional wave-packet by a resonant SDF is exactly the procedure used for motional state tomography, which we give further details for in~\S~\ref{sec:tomography}.
+    
 
 \subsection{Two-Qubit Entangling Gates}
 \label{sec:Two-Qubit Entangling Gates}
 \todo{Need to move some to theory and add section and results of Walsh-1 gate implementation.}\\
 \todo{Look at 98\% MS on 2026-05-07}\\
+Duration scan on 2026-04-02 - 96.5\%\\
+2026-03-25 duration:rid 99417, parity rid 99418\\
 \todo{Update figure with walsh gate results}\\
 \todo{Define propagator as $R_{xx}$ to match QEM chapter}\\
 % Main points:
@@ -1135,10 +1128,11 @@ sequences~\cite{fang_crosstalk_2022}.
     \begin{figure}
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{
-            figures/pdf_figure/ch4/ms_gate.pdf
+            figures/pdf_figure/ch4/ms_walsh.pdf
             }
         \end{center}
         \caption{
+            \todo{Outdated}
             Experimental data for $\mathcal{F}=92(2)$\% Mølmer-Sørensen (MS) two-qubit entangling gate.
             \textbf{a)} Populations versus duration scan of the MS interaction.
             Each point corresponds to the average of 200 shots, and the error
@@ -1160,24 +1154,7 @@ sequences~\cite{fang_crosstalk_2022}.
     Here we quote the current fidelity of experimentally demonstrated two-qubit gates on
     our system. The fidelity serves to quantify the similarity of
     two density matrices. 
-    %---------------
-    %For the use case of quantum information processing, what we
-    %care about is that the experimental unitary applied in the gate sequence closely resembles the unitary we desire theoretically. In general this
-    %means that the fidelity of the applied unitary should be measured in an input
-    %state agnostic way. Unfortunately, this is often not practical as the input
-    %state space can be unwieldly, and the act of preparing the input state can
-    %also be error prone. As a compromise, the unitary is tested with either
-    %one, or a set of input states, and the fidelity of the output state
-    %is measured with respect to the known target state. 
-    %---------------
-    %Gate performance, quantified by the fidelity, can be measured by tomography~\cite{}.
-    %While full quantum process tomography provides an input-independent measure of fidelity, it is often impractical due to the size of the state space and preparation errors. Instead, the unitary is typically tested on one or a few input states, with fidelity evaluated against the expected output.
-    %---------------
-    %If the error mechansisms of the 
-    %unitary are well understood, arguments can be made that this measured
-    %fidelity for a set of input state is representative (or not representative)
-    %of the average fidelity over the input state space~\cite{}.\\
-    %---------------
+
     Here for a two-qubit entangling gate, we target the creation of the Bell
     state $\ket{\Phi^+_{\phi_0}} = 1/\sqrt{2} \left( \ket{\downarrow\downarrow} +
     e^{i\phi_0}\ket{\uparrow\uparrow} \right)$, from an initial state of $\ket{\downarrow\downarrow}$, where $phi_0$, is some fixed phase.
@@ -1204,15 +1181,5 @@ sequences~\cite{fang_crosstalk_2022}.
     \todo{Need to update summary for current thesis framing\\}
     These results serve as both a proof of principle for full spin control on
     our system, but also as a benchmark to which we can compare future system
-    improvements.  For future work, we will require the use of this entangling
-    gate either as Bell state preparation for input to analogue simulation
-    experiments~\cite{bazavan_synthetic_2023-1}, or as a primitive gate for the spin component of hybrid
-    algorithms~\cite{varonevarona_towards_2024,brenner_factoring_2024}.  In both these cases, especially any use that requires
-    multiple concatenated entangling gates, we will likely require improved gate
-    fidelities. 
-    Current gate fidelities are limited by the motional dephasing. The gate error due to motional dephasing follows (see section 4.4.6 in~\cite{ballance_high-fidelity_2017})
-    \begin{equation}
-        \epsilon_{\rm DEPH} = 0.686 \frac{t_g}{\tau_{\rm DEPH}},
-    \end{equation}
-    where for these experiments we estimate a motional coherence time of approximately $\tau_{\rm DEPH} = 1$~\unit{\ms}. Given the gate duration of $t_g = 75$~\unit{\us}, this gives a dephasing error of $\epsilon_{\rm DEPH} = 0.05$, or approximately 5\%. This is the dominant error source in our current gate fidelity, and can be improved by decreasing the gate duration, or by improving the mode frequency stability. We have not yet attempted to optimise these gates, nor have we attempted to fully account for the observed errors. However, this work serves as a benchmark for future improvements, and a demonstration of the full spin control capabilities of our system. \\
+    improvements.  
     

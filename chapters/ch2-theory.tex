@@ -8,6 +8,7 @@
     \item Conform all figure color schemes
     \item Conform all figure axis units
     \item Conform (a), (b), \S , Fig, chapter references
+    \item Conform dashed and solid line for model vs fit
 \end{itemize}
 }
 \todo{Here give a broad overview of all control required for ion trap. (This is pointed to at beginning of apparatus section)}
@@ -203,21 +204,13 @@ Define propagator as $R_{x}$ to match QEM chapter}\\
     \omega_{m}$, the interaction Hamiltonian can be approximated
     to,
     \begin{equation}
-        \label{eqn:MS}
-        \hat{H}_{MS} \approx \frac{i\hbar \eta\Omega}{2}~\hat{\sigma}_\phi \left( \hat{a} e^{-i\delta_g t} + \hat{a}^\dagger e^{i\delta_g t} \right).
+        \label{eqn:sdf}
+        \hat{H}_\mathrm{SDF} \approx \frac{i\hbar \eta\Omega}{2}~\hat{\sigma}_\phi \left( \hat{a} e^{-i\delta_g t} + \hat{a}^\dagger e^{i\delta_g t} \right).
     \end{equation}
     The trajectory of this displacement can be controlled by varying $\delta_g$: on
     resonance, $\delta_g = 0$, corresponds to linear trajectories, whilst off resonance,
     $\delta_g \neq 0$, corresponds to cyclic trajectories where after some duration $t =
     2\pi/\delta_g$, the motion returns to the initial state (with perhaps some phase shift~\cite{haljan2005spin-dependent}). 
-    The dynamics of the SDF may be measured by projective spin measurements, the population in $\ket{\downarrow}$, $P_\downarrow$, after applying the SDF for duration $t$ is described by~\cite{burd2020squeezing},
-    \begin{equation}
-        \label{eqn:sdf_pop}
-        P_{\downarrow,\mathrm{th}} = \frac{1}{2} \left[ 1 + e^{-4\left( \bar{n} + \frac{1}{2} \right) |\alpha(t, \delta_g)|^2} \right],
-    \end{equation}
-    where $\bar{n}$ is the initial thermal phonon occupation, and $|\alpha(t, \delta_g)| = \Omega_{\rm SDF} \sin(\delta_g t/2)/\delta_g$, is the absolute displacement of the initial state.
-    This control is utilised in both two-qubit entangling gate experiments, as well as
-    in the creation of squeezed states.\\
 
 \subsection{Geometric Phase Gates}
 \label{sec:Geometric Phase Gates}
