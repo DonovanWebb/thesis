@@ -435,7 +435,6 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
             }
         \label{fig:coherence_times}
     \end{figure}
-    Decoherence, as can be seen in figure~\ref{fig:Long Flop}, can be caused by laser frequency and power fluctuations, magnetic field noise, and spontaneous emission from the $3D_{5/2}$ level. The coherence time of the qubit is a useful diagnostic for finding unwanted noise sources, and for benchmarking the performance of the qubit as a store of quantum information.\\
     To measure the coherence times, we perform Ramsey sequences with varying delay durations. The Ramsey sequence is as follows:
     \begin{enumerate}
         \item Prepare the qubit in $\ket{\downarrow}$ via optical pumping, section~\ref{sec:Stateprep}.
@@ -446,9 +445,47 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
         \item Repeat steps 1-5 for different values of $\phi$ and fit the resulting fringe to find the contrast.
         \item Repeat steps 1-6 for different values of $t_{\rm RAM}$ to find the decay in contrast with time. The coherence time is defined as the time at which the contrast has decayed to $1/e$ of its initial value.
     \end{enumerate}
-    With this tool, the efficacy of the fibre noise cancellation (FNC, see section~\ref{sec:Narrow Line Width 729 Laser}) can be measured. Figure~\ref{fig:coherence_times} $a$ shows the coherence time of the $\ket{4S_{1/2},~m_j=-1/2}\leftrightarrow\ket{3D_{5/2},~m_j=-3/2}$  transition with and without FNC. The coherence time is increased from 1.9(1)~\unit{\ms} to 6.2(3)~\unit{\ms} with FNC, showing that without FNC, the coherence times are limited by laser phase noise. \\
-    With FNC enabled, to see if the coherence time is now limited by magnetic field noise, transitions with varying magnetic field sensitivities are compared. Figure~\ref{fig:coherence_times} $b$ shows the coherence time of three quadrupole transitions with varying $D_{5/2}$, $m_j$ numbers: $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=\lbrace -5/2, -3/2, +3/2}$. These transitions have magnetic field sensitivities\todo{calculated by?} $-0.446$, $-0.178$, $+0.624$~\unit{\MHz\per\gauss} respectively. The contrast decays for all three qubits are shown in the figure. The inset plot shows a well correlated linear fit between the coherence time and the magnetic field sensitivity, suggesting that the coherence time is limited by magnetic field noise. For both $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=-5/2}$ and $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=+3/2}$, revivals in contrast can be seen which suggest that the dominant noise source is oscillatory and coherent over the Ramsey scan duration.\\
-    These measurements were taken without the MuMetal enclosure (\S~\ref{sec:Magnetic Field}) fully assembled around the vacuum system, which we expect will greatly reduce external magnetic field noise, and therefore increase the coherence times.
+    \todo{Define Ramsey fringe}
+    \begin{equation}
+    \label{eqn:ramsey_fringe}
+    P_\downarrow = 
+    \end{equation}
+
+    \begin{equation}
+    \label{eqn:ramsey_decay_gauss}
+    C = 
+    \end{equation}
+    \begin{equation}
+    \label{eqn:ramsey_decay_exp}
+    C(t) = C_0\mathrm{exp}\left(\frac{-t}{\tau}\right),
+    \end{equation}
+
+    With this tool, the efficacy of the fibre noise cancellation (FNC, see
+    section~\ref{sec:Narrow Line Width 729 Laser}) can be measured.
+    Figure~\ref{fig:coherence_times} $a$ shows the coherence time of the
+    $\ket{4S_{1/2},~m_j=-1/2}\leftrightarrow\ket{3D_{5/2},~m_j=-3/2}$
+    transition with and without FNC. The coherence time is increased from
+    1.9(1)~\unit{\ms} to 6.2(3)~\unit{\ms} with FNC, showing that without FNC,
+    the coherence times are limited by laser phase noise. \\
+    With FNC enabled, to see if the coherence time is now limited by magnetic
+    field noise, transitions with varying magnetic field sensitivities are
+    compared. Figure~\ref{fig:coherence_times} $b$ shows the coherence time of
+    three quadrupole transitions with varying $D_{5/2}$, $m_j$ numbers:
+    $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=\lbrace -5/2,
+    -3/2, +3/2}$. These transitions have magnetic field
+    sensitivities\todo{calculated by?} $-0.446$, $-0.178$,
+    $+0.624$~\unit{\MHz\per\gauss} respectively. The contrast decays for all
+    three qubits are shown in the figure. The inset plot shows a well correlated
+    linear fit between the coherence time and the magnetic field sensitivity,
+    suggesting that the coherence time is limited by magnetic field noise. For
+    both $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=-5/2}$ and
+    $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=+3/2}$,
+    revivals in contrast can be seen which suggest that the dominant noise
+    source is oscillatory and coherent over the Ramsey scan duration.\\
+    These measurements were taken without the MuMetal enclosure
+    (\S~\ref{sec:Magnetic Field}) fully assembled around the vacuum system,
+    which we expect will greatly reduce external magnetic field noise, and
+    therefore increase the coherence times.
 
 \subsection{Single-ion Addressing}
 \label{sec:Single Addressing char}
@@ -563,20 +600,48 @@ sequences~\cite{fang_crosstalk_2022}.
     4.0$~\unit{\MHz}, and $\omega_{\rm lower}/2\pi = 2.5$~\unit{\MHz}, and the
     axial mode frequency is $\omega_{\rm axial}/2\pi = 1.6$~\unit{\MHz}. All
     work here is using the upper radial mode. \\
-    The motional mode, $i$, leads to sidebands in the 729-nm spectrum at $\omega_0 \pm \omega_{i}$~\cite{ozeri_tutorial_2011}\todo{Point to theory section}, where $\omega_0$, the carrier, is the frequency of the 729-nm laser when on resonance with the qubit transition. The $+\omega_i$ sideband is referred to as the blue sideband (BSB), and the $-\omega_i$ is the red sideband (RSB).
-    The RSB, BSB, and RF fields near to resonance with the motional modes, are the tools used in this section to manipulate the motion of the ion.\\
-    The motional state preparation, heating rate, frequency stabilities, and coherence times are characterised in this section.
+    The motional mode, $i$, leads to sidebands in the 729-nm spectrum at
+    $\omega_0 \pm \omega_{i}$~\cite{ozeri_tutorial_2011}\todo{Point to theory
+    section}, where $\omega_0$, the carrier, is the frequency of the 729-nm
+    laser when on resonance with the qubit transition. The $+\omega_i$ sideband
+    is referred to as the blue sideband (BSB), and the $-\omega_i$ is the red
+    sideband (RSB).
+    The RSB, BSB, and RF fields near to resonance with the motional modes, are
+    the tools used in this section to manipulate the motion of the ion.\\
+    The motional state preparation, heating rate, frequency stabilities, and
+    coherence times are characterised in this section.
 
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=0.5\linewidth]{
+        figures/pdf_figure/ch4/tickle.pdf
+        }
+    \end{center}
+    \caption{
+        Motional mode resonance measured by RF ``tickle'' experiment. Points correspond to fluorescence rate measured by the camera while the solid line is a Lorentzian model fit.
+        }
+    \label{fig:tickle}
+\end{figure}
 \subsection{Calibrating Mode Frequencies}
 \label{sec:tickle}
-\todo{Outline tickle procedure}
+    The radial mode frequencies are proportional to the RF voltage (equation~\ref{eqn:pseudo_pot}), as such any amplitude drift on the RF chain translates to mode frequency drift. The efficiency of the resonator, as discussed in~\S~\ref{sec:Trap RF Chain}, is dependent on ambient temperature, and is currently not actively stabilised. As such the mode frequencies are routinely (order minutes) measured to track and update the frequency set point for interactions involving the mode.\\
     The motional mode frequency is measured via an RF ``tickle'' experiment.
-    This consists of short ($\sim 5$~\unit{\us}) RF field pulses applied to one
+    This consists of short ($\approx 1~\unit{\milli\second}$) RF field pulses applied to one
     of the trap DC electrodes which has a non-zero electric field projection to
     the mode we wish to probe. The frequency of the RF field is scanned around
-    the expected motional mode frequency, and when resonant, drives the motion
-    of the ion. This resonance is measured by observing an increase in
-    fluorescence counts using a 397-nm laser red-detuned by 100~\unit{\MHz}.
+    the expected motional mode frequency, and when resonant drives the motion
+    of the ion. Excess motional amplitude is measured by observing an increase in
+    fluorescence when driving a closed dipole transition detuned to a non-linear
+    region of the resonance. The motional induced sidebands at this non-linear
+    point are unbalanced leading to a modulation of fluorescence. Here the
+    397-nm laser is set to provide approximately 1 saturation intensity of light
+    to avoid power broadening the dipole transition. The 397-nm is red-detuned
+    100~\unit{\MHz} from resonance.  The 866-nm is set to typical readout parameters to
+    repump any population trapped in the $D$-manifold. The modulated
+    fluorescence is integrated over $\approx 1\unit{\milli\second}$ leading to
+    an increased average count rate when the RF tone is resonant with the mode
+    frequency.\\
+    Figure~\ref{fig:tickle} shows the typical fluorescence count rate for this mode frequency calibration scan on the upper radial mode. A Lorentzian profile is fit to extract central mode frequency $\omega_\mathrm{upper}=2\pi\times2.87034(2)~\unit{\mega\hertz}$, and FWHM of $280(50)~\unit{\hertz}$. The uncertainties of these parameters are determined by the bootstrapping method using $1000$ re-samplings.
 
 \subsection{Cooling}
 \label{sec:Cooling}
@@ -749,14 +814,23 @@ sequences~\cite{fang_crosstalk_2022}.
         \label{fig:heating rates}
     \end{figure}
 
-    After cooling the motion, the ion will return to a temperature in equilibrium with the environment. However, this process can be slowed by adequate isolation of the ion. In UHV ion trap systems (see section~\ref{sec:Vacuum System}), motional heating is predominantly caused by electric field noise from the ion trap~\cite{wineland_experimental_1998}. Noise due to thermal charge fluctuations at the trap surface can be 
-    mitigated by increasing ion-electrode distances. The \emph{NPL} trap (section~\ref{sec:The Ion Trap}), used here, has an ion-electrode 
+    After cooling the motion, the ion will return to a temperature in
+    equilibrium with the environment. However, this process can be slowed by
+    adequate isolation of the ion. In UHV ion trap systems (see
+    section~\ref{sec:Vacuum System}), motional heating is predominantly caused
+    by electric field noise from the ion trap~\cite{wineland_experimental_1998}.
+    Noise due to thermal charge fluctuations at the trap surface can be 
+    mitigated by increasing ion-electrode distances. The \emph{NPL} trap
+    (section~\ref{sec:The Ion Trap}), used here, has an ion-electrode 
     distance of 250~\unit{\um}, larger than most surface traps, but less than that of a
-    macroscopic blade or rod style trap~\cite{milne_construction_nodate}. Heating rates were probed by a series of thermometry experiments, explained above, with varying delay
+    macroscopic blade or rod style trap~\cite{milne_construction_nodate}.
+    Heating rates were probed by a series of thermometry experiments, explained
+    above, with varying delay
     times, $t_{\rm delay}$, between cooling and thermometry pulses. A typical plot can be seen in
     figure~\ref{fig:heating rates}. The heating rate of the system
-    was found by a linear fit, shown by the dashed line, to be $33(3)$~quanta per second on the upper radial 4~\unit{\MHz} mode on
-    one ion. As will be discussed in section~\ref{sec:Motional Coherence}, the heating rate sets a limit for the motional coherence time.\\
+    was found by a linear fit, shown by the dashed line, to be $33(3)$~quanta
+    per second on the upper radial 4~\unit{\MHz} mode on
+    one ion\todo{Update mode frequency + why radial?}. As will be discussed in section~\ref{sec:Motional Coherence}, the heating rate sets a limit for the motional coherence time.\\
 
     %It is expected that the heating rate will be larger for lower frequency
     %motional modes if electric field noise is assumed to be uniform over its spectrum~\cite{}. 
@@ -765,51 +839,51 @@ sequences~\cite{fang_crosstalk_2022}.
     %mode frequency. This is a useful diagnostic to check for unexpected heating
     %at certain frequencies, perhaps due to RF noise in the lab. We find....\\
 
-\subsection{Motional Mode Stability}
-\label{sec:Motional Mode Stability}
-\todo{Requires plot and main text numbers update, but we dont yet have data... 2025/11/07\\}
-% Main points:
-    % Quote motional mode drift 
-    % Explain why it is currently drifty
-    % Outline how this will be improved with the squareatron
-% Pre reqs:
-    % Trap
+% \subsection{Motional Mode Stability}
+% \label{sec:Motional Mode Stability}
+% \todo{Requires plot and main text numbers update, but we dont yet have data... 2025/11/07\\}
+% % Main points:
+%     % Quote motional mode drift 
+%     % Explain why it is currently drifty
+%     % Outline how this will be improved with the squareatron
+% % Pre reqs:
+%     % Trap
 
-    \begin{figure}
-        \begin{center}
-        \noindent\includegraphics[width=\linewidth]{
-            figures/pdf_figure/ch4/mode_drift.pdf
-            }
-        \end{center}
-        \caption{
-            \textbf{a)} Motional mode frequency drift over time. The radial motional mode frequency is measured by exciting motion using an RF field in resonance with the motional frequency, and looking at increased fluorescence. The resulting frequency trace is shown in blue. The green line shows a low pass filter of the data, with cut-off frequency of 1.67~\unit{\mHz}, corresponding to an assumed 10 minutes slow thermal drift. The motional mode frequency is typically calibrated every 10 minutes, which is indicated by the red line. 
-            \textbf{b)} Residuals from the measured data and expected calibrated mode frequencies. The standard deviation of these residuals suggests the typical mis-set detuning of the mode frequency in current experiments with automated mode frequency calibrations every 10 minutes.
-            \textbf{c)} Residuals from the measured data and the low passed trace. The standard deviation of these residuals are due to noise with period less than 10 minutes. 
-            }
-        \label{fig:mode drift}
-    \end{figure}
+%     \begin{figure}
+%         \begin{center}
+%         \noindent\includegraphics[width=\linewidth]{
+%             figures/pdf_figure/ch4/mode_drift.pdf
+%             }
+%         \end{center}
+%         \caption{
+%             \textbf{a)} Motional mode frequency drift over time. The radial motional mode frequency is measured by exciting motion using an RF field in resonance with the motional frequency, and looking at increased fluorescence. The resulting frequency trace is shown in blue. The green line shows a low pass filter of the data, with cut-off frequency of 1.67~\unit{\mHz}, corresponding to an assumed 10 minutes slow thermal drift. The motional mode frequency is typically calibrated every 10 minutes, which is indicated by the red line. 
+%             \textbf{b)} Residuals from the measured data and expected calibrated mode frequencies. The standard deviation of these residuals suggests the typical mis-set detuning of the mode frequency in current experiments with automated mode frequency calibrations every 10 minutes.
+%             \textbf{c)} Residuals from the measured data and the low passed trace. The standard deviation of these residuals are due to noise with period less than 10 minutes. 
+%             }
+%         \label{fig:mode drift}
+%     \end{figure}
 
-    Due to thermal drifts and microphonics introducing amplitude and frequency
-    noise on the RF chain, drifts of the radial motional mode frequencies are
-    seen over time. As will be discussed in the following
-    section~\ref{sec:Motional Coherence}, this can lead to dephasing of the
-    motional state. Here, the current motional mode stability is characterised
-    to estimate its contribution to dephasing, and to set a benchmark for future
-    stability improvements. \\
-    To measure mode frequency drift, this sequence is repeated every 10 seconds
-    over multiple hours. A typical plot can be seen in figure~\ref{fig:mode
-    drift} $a$. Over this two hour period, the frequency had an absolute drift
-    of 1.5~\unit{\kHz}. Typically, we calibrate the mode frequency every 10
-    minutes, which is indicated with the red dashed line. Residuals between this
-    calibrated line and the data, shown in $b$, have a standard deviation of
-    $\sigma/(2\pi) = 203(8)$~\unit{\Hz}, giving the expected uncertainty of the
-    mode frequency detuning given our current periodic calibration routine. A
-    slow drift with frequency cut-off of 1.67~\unit{\mHz} is also fitted to the
-    data, shown in green. The residuals from this fit, shown in $c$, have a
-    standard deviation of $\sigma/(2\pi) = 94(4)$~\unit{\Hz}. This suggests that
-    the motional mode frequency is relatively stable over time scales shorter
-    than 10 minutes, but has a slow drift on longer time scales, which is likely
-    due to thermal fluctuations. \\
+%     Due to thermal drifts and microphonics introducing amplitude and frequency
+%     noise on the RF chain, drifts of the radial motional mode frequencies are
+%     seen over time. As will be discussed in the following
+%     section~\ref{sec:Motional Coherence}, this can lead to dephasing of the
+%     motional state. Here, the current motional mode stability is characterised
+%     to estimate its contribution to dephasing, and to set a benchmark for future
+%     stability improvements. \\
+%     To measure mode frequency drift, this sequence is repeated every 10 seconds
+%     over multiple hours. A typical plot can be seen in figure~\ref{fig:mode
+%     drift} $a$. Over this two hour period, the frequency had an absolute drift
+%     of 1.5~\unit{\kHz}. Typically, we calibrate the mode frequency every 10
+%     minutes, which is indicated with the red dashed line. Residuals between this
+%     calibrated line and the data, shown in $b$, have a standard deviation of
+%     $\sigma/(2\pi) = 203(8)$~\unit{\Hz}, giving the expected uncertainty of the
+%     mode frequency detuning given our current periodic calibration routine. A
+%     slow drift with frequency cut-off of 1.67~\unit{\mHz} is also fitted to the
+%     data, shown in green. The residuals from this fit, shown in $c$, have a
+%     standard deviation of $\sigma/(2\pi) = 94(4)$~\unit{\Hz}. This suggests that
+%     the motional mode frequency is relatively stable over time scales shorter
+%     than 10 minutes, but has a slow drift on longer time scales, which is likely
+%     due to thermal fluctuations. \\
     
     % Tracking noise source
     % Show resonator scan
@@ -821,7 +895,6 @@ sequences~\cite{fang_crosstalk_2022}.
 
 \subsection{Motional Coherence Times}
 \label{sec:Motional Coherence}
-\todo{Requires plot and main text numbers update, either 2026/08/11 or 2026/07/27 \\}
 % Main points:
     % Quote measured result for motional coherence time
     % Give estimate for what times we need for future experiments
@@ -834,49 +907,114 @@ sequences~\cite{fang_crosstalk_2022}.
     % SBC
 \begin{figure}
     \begin{center}
-    \noindent\includegraphics[width=0.75\linewidth]{
+    \noindent\includegraphics[width=\linewidth]{
         figures/pdf_figure/ch4/motional_coherence.pdf
         }
     \end{center}
     \caption{
-        Motional coherence time measured by Ramsey sequence on the motional state. The blue points are the population in $\ket{\downarrow}$ after a Ramsey sequence with varying delay time, $t_{\rm RAM}$. The dashed line is an exponential decay fit, with a coherence time $\tau = 4.6(4)$~\unit{\ms}.
+        a) Motional coherence time measured by Ramsey interferometry using Fock
+        states $\ket{0}$ and $\ket{1}$. Points are populations measured in
+        $\ket{\downarrow}$ after the Ramsey sequence with varying delay time.
+        The black dashed line is an exponential decay fit, with $\frac{1}{e}$
+        coherence time $\tau = 18.0(8)$~\unit{\ms}, and initial contrast $C_0 =
+        0.90(2)$. The red line corresponds to the expected decay due to the
+        independently measured heating rate of $\dot{\bar{n}}=33(3)$~q/s. b)~Displays 
+        the residual oscillations after subtracting the expected
+        heating-rate profile. c)~Displays the PSD of the residual oscillations,
+        with the dashed red line signifying $50~\unit{\hertz}$.
         }
     \label{fig:motional_coherence}
 \end{figure}
 
-    We will utilise the motional modes of the ion to store quantum information.
-    As with the section on spin coherence times~\ref{sec:Coherence}, the
-    fidelity of operations, and success probability of algorithms will be
-    limited by the coherence time of the motional state.  To measure motional
-    coherence, a Ramsey sequence is performed between states $\ket{\downarrow, 0}$
-    and $\ket{\downarrow, 1}$, where the first element is the qubit
-    state, and the second element is the motional Fock state. To prepare these
-    states the following pulse sequence is applied:
+    For both hybrid computation, and for two-qubit entangling gates via
+    geometric phase gates, we require motional modes with long coherence times
+    compared to the desired circuit length. Electric field noise on the trap RF,
+    or fluctuating external fields cause decoherence of the qumode. The field
+    noise can cause coherent errors, motional frequency dephasing, or thermal heating of
+    the mode, depending on its coherence and underling frequency spectrum.
+    Here the coherence time is quantified
+    using Fock state interferometry --- a Ramsey technique with initial superposition states $\ket{\psi_{0m}}=(\ket{\downarrow, 0}+\ket{\downarrow, m})/\sqrt{2}$, where $m$ is a pure Fock state~\cite{turchette_decoherence_2000}. The acquired Ramsey phase is mapped to the optical qubit through sideband pulses. Fock state interferometry is
+    easy to implement through driving resonant carrier and RSB gates, and is sensitive to both dephasing
+    and mode-heating noise. We note that similar interferometry
+    techniques based on cat states~\cite{monroe_schrodinger_1996} also 
+    quantify decoherence, however with different
+    sensitivities to both dephasing and heating. \\
+    The Ramsey contrast decays is measured by the following sequence:
     \begin{enumerate}
-    \item State prepare system to $\ket{\downarrow, 0}$ via optical pumping and sideband cooling.
-    \item Apply $R_y(\pi/2)$-pulse on carrier transition to prepare the qubit in $(\ket{\downarrow, 0} + \ket{\uparrow, 0})/\sqrt{2}$.
-    \item Apply $R(\pi)$-pulse on the RSB to prepare the motional state in $(\ket{\downarrow, 0} + \ket{\downarrow, 1})/\sqrt{2}$.
-    \item Delay for some time $t_{\rm RAM}$.
-    \item Apply $R(\pi)$-pulse on the RSB to map accumulated phase onto the qubit state.
-    \item Apply $R_\phi(\pi/2)$-pulse on the carrier, with variable axis of rotation, $\phi$.
-    \item Measure the population in $\ket{\downarrow}$ via state-selective fluorescence, section~\ref{sec:Measurement}.
-    \item Repeat steps 1-7 for different values of $\phi$ to find the contrast of the Ramsey fringe.
-    \item Repeat steps 1-8 for different values of $t_{\rm RAM}$ to find the decay in contrast with time. The coherence time is defined as the time at which the contrast has decayed to $1/e$ of its initial value.
+    \item Prepare the ground state of both qubit and qumode, $\ket{\downarrow, 0}$. The qubit is first prepared via optical pumping, and the qumode is subsequently prepared by Doppler and resolved sideband cooling.
+    \item A $R_y(\pi/2)$-pulse is applied on the carrier transition, preparing the state $(\ket{\downarrow, 0} + \ket{\uparrow, 0})/\sqrt{2}$.
+    \item A RSB $R_\mathrm{RSB}(\pi)$-pulse is applied, preparing the state $\ket{\psi_{0m}}=(\ket{\downarrow, 0} + \ket{\downarrow, 1})/\sqrt{2}$.
+    \item The system is left to evolve for Ramsey delay, $t_{\rm RAM}$.
+    \item A RSB $R_\mathrm{RSB}(\pi)$-pulse is applied to map accumulated phase onto the qubit state.
+    \item A variable carrier $R_\phi(\pi/2)$-pulse is applied.
+    \item The population of $\ket{\downarrow}$ is measured.
+    \item Repeat steps 1-7 for different values of $\phi$ to find the contrast of the Ramsey fringe (see equation~\ref{eqn:ramsey_fringe}).
+    \item Repeat steps 1-8 for different values of $t_{\rm RAM}$ to find the decay in contrast with time (see equation~\ref{eqn:ramsey_decay_exp}).
     \end{enumerate}
-    There are two main mechanisms for motional decoherence\cite{turchette_decoherence_2000}: motional heating, as
-    characterised in section~\ref{sec:Heating}, and motional dephasing due to
-    mode frequency instability, as discussed in section~\ref{sec:Motional Mode Stability}. \\
-    A heating rate dominated coherence time is given by, $\tau_{\rm HEAT} =
-    (\sqrt{e}-1)/\dot{\bar{n}}$~\cite{turchette_decoherence_2000}, where $\dot{\bar{n}}$ is the heating
-    rate. A dephasing dominated coherence time, if noise is correlated on timescales long compared to the Ramsey delay~\cite{omalley_qubit_2015}, is characterised by a Gaussian decay profile with a coherence time
-    of $\tau_{DEPH} = \sqrt{2}/\sigma_{\omega}$.\\
-    Evaluating both of these models with $\dot{\bar{n}}=33(3)$~q/s, and
-    $\sigma_{\omega}/(2\pi) = 94(4)$~\unit{\Hz}, the expected motional coherence times of $\tau_{\rm
-    HEAT} \approx 20$~ms and $\tau_{\rm DEPH} \approx 2.3$~ms respectively, are found. From these auxiliary characterisations of the motional modes, it is expected that the coherence time will be limited by motional dephasing. \\
-    Figure~\ref{fig:motional_coherence} shows the decaying coherence when probed by the above sequence. It can be seen that the contrast has a good fit assuming an exponential decay (green dashed line),
-    defined by $C(t_{\rm RAM}) = C(0) e^{-t_{\rm RAM}/\tau},$ where $C(t_{\rm RAM})$ is the contrast at time $t_{\rm RAM}$, and $\tau$ is the coherence time. The fit yields a motional coherence time of $\tau = 4.6(4)$~\unit{\ms}, defined as the time at which the contrast decays to $1/e$ of its initial value. 
-    An exponential decay suggests that the noise source causing the dephasing is correlated only for durations much shorter than the Ramsey delay times~\cite{omalley_qubit_2015}.
-    The Gaussian decay, (red dashed line), which was appropriate for the previous spin coherence time measurements in section~\ref{sec:Coherence}, is a poor fit here. \\
+
+    Figure~\ref{fig:motional_coherence}~(a) shows the recovered coherence contrast
+    for variable Ramsey delays for the upper radial mode of a single ion, with
+    frequency $\omega_\mathrm{upper}\approx 2\pi\times2.9~\unit{\mega\hertz}$.
+    The black solid line indicates an exponential decay, given by
+    equation~\ref{eqn:ramsey_decay_exp}, with a fit $\frac{1}{e}$ coherence time
+    of $\tau = 18.0(8)$~\unit{\ms}, and initial contrast $C_0 = 0.90(2)$. The
+    low initial contrast is attributed to imperfect RSB pulses due to a
+    combination of finite residual mode temperature (expected around
+    $\bar{n}=0.03$), and imperfect calibration of the sideband frequency and
+    $\pi$-gate duration.
+    The exponential, rather than Gaussian, profile of the decay suggests that the dominating noise
+    source is correlated for durations much shorter
+    than the Ramsey delay times~\cite{omalley_qubit_2015}. \\
+    If motional-mode heating is dominant, the expected decay in the coherence 
+    between Fock states $\ket{0}$ and $\ket{m}$ for an equal superposition is given by~\cite{turchette_decoherence_2000, kienzler_quantum_2015},
+    \begin{equation}
+        \rho_{0m}(t)=\frac{1}{2(1+\dot{\bar{n}}t)^{m+1}},
+    \end{equation}
+    where $\rho_{0m}$ is the off-diagonal density matrix element, and 
+    $\dot{\bar{n}}$ is the heating rate in phonons per second.
+    Taking $m=1$, and using the above protocol mapping the motional coherence to the spin-qubit, we find spin populations,
+    \begin{equation}
+    P_\da(t) = \rho_{01}(t) + \rho_{10}(t) = \frac{C_0}{(1+\dot{\bar{n}})^2},
+    \end{equation}
+    where $C_0$ is included to account for imperfect mapping pulses. 
+    The dashed red line overlaid on figure~\ref{fig:motional_coherence}~(a) is the
+    heating induced decoherence using the independently measured heating rate of
+    $\dot{\bar{n}}=33(3)$~q/s, found in~\S~\ref{sec:Heating}. The measured
+    contrast closely follows this decay, giving strong evidence that the
+    coherence of the qumode is dominated by the underlying heating rate.\\
+    Further periodic structure on the decaying contrast suggests the
+    presence of coherent noise sources. The frequencies of these oscillations
+    are recovered by finding the power spectral density (PSD) of the residual
+    contrast above the expected decay profile. Panel (b) displays the residual contrast amplitudes when
+    subtracting the decay due to the heating rate from the observed populations $P_\da$. The
+    PSD, shown in panel (c), is found using Welch's method with a Hann window and zero-padded to
+    visually smooth the spectrum. The vertical dashed red line indicates
+    $50~\unit{\hertz}$, the electric hum from the UK AC mains supply. The PSD
+    suggests that this hum is the dominant coherent noise source affecting the
+    contrast decay profiles.\\
+
+    The effect of dephasing and heating noise depends strongly on the state of
+    the motional mode, as such, this metric of Fock state coherence time
+    provides evidence of adequate performance of the qumode, but does not
+    rigourously determine the error channel acting on the oscillator.
+    However, this measurement suggests that the coherence of the qumode is
+    sufficient for the short hybrid sequences we plan to explore with the
+    apparatus. \\
+    If this coherence time is not adequate for future projects, there are three
+    possible mitigations. First, we may explore the dependence of motional mode
+    frequency on coherence time, effectively probing the electric-field noise
+    spectrum to find quieter regions. Second, we can decrease the impact of any
+    incoherent noise by reducing the duration of motional interactions, however
+    emergent off-resonant coherent errors will then require mitigation. Third,
+    we may explore algorithmic error mitigation techniques that reduce the
+    impact of noise on estimated expectation values, for example, using virtual
+    distillation. This technique was first developed explicitly to suppress the
+    bias of an estimated observable due to finite-temperature
+    effects~\cite{cotler_quantum_2019}, but has been generalised to mitigate errors occurring in quantum circuits~\cite{huggins_virtual_2021,koczor_exponential_2021}.  We discuss
+    this method in the context of hybrid systems in chapter~\ref{ch:QEM}, and
+    provide an initial demonstration on a spin-only system.
+
+
 
 \section{Spin-Motion}
     \todo{Point to theory\\}
@@ -930,25 +1068,30 @@ sequences~\cite{fang_crosstalk_2022}.
         \label{fig:SDF}
     \end{figure}
 
-    Geometric phase gates, such as the MS interaction, are widely employed in ion trap experiments due to their robustness against variations in initial motional state. However, the SDF is sensitive to various frequency and power miscalibrations and drifts of these between calibrations.  Here, we describe the workflow for calibrating and optimising the SDF behaviour.\\
-    In practice, the SDF interaction involves relatively few degrees of freedom: the central qubit frequency, the motional mode frequency, the power in each tone, and the durations of the pulses must all be calibrated. The complexity comes from the fact that the ion is a multi-level system, possesses multiple motional modes, and that each experimental parameter can only be controlled with finite precision.\\
-    The effect of nearby motional modes is negated by either selecting the
-    interaction mode to be well separated from the others either in frequency, by beam geometry, by
-    operating the SDF near to resonance of the desired mode, or by using amplitude shaping of the pulse.
-    Smoothing a square pulse through amplitude shaping narrows the pulse frequency bandwidth, and thus reduces unwanted off-resonant
-    excitation of other modes.  \\
-    The power balance of the SDF tones is complicated due to our use of AOMs.
+    Spin-dependent forces (SDF), as described in~\S~\ref{sec:SDF}, are used in this thesis for both two-qubit entangling gates (following section), and for generating and characterising non-linear bosonic states (~\S~\ref{sec:tomography} and \S~\ref{sec:two-sdf}). Here we describe the calibration strategy and characterisation of a single SDF.\\
+
+    The SDF is generated using the bichromatic field method introduced by M\/{o}lmer and S\/{o}rensen~\cite{molmer_multiparticle_1999}, using simultaneous detuned red- and blue-sidebands.
+    In practice, this SDF interaction involves relatively few degrees of freedom:
+    the central qubit ``carrier'' frequency, the motional mode frequency, the power in each
+    optical tone, and the durations of the pulses.
+    \todo{bichromatic field H, to highlight the d.o.f.}
+    \begin{equation}
+        \hat H_\mathrm{bi} = 
+    \end{equation}
+    
+    Complexity
+    comes when we consider spectator interactions due to other available electronic and motional transitions.\\
+
+    The bichromatic field is generated by providing two simultaneous RF tones to the single-pass (SP) AOM, as seen in the \emph{TrapLab} panel of figure~\ref{fig:729}. The SDF may be driven by either the single-ion addressing system (path 729\#1), or by a global field (path 729\#2). The SP AOMs are driven by an arbitrary waveform generator\footnote{\emph{Phaser Sinara} board} to provide phase, frequency, and amplitude control over the two tones.\\
+    The bichromatic field is measured using a high-bandwidth photodiode after an optical pick-off before addressing the ions. The intensity measured by the photodiode has a beat-note with frequency $\omega_b \approx 2\omega_\mathrm{upper}$. The contrast of this beat-note is optimised to calibrate the power balance between the two optical frequencies. The power balance is varied by updating the RF amplitude supplied to the SP AOMs.
     AOMs generate frequency shifts in the laser beam at the expense of small
-    frequency-dependent angular shifts. After the AOM, the beam is coupled into a
-    single mode fibre (see figure~\ref{fig:729}), and so the AOMs effectively introduce a
-    frequency-dependent loss. To calibrate the power balance, a pick
-    off of the bichromatic beam after the ion is monitored on a high bandwidth photodiode.
-    The beatnote contrast is measured for the two tones and the power
-    balance is optimised by maximising this contrast.\\
-    The far off-resonant levels of our ion lead to light-shifts of our qubit
-    frequency. To account for the light-shift the central qubit frequency must be calibrated at the
-    optical power used for the interaction. This is done with the SDF interaction
-    itself. When the qubit frequency is set incorrectly, the two tones will no
+    frequency-dependent angular shifts. The beam pointing of the diffracted order also has some temperature dependence. After the AOM, the beam is coupled into a
+    single mode fibre, as such the AOMs introduce a
+    frequency- and temperature-dependent loss. These losses can lead to significant errors in power-balance between the two tones. We found that optimising for short optical path-lengths between the SP AOM and the fibre, careful alignment to the fibre, and ensuring the SP AOM is supplied with a constant duty cycle were all required for stable power-balance.\\
+    Off-resonant excitations of other interactions are negated through selecting trap parameters to spectrally isolate a single-motional mode, and ensuring that gates are driven adiabatically --- the SDF Rabi frequency, $\Omega$, is significantly less than the frequency spacing to nearby interactions. Ensuring the interaction is smoothly ramped on and off also reduces excess off-resonant excitations.\\
+    The bichromatic field leads to both a dipole and quadrupole Stark shift of the central qubit frequency. As such, the bare-qubit frequency measured by RPE in~\S~\ref{sec:RPE} is insufficient.
+    The Stark-shift calibration is thus done through observing the application of the SDF to the ion when all other parameters are already well calibrated.
+    When the qubit frequency is set incorrectly, the two tones no
     longer have the same absolute detuning from their respective RSB or BSB.
     This manifests as a ``skewness'' of the SDF detuning trace. By varying the qubit frequency and
     inspecting these detuning scans, the desired SDF behaviour can be found. \\
