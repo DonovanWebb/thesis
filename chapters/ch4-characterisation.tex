@@ -2,23 +2,27 @@
 \label{ch:characterisation}
 \minitoc
 
-    \todo{Outline calibration experiments, and characterisation of performance on current system}\\
-    \todo{Particular focus on the elementary operations for the DV subsystem, with spin-motion limited to applications to two-qubit gate via shared motion. Further details on implementing motional interactions, and motional readout is given in section CVQC.}\\
     Before we can proceed with our planned experiments involving the motion and
-    spin of the atoms, the apparatus must be characterised. This characterisation
-    serves two purposes: it allows us to benchmark the performance of our system
-    against state-of-the-art results, and it reveals any current limitations
+    spin of the ions, the apparatus must be characterised. This characterisation
+    serves two purposes: it allows us to benchmark the performance of our
+    system, and it reveals any current limitations
     that must be addressed before we can successfully carry out the experiments.\\
 
-    We split this chapter into interactions involving only the spin, then those focussed only on the motion, and finally we describe spin-motion interactions.
-    \todo{Summary of interactions discussed here}
+    We split this chapter into interactions involving only the spin, then those
+    focussed only on the motion, and finally we describe spin-motion
+    interactions. This chapter demonstrates the full control required for
+    discrete-variable quantum computation. Section~\ref{sec:CVQC} in
+    chapter~\ref{ch:QEM} applies the spin-dependent motional
+    interactions demonstrated here for continuous-variable readout, and to
+    realise the remaining non-linear and two-mode operations required
+    for full hybrid CV-DV control.\\
 
 \section{Spin}
 \label{sec:Spin}
-    Discrete variable quantum computing consists of manipulating many two-level
+    Discrete variable quantum computing consists of control over many two-level
     systems, which we refer to either as spins, or qubits. In this section 
-    the methods used to manipulate these spins are described, and their
-    performances are benchmarked.\\
+    the experimental methods used to prepare, manipulate, and measure these spins are described, and the
+    performance of these operations are benchmarked.\\
 
 \subsection{State Preparation}
 \label{sec:Stateprep}
@@ -34,7 +38,7 @@
 
     \begin{figure}
         \begin{center}
-        \noindent\includegraphics[width=0.75\linewidth]{
+        \noindent\includegraphics[width=0.667\linewidth]{
             figures/pdf_figure/ch4/state_prep.pdf
             }
         \end{center}
@@ -134,12 +138,10 @@
     finite lifetime of the metastable $3D_{5/2}$ level, which dominate $\epsilon_\uparrow$. The expected error due
     to the finite lifetime, $\tau$, is $\epsilon_{\rm decay} = 1 - e^{-t/\tau}$, where $t$ is the readout duration. For \ca, $\tau \sim 1.1$~s, $\epsilon_\uparrow \approx \epsilon_{\rm decay}  = 
     10^{-4}$. 
-    Assuming the metastable lifetime is limited only by spontaneous decay overlooks leakage from the 854-nm deshelving beam, which could significantly shorten $\tau$~\cite{sotirova_high-fidelity_2024}. \\
-    
+    Assuming the metastable lifetime is limited only by spontaneous decay overlooks leakage from the 854-nm deshelving beam, which could significantly shorten $\tau$~\cite{sotirova_high-fidelity_2024}. Further characterisation of the combined state-preparation and measurement fidelity is provided in~\S~\ref{sec:standard_rb}.
 
 
-
-\subsection{Single Qubit Rotations}
+\subsection{Single-Qubit Rotations}
 \label{sec:Single Qubit Gates}
 % Main points:
     % Here is a characterisation of single qubit gates.
@@ -153,14 +155,12 @@
     % Spin coherence times
     % Possible transitions
     % Calibrating gate times
-\todo{short intro, point to requirements and theory section}
 
-Single-qubit rotations driven by optical fields, as described in~\S~\ref{sec:Rabi Flopping}, along with two-qubit gates are required for universal discrete variable quantum computation. 
+Single-qubit rotations driven by optical fields, as described in~\S~\ref{sec:Rabi Flopping}, along with two-qubit gates are required for universal discrete variable quantum computation. \\
 
-
-We divide errors affecting single-qubit gates into two categories: unitary, and non-unitary. The unitary error component is labelled ``systematic'' if there are exists simple control parameters to suppress such errors. 
+We divide errors affecting single-qubit gates into two categories: unitary, and non-unitary. The unitary error component is labelled ``systematic'' if there exists simple (and accessible) control parameters to suppress such errors. 
 We outline in the next section robust phase estimation (RPE), the calibration routine used to reduce systematic errors. 
-Non-unitary errors often require improved isolation between the qubit and environment, or suppressed noise on the single-qubit-driving field. At the end of this section we characterise the performance of the gates, with current hardware and calibration routines, using single-qubit randomised benchmarking.
+In contrast, reducing non-unitary errors require improved isolation between the qubit and environment, or suppressed noise on the single-qubit-driving field. At the end of this section we characterise the performance of the single-qubit gates using randomised benchmarking.
 
 \subsubsection{Robust Phase Estimation}
 \label{sec:RPE}
@@ -406,8 +406,19 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     Figure~\ref{fig:rbm}~(b) shows the average survival populations for a log-sampled range of sequence lengths up to $m_\mathrm{max} = 2048$ Clifford gates. Each point corresponds to an average over $r=50$ randomisations, and $s=50$ sample repeats per randomisation. The solid line follows equation~\ref{eq:RBM_decay}, with fit parameters, $\varepsilon_c=1.9(1)\times10^{-3}$, and $\varepsilon_\mathrm{sp}=3(1)\times10^{-3}$. The dashed line is the expected asymptote for a fully depolarised qubit. Error bars show the standard error of the average survivals for each random sequence for a given length $m$. From $\varepsilon_c$, we find a single $R_x(\frac{\pi}{2})$ average fidelity of $\mathcal{F}_{\pi/2}=1-\frac{\varepsilon_c}{2.17}=99.913(2)\%$.
     The measured SPAM is consistent with the independently characterised state preparation (section~\ref{sec:Stateprep}) and measurement (section~\ref{sec:Measurement}) errors of $\sim 10^{-3}$, and $\sim 10^{-4}$ respectively.\\
 
-    RB can be used to calibrate systematic errors, however requiring many more samples than the RPE protocol described above. Figure~\ref{fig:rb_detuning} presents the detuning of the 729-nm laser with respect to the resonant frequency extracted by RPE. The points correspond to the extracted $\varepsilon_c$ from RB sequences with the same parameters as used for figure~\ref{fig:rbm_circ}~(b). The solid line is a quadratic fit, with center frequency $\delta=2\pi\times 0.76(8)~\unit{\kilo\hertz}$. The RPE protocol does not account for the Stark-shift due to the 729-nm beam, as such we see a frequency shift between the qubit and laser when probing by RB.\\
+    We attribute the single-qubit rotation error to the finite-temperature of the radial modes. Expanding equation~\ref{eqn:exp_eta} to second order in the Lamb-Dicke parameter, the carrier Rabi frequency is modulated depending on motional Fock state, $n$, as~\cite{leibfried_quantum_2003},
+    \begin{equation}
+    \Omega_n\approx \Omega\left(1-\eta^2\left(n+\frac{1}{2}\right)\right),
+    \end{equation}
+    where $\eta$ is the Lamb-Dicke parameter. For a thermal distribution each shot will result in a different rotation angle leading to a thermal dephasing error. For small rotation errors, the fidelity averaged over the Haar measure (see appendix~\S~\ref{sec:fidelity}) is given to first order by $\mathcal{F} =1-\frac{1}{3}\langle \theta^2\rangle$. If targetting an $R_x(\frac{\pi}{2})$-gate, the expected fidelity due to thermal errors is then,
+    \begin{equation}
+        \mathcal{F}_{\pi/2}(\bar{n})=1-\frac{1}{12}\pi^2\eta^4 (2\bar{n}^2 + \bar{n}).
+    \end{equation}
+    The radial modes for our target trapping frequencies ($\approx 2.5~\unit{\mega\hertz}$) have Lamb-Dicke parameters of $\eta\approx0.05$. For these experiments the radial modes are only Doppler cooled. In the following section on cooling, \S~\ref{sec:Cooling}, we will determine the Doppler limit for these modes to be $\bar{n}_d \approx 4$. Using these two estimated parameters, we expect a fidelity due to thermal errors of $\mathrm{F}_{\pi/2,\mathrm{th}}=99.96\%$. This is similar in magnitude to the measured value and makes the assumption cooling is optimised to reach the Doppler limit. The single-qubit gate fidelity measured here is sufficient for the projects in this thesis, however if a lower error is required, we will be required to sub-Doppler cool all radial modes. \\
+
+    RB can be used to calibrate systematic errors, however requiring many more samples than the RPE protocol described above. Figure~\ref{fig:rb_detuning} presents the detuning of the 729-nm laser with respect to the resonant frequency extracted by RPE. The points correspond to the extracted $\varepsilon_c$ from RB sequences with the same parameters as used for figure~\ref{fig:rbm}~(b). The solid line is a quadratic fit, with center frequency $\delta=2\pi\times 0.76(8)~\unit{\kilo\hertz}$. The RPE protocol does not account for the Stark-shift due to the 729-nm beam, as such we see a frequency shift between the qubit and laser when probing by RB.\\
     We use standard RB as a daily characterisation experiment to verify consistent performance of the single-qubit gates. In chapter~\ref{ch:k-copy} we show further utility of single-qubit Clifford RB using a novel extension to parallel single-qubit Clifford application in a multi-qubit register.
+
 
 \subsection{Spin Coherence Times}
 \label{sec:Coherence}
@@ -688,7 +699,7 @@ sequences~\cite{fang_crosstalk_2022}.
     where $\hbar$ is the reduced Planck constant, and $k_B$ is Boltzmann's constant~\cite{wineland_laser_1979}.\\
      For
     $^{40}$Ca$^+$, the natural linewidth of the 397-nm transition is $\frac{\gamma}{2\pi} =
-    21$~\unit{\MHz}\cite{morton_atomic_2003}, giving $T_{\rm Doppler} = 0.5$~\unit{\milli\kelvin}. For a radial mode frequency of $\frac{\omega}{2\pi} = 4$~\unit{\MHz}, the expected mean phonon number is,
+    21$~\unit{\MHz}\cite{morton_atomic_2003}, giving $T_{\rm Doppler} = 0.5$~\unit{\milli\kelvin}. For a radial mode frequency of $\frac{\omega}{2\pi} = 4$~\unit{\MHz}\todo{Outdated}, the expected mean phonon number is,
     \begin{equation}
         \bar{n} = \frac{1}{e^{\hbar\omega/k_B T}-1},
     \end{equation}
@@ -805,7 +816,7 @@ sequences~\cite{fang_crosstalk_2022}.
 
     \begin{figure}
         \begin{center}
-        \noindent\includegraphics[width=0.75\linewidth]{
+        \noindent\includegraphics[width=0.667\linewidth]{
             figures/pdf_figure/ch4/heating_rate.pdf
             }
         \end{center}
@@ -830,8 +841,8 @@ sequences~\cite{fang_crosstalk_2022}.
     times, $t_{\rm delay}$, between cooling and thermometry pulses. A typical plot can be seen in
     figure~\ref{fig:heating rates}. The heating rate of the system
     was found by a linear fit, shown by the dashed line, to be $33(3)$~quanta
-    per second on the upper radial 4~\unit{\MHz} mode on
-    one ion\todo{Update mode frequency + why radial?}. As will be discussed in section~\ref{sec:Motional Coherence}, the heating rate sets a limit for the motional coherence time.\\
+    per second on the upper radial with mode frequency $\omega_\mathrm{upper} \approx 3~\unit{\MHz}$ on
+    one ion. As will be discussed in section~\ref{sec:Motional Coherence}, the heating rate sets a limit for the motional coherence time.\\
 
     %It is expected that the heating rate will be larger for lower frequency
     %motional modes if electric field noise is assumed to be uniform over its spectrum~\cite{}. 
@@ -1107,12 +1118,6 @@ sequences~\cite{fang_crosstalk_2022}.
 
 \subsection{Two-Qubit Entangling Gates}
 \label{sec:Two-Qubit Entangling Gates}
-\todo{Need to move some to theory and add section and results of Walsh-1 gate implementation.}\\
-\todo{Look at 98\% MS on 2026-05-07}\\
-Duration scan on 2026-04-02 - 96.5\%\\
-2026-03-25 duration:rid 99417, parity rid 99418\\
-\todo{Update figure with walsh gate results}\\
-\todo{Define propagator as $R_{xx}$ to match QEM chapter}\\
 % Main points:
     % Intro/brief outline of goal of two-qubit gate. Truth table? Preparing in Bell state. This is tool kit for spin control of our system.
     % Discuss likely limitations being nearby hot motional modes, no pulse ramping
@@ -1132,54 +1137,141 @@ Duration scan on 2026-04-02 - 96.5\%\\
             }
         \end{center}
         \caption{
-            \todo{Outdated}
-            Experimental data for $\mathcal{F}=92(2)$\% Mølmer-Sørensen (MS) two-qubit entangling gate.
-            \textbf{a)} Populations versus duration scan of the MS interaction.
+            Experimental calibration and characterisation of a Walsh-modulated Mølmer-Sørensen (MS) two-qubit entangling gate with fidelity $\mathcal{F}=0.980(6)$.
+            (a) Populations versus duration scan of the MS interaction.
             Each point corresponds to the average of 200 shots, and the error
-            bars are given by the standard deviation of these averages. The blue
-            points are the populations of both ions being in the $\ket{\downarrow}$
-            state, $P_{\downarrow\downarrow}$, the green points are the populations of both ions
-            being in the $\ket{1}$ state, $P_{\uparrow\uparrow}$, and the red points are the
-            ions being the the opposite states, $(P_{\downarrow\uparrow}+P_{\uparrow\downarrow})/2$. The desired
-            entangling gate corresponds here to $t_g =  75$\unit{\us}. 
-            \textbf{b)} Parity oscillations after the MS interaction. The parity
-            is defined as $P_{\downarrow\downarrow} + P_{\uparrow\uparrow} - P_{\downarrow\uparrow} - P_{\uparrow\downarrow}$. The fitted
-            contrast here is $0.90(2)$.
-            \textbf{c)} Populations at the desired entangling gate duration, $t_g =
-            75$~\unit{us}.  
+            bars are given by the standard deviation of these averages. The desired
+            entangling gate corresponds here to $t_g =  95$\unit{\us}. 
+            (b) Observed parity oscillations after the MS interaction. The fitted
+            contrast here is $C=0.97(1)$.
+            (c) Populations at the desired entangling gate duration, $t_g =
+            95$~\unit{us}.  
             }
         \label{fig:ms_gate}
     \end{figure}
-    \todo{Intro needed + pt to theory}\\
-    Here we quote the current fidelity of experimentally demonstrated two-qubit gates on
-    our system. The fidelity serves to quantify the similarity of
-    two density matrices. 
 
-    Here for a two-qubit entangling gate, we target the creation of the Bell
-    state $\ket{\Phi^+_{\phi_0}} = 1/\sqrt{2} \left( \ket{\downarrow\downarrow} +
-    e^{i\phi_0}\ket{\uparrow\uparrow} \right)$, from an initial state of $\ket{\downarrow\downarrow}$, where $phi_0$, is some fixed phase.
-    The fidelity between our mixed state $\rho$, and the pure Bell state may be
+    To complete the demonstration of elementary operations required for
+    universal qubit control, we characterise the performance of two-qubit
+    entangling gates via the MS interaction on our apparatus.\\
+    This interaction, as discuss in~\S~\ref{sec:Geometric Phase Gates}, is
+    implemented through a detuned SDF.
+    To reduce the sensitivity to both
+    systematic and incoherent motional errors a Walsh modulated two-loop gate
+    sequence is used.\\
+
+    The two-qubit gate performance can be characterised many different ways.
+    Ideally a process tomography method would be used to fully characterise the
+    CPTP map implemented by the noisy two-qubit
+    gate~\cite{chuang_prescription_1997}. However such a method requires
+    near-perfect state-initialisation to correctly discern dynamics originating
+    from the gate under test. Random circuit methods such as two-qubit Clifford
+    RB~\cite{gaebler_randomized_2012}, or cyclic
+    benchmarking~\cite{erhard_characterizing_2019} could also be used to gain
+    single-value performance metrics insensitive to state-preparation errors. In
+    this thesis we use a state tomographic
+    technique~\cite{sackett_experimental_2000}, which although does not
+    rigorously characterise the action of the gate on arbitrary initial states,
+    is quick to implement, and only requires a single additional
+    $R_x(\frac{\pi}{2})$-pulse.\\
+    A single $R_{\phi_s\phi_s}(\frac{\pi}{2})$ two-qubit entangling gate, where
+    $\phi_s$ is some fixed angle in the $xy$-plane, is applied to the initial
+    state $\ket{\da\da}$. This gate targets the creation of the 
+    maximally-entangled state $\ket{\Phi^+_{\phi_0}} = 1/\sqrt{2} \left( \ket{\downarrow\downarrow} +
+    e^{i\phi_0}\ket{\uparrow\uparrow} \right)$, where $\phi_0$, is some fixed
+    phase\footnote{$\phi_0$ is left unspecified as the target of a specific
+    phase is not required, we only require that it is stable over time, and
+    measured precisely.}. Practically, due to systematic errors and noise on
+    both the qubit and motional state, the final mixed state $\rho$ is produced.
+    The state-fidelity between $\rho$, and the pure Bell state is
     given by,
     \begin{equation}
         \mathcal{F} = \bra{\Phi^+_{\phi_0}} \rho \ket{\Phi^+_{\phi_0}} = \frac{1}{2} \left( \rho_{\da\da,\da\da} + \rho_{\ua\ua,\ua\ua} \right) + \frac{1}{2}\left( e^{i\phi_0}\rho_{\ua\ua,\da\da}+e^{-i\phi_0}\rho_{\da\da,\ua\ua}\right),
         \label{eq:Fidelity}
     \end{equation}
-    where $\rho_{ij,kl} = \braket{ij|\rho|kl}$. To extract the fidelity experimentally, a partial state tomography 
-    protocol is used~\cite{sackett_experimental_2000}, where the first bracketed term of
-    equation~\ref{eq:Fidelity} is measured by performing projective measurements
-    of the two ions after the gate sequence to extract populations, and the second bracketed term,
-    known as the coherence terms, are measured by applying a global analysis
-    $R_\phi(\pi/2)$ pulse to the two ions and applying parity measurements. 
-    Parity measurements are defined as $P = P_{\da\da} + P_{\ua\ua} - P_{\da\ua} - P_{\ua\da}$, where $P_{ij}$ is the population of the two ions in state $\ket{i}\ket{j}$ after the gate sequence and variable $\pi/2$-pulse. 
-    Creating a Bell state is essential for two-qubit entanglement, but its basis can vary as long as it is consistent across experiments. This allows the Bell state phase, $\phi_0$, to float, which in practice means using only the amplitude of the fitted parity oscillations to compute fidelity, ignoring any phase offset.\\
-    The best two-qubit entangling gate fidelity currently achieved on our system is $\mathcal{F}=92(2)\%$. As shown in figure~\ref{fig:ms_gate}, the magnitude of the parity scan was measured to be 0.90(2), while the populations $\left( \rho_{\da\da,\da\da} + \rho_{\ua\ua,\ua\ua} \right) = 0.95(2)$. Each population point in these figures are found by taking the average of 200 shots of the gate sequence.
-    \todo{Flag pi/4 gates used in VD}\\
+    where the matrix elements are given by $\rho_{ij,kl} = \braket{ij|\rho|kl}$.
+    Thus to extract this fidelity, only partial state tomography is
+    required~\cite{sackett_experimental_2000}.
+    The first bracketed term of
+    equation~\ref{eq:Fidelity}, denoted $A$, is measured by performing projective measurements
+    of the two ions after the applied $R_{\phi_s\phi_s}(\frac{\pi}{2})$. The extracted
+    two-qubit joint populations directly recover this population term, $A=
+    P_{\da\da} + P_{\ua\ua}$, where $P_{ij}$ is the population of the two ions
+    in state $\ket{i}\ket{j}$.
+    The coherence terms in the second bracket are measured by applying a global analysis
+    $R_\phi(\pi/2)$ pulse to the two ions with variable phase $\phi$. The final
+    spin-populations are combined to a parity measurement, defined as $\Pi =
+    P_{\da\da} + P_{\ua\ua} - P_{\da\ua} - P_{\ua\da}$. Varying $\phi$, the
+    observed parity relates to the matrix elements of $\rho$ as,
+    \begin{equation}
+        \Pi(\phi) = \rho_{\da\ua,\ua\da}+\rho_{\ua\da,\da\ua} + e^{-2i\phi}\rho_{\ua\ua,\da\da} + e^{+2i\phi}\rho_{\da\da,\ua\ua}.
+    \end{equation}
+    In the case that there are no coherences between single-excitation states
+    $\ket{01}\leftrightarrow\ket{10}$, the parity reduces to simple oscillations
+    of the form,
+    \begin{equation}
+        \Pi(\phi) =  2\mathrm{Re}\left[e^{-2i\phi}e^{i\phi_0}|\rho_{\ua\ua,\da\da}|\right]=C\cos(2\phi-\phi_0),
+    \end{equation}
+    where we have taken $\rho_{\ua\ua,\da\da} :=
+    e^{i\phi_0}|\rho_{\ua\ua,\da\da}|$, and $C=2|\rho_{\ua\ua,\da\da}|$. The
+    contrast of the parity oscillations thus provide the magnitude of the
+    coherence term.
+    The Bell-state fidelity is thus given by $\mathcal{F} = \frac{A + C}{2}$.\\
 
+    Using this method, the fidelity of a globally addressed two-qubit entangling
+    gate by the Walsh method is experimentally measured.
+    Figure~\ref{fig:ms_gate} (a) shows the spin-population dynamics as a
+    function of total Walsh-1 duration for an MS gate acting on the upper radial
+    common mode, with gate parameters, $\delta_g = -19.5~\unit{\kilo\hertz}$, and
+    $35~\unit{\milli\watt}$ of total beam power, causing a Stark shift of
+    $\delta_s=14~\unit{\kilo\hertz}$. To suppress off-resonant excitation of
+    nearby spin-motion interactions, the SDF field is ramped on and off with a
+    rise envelope of $\sin^2(\pi t/(2t_\mathrm{ramp}))$ applied via the AWG, where
+    $t_\mathrm{ramp}=9.6~\unit{\micro\second}$ is the ramp duration. The desired
+    geometric phase is accumulated by $t_g=95~\unit{\micro\second}$. The parity
+    oscillations and two-qubit populations are measured at this point, and shown
+    in panels (b) and (c) respectively. A contrast of $C=0.97(1)$, and
+    population of $A=0.987(2)$ is found, resulting in a state fidelity,
+    $\mathcal{F}=0.980(6)$.
+    Each population point in these figures are found by taking the
+    average of 200 shots of the gate sequence.\\
+    Similar fidelities were measured when applying the interaction by the single-ion addressing system on
+    the upper radial common mode. Using
+    gate parameters $\delta_g = -15~\unit{\kilo\hertz}$, $t_g=110~\unit{\micro\second}$, and
+    $0.148~\unit{\milli\watt}$ of total beam power,
+    a fidelity of
+    $\mathcal{F}=0.983(4)$ was measured, with contrast $C=0.976(7)$ and
+    population contribution $A=0.991(1)$.\\
 
+    We believe we are currently limited either by systematic calibration errors,
+    or by laser phase noise of the 729-nm system. We have anecdotally observed a
+    strong dependence on the gate-fidelity with PID parameters for the 729-nm
+    PDH lock. To increase the two-qubit gate fidelity, we believe that further time
+    must be devoted to characterising the noise-spectrum of the 729-nm, and
+    optimising lock parameters to suppress phase noise at the frequencies
+    relevant to the two-qubit entangling gates. This, along with developing an
+    automated gate-tuning algorithm for our apparatus, is left to future work.
+    The current fidelities observed here are sufficient for the projects outlined in this
+    thesis. In~\S~\ref{sec:vd_exp} we calibrate $R_{xx}(\frac{\pi}{4})$ gates
+    using this state-fidelity approach.
 
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c|c}
+         Operation & Fidelity & Section \\
+         \hline\hline
+         State Prep &99.96(2)& \S~\ref{sec:Stateprep}\\
+         Measurement &$ < 99.7(3)$& \S~\ref{sec:standard_rb}\\
+         $R_x(\pi/2)$ & 99.913(2) & \S~\ref{sec:standard_rb}\\
+         $R_{xx}(\pi/2)$ & 98.3(4) & \S~\ref{sec:Two-Qubit Entangling Gates}\\
+    \end{tabular}
+    \caption{
+        Summary of qubit-operation fidelities presented in this chapter.
+    }
+    \label{tab:fidelities}
+\end{table}
 \section{Summary}
-    \todo{Need to update summary for current thesis framing\\}
-    These results serve as both a proof of principle for full spin control on
+    These results serve as both a proof of principle for full discrete-variable control on
     our system, but also as a benchmark to which we can compare future system
-    improvements.  
+    improvements. The fidelities of the operations demonstrated in this chapter are summarised in table~\ref{tab:fidelities}, with relevant sections highlighted.
+
     
