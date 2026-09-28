@@ -11,7 +11,12 @@
     \item Conform dashed and solid line for model vs fit
 \end{itemize}
 }
-\todo{Here give a broad overview of all control required for ion trap. (This is pointed to at beginning of apparatus section)}
+
+
+\todo{
+    \indent - Here give a broad overview of all control required for ion trap. (This is pointed to at beginning of apparatus section)\\
+    \indent - \textbf{Figure} of spin otimes motion to hammer home hybrid system \\
+}
 
     \todo{Accurate?} As discussed above, we are interested in two paradigms: discrete variable quantum computing (DVQC), that concerns the manipulation of qubits (or spins), and continuous variable quantum computing (CVQC), that concerns the manipulation of qumodes (or harmonic motion).\\
     For DVQC, we must have access to the following elementary operations:
@@ -32,12 +37,14 @@
 
 \section{The Ion}
 \label{sec:Transitions}
-% Main points:
-    % All visible motional modes on large detuning scan at $5$~G. 
-    % Can compare when have all quadrupole transitions available or when we selectively omit transitions via polarisation.
-% Pre reqs:
-    % 5 G field
-    \todo{Move some (or all!) to theory start?}
+\todo{
+    \indent Refrain from exp detail\\
+    \indent Level structure\\
+    \indent Zeeman structure \\
+    \indent Define qubit\\
+    \indent Short discussion on qubit choice \\
+    \indent Other useful wavelengths\\
+}
     \begin{figure}[ht]
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ion.pdf}
@@ -121,12 +128,16 @@
 \section{Trapping Charged Particles}
 \label{sec:trap_charge}
 \todo{
-Main points:\\
-    -Give useful equations for describing trapping pseudopotential\\
-    -Give ion spacing and mode frequencies from James\\
-    -Put tickle interaction here (ref in ch6)\\
+At most 2 pages. No figures.\\
+    \indent - Short intro to Paul and Penning traps.\\
+    \indent - Linear Paul trap, equations of motion\\
+    \indent - Show pseudo potential, secular and micromotion\\
+    \indent - Quick overview that secular gives us qumodes, while micromotion can cause some issues\\
+    \indent - Give useful equations i.e. $\omega \propto V_{\rm rf}$\\
+    \indent - Give ion spacing and axial mode frequencies from James, for radial modes, look at IRO script\\
+    \indent - Get all the way to quantisation $H_{osc} \propto (a^\dagger a + 1/2)$\\
+    \indent - \textbf{Figure?} Could be nice to have tickle displacement as tool for hybrid control...\\
 }
-
 
     From Earnshaw's theorem,
     $\nabla^2 V = 0,$ a stable stationary point in 3D cannot be realised
@@ -141,17 +152,6 @@ Will include pseudopotential relating $V_{RF}$ and $\Omega_{RF}$ to the radial m
 \begin{equation}\label{eqn:pseudo_pot}
     \omega_r \propto \frac{V_{RF}}{M\Omega_{RF}}.
 \end{equation}
-Further, will use James to give ion spacing and non-COM mode frequencies as will be relevant for single addressing, fast gates (if discussed), and for motional mode excitati as will be relevant for single addressing, fast gates (if discussed), and for motional mode excitation.
-
-\section{The Ions}
-\todo{- Give Calcium level structure \\
-- photoionisation\\
-- Give wavelengths, with details on quadrupole\\
-- Doppler cooling?\\
-- Discuss qubit encoding - highlighting optical here \\
-- Readout?\\
-}
-
 
 \section{Coherent Light-Matter Interactions}
 % Main points:
@@ -160,42 +160,69 @@ Further, will use James to give ion spacing and non-COM mode frequencies as will
     % SDF
 % Pre reqs:
     % 
-\todo{- Give general Hamiltonian for trapped ion in light field\\
-Do we need: dipole and quadrupole interactions... If so, can give multipole definition.}
+\todo{
+    \indent - Give general Hamiltonian for trapped ion in light field\\
+    \indent - Split into $H_0 = H_s + H_{osc}$, and $H_{ED} = -d\cdot E$ and $H_{EQ} = Q\nabla\cdot E$\\
+    \indent - Make approximation... to get to $H_I \propto (\sigma_+ + \sigma_-)(e^+ + e^-)$\\
+    \indent - Go into interaction picture, $\tilde H_I$ \\
+}
 
-\subsection{Rabi Flopping}
-\label{sec:Rabi Flopping}
-\todo{ Discuss two-level Hamiltonian\\
-- show general off-resonance\\
-- then on resonance is how we do single qubit gates.\\
-Define propagator as $R_{x}$ to match QEM chapter}\\
+
+\subsection{Neglecting Motion}
+\label{sec:rabi_oscillations}
+\todo{ 
+    \indent - Neglect motion, $k\cdot r=0$\\
+    \indent - Make RWA\\
+    \indent - show general off-resonance propagator \\
+}
+
+\subsubsection{Rabi Oscillations}
+\todo{ 
+    \indent - then on resonance is how we do single qubit gates\\
+    \indent - Define propagator as $R_{x}$ to match QEM chapter\\
+    \indent - Show $R_\phi$\\
+    \indent - Show how rotation angle is related to $\Omega$.
+}
+
 
     A qubit is fully described by $\ket{\psi} = \alpha\ket{\downarrow} + \beta\ket{\uparrow}$, where $\alpha$ and $\beta$ are complex numbers satisfying $|\alpha|^2 + |\beta|^2 = 1$. The qubit state can be manipulated by applying single qubit rotations, $R_{x,y}(\theta)$, commonly referred to as gates. In the Bloch sphere, $x$- and $y$-rotations are performed by \todo{wording} pertubations resonant with the qubit transition, here, using the 729-nm laser. The rotation angle, $\theta$, is given by $\theta=\Omega t/2$\todo{Check factor of 2}, where $\Omega$, is the Rabi frequency, and $t$ is the pulse duration. The rotation axis, is determined by the relative phase of the light field and the qubit. We define the initial relative phase to correspond to a $y$-rotation.
 
+\subsubsection{Stark Shifts}
+\todo{ 
+    \indent - far off resonance, get to dressed state \\
+    \indent - Define propagator as $R_{z}$ to match QEM chapter\\
+    \indent - Show how rotation angle is related to $\Omega$.
+}
+
 \subsection{Coupling to the Motion}
 \label{sec:Motional Coupling}
-\todo{ Show full H\\
+\todo{ 
+    \indent - Go back to light-matter, but now expand $k\cdot r$\\
+    \indent - Define Lamb-Dicke\\
+    \indent - Expand in Lamb-Dicke\\
+    \indent - Go to Lamb-Dicke regime to get Jaynes Cummings (ref in ch6)\\
+    \indent - \textbf{Figure} Discuss three-regimes, RSB, BSB, carrier\\
+    \indent - Point to carrier and refer back above \\
+    \indent - expand to 2nd order to get motional error? In RB section  ch4\\
+}
+
 \begin{equation}
     \label{eqn:exp_eta}
     \hat H = 
 \end{equation}
-- Define Lamb-Dicke\\
-- Expand in Lamb-Dicke, take limit to get Jaynes Cummings (ref in ch6)\\
-- Discuss three-regimes, RSB, BSB, carrier}\\
-- expand to 2nd order to get motional error? In RB section  ch4\\
 
 \subsection{The Spin-Dependent Force}
 \label{sec:SDF}
-\todo{ref in ch6\\}
 
 \todo{
-- basics - look at Ozeri and other thesis\\ 
-- on res and off res, figure here.\\
-- Hamiltonian. Give motional and spin phase definition \\
-- Derivation of MS bichromatic field implementation leading to $\hat\sigma x$ conditioning. \\
-- Need to at least find following relationships:\\
-    - $\phi_s = \frac{\phi_\mathrm{RSB} + \phi_\mathrm{BSB}}{2}$\\
-    - $\phi_m = \frac{\phi_\mathrm{RSB} - \phi_\mathrm{BSB}}{2}$\\
+    \indent - basics - look at Ozeri and other thesis \\
+    \indent - \textbf{Figure} on res and off res.\\
+    \indent - Hamiltonian. Give motional and spin phase definition \\
+    \indent - Derivation of MS bichromatic field implementation leading to $\hat\sigma x$ conditioning. \\
+    \indent - Need to at least find following relationships:\\
+    \indent - $\phi_s = \frac{\phi_\mathrm{RSB} + \phi_\mathrm{BSB}}{2}$\\
+    \indent - $\phi_m = \frac{\phi_\mathrm{RSB} - \phi_\mathrm{BSB}}{2}$\\
+    \indent - Creating a cat state? \\
 }
 
     The optical Mølmer-Sørensen (MS) scheme~\cite{sorensen2000entanglement} is used to generate the
@@ -224,12 +251,18 @@ Define propagator as $R_{x}$ to match QEM chapter}\\
 
 \subsection{Geometric Phase Gates}
 \label{sec:Geometric Phase Gates}
-\todo{- Discuss goal of entangling gate\\
-- Point to Magnus + geo phase there\\
-- Show duration and detuning scans\\
-- Define propagator as $R_{xx}$ to match QEM chapter\\
-- Give very quick overview on adiabatic limit for this gate (mentioned in trap RF chain)\\
-- Walsh modulation (Amy has section)}\\
+\todo{
+    \indent - Discuss goal of entangling gate\\
+    \indent - Point to Magnus derive geometric phase there\\
+    \indent - \textbf{Figure} Phase space dynamics (RS fig 2.3) \\
+    \indent - Talk about disentangling motion at end \\
+    \indent - Define propagator as $R_{xx}$ to match QEM chapter\\
+    \indent - Logic table for pi/2 pulse\\
+    \indent - Give very quick overview on adiabatic limit for this gate (mentioned in trap RF chain)\\
+    \indent - \textbf{Figure} Walsh modulation (Amy has section, RS sec 2.5.2)\\
+    \indent - Why Walsh modulation makes us less sensitive to mode frequency + decoherence of mode. Sim this\\
+    \indent - Highlight sqz 2q gate here \\
+}
 
     We perform two-qubit entangling gates using the Mølmer-Sørensen (MS)
     interaction~\cite{sorensen2000entanglement}. This interaction is the same described SDF from the
@@ -243,18 +276,6 @@ Define propagator as $R_{x}$ to match QEM chapter}\\
     duration $t_g = 2n\pi/\delta_g$, where $n$ is the number of ``loops''. The MS gate is a universal two-qubit gate, and
     along with only single qubit gates, constitutes a universal gate set for
     discrete quantum algorithms.\\  
-% \section{Randomised Benchmarking}
-% \todo{May just not use this section?}
-% Some overview and motivation for RB.\\
-% \todo{Currently dont point to too much of this in k-copy chapter}
-% Take some from ch4\\
-%     \begin{itemize}
-%         \item Twirling over a group \todo{defined in k-copy}
-%         \item Liouville representation of a CPTP map\todo{defined in k-copy}
-%         \item Irreps of the Clifford group\todo{defined in k-copy}
-%         \item Clifford approximates twirling over the unitary group (Haar measure)\todo{defined in k-copy}
-%         \item How Liouville representation is transformed under twirling\todo{defined in k-copy}
-%         \item The specific representation-theory tools you use later: irreps, multiplicity spaces, invariant sectors, Schur basis.\\\todo{defined in k-copy}
-%         \item RB protocol for single qubit Clifford group, generalisation to multi-qubit Clifford group.
-%         \item How to extract error per Clifford from decay rate
-% \end{itemize}
+
+
+\todo{Standalone summary paragraph}
