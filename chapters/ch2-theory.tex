@@ -103,7 +103,12 @@
     \item Ideally the qubit transition should have a low magnetic field sensitivity, to reduce the effect of magnetic field noise. Using a MuMetal enclosure around the experiment does relax this constraint, see section~\ref{sec:Magnetic Field}.
     \item To reduce the effects of off-resonant interactions due to nearby transitions, it is desirable to limit the number of accessible transitions near to the qubit transition. This is done by selecting a polarisation, $\gamma$, such that unwanted transitions are suppressed.
     \end{itemize}
-    Given these criteria, we use the transition $\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ with magnetic field sensitivity 
+    Given these criteria, we use the transition $\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ with magnetic field sensitivity \todo{Off by 2pi!}
+    \todo{Give magnetic sensitivity eqn (used in ch4)}
+    \begin{equation}
+        \label{eqn:mag_sens}
+        \Delta \mu/h = 
+    \end{equation}
     $-0.446$~\unit{\MHz\per\gauss}. Closed-cycle sideband cooling is possible with this same transition, and state preparation via optical pumping is done via $\ket{4S_{1/2},~m_j = +1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -3/2}$ with magnetic field sensitivity $-0.624$~\unit{\MHz\per\gauss}. \\
     Figure~\ref{fig:quadrupole} $a$, shows the normalised Rabi frequencies of each transition as the angle $\gamma$ between polarisation vector and B-field is varied. Here only linearly-polarised light with k-vector perpendicular to the B-field direction is considered.
     The polarisation of the 729-nm laser is set to $\gamma = \pi/2$ (black dashed line), which maximises the Rabi frequency of the qubit transition, while suppressing nearby transitions apart from that needed for state preparation. 

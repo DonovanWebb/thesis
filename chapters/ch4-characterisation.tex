@@ -26,7 +26,6 @@
 
 \subsection{State Preparation}
 \label{sec:Stateprep}
-\todo{Point to theory section\\}
 % Main points:
     % Method of preparation via optical pumping
     % Quote state prep error (back this from RBM + measurement histograms)
@@ -55,20 +54,16 @@
         Parameter & Value \\
         \hline
         729-nm laser power & 1000~\unit{\uW}\\
-        729-nm laser detuning & 0~\unit{\MHz}*\todo{resonant} \\
         729-nm pulse duration & 5~\unit{\us} \\
         854-nm laser power & 60~\unit{\uW}, $250\times I_{\rm SAT}$\\
-        854-nm laser detuning & 0~\unit{\MHz} \\
         854-nm pulse duration & 40~\unit{\us} \\
         866-nm laser power & 15~\unit{\uW}, $\sim 70\times I_{\rm SAT}$\\
-        866-nm laser detuning & 0~\unit{\MHz} \\
         866-nm pulse duration & 30~\unit{\us} \\
         \hline
     \end{tabular}
     \end{center}
     \caption{
-        * With respect to qubit transition frequency.\\
-        \todo{Update table?} Experimental parameters used for state preparation of the ion into the $\ket{\downarrow} = \ket{4S_{1/2},~m_j = -1/2}$ state.
+        Experimental parameters used for state preparation of the ion into the $\ket{\downarrow} = \ket{4S_{1/2},~m_j = -1/2}$ state. All lasers frequencies are set to be resonant with the corresponding transition frequencies.
         }
     \label{tab:state_prep_parameters}
 \end{table}
@@ -76,10 +71,7 @@
     To utilise two levels of the ion as a qubit, the electronic state must first be prepared into the qubit manifold. Here, the ion is prepared into the $\ket{\downarrow}=\ket{4S_{1/2},~m_j=-1/2}$ state. 
     This is done via optical pumping by pulsing the quadrupole transition $\ket{4S_{1/2},~m_j = +1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -3/2}$,
     followed by deshelving pulses using the 854-nm, 866-nm
-    lasers on resonance.  The 729-nm laser pulse duration and intensity is set to invert the populations, i.e. perform a $\pi$-pulse. Details for laser parameters are summarised in table~\ref{tab:state_prep_parameters}. These three pulses are repeated $N$ times sequentially. Figure~\ref{fig:stateprep} shows the state preparation error with increasing $N$. The error is found by applying a $\pi$-pulse on the state preparation transition directly after the state preparation sequence and looking at the population in the $\ket{\downarrow}$ state. Any reduction from $\ket{\downarrow} = 1$ indicates residual population in the $\ket{4S_{1/2},~m_j = +1/2}$ state, or the $D$ levels. After $N=7$ pulses, which is used in our experiments, there is a state preparation error of $<10^{-3}$. This is further verified by randomised benchmarking in section~\ref{sec:Single Qubit Gates}. The state preparation error is likely limited by accidental excitation of the $\ket{4S_{1/2},~m_j = -1/2}$ state to the $D_{5/2}$ level. This may be due to off-resonant excitation of another transition, or due to spectral purity of the 729-nm laser. \\
-    \todo{reword} Another protocol for state preparation is optical pumping on the dipole transition (397-nm), which often is much faster. However, in this setup it is impractical as polarisation selectivity of the 397-nm transition is not possible due to 
-    the constraint of beam geometry from the in vacuum optics, see section~\ref{sec:Vacuum System},
-    and frequency selectivity is not possible due to the low magnitude fixed B-field providing Zeeman shifts less than the natural linewidth of the 397-nm transition, see section~\ref{sec:Magnetic Field}. 
+    lasers on resonance.  The 729-nm laser pulse duration and intensity is set to invert the populations, i.e. perform a $\pi$-pulse. Details for laser parameters are summarised in table~\ref{tab:state_prep_parameters}. These three pulses are repeated $N$ times sequentially. Figure~\ref{fig:stateprep} shows the state preparation error with increasing $N$. The error is found by applying a $\pi$-pulse on the state preparation transition directly after the state preparation sequence and measuring the population in the $\ket{\downarrow}$ state, $P_\da$. Any population not in $P_\da$ indicates either residual population in the $\ket{4S_{1/2},~m_j = +1/2}$ state, or trapped in the metastable $D$ levels. After $N=7$ pulses there is a state preparation error of $<10^{-3}$. The state preparation error is likely limited by accidental excitation of the $\ket{4S_{1/2},~m_j = -1/2}$ state to the $D_{5/2}$ level. This may be due to off-resonant excitation of another transition, or due to spectral purity of the 729-nm laser. \\
 
 
 \subsection{Measurement}
@@ -87,7 +79,6 @@
 % Main points:
     % Readout characterisation with NA 0.6 lens
     % Compare readout histograms of fast 30 us readout to Doppler cold 100 us readout
-\todo{Point to theory section\\}
     \begin{figure}
         \begin{center}
         \noindent\includegraphics[width=0.75\linewidth]{
@@ -95,7 +86,7 @@
             }
         \end{center}
         \caption{
-            Readout histogram with 100,000 individual measurements for bright (red) and dark (blue) populations. The camera counts are presented as a histogram and fitted to Poissonian distributions to calibrate a threshold for discerning if the ion is bright or dark with the lowest probability for false measurement. Dark counts are mainly due to 397-nm light scattered from the nearest trap electrodes. With 100~\unit{\us} readout duration, and laser parameters set to Doppler cooling parameters, a threshold count of 137 photons is found, giving an expected statistical error of $6\times 10^{-9}$ given the fitted Poissonians\todo{Careful with wording here}. %Gaussian dark: mean = 62, $\sigma$ = 13. Gaussian bright: mean = 341, $\sigma$ = 36.
+            Readout histogram with 100,000 individual measurements for bright (red) and dark (blue) populations. The camera counts are presented as a histogram and fitted to Poissonian distributions to calibrate a threshold for discerning if the ion is bright or dark with the lowest probability for false measurement. Dark counts are mainly due to 397-nm light scattered from the nearest trap electrodes. With 100~\unit{\us} readout duration, and laser parameters set to Doppler cooling parameters, a threshold of 137 photons is found to be sufficient to discern the two populations.
             }
         \label{fig:readout_histogram}
     \end{figure}
@@ -117,7 +108,6 @@
         \end{tabular}
         \end{center}
         \caption{
-            \todo{Update table}
             Experimental parameters used for Doppler cooling and state-selective fluorescence of the ion. 
             }
         \label{tab:397_parameters}
@@ -125,16 +115,17 @@
 
     To measure the qubit state, the 397-nm and 866-nm lasers
     are applied, and the scattered 397-nm photons are imaged by the objective onto a camera (see section~\ref{sec:Imaging System}). 397-nm light will only be scattered if the qubit is in $\ket{\downarrow}$.
+    A typical image generated by the camera is seen in figure~\ref{fig:readout}. A small window of pixels in set around each ion (typically a $3\times3$ px region), and the photon counts in this region are summed.  
     Use of a high numerical aperture (NA = 0.6) objective greatly increases the collection efficiency.
     This efficiency allows the 397-nm beam to be red-detuned to Doppler cooling parameters (see section~\ref{sec:Cooling}), while still maintaining low readout duration (100~\unit{\us}) and low readout error. 
     Cooling during readout increases the experiment's repetition rate by reducing the amount of dedicated cooling time required.\\
     The parameters used for readout are
     summarised in table~\ref{tab:397_parameters}, and a typical histogram of
-    readout counts\todo{how to count on camera} for one ion can be seen in
+    readout counts for one ion can be seen in
     figure~\ref{fig:readout_histogram}. The readout threshold is calibrated by taking bright counts with the 397-nm and 866-nm lasers on, and dark counts with the 397-nm laser on and the 866-nm laser off. This assumes dark counts are due to 397-nm scattering from the trap electrodes. 
     Fitting Poissonian distributions to the bright and dark measurements, an optimal count threshold of
-    137(\todo{X}) is found, shown by black dashed line. This threshold gives an expected
-    statistical readout error of $\epsilon_\downarrow = \epsilon_\uparrow = 6\times10^{-9}$, where $\epsilon_{\downarrow,\uparrow}$ are the expected error associated with measuring bright or dark\todo{Careful with wording here}. This measurement ignores errors due to the
+    is determined, shown by black dashed line. Assuming Poissonian statistics this threshold would give an expected
+    statistical readout error of $\epsilon_\downarrow = \epsilon_\uparrow = 6\times10^{-9}$, where $\epsilon_{\downarrow,\uparrow}$ are the expected error associated with measuring bright or dark. This measurement ignores errors due to the
     finite lifetime of the metastable $3D_{5/2}$ level, which dominate $\epsilon_\uparrow$. The expected error due
     to the finite lifetime, $\tau$, is $\epsilon_{\rm decay} = 1 - e^{-t/\tau}$, where $t$ is the readout duration. For \ca, $\tau \sim 1.1$~s, $\epsilon_\uparrow \approx \epsilon_{\rm decay}  = 
     10^{-4}$. 
@@ -424,80 +415,63 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
 \label{sec:Coherence}
 % Main points:
     % Quote coherence times comparing:
-        % Mumetal box panels
         % Transitions with diff mag sensitivity
-        % FNC/ no-FNC
 % Pre reqs:
-    % MuMetal box
     % Available transitions
     % 729 laser system
-    \todo{We have better spin-coherence now...}\\
     \begin{figure}
         \begin{center}
-        \noindent\includegraphics[width=\linewidth]{
-            figures/pdf_figure/ch4/fnc_coherence.pdf
-            }
-        \noindent\includegraphics[width=\linewidth]{
-            figures/pdf_figure/ch4/mag_coherence.pdf
+        \includegraphics[width=\linewidth]{
+            figures/pdf_figure/ch4/spin_coherence.pdf
             }
         \end{center}
-        \caption{Coherence time measurements.
-        \textbf{a)} Coherence time of the $\ket{4S_{1/2},~m_j=-1/2}\leftrightarrow\ket{3D_{5/2},~m_j=-3/2}$ transition with and without fibre noise cancellation (FNC). 
-        \textbf{b)} Coherence time of three quadrupole transitions with varying magnetic field sensitivities. The inset plot shows a linear fit between the coherence time and the magnetic field sensitivity of the transition.
+        \caption{
+        Coherence times of three quadrupole transitions with varying magnetic
+        field sensitivities. Points correspond to the extracted contrasts of
+        Ramsey fringes. Solid lines are exponential fits to determine the
+        $\frac{1}{e}$ coherence time, $\tau$. The inset plot shows the measured
+        coherence time as a function of the magnetic field sensitivity,
+        $\Delta\mu/h$, of the transition being probed.
             }
         \label{fig:coherence_times}
     \end{figure}
-    To measure the coherence times, we perform Ramsey sequences with varying delay durations. The Ramsey sequence is as follows:
+
+    Qubit decoherence may originate from uncontrolled fluctuations of the qubit transition frequency or from phase noise on the laser driving the qubit transition. Decoherence directly contributes to loss of fidelity of qubit operations, and will limit the circuit-depths possible on our apparatus.\\
+    Both electric and magnetic field noise can lead to qubit transition frequency fluctuations.
+    The quadrupole transitions between the ground state $\ket{4S_{1/2}, m_j=-1/2}$ and the metastable manifold $\ket{3D_{5/2}}$ in \ca are first order sensitive to any external magnetic fields. As such, even with the MuMetal magnetic shield in place, external magnetic fields are expected to be the dominant noise source. To verify this, and benchmark the current decoherence time, the Ramsey contrast is measured as a function of delay duration. 
+    The Ramsey sequence is as follows:
     \begin{enumerate}
-        \item Prepare the qubit in $\ket{\downarrow}$ via optical pumping, section~\ref{sec:Stateprep}.
-        \item Apply a $R_y(\pi/2)$ pulse to prepare the qubit in $\ket{+} = \frac{1}{\sqrt{2}}(\ket{\downarrow} + \ket{\uparrow})$ superposition state.
-        \item Wait for a time $t_{\rm RAM}$.
-        \item Apply a second $R_\phi(\pi/2)$-pulse, with a variable axis of rotation, $\phi$. 
-        \item Measure the population in $\ket{\downarrow}$, $P_\downarrow$, via state-selective fluorescence, section~\ref{sec:Measurement}.
-        \item Repeat steps 1-5 for different values of $\phi$ and fit the resulting fringe to find the contrast.
-        \item Repeat steps 1-6 for different values of $t_{\rm RAM}$ to find the decay in contrast with time. The coherence time is defined as the time at which the contrast has decayed to $1/e$ of its initial value.
+        \item Prepare the qubit in $\ket{\downarrow}$. 
+        \item A $R_y(\pi/2)$-pulse is applied. preparing the state $\ket{+} = \frac{1}{\sqrt{2}}(\ket{\downarrow} + \ket{\uparrow})$.
+        \item The system is left to evolve for Ramsey delay, $t_{\rm RAM}$.
+        \item A variable $R_\phi(\pi/2)$-pulse is applied.
+        \item The population of $\ket{\downarrow}$ is measured.
+        \item Repeat steps 1-5 for different values of $\phi$ to find the contrast of the Ramsey fringe.
+        \item Repeat steps 1-6 for different values of $t_{\rm RAM}$ to find the decay in contrast with time. 
     \end{enumerate}
-    \todo{Define Ramsey fringe}
-    \begin{equation}
-    \label{eqn:ramsey_fringe}
-    P_\downarrow = 
-    \end{equation}
 
-    \begin{equation}
-    \label{eqn:ramsey_decay_gauss}
-    C = 
-    \end{equation}
-    \begin{equation}
-    \label{eqn:ramsey_decay_exp}
-    C(t) = C_0\mathrm{exp}\left(\frac{-t}{\tau}\right),
-    \end{equation}
-
-    With this tool, the efficacy of the fibre noise cancellation (FNC, see
-    section~\ref{sec:Narrow Line Width 729 Laser}) can be measured.
-    Figure~\ref{fig:coherence_times} $a$ shows the coherence time of the
-    $\ket{4S_{1/2},~m_j=-1/2}\leftrightarrow\ket{3D_{5/2},~m_j=-3/2}$
-    transition with and without FNC. The coherence time is increased from
-    1.9(1)~\unit{\ms} to 6.2(3)~\unit{\ms} with FNC, showing that without FNC,
-    the coherence times are limited by laser phase noise. \\
-    With FNC enabled, to see if the coherence time is now limited by magnetic
-    field noise, transitions with varying magnetic field sensitivities are
-    compared. Figure~\ref{fig:coherence_times} $b$ shows the coherence time of
-    three quadrupole transitions with varying $D_{5/2}$, $m_j$ numbers:
+    This Ramsey fringe contrast is directly proportional to the coherence of the resulting noisy state, $\rho$, given by matrix element, $\rho_{\da,\ua}$. \\
+    Figure~\ref{fig:coherence_times} shows the coherence time of
+    three quadrupole transitions:\\
     $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=\lbrace -5/2,
-    -3/2, +3/2}$. These transitions have magnetic field
-    sensitivities\todo{calculated by?} $-0.446$, $-0.178$,
-    $+0.624$~\unit{\MHz\per\gauss} respectively. The contrast decays for all
-    three qubits are shown in the figure. The inset plot shows a well correlated
-    linear fit between the coherence time and the magnetic field sensitivity,
-    suggesting that the coherence time is limited by magnetic field noise. For
-    both $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=-5/2}$ and
-    $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=+3/2}$,
-    revivals in contrast can be seen which suggest that the dominant noise
-    source is oscillatory and coherent over the Ramsey scan duration.\\
-    These measurements were taken without the MuMetal enclosure
-    (\S~\ref{sec:Magnetic Field}) fully assembled around the vacuum system,
-    which we expect will greatly reduce external magnetic field noise, and
-    therefore increase the coherence times.
+    -3/2, +3/2\rbrace }$. These transitions have magnetic field
+    sensitivities of $\Delta\mu/h = \{2.802, 1.118,
+    3.921\}~\unit{\MHz\per\gauss}$ respectively (calculated using equation~\ref{eqn:mag_sens}). The contrast decays for all
+    three qubits are shown in the figure. 
+    The $\frac{1}{e}$-coherence time is extracted by fitting exponential decays
+    to the contrasts. Generally, exponential decays indicate the timescale of
+    the noise is fast compared to the Ramsey probe durations, whilst Gaussian
+    decays indicates comparatively slow drifts. Neither exponential nor Gaussian
+    well describe the measured decays here due to the strong
+    periodic structure above the exponential decay. This suggests a strong
+    narrow-band coherent component to the noise. At the time scale of $\approx
+    20~\unit{\milli\second}$ we expect to see the effects of UK mains hum, which
+    likely cause this structure. Regardless, fitting the exponential envelope
+    suggests a coherence time of $17(4)~\unit{\milli\second}$ for the qubit
+    transition, $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow
+    \ket{3D_{5/2},~m_j= -5/2}$.
+    The inset plot shows the extracted coherence time as a function of transition magnetic field sensitivity. There is a clear dependency between the coherence time and the magnetic field sensitivity,
+    suggesting that magnetic noise is dominant.\\
 
 \subsection{Single-ion Addressing}
 \label{sec:Single Addressing char}
@@ -600,6 +574,12 @@ sequences~\cite{fang_crosstalk_2022}.
     % Trap RF DC
     % Laser systems
 
+    We outline methods to track the mode frequencies, cool the motion of the
+    qubit, quantify thermal heating of the motion, and characterise the qumode
+    coherence time. These methods are necessary for control over qumodes for
+    information, or for using the common motion as a means to entangle two
+    qubits.\\
+
     Motion of ions trapped in the same potential can be described by a set of
     normal modes~\cite{james_quantum_1998}. These modes are labelled with respect
     to the ion chain geometry: axial modes oscillate parallel with the chain,
@@ -608,20 +588,14 @@ sequences~\cite{fang_crosstalk_2022}.
     section~\ref{sec:Vacuum System}), only the radial modes can be addressed in
     our system. For the \emph{NPL} trap (see section~\ref{sec:The Ion Trap}),
     the radial modes frequencies are non-degenerate. In our system, for a single
-    ion, the radial mode frequencies are\todo{targetted (also outdated?)} $\omega_{\rm upper}/2\pi =
-    4.0$~\unit{\MHz}, and $\omega_{\rm lower}/2\pi = 2.5$~\unit{\MHz}, and the
-    axial mode frequency is $\omega_{\rm axial}/2\pi = 1.6$~\unit{\MHz}. All
-    work here is using the upper radial mode. \\
-    The motional mode, $i$, leads to sidebands in the 729-nm spectrum at
-    $\omega_0 \pm \omega_{i}$~\cite{ozeri_tutorial_2011}\todo{Point to theory
-    section}, where $\omega_0$, the carrier, is the frequency of the 729-nm
-    laser when on resonance with the qubit transition. The $+\omega_i$ sideband
-    is referred to as the blue sideband (BSB), and the $-\omega_i$ is the red
-    sideband (RSB).
-    The RSB, BSB, and RF fields near to resonance with the motional modes, are
-    the tools used in this section to manipulate the motion of the ion.\\
-    The motional state preparation, heating rate, frequency stabilities, and
-    coherence times are characterised in this section.
+    ion, the mode frequencies are approximately $\omega_{\rm upper}
+    =2\pi\times2.9$~\unit{\MHz}, $\omega_{\rm lower} = 2\pi\times2.0$~\unit{\MHz},
+    and 
+    $\omega_{\rm axial} = 2\pi\times1.0$~\unit{\MHz}, where ``upper'' and ``lower''
+    are the two radial modes. All
+    results in the following section are using
+    the upper radial mode. \\
+
 
 \begin{figure}
     \begin{center}
@@ -665,7 +639,6 @@ sequences~\cite{fang_crosstalk_2022}.
     % Motional mode and beam geometry
     % Laser systems 
     % Trapping
-    \todo{Point to theory section\\}
 
     For any interaction that involves the motion of the ion, it is essential to
     both prepare and measure the motional state with high fidelity. For all
@@ -684,7 +657,7 @@ sequences~\cite{fang_crosstalk_2022}.
     % Motional mode and beam geometry
     % Laser systems 
 
-    Doppler cooling relies on the fact that light incident on a moving ion 
+    Doppler cooling relies on light incident on a moving ion 
     appears frequency-shifted in the ion's rest frame. For Doppler cooling
     of \ca, both the 397-nm and 866-nm lasers are applied. The 397-nm laser is red-detuned from the dipole $\ket{4S_{1/2}}\leftrightarrow\ket{4P_{1/2}}$ transition, leading to preferential
     scattering of 397-nm photons that have a net cooling effect~\cite{wineland_laser_1979}. The excited $4P_{1/2}$ level decays via two channels: emission of a 397-nm photon back to $\ket{4S_{1/2}}$, or an 866-nm photon to $\ket{3D_{3/2}}$, with a branching
@@ -699,11 +672,13 @@ sequences~\cite{fang_crosstalk_2022}.
     where $\hbar$ is the reduced Planck constant, and $k_B$ is Boltzmann's constant~\cite{wineland_laser_1979}.\\
      For
     $^{40}$Ca$^+$, the natural linewidth of the 397-nm transition is $\frac{\gamma}{2\pi} =
-    21$~\unit{\MHz}\cite{morton_atomic_2003}, giving $T_{\rm Doppler} = 0.5$~\unit{\milli\kelvin}. For a radial mode frequency of $\frac{\omega}{2\pi} = 4$~\unit{\MHz}\todo{Outdated}, the expected mean phonon number is,
+    21$~\unit{\MHz}\cite{morton_atomic_2003}, giving $T_{\rm Doppler} = 0.5$~\unit{\milli\kelvin}. 
+    Given a mode frequency, the expected mean phonon number is,
     \begin{equation}
-        \bar{n} = \frac{1}{e^{\hbar\omega/k_B T}-1},
+        \bar{n} = \frac{1}{e^{\hbar\omega/k_B T}-1}.
     \end{equation}
-    yielding $\bar{n} = 2.3$ at the Doppler limit.
+    For a radial mode with frequency $\omega \approx 2\pi\times2.5$~\unit{\MHz}, the Doppler limit is approximately
+    $\bar{n} \approx 4$. 
     The parameters used here for Doppler cooling are summarised in table~\ref{tab:397_parameters}. \\
 
 \subsubsection{Sideband Cooling}
@@ -727,13 +702,20 @@ sequences~\cite{fang_crosstalk_2022}.
 
         \end{center}
         \caption{
-            \todo{Update colours in pulse-sequence}\\
-            \textbf{a)} Example pulse sequence for one experimental shot including pulsed sideband cooling. The \emph{Exp.} block represents an arbitrary sequence of operations, for the experiment under study, such as a thermometry sequence.
-            The blue blocks represent Doppler cooling and readout (section~\ref{sec:Measurement}), the green blocks represent qubit state preparation (section~\ref{sec:Stateprep}), the red blocks are RSB pulses with varying durations $t(N)$, and the purple blocks are deshelving pulses. After every 5 sideband cooling pulses, there is an interleaved state preparation sequence to ensure there is no population trapped outside of the closed cooling cycle. The RSB length is linearly increased with pulse number $N$, upto the expected RSB $R(\pi)$-pulse duration for $n=1$.  
-            \textbf{b, c)} Thermometry scans after Doppler and sideband cooling.
+            (a) Example pulse sequence for one experimental shot including pulsed sideband cooling. The \emph{Exp.} block represents an arbitrary sequence of operations, for the experiment under study, such as a thermometry sequence.
+            The blue blocks represent Doppler cooling and readout
+            (section~\ref{sec:Measurement}), the green blocks represent qubit
+            state preparation (section~\ref{sec:Stateprep}), the red blocks are
+            RSB pulses with varying durations $t(N)$, and the purple blocks are
+            deshelving pulses. After every 5 sideband cooling pulses, there is
+            an interleaved state preparation sequence to ensure there is no
+            population trapped outside of the closed cooling cycle. The RSB
+            length is linearly increased with pulse number $N$, upto the
+            expected RSB $R(\pi)$-pulse duration for $n=1$.  
+            (b, c) Thermometry scans after Doppler and sideband cooling.
             The red points are the populations measured via on-resonance RSB
             pulses, and the blue points are the populations after a sequence of
-            $R(\pi)$-RSB-$R(\pi)$ with varying RSB probe durations. The dashed
+            $R(\pi)$-RSB-$R(\pi)$ with varying RSB probe durations. The solid
             lines are fits to a thermal Fock state distribution, with truncation
             at $n = 100$. The extracted mean occupation number is $\bar{n} =
             0.03(1)$, and $\eta\Omega/(2\pi) = 11.6(1)$~\unit{\kHz}. 
@@ -764,8 +746,7 @@ sequences~\cite{fang_crosstalk_2022}.
     \end{table}
 
     To further cool the ions toward their motional ground state, resolved
-    sideband cooling is used. As mentioned above, the motion of the ion
-    modulates the absorption spectrum of the ion, leading to red and blue sidebands (RSB and BSB). For the $\ket{4S_{1/2}} \leftrightarrow
+    sideband cooling is used~\cite{diedrich_laser_1989}. As discussed in~\S~\ref{sec:Motional Coupling}, red and blue sidebands (RSB and BSB) of the quadrupole transition are accessible, which may both flip the spin and add or remove a single phonon from the motional mode. For the $\ket{4S_{1/2}} \leftrightarrow
     \ket{3D_{5/2}}$ transition, at appropriate motional mode
     frequencies, interaction strengths, and using a narrow linewidth laser (section~\ref{sec:Narrow Linewidth 729 Laser}), these sidebands can be resolved spectroscopically. The pulsed
     sideband technique employed consists of RSB pulses on the 729-nm transition, followed by
@@ -773,36 +754,19 @@ sequences~\cite{fang_crosstalk_2022}.
     respectively. 
     For efficient cooling, initial short 729-nm pulses are applied to preferentially excite the thermal population with high phonon number, as the pulse duration for RSB $R(\pi)$ is proportional to $\sqrt{n}$, where $n$ is the phonon number.  The RSB pulse length is linearly increased to the expected RSB $R(\pi)$-pulse duration for $n=1$.\\
     An example pulse sequence for a single experimental shot using sideband cooling, can be seen in
-    figure~\ref{fig:SBC} $a$. Experimental parameters used are summarised in table~\ref{tab:sbc_parameters}.\\
+    figure~\ref{fig:SBC} (a). Experimental parameters used are summarised in table~\ref{tab:sbc_parameters}.\\
     To verify the efficacy of our sideband cooling, thermometry
-    experiments are performed by probing Fock state populations. This is done using on resonance RSB pulses and effective BSB pulses composed of a $\pi$-RSB-$\pi$ pulse
-    sequences. The time dynamics of population flopping is measured as RSB
+    experiments are performed by probing Fock state populations. This is done using on resonance RSB pulses and effective BSB pulses composed of a $R_x(\pi)$-RSB-$R_x(\pi)$ pulse
+    sequences. The spin population dynamics are measured as RSB
     pulse length, $t$, is varied. In the case of Fock state $\ket{0}$, there should be full contrast 
     ``BSB'' oscillations, and no visible oscillations when probed with RSB pulses. A thermal
     Fock state distribution~\cite{meekhof_generation_1996} (with truncation at Fock state = 100) is fitted to these
     signals to extract the mean occupation number, and $\eta\Omega$, the carrier
     Rabi frequency multiplied by the Lamb-Dicke parameter. A typical thermometry
     scan after Doppler and sideband cooling can be seen in
-    figure~\ref{fig:SBC} $b, c$, where $b$ shows the population after effective ``BSB'' pulses, and $c$ shows the population after RSB$(t)$ pulses with duration $t$. These oscillations are fit to thermal Fock state distributions, shown by the dashed lines. The mean occupation
+    figure~\ref{fig:SBC} (b, c), where (b) shows the population after effective BSB pulses, and (c) shows the population after RSB$(t)$ pulses with duration $t$. The mean occupation
     number after sideband cooling is found to be $\bar{n} = 0.03(1)$, and $\eta\Omega =
     11.6(1)$~\unit{\kHz}.\\
-
-    %Optimisation of the cooling parameters can be roughly performed by fitting
-    %temperature while scanning RSB $\pi$-pulse durations, total number of pulses,
-    %repumping and deshelving times. One can optimise for minimum temperature,
-    %however it is also important to optimise for total cooling duration. For
-    %single ion, single mode experiments, this duration is often not a limiting factor for experimental run-times,
-    %however for multi-ion crystals, any interaction involving the motion may
-    %require the sequential sideband cooling of multiple motional modes. This can
-    %not be easily parallalised due to the requirement that the RSB $\pi$-pulse is
-    %performed near resonance to one of the motional sidebands. This sequential
-    %cooling strategy can be either limiting when heating and cooling rates are
-    %comparable, or lead to prohibitive data acquisition times.\\
-    %To mitigate this issue, other sub-Doppler cooling techniques with larger
-    %accepted mode frequency bandwidths may be employed. Examples are dark-resonance
-    %cooling~\cite{reis1996cooling,allcock2016dark-resonance}, electromagnetically induced transparency (EIT) cooling~\cite{roos2000experimental}, and
-    %Sisyphus cooling~\cite{cirac1992laser}. These techniques are not yet implemented in our system,
-    %but will be likely additions once we move to larger ion crystals.\\
 
 \subsection{Heating Rates}
 \label{sec:Heating}
@@ -821,7 +785,7 @@ sequences~\cite{fang_crosstalk_2022}.
             }
         \end{center}
         \caption{
-            Heating rates of upper radial mode, measured by varying the delay between cooling and thermometry pulses. The dashed line is a linear fit to the data, with slope $33(3)$~quanta/s. The error bars are given by the standard deviation of the fitted $\bar{n}$.
+            Heating rates of upper radial mode, measured by varying the delay between cooling and thermometry pulses. The solid line is a linear fit to the data, with slope $33(3)$~quanta/s. The error bars are given by the standard deviation of the fitted $\bar{n}$.
             }
         \label{fig:heating rates}
     \end{figure}
@@ -840,16 +804,9 @@ sequences~\cite{fang_crosstalk_2022}.
     above, with varying delay
     times, $t_{\rm delay}$, between cooling and thermometry pulses. A typical plot can be seen in
     figure~\ref{fig:heating rates}. The heating rate of the system
-    was found by a linear fit, shown by the dashed line, to be $33(3)$~quanta
+    was found by a linear fit, shown by the solid line, to be $33(3)$~quanta
     per second on the upper radial with mode frequency $\omega_\mathrm{upper} \approx 3~\unit{\MHz}$ on
     one ion. As will be discussed in section~\ref{sec:Motional Coherence}, the heating rate sets a limit for the motional coherence time.\\
-
-    %It is expected that the heating rate will be larger for lower frequency
-    %motional modes if electric field noise is assumed to be uniform over its spectrum~\cite{}. 
-    %We also verify
-    %this by looking at heating rate on the radial mode while varying the axial
-    %mode frequency. This is a useful diagnostic to check for unexpected heating
-    %at certain frequencies, perhaps due to RF noise in the lab. We find....\\
 
 % \subsection{Motional Mode Stability}
 % \label{sec:Motional Mode Stability}
@@ -960,15 +917,14 @@ sequences~\cite{fang_crosstalk_2022}.
     \item A RSB $R_\mathrm{RSB}(\pi)$-pulse is applied to map accumulated phase onto the qubit state.
     \item A variable carrier $R_\phi(\pi/2)$-pulse is applied.
     \item The population of $\ket{\downarrow}$ is measured.
-    \item Repeat steps 1-7 for different values of $\phi$ to find the contrast of the Ramsey fringe (see equation~\ref{eqn:ramsey_fringe}).
-    \item Repeat steps 1-8 for different values of $t_{\rm RAM}$ to find the decay in contrast with time (see equation~\ref{eqn:ramsey_decay_exp}).
+    \item Repeat steps 1-7 for different values of $\phi$ to find the contrast of the Ramsey fringe.
+    \item Repeat steps 1-8 for different values of $t_{\rm RAM}$ to find the decay in contrast with time.
     \end{enumerate}
 
     Figure~\ref{fig:motional_coherence}~(a) shows the recovered coherence contrast
     for variable Ramsey delays for the upper radial mode of a single ion, with
     frequency $\omega_\mathrm{upper}\approx 2\pi\times2.9~\unit{\mega\hertz}$.
-    The black solid line indicates an exponential decay, given by
-    equation~\ref{eqn:ramsey_decay_exp}, with a fit $\frac{1}{e}$ coherence time
+    The black solid line indicates an exponential decay with a fit $\frac{1}{e}$ coherence time
     of $\tau = 18.0(8)$~\unit{\ms}, and initial contrast $C_0 = 0.90(2)$. The
     low initial contrast is attributed to imperfect RSB pulses due to a
     combination of finite residual mode temperature (expected around
@@ -1029,20 +985,15 @@ sequences~\cite{fang_crosstalk_2022}.
 
 
 \section{Spin-Motion}
-    \todo{Point to theory\\}
-    \todo{Outdated intro - rewrite\\}
     For full control of the spin-motion hybrid system, we require interactions
     that couple the two. Perhaps the simplest of this class of interactions
-    are the red- and blue-sidebands (RSB and BSB respectively). The  RSB
-    interaction was used previously in the thermometry and sideband cooling
-    sections~\ref{sec:Cooling}. The RSB (BSB) consists of a single frequency
-    laser tuned at the carrier frequency minus (plus) the motional mode frequency,
-    $\omega_m$. The interaction is well described by the (Anti-) Jaynes-Cummings
-    Hamiltonian, and effectively couples spin flips with the addition or
-    subtraction of a motional quanta depending on the initial spin state. Here,
-    another such interaction coupling spin and motion, known as the
-    spin-dependent force, SDF, is introduced. 
-    While the RSB and BSB interactions couple the spin and motion in the motional Fock basis, the SDF couples them through spin-dependent displacements, thus in a coherent state basis. The direction of the displacement is determined by the spin state and an effective detuning parameter.
+    are the red- and blue-sidebands (RSB and BSB respectively,
+    see~\S~\ref{sec:Motional Coupling}). The spin-dependent force (SDF), as
+    described in~\S~\ref{sec:SDF}, is another highly useful spin-motion
+    interaction. The calibration and characterisation of the SDF is presented
+    here. Using the SDF applied simultaneously to two qubits, we demonstrate the
+    M\/{o}lmer S\/{o}rensen two-qubit entangling
+    gate~\cite{molmer_multiparticle_1999}. 
 
 \subsection{Calibrating the SDF}
 \label{sec:SDF_Calib}
@@ -1080,12 +1031,6 @@ sequences~\cite{fang_crosstalk_2022}.
     \end{figure}
 
     Spin-dependent forces (SDF), as described in~\S~\ref{sec:SDF}, are used in this thesis for both two-qubit entangling gates (following section), and for generating and characterising non-linear bosonic states (~\S~\ref{sec:tomography} and \S~\ref{sec:two-sdf}). Here we describe the calibration strategy and characterisation of a single SDF.\\
-
-    For convenience the SDF given by equation~\ref{eqn:sdf} is reproduced here\todo{check phases, make sigma x},
-    \begin{equation}
-        \tag{\ref{eqn:sdf}}
-        \hat{H}_\mathrm{SDF} \approx \frac{i\hbar \eta\Omega}{2}~\hat{\sigma}_\phi \left( \hat{a} e^{-i\delta_g t} + \hat{a}^\dagger e^{i\delta_g t} \right).
-    \end{equation}
 
     The SDF is generated using the bichromatic field method introduced by M\/{o}lmer and S\/{o}rensen~\cite{molmer_multiparticle_1999}, using simultaneous detuned red- and blue-sidebands.
     In practice, this SDF interaction involves relatively few degrees of freedom to calibrate:
