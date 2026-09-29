@@ -12,40 +12,23 @@
 \end{itemize}
 }
 
-
 \todo{
     \indent - Here give a broad overview of all control required for ion trap. (This is pointed to at beginning of apparatus section)\\
     \indent - \textbf{Figure} of spin otimes motion to hammer home hybrid system \\
 }
 
-    \todo{Accurate?} As discussed above, we are interested in two paradigms: discrete variable quantum computing (DVQC), that concerns the manipulation of qubits (or spins), and continuous variable quantum computing (CVQC), that concerns the manipulation of qumodes (or harmonic motion).\\
-    For DVQC, we must have access to the following elementary operations:
-    \begin{itemize}
-        \item Qubit state preparation, here via optically pumping the electronic state of the ion into one sublevel of the $4S_{1/2}$ manifold --- the lower level of our qubit, section~\ref{sec:Stateprep}.
-        \item Measurement of the qubit state, here via state-dependent fluorescence, section~\ref{sec:Measurement}.
-        \item Single qubit rotations, here via interaction with the 729-nm laser, section~\ref{sec:Single Qubit Gates}
-        \item Two qubit entangling-gates, here via spin-dependent forces (SDFs), using the 729-nm laser and the motional modes of the ion, section~\ref{sec:Two-Qubit Entangling Gates}.
-    \end{itemize}
-     For CVQC, we need:
-    \begin{itemize}
-        \item Motional state preparation, here via Doppler cooling and sideband cooling, section~\ref{sec:Cooling}.
-        \item Measurement of the motional state, which is not yet implemented on our system but will follow~\cite{fluhmann2020direct}\todo{Update}.
-        \item Single and two qumode gates, which are also not yet implemented, but will utilise SDFs following~\cite{sutherland2021universal}, section~\ref{sec:Spin-Dependent Forces}\todo{update}.
-    \end{itemize}
-    First, however, we describe the ion, its level structure, and the relevant lasers to manipulate its state.
+\begin{figure}[ht]
+        % \begin{center}
+        % \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ion.pdf}
+        % \end{center}
+        \caption{ \todo{Spin otimes motion}
+        }
+    \label{fig:spin_motion}
+    \end{figure}
 
 
-\section{The Ion}
-\label{sec:Transitions}
-\todo{
-    \indent Refrain from exp detail\\
-    \indent Level structure\\
-    \indent Zeeman structure \\
-    \indent Define qubit\\
-    \indent Short discussion on qubit choice \\
-    \indent Other useful wavelengths\\
-}
-    \begin{figure}[ht]
+
+\begin{figure}[ht]
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ion.pdf}
         \end{center}
@@ -56,10 +39,74 @@
         transitions marked are required for cooling and control over the
         ion. The chosen qubit levels are labelled with $\ket{\downarrow}$, $\ket{\uparrow}$.
         }
-
     \label{fig:ion}
-    \end{figure}
+\end{figure}
 
+\section{The Ion}
+\label{sec:Transitions}
+\todo{
+    \indent Refrain from exp detail\\
+    \indent \textbf{Figure} Level structure\\
+    \indent Zeeman structure \\
+    \indent \textbf{Table} All useful wavelengths\\
+}
+
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c|c|c}
+         Transition & Wavelength / nm & $\Gamma$ & Use \\
+         \hline\hline
+         $S\leftrightarrow P$       & 397               & XXMHz & Doppler Cooling, State-dependent Fluorescence\\
+    \end{tabular}
+    \caption{
+        Summary of electronic transitions in \ca.
+        \todo{Need ISat?}
+    }
+    \label{tab:transitions}
+\end{table}
+
+    Describe energy levels and transitions. Refer to table.
+
+    We use low field, so only frequency selective transitions are in quadrupole.
+
+    Magnetic field sensitivity of quadrupole transition
+    \begin{equation}
+        \label{eqn:mag_sens}
+        \lvert \frac{df}{dB}\rvert = \Delta \mu_B/h, ~~~~~~~~ \Delta = g_Dm_{D}- g_Sm_{S},
+    \end{equation}
+
+
+
+
+
+    The \ca~ion has a \todo{wording} rich level structure, shown in figure~\ref{fig:ion}, with
+    many accessible quadrupole transitions $4S_{1/2}\leftrightarrow 3D_{5/2}$.
+    The quadrupole transition is ideal for use as a qubit due to the long-lived
+    metastable level ($\tau=1.1$~\unit{\s})~\cite{barton2000measurement}, and
+    the ability to optically couple the transition via a laser. 
+    As mentioned in
+    section~\ref{sec:Narrow Line Width 729 Laser}, the 729-nm beam is used for
+    this purpose. By selecting the appropriate frequency of the 729-nm beam,
+    qubit operations such as state preparation (section~\ref{sec:Stateprep}) and
+    single qubit gates (section~\ref{sec:Single Qubit Gates}) may be driven, or
+    by setting the detuning such that a motional sideband is near resonance, to
+    couple the spin and motional degrees of freedom
+    (section~\ref{sec:Spin-Dependent Forces}). Here, we discuss which quadrupole
+    transitions are used, and the rationale behind their choice.\\ 
+    Zeeman splitting of the $4S_{1/2}$ and $3D_{5/2}$ states leads to 2 and 6
+    non-degenerate sublevels, respectively. Due to the magnetic field strength of 5.4~G (section~\ref{sec:Magnetic Field}),
+    the $S$-levels are split by $\sim$15~\unit{\MHz}, and the $D$-levels by $\sim$9~\unit{\MHz}.
+    This splitting is considerably larger than both the natural linewidth of the
+    729-nm transition ($\sim$\unit{\Hz}), and the Ti:Sapph laser linewidth (<1~\unit{\kHz}), meaning the transitions can be 
+    selectively addressed by frequency tuning of the laser. 
+    
+    Figure~\ref{fig:quadrupole} $a$, shows the normalised Rabi frequencies of each transition as the angle $\gamma$ between polarisation vector and B-field is varied. Here only linearly-polarised light with k-vector perpendicular to the B-field direction is considered.
+    The polarisation of the 729-nm laser is set to $\gamma = \pi/2$ (black dashed line), which maximises the Rabi frequency of the qubit transition, while suppressing nearby transitions apart from that needed for state preparation. 
+    Figure~\ref{fig:quadrupole} $b$, shows the relevant frequency splitting of the transitions at $\gamma = \pi/2$, which is the set polarisation for all experiments apart from initial quadrupole characterisation.
+    For initial characterisation of the quadrupole transitions, the polarisation was set to $\gamma = \pi/4$, which allowed access to all transitions apart from those forbidden by the beam geometry, $\Delta m_j = 0$, see figure~\ref{fig:quadrupole} $c$. \\
+    Other required lasers for manipulating the ion are: the 397-nm and 866-nm lasers used to form a closed-cycle for fluorescence, the 854-nm laser used to deshelve the ion from the $3D_{5/2}$ level for qubit state preparation. Details on these lasers can be found in section~\ref{sec:Laser systems}.
+    
     \begin{figure}
         \vspace*{-0.5cm}
         \begin{center}
@@ -85,47 +132,147 @@
         \label{fig:quadrupole}
     \end{figure}
 
-    The \ca~ion has a \todo{wording} rich level structure, shown in figure~\ref{fig:ion}, with
-    many accessible quadrupole transitions $4S_{1/2}\leftrightarrow 3D_{5/2}$.
-    The quadrupole transition is ideal for use as a qubit due to the long-lived
-    metastable level ($\tau=1.1$~\unit{\s})~\cite{barton2000measurement}, and
-    the ability to optically couple the transition via a laser. As mentioned in
-    section~\ref{sec:Narrow Line Width 729 Laser}, the 729-nm beam is used for
-    this purpose. By selecting the appropriate frequency of the 729-nm beam,
-    qubit operations such as state preparation (section~\ref{sec:Stateprep}) and
-    single qubit gates (section~\ref{sec:Single Qubit Gates}) may be driven, or
-    by setting the detuning such that a motional sideband is near resonance, to
-    couple the spin and motional degrees of freedom
-    (section~\ref{sec:Spin-Dependent Forces}). Here, we discuss which quadrupole
-    transitions are used, and the rationale behind their choice.\\ 
-    Zeeman splitting of the $4S_{1/2}$ and $3D_{5/2}$ states leads to 2 and 6
-    non-degenerate sublevels, respectively. Due to the magnetic field strength of 5.4~G (section~\ref{sec:Magnetic Field}),
-    the $S$-levels are split by $\sim$15~\unit{\MHz}, and the $D$-levels by $\sim$9~\unit{\MHz}.
-    This splitting is considerably larger than both the natural linewidth of the
-    729-nm transition ($\sim$\unit{\Hz}), and the Ti:Sapph laser linewidth (<1~\unit{\kHz}), meaning the transitions can be 
-    selectively addressed by frequency tuning of the laser. There is some freedom in choosing which of these 10 possible (with $\Delta m_j \leq 2$) quadrupole transitions we define as our qubit. Each transition has a varying coupling strength, here denoted by the relative Rabi frequency, $\Omega$, \todo{further define} depending on the polarisation and $k$-vector of the interacting light with respect to the B-field axis. The desired criteria for qubit and polarisation choice are as follows:
+
+\section{Spin}
+\todo{Short intro}
+
+\subsection{The Qubit}
+
+\todo{Quick rationalisation for choice of qubit}\\
+    There is some freedom in choosing which of these 10 possible (with $\Delta m_j \leq 2$) quadrupole transitions we define as our qubit. Each transition has a varying coupling strength, here denoted by the relative Rabi frequency, $\Omega$, \todo{further define} depending on the polarisation and $k$-vector of the interacting light with respect to the B-field axis. The desired criteria for qubit and polarisation choice are as follows:
     \begin{itemize}
     \item Access to a closed-cycle transition for sideband cooling, (for details on this, see section~\ref{sec:Cooling}). Closed-cycle here means $\ket{4S_{1/2},~m_j = -1/2} \rightarrow \ket{3D_{5/2}} \rightarrow \ket{4P_{3/2},~m_j = -3/2} \rightarrow \ket{4S_{1/2},~m_j = -1/2}$.
     \item The qubit transition needs a large quadrupole matrix element, leading to a high Rabi frequency, $\Omega$, to enable laser-power-efficient, fast, gates. Polarisation, $\gamma$, may be optimised to increase this coupling.
     \item Ideally the qubit transition should have a low magnetic field sensitivity, to reduce the effect of magnetic field noise. Using a MuMetal enclosure around the experiment does relax this constraint, see section~\ref{sec:Magnetic Field}.
     \item To reduce the effects of off-resonant interactions due to nearby transitions, it is desirable to limit the number of accessible transitions near to the qubit transition. This is done by selecting a polarisation, $\gamma$, such that unwanted transitions are suppressed.
     \end{itemize}
-    Given these criteria, we use the transition $\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ with magnetic field sensitivity \todo{Off by 2pi!}
-    \todo{Give magnetic sensitivity eqn (used in ch4)}
-    \begin{equation}
-        \label{eqn:mag_sens}
-        \Delta \mu/h = 
-    \end{equation}
-    $-0.446$~\unit{\MHz\per\gauss}. Closed-cycle sideband cooling is possible with this same transition, and state preparation via optical pumping is done via $\ket{4S_{1/2},~m_j = +1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -3/2}$ with magnetic field sensitivity $-0.624$~\unit{\MHz\per\gauss}. \\
-    Figure~\ref{fig:quadrupole} $a$, shows the normalised Rabi frequencies of each transition as the angle $\gamma$ between polarisation vector and B-field is varied. Here only linearly-polarised light with k-vector perpendicular to the B-field direction is considered.
-    The polarisation of the 729-nm laser is set to $\gamma = \pi/2$ (black dashed line), which maximises the Rabi frequency of the qubit transition, while suppressing nearby transitions apart from that needed for state preparation. 
-    Figure~\ref{fig:quadrupole} $b$, shows the relevant frequency splitting of the transitions at $\gamma = \pi/2$, which is the set polarisation for all experiments apart from initial quadrupole characterisation.
-    For initial characterisation of the quadrupole transitions, the polarisation was set to $\gamma = \pi/4$, which allowed access to all transitions apart from those forbidden by the beam geometry, $\Delta m_j = 0$, see figure~\ref{fig:quadrupole} $c$. \\
-    Other required lasers for manipulating the ion are: the 397-nm and 866-nm lasers used to form a closed-cycle for fluorescence, the 854-nm laser used to deshelve the ion from the $3D_{5/2}$ level for qubit state preparation. Details on these lasers can be found in section~\ref{sec:Laser systems}.
-    
+
+    Given these criteria, in this thesis we use qubit transition $\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ 
+    define $\ket{\da}:=\ket{4S_{1/2},~m_j = -1/2}$, $\ket{\ua}:=\ket{3D_{5/2},~m_j = -5/2}$,
 
 
-\section{Trapping Charged Particles}
+
+with time evolution defined by time-independent Hamiltonian,
+\begin{equation}
+    \hat H_s = \frac{\hbar\omega_0}{2} \hat\sigma_z,
+\end{equation}
+where $\omega_0 = \frac{E_\ua - E_\da}{\hbar}$, and $\hat\sigma_z$ is the Pauli operator.
+Now we look at how to manipulate this spin state by coupling to external fields.
+
+
+\subsection{Coherent Spin Control}
+\todo{
+    \indent - Give general Hamiltonian for qubit in light field\\
+    \indent - Consider $H_0 = H_s$, and $H_{ED} = -d\cdot E$ and $H_{EQ} = Q\nabla\cdot E$\\
+    \indent - Make approximation... to get to $H_I \propto (\sigma_+ + \sigma_-)(e^+ + e^-)$\\
+    \indent - Go into interaction picture, $\tilde H_I$ \\
+    \indent - Make RWA\\
+    \indent - maybe show general off-resonance propagator \\
+}
+
+To manipulate the spin-state we consider periodic perturbations given by interaction Hamiltonian $\hat H_I(t)$, giving full time dependent Hamiltonian,
+\begin{equation}
+    \hat H(t) = \hat H_s + \hat H_I(t),
+\end{equation}
+Treating the ion as a two-level spin-like system, we consider the interaction between its
+electronic state and a spatially varying electromagnetic field.
+Assuming the phase variation of the field across the spatial extent of the ion is small, we can expand the field around the electron position, $r$, to a series of electric and magnetic multipole interactions. In this thesis we exclusively consider the electric dipole and quadrupole with interaction Hamiltonians,
+\begin{align}
+    \hat H_{\rm ED} &= -\vec d\cdot \vec E \\
+    \hat H_{\rm EQ} &= -\frac{1}{6}Q_{ij}d E_j
+\end{align}
+
+
+For travelling optical field with frequency $\omega$,
+\begin{equation}
+    \vec E = E_0 \epsilon \cos(k\cdot r - \omega t + \phi),
+\end{equation}
+where $E_0$ is field amplitude, $\epsilon$ is the complex polarisation unit vector, and $\phi$ is some phase.
+
+For quadrupole transitions, we have already seen the effect of polarisation on coupling constant when discussing the qubit choice above. Generally, we can exploit the spatial structure dependence of dipole and quadrupole fields to selectively drive interaction e.g. for a standing wave or tightly focusses beam. However, for the remainder of this thesis, we use travelling waves, as such both ED and QD differences may be abstracted into a Rabi frequency.
+Generalise to $\Omega$
+\begin{align}
+    \Omega_{\rm ED} &= -d_{eg}E_0\\
+    \Omega_{\rm ED} &= -d_{eg}E_0
+\end{align}
+
+Now rearrange $H_I$, 
+\begin{equation}
+    \hat H_I = -\frac{\hbar\Omega}{2}(\hat\sigma_+ + \hat\sigma_-)\left(e^{i(k\cdot r - \omega t + \phi)} + e^{-i(k\cdot r - \omega t +\phi)}\right),
+\end{equation}
+
+Go to interaction picture with respect to $\hat H_s$, $\delta = \omega - \omega_0$, and make RWA (assume near ish to resonance)
+\begin{equation}
+    \tilde H_I =-\frac{\hbar\Omega}{2}\hat\sigma_+ e^{i(k\cdot r - \delta t + \phi)} + h.c.
+\end{equation}
+
+Assuming neglegible motion get off-res Rabi propagator,
+\begin{equation}
+    \hat U(t, \delta) = \begin{pmatrix}
+        0 &0\\
+        0 &0
+    \end{pmatrix}
+\end{equation}
+
+\subsubsection{Rabi Oscillations}
+\label{sec:rabi_oscillations}
+\todo{ 
+    \indent - then on resonance is how we do single qubit gates\\
+    \indent - Define propagator as $R_{x}$ to match QEM chapter\\
+    \indent - Show $R_\phi$\\
+    \indent - Show how rotation angle is related to $\Omega$.
+}
+
+On resonance and neglecting motion, get time-independent propagator
+\begin{equation}
+    R_\phi(\theta) := \hat U(t, 0) = \begin{pmatrix}
+        \cos(\theta/2) & ie^{i\phi}\sin(\theta/2) \\
+        ie^{-i\phi}\sin(\theta/2) & \cos(\theta/2) 
+    \end{pmatrix}
+\end{equation}
+with $\theta = \Omega t$.
+For $\phi = 0$,
+\begin{equation}
+    R_x(\theta) := \begin{pmatrix}
+        \cos(\theta/2) & i\sin(\theta/2) \\
+        i\sin(\theta/2) & \cos(\theta/2) 
+    \end{pmatrix}
+\end{equation}
+With $R_x(\pi) = i\hat\sigma_x$, \todo{useful check of convention}.
+State Hadamard?
+
+Then state populations are given by
+\begin{align}
+P_\da &= \bra{\da}R_x(\theta)\ket{\da}\\
+&= \cos^2(\Omega t)
+\end{align}
+
+
+    A qubit is fully described by $\ket{\psi} = \alpha\ket{\downarrow} + \beta\ket{\uparrow}$, where $\alpha$ and $\beta$ are complex numbers satisfying $|\alpha|^2 + |\beta|^2 = 1$. The qubit state can be manipulated by applying single qubit rotations, $R_{x,y}(\theta)$, commonly referred to as gates. In the Bloch sphere, $x$- and $y$-rotations are performed by \todo{wording} pertubations resonant with the qubit transition, here, using the 729-nm laser. The rotation angle, $\theta$, is given by $\theta=\Omega t$ where $\Omega$, is the Rabi frequency, and $t$ is the pulse duration. The rotation axis, is determined by the relative phase of the light field and the qubit. We define the initial relative phase to correspond to a $y$-rotation.
+
+\subsubsection{AC Stark Shifts}
+\todo{ 
+    \indent - far off resonance, get to dressed state \\
+    \indent - Define propagator as $R_{z}$ to match QEM chapter\\
+    \indent - Show how rotation angle is related to $\Omega$.
+}
+
+When far off-resonant, $\Delta \gg \Omega$ take above eqn $U(t,\Delta)$,
+get $R_z$
+\begin{equation}
+    R_z(\theta) := \begin{pmatrix}
+        e^{\frac{i\Delta t}{2}} &  0                \\
+        0 & e^{\frac{-i\Delta t }{2}} 
+    \end{pmatrix}
+\end{equation}
+$R_z$ can also be realised by phase shift of the laser with respect to the qubit.
+
+
+
+\section{Motion}
+\todo{Short opening}
+
+\subsection{Linear Paul Trap}
 \label{sec:trap_charge}
 \todo{
 At most 2 pages. No figures.\\
@@ -135,9 +282,43 @@ At most 2 pages. No figures.\\
     \indent - Quick overview that secular gives us qumodes, while micromotion can cause some issues\\
     \indent - Give useful equations i.e. $\omega \propto V_{\rm rf}$\\
     \indent - Give ion spacing and axial mode frequencies from James, for radial modes, look at IRO script\\
-    \indent - Get all the way to quantisation $H_{osc} \propto (a^\dagger a + 1/2)$\\
-    \indent - \textbf{Figure?} Could be nice to have tickle displacement as tool for hybrid control...\\
 }
+
+Most general equation,
+\begin{equation}
+    \Phi = \frac{V_\mathrm{RF}}{2}...
+\end{equation}
+
+Mathieu equation,
+\begin{equation}
+    \frac{d^2u_i}{d E^2} + a + q ....
+\end{equation}
+
+$a$ gives something
+$q$ gives stability, stable for $q<$, heuristically want $q<$.
+Get $\omega_p$ potential.
+Can approximate this motion by pseudopotential with secular motion and micromotion
+\begin{equation}
+    \omega_{\rm axial} = 
+\end{equation}
+
+Give details of our asymmetric trap potentials
+\begin{align}
+    \omega_{\rm upper} &= \\
+    \omega_{\rm lower} &= 
+\end{align}
+
+For multiple ions, these modes go as:
+
+\begin{align}
+    \omega_{\rm radial, i} &= \\
+    \omega_{\rm axial, i} &= 
+\end{align}
+
+With ion spacing given by axial frequency (James)
+\begin{equation}
+    \delta_z = ...
+\end{equation}
 
     From Earnshaw's theorem,
     $\nabla^2 V = 0,$ a stable stationary point in 3D cannot be realised
@@ -153,70 +334,135 @@ Will include pseudopotential relating $V_{RF}$ and $\Omega_{RF}$ to the radial m
     \omega_r \propto \frac{V_{RF}}{M\Omega_{RF}}.
 \end{equation}
 
-\section{Coherent Light-Matter Interactions}
-% Main points:
-    % Give useful equations for describing Rabi flopping
-    % For motional mode coupling
-    % SDF
-% Pre reqs:
-    % 
+\subsection{The Qumode}
 \todo{
-    \indent - Give general Hamiltonian for trapped ion in light field\\
-    \indent - Split into $H_0 = H_s + H_{osc}$, and $H_{ED} = -d\cdot E$ and $H_{EQ} = Q\nabla\cdot E$\\
-    \indent - Make approximation... to get to $H_I \propto (\sigma_+ + \sigma_-)(e^+ + e^-)$\\
-    \indent - Go into interaction picture, $\tilde H_I$ \\
+    \indent - Get all the way to quantisation $H_{osc} \propto (a^\dagger a + 1/2)$\\
 }
 
+Go to quantised position operator $r = z_0 (\hat a + \hat a^\dagger)$
+Secular motion described by Hamiltonian
+\begin{equation}
+\hat H_{\rm osc} = \hbar \omega_m (a^\dagger a + \frac{1}{2}),
+\end{equation}
 
-\subsection{Neglecting Motion}
-\label{sec:rabi_oscillations}
-\todo{ 
-    \indent - Neglect motion, $k\cdot r=0$\\
-    \indent - Make RWA\\
-    \indent - show general off-resonance propagator \\
+with $a^\dagger =$, $n = a^\dagger a$,
+
+We show state of qumode in Fock state basis as, $\ket{n}$, or displacement basis as $\ket{\beta}$. Quick chat on phase space
+
+\subsection{Driving Motion}
+\todo{
+    \indent - Split into $H_0 = H_{osc}$, and $H_{E}$.
+    \indent - Could be nice to have tickle displacement as tool for hybrid control...\\
+    \indent - \textbf{Figure} on res and off res.\\
+    \indent - Geometric phase!\\
 }
 
-\subsubsection{Rabi Oscillations}
-\todo{ 
-    \indent - then on resonance is how we do single qubit gates\\
-    \indent - Define propagator as $R_{x}$ to match QEM chapter\\
-    \indent - Show $R_\phi$\\
-    \indent - Show how rotation angle is related to $\Omega$.
-}
+Electric field near resonance couples to charge,
+\begin{equation}
+    E = E_0 \cos,
+\end{equation}
 
+\begin{equation}
+    \hat H_I = -qE,
+\end{equation}
 
-    A qubit is fully described by $\ket{\psi} = \alpha\ket{\downarrow} + \beta\ket{\uparrow}$, where $\alpha$ and $\beta$ are complex numbers satisfying $|\alpha|^2 + |\beta|^2 = 1$. The qubit state can be manipulated by applying single qubit rotations, $R_{x,y}(\theta)$, commonly referred to as gates. In the Bloch sphere, $x$- and $y$-rotations are performed by \todo{wording} pertubations resonant with the qubit transition, here, using the 729-nm laser. The rotation angle, $\theta$, is given by $\theta=\Omega t/2$\todo{Check factor of 2}, where $\Omega$, is the Rabi frequency, and $t$ is the pulse duration. The rotation axis, is determined by the relative phase of the light field and the qubit. We define the initial relative phase to correspond to a $y$-rotation.
+Go into interaction picture with respect to motion,
+get displacement Hamiltonian
+\begin{equation}
+    \tilde H_I = (ae^{i\phi} + a^\dagger e^{-i\phi})
+\end{equation}
 
-\subsubsection{Stark Shifts}
-\todo{ 
-    \indent - far off resonance, get to dressed state \\
-    \indent - Define propagator as $R_{z}$ to match QEM chapter\\
-    \indent - Show how rotation angle is related to $\Omega$.
-}
+We get coherent displacement operator (that has general detuning)
+\begin{equation}
+    \hat D(\beta) = ,
+\end{equation}
+define (\todo{change all beta to alpha?})$\beta=$.
 
-\subsection{Coupling to the Motion}
+Show on res and off-res
+\begin{figure}
+    \begin{center}
+    % \noindent\includegraphics[width=0.667\linewidth]{
+    %     figures/pdf_figure/ch4/state_prep.pdf
+    %     }
+    \end{center}
+    \caption{
+        \todo{Phase space motion}
+        }
+    \label{fig:displacement}
+\end{figure}
+
+We consider the fact that off-res displacement does not commute with itself over time, we get geometric phase,
+Point to Magnus appendix
+\begin{equation}
+    \Phi = 
+\end{equation}
+Here this phase acts globally, so can be ignored, we will show later utilising this for entangling gates.
+
+\section{Spin-Motion}
 \label{sec:Motional Coupling}
 \todo{ 
+    \indent - Split into $H_0 = H_s + H_{osc}$, and $H_{ED} = -d\cdot E$ and $H_{EQ} = Q\nabla\cdot E$\\
     \indent - Go back to light-matter, but now expand $k\cdot r$\\
     \indent - Define Lamb-Dicke\\
+}
+
+Going back to previous equation, lets keep motional term, but using quantisation, we get
+$k\cdot r = \eta(\hat a \hat a^\dagger)$, where $\eta$ is Lamb-Dicke factor, $\eta = 2kz_0\cos(\gamma)$, $z_0 = $. Relates photon recoil to mode frequency.
+
+
+\subsection{Resolved Sideband Interactions}
+\todo{ 
     \indent - Expand in Lamb-Dicke\\
     \indent - Go to Lamb-Dicke regime to get Jaynes Cummings (ref in ch6)\\
-    \indent - \textbf{Figure} Discuss three-regimes, RSB, BSB, carrier\\
+    \indent - \textbf{Figure, ladder + oscillations of spin and phonon} Discuss three-regimes, RSB, BSB, carrier\\
     \indent - Point to carrier and refer back above \\
     \indent - expand to 2nd order to get motional error? In RB section  ch4\\
 }
 
+Go back to previous equation and assume wavepacket is small compared to wavelength, then can expand for small $\eta$, already in interaction pic of spin, now also go to interaction pic with respect to motion,
+\begin{equation}
+ \tilde H_I \approx -\frac{\hbar\Omega}{2}\left(e^+\sigma_+\left(1+i\eta(ae^+ + a^\dagger e^-) \right)+ h.c. \right)
+\end{equation}
+If we ensure $\Omega < \delta$, adiabatic regime, we now have frequency control to bring different terms into resonance.
+
+for $\omega = \omega_0$, bring non-motional term to resonance. Term this carrier, it is exactly the interactions above for Rabi oscillations and Stark shift. 
+
+For $\omega = \omega_0 \pm \omega_m$ we get RSB and BSB respectively.
+\begin{align}
+    \hat H_{\rm RSB} &= \\
+    \hat H_{\rm BSB} &= 
+\end{align}
+
+\begin{figure}
+    \begin{center}
+    % \noindent\includegraphics[width=0.667\linewidth]{
+    %     figures/pdf_figure/ch4/state_prep.pdf
+    %     }
+    \end{center}
+    \caption{
+        \todo{JC and AJC applied to $\ket{\da, 1}$}
+        }
+    \label{fig:sidebands}
+\end{figure}
+
+Note that the second order term looks like,
+
 \begin{equation}
     \label{eqn:exp_eta}
-    \hat H = 
+    X_2 = \eta^2(n + e^{2+} e^{2-})
 \end{equation}
+Leading to a resonant effect when driving carrier,
+\begin{equation}
+    \label{eqn:exp_eta}
+    \Omega_2 = \Omega (1-\eta^2 n)
+\end{equation}
+For high $n$ this causes issues.
 
 \subsection{The Spin-Dependent Force}
 \label{sec:SDF}
 
 \todo{
     \indent - basics - look at Ozeri and other thesis \\
-    \indent - \textbf{Figure} on res and off res.\\
     \indent - Hamiltonian. Give motional and spin phase definition \\
     \indent - Derivation of MS bichromatic field implementation leading to $\hat\sigma x$ conditioning. \\
     \indent - Need to at least find following relationships:\\
@@ -224,6 +470,23 @@ Will include pseudopotential relating $V_{RF}$ and $\Omega_{RF}$ to the radial m
     \indent - $\phi_m = \frac{\phi_\mathrm{RSB} - \phi_\mathrm{BSB}}{2}$\\
     \indent - Creating a cat state? \\
 }
+
+From displacement eqn, could have SDF if we have extra spin-conditioning,
+\begin{equation}
+    \hat H_{\rm SDF} = \hat\sigma_+ D(+\beta) + \hat\sigma- D(-\beta),
+\end{equation}
+Dynamics now are spin-dependent. Will be useful!
+
+How does MS interaction use bichromatic field to get here?
+\begin{align}
+    \hat H_{\rm bi} &= \sum,\\
+    & = ...
+\end{align}
+which recovers SDF with $\phi_s = \frac{\phi_\mathrm{RSB} + \phi_\mathrm{BSB}}{2}$, $\phi_m = \frac{\phi_\mathrm{RSB} - \phi_\mathrm{BSB}}{2}$, and $\Omega_{\rm SDF} = $.
+
+
+
+
 
     The optical Mølmer-Sørensen (MS) scheme~\cite{sorensen2000entanglement} is used to generate the
     SDF via a bichromatic laser field. Bichromatic refers to the simultaneous
@@ -264,6 +527,31 @@ Will include pseudopotential relating $V_{RF}$ and $\Omega_{RF}$ to the radial m
     \indent - Highlight sqz 2q gate here \\
 }
 
+If applied to two qubits, replace $\sigma_x$ with $\sigma_x\otimes I + I\otimes\sigma_x$,
+work through derivation, we find dynamics highlighted in figure
+\begin{figure}
+    \begin{center}
+    % \noindent\includegraphics[width=0.667\linewidth]{
+    %     figures/pdf_figure/ch4/state_prep.pdf
+    %     }
+    \end{center}
+    \caption{
+        \todo{Phase space motion with spin-conditioning for MS gate, also with walsh modulation.}
+        }
+    \label{fig:sdf}
+\end{figure}
+symmetric states traverse phase space, asymmetric states have forces cancel.
+
+Traversing phase space accumulated geometric phase. So get following relationship:
+Show truth table:
+
+Must ensure motion is disentangled at the end, otherwise tracing out leads to mixed state.
+
+Experimentally, large excursions are sensitive to decoherence, so multiloop is better.
+
+Walsh modulation
+Second, sensitivity to mode frequency drift is annoying, so flip phase in the middle.
+
     We perform two-qubit entangling gates using the Mølmer-Sørensen (MS)
     interaction~\cite{sorensen2000entanglement}. This interaction is the same described SDF from the
     previous section, but applied globally to two ions. The MS interaction
@@ -276,6 +564,8 @@ Will include pseudopotential relating $V_{RF}$ and $\Omega_{RF}$ to the radial m
     duration $t_g = 2n\pi/\delta_g$, where $n$ is the number of ``loops''. The MS gate is a universal two-qubit gate, and
     along with only single qubit gates, constitutes a universal gate set for
     discrete quantum algorithms.\\  
+
+
 
 
 \todo{Standalone summary paragraph}
