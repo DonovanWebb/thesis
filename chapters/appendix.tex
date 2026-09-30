@@ -166,8 +166,59 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     where we can see that if the Hamiltonian fails to commute with itself at different times, the higher-order Magnus terms become relevant.
     This may be understood as the continuous analogy of the Baker-Campbell-Hausdorff formula. It is particularly useful in this thesis to understand the origin of the geometric phase in the MS gate scheme, and the non-linear bosonic interactions generated in the ``two-SDF'' protocol given in~\S~\ref{sec:two-sdf}.
 
+\subsection{AC Stark Shift}
+\label{app:stark_shift}
+    Here we analyse AC Stark shifts due to far off-resonant optical interactions. The interaction between a spin and an oscillating electric field is given by equation~\ref{eqn:light_matter} (in the interaction picture of the spin, and neglecting fast oscillating terms), reproduced here as,
+    \begin{equation}
+        \tag{\ref{eqn:light_matter}}
+        \tilde H_I \approx \frac{\hbar\Omega}{2}\hat\sigma_+ e^{i(\vec k\cdot \vec R - \delta t + \phi)} + {\rm h.c.}~~.
+    \end{equation}
+    Neglecting the motional term, taking $\phi=0$, and setting $\delta$ to some large detuning $|\Delta| \gg \Omega$, the Hamiltonian is,
+    \begin{equation}
+        \tilde H_I \approx \frac{\hbar\Omega}{2}\left(\cos(\Delta t)\hat\sigma_x -  \sin(\Delta t)\hat\sigma_y\right).
+    \end{equation}
+    The first two Magnus terms are,
+    \begin{align}
+        A_1(t) &= -\frac{i\Omega}{2\Delta}\left(\sin(\Delta t)\hat\sigma_x - (1-\cos(\Delta t)\hat\sigma_y)\right),\\
+        A_2(t) &= -\frac{i\Omega^2}{4\Delta}\hat\sigma_z\left(t-\frac{\sin(\Delta t)}{\Delta}\right).
+    \end{align}
+    The first term is bounded in time contributing to negligible population transfer of order $\left(\frac{\Omega}{\Delta}\right)^2$. The second term contains both a bounded oscillating and unbounded secular term in time. Neglecting the oscillating $\sin(\Delta t)$ term, and taking only the linearly increasing phase term, we find the effective Hamiltonian corresponding to rotations around $\hat\sigma_z$,
+    \begin{equation}
+        \hat H_{\rm eff} = \frac{\hbar\delta_{\rm AC}}{2}\hat\sigma_z, ~~~~~~~~ \delta_{\rm AC} = \frac{\Omega^2}{2\Delta},
+    \end{equation}
+    with rotation angle $\theta = \delta_{\rm AC}t$.
+
+
 \subsection{Geometric Phase}
-\todo{For Geometric phase gates derivation}
+\label{app:geometric_phase}
+    Here we analyse the off-resonant motional displacement, described by the Hamiltonian given in equation~\ref{eqn:displace_H}, where we are in the interaction picture with respect to $\hat H_{\rm osc}$, and have assumed the fast oscillating terms are negligible, reproduced here as,
+    \begin{equation}
+        \tag{\ref{eqn:displace_H}}
+        \tilde H_I \approx -\frac{\hbar \Omega}{2}(\hat a^\dagger e^{-i(\delta t+\phi)}+\hat ae^{i(\delta t+\phi)}),
+    \end{equation}
+    The first two Magnus terms are,
+    \begin{align}
+        A_1(t) &= \frac{i\Omega}{\delta}\sin\left(\frac{\delta t}{2}\right)\left(\hat a^\dagger e^{-i(\delta t/2 + \phi)} + \hat ae^{i(\delta t/2 + \phi)}  \right),\\
+        A_2(t) &= -\frac{i\Omega^2}{4\delta}\left(t-\frac{\sin(\delta t)}{\delta}\right)\hat I.
+    \end{align}
+    The dynamics of $A_1$ describe the familiar displacement operator, $\hat D(\beta)$ 
+    with $\beta = \frac{\Omega}{\delta}\sin\left(\frac{\delta t}{2}\right)ie^{-i(\delta t/2 + \phi)}$. 
+    The maximum displacement from the origin 
+    is $\beta_{\rm  max} = \frac{\Omega}{|\delta|}$. The trajectory traces a circle of radius $\frac{\Omega}{2|\delta|}$ which returns to the
+    initial motional state with periodicity $T_n = \frac{2\pi n}{|\delta|}$, for integer $n$. The
+    second term, $A_2$, contains both a bounded oscillating and unbounded
+    secular term in time. The term acts entirely as the accumulation of a phase
+    over time. Considering the application of the off-resonant displacement for
+    $t = T_n$, then the dynamics reduces entirely into a single
+    accumulating phase of,
+    \begin{equation}
+        \Phi(T_n) = \frac{\Omega^2}{4\delta}T_n.
+    \end{equation}
+    For a single loop the phase accumulated is thus,
+    \begin{equation}
+        \Phi(T_1) = \frac{\pi\Omega^2}{2\delta^2}.
+    \end{equation}
+    This geometric phase is utilised in the M{\o}lmer-S{\o}rensen scheme to perform two-qubit entangling gates.
 
 \subsection{``Two-SDF'' Dynamics}
     Here we analyse the ``two-SDF'' Hamiltonian given in equation~\ref{eqn:two-sdf} using the Magnus expansion. We recover effective Hamiltonians for both Gaussian interactions, as well as for tri-squeezing. \\

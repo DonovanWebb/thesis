@@ -156,19 +156,11 @@ with time evolution defined by time-independent Hamiltonian,
 \begin{equation}
     \hat H_s = \frac{\hbar\omega_0}{2} \hat\sigma_z,
 \end{equation}
-where $\omega_0 = \frac{E_\ua - E_\da}{\hbar}$, and $\hat\sigma_z$ is the Pauli operator.
+where $\omega_0 = \frac{E_\ua - E_\da}{\hbar}$ is the qubit frequency.
 Now we look at how to manipulate this spin state by coupling to external fields.
 
 
 \subsection{Coherent Spin Control}
-\todo{
-    \indent - Give general Hamiltonian for qubit in light field\\
-    \indent - Consider $H_0 = H_s$, and $H_{ED} = -d\cdot E$ and $H_{EQ} = Q\nabla\cdot E$\\
-    \indent - Make approximation... to get to $H_I \propto (\sigma_+ + \sigma_-)(e^+ + e^-)$\\
-    \indent - Go into interaction picture, $\tilde H_I$ \\
-    \indent - Make RWA\\
-    \indent - maybe show general off-resonance propagator \\
-}
 
 To manipulate the spin-state we consider periodic perturbations given by interaction Hamiltonian $\hat H_I(t)$, giving full time dependent Hamiltonian,
 \begin{equation}
@@ -176,97 +168,76 @@ To manipulate the spin-state we consider periodic perturbations given by interac
 \end{equation}
 Treating the ion as a two-level spin-like system, we consider the interaction between its
 electronic state and a spatially varying electromagnetic field.
-Assuming the phase variation of the field across the spatial extent of the ion is small, we can expand the field around the electron position, $r$, to a series of electric and magnetic multipole interactions. In this thesis we exclusively consider the electric dipole and quadrupole with interaction Hamiltonians,
-\begin{align}
-    \hat H_{\rm ED} &= -\vec d\cdot \vec E \\
-    \hat H_{\rm EQ} &= -\frac{1}{6}Q_{ij}d E_j
-\end{align}
 
-
-For travelling optical field with frequency $\omega$,
+For a travelling optical field the transition-driving part of the interaction is generally given by,
 \begin{equation}
-    \vec E = E_0 \epsilon \cos(k\cdot r - \omega t + \phi),
+    \hat H_I = \frac{\hbar\Omega}{2}(\hat\sigma_+ + \hat\sigma_-)\left(e^{i(\vec k\cdot \vec R - \omega t + \phi)} + e^{-i(\vec k\cdot \vec R - \omega t +\phi)}\right),
 \end{equation}
-where $E_0$ is field amplitude, $\epsilon$ is the complex polarisation unit vector, and $\phi$ is some phase.
-
-For quadrupole transitions, we have already seen the effect of polarisation on coupling constant when discussing the qubit choice above. Generally, we can exploit the spatial structure dependence of dipole and quadrupole fields to selectively drive interaction e.g. for a standing wave or tightly focusses beam. However, for the remainder of this thesis, we use travelling waves, as such both ED and QD differences may be abstracted into a Rabi frequency.
-Generalise to $\Omega$
-\begin{align}
-    \Omega_{\rm ED} &= -d_{eg}E_0\\
-    \Omega_{\rm ED} &= -d_{eg}E_0
-\end{align}
-
-Now rearrange $H_I$, 
+where $\Omega$ is the Rabi frequency, $R$ is the ion position, $\omega$ is the optical frequency, and $\phi$ is some phase.
+The Rabi frequency contains the specifics of the physical light-matter interaction, $\hbar\Omega\propto\bra{\ua}\hat H_I\ket{\da}$.
+Assuming the phase variation of the field across the electrons spatial extent is small, we can expand the field around the ion position, $R$, for small relative electron position $r$, to generate a series
+of electric and magnetic multipole interactions. For the qubit transition considered here ($S$ manifold to $D$ manifold) the electric dipole interaction is forbidden, as such in this thesis we exclusively consider the electric quadrupole interaction.\\
+For plane travelling optical field given by,
 \begin{equation}
-    \hat H_I = -\frac{\hbar\Omega}{2}(\hat\sigma_+ + \hat\sigma_-)\left(e^{i(k\cdot r - \omega t + \phi)} + e^{-i(k\cdot r - \omega t +\phi)}\right),
+    \vec E = E_0 \epsilon \cos(\vec k\cdot \vec R - \omega t + \phi),
 \end{equation}
-
-Go to interaction picture with respect to $\hat H_s$, $\delta = \omega - \omega_0$, and make RWA (assume near ish to resonance)
+the quadrupole Rabi frequency is given by,
 \begin{equation}
-    \tilde H_I =-\frac{\hbar\Omega}{2}\hat\sigma_+ e^{i(k\cdot r - \delta t + \phi)} + h.c.
+    \Omega_{\rm EQ} = \frac{1}{6\hbar}\sum_{i,j=\{x,y,z\}}\bra{\da}Q_{ij}\ket{\ua}\partial_i E_j\rvert_R
 \end{equation}
+where $Q_{ij}$ is the quadrupole tensor. For reference, for the simpler electric dipole, the Rabi frequency is given by
+$\Omega_{\rm ED} = \frac{1}{\hbar}\sum_j\bra{\da}d_j\ket{\ua}E_j$, where $d_j$ is the dipole momement. We shall consider the general Rabi frequency, $\Omega$, for the rest of this section.\\
 
-Assuming neglegible motion get off-res Rabi propagator,
+To evaluate the dynamics of $\hat H_I$ we go to a frame rotating at the qubit frequency, $\omega_0$, by going into the interaction picture with respect to $\hat H_s$: $\tilde H_I = \hat U_s^\dagger \hat H_I \hat U_s$ with $\hat U_s = e^{-i\hat H_s t/\hbar}$. Defining a relative detuning between the qubit and optical frequency as $\delta = \omega - \omega_0$, and neglecting fast oscillating terms with frequency $\omega + \omega_0$, the Hamiltonian is approximated by, 
 \begin{equation}
-    \hat U(t, \delta) = \begin{pmatrix}
-        0 &0\\
-        0 &0
-    \end{pmatrix}
+    \label{eqn:light_matter}
+    \tilde H_I \approx \frac{\hbar\Omega}{2}\hat\sigma_+ e^{i(\vec k\cdot \vec R - \delta t + \phi)} + {\rm h.c.}~~.
 \end{equation}
+The dynamics due to the fast oscillating terms are safely neglected in the case of weak coupling $\Omega \ll \omega + \omega_0$.
+
+For the rest of this section the ion is assumed to be stationary, thus the motional term contributes a simple phase factor, $\phi' = \phi + \vec k\cdot\vec R$. 
 
 \subsubsection{Rabi Oscillations}
 \label{sec:rabi_oscillations}
-\todo{ 
-    \indent - then on resonance is how we do single qubit gates\\
-    \indent - Define propagator as $R_{x}$ to match QEM chapter\\
-    \indent - Show $R_\phi$\\
-    \indent - Show how rotation angle is related to $\Omega$.
-}
 
-On resonance and neglecting motion, get time-independent propagator
+When the laser is tuned to the qubit resonance, $\delta = 0$, the Hamiltonian becomes time-independent, 
+\begin{equation}
+\tilde H_I = \frac{\hbar\Omega}{2}\sigma_\phi,
+\end{equation}
+where $\sigma_\phi = \cos(\phi)\sigma_x -\sin(\phi)\sigma_y$.
+Exponentiating, this yields the unitary propagator,
 \begin{equation}
     R_\phi(\theta) := \hat U(t, 0) = \begin{pmatrix}
-        \cos(\theta/2) & ie^{i\phi}\sin(\theta/2) \\
-        ie^{-i\phi}\sin(\theta/2) & \cos(\theta/2) 
+        \cos(\theta/2) & -ie^{i\phi}\sin(\theta/2) \\
+        -ie^{-i\phi}\sin(\theta/2) & \cos(\theta/2) 
     \end{pmatrix}
 \end{equation}
-with $\theta = \Omega t$.
-For $\phi = 0$,
-\begin{equation}
-    R_x(\theta) := \begin{pmatrix}
-        \cos(\theta/2) & i\sin(\theta/2) \\
-        i\sin(\theta/2) & \cos(\theta/2) 
-    \end{pmatrix}
-\end{equation}
-With $R_x(\pi) = i\hat\sigma_x$, \todo{useful check of convention}.
-State Hadamard?
+with $\theta = \Omega t$. Varying phase $\phi$ then sets the rotation axis in the $xy$-plane, with $R_x:=e^{-i\theta\hat\sigma_x/2}$ defined for $\phi=0$. 
 
-Then state populations are given by
+Applying single qubit rotations to the initial state $\ket{\da}$ and observing the spin populations results in Rabi oscillations,
 \begin{align}
-P_\da &= \bra{\da}R_x(\theta)\ket{\da}\\
-&= \cos^2(\Omega t)
+P_\ua &= |\bra{\ua}R_x(\theta)\ket{\da}|^2\\
+&= \sin^2\left(\frac{\Omega t}{2}\right).
 \end{align}
-
-
-    A qubit is fully described by $\ket{\psi} = \alpha\ket{\downarrow} + \beta\ket{\uparrow}$, where $\alpha$ and $\beta$ are complex numbers satisfying $|\alpha|^2 + |\beta|^2 = 1$. The qubit state can be manipulated by applying single qubit rotations, $R_{x,y}(\theta)$, commonly referred to as gates. In the Bloch sphere, $x$- and $y$-rotations are performed by \todo{wording} pertubations resonant with the qubit transition, here, using the 729-nm laser. The rotation angle, $\theta$, is given by $\theta=\Omega t$ where $\Omega$, is the Rabi frequency, and $t$ is the pulse duration. The rotation axis, is determined by the relative phase of the light field and the qubit. We define the initial relative phase to correspond to a $y$-rotation.
+where $P_\da$ is the population observed in $\ket{\da}$.
 
 \subsubsection{AC Stark Shifts}
-\todo{ 
-    \indent - far off resonance, get to dressed state \\
-    \indent - Define propagator as $R_{z}$ to match QEM chapter\\
-    \indent - Show how rotation angle is related to $\Omega$.
-}
 
-When far off-resonant, $\Delta \gg \Omega$ take above eqn $U(t,\Delta)$,
-get $R_z$
+When considering the optical interaction given in
+equation~\ref{eqn:light_matter} for a large detuning $|\Delta| \gg \Omega$, the
+Hamiltonian remains time dependent, and does not self-commute at different
+times. The Magnus expansion is utilised to evaluate the dynamics. Details are
+given in appendix~\ref{app:stark_shift}, with the resulting dynamics
+approximating $\hat\sigma_z$ rotations of the form,
 \begin{equation}
-    R_z(\theta) := \begin{pmatrix}
-        e^{\frac{i\Delta t}{2}} &  0                \\
-        0 & e^{\frac{-i\Delta t }{2}} 
-    \end{pmatrix}
+R_z := e^{-i\theta\hat\sigma_z/2}, ~~~~ \theta = \frac{\Omega^2t}{2\Delta}.
 \end{equation}
-$R_z$ can also be realised by phase shift of the laser with respect to the qubit.
 
+In this thesis these $R_z$ rotations are often caused unintentionally due to
+off-resonant coupling of other electronic transitions when addressing the qubit
+transition. As such, for a given desired interaction and beam power, these Stark
+shift rotations are calibrated and accounted for by updating the target rotation
+axis of subsequent pulses.
 
 
 \section{Motion}
@@ -339,46 +310,22 @@ Will include pseudopotential relating $V_{RF}$ and $\Omega_{RF}$ to the radial m
     \indent - Get all the way to quantisation $H_{osc} \propto (a^\dagger a + 1/2)$\\
 }
 
-Go to quantised position operator $r = z_0 (\hat a + \hat a^\dagger)$
-Secular motion described by Hamiltonian
+The secular motion resulting from the pseudopotential is well approximated by the harmonic oscillator for small amplitudes. The quantum harmonic oscillator (qumode) is given by\todo{Check convention for ch6},
 \begin{equation}
-\hat H_{\rm osc} = \hbar \omega_m (a^\dagger a + \frac{1}{2}),
+    \hat H_{\rm osc} = \frac{1}{2m}\hat p^2 + \frac{1}{2}m\omega_m^2\hat x^2,
 \end{equation}
-
-with $a^\dagger =$, $n = a^\dagger a$,
-
-We show state of qumode in Fock state basis as, $\ket{n}$, or displacement basis as $\ket{\beta}$. Quick chat on phase space
-
-\subsection{Driving Motion}
-\todo{
-    \indent - Split into $H_0 = H_{osc}$, and $H_{E}$.
-    \indent - Could be nice to have tickle displacement as tool for hybrid control...\\
-    \indent - \textbf{Figure} on res and off res.\\
-    \indent - Geometric phase!\\
-}
-
-Electric field near resonance couples to charge,
+where $m$ is the ion mass, $\omega_m$ is the motional mode frequency, and $\hat x$, $\hat p$ are the position and momentum operators respectively. Expressed in terms of phonon creation and annihilation operators, $\hat a^\dagger$ and $\hat a$, 
+\begin{align}
+    \hat x &= x_0 (\hat a^\dagger + \hat a),\\
+    \hat p &= p_0 (\hat a^\dagger - \hat a),
+\end{align}
+where $x_0=\sqrt{\frac{\hbar}{2m\omega_m}}$ is the ground state wave-packet extent, and $p_0 = \sqrt{\frac{\hbar m \omega_m}{2}}$ is the ground state momenta.\\
+The oscillator Hamiltonian is then given simply by,
 \begin{equation}
-    E = E_0 \cos,
+    \hat H_{\rm osc} = \hbar \omega_m \left(\hat n + \frac{1}{2}\right),
 \end{equation}
+where the number operator $\hat n = \hat a^\dagger \hat a$. This ``number'' or Fock-state representation suggested by this Hamiltonian labels eigenstates in the Fock basis as $\ket{n}=\hat a^{\dagger n} \ket{0}$. In the next section we describe coherent excitation of the qumode, and introduce the phase-space representation that naturally describe it.
 
-\begin{equation}
-    \hat H_I = -qE,
-\end{equation}
-
-Go into interaction picture with respect to motion,
-get displacement Hamiltonian
-\begin{equation}
-    \tilde H_I = (ae^{i\phi} + a^\dagger e^{-i\phi})
-\end{equation}
-
-We get coherent displacement operator (that has general detuning)
-\begin{equation}
-    \hat D(\beta) = ,
-\end{equation}
-define (\todo{change all beta to alpha?})$\beta=$.
-
-Show on res and off-res
 \begin{figure}
     \begin{center}
     % \noindent\includegraphics[width=0.667\linewidth]{
@@ -390,13 +337,60 @@ Show on res and off-res
         }
     \label{fig:displacement}
 \end{figure}
+\subsection{Driving Motion}
 
-We consider the fact that off-res displacement does not commute with itself over time, we get geometric phase,
-Point to Magnus appendix
+We now consider driving the qumode by a near-resonant spatially uniform electric field,
 \begin{equation}
-    \Phi = 
+    E(t) = E_0  \cos(\omega t + \phi),
 \end{equation}
-Here this phase acts globally, so can be ignored, we will show later utilising this for entangling gates.
+with the Hamiltonian given by,
+\begin{equation}
+    \hat H(t) = \hat H_{\rm osc} + \hat H_I, ~~~~~~ \hat H_I = -q\hat xE(t),
+\end{equation}
+where $q$ is the ion charge. 
+Going into the interaction picture with respect to $hat H_{\rm osc}$, we find,
+\begin{equation}
+    \tilde H_I = -\hbar \Omega\cos(\omega t + \phi) (\hat a^\dagger e^{i\omega_m t}+\hat ae^{-i\omega_m t}),
+\end{equation}
+where $\Omega = \frac{qx_0E_0}{\hbar}$. Expanding the oscillating field and assuming $\omega+ \omega_m \gg \Omega$, the fast oscillating terms are neglected giving,
+\begin{equation}
+    \label{eqn:displace_H}
+    \tilde H_I \approx -\frac{\hbar \Omega}{2}(\hat a^\dagger e^{-i(\delta t+\phi)}+\hat ae^{i(\delta t+\phi)}),
+\end{equation}
+where $\delta = \omega - \omega_m$.\\
+In the case of resonant driving, $\delta = 0$, the Hamiltonian becomes time-independent, and we recover the propagator
+\begin{align}
+    \hat U &= e^{i\frac{\Omega t}{2}(\hat a^\dagger e^{-i\phi}+\hat a e^{i\phi})},\\
+    &= e^{\beta \hat a^\dagger - \beta^*\hat a},
+\end{align}
+where the second expression is the conventional displacement operator,
+$\hat D(\beta)$, where here $\beta = \frac{\Omega t}{2}ie^{-i\phi}$. The
+displacement operator is used in the coherent state representation of the
+oscillator, where the eigenstate of the annihilation operator, $\hat a$, is
+given by $\ket{\beta} = \hat D(\beta)\ket{0}$. The action of the displacement
+operator may be visualised in phase space, shown for resonance in
+figure~\ref{fig:displacement}~(a).\\
+
+When we consider the off-resonant case, $\delta \neq 0$, the Hamiltonian $\tilde H_I$ 
+does not self-commute over time. The resulting dynamics are derived in
+appendix~\S~\ref{app:geometric_phase} by expressing the interaction in the
+Magnus expansion. Importantly, we recover two effects: first, we observe a
+similar displacement of the initial motional state in phase space, but now
+the trajectory traces a circle of radius $\frac{\Omega}{2|\delta|}$ which returns to the
+initial motional state with periodicity $T_n = \frac{2\pi n}{|\delta|}$, for integer $n$. 
+The displacement parameter $\beta$ is given by,
+\begin{equation}
+    \beta = \frac{\Omega}{\delta}\sin\left(\frac{\delta t}{2}\right)ie^{-i(\delta t/2 + \phi)}.
+\end{equation}
+Second, we see the build up of a geometric phase, originating from the second
+order term in the Magnus expansion. The phase acts globally in this case, and
+for a single closed loop is given by,
+\begin{equation}
+    \Phi(T_1) = \frac{\pi\Omega^2}{2\delta^2}.
+\end{equation}
+The phase space dynamics for the off-resonant displacement is shown in figure~\ref{fig:displacement}~(b).\\
+
+
 
 \section{Spin-Motion}
 \label{sec:Motional Coupling}
