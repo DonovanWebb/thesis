@@ -391,41 +391,25 @@ for a single closed loop is given by,
 The phase space dynamics for the off-resonant displacement is shown in figure~\ref{fig:displacement}~(b).\\
 
 
-
 \section{Spin-Motion}
 \label{sec:Motional Coupling}
-\todo{ 
-    \indent - Split into $H_0 = H_s + H_{osc}$, and $H_{ED} = -d\cdot E$ and $H_{EQ} = Q\nabla\cdot E$\\
-    \indent - Go back to light-matter, but now expand $k\cdot r$\\
-    \indent - Define Lamb-Dicke\\
-}
 
-Going back to previous equation, lets keep motional term, but using quantisation, we get
-$k\cdot r = \eta(\hat a \hat a^\dagger)$, where $\eta$ is Lamb-Dicke factor, $\eta = 2kz_0\cos(\gamma)$, $z_0 = $. Relates photon recoil to mode frequency.
+Going back to previous equation~\ref{eqn:light_matter} where we have already in the interaction picture with respect to the spin, and have neglected fast oscillating terms. Now keep motional term due to secular ion motion around the equilibrium position in quantised form $\vec R = |R|\hat z$, with mode direction set to be in the $z$-axis,
 
-
-\subsection{Resolved Sideband Interactions}
-\todo{ 
-    \indent - Expand in Lamb-Dicke\\
-    \indent - Go to Lamb-Dicke regime to get Jaynes Cummings (ref in ch6)\\
-    \indent - \textbf{Figure, ladder + oscillations of spin and phonon} Discuss three-regimes, RSB, BSB, carrier\\
-    \indent - Point to carrier and refer back above \\
-    \indent - expand to 2nd order to get motional error? In RB section  ch4\\
-}
-
-Go back to previous equation and assume wavepacket is small compared to wavelength, then can expand for small $\eta$, already in interaction pic of spin, now also go to interaction pic with respect to motion,
 \begin{equation}
- \tilde H_I \approx -\frac{\hbar\Omega}{2}\left(e^+\sigma_+\left(1+i\eta(ae^+ + a^\dagger e^-) \right)+ h.c. \right)
+    \tilde H_I \approx \hat H_{\rm osc} + \frac{\hbar\Omega}{2}\left(\hat\sigma_+ e^{i\eta(\hat a^\dagger+\hat a )}e^{-i(\delta t - \phi)} + {\rm h.c.} \right),
 \end{equation}
-If we ensure $\Omega < \delta$, adiabatic regime, we now have frequency control to bring different terms into resonance.
 
-for $\omega = \omega_0$, bring non-motional term to resonance. Term this carrier, it is exactly the interactions above for Rabi oscillations and Stark shift. 
+where $\eta = 2kz_0\cos(\gamma)$ is Lamb-Dicke parameter, where $\gamma$ is angle between $k$-vector of optical field and the mode vector $\hat z$. Relates photon recoil to mode frequency.
 
-For $\omega = \omega_0 \pm \omega_m$ we get RSB and BSB respectively.
-\begin{align}
-    \hat H_{\rm RSB} &= \\
-    \hat H_{\rm BSB} &= 
-\end{align}
+Going into the interaction picture with respect $\hat H_{\rm osc}$, we find,
+
+\begin{equation}
+    \vardbtilde H_I \approx \frac{\hbar\Omega}{2}\hat\sigma_+ e^{i\eta(\hat a^\dagger e^{i\omega_m t}+\hat a e^{-i\omega t} )}e^{-i(\delta t - \phi)} + {\rm h.c.} ~~~.
+\end{equation}
+
+For the wavelength (729-nm) and mode frequencies ($\approx 3~\unit{\mega\hertz}$) considered in this thesis, the Lamb-Dicke parameter is of order $\eta \approx 0.05$.
+
 
 \begin{figure}
     \begin{center}
@@ -439,8 +423,35 @@ For $\omega = \omega_0 \pm \omega_m$ we get RSB and BSB respectively.
     \label{fig:sidebands}
 \end{figure}
 
-Note that the second order term looks like,
+\subsection{Resolved Sideband Interactions}
+\todo{ 
+    \indent - \textbf{Figure, ladder + oscillations of spin and phonon} Discuss three-regimes, RSB, BSB, carrier\\
+    \indent - expand to 2nd order to get motional error? In RB section  ch4\\
+}
 
+Go back to previous equation and assume wavepacket is small compared to wavelength, specifically $\eta^2(2\hat n+1)\ll 1$ then can expand to first order, 
+\begin{equation}
+ \hat H_{\rm LD} = \frac{\hbar\Omega}{2}\hat\sigma_+ \left(\hat I+ i\eta(\hat a^\dagger e^{i\omega_m t}+\hat a e^{-i\omega t} ) + O(\eta^2)\right)e^{-i(\delta t - \phi)} + {\rm h.c.} ,
+\end{equation}
+where $\hat I$ is the identity operator of the qumode.
+
+To further analyse the dynamics of this Hamiltonian, we consider three resonant regimes. 
+for $\delta = 0$, and assuming $\eta\Omega \ll \omega_m$ (adiabatic driving) then the non-motional term is in resonance, and we neglect the effect of the terms linear in $\eta$. We shall call this the carrier, and is identical (up to first order) to the Hamiltonian we considered exactly the interactions above for Rabi oscillations and Stark shift. 
+
+For $\delta = +\omega_m $, and $\delta = -\omega_m$, and assuming $\Omega \ll \omega_m$, we get BSB and RSB respectively,
+\begin{align}
+    \hat H_{\rm BSB} &= \frac{i\hbar \eta\Omega}{2}\left( \hat\sigma_+\hat a^\dagger e^{i\phi} + \hat\sigma_-\hat a e^{-i\phi}\right),\\
+    \hat H_{\rm RSB} &= \frac{i\hbar \eta\Omega}{2}\left(\hat\sigma_+\hat a e^{i\phi} + \hat\sigma_-\hat a^\dagger e^{-i\phi}\right),
+\end{align}
+The RSB is the Jaynes-Cummings Hamiltonian
+familiar from cavity QED, for the a quanta of energy oscillating between the
+atom excitation and a photon in the cavity mode. The BSB is known as the anti-Jaynes-Cummings.
+The dynamics of these two interactions for an initial state of $\ket{\da, 1}$ is shown in figure~\ref{fig:sidebands}.
+
+These provide a tool for coupling qubit and qumode.
+
+
+We note that the terms 2nd order in $\eta$ may not always be neglected. 
 \begin{equation}
     \label{eqn:exp_eta}
     X_2 = \eta^2(n + e^{2+} e^{2-})
