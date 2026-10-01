@@ -202,9 +202,9 @@ For the rest of this section the ion is assumed to be stationary, thus the motio
 
 When the laser is tuned to the qubit resonance, $\delta = 0$, the Hamiltonian becomes time-independent, 
 \begin{equation}
-\tilde H_I = \frac{\hbar\Omega}{2}\sigma_\phi,
+\tilde H_I = \frac{\hbar\Omega}{2}\hat\sigma_\phi,
 \end{equation}
-where $\sigma_\phi = \cos(\phi)\sigma_x -\sin(\phi)\sigma_y$.
+where $\hat\sigma_\phi = \cos(\phi)\hat\sigma_x -\sin(\phi)\hat\sigma_y$.
 Exponentiating, this yields the unitary propagator,
 \begin{equation}
     R_\phi(\theta) := \hat U(t, 0) = \begin{pmatrix}
@@ -246,64 +246,65 @@ axis of subsequent pulses.
 \subsection{Linear Paul Trap}
 \label{sec:trap_charge}
 \todo{
-At most 2 pages. No figures.\\
     \indent - Short intro to Paul and Penning traps.\\
-    \indent - Linear Paul trap, equations of motion\\
-    \indent - Show pseudo potential, secular and micromotion\\
-    \indent - Quick overview that secular gives us qumodes, while micromotion can cause some issues\\
-    \indent - Give useful equations i.e. $\omega \propto V_{\rm rf}$\\
-    \indent - Give ion spacing and axial mode frequencies from James, for radial modes, look at IRO script\\
 }
+From Earnshaw's theorem,
+$\nabla^2 V = 0,$ a stable stationary point in 3D cannot be realised
+using only static electric potentials, $V$, as if the potential is confining
+in two dimensions, it will be anti-confining in the third. Therefore, to
+achieve stable trapping, either an oscillating electric field (Paul
+trap~\cite{paul1990electromagnetic}), or a static magnetic field (Penning trap) is
+used.\\
 
 Most general equation,
 \begin{equation}
-    \Phi = \frac{V_\mathrm{RF}}{2}...
+    \Phi(x,y,z,t) = \frac{V_{\rm DC}}{2d^2}(2z^2-x^2-y^2)+\frac{V_{\rm RF}}{2\rho^2}\cos(\Omega_{\rm RF}t)(x^2-y^2),
 \end{equation}
 
+equation of motion in $x$ is then 
+\begin{equation}
+    m\frac{d^2x}{d t^2} =  \left(\frac{eV_{\rm DC}}{d^2}-\frac{eV_{\rm RF}}{\rho^2}\cos(\Omega_{\rm RF}t)\right)x,
+\end{equation}
+
+This is of the form for 
 Mathieu equation,
 \begin{equation}
-    \frac{d^2u_i}{d E^2} + a + q ....
+    \frac{d^2x}{d \tau^2} + (a - 2q\cos(2x))x = 0,
 \end{equation}
+where we have defined $\tau = \frac{\Omega_{\rm RF}t}{2}$ $a=\frac{4eV_{\rm DC}}{m\Omega_{\rm RF}^2d^2}$, and $q=\frac{2eV_{\rm RF}}{m\Omega_{\rm RF}^2\rho^2}$ . 
 
-$a$ gives something
-$q$ gives stability, stable for $q<$, heuristically want $q<$.
-Get $\omega_p$ potential.
-Can approximate this motion by pseudopotential with secular motion and micromotion
-\begin{equation}
-    \omega_{\rm axial} = 
-\end{equation}
-
-Give details of our asymmetric trap potentials
+gives stability, stable for $|a|,q^2\ll 1$.
+In this case the ion dynamics are approximated by,
 \begin{align}
-    \omega_{\rm upper} &= \\
-    \omega_{\rm lower} &= 
+    x(t) &\approx x_0 +  x_{\rm sec}(t)\left(1+\frac{q}{2}\cos(\Omega_{\rm RF}t)\right),\\
+    x_{\rm sec} &= \cos(\omega_{x}t),
 \end{align}
-
-For multiple ions, these modes go as:
-
-\begin{align}
-    \omega_{\rm radial, i} &= \\
-    \omega_{\rm axial, i} &= 
-\end{align}
-
-With ion spacing given by axial frequency (James)
+with secular mode frequency,
 \begin{equation}
-    \delta_z = ...
+    \omega_{x} = \frac{\Omega_{\rm RF}}{2}\sqrt{a + \frac{q^2}{2}}
+\end{equation}
+where we have secular and micromotion parts.
+Assuming $q^2\gg a$, this simplifies To
+\begin{equation}
+    \label{eqn:pseudo_pot}
+    \omega_{x} \approx \frac{eV_{\rm RF}}{\sqrt{2}m\Omega_{\rm RF}\rho^2}
 \end{equation}
 
-    From Earnshaw's theorem,
-    $\nabla^2 V = 0,$ a stable stationary point in 3D cannot be realised
-    using only static electric potentials, $V$, as if the potential is confining
-    in two dimensions, it will be anti-confining in the third. Therefore, to
-    achieve stable trapping, either an oscillating electric field (Paul
-    trap~\cite{paul1990electromagnetic}), or a static magnetic field (Penning trap) is
-    used.\\
-Will include pseudopotential relating $V_{RF}$ and $\Omega_{RF}$ to the radial mode frequencies $\omega_m$ (see Vera eqn 3.4),
-
-\todo{following eqn needed in apparatus iontrap section}
-\begin{equation}\label{eqn:pseudo_pot}
-    \omega_r \propto \frac{V_{RF}}{M\Omega_{RF}}.
+Similar form for $y(t)$, 
+$z(t)$ is direct harmonic motion
+\begin{equation}
+    \omega_{z} = \sqrt{\frac{2eV_{\rm DC}}{md^2}}.
 \end{equation}
+
+Time averaging over the micromotion.
+Can approximate this motion by pseudopotential with secular motion and micromotion.
+Qumodes are the secular part, micromotion can be issue.
+the resulting dynamics are well approximated as simple harmonic motion in 3D, corresponding to the potential,
+\begin{equation}
+    U_{\rm pseudo}(x,y,z) = \frac{m}{2}(\omega_{ x}^2 x^2 + \omega_{ y}^2 y^2 + \omega_{ z}^2 z^2),
+\end{equation}
+
+For $N$ ions, balance this confinement with Coulomb repulsion~\cite{james_quantum_1998}. Will get $3N$ common modes.
 
 \subsection{The Qumode}
 \todo{
@@ -355,7 +356,7 @@ Going into the interaction picture with respect to $hat H_{\rm osc}$, we find,
 where $\Omega = \frac{qx_0E_0}{\hbar}$. Expanding the oscillating field and assuming $\omega+ \omega_m \gg \Omega$, the fast oscillating terms are neglected giving,
 \begin{equation}
     \label{eqn:displace_H}
-    \tilde H_I \approx -\frac{\hbar \Omega}{2}(\hat a^\dagger e^{-i(\delta t+\phi)}+\hat ae^{i(\delta t+\phi)}),
+    \tilde H_I \approx \hat H_{\rm D} := -\frac{\hbar \Omega}{2}(\hat a^\dagger e^{-i(\delta t+\phi)}+\hat ae^{i(\delta t+\phi)}),
 \end{equation}
 where $\delta = \omega - \omega_m$.\\
 In the case of resonant driving, $\delta = 0$, the Hamiltonian becomes time-independent, and we recover the propagator
@@ -388,6 +389,13 @@ for a single closed loop is given by,
 \begin{equation}
     \Phi(T_1) = \frac{\pi\Omega^2}{2\delta^2}.
 \end{equation}
+
+For arbitrary time, total propagator is then,
+\begin{equation}
+    \label{eqn:displacement}
+    \hat U(t) = \hat D(\beta(t))e^{-i\Phi(t)}.
+\end{equation}
+
 The phase space dynamics for the off-resonant displacement is shown in figure~\ref{fig:displacement}~(b).\\
 
 
@@ -400,7 +408,7 @@ Going back to previous equation~\ref{eqn:light_matter} where we have already in 
     \tilde H_I \approx \hat H_{\rm osc} + \frac{\hbar\Omega}{2}\left(\hat\sigma_+ e^{i\eta(\hat a^\dagger+\hat a )}e^{-i(\delta t - \phi)} + {\rm h.c.} \right),
 \end{equation}
 
-where $\eta = 2kz_0\cos(\gamma)$ is Lamb-Dicke parameter, where $\gamma$ is angle between $k$-vector of optical field and the mode vector $\hat z$. Relates photon recoil to mode frequency.
+where $\eta = kz_0\cos(\gamma)$ is Lamb-Dicke parameter, where $\gamma$ is angle between $k$-vector of optical field and the mode vector $\hat z$. Relates photon recoil to mode frequency.
 
 Going into the interaction picture with respect $\hat H_{\rm osc}$, we find,
 
@@ -431,17 +439,17 @@ For the wavelength (729-nm) and mode frequencies ($\approx 3~\unit{\mega\hertz}$
 
 Go back to previous equation and assume wavepacket is small compared to wavelength, specifically $\eta^2(2\hat n+1)\ll 1$ then can expand to first order, 
 \begin{equation}
- \hat H_{\rm LD} = \frac{\hbar\Omega}{2}\hat\sigma_+ \left(\hat I+ i\eta(\hat a^\dagger e^{i\omega_m t}+\hat a e^{-i\omega t} ) + O(\eta^2)\right)e^{-i(\delta t - \phi)} + {\rm h.c.} ,
+ \hat H_{\rm LD} = \frac{\hbar\Omega}{2}\hat\sigma_+ \left(\hat I+ i\eta(\hat a^\dagger e^{i\omega_m t}+\hat a e^{-i\omega_m t} ) + O(\eta^2)\right)e^{-i(\delta t - \phi)} + {\rm h.c.} ,
 \end{equation}
 where $\hat I$ is the identity operator of the qumode.
 
 To further analyse the dynamics of this Hamiltonian, we consider three resonant regimes. 
 for $\delta = 0$, and assuming $\eta\Omega \ll \omega_m$ (adiabatic driving) then the non-motional term is in resonance, and we neglect the effect of the terms linear in $\eta$. We shall call this the carrier, and is identical (up to first order) to the Hamiltonian we considered exactly the interactions above for Rabi oscillations and Stark shift. 
 
-For $\delta = +\omega_m $, and $\delta = -\omega_m$, and assuming $\Omega \ll \omega_m$, we get BSB and RSB respectively,
+For $\delta = +\omega_m + \Delta $, and $\delta = -\omega_m - \Delta$, and assuming $\Omega \ll \omega_m$, we get BSB and RSB respectively,
 \begin{align}
-    \hat H_{\rm BSB} &= \frac{i\hbar \eta\Omega}{2}\left( \hat\sigma_+\hat a^\dagger e^{i\phi} + \hat\sigma_-\hat a e^{-i\phi}\right),\\
-    \hat H_{\rm RSB} &= \frac{i\hbar \eta\Omega}{2}\left(\hat\sigma_+\hat a e^{i\phi} + \hat\sigma_-\hat a^\dagger e^{-i\phi}\right),
+    \hat H_{\rm BSB} &= \frac{i\hbar \eta\Omega}{2}\left( \hat\sigma_+\hat a^\dagger e^{-i(\Delta t-\phi)} - \hat\sigma_-\hat a e^{i(\Delta t -\phi)}\right),\\
+    \hat H_{\rm RSB} &= \frac{i\hbar \eta\Omega}{2}\left(\hat\sigma_+\hat a e^{i(\Delta t + \phi)} - \hat\sigma_-\hat a^\dagger e^{-i(\Delta t +\phi)}\right),
 \end{align}
 The RSB is the Jaynes-Cummings Hamiltonian
 familiar from cavity QED, for the a quanta of energy oscillating between the
@@ -449,9 +457,10 @@ atom excitation and a photon in the cavity mode. The BSB is known as the anti-Ja
 The dynamics of these two interactions for an initial state of $\ket{\da, 1}$ is shown in figure~\ref{fig:sidebands}.
 
 These provide a tool for coupling qubit and qumode.
+\todo{Define $R_{\rm RSB}$}
 
 
-We note that the terms 2nd order in $\eta$ may not always be neglected. 
+\todo{We note that the terms 2nd order in $\eta$ may not always be neglected. }
 \begin{equation}
     \label{eqn:exp_eta}
     X_2 = \eta^2(n + e^{2+} e^{2-})
@@ -466,74 +475,31 @@ For high $n$ this causes issues.
 \subsection{The Spin-Dependent Force}
 \label{sec:SDF}
 
-\todo{
-    \indent - basics - look at Ozeri and other thesis \\
-    \indent - Hamiltonian. Give motional and spin phase definition \\
-    \indent - Derivation of MS bichromatic field implementation leading to $\hat\sigma x$ conditioning. \\
-    \indent - Need to at least find following relationships:\\
-    \indent - $\phi_s = \frac{\phi_\mathrm{RSB} + \phi_\mathrm{BSB}}{2}$\\
-    \indent - $\phi_m = \frac{\phi_\mathrm{RSB} - \phi_\mathrm{BSB}}{2}$\\
-    \indent - Creating a cat state? \\
-}
-
-From displacement eqn, could have SDF if we have extra spin-conditioning,
+From displacement in equation~\ref{eqn:displace_H}, what if we could add spin conditioning (e.g. $\hat\sigma_{\phi_s}$): get spin-dependent force, SDF,
 \begin{equation}
-    \hat H_{\rm SDF} = \hat\sigma_+ D(+\beta) + \hat\sigma- D(-\beta),
+    \hat H_{\rm SDF} = \hat\sigma_{\phi_s}\otimes\hat H_{\rm D}
 \end{equation}
-Dynamics now are spin-dependent. Will be useful!
+This SDF is used in this thesis for three applications. First is applying to two-qubits simultaneously for MS gate, next is applying to one qubit on resonance for motional state tomography, finally is applying two off-resonant-SDFs on one qubit for non-linear bosonic interactions.
 
+In this section we analyse how to generate an effective SDF using a combination of RSB and BSB fields.
+Next section we discuss using geometric phase for two-qubit entangling gates.
+
+The optical Mølmer-Sørensen (MS) scheme~\cite{sorensen2000entanglement} is used to generate the
+SDF via a bichromatic laser field. Bichromatic refers to the simultaneous
+application of two tones symmetrically detuned around the qubit carrier.
 How does MS interaction use bichromatic field to get here?
-\begin{align}
-    \hat H_{\rm bi} &= \sum,\\
-    & = ...
-\end{align}
-which recovers SDF with $\phi_s = \frac{\phi_\mathrm{RSB} + \phi_\mathrm{BSB}}{2}$, $\phi_m = \frac{\phi_\mathrm{RSB} - \phi_\mathrm{BSB}}{2}$, and $\Omega_{\rm SDF} = $.
+\begin{equation}
+    \hat H_{\rm bi} = \hat H_{\rm RSB} + \hat H_{\rm BSB},
+\end{equation}
+Label parameters with subscript $r$, $b$, for RSB and BSB respectively.
+Set parameters to $\Omega_r = \Omega_b = \Omega$, $\delta_r = \delta_b = \delta_g$.
+Expand Hamiltonian, and group together spin and motional terms, get,
+\begin{equation}
+    \hat H_{\rm bi} = \frac{\hbar \Omega_{\rm SDF}}{2} \hat\sigma_{\phi_s}\left(\hat a^\dagger e^{-i(\delta_g t + \phi_m)} + \hat a e^{i(\delta_g t +\phi_m)}\right),
+\end{equation}
+where SDF strength $\Omega_{\rm SDF} = \eta\Omega$ spin phase $\phi_s = \frac{\phi_b + \phi_r + \pi}{2}$ and motional phase $\phi_m = \frac{\phi_r - \phi_b}{2}$, and we have used, $\hat\sigma_\phi = \cos(\phi)\hat\sigma_x - \sin(\phi)\hat\sigma_y$.
+Comparing to equation~\ref{eqn:displace_H}, looks exactly like the desired displacement Hamiltonian now conditioned by $\sigma_{\phi_s}$.
 
-
-
-
-
-    The optical Mølmer-Sørensen (MS) scheme~\cite{sorensen2000entanglement} is used to generate the
-    SDF via a bichromatic laser field. Bichromatic refers to the simultaneous
-    application of two tones symmetrically detuned around the qubit carrier
-    frequency, with absolute detuning approximately equal to the motional mode
-    frequency, $\delta \approx \omega_{m}$. The resulting interaction, when
-    ignoring off-resonant and higher order couplings, is given by,
-    \begin{equation}
-        \hat{H}_{MS} = i\hbar \eta\Omega\hat{\sigma}_\phi\cos(\delta t) \left( \hat{a} e^{-i\omega_{m} t} + \hat{a}^\dagger e^{i\omega_{m} t} \right),
-    \end{equation}
-    where $\eta$ is the Lamb-Dicke parameter, $\Omega$ is the carrier Rabi
-    frequency, $\hat{a}(\hat{a}^\dagger)$ is the lowering (raising) operator, and
-    $\hat{\sigma}_\phi$ is the Pauli operator with $\hat{\sigma}_\phi = \cos(\phi)\hat{\sigma}_x + \sin(\phi)\hat{\sigma}_y$.
-    Applying the rotating wave approximation, and defining $\delta_g = \delta -
-    \omega_{m}$, the interaction Hamiltonian can be approximated
-    to,
-    \begin{equation}
-        \label{eqn:sdf}
-        \hat{H}_\mathrm{SDF} \approx \frac{i\hbar \eta\Omega}{2}~\hat{\sigma}_\phi \left( \hat{a} e^{-i\delta_g t} + \hat{a}^\dagger e^{i\delta_g t} \right).
-    \end{equation}
-    The trajectory of this displacement can be controlled by varying $\delta_g$: on
-    resonance, $\delta_g = 0$, corresponds to linear trajectories, whilst off resonance,
-    $\delta_g \neq 0$, corresponds to cyclic trajectories where after some duration $t =
-    2\pi/\delta_g$, the motion returns to the initial state (with perhaps some phase shift~\cite{haljan2005spin-dependent}). 
-
-\subsection{Geometric Phase Gates}
-\label{sec:Geometric Phase Gates}
-\todo{
-    \indent - Discuss goal of entangling gate\\
-    \indent - Point to Magnus derive geometric phase there\\
-    \indent - \textbf{Figure} Phase space dynamics (RS fig 2.3) \\
-    \indent - Talk about disentangling motion at end \\
-    \indent - Define propagator as $R_{xx}$ to match QEM chapter\\
-    \indent - Logic table for pi/2 pulse\\
-    \indent - Give very quick overview on adiabatic limit for this gate (mentioned in trap RF chain)\\
-    \indent - \textbf{Figure} Walsh modulation (Amy has section, RS sec 2.5.2)\\
-    \indent - Why Walsh modulation makes us less sensitive to mode frequency + decoherence of mode. Sim this\\
-    \indent - Highlight sqz 2q gate here \\
-}
-
-If applied to two qubits, replace $\sigma_x$ with $\sigma_x\otimes I + I\otimes\sigma_x$,
-work through derivation, we find dynamics highlighted in figure
 \begin{figure}
     \begin{center}
     % \noindent\includegraphics[width=0.667\linewidth]{
@@ -543,20 +509,17 @@ work through derivation, we find dynamics highlighted in figure
     \caption{
         \todo{Phase space motion with spin-conditioning for MS gate, also with walsh modulation.}
         }
-    \label{fig:sdf}
+    \label{fig:ms_trajectories}
 \end{figure}
-symmetric states traverse phase space, asymmetric states have forces cancel.
-
-Traversing phase space accumulated geometric phase. So get following relationship:
-Show truth table:
-
-Must ensure motion is disentangled at the end, otherwise tracing out leads to mixed state.
-
-Experimentally, large excursions are sensitive to decoherence, so multiloop is better.
-
-Walsh modulation
-Second, sensitivity to mode frequency drift is annoying, so flip phase in the middle.
-
+\subsection{Geometric Phase Gates}
+\label{sec:Geometric Phase Gates}
+\todo{
+    \indent - \textbf{Figure} Phase space dynamics (RS fig 2.3) \\
+    \indent - Talk about disentangling motion at end \\
+    \indent - Give very quick overview on adiabatic limit for this gate (mentioned in trap RF chain)\\
+    \indent - \textbf{Figure} Walsh modulation (Amy has section, RS sec 2.5.2)\\
+    \indent - Why Walsh modulation makes us less sensitive to mode frequency + decoherence of mode. Sim this\\
+}
     We perform two-qubit entangling gates using the Mølmer-Sørensen (MS)
     interaction~\cite{sorensen2000entanglement}. This interaction is the same described SDF from the
     previous section, but applied globally to two ions. The MS interaction
@@ -569,6 +532,57 @@ Second, sensitivity to mode frequency drift is annoying, so flip phase in the mi
     duration $t_g = 2n\pi/\delta_g$, where $n$ is the number of ``loops''. The MS gate is a universal two-qubit gate, and
     along with only single qubit gates, constitutes a universal gate set for
     discrete quantum algorithms.\\  
+
+Set spin phase, $\phi_s = 0$, so we have $\hat \sigma_x$ conditioned displacement.
+If applied to two qubits, replace $\hat\sigma_x$ with $\hat S_{xx}=\hat\sigma_x\otimes \hat I + \hat I\otimes\hat\sigma_x$, and set $\phi_m = 0$
+\begin{equation}
+    \hat H_{\rm MS} = \frac{\hbar \Omega_{\rm SDF}}{2}\hat S_{xx}(\hat a^\dagger e^{-i\delta_g t}+\hat a e^{i\delta_g t})
+\end{equation}
+
+Taking Magnus expansion, find same form as for motional displacement and geometric phase,
+\begin{equation}
+    \hat U_{\rm MS}(t) = \hat D(\beta(t))e^{-i\Phi(t)}.
+\end{equation}
+but now both $\beta$ and $\phi$ have spin conditioning,
+\begin{equation}
+    \beta(t) = \frac{\Omega_{\rm SDF}}{\delta_g}\sin\left(\frac{\delta_g t}{2}\right)ie^{-i(\delta_g t/2)}\hat S_{xx},
+\end{equation}
+\begin{equation}
+    \Phi(t) = \frac{\Omega_{\rm SDF}^2}{4\delta_g}\left(t-\frac{\sin(\delta_g t)}{\delta_g}\right)\hat S_{xx}^2.
+\end{equation}
+For loop closure time $T_n = \frac{2\pi n}{|\delta|}$, results in time-independent effective Hamiltonian, with no motional component, with propagator defined as,
+\begin{equation}
+    R_{xx}(\theta) := e^{-i\theta\hat\sigma_x\otimes\hat\sigma_x/2}
+\end{equation}
+where we have neglected any global phases,
+\begin{equation}
+\theta = \frac{\Omega_{\rm SDF}^2T_n}{\delta_g}.
+\end{equation}
+
+To maximally entangle two initially separable spins want $\theta=\pi/2$ so we get,
+\begin{align}
+\delta_g &= 2\sqrt{n}\Omega_{\rm SDF},\\
+T_n &= \frac{\pi\sqrt{n}}{\Omega_{\rm SDF}}.
+\end{align}
+For a $\hat S_{xx}$ gate applied to $\ket{\da\da}$ we have,
+\todo{Check Bell state phases}
+\begin{equation}
+    \hat R_{xx}\left(\frac{\pi}{2}\right) \ket{\da\da} = \frac{1}{\sqrt{2}}(\ket{\da\da}+i\ket{\ua\ua})
+\end{equation}
+
+
+we find dynamics highlighted in figure~\ref{fig:ms_trajectories}
+symmetric states traverse phase space, asymmetric states have forces cancel.
+
+Must ensure motion is disentangled at the end, otherwise tracing out leads to mixed state.
+\todo{detuning error?}
+
+Experimentally, large excursions are sensitive to decoherence, so multi-loop is better.
+\todo{heating error?}
+
+Walsh modulation
+Second, sensitivity to mode frequency drift is annoying, so flip phase in the middle.
+
 
 
 
