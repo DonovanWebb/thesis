@@ -140,45 +140,45 @@ entangling gates via the shared motional modes.
     To maximise the coupling of one transition, and suppress other possible transitions, the polarisation of the 729-nm laser can be set to $\gamma = \frac{\pi}{2}$ (black dashed line). This would be a good choice if high-strength coupling interactions are desired to minimise off-resonant driving of spectator interactions. If it is desirable to access multiple quadrupole transitions the setting $\gamma = \frac{\pi}{4}$ is a convenient choice.
     At the magnetic field strength of $\approx 5~\unit{\gauss}$, the relative frequency splitting and strengths of the interactions are shown for $\gamma = \frac{\pi}{2}$ and $\gamma=\frac{\pi}{4}$ in panels (b) and (c) respectively.\\
 
-    The particular choice of qubit, highlighted in figure~\ref{fig:ion},
-    $\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ 
-    with $\ket{\da}:=\ket{4S_{1/2},~m_j = -1/2}$, $\ket{\ua}:=\ket{3D_{5/2},~m_j = -5/2}$, is convenient as the 729-nm polarisation when set to $\gamma=\frac{\pi}{2}$ can maximise its coupling, and, by selection rules,
-    a closed-cycle transition for sideband cooling (details in \S~\ref{sec:Cooling}) is available using this transition. 
 
 \section{Spin}
-\todo{Short intro}
-
 \subsection{The Qubit}
 
-
-
-with time evolution defined by time-independent Hamiltonian,
+The particular choice of qubit, highlighted in figure~\ref{fig:ion},
+$\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ 
+with $\ket{\da}:=\ket{4S_{1/2},~m_j = -1/2}$, $\ket{\ua}:=\ket{3D_{5/2},~m_j = -5/2}$, is convenient as the 729-nm polarisation when set to $\gamma=\frac{\pi}{2}$ can maximise its coupling, and, by selection rules,
+a closed-cycle transition for sideband cooling (details in \S~\ref{sec:Cooling}) is available using this transition. \\
+The computational eigenstates of the qubit, $\ket{\da}$, $\ket{\ua}$, have eigenvalues,
+\begin{equation}
+    \hat \sigma_z \ket{\da} = -\ket{\da},~~~~~\hat \sigma_z \ket{\ua} = +\ket{\ua},
+\end{equation}
+and the dynamics of the system are giving by the Hamiltonian,
 \begin{equation}
     \hat H_s = \frac{\hbar\omega_0}{2} \hat\sigma_z,
 \end{equation}
-where $\omega_0 = \frac{E_\ua - E_\da}{\hbar}$ is the qubit frequency.
-Now we look at how to manipulate this spin state by coupling to external fields.
+where $\omega_0$ is the qubit transition frequency.\\
+We define transition elements $\hat\sigma_+ = \ket{\ua}\bra{\da}$, and $\hat\sigma_- = \ket{\da}\bra{\ua}$.
+The next section outlines how to physically realise such transitions.
 
 
 \subsection{Coherent Spin Control}
 \label{sec:qubit_control}
 
-To manipulate the spin-state we consider periodic perturbations given by interaction Hamiltonian $\hat H_I(t)$, giving full time dependent Hamiltonian,
+To manipulate the spin-state we consider periodic perturbations given by the interaction Hamiltonian $\hat H_I(t)$, with the full time dependent Hamiltonian of the system given by,
 \begin{equation}
-    \hat H(t) = \hat H_s + \hat H_I(t),
+    \hat H(t) = \hat H_s + \hat H_I(t).
 \end{equation}
-Treating the ion as a two-level spin-like system, we consider the interaction between its
-electronic state and a spatially varying electromagnetic field.
-
-For a travelling optical field the transition-driving part of the interaction is generally given by,
+The perturbation is treated semi-classically, consisting of the interaction between the
+quantised electronic states of the ion and a classical spatially varying electromagnetic field.\\
+For a travelling monochromatic optical field (almost always from a laser) the transition-driving part of the interaction is generally given by,
 \begin{equation}
     \hat H_I = \frac{\hbar\Omega}{2}(\hat\sigma_+ + \hat\sigma_-)\left(e^{i(\vec k\cdot \vec R - \omega t + \phi)} + e^{-i(\vec k\cdot \vec R - \omega t +\phi)}\right),
 \end{equation}
-where $\Omega$ is the Rabi frequency, $R$ is the ion position, $\omega$ is the optical frequency, and $\phi$ is some phase.
+where $\Omega$ is the Rabi frequency, $\vec R$ is the ion position, $\omega$ is the optical frequency, and $\phi$ is the optical phase.
 The Rabi frequency contains the specifics of the physical light-matter interaction, $\hbar\Omega\propto\bra{\ua}\hat H_I\ket{\da}$.
-Assuming the phase variation of the field across the electrons spatial extent is small, we can expand the field around the ion position, $R$, for small relative electron position $r$, to generate a series
-of electric and magnetic multipole interactions. For the qubit transition considered here ($S$ manifold to $D$ manifold) the electric dipole interaction is forbidden, as such in this thesis we exclusively consider the electric quadrupole interaction.\\
-For plane travelling optical field given by,
+Assuming the phase variation of the optical field across the electrons spatial extent is small, the perturbation can be expanded around the ion position, $R$, for small relative electron position $r$, to generate a series
+of electric and magnetic multipole interactions. For the qubit transition considered here the electric dipole interaction is forbidden, as such in this thesis we exclusively consider the electric quadrupole interaction.\\
+For a plane travelling optical field given by,
 \begin{equation}
     \vec E = E_0 \epsilon \cos(\vec k\cdot \vec R - \omega t + \phi),
 \end{equation}
@@ -186,22 +186,21 @@ the quadrupole Rabi frequency is given by,
 \begin{equation}
     \Omega_{\rm EQ} = \frac{1}{6\hbar}\sum_{i,j=\{x,y,z\}}\bra{\da}Q_{ij}\ket{\ua}\partial_i E_j\rvert_R
 \end{equation}
-where $Q_{ij}$ is the quadrupole tensor. For reference, for the simpler electric dipole, the Rabi frequency is given by
-$\Omega_{\rm ED} = \frac{1}{\hbar}\sum_j\bra{\da}d_j\ket{\ua}E_j$, where $d_j$ is the dipole momement. We shall consider the general Rabi frequency, $\Omega$, for the rest of this section.\\
+where $Q_{ij}$ is the quadrupole tensor~\cite{james_quantum_1998}\footnote{For reference, the simpler electric dipole interaction has Rabi frequency is given by
+$\Omega_{\rm ED} = \frac{1}{\hbar}\sum_j\bra{\da}d_j\ket{\ua}E_j$, where $d_j$ is the dipole moment}. Apart from the dependence on polarisation and $k$-vector discussed in figure~\ref{fig:quadrupole}, the details of the quadrupole derived Rabi-frequency are not relevant for the remainder of this section, and a general Rabi frequency, denoted by $\Omega$, is instead considered.\\
 
-To evaluate the dynamics of $\hat H_I$ we go to a frame rotating at the qubit frequency, $\omega_0$, by going into the interaction picture with respect to $\hat H_s$: $\tilde H_I = \hat U_s^\dagger \hat H_I \hat U_s$ with $\hat U_s = e^{-i\hat H_s t/\hbar}$. Defining a relative detuning between the qubit and optical frequency as $\delta = \omega - \omega_0$, and neglecting fast oscillating terms with frequency $\omega + \omega_0$, the Hamiltonian is approximated by, 
+To evaluate the dynamics of $\hat H_I$ we go to a frame rotating at the qubit frequency, $\omega_0$. This interaction picture with respect to $\hat H_s$ is $\tilde H_I = \hat U_s^\dagger \hat H_I \hat U_s$ with $\hat U_s = e^{-i\hat H_s t/\hbar}$. Defining a relative detuning between the qubit and optical frequency as $\delta = \omega - \omega_0$, and neglecting fast oscillating terms (making the rotating wave approximation) with frequency $\omega + \omega_0$, the Hamiltonian is approximated by, 
 \begin{equation}
     \label{eqn:light_matter}
     \tilde H_I \approx \frac{\hbar\Omega}{2}\hat\sigma_+ e^{i(\vec k\cdot \vec R - \delta t + \phi)} + {\rm h.c.}~~.
 \end{equation}
-The dynamics due to the fast oscillating terms are safely neglected in the case of weak coupling $\Omega \ll \omega + \omega_0$.
-
-For the rest of this section the ion is assumed to be stationary, thus the motional term contributes a simple phase factor, $\phi' = \phi + \vec k\cdot\vec R$. 
+The dynamics due to the fast oscillating terms are safely neglected in the case of weak coupling $\Omega \ll \omega + \omega_0$.\\
+For the rest of this subsection the ion is assumed to be stationary over time, thus the motional term contributes a simple phase factor which can be absorbed into a global phase, $\phi' = \phi + \vec k\cdot\vec R$. 
 
 \subsubsection{Rabi Oscillations}
 \label{sec:rabi_oscillations}
 
-When the laser is tuned to the qubit resonance, $\delta = 0$, the Hamiltonian becomes time-independent, 
+When the optical field frequency is tuned to the qubit resonance, $\delta = 0$, the Hamiltonian becomes time-independent, 
 \begin{equation}
 \tilde H_I = \frac{\hbar\Omega}{2}\hat\sigma_\phi,
 \end{equation}
@@ -209,19 +208,18 @@ where $\hat\sigma_\phi = \cos(\phi)\hat\sigma_x -\sin(\phi)\hat\sigma_y$.
 Exponentiating\footnote{Using identity $e^{-i\theta \vec{n}\cdot\vec{\sigma}/2}
 =\hat I \cos\left(\frac{\theta}{2}\right)-i(\vec{n}\cdot\vec{\sigma})\sin\left(\frac{\theta}{2}\right)$}, this yields the unitary propagator,
 \begin{equation}
-    R_\phi(\theta) := \hat U(t, 0) = \begin{pmatrix}
+    \hat R_\phi(\theta) := \hat U(t, 0) = \begin{pmatrix}
         \cos(\theta/2) & -ie^{i\phi}\sin(\theta/2) \\
         -ie^{-i\phi}\sin(\theta/2) & \cos(\theta/2) 
-    \end{pmatrix}
+    \end{pmatrix},
 \end{equation}
-with $\theta = \Omega t$. Varying phase $\phi$ then sets the rotation axis in the $xy$-plane, with $R_x:=e^{-i\theta\hat\sigma_x/2}$ defined for $\phi=0$. 
-
-Applying single qubit rotations to the initial state $\ket{\da}$ and observing the spin populations results in Rabi oscillations,
+which is a rotation on the Bloch sphere by angle $\theta = \Omega t$, around the Bloch vector, $\hat\sigma_\phi$. Varying phase $\phi$ then sets the rotation axis in the $xy$-plane, with $\hat R_x(\theta):=e^{-i\theta\hat\sigma_x/2}$ defined for $\phi=0$. 
+Applying single qubit rotations to the initial state $\ket{\da}$ and observing the spin populations results in spin-state transfers, termed Rabi oscillations,
 \begin{align}
-P_\ua &= |\bra{\ua}R_x(\theta)\ket{\da}|^2\\
+P_\ua &= |\bra{\ua}\hat R_x(\Omega t)\ket{\da}|^2\\
 &= \sin^2\left(\frac{\Omega t}{2}\right).
 \end{align}
-where $P_\da$ is the population observed in $\ket{\da}$.
+where $P_\ua$ is the population observed in $\ket{\ua}$.
 
 \subsubsection{AC Stark Shifts}
 
@@ -232,103 +230,124 @@ times. The Magnus expansion is utilised to evaluate the dynamics. Details are
 given in appendix~\ref{app:stark_shift}, with the resulting dynamics
 approximating $\hat\sigma_z$ rotations of the form,
 \begin{equation}
-R_z := e^{-i\theta\hat\sigma_z/2}, ~~~~ \theta = \frac{\Omega^2t}{2\Delta}.
+\hat R_z := e^{-i\theta\hat\sigma_z/2}, ~~~~ \theta = \frac{\Omega^2t}{2\Delta}.
 \end{equation}
 
-In this thesis these $R_z$ rotations are often caused unintentionally due to
+In this thesis these $\hat R_z$ rotations are often caused unintentionally due to
 off-resonant coupling of other electronic transitions when addressing the qubit
 transition. As such, for a given desired interaction and beam power, these Stark
 shift rotations are calibrated and accounted for by updating the target rotation
-axis of subsequent pulses.
+axis of subsequent pulses.\\
 
+This concludes the spin-only control of our system. To access two-body
+interactions, such as two-qubit entangling gates, we must first introduce the
+shared motion of the qubits.
 
 \section{Motion}
-\todo{Short opening}
+The potential used to trap the ions also dictates their motion. Here we outline
+the motion of a single trapped ion in a radio-frequency (RF) Paul trap, and go on to
+define the emergent qumodes, and two representations to describe their state.
 
 \subsection{Linear Paul Trap}
 \label{sec:trap_charge}
-\todo{
-    \indent - Short intro to Paul and Penning traps.\\
-}
+
 From Earnshaw's theorem,
 $\nabla^2 V = 0,$ a stable stationary point in 3D cannot be realised
-using only static electric potentials, $V$, as if the potential is confining
-in two dimensions, it will be anti-confining in the third. Therefore, to
-achieve stable trapping, either an oscillating electric field (Paul
-trap~\cite{paul1990electromagnetic}), or a static magnetic field (Penning trap) is
-used.\\
+using only static electric potentials. If the potential is confining
+in two dimensions, it must be anti-confining in the third. Therefore, to
+achieve stable trapping, either a supplementary oscillating electric field, as used in RF Paul
+traps~\cite{paul_electromagnetic_1990}, or a static magnetic field as used in Penning
+traps~\cite{dehmelt_experiments_1990}, is required.\\
 
-Most general equation,
+In this thesis we use an RF Paul trap (hardware details in~\S~\ref{sec:The Ion
+Trap}). Radial confinement is provided by an oscillating radial electric
+potential, while the axial confinement is provided by a static axial potential.
+Both potentials are considered to be ideal quadrupolar electric potential. The combined potential is given as,
 \begin{equation}
+    \label{eqn:potential}
     \Phi(x,y,z,t) = \frac{V_{\rm DC}}{2d^2}(2z^2-x^2-y^2)+\frac{V_{\rm RF}}{2\rho^2}\cos(\Omega_{\rm RF}t)(x^2-y^2),
 \end{equation}
-
-equation of motion in $x$ is then 
+where $V_{\rm DC}$ is the voltage applied to axial ``endcap'' electrodes which are distance $d$ from the trapping point. $V_{\rm RF}$ is the RF voltage with frequency $\Omega_{\rm RF}$ applied to the radial RF electrodes which are distance $\rho$ from the trapping point. This potential considers a highly symmetric field configuration with the axial potential confining in the $z$ direction while equally anti-confining in both radial directions.
+While the radial potential has no no axial component, and initially confines in $x$ and anti-confines in $y$, but switches periodically to confining in $y$ and anti-confining in $x$.\\
+From this potential the equation of motion in the radial $x$ for a trapped ion with charge $+e$ is,
 \begin{equation}
     m\frac{d^2x}{d t^2} =  \left(\frac{eV_{\rm DC}}{d^2}-\frac{eV_{\rm RF}}{\rho^2}\cos(\Omega_{\rm RF}t)\right)x,
 \end{equation}
-
-This is of the form for 
-Mathieu equation,
+where $m$ is the mass of the ion. This motion is thus described by the Mathieu equation,
 \begin{equation}
     \frac{d^2x}{d \tau^2} + (a - 2q\cos(2\tau))x = 0,
 \end{equation}
-where we have defined $\tau = \frac{\Omega_{\rm RF}t}{2}$ $a=-\frac{4eV_{\rm DC}}{m\Omega_{\rm RF}^2d^2}$, and $q=-\frac{2eV_{\rm RF}}{m\Omega_{\rm RF}^2\rho^2}$ . 
-for small-$q$ pseudopotential regime, stable when $|a|,q^2\ll 1$.
-In this case the ion dynamics are approximated by,
-\begin{align}
-    x(t) &\approx x_{\rm eq} +  x_{\rm sec}(t)\left(1+\frac{q}{2}\cos(\Omega_{\rm RF}t)\right),\\
-    x_{\rm sec} &= A\cos(\omega_{x}t+\theta_0),
-\end{align}
-with secular mode frequency,
+where we have defined $\tau = \frac{\Omega_{\rm RF}t}{2}$ $a=-\frac{4eV_{\rm DC}}{m\Omega_{\rm RF}^2d^2}$, and $q=-\frac{2eV_{\rm RF}}{m\Omega_{\rm RF}^2\rho^2}$. 
+Analysis of the two parameters, $a$, $q$, of the Mathieu equation yield regions of stability (motional amplitude converges) and instability (motional amplitude diverges). For the ``lowest stability region'', the regime relevant to our trap, the motion is stable when $|a|,q^2\ll 1$~\cite{leibfried_quantum_2003}.
+In this regime the ion dynamics are well approximated by the motion,
 \begin{equation}
-    \omega_{x} = \frac{\Omega_{\rm RF}}{2}\sqrt{a + \frac{q^2}{2}}
+    x(t) \approx x_{\rm eq} +  x_{\rm sec}(t)\left(1+\frac{q}{2}\cos(\Omega_{\rm RF}t)\right),
 \end{equation}
-where we have secular and micromotion parts.
-Assuming $q^2\gg a$, this simplifies To
+where $x_{\rm eq}$ is the equilibrium position, and $x_{\rm sec}$ is a secular motional term,
 \begin{equation}
-    \label{eqn:pseudo_pot}
-    \omega_{x} \approx \frac{eV_{\rm RF}}{\sqrt{2}m\Omega_{\rm RF}\rho^2}
+    x_{\rm sec}(t) = A\cos(\omega_{x}t+\theta_0),
 \end{equation}
-
-Similar form for $y(t)$, 
-$z(t)$ is direct harmonic motion
+with phase, $\theta_0$ and amplitude, $A$, set by initial conditions and a frequency, 
+\begin{equation}
+    \omega_{x} = \frac{\Omega_{\rm RF}}{2}\sqrt{a + \frac{q^2}{2}}.
+\end{equation}
+A similar form exists for motion in $y$. The non-secular component of the motion is termed ``micromotion'', and provides a fast oscillation superimposed on the secular motion. 
+Due to the different time-scales of the two motional terms, and the relatively smaller amplitude of the micromotion term, averaging over periods greater than $\frac{1}{\Omega_{\rm RF}}$ often is sufficient to negate the effects of the fast oscillations. In this case, the motion is well described by simple harmonic motion in 3D with a ``pseudopotential'' given by,
+\begin{equation}
+    U_{\rm pseudo}(x,y,z) = \frac{m}{2}(\omega_{ x}^2 x^2 + \omega_{ y}^2 y^2 + \omega_{ z}^2 z^2).
+\end{equation}
+The axial mode is given exclusively by the DC term,
 \begin{equation}
     \omega_{z} = \sqrt{\frac{2eV_{\rm DC}}{md^2}}.
 \end{equation}
-
-Can rewrite \todo{to highlight radial anticonfining} $\omega_x = \sqrt{\omega_p^2 - \frac{\omega_z^2}{2}}$
-
-Time averaging over the micromotion.
-Can approximate this motion by pseudopotential with secular motion and micromotion.
-Qumodes are the secular part, micromotion can be issue.
-the resulting dynamics are well approximated as simple harmonic motion in 3D, corresponding to the potential,
+The radial terms are given by,
 \begin{equation}
-    U_{\rm pseudo}(x,y,z) = \frac{m}{2}(\omega_{ x}^2 x^2 + \omega_{ y}^2 y^2 + \omega_{ z}^2 z^2),
+    \label{eqn:pseudo_pot}
+    \omega_{x} = \omega_{y}  = \sqrt{\omega_r^2 - \omega_z^2},
 \end{equation}
-
-For $N$ ions, balance this confinement with Coulomb repulsion~\cite{james_quantum_1998}. Will get $3N$ common modes.
+where $\omega_r$ is the radial trapping frequency in the limit of $q^2\gg a$, 
+\begin{equation}
+    \omega_{r} = \frac{eV_{\rm RF}}{\sqrt{2}m\Omega_{\rm RF}\rho^2}.
+\end{equation}
+The axial potential then acts to ``defocus'' the radial confinement, with an
+increased axial frequency leading to a reduces radial. This equal defocussing of
+the two radials is due to the assumed electrode symmetry of the idealised
+potential in equation~\ref{eqn:potential}. If the static potential acts
+asymmetrically on the two radial dimensions, this breaks the degeneracy of the
+radial modes. In this thesis we enforce a strong DC radial asymmetry to ensure
+the two radial modes are well frequency separated (electrode configuration
+details in~\S~\ref{sec:Trap DC Voltages}).\\
+For $N$ ions there are $3N$ common secular motional modes, with mode frequencies
+and ion spacing set by the pseudopotential and the Coulomb repulsion between
+ions~\cite{james_quantum_1998}.
 
 \subsection{The Qumode}
-\todo{
-    \indent - Get all the way to quantisation $H_{osc} \propto (a^\dagger a + 1/2)$\\
-}
 
-The secular motion resulting from the pseudopotential is well approximated by the harmonic oscillator for small amplitudes. The quantum harmonic oscillator (qumode) is given by\todo{Check convention for ch6},
+This secular motion is well approximated by simple harmonic oscillations for amplitudes small compared to the length scale of any anharmonicities in the pseudopotential. When the motion is suitably damped to a temperature of order the mode frequency, $T\sim \hbar \omega_x/k_B$, a quantised description of the oscillator is required. 
+The quantum harmonic oscillator (qumode) is given by\todo{Check convention for ch6},
 \begin{equation}
-    \hat H_{\rm osc} = \frac{1}{2m}\hat p^2 + \frac{1}{2}m\omega_m^2\hat x^2,
+    \hat H_{\rm osc} = \frac{1}{2m}\hat p^2 + \frac{1}{2}m\omega_x^2\hat x^2,
 \end{equation}
-where $m$ is the ion mass, $\omega_m$ is the motional mode frequency, and $\hat x$, $\hat p$ are the position and momentum operators respectively. Expressed in terms of phonon creation and annihilation operators, $\hat a^\dagger$ and $\hat a$, 
+where $m$ is the ion mass, $\omega_x$ is the motional mode frequency, and $\hat x$, $\hat p$ are the position and momentum operators respectively. A description of the oscillator state may be given in phase space using the $\hat x$ and $\hat p$ operators.
+In the phonon, or Fock-state, representation, the creation and annihilation operators, $\hat a^\dagger$ and $\hat a$,
+are related to this picture by,
 \begin{align}
     \hat x &= x_0 (\hat a^\dagger + \hat a),\\
     \hat p &= ip_0 (\hat a^\dagger - \hat a),
 \end{align}
-where $x_0=\sqrt{\frac{\hbar}{2m\omega_m}}$ is the ground state wave-packet extent, and $p_0 = \sqrt{\frac{\hbar m \omega_m}{2}}$ is the ground state momenta.\\
-The oscillator Hamiltonian is then given simply by,
+where $x_0=\sqrt{\frac{\hbar}{2m\omega_x}}$ is the ground state wave-packet extent, and $p_0 = \sqrt{\frac{\hbar m \omega_x}{2}}$ is the ground state momenta.
+These ladder operators provide a basis to describe the oscillator state. They act on the oscillator energy levels as,
 \begin{equation}
-    \hat H_{\rm osc} = \hbar \omega_m \left(\hat n + \frac{1}{2}\right),
+    \hat a^\dagger\ket{n} = \sqrt{n+1}\ket{n+1},~~~~ \hat a\ket{n} = \sqrt{n}\ket{n-1},
 \end{equation}
-where the number operator $\hat n = \hat a^\dagger \hat a$. This ``number'' or Fock-state representation suggested by this Hamiltonian labels eigenstates in the Fock basis as $\ket{n}=\frac{\hat a^{\dagger n}}{\sqrt{n!}} \ket{0}$. In the next section we describe coherent excitation of the qumode, and introduce the phase-space representation that naturally describe it.
+where $n$ is the Fock state.
+The oscillator Hamiltonian is then given succinctly by,
+\begin{equation}
+    \hat H_{\rm osc} = \hbar \omega_x \left(\hat n + \frac{1}{2}\right),
+\end{equation}
+where the number operator $\hat n = \hat a^\dagger \hat a$.
+In this thesis we will denote an oscillators state either in this Fock-state basis, where,
+$\ket{n}=\frac{\hat a^{\dagger n}}{\sqrt{n!}} \ket{0}$, or in a coherent-state basis, $\ket{\beta} = \hat D(\beta)\ket{0}$, where $\hat D(\beta)$ is the displacement operator which we shall explore in the following section.
 
 \begin{figure}
     \begin{center}
@@ -349,29 +368,28 @@ We now consider driving the qumode by a near-resonant spatially uniform electric
 \end{equation}
 with the Hamiltonian given by,
 \begin{equation}
-    \hat H(t) = \hat H_{\rm osc} + \hat H_I, ~~~~~~ \hat H_I = -q\hat xE(t),
+    \hat H(t) = \hat H_{\rm osc} + \hat H_I, ~~~~~~ \hat H_I = -e\hat xE(t),
 \end{equation}
-where $q$ is the ion charge. 
-Going into the interaction picture with respect to $hat H_{\rm osc}$, we find,
+where $+e$ is the ion charge. 
+Going into the interaction picture with respect to $\hat H_{\rm osc}$, we find,
 \begin{equation}
-    \tilde H_I = -\hbar \Omega\cos(\omega t + \phi) (\hat a^\dagger e^{i\omega_m t}+\hat ae^{-i\omega_m t}),
+    \tilde H_I = -\hbar \Omega\cos(\omega t + \phi) (\hat a^\dagger e^{i\omega_x t}+\hat ae^{-i\omega_x t}),
 \end{equation}
-where $\Omega = \frac{qx_0E_0}{\hbar}$. Expanding the oscillating field and assuming $\omega+ \omega_m \gg \Omega$, the fast oscillating terms are neglected giving,
+where $\Omega = \frac{ex_0E_0}{\hbar}$. Expanding the oscillating field and assuming $\omega+ \omega_x \gg \Omega$, the fast oscillating terms are neglected giving,
 \begin{equation}
     \label{eqn:displace_H}
     \tilde H_I \approx \hat H_{\rm D} := -\frac{\hbar \Omega}{2}(\hat a^\dagger e^{-i(\delta t+\phi)}+\hat ae^{i(\delta t+\phi)}),
 \end{equation}
-where $\delta = \omega - \omega_m$.\\
-In the case of resonant driving, $\delta = 0$, the Hamiltonian becomes time-independent, and we recover the propagator
+where $\delta = \omega - \omega_x$.\\
+In the case of resonant driving, $\delta = 0$, the Hamiltonian becomes time-independent, and we recover the propagator,
 \begin{align}
-    \hat U &= e^{i\frac{\Omega t}{2}(\hat a^\dagger e^{-i\phi}+\hat a e^{i\phi})},\\
+    \hat D(\beta) := \hat U(t) &= e^{i\frac{\Omega t}{2}(\hat a^\dagger e^{-i\phi}+\hat a e^{i\phi})},\\
     &= e^{\beta \hat a^\dagger - \beta^*\hat a},
 \end{align}
 where the second expression is the conventional displacement operator,
 $\hat D(\beta)$, where here $\beta = \frac{\Omega t}{2}ie^{-i\phi}$. The
 displacement operator is used in the coherent state representation of the
-oscillator, where the eigenstate of the annihilation operator, $\hat a$, is
-given by $\ket{\beta} = \hat D(\beta)\ket{0}$. The action of the displacement
+oscillator, $\ket{\beta} = \hat D(\beta)\ket{0}$, where $\ket{\beta}$ is the eigenstate of the annihilation operator, $\hat a\ket{\beta} = \beta\ket{\beta}$.  The action of the displacement
 operator may be visualised in phase space, shown for resonance in
 figure~\ref{fig:displacement}~(a).\\
 
@@ -416,7 +434,7 @@ where $\eta = kx_0\cos(\gamma)$ is Lamb-Dicke parameter, where $\gamma$ is angle
 Going into the interaction picture with respect $\hat H_{\rm osc}$, we find,
 
 \begin{equation}
-    \vardbtilde H_I \approx \frac{\hbar\Omega}{2}\hat\sigma_+ e^{i\eta(\hat a^\dagger e^{i\omega_m t}+\hat a e^{-i\omega_m t} )}e^{-i(\delta t - \phi)} + {\rm h.c.} ~~~.
+    \vardbtilde H_I \approx \frac{\hbar\Omega}{2}\hat\sigma_+ e^{i\eta(\hat a^\dagger e^{i\omega_x t}+\hat a e^{-i\omega_x t} )}e^{-i(\delta t - \phi)} + {\rm h.c.} ~~~.
 \end{equation}
 
 For the wavelength (729-nm) and mode frequencies ($\approx 3~\unit{\mega\hertz}$) considered in this thesis, the Lamb-Dicke parameter is of order $\eta \approx 0.05$.
@@ -442,14 +460,14 @@ For the wavelength (729-nm) and mode frequencies ($\approx 3~\unit{\mega\hertz}$
 
 Go back to previous equation and assume wavepacket is small compared to wavelength, specifically $\eta^2(2\hat n+1)\ll 1$ then can expand to first order, 
 \begin{equation}
- \hat H_{\rm LD} = \frac{\hbar\Omega}{2}\hat\sigma_+ \left(\hat I+ i\eta(\hat a^\dagger e^{i\omega_m t}+\hat a e^{-i\omega_m t} ) + O(\eta^2)\right)e^{-i(\delta t - \phi)} + {\rm h.c.} ,
+ \hat H_{\rm LD} = \frac{\hbar\Omega}{2}\hat\sigma_+ \left(\hat I+ i\eta(\hat a^\dagger e^{i\omega_x t}+\hat a e^{-i\omega_x t} ) + O(\eta^2)\right)e^{-i(\delta t - \phi)} + {\rm h.c.} ,
 \end{equation}
 where $\hat I$ is the identity operator of the qumode.
 
 To further analyse the dynamics of this Hamiltonian, we consider three resonant regimes. 
-for $\delta = 0$, and assuming $\eta\Omega \ll \omega_m$ (adiabatic driving) then the non-motional term is in resonance, and we neglect the effect of the terms linear in $\eta$. We shall call this the carrier, and is identical (up to first order) to the Hamiltonian we considered exactly the interactions above for Rabi oscillations and Stark shift. 
+for $\delta = 0$, and assuming $\eta\Omega \ll \omega_x$ (adiabatic driving) then the non-motional term is in resonance, and we neglect the effect of the terms linear in $\eta$. We shall call this the carrier, and is identical (up to first order) to the Hamiltonian we considered exactly the interactions above for Rabi oscillations and Stark shift. 
 
-For $\delta = +\omega_m + \Delta $, and $\delta = -\omega_m - \Delta$, and assuming $\Omega \ll \omega_m$, we get BSB and RSB respectively,
+For $\delta = +\omega_x + \Delta $, and $\delta = -\omega_x - \Delta$, and assuming $\Omega \ll \omega_x$, we get BSB and RSB respectively,
 \begin{align}
     \hat H_{\rm BSB} &= \frac{i\hbar \eta\Omega}{2}\left( \hat\sigma_+\hat a^\dagger e^{-i(\Delta t-\phi)} - \hat\sigma_-\hat a e^{i(\Delta t -\phi)}\right),\\
     \hat H_{\rm RSB} &= \frac{i\hbar \eta\Omega}{2}\left(\hat\sigma_+\hat a e^{i(\Delta t + \phi)} - \hat\sigma_-\hat a^\dagger e^{-i(\Delta t +\phi)}\right),
