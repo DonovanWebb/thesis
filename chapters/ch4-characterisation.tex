@@ -397,7 +397,7 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     Figure~\ref{fig:rbm}~(b) shows the average survival populations for a log-sampled range of sequence lengths up to $m_\mathrm{max} = 2048$ Clifford gates. Each point corresponds to an average over $r=50$ randomisations, and $s=50$ sample repeats per randomisation. The solid line follows equation~\ref{eq:RBM_decay}, with fit parameters, $\varepsilon_c=1.9(1)\times10^{-3}$, and $\varepsilon_\mathrm{sp}=3(1)\times10^{-3}$. The dashed line is the expected asymptote for a fully depolarised qubit. Error bars show the standard error of the average survivals for each random sequence for a given length $m$. From $\varepsilon_c$, we find a single $R_x(\frac{\pi}{2})$ average fidelity of $\mathcal{F}_{\pi/2}=1-\frac{\varepsilon_c}{2.17}=99.913(2)\%$.
     The measured SPAM is consistent with the independently characterised state preparation (section~\ref{sec:Stateprep}) and measurement (section~\ref{sec:Measurement}) errors of $\sim 10^{-3}$, and $\sim 10^{-4}$ respectively.\\
 
-    We attribute the single-qubit rotation error to the finite-temperature of the radial modes. Expanding equation~\ref{eqn:exp_eta} to second order in the Lamb-Dicke parameter, the carrier Rabi frequency is modulated depending on motional Fock state, $n$, as~\cite{leibfried_quantum_2003},
+    We attribute the single-qubit rotation error to the finite-temperature of the radial modes. Expanding the light-matter interaction Hamiltonian given in equation~\ref{eqn:LD_regime} to second order in the Lamb-Dicke parameter, the carrier Rabi frequency is modulated depending on motional Fock state, $n$, as~\cite{leibfried_quantum_2003},
     \begin{equation}
     \Omega_n\approx \Omega\left(1-\eta^2\left(n+\frac{1}{2}\right)\right),
     \end{equation}
@@ -1099,12 +1099,16 @@ sequences~\cite{fang_crosstalk_2022}.
 
     To complete the demonstration of elementary operations required for
     universal qubit control, we characterise the performance of two-qubit
-    entangling gates via the MS interaction on our apparatus.\\
+    entangling gates, $R_{xx}(\theta)$, via the MS interaction on our apparatus.\\
     This interaction, as discuss in~\S~\ref{sec:Geometric Phase Gates}, is
     implemented through a detuned SDF.
-    To reduce the sensitivity to both
-    systematic and incoherent motional errors a Walsh modulated two-loop gate
-    sequence is used.\\
+    To reduce the sensitivity to incoherent motional errors such as heating and dephasing, a multi-loop 
+    sequence is used. Specifically, we use a ``Walsh-modulated two-loop'' sequence consisting of two complete loops in phase space with the motional phase of the SDF flipped by $\pi$ for the second loop~\cite{hayes_coherent_2012}. The two-loop gate requires
+    gate duration and detuning related by
+    equation~\ref{eqn:nloop}, yielding, $T_2 = \frac{\pi\sqrt{2}}{\Omega_{\rm
+    SDF}}$ and $\delta_g = 2\sqrt{2}\Omega_{\rm SDF}$. The 
+    change of SDF sign after the first loop reduces sensitivity to
+    systematic detuning offsets, for example due to mode-frequency drift.
 
     The two-qubit gate performance can be characterised many different ways.
     Ideally a process tomography method would be used to fully characterise the

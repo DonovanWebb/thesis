@@ -1,149 +1,5 @@
 \chapter{Appendix}
 
-\section{Generating Ions}
-\todo{split and move between PI in ch2, and hardware in ch3\\
--Main points:\\
-    -Atomic oven \\
-        -Really this is just for future members.\\
-        -What temperature/current we go to\\
-    -PI lasers\\
-        -What powers/ saturation/ frequencies we use for trapping\\
-        -Concerns of charging the trap with the UV lasers}
-
-\section{Gate Fidelity}
-\label{sec:fidelity}
-We derive the fidelity of a noisy gate implementation with respect to the ideal unitary.\\
-A quantum channel,
-\begin{equation}
-    \mathcal{E}: \rho \mapsto \rho,
-\end{equation}
-which executes ideal unitary, $U$, with some error, has 
-an average operation fidelity given by, 
-\begin{equation}
-    \label{eqn:fid}
-    F(\mathcal{E},U) = \int d\psi \bra{\psi} U^\dagger \mathcal{E}(\ket{\psi}\bra{\psi}) U \ket{\psi},
-\end{equation}
-where the integral is taken over the uniform Haar measure on the space of pure states~\cite{bowdrey_fidelity_2002, nielsen_simple_2002}. We shall see that the language used for this analysis of single qubit gate fidelities closely resembles the group theory approach describing randomised benchmarking. The Haar measure is relevant here to consider the fidelity of the operation independent of the initial state (assuming it is pure), which is exactly the enforced criteria through Clifford twirling during RB. For a single qubit, this can be expressed as an integral over the Bloch sphere. 
-If we further assume that the error channel is unitary, as is the case of a detuned channel considered here, we shall find that the fidelity follows
-\begin{equation}
-    \label{eqn:fid_unitary}
-    F(V,U) = \frac{1}{d(d+1)} \left( |\text{Tr}(U^\dagger V)|^2 + d \right),
-\end{equation}
- where $V$ is the error unitary, and $d$ is the dimension of the Hilbert space. \\
-Here we shall give a derivation of this result, by considering the symmetry imposed by the Haar measure.
-The standard fidelity of two unitaries following from equation~\ref{eqn:fid} is given by
-\begin{equation}
-\begin{split}
-    F(V,U) &= \int d\psi \bra{\psi} U^\dagger V \ket{\psi}\bra{\psi} V^\dagger U \ket{\psi},\\
-    &= \int d\psi |\bra{\psi} W \ket{\psi}|^2,\\
-\end{split}
-\end{equation}
-where $W=U^\dagger V$.
-Using the identity $\text{Tr}(A)\text{Tr}(B) = \text{Tr}(A\otimes B)$, we can rewrite the fidelity as a two-copy expectation value,
-\begin{equation}
-    F(V,U) = \text{Tr}\left( \left(W \otimes W^\dagger\right) \int d\psi \left(\ket{\psi}\bra{\psi}\right)^{\otimes 2}\right),
-\end{equation}
-where we have now separated the fidelity into a part dependent on the error channel, and a part equivalent to the second moment of the Haar measure, explicitely rewritten as
-\begin{equation}
-    \mathcal{M}_2 = \int d\psi \left(\ket{\psi}\bra{\psi}\right)^{\otimes 2}.
-\end{equation}
-We now consider two apparent symmetries of $\mathcal{M}_2$: first, the Haar measure is invariant under unitary transformations, and so our expression must commute with $U \otimes U$ for any unitary $U$; second, the two states in the tensor product are identical, and so $\mathcal{M}_2$ must be invariant under the swap operator $S$ which exchanges the two copies. These two symmetries are sufficient to show that $\mathcal{M}_2$ is proportional to the projector onto the symmetric subspace of the two-copy Hilbert space, which is given by
-\begin{equation}
-    \Pi_{\text{sym}} = \frac{1}{2}(\mathbb{I} + S).
-\end{equation}
-To normalise the moment (as the Haar measure is a probability distribution), we enforce $\text{Tr}(\mathcal{M}_2) = 1$. In this two-copy expression, it is apparant that $\text{Tr}(I) = d^2$ and $\text{Tr}(S) = d$, resulting in,
-\begin{equation}
-    \mathcal{M}_2 = \frac{1}{d(d+1)} \left(\mathbb{I} + S\right). 
-\end{equation}
-Incorporating this result into the fidelity expression, we find
-\begin{equation}
-    F(V,U) = \frac{1}{d(d+1)} \text{Tr}\left[ (W \otimes W^\dagger)(\mathbb{I} + S) \right],
-\end{equation}
-where we can evaluate the two terms using the identities $\text{Tr}(A \otimes B) = \text{Tr}(A)\text{Tr}(B)$ and $\text{Tr}((A \otimes B)S) = \text{Tr}(AB)$, the latter of which is highly relevant to the mechanism of virtual distillation, described in chapter~\ref{ch:virtual_distillation}. This results in the final expression for the fidelity of a unitary error channel with respect to a target unitary, given above by equation~\ref{eqn:fid_unitary}.\\
-
-\section{Projectors of $Cl_1^{\otimes 2}$}
-\label{sec:k-copy_projector}
-We outline the method of recovering the $\alpha$ parameters described in section~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver Romvig {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here. \\
-The decay due to a single rotation acting identically on both qubits which, in the Pauli-transfer matrix (PTM) representation, can be written as $\Lambda^\mathcal{P}=\mathrm{diag}(1, R, R, R\otimes R)$, 
-where superscript $\mathcal{P}$ represents the block diagonal matrix is ordered by the two-qubit Pauli basis $\mathcal{P}=\{I\otimes I, \vec\sigma\otimes I , I\otimes\vec\sigma, \vec\sigma\otimes\vec\sigma\}$, with $\vec\sigma = \{\hat\sigma_x, \hat\sigma_y, \hat\sigma_z\}$, and
-$R=R(\vec{n}, \theta)\in SO(3)$ describes a rotation by $\theta$ around $\vec{n}$. Finding the vector $\vec\alpha$ can now be done using Schur's lemma for the case of no mixing between irrep spaces:
-\begin{equation}\label{eqn:PTM projector decomposition}
-    \tilde\Lambda^\mathcal{P}=\sum_\lambda\alpha_\lambda\Pi_\lambda,\hspace{10pt} \alpha_\lambda=\frac{1}{d_\lambda}\mathrm{Tr}(\Pi_\lambda\Lambda^{\mathcal{P}}).
-\end{equation}
-Here, $\Pi_\lambda$ denotes the PTM projector onto the irrep space labelled $\lambda$ and with dimension $d_\lambda$. It follows immediately that the identity sector is fixed, while the left- and right-qubit sectors produce $\alpha_L=\alpha_R=\mathrm{Tr}(R)/3$. In principle, $\alpha_\lambda$ for the two-qubit sector can be evaluated by explicitly constructing the projectors from the basis operators in Table~\ref{table:irreps}. However, in this case the symmetries of these irrep spaces allow the projectors to be expressed more simply in terms of operators whose traces are easily evaluated:
-\begin{align}
-\label{eqn:irrep symmetry projector decomposition}
-    \Pi_{tr}&=T,\\
-    \Pi_{dt}&=D-T,\\
-    \Pi_{so}&=\frac{1}{2}(I_9+S)-D,\\
-    \Pi_{as}&=\frac{1}{2}(I_9-S),
-\end{align}
-where $T=1/3\sum_{ij}\ket{ii}\bra{jj}$, $D=\sum_i\ket{ii}\bra{ii}$, and $S=\sum_{ij}\ket{ji}\bra{ij}$ are the trace projector, diagonal projector, and swap operator, respectively. The required traces are
-\begin{align}
-     \mathrm{Tr}(I_3 R)&=\mathrm{Tr}(R)=(1+2c),\\
-     \mathrm{Tr}(I_9(R\otimes R))&=(\mathrm{Tr}(R))^2=(1+2c)^2,\\
-    \mathrm{Tr}(T(R\otimes R))&=\frac{1}{3}\mathrm{Tr}(R^TR)=1,\\
-    \mathrm{Tr}(D(R\otimes R))&=\sum_i R_{ii}^2=c^2+2c+(1-c)^2\kappa,\\
-    \mathrm{Tr}(S(R\otimes R))&=\mathrm{Tr}(R^2)=4c^2-1,
-\end{align}
-where $c=\cos(\theta)$,  and $\kappa=n_x^4+n_y^4+n_z^4$ is an anisotropy parameter reflecting the fact that Clifford twirling enforces symmetry under permutations of the Pauli axes, rather than under arbitrary rotations. Substituting these traces into equation~\ref{eqn:PTM projector decomposition} and using equation~\ref{eqn:irrep symmetry projector decomposition} yields 
-\begin{align}
-    \alpha_{L}&=\alpha_R=\alpha_{as}=\frac{1}{3}(1+2c),\\
-    \alpha_{tr}&=1,\\
-    \alpha_{dt}&=\frac{1}{2}(c^2+2c-1+(1-c)^2\kappa),\\
-    \alpha_{so}&=\frac{1}{3}(3c^2-(1-c)^2\kappa).
-\end{align}
-
-\section{$ZZ$-type noise}
-\label{sec:app_zz_noise}
-\begin{figure}
-    \begin{center}
-    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch5/liouville.pdf
-        }
-    \end{center}
-    \caption{
-        Liouville operator representation of error channels after twirling over $Cl_1^{\otimes 2}$, ordered by the irrep basis (Schur basis). (a) \emph{Common noise}, (b) Continuous $ZZ$, (c) Stochastic $ZZ$. Orange blocks represent an entry of $1$, green represent $0$, and red represent a decay with dependence on $m$.
-        }
-    \label{fig:ch4_zz_noise}
-\end{figure}
-\label{app:zz_err}
-In the main text we explore a separable error channel that induces correlations between qubits in a register. Here we shall explore entangling type noise, which although not prevalent on the ion-trap qubit platform, is a dominant error source in superconducting qubits. \\
-
-The always on $ZZ$-type error common to superconducting qubits is described by
-the Hamiltonian,
-\begin{equation}
-\label{eqn:app_HZZ}
-H_{ZZ} = \frac{J_{ZZ}}{2}Z\otimes Z,
-\end{equation}
-where $J_{ZZ}$ is the coupling strength.
-Generally, $H_{ZZ}$ will couple
-the subrepresentations of the $3$-irrep, given in table~\ref{table:irreps}. We can show the qualitative difference in the subspace dynamics by plotting the Liouville representation of the twirled \emph{common noise}, and the $ZZ$-type noise. Specifically we plot $\tilde\Lambda^m$, where $m$ is the sequence length. Figure~\ref{fig:ch4_fisher_1} plots the maps in the Schur basis
-ordered so isotypic representations are adjacent to one another. Orange blocks have entries of $1$, light green blocks are $0$, and red blocks represent some decay parameters dependent on $m$.
-Panel (a) shows the fully diagonal \emph{common noise} transfer matrix, where we can see the invariant trace subspace that was noted in the main text. Panel (b) shows the general case for twirled $ZZ$-type noise, given by equation~\ref{eqn:app_HZZ}. The off-diagonal entries exactly couple the three subspaces of the $3$-irrep.
-We note that the resulting block diagonal form is inconvenient to express as a
-general multi-exponential decay profile as given in the main text for \emph{common} and local depolarising type noise. However, the resulting block diagonal Liouville
-form may be used directly with experimental data to fit these parameters of
-interest. Further, we may still explore the expected asymptotic decays due to this model, and find that under dominant $ZZ$-type noise, we expect an asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty}=1/2$.\\
-
-We may recover a simple diagonal Liouville form in the case of stochastic $ZZ$ noise, given by,
-\begin{equation}
-\mathcal{E}_{ZZ}(\rho) = (1-p_{ZZ})\rho + p_{ZZ} (Z\otimes Z)\rho(Z\otimes Z),
-\end{equation}
-where $p_{ZZ}$ is the probability of a correlated phase flip error on both qubits.
-In the irrep basis, the following sector decays are found for the stochastic $ZZ$ error,
-\begin{equation}
-    \begin{split}
-        \alpha_L&=\alpha_R=\alpha_{so}=\alpha_{as}= 1- 4p_{ZZ}/3, \\
-        \alpha_{tr} &= \alpha_{dt} = 1.\\
-    \end{split}
-\end{equation}
-We show this dependence in figure~\ref{fig:ch4_zz_noise} (c).
-The same intermediate asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty} = 0.5$ is expected. \\
-
-The difference in correlated decay structure due to \emph{common}, depolarising, and $ZZ$-type errors suggests that twirling over $Cl_1^{\otimes2}$ both simplifies a generic error map to be measurable via RB, but also, retains some noise-dependent structure of the correlated decay profiles.  
-Designing optimal initial and final states, as well as optimal sampling strategies for extracting a larger set of error parameters covering multiple physical error mechanisms is left for future work. A possible strategy to avoid introducing arbitrary error channels, is to be agnostic of the physical error mechanisms, and rather directly extract the $\vec\alpha$ and $\vec m$ parameters described in section~\ref{app:reps}. Analogous protocols to this is described by character RB~\cite{helsen_new_2019}, and tomography via RB~\cite{kimmel_robust_2014}.
-
-
 \section{Magnus expansion}
 \label{app:magnus}
 
@@ -294,27 +150,162 @@ Designing optimal initial and final states, as well as optimal sampling strategi
     \end{equation}
     with $\Omega_3 = \frac{\Omega_\alpha^2\Omega_\beta}{2\Delta^2}$.\\
     For further details on the use of these higher order effective interactions refer to the following two theses:\cite{bazavan_easy_nodate,saner_quantum_2026}.
-    
 
 
-    \section{Derangement for $k=2$}
-    \label{app:derange}
-    Huggins~\cite{huggins_virtual_2021} provides a proof of the identity given
-    in equation~\ref{eqn:derange}, which I reproduce here for the simple example
-    of $k=2$.   The derangement operator for two copies is simply the swap
-    operator, $S^{(2)}=\mathrm{SWAP}$, and we will assume the observable acts
-    only on the first copy, giving $\hat{O}^1 = \hat{O}\otimes\mathbb{I}$. The
-    identity is then,
-    \begin{align}
-        \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
-        &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1,k_2}} \bra{i_1}\hat{O}\ket{k_1}\delta_{i_2,k_2}
-        \bra{k_1, k_2}S^{(2)}\ket{j_1,j_2}\bra{j_1}\rho\ket{i_1}\bra{j_2}\rho\ket{i_2}\\
-        &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1, k_2}} \hat{O}_{i_1, k_1}\delta_{i_2,k_2}\delta_{k_1,j_2}\delta_{k_2,j_1}\rho_{j_1,i_1}\rho_{j_2,i_2}
-    \end{align}
-    and contracting the Kronecker deltas, we find,
-    \begin{align}
-        \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
-        &= \sum_{\substack{i_1,j_1, j_1}} \hat{O}_{i_1, j_2}\rho_{j_1,i_1}\rho_{j_2,j_1}\\
-        &= \mathrm{Tr}[\hat{O}\rho^2],
-    \end{align}
-    with the last equality following from the definition of matrix multiplication. \\
+
+\section{Gate Fidelity}
+\label{sec:fidelity}
+We derive the fidelity of a noisy gate implementation with respect to the ideal unitary.\\
+A quantum channel,
+\begin{equation}
+    \mathcal{E}: \rho \mapsto \rho,
+\end{equation}
+which executes ideal unitary, $U$, with some error, has 
+an average operation fidelity given by, 
+\begin{equation}
+    \label{eqn:fid}
+    F(\mathcal{E},U) = \int d\psi \bra{\psi} U^\dagger \mathcal{E}(\ket{\psi}\bra{\psi}) U \ket{\psi},
+\end{equation}
+where the integral is taken over the uniform Haar measure on the space of pure states~\cite{bowdrey_fidelity_2002, nielsen_simple_2002}. We shall see that the language used for this analysis of single qubit gate fidelities closely resembles the group theory approach describing randomised benchmarking. The Haar measure is relevant here to consider the fidelity of the operation independent of the initial state (assuming it is pure), which is exactly the enforced criteria through Clifford twirling during RB. For a single qubit, this can be expressed as an integral over the Bloch sphere. 
+If we further assume that the error channel is unitary, as is the case of a detuned channel considered here, we shall find that the fidelity follows
+\begin{equation}
+    \label{eqn:fid_unitary}
+    F(V,U) = \frac{1}{d(d+1)} \left( |\text{Tr}(U^\dagger V)|^2 + d \right),
+\end{equation}
+ where $V$ is the error unitary, and $d$ is the dimension of the Hilbert space. \\
+Here we shall give a derivation of this result, by considering the symmetry imposed by the Haar measure.
+The standard fidelity of two unitaries following from equation~\ref{eqn:fid} is given by
+\begin{equation}
+\begin{split}
+    F(V,U) &= \int d\psi \bra{\psi} U^\dagger V \ket{\psi}\bra{\psi} V^\dagger U \ket{\psi},\\
+    &= \int d\psi |\bra{\psi} W \ket{\psi}|^2,\\
+\end{split}
+\end{equation}
+where $W=U^\dagger V$.
+Using the identity $\text{Tr}(A)\text{Tr}(B) = \text{Tr}(A\otimes B)$, we can rewrite the fidelity as a two-copy expectation value,
+\begin{equation}
+    F(V,U) = \text{Tr}\left( \left(W \otimes W^\dagger\right) \int d\psi \left(\ket{\psi}\bra{\psi}\right)^{\otimes 2}\right),
+\end{equation}
+where we have now separated the fidelity into a part dependent on the error channel, and a part equivalent to the second moment of the Haar measure, explicitely rewritten as
+\begin{equation}
+    \mathcal{M}_2 = \int d\psi \left(\ket{\psi}\bra{\psi}\right)^{\otimes 2}.
+\end{equation}
+We now consider two apparent symmetries of $\mathcal{M}_2$: first, the Haar measure is invariant under unitary transformations, and so our expression must commute with $U \otimes U$ for any unitary $U$; second, the two states in the tensor product are identical, and so $\mathcal{M}_2$ must be invariant under the swap operator $S$ which exchanges the two copies. These two symmetries are sufficient to show that $\mathcal{M}_2$ is proportional to the projector onto the symmetric subspace of the two-copy Hilbert space, which is given by
+\begin{equation}
+    \Pi_{\text{sym}} = \frac{1}{2}(\mathbb{I} + S).
+\end{equation}
+To normalise the moment (as the Haar measure is a probability distribution), we enforce $\text{Tr}(\mathcal{M}_2) = 1$. In this two-copy expression, it is apparant that $\text{Tr}(I) = d^2$ and $\text{Tr}(S) = d$, resulting in,
+\begin{equation}
+    \mathcal{M}_2 = \frac{1}{d(d+1)} \left(\mathbb{I} + S\right). 
+\end{equation}
+Incorporating this result into the fidelity expression, we find
+\begin{equation}
+    F(V,U) = \frac{1}{d(d+1)} \text{Tr}\left[ (W \otimes W^\dagger)(\mathbb{I} + S) \right],
+\end{equation}
+where we can evaluate the two terms using the identities $\text{Tr}(A \otimes B) = \text{Tr}(A)\text{Tr}(B)$ and $\text{Tr}((A \otimes B)S) = \text{Tr}(AB)$, the latter of which is highly relevant to the mechanism of virtual distillation, described in chapter~\ref{ch:virtual_distillation}. This results in the final expression for the fidelity of a unitary error channel with respect to a target unitary, given above by equation~\ref{eqn:fid_unitary}.\\
+
+
+\section{Projectors of $Cl_1^{\otimes 2}$}
+\label{sec:k-copy_projector}
+We outline the method of recovering the $\alpha$ parameters described in section~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver Romvig {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here. \\
+The decay due to a single rotation acting identically on both qubits which, in the Pauli-transfer matrix (PTM) representation, can be written as $\Lambda^\mathcal{P}=\mathrm{diag}(1, R, R, R\otimes R)$, 
+where superscript $\mathcal{P}$ represents the block diagonal matrix is ordered by the two-qubit Pauli basis $\mathcal{P}=\{I\otimes I, \vec\sigma\otimes I , I\otimes\vec\sigma, \vec\sigma\otimes\vec\sigma\}$, with $\vec\sigma = \{\hat\sigma_x, \hat\sigma_y, \hat\sigma_z\}$, and
+$R=R(\vec{n}, \theta)\in SO(3)$ describes a rotation by $\theta$ around $\vec{n}$. Finding the vector $\vec\alpha$ can now be done using Schur's lemma for the case of no mixing between irrep spaces:
+\begin{equation}\label{eqn:PTM projector decomposition}
+    \tilde\Lambda^\mathcal{P}=\sum_\lambda\alpha_\lambda\Pi_\lambda,\hspace{10pt} \alpha_\lambda=\frac{1}{d_\lambda}\mathrm{Tr}(\Pi_\lambda\Lambda^{\mathcal{P}}).
+\end{equation}
+Here, $\Pi_\lambda$ denotes the PTM projector onto the irrep space labelled $\lambda$ and with dimension $d_\lambda$. It follows immediately that the identity sector is fixed, while the left- and right-qubit sectors produce $\alpha_L=\alpha_R=\mathrm{Tr}(R)/3$. In principle, $\alpha_\lambda$ for the two-qubit sector can be evaluated by explicitly constructing the projectors from the basis operators in Table~\ref{table:irreps}. However, in this case the symmetries of these irrep spaces allow the projectors to be expressed more simply in terms of operators whose traces are easily evaluated:
+\begin{align}
+\label{eqn:irrep symmetry projector decomposition}
+    \Pi_{tr}&=T,\\
+    \Pi_{dt}&=D-T,\\
+    \Pi_{so}&=\frac{1}{2}(I_9+S)-D,\\
+    \Pi_{as}&=\frac{1}{2}(I_9-S),
+\end{align}
+where $T=1/3\sum_{ij}\ket{ii}\bra{jj}$, $D=\sum_i\ket{ii}\bra{ii}$, and $S=\sum_{ij}\ket{ji}\bra{ij}$ are the trace projector, diagonal projector, and swap operator, respectively. The required traces are
+\begin{align}
+     \mathrm{Tr}(I_3 R)&=\mathrm{Tr}(R)=(1+2c),\\
+     \mathrm{Tr}(I_9(R\otimes R))&=(\mathrm{Tr}(R))^2=(1+2c)^2,\\
+    \mathrm{Tr}(T(R\otimes R))&=\frac{1}{3}\mathrm{Tr}(R^TR)=1,\\
+    \mathrm{Tr}(D(R\otimes R))&=\sum_i R_{ii}^2=c^2+2c+(1-c)^2\kappa,\\
+    \mathrm{Tr}(S(R\otimes R))&=\mathrm{Tr}(R^2)=4c^2-1,
+\end{align}
+where $c=\cos(\theta)$,  and $\kappa=n_x^4+n_y^4+n_z^4$ is an anisotropy parameter reflecting the fact that Clifford twirling enforces symmetry under permutations of the Pauli axes, rather than under arbitrary rotations. Substituting these traces into equation~\ref{eqn:PTM projector decomposition} and using equation~\ref{eqn:irrep symmetry projector decomposition} yields 
+\begin{align}
+    \alpha_{L}&=\alpha_R=\alpha_{as}=\frac{1}{3}(1+2c),\\
+    \alpha_{tr}&=1,\\
+    \alpha_{dt}&=\frac{1}{2}(c^2+2c-1+(1-c)^2\kappa),\\
+    \alpha_{so}&=\frac{1}{3}(3c^2-(1-c)^2\kappa).
+\end{align}
+
+\section{$ZZ$-type noise}
+\label{sec:app_zz_noise}
+\begin{figure}
+    \begin{center}
+    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch5/liouville.pdf
+        }
+    \end{center}
+    \caption{
+        Liouville operator representation of error channels after twirling over $Cl_1^{\otimes 2}$, ordered by the irrep basis (Schur basis). (a) \emph{Common noise}, (b) Continuous $ZZ$, (c) Stochastic $ZZ$. Orange blocks represent an entry of $1$, green represent $0$, and red represent a decay with dependence on $m$.
+        }
+    \label{fig:ch4_zz_noise}
+\end{figure}
+\label{app:zz_err}
+In the main text we explore a separable error channel that induces correlations between qubits in a register. Here we shall explore entangling type noise, which although not prevalent on the ion-trap qubit platform, is a dominant error source in superconducting qubits. \\
+
+The always on $ZZ$-type error common to superconducting qubits is described by
+the Hamiltonian,
+\begin{equation}
+\label{eqn:app_HZZ}
+H_{ZZ} = \frac{J_{ZZ}}{2}Z\otimes Z,
+\end{equation}
+where $J_{ZZ}$ is the coupling strength.
+Generally, $H_{ZZ}$ will couple
+the subrepresentations of the $3$-irrep, given in table~\ref{table:irreps}. We can show the qualitative difference in the subspace dynamics by plotting the Liouville representation of the twirled \emph{common noise}, and the $ZZ$-type noise. Specifically we plot $\tilde\Lambda^m$, where $m$ is the sequence length. Figure~\ref{fig:ch4_fisher_1} plots the maps in the Schur basis
+ordered so isotypic representations are adjacent to one another. Orange blocks have entries of $1$, light green blocks are $0$, and red blocks represent some decay parameters dependent on $m$.
+Panel (a) shows the fully diagonal \emph{common noise} transfer matrix, where we can see the invariant trace subspace that was noted in the main text. Panel (b) shows the general case for twirled $ZZ$-type noise, given by equation~\ref{eqn:app_HZZ}. The off-diagonal entries exactly couple the three subspaces of the $3$-irrep.
+We note that the resulting block diagonal form is inconvenient to express as a
+general multi-exponential decay profile as given in the main text for \emph{common} and local depolarising type noise. However, the resulting block diagonal Liouville
+form may be used directly with experimental data to fit these parameters of
+interest. Further, we may still explore the expected asymptotic decays due to this model, and find that under dominant $ZZ$-type noise, we expect an asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty}=1/2$.\\
+
+We may recover a simple diagonal Liouville form in the case of stochastic $ZZ$ noise, given by,
+\begin{equation}
+\mathcal{E}_{ZZ}(\rho) = (1-p_{ZZ})\rho + p_{ZZ} (Z\otimes Z)\rho(Z\otimes Z),
+\end{equation}
+where $p_{ZZ}$ is the probability of a correlated phase flip error on both qubits.
+In the irrep basis, the following sector decays are found for the stochastic $ZZ$ error,
+\begin{equation}
+    \begin{split}
+        \alpha_L&=\alpha_R=\alpha_{so}=\alpha_{as}= 1- 4p_{ZZ}/3, \\
+        \alpha_{tr} &= \alpha_{dt} = 1.\\
+    \end{split}
+\end{equation}
+We show this dependence in figure~\ref{fig:ch4_zz_noise} (c).
+The same intermediate asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty} = 0.5$ is expected. \\
+
+The difference in correlated decay structure due to \emph{common}, depolarising, and $ZZ$-type errors suggests that twirling over $Cl_1^{\otimes2}$ both simplifies a generic error map to be measurable via RB, but also, retains some noise-dependent structure of the correlated decay profiles.  
+Designing optimal initial and final states, as well as optimal sampling strategies for extracting a larger set of error parameters covering multiple physical error mechanisms is left for future work. A possible strategy to avoid introducing arbitrary error channels, is to be agnostic of the physical error mechanisms, and rather directly extract the $\vec\alpha$ and $\vec m$ parameters described in section~\ref{app:reps}. Analogous protocols to this is described by character RB~\cite{helsen_new_2019}, and tomography via RB~\cite{kimmel_robust_2014}.
+
+
+\section{Derangement for $k=2$}
+\label{app:derange}
+Huggins~\cite{huggins_virtual_2021} provides a proof of the identity given
+in equation~\ref{eqn:derange}, which I reproduce here for the simple example
+of $k=2$.   The derangement operator for two copies is simply the swap
+operator, $S^{(2)}=\mathrm{SWAP}$, and we will assume the observable acts
+only on the first copy, giving $\hat{O}^1 = \hat{O}\otimes\mathbb{I}$. The
+identity is then,
+\begin{align}
+    \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
+    &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1,k_2}} \bra{i_1}\hat{O}\ket{k_1}\delta_{i_2,k_2}
+    \bra{k_1, k_2}S^{(2)}\ket{j_1,j_2}\bra{j_1}\rho\ket{i_1}\bra{j_2}\rho\ket{i_2}\\
+    &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1, k_2}} \hat{O}_{i_1, k_1}\delta_{i_2,k_2}\delta_{k_1,j_2}\delta_{k_2,j_1}\rho_{j_1,i_1}\rho_{j_2,i_2}
+\end{align}
+and contracting the Kronecker deltas, we find,
+\begin{align}
+    \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
+    &= \sum_{\substack{i_1,j_1, j_1}} \hat{O}_{i_1, j_2}\rho_{j_1,i_1}\rho_{j_2,j_1}\\
+    &= \mathrm{Tr}[\hat{O}\rho^2],
+\end{align}
+with the last equality following from the definition of matrix multiplication. \\

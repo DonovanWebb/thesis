@@ -95,16 +95,11 @@ well-placed for studying methods for scaling hybrid-system control.
     \end{table}
 
     For any computing paradigm, we must establish a set of interactions required for universality. In DV-only systems, quantum universality may be realised by a finite set of Clifford operations plus one non-Clifford gate~\cite{nielsen_quantum_2010, aaronson_improved_2004}. CV-only universality can analogously be realised by a finite set of Gaussian operations plus one non-Gaussian gate~\cite{braunstein_quantum_2005,lloyd_quantum_1999}.
-    The term Gaussian is understood in the position-momentum representation of the qumode, where the bare oscillator Hamiltonian is given by,
+    The term Gaussian is understood in the position-momentum representation of the qumode, as discussed in~\S~\ref{sec:qumode}, where the bare oscillator Hamiltonian is given by,
     \begin{equation}
-        \hat H_\mathrm{osc,0} = \hbar\omega_\mathrm{osc}(\hat x^2 + \hat p^2),
+        \hat H_{\rm osc} = \frac{1}{2m}\hat p^2 + \frac{1}{2}m\omega_x^2\hat x^2,
     \end{equation}
-    with quadratures,
-    \begin{align}
-        \hat x &= \frac{1}{2}(\hat a + \hat a^\dagger),\\
-        \hat p &= \frac{-i}{2}(\hat a - \hat a^\dagger),
-    \end{align}
-    where $\hat a^\dagger,~\hat a$ are the creation and annihilation ladder operators of the mode with frequency, $\omega_\mathrm{osc}$.
+    with $\hat x$ and $\hat p$ quadratures expressible in terms of creation and annihilation operators, as given in equation~\ref{eqn:x_ladder}.
     Gaussian operators are then the set of interactions containing at most quadratic terms in $\hat x$ and $\hat p$, therefore mapping Gaussian input states to Gaussian output states. \\
     The condition for universality of a hybrid CV-DV is somewhat ambiguous as both the CV and DV subsystems are themselves sufficient for universality, however this presents an opportunity: the freedom in selecting the chosen gate-set for universality, combining both Clifford, non-Clifford, Gaussian, non-Gaussian, and spin-oscillator interactions together, allows for selecting efficient, native, and simply accessed interactions of the physical platform. 
     We consider the over-complete instruction set presented in Table~\ref{tab:gateset}, consisting of spin-conditioned Gaussian and non-Gaussian interactions. This set of interactions on the bosonic subsystems are themselves universal, but the spin-conditioning provides a bridge between CV and DV subsystems, allowing for readout and control to be implemented on ancilla qubits.
