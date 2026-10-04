@@ -152,7 +152,6 @@
     For further details on the use of these higher order effective interactions refer to the following two theses:\cite{bazavan_easy_nodate,saner_quantum_2026}.
 
 
-
 \section{Gate Fidelity}
 \label{sec:fidelity}
 We derive the fidelity of a noisy gate implementation with respect to the ideal unitary.\\
@@ -204,8 +203,97 @@ Incorporating this result into the fidelity expression, we find
 \end{equation}
 where we can evaluate the two terms using the identities $\text{Tr}(A \otimes B) = \text{Tr}(A)\text{Tr}(B)$ and $\text{Tr}((A \otimes B)S) = \text{Tr}(AB)$, the latter of which is highly relevant to the mechanism of virtual distillation, described in chapter~\ref{ch:virtual_distillation}. This results in the final expression for the fidelity of a unitary error channel with respect to a target unitary, given above by equation~\ref{eqn:fid_unitary}.\\
 
+\section{Irreducible Representations of $Cl_1$}
+\label{app:reps}
 
-\section{Projectors of $Cl_1^{\otimes 2}$}
+In this section we provide some background group theory useful in describing how \emph{k-copy} RB simplifies general CPTP error channels.
+We start with an overview of twirling, with background applicable to all RB methods. We then provide further details on the particular symmetries enforced by twirling over $Cl_1^{\otimes 2}$.
+
+\subsection{Twirling}
+\label{app:twirling}
+
+Twirling a channel over a group enforces the group symmetry onto that channel --- a useful method in simplifying error channels for characterisation, or to lessen the impact of structured errors on correction and mitigation protocols.\\
+
+Consider a group $\mathcal{G}$ and a representation $r:\mathcal{G}\rightarrow GL(\mathcal{L})$, where $GL$ is the general linear group (consisting of the set of invertible matrices and the matrix multiplication operation), and $\mathcal{L}$
+denotes the Liouville (vectorised operator) space of two qubits.
+Twirling over the elements $g$ in $\mathcal{G}$ enforces symmetry on a general error channel, $\Lambda$, given in Liouville form,
+\begin{equation}\label{eqn:twirl}
+    \tilde\Lambda=\frac{1}{\lvert\mathcal{G}\lvert}\sum_{g\in \mathcal{G}}r(g)\Lambda r(g)^\dagger,
+\end{equation}
+where $\lvert\mathcal{G}\lvert$ is the order of the finite group $\mathcal{G}$.
+The twirling enforces commutation with the group action,
+\begin{equation}\label{eqn:commute}
+    r(g)\tilde\Lambda r(g)^\dagger=\tilde\Lambda~~~~\forall g \in \mathcal{G}.
+\end{equation}
+The representation of the space, $\mathcal{L}$ decomposes to irreps $\lambda$ as,
+\begin{equation}
+    \mathcal{L}=\bigoplus_\lambda(V_\lambda\otimes \mathbb{C}^{m_\lambda}),
+\end{equation}
+where $V_\lambda$ is the irrep space, and $\mathbb{C}^{m_\lambda}$ is a complex valued multiplicity space with dimension of the multiplicity $m_\lambda$.
+From Schur's lemma, equation~\ref{eqn:commute} implies the twirled error channel has the form,
+\begin{equation}\label{eqn:block-diag}
+    \tilde\Lambda=\bigoplus_\lambda(I_\lambda\otimes \mathcal M_{\lambda}),
+\end{equation}
+where $\mathcal{M}_\lambda$ is the multiplicity matrix of dimensions $m_\lambda\times m_\lambda.$\\
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c}
+         Class & Representation & Member \\
+         \hline
+         Identity &e&I \\
+         \hline
+         Swap &(12)&H\\
+         \hline
+         Two-swap &(12)(34)&X\\
+         \hline
+         Three-cycle &(123)&HS\\
+         \hline
+         Four-cycle &(1234)&S\\
+    \end{tabular}
+    \caption{Conjugacy classes for the single qubit Clifford group.}
+    \label{table:conj}
+\end{table}
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c}
+         irrep & e & (12) & (12)(34) & (123) & (1234)\\
+         \hline
+         Identity/Trace &1&1&1&1&1 \\
+         \hline
+         Left/Right/Antisymmetric &3&-1&-1&0&1 \\
+         \hline
+         Diagonal traceless &2&0&2&-1&0 \\
+         \hline
+         Symmetric off-diagonal &3&1&-1&0&-1 \\
+    \end{tabular}
+    \caption{Character table for the Clifford group given the irreps in table~\ref{table:irreps}, and with conjugacy classes: identity, transposition, double transposition, 3-cycle, and 4-cycle. The ``sign'' irrep of the single-qubit Clifford group has zero multiplicity in the two-copy case, and so is excluded here.}
+    \label{table:character}
+\end{table}
+
+\subsection{Character Table of $Cl_1$}
+\label{app:char_table}
+Irreps are uniquely determined by their character on the conjugacy classes of the Clifford group. 
+Two group elements $g,h\in G$ are said to be in the same conjugacy class if they are related by conjugation,
+\begin{equation}
+g = khk^{-1},
+\end{equation}
+for all $k\in G$.\\
+With this definition, the 24 single qubit Clifford elements are divided into five permutation classes, shown in table~\ref{table:conj}, with a representative name and example member following each class.
+These classes make obvious the known isomorphism between $Cl_1$ and the symmetric group S$_4$ (modulo phase).
+Character tables~\cite{lee_character_2025}, are useful tools in representation theory, to uniquely describe irreps 
+by the traces of the representative matrices for group elements of each conjugacy class. The table is presented as a 2D matrix with rows corresponding to group representations and columns to group conjugacy classes. The character, $\xi$, is defined by,
+\begin{equation}
+\xi_\lambda(g) = \mathrm{Tr}[r_\lambda(g)],
+\end{equation}
+where $r_\lambda$ is the irreducible component of the representation of $G$ acting on some vector space,
+\begin{equation}
+r_\lambda(g)_{i,j} = \mathrm{Tr}[B_i^\dagger g B_j g^\dagger],
+\end{equation}
+where $B_i$ are the orthonormal basis vectors for irrep $\lambda$.
+Taking the two-qubit sub-representations reproduced in table~\ref{table:irreps}, the character table calculated is shown in table~\ref{table:character}. We can see that the left, right, and antisymmetric sub-representations form a multiplicity of the $3D$-irrep labelled $3$, while the trace sub-representation is a multiplicity of the $1D$ trivial irrep.\\
+
+\subsection{Projectors of $Cl_1^{\otimes 2}$}
 \label{sec:k-copy_projector}
 We outline the method of recovering the $\alpha$ parameters described in section~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver Romvig {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here. \\
 The decay due to a single rotation acting identically on both qubits which, in the Pauli-transfer matrix (PTM) representation, can be written as $\Lambda^\mathcal{P}=\mathrm{diag}(1, R, R, R\otimes R)$, 
@@ -217,10 +305,10 @@ $R=R(\vec{n}, \theta)\in SO(3)$ describes a rotation by $\theta$ around $\vec{n}
 Here, $\Pi_\lambda$ denotes the PTM projector onto the irrep space labelled $\lambda$ and with dimension $d_\lambda$. It follows immediately that the identity sector is fixed, while the left- and right-qubit sectors produce $\alpha_L=\alpha_R=\mathrm{Tr}(R)/3$. In principle, $\alpha_\lambda$ for the two-qubit sector can be evaluated by explicitly constructing the projectors from the basis operators in Table~\ref{table:irreps}. However, in this case the symmetries of these irrep spaces allow the projectors to be expressed more simply in terms of operators whose traces are easily evaluated:
 \begin{align}
 \label{eqn:irrep symmetry projector decomposition}
-    \Pi_{tr}&=T,\\
-    \Pi_{dt}&=D-T,\\
-    \Pi_{so}&=\frac{1}{2}(I_9+S)-D,\\
-    \Pi_{as}&=\frac{1}{2}(I_9-S),
+    \Pi_{\rm tr}&=T,\\
+    \Pi_{\rm dt}&=D-T,\\
+    \Pi_{\rm so}&=\frac{1}{2}(I_9+S)-D,\\
+    \Pi_{\rm as}&=\frac{1}{2}(I_9-S),
 \end{align}
 where $T=1/3\sum_{ij}\ket{ii}\bra{jj}$, $D=\sum_i\ket{ii}\bra{ii}$, and $S=\sum_{ij}\ket{ji}\bra{ij}$ are the trace projector, diagonal projector, and swap operator, respectively. The required traces are
 \begin{align}
@@ -232,13 +320,13 @@ where $T=1/3\sum_{ij}\ket{ii}\bra{jj}$, $D=\sum_i\ket{ii}\bra{ii}$, and $S=\sum_
 \end{align}
 where $c=\cos(\theta)$,  and $\kappa=n_x^4+n_y^4+n_z^4$ is an anisotropy parameter reflecting the fact that Clifford twirling enforces symmetry under permutations of the Pauli axes, rather than under arbitrary rotations. Substituting these traces into equation~\ref{eqn:PTM projector decomposition} and using equation~\ref{eqn:irrep symmetry projector decomposition} yields 
 \begin{align}
-    \alpha_{L}&=\alpha_R=\alpha_{as}=\frac{1}{3}(1+2c),\\
-    \alpha_{tr}&=1,\\
-    \alpha_{dt}&=\frac{1}{2}(c^2+2c-1+(1-c)^2\kappa),\\
-    \alpha_{so}&=\frac{1}{3}(3c^2-(1-c)^2\kappa).
+    \alpha_{L}&=\alpha_R=\alpha_{\rm as}=\frac{1}{3}(1+2c),\\
+    \alpha_{\rm tr}&=1,\\
+    \alpha_{\rm dt}&=\frac{1}{2}(c^2+2c-1+(1-c)^2\kappa),\\
+    \alpha_{\rm so}&=\frac{1}{3}(3c^2-(1-c)^2\kappa).
 \end{align}
 
-\section{$ZZ$-type noise}
+\subsection{$ZZ$-type noise}
 \label{sec:app_zz_noise}
 \begin{figure}
     \begin{center}
@@ -246,7 +334,7 @@ where $c=\cos(\theta)$,  and $\kappa=n_x^4+n_y^4+n_z^4$ is an anisotropy paramet
         }
     \end{center}
     \caption{
-        Liouville operator representation of error channels after twirling over $Cl_1^{\otimes 2}$, ordered by the irrep basis (Schur basis). (a) \emph{Common noise}, (b) Continuous $ZZ$, (c) Stochastic $ZZ$. Orange blocks represent an entry of $1$, green represent $0$, and red represent a decay with dependence on $m$.
+        Liouville operator representation of error channels after twirling over $Cl_1^{\otimes 2}$, ordered by the Schur basis. (a) \emph{Common noise}, (b) Continuous $ZZ$, (c) Stochastic $ZZ$. Orange blocks represent an entry of $1$, green represent $0$, and red represent a decay with dependence on $m$.
         }
     \label{fig:ch4_zz_noise}
 \end{figure}
@@ -274,11 +362,11 @@ We may recover a simple diagonal Liouville form in the case of stochastic $ZZ$ n
 \mathcal{E}_{ZZ}(\rho) = (1-p_{ZZ})\rho + p_{ZZ} (Z\otimes Z)\rho(Z\otimes Z),
 \end{equation}
 where $p_{ZZ}$ is the probability of a correlated phase flip error on both qubits.
-In the irrep basis, the following sector decays are found for the stochastic $ZZ$ error,
+In the Shur basis the following sector decays are found for the stochastic $ZZ$ error,
 \begin{equation}
     \begin{split}
-        \alpha_L&=\alpha_R=\alpha_{so}=\alpha_{as}= 1- 4p_{ZZ}/3, \\
-        \alpha_{tr} &= \alpha_{dt} = 1.\\
+        \alpha_L&=\alpha_R=\alpha_{\rm so}=\alpha_{\rm as}= 1- 4p_{ZZ}/3, \\
+        \alpha_{\rm tr} &= \alpha_{\rm dt} = 1.\\
     \end{split}
 \end{equation}
 We show this dependence in figure~\ref{fig:ch4_zz_noise} (c).
