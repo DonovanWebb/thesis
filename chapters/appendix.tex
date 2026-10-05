@@ -107,7 +107,7 @@
     \begin{equation}
         S_i(t) = \frac{i\Omega_i^2}{4}\left(\frac{\sin(\Delta_i t)}{\Delta_i^2} - \frac{t}{\Delta_i}\right)
     \end{equation}
-    are recognisable from section~\ref{app:geometric_phase} as geometric phase factors.
+    are recognisable from~\S~\ref{app:geometric_phase} as geometric phase factors.
     Taking the assumption that $t\gg \frac{1}{\Delta_i}$, we get a linearly growing geometric phase term,
     $S_i(t) \approx \frac{-i\Omega_i^2t}{4\Delta_i}$.
     In the case that this geometric phase acts globally on the
@@ -268,7 +268,7 @@ where $\mathcal{M}_\lambda$ is the multiplicity matrix of dimensions $m_\lambda\
          \hline
          Symmetric off-diagonal &3&1&-1&0&-1 \\
     \end{tabular}
-    \caption{Character table for the Clifford group given the irreps in table~\ref{table:irreps}, and with conjugacy classes: identity, transposition, double transposition, 3-cycle, and 4-cycle. The ``sign'' irrep of the single-qubit Clifford group has zero multiplicity in the two-copy case, and so is excluded here.}
+    \caption{Character table for the Clifford group given the irreps in Table~\ref{table:irreps}, and with conjugacy classes: identity, transposition, double transposition, 3-cycle, and 4-cycle. The ``sign'' irrep of the single-qubit Clifford group has zero multiplicity in the two-copy case, and so is excluded here.}
     \label{table:character}
 \end{table}
 
@@ -280,7 +280,7 @@ Two group elements $g,h\in G$ are said to be in the same conjugacy class if they
 g = khk^{-1},
 \end{equation}
 for all $k\in G$.\\
-With this definition, the 24 single qubit Clifford elements are divided into five permutation classes, shown in table~\ref{table:conj}, with a representative name and example member following each class.
+With this definition, the 24 single qubit Clifford elements are divided into five permutation classes, shown in Table~\ref{table:conj}, with a representative name and example member following each class.
 These classes make obvious the known isomorphism between $Cl_1$ and the symmetric group S$_4$ (modulo phase).
 Character tables~\cite{lee_character_2025}, are useful tools in representation theory, to uniquely describe irreps 
 by the traces of the representative matrices for group elements of each conjugacy class. The table is presented as a 2D matrix with rows corresponding to group representations and columns to group conjugacy classes. The character, $\xi$, is defined by,
@@ -292,11 +292,11 @@ where $r_\lambda$ is the irreducible component of the representation of $G$ acti
 r_\lambda(g)_{i,j} = \mathrm{Tr}[B_i^\dagger g B_j g^\dagger],
 \end{equation}
 where $B_i$ are the orthonormal basis vectors for irrep $\lambda$.
-Taking the two-qubit sub-representations reproduced in table~\ref{table:irreps}, the character table calculated is shown in table~\ref{table:character}. We can see that the left, right, and antisymmetric sub-representations form a multiplicity of the $3D$-irrep labelled $3$, while the trace sub-representation is a multiplicity of the $1D$ trivial irrep.\\
+Taking the two-qubit sub-representations reproduced in Table~\ref{table:irreps}, the character table calculated is shown in Table~\ref{table:character}. We can see that the left, right, and antisymmetric sub-representations form a multiplicity of the $3D$-irrep labelled $3$, while the trace sub-representation is a multiplicity of the $1D$ trivial irrep.\\
 
 \subsection{Projectors of $Cl_1^{\otimes 2}$}
 \label{sec:k-copy_projector}
-We outline the method of recovering the $\alpha$ parameters described in section~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver Romvig {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here. \\
+We outline the method of recovering the $\alpha$ parameters described in~\S~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver Romvig {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here. \\
 The decay due to a single rotation acting identically on both qubits which, in the Pauli-transfer matrix (PTM) representation, can be written as $\Lambda^\mathcal{P}=\mathrm{diag}(1, R, R, R\otimes R)$, 
 where superscript $\mathcal{P}$ represents the block diagonal matrix is ordered by the two-qubit Pauli basis $\mathcal{P}=\{I\otimes I, \vec\sigma\otimes I , I\otimes\vec\sigma, \vec\sigma\otimes\vec\sigma\}$, with $\vec\sigma = \{\hat\sigma_x, \hat\sigma_y, \hat\sigma_z\}$, and
 $R=R(\vec{n}, \theta)\in SO(3)$ describes a rotation by $\theta$ around $\vec{n}$. Finding the vector $\vec\alpha$ can now be done using Schur's lemma for the case of no mixing between irrep spaces:
@@ -350,7 +350,7 @@ H_{ZZ} = \frac{J_{ZZ}}{2}Z\otimes Z,
 \end{equation}
 where $J_{ZZ}$ is the coupling strength.
 Generally, $H_{ZZ}$ will couple
-the subrepresentations of the $3$-irrep, given in table~\ref{table:irreps}. We can show the qualitative difference in the subspace dynamics by plotting the Liouville representation of the twirled \emph{common noise}, and the $ZZ$-type noise. Specifically we plot $\tilde\Lambda^m$, where $m$ is the sequence length. Figure~\ref{fig:ch4_fisher_1} plots the maps in the Schur basis
+the subrepresentations of the $3$-irrep, given in Table~\ref{table:irreps}. We can show the qualitative difference in the subspace dynamics by plotting the Liouville representation of the twirled \emph{common noise}, and the $ZZ$-type noise. Specifically we plot $\tilde\Lambda^m$, where $m$ is the sequence length. Figure~\ref{fig:ch4_fisher_1} plots the maps in the Schur basis
 ordered so isotypic representations are adjacent to one another. Orange blocks have entries of $1$, light green blocks are $0$, and red blocks represent some decay parameters dependent on $m$.
 Panel (a) shows the fully diagonal \emph{common noise} transfer matrix, where we can see the invariant trace subspace that was noted in the main text. Panel (b) shows the general case for twirled $ZZ$-type noise, given by equation~\ref{eqn:app_HZZ}. The off-diagonal entries exactly couple the three subspaces of the $3$-irrep.
 We note that the resulting block diagonal form is inconvenient to express as a
@@ -370,11 +370,11 @@ In the Shur basis the following sector decays are found for the stochastic $ZZ$ 
         \alpha_{\rm tr} &= \alpha_{\rm dt} = 1.\\
     \end{split}
 \end{equation}
-We show this dependence in figure~\ref{fig:ch4_zz_noise} (c).
+We show this dependence in Figure~\ref{fig:ch4_zz_noise} (c).
 The same intermediate asymptote of $\mathcal{P}_{SS}|_{m\rightarrow\infty} = 0.5$ is expected. \\
 
 The difference in correlated decay structure due to \emph{common}, depolarising, and $ZZ$-type errors suggests that twirling over $Cl_1^{\otimes2}$ both simplifies a generic error map to be measurable via RB, but also, retains some noise-dependent structure of the correlated decay profiles.  
-Designing optimal initial and final states, as well as optimal sampling strategies for extracting a larger set of error parameters covering multiple physical error mechanisms is left for future work. A possible strategy to avoid introducing arbitrary error channels, is to be agnostic of the physical error mechanisms, and rather directly extract the $\vec\alpha$ and $\vec m$ parameters described in section~\ref{app:reps}. Analogous protocols to this is described by character RB~\cite{helsen_new_2019}, and tomography via RB~\cite{kimmel_robust_2014}.
+Designing optimal initial and final states, as well as optimal sampling strategies for extracting a larger set of error parameters covering multiple physical error mechanisms is left for future work. A possible strategy to avoid introducing arbitrary error channels, is to be agnostic of the physical error mechanisms, and rather directly extract the $\vec\alpha$ and $\vec m$ parameters described in~\S~\ref{app:reps}. Analogous protocols to this is described by character RB~\cite{helsen_new_2019}, and tomography via RB~\cite{kimmel_robust_2014}.
 
 
 \section{Derangement for $k=2$}

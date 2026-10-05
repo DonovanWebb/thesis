@@ -12,7 +12,7 @@
     \end{figure}
 
 This thesis considers control over a hybrid spin-motion system, as shown
-schematically in figure~\ref{fig:spin_motion}. For an $N$-ion chain, we have access to $N$-qubits, defined by
+schematically in Figure~\ref{fig:spin_motion}. For an $N$-ion chain, we have access to $N$-qubits, defined by
 electronic transitions of the ions, and $3N$-qumodes, emerging from the collective motion
 of the ion chain.\\
 In this chapter we lay out the foundational concepts and interactions that will
@@ -67,7 +67,7 @@ entangling gates via the shared motional modes.
     we shall refer to the transition between the two manifolds as either the
     quadrupole transition, or the 729-nm transition.
     The energy levels for
-    \ca are shown in figure~\ref{fig:ion}, with the wavelengths of laser
+    \ca are shown in Figure~\ref{fig:ion}, with the wavelengths of laser
     highlighted to drive a selection of transitions. \\
     The 397-nm and 866-nm lasers are used to form a dissipative closed-cycle transition useful for both state-dependent fluorescence (\S~\ref{sec:Measurement}), and for laser cooling (\S~\ref{sec:Cooling}). The 854-nm laser is used to deshelve the electron from the $\ket{3D_{5/2}}$ manifold for qubit state preparation (\S~\ref{sec:Stateprep}). Details on these lasers can be found in~\S~\ref{sec:Laser systems}.\\
 
@@ -99,7 +99,7 @@ entangling gates via the shared motional modes.
     where $\mu_B$ is the Bohr magneton, and $g_D$ and $g_S$ are the $g$-factors for the manifolds $\ket{3D_{5/2}}$ and $\ket{4S_{1/2}}$ respectively. The magnetic field sensitivities are then,
     $\lvert \frac{df}{dB}\rvert = \{-2.799, -1.119,
     0.561, 2.241, 3.922\}~\unit{\MHz\per\gauss}$ between ground state $\ket{\da}$ and excited states with varying $m_j$, $\ket{3D_{5/2},~m_j = \{-5/2, -3/2, -1/2, 1/2, 3/2\}}$ respectively.\\
-    The quantising magnetic field is set perpendicular to the 729-nm laser beam access. As such, the coupling strength of the various quadrupole transitions for a linear-polarised optical field is set exclusively by the angle, $\gamma$, between the magnetic field axis and the optical polarisation axis. This relationship is plotted in figure~\ref{fig:quadrupole}.
+    The quantising magnetic field is set perpendicular to the 729-nm laser beam access. As such, the coupling strength of the various quadrupole transitions for a linear-polarised optical field is set exclusively by the angle, $\gamma$, between the magnetic field axis and the optical polarisation axis. This relationship is plotted in Figure~\ref{fig:quadrupole}.
     Figure~\ref{fig:quadrupole}~(a), shows the relative coupling strength
     (here given as Rabi frequency, which is discussed in~\S~\ref{sec:qubit_control}) of each transition as the angle $\gamma$ is varied.
     To maximise the coupling of one transition, and suppress other possible transitions, the polarisation of the 729-nm laser can be set to $\gamma = \frac{\pi}{2}$. This would be a good choice if high-strength coupling interactions are desired to minimise off-resonant driving of spectator interactions. If it is desirable to access multiple quadrupole transitions the setting $\gamma = \frac{\pi}{4}$ is a convenient choice.
@@ -109,7 +109,7 @@ entangling gates via the shared motional modes.
 \section{Spin}
 \subsection{The Qubit}
 
-The particular choice of qubit, highlighted in figure~\ref{fig:ion},
+The particular choice of qubit, highlighted in Figure~\ref{fig:ion},
 $\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ 
 with $\ket{\da}:=\ket{4S_{1/2},~m_j = -1/2}$, $\ket{\ua}:=\ket{3D_{5/2},~m_j = -5/2}$, is convenient as the 729-nm polarisation when set to $\gamma=\frac{\pi}{2}$ can maximise its coupling. Furthermore, due to the dipole selection rule, $|\Delta m_j| \leq 1$,
 a closed-cycle transition for sideband cooling (details in \S~\ref{sec:Cooling}) is available using this excited $\ket{3D_{5/2}}$ state. \\
@@ -152,7 +152,7 @@ the quadrupole Rabi frequency is given by,
     \Omega_{\rm EQ} = \frac{1}{6\hbar}\sum_{i,j=\{x,y,z\}}\bra{\da}Q_{ij}\ket{\ua}\partial_i E_j\rvert_R
 \end{equation}
 where $Q_{ij}$ is the quadrupole tensor~\cite{james_quantum_1998}\footnote{For reference, the simpler electric dipole interaction has Rabi frequency is given by
-$\Omega_{\rm ED} = \frac{1}{\hbar}\sum_j\bra{\da}d_j\ket{\ua}E_j$, where $d_j$ is the dipole moment}. Apart from the dependence on polarisation and $k$-vector discussed in figure~\ref{fig:quadrupole}, the details of the quadrupole derived Rabi-frequency are not relevant for the remainder of this section, and a general Rabi frequency, denoted by $\Omega$, is instead considered.\\
+$\Omega_{\rm ED} = \frac{1}{\hbar}\sum_j\bra{\da}d_j\ket{\ua}E_j$, where $d_j$ is the dipole moment}. Apart from the dependence on polarisation and $k$-vector discussed in Figure~\ref{fig:quadrupole}, the details of the quadrupole derived Rabi-frequency are not relevant for the remainder of this section, and a general Rabi frequency, denoted by $\Omega$, is instead considered.\\
 
 To evaluate the dynamics of $\hat H_I$ we go to a frame rotating at the qubit frequency, $\omega_0$. This interaction picture with respect to $\hat H_s$ is $\tilde H_I = \hat U_s^\dagger \hat H_I \hat U_s$ with $\hat U_s = e^{-i\hat H_s t/\hbar}$. Defining a relative detuning between the qubit and optical frequency as $\delta = \omega - \omega_0$, and neglecting fast oscillating terms (making the rotating wave approximation) with frequency $\omega + \omega_0$, the Hamiltonian is approximated by, 
 \begin{equation}
@@ -192,7 +192,7 @@ When considering the optical interaction given in
 equation~\ref{eqn:light_matter} for a large detuning $|\Delta| \gg \Omega$, the
 Hamiltonian remains time dependent, and does not self-commute at different
 times. The Magnus expansion is utilised to evaluate the dynamics. Details are
-given in appendix~\ref{app:stark_shift}, with the resulting dynamics
+given in Appendix~\ref{app:stark_shift}, with the resulting dynamics
 approximating $\hat\sigma_z$ rotations of the form,
 \begin{equation}
 \hat R_z := e^{-i\theta\hat\sigma_z/2}, ~~~~ \theta = \frac{\Omega^2t}{2\Delta}.
@@ -360,10 +360,10 @@ $\hat D(\beta)$, where here $\beta = \frac{\Omega_D t}{2}ie^{-i\phi}$. The
 displacement operator is used in the coherent state representation of the
 oscillator, $\ket{\beta} = \hat D(\beta)\ket{0}$, where $\ket{\beta}$ is the eigenstate of the annihilation operator, $\hat a\ket{\beta} = \beta\ket{\beta}$.  The action of the displacement
 operator may be visualised in phase space, shown for resonance in
-figure~\ref{fig:displacement}~(a).\\
+Figure~\ref{fig:displacement}~(a).\\
 
 Considering the off-resonant case, $\delta \neq 0$, the Hamiltonian $\tilde H_I$ 
-does not self-commute over time, generally $[\hat H_D(t_1), \hat H_D(t_2)]\neq 0$. The resulting dynamics are derived by the Magnus expansion in appendix~\S~\ref{app:geometric_phase}, yielding the effective unitary at time $T$,
+does not self-commute over time, generally $[\hat H_D(t_1), \hat H_D(t_2)]\neq 0$. The resulting dynamics are derived by the Magnus expansion in Appendix~\ref{app:geometric_phase}, yielding the effective unitary at time $T$,
 \begin{equation}
     \label{eqn:displacement}
     \hat U(T) \approx \hat D(\beta(T))e^{-i\Phi(T)}.
@@ -376,7 +376,7 @@ The displacement parameter $\beta$ is given by,
 \end{equation}
 with a trajectory tracing a circle of radius $\frac{\Omega_D}{2|\delta|}$, returning to the
 initial motional state with periodicity $T_n = \frac{2\pi n}{|\delta|}$, for integer $n$.
-The phase space dynamics for the off-resonant displacement is shown in figure~\ref{fig:displacement}~(b).\\
+The phase space dynamics for the off-resonant displacement is shown in Figure~\ref{fig:displacement}~(b).\\
 The geometric phase term, originating from the second
 order term in the Magnus expansion, is given by,
 \begin{equation}
@@ -461,7 +461,7 @@ R_{\rm BSB}(\Omega^{(n)}_{\rm BSB}t) := e^{-i\hat H_{\rm BSB}t/2}\ket{\da, n} = 
 \end{equation}
 where $\Omega^{(n)}_{\rm BSB} = \sqrt{n+1}\eta\Omega$ is the $n$-dependent modified BSB Rabi-frequency.\\
 The resulting resolved sideband structure is shown schematically in
-figure~\ref{fig:sidebands} with the carrier, RSB, and BSB transitions
+Figure~\ref{fig:sidebands} with the carrier, RSB, and BSB transitions
 highlighted for one state, $\ket{\da, 1}$. In contrast to the coherent
 displacements in~\S~\ref{sec:driving_motion}, these sideband interactions offer
 a method for coherent control in the discrete Fock-state basis, selectively
@@ -553,7 +553,7 @@ Setting $\theta = \pi/2$ and ensuring the duration is an integer number of loop 
 T_n &= \frac{\pi\sqrt{n}}{\Omega_{\rm SDF}}.
 \end{align}
 The phase space dynamics for this entangling gate are shown in
-figure~\ref{fig:ms_trajectories}. The initial state is expressed in the
+Figure~\ref{fig:ms_trajectories}. The initial state is expressed in the
 $x$-basis as $\ket{\da\da}=\frac{1}{2}(\ket{++}+\ket{+-}+\ket{-+}+\ket{--})$,
 with the trajectories associated with $\ket{++}$ and $\ket{--}$ tracing closed
 loops in phase space, while spin-component 
