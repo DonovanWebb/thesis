@@ -14,7 +14,7 @@
     discrete-variable quantum computation. Section~\ref{sec:CVQC} in
     chapter~\ref{ch:QEM} applies the spin-dependent motional
     interactions demonstrated here for continuous-variable readout, and to
-    realise the remaining non-linear and two-mode operations required
+    realise the remaining nonlinear and two-mode operations required
     for full hybrid CV-DV control.\\
 
 \section{Spin}
@@ -317,7 +317,7 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     symmetry of a chosen group on the channel~\cite{hashim_practical_2025}.
     The general error channel is described by the map acting on the space of density matrices,
     \begin{equation}
-    \mathcal{E}(\rho): \mathbb{C}^{d\times d}\rightarrow\mathbb{C}^{d\times d}
+    \mathcal{E}(\hat\rho): \mathbb{C}^{d\times d}\rightarrow\mathbb{C}^{d\times d}
     \end{equation}
     where $d$ is the Hilbert space dimension.
     The symmetry is enforced on the channel through twirling --- averaging a channel $\mathcal{E}$
@@ -344,7 +344,7 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
     and transforms single-qubit error channels to highly-symmetric depolarising
     type channels, fully expressed by a single parameter, $\lambda$,
     \begin{equation}
-    \mathcal{E}_{dp}(\rho) = (1-2\lambda)\rho + \lambda I_2 \mathrm{Tr}(\rho),
+    \mathcal{E}_{dp}(\hat\rho) = (1-2\lambda)\hat\rho + \lambda I_2 \mathrm{Tr}(\hat\rho),
     \end{equation}
     where $\mathcal{E}_{dp}$ is the resulting twirled channel, and $I_2$ is the $2\times 2$ identity matrix.
     Unfortunately, $SU(2)$ is continuous, as such it is impractical to average over the entire group.
@@ -450,7 +450,7 @@ the bare-qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.\\
         \item Repeat steps 1-6 for different values of $t_{\rm RAM}$ to find the decay in contrast with time. 
     \end{enumerate}
 
-    This Ramsey fringe contrast is directly proportional to the coherence of the resulting noisy state, $\rho$, given by matrix element, $\rho_{\da,\ua}$. \\
+    This Ramsey fringe contrast is directly proportional to the coherence of the resulting noisy state, $\hat\rho$, given by matrix element, $\rho_{\da,\ua}$. \\
     Figure~\ref{fig:coherence_times} shows the coherence time of
     three quadrupole transitions:\\
     $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=\lbrace -5/2,
@@ -617,8 +617,8 @@ sequences~\cite{fang_crosstalk_2022}.
     the mode we wish to probe. The frequency of the RF field is scanned around
     the expected motional mode frequency, and when resonant drives the motion
     of the ion. Excess motional amplitude is measured by observing an increase in
-    fluorescence when driving a closed dipole transition detuned to a non-linear
-    region of the resonance. The motional induced sidebands at this non-linear
+    fluorescence when driving a closed dipole transition detuned to a nonlinear
+    region of the resonance. The motional induced sidebands at this nonlinear
     point are unbalanced leading to a modulation of fluorescence. Here the
     397-nm laser is set to provide approximately 1 saturation intensity of light
     to avoid power broadening the dipole transition. The 397-nm is red-detuned
@@ -1032,7 +1032,7 @@ sequences~\cite{fang_crosstalk_2022}.
         \label{fig:SDF}
     \end{figure}
 
-    Spin-dependent forces (SDF), as described in~\S~\ref{sec:SDF}, are used in this thesis for both two-qubit entangling gates (following section), and for generating and characterising non-linear bosonic states (~\S~\ref{sec:tomography} and \S~\ref{sec:two-sdf}). Here we describe the calibration strategy and characterisation of a single SDF.\\
+    Spin-dependent forces (SDF), as described in~\S~\ref{sec:SDF}, are used in this thesis for both two-qubit entangling gates (following section), and for generating and characterising nonlinear bosonic states (~\S~\ref{sec:tomography} and \S~\ref{sec:two-sdf}). Here we describe the calibration strategy and characterisation of a single SDF.\\
 
     The SDF is generated using the bichromatic field method introduced by M{\o}lmer and S{\o}rensen~\cite{molmer_multiparticle_1999}, using simultaneous detuned red- and blue-sidebands.
     In practice, this SDF interaction involves relatively few degrees of freedom to calibrate:
@@ -1132,14 +1132,14 @@ sequences~\cite{fang_crosstalk_2022}.
     phase\footnote{$\phi_0$ is left unspecified as the target of a specific
     phase is not required, we only require that it is stable over time, and
     measured precisely.}. Practically, due to systematic errors and noise on
-    both the qubit and motional state, the final mixed state $\rho$ is produced.
-    The state-fidelity between $\rho$, and the pure Bell state is
+    both the qubit and motional state, the final mixed state $\hat\rho$ is produced.
+    The state-fidelity between $\hat\rho$, and the pure Bell state is
     given by,
     \begin{equation}
-        \mathcal{F} = \bra{\Phi^+_{\phi_0}} \rho \ket{\Phi^+_{\phi_0}} = \frac{1}{2} \left( \rho_{\da\da,\da\da} + \rho_{\ua\ua,\ua\ua} \right) + \frac{1}{2}\left( e^{i\phi_0}\rho_{\ua\ua,\da\da}+e^{-i\phi_0}\rho_{\da\da,\ua\ua}\right),
+        \mathcal{F} = \bra{\Phi^+_{\phi_0}} \hat\rho \ket{\Phi^+_{\phi_0}} = \frac{1}{2} \left( \rho_{\da\da,\da\da} + \rho_{\ua\ua,\ua\ua} \right) + \frac{1}{2}\left( e^{i\phi_0}\rho_{\ua\ua,\da\da}+e^{-i\phi_0}\rho_{\da\da,\ua\ua}\right),
         \label{eq:Fidelity}
     \end{equation}
-    where the matrix elements are given by $\rho_{ij,kl} = \braket{ij|\rho|kl}$.
+    where the matrix elements are given by $\rho_{ij,kl} = \braket{ij|\hat\rho|kl}$.
     Thus to extract this fidelity, only partial state tomography is
     required~\cite{sackett_experimental_2000}.
     The first bracketed term of
@@ -1152,7 +1152,7 @@ sequences~\cite{fang_crosstalk_2022}.
     $R_\phi(\pi/2)$ pulse to the two ions with variable phase $\phi$. The final
     spin-populations are combined to a parity measurement, defined as $\Pi =
     P_{\da\da} + P_{\ua\ua} - P_{\da\ua} - P_{\ua\da}$. Varying $\phi$, the
-    observed parity relates to the matrix elements of $\rho$ as,
+    observed parity relates to the matrix elements of $\hat\rho$ as,
     \begin{equation}
         \Pi(\phi) = \rho_{\da\ua,\ua\da}+\rho_{\ua\da,\da\ua} + e^{-2i\phi}\rho_{\ua\ua,\da\da} + e^{+2i\phi}\rho_{\da\da,\ua\ua}.
     \end{equation}

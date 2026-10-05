@@ -27,7 +27,7 @@ How faithfully can we execute arbitrary circuits on our physical devices?
 Extracting metrics to this end is a wide research area in quantum information, with techniques of varying scalability and implicit assumptions on underlying noise models~\cite{eisert_quantum_2020}. On one end of the spectrum sits full
 tomography~\cite{chuang_prescription_1997, nielsen_gate_2021, poyatos_complete_1997, childs_realization_2001} which reconstructs quantum channels, here represented as completely positive, trace-preserving (CPTP) maps on the space of density matrices,
 \begin{equation}
-\mathcal{E}(\rho): \mathbb{C}^{d\times d} \to \mathbb{C}^{d\times d},
+\mathcal{E}(\hat\rho): \mathbb{C}^{d\times d} \to \mathbb{C}^{d\times d},
 \end{equation}
 where the dimension of the Hilbert space is $d=2^n$ for $n$ qubits. 
 The CPTP map is rich in information, capturing all Markovian (those which do not depend on history) error channels, but has poor scaling with system size, generally requiring $O(d^4)$ parameters to describe, and $O(d^4)$ measurement settings to reconstruct. This scaling fundamentally limits tomography to small system sizes. 
@@ -44,15 +44,15 @@ We highlight a subset of these models, termed \emph{Crosstalk-Free Markovian QIP
 \item\emph{Local} is the assumption that only explicitly applied multi-body operations lead to correlations between qubits that participate in the ideal multi-body operation. For a bipartite system, a local Markovian QIP executing a circuit with no explicit coupling between subsystems, $A$, and $B$, can be described by the product channel CPTP map,
 \begin{equation}
     \label{eqn:k-copy_local}
-    \mathcal{E}_{AB}(\rho_A\otimes\rho_B) = \mathcal{E}_A(\rho_A)\otimes\mathcal{E}_B(\rho_B),
+    \mathcal{E}_{AB}(\hat\rho_A\otimes\hat\rho_B) = \mathcal{E}_A(\hat\rho_A)\otimes\mathcal{E}_B(\hat\rho_B),
 \end{equation}
 where $\mathcal{E}_A$ and $\mathcal{E}_B$ are CPTP maps acting locally on the $A$ and $B$ subsystems respectively.\\
 \item\emph{Independent} is the assumption that the action of an applied gate on a
 subset of qubits is independent of any other gates applied in parallel on the
-other qubits. This implies that the CPTP map of gate $G$, acting on subsystem $A$ in layer $i$, given by $\mathcal{E}_G^{(i)}(\rho_A)$, is identical to the action of the same gate acting on subsystem $A$ in layer $j$, 
+other qubits. This implies that the CPTP map of gate $G$, acting on subsystem $A$ in layer $i$, given by $\mathcal{E}_G^{(i)}(\hat\rho_A)$, is identical to the action of the same gate acting on subsystem $A$ in layer $j$, 
 \begin{equation}
     \label{eqn:k-copy_independent}
-    \mathcal{E}_G^{(i)}(\rho_A)=\mathcal{E}_G^{(j)}(\rho_A),
+    \mathcal{E}_G^{(i)}(\hat\rho_A)=\mathcal{E}_G^{(j)}(\hat\rho_A),
 \end{equation}
 where parallel applied gates on the other subsystems may be different between layers.
 \end{itemize}
@@ -262,12 +262,12 @@ in Liouville form diagonal in the Schur basis, $\mathcal{S}$, (ordered by table~
 where $I_d$ is the $d$-dimensional identity.\\
 We term noise due to common small-angle single-qubit rotations acting on $k$-qubits \emph{common noise}. For two qubits the general form is given by the separable channel,
 \begin{equation}\label{eqn:rotation_channel}
-    \mathcal{E}_\mathcal{A}(\rho)=\sum_{a\in \mathcal{A}} p_a(U_a\otimes U_a)\rho(U_a\otimes U_a)^\dagger,
+    \mathcal{E}_\mathcal{A}(\hat\rho)=\sum_{a\in \mathcal{A}} p_a(U_a\otimes U_a)\hat\rho(U_a\otimes U_a)^\dagger,
 \end{equation}
 where $\mathcal{A}$ specifies the ensemble of unitaries applied with probabilities $p_a$, with $\sum_{a \in\mathcal{A}}p_a=1$, and $U_a(\theta_a,\hat{n}_a)=e^{-i(\theta_a/2)\hat n_a\cdot\hat\sigma}$, with rotation angle, $\theta_a$, axis, $\hat n_a$, and Pauli vector, $\hat\sigma$.
 A subset of error channels following this description cannot be described by a product channel map on a bipartite system, and so violate the \emph{local} condition given in equation~\ref{eqn:k-copy_local}. These errors therefore cannot be modelled by a crosstalk-free Markovian QIP although originating from separable channels.
 This is an important distinction: non-product channels are not limited to direct entangling noise.\\
-To find the twirled error channel of the common unitary channel, $\tilde\Lambda^\mathcal{S}(\mathcal{E}_\mathcal{A})$, we first consider the effect of twirling on a single common unitary channel, $\mathcal{E}_a(\rho) = (U_a\otimes U_a)\rho(U_a\otimes U_a)$. We outline two approaches to find $\tilde\Lambda^\mathcal{S}(\mathcal{E}_a)$:\\ 
+To find the twirled error channel of the common unitary channel, $\tilde\Lambda^\mathcal{S}(\mathcal{E}_\mathcal{A})$, we first consider the effect of twirling on a single common unitary channel, $\mathcal{E}_a(\hat\rho) = (U_a\otimes U_a)\hat\rho(U_a\otimes U_a)$. We outline two approaches to find $\tilde\Lambda^\mathcal{S}(\mathcal{E}_a)$:\\ 
 First, as the basis sets for the relevant
 sub-representations are known (see table~\ref{table:irreps}), and as the single qubit
 Clifford group only contains 24 elements, we may construct the common unitary
@@ -321,9 +321,9 @@ Comparing to equation~\ref{eqn:Liouville}, the general ensemble of common single
 Ultimately, environmental noise will not perfectly couple symmetrically to both qubits, and so independent local single-qubit error channels must also be considered.
 Assuming an independent noise channel acting on each qubit, Clifford twirling leads to a fully depolarising noise channel of the form,
 \begin{equation}\label{eqn:1q_depol}
-    \mathcal{E}_{dp,i}(\rho)=(1-2\varepsilon_i)\rho+ \varepsilon_iI_2\mathrm{Tr}(\rho),
+    \mathcal{E}_{dp,i}(\hat\rho)=(1-2\varepsilon_i)\hat\rho+ \varepsilon_iI_2\mathrm{Tr}(\hat\rho),
 \end{equation}
-where $\rho$ is the density matrix for a single qubit, and the subscript $i$ signifies which qubit we are considering. For the ``left'' and ``right'' qubits we describe the decay rates by $\varepsilon_L$ and $\varepsilon_R$, respectively.
+where $\hat\rho$ is the density matrix for a single qubit, and the subscript $i$ signifies which qubit we are considering. For the ``left'' and ``right'' qubits we describe the decay rates by $\varepsilon_L$ and $\varepsilon_R$, respectively.
 Parallel local depolarisation is given by the channel, $\mathcal{E}_{dp}=\mathcal{E}_{dp,L}\otimes \mathcal{I} + \mathcal{I}\otimes\mathcal{E}_{dp,R}$, with $\mathcal I$ being the identity channel on a single qubit.
 Comparing to equation~\ref{eqn:Liouville}, 
 this channel may be expressed in PTM form as the diagonal matrix,
@@ -394,7 +394,7 @@ we find the observed decay of each qubit is now separable into a local, and corr
     \label{fig:k-copy sim}
 \end{figure}
 
-Here we consider the asymptotic structure of the correlated decay curves given in~\ref{eqn:app_pops}. Under dominant local depolarisation, the two-qubit state will approach the maximally mixed state, $\rho\rightarrow I_4/4$, indicated by the asymptote
+Here we consider the asymptotic structure of the correlated decay curves given in~\ref{eqn:app_pops}. Under dominant local depolarisation, the two-qubit state will approach the maximally mixed state, $\hat\rho\rightarrow I_4/4$, indicated by the asymptote
 $\mathcal{P}_{SS}\lvert_{m\to\infty} = 1/4$, as seen in figure~\ref{fig:k-copy sim} (a).
 Under dominant \emph{common noise}, with decay profile seen in (b), an asymptote of
 $\mathcal{P}_{SS}\lvert_{m\to\infty} = 1/3$ is approached due to the invariance of the trace sector, $\alpha_{\rm tr}$.
@@ -414,7 +414,7 @@ Depolarising into the symmetric separable two-qubit states is equivalent to aver
 \begin{equation}
     \label{eqn:rho_sym}
 \begin{split}
-    \rho_\mathrm{sym}&=\frac{1}{4\pi}\int_0^\pi\int_0^{2\pi}\left(\sin(\theta)\ket{\Psi}\bra{\Psi}\right)\mathrm{d}\phi\mathrm{d}\theta\\
+    \hat\rho_\mathrm{sym}&=\frac{1}{4\pi}\int_0^\pi\int_0^{2\pi}\left(\sin(\theta)\ket{\Psi}\bra{\Psi}\right)\mathrm{d}\phi\mathrm{d}\theta\\
     &=\frac{1}{4}\left(II+\frac{1}{3}(XX+YY+ZZ)\right),\\
     &=\frac{1}{3}\ket{\da\da}\bra{\da\da}+\frac{1}{3}\ket{\ua\ua}\bra{\ua\ua}+\frac{1}{3}\ket{\Psi^+}\bra{\Psi^+},
     \end{split}
@@ -458,7 +458,7 @@ First, we consider independent state preparation on two qubits. We model indepen
 \begin{equation}
 \label{eqn:state_prep}
 \begin{split}
-    \rho_{sp}^{(i)}&=(1-\varepsilon_{sp}^{(i)})\ket{\da}\bra{\da}+\varepsilon_{sp}^{(i)}\ket{\ua}\bra{\ua},\\
+    \hat\rho_{sp}^{(i)}&=(1-\varepsilon_{sp}^{(i)})\ket{\da}\bra{\da}+\varepsilon_{sp}^{(i)}\ket{\ua}\bra{\ua},\\
 \end{split}
 \end{equation}
 where the superscript refers to which qubit, $L$, or $R$, the preparation error is relevant to.
@@ -466,7 +466,7 @@ This error may be modelled by $\mathcal{E}_{sp}^{(i)}$, a probabilistic $X$ chan
 \begin{equation}
 \label{eqn:app_state_prep}
 \begin{split}
-    \mathcal{E}_{sp}^{(i)}(\rho)&=\left(1-\varepsilon_{sp}^{(i)}\right)\rho+\varepsilon_{sp}^{(i)}X\rho X.\\
+    \mathcal{E}_{sp}^{(i)}(\hat\rho)&=\left(1-\varepsilon_{sp}^{(i)}\right)\hat\rho+\varepsilon_{sp}^{(i)}X\hat\rho X.\\
 \end{split}
 \end{equation}
 Transforming to the Liouville form, denoted by $\Lambda_{sp}^{(i)}$, this error is simply
@@ -494,7 +494,7 @@ Correlated state preparation errors may be considered by adapting equation~\ref{
 \begin{equation}
 \label{eqn:corr_state_prep}
 \begin{split}
-    \mathcal{E}_{sp}^{\rm corr}(\rho)&=(1-\varepsilon_{sp}^{\rm corr})\rho+\varepsilon_{sp}^{\rm corr}(X\otimes X)\rho (X\otimes X).\\
+    \mathcal{E}_{sp}^{\rm corr}(\hat\rho)&=(1-\varepsilon_{sp}^{\rm corr})\hat\rho+\varepsilon_{sp}^{\rm corr}(X\otimes X)\hat\rho (X\otimes X).\\
 \end{split}
 \end{equation}
 The subspaces involving both qubits non-trivially are now unaffected by the state preparation error, shown explicitly by,
@@ -516,12 +516,12 @@ where $A_{sp}^{\rm corr}=1-2\varepsilon_{sp}^{\rm corr}$. These correlations thu
     \label{fig:parity_protocol}
 \end{figure}
 
-Correlated errors lead to multi-qubit correlations. In the two-qubit case these correlations are clearly visible in the mixed state $\rho_{sym}$, 
+Correlated errors lead to multi-qubit correlations. In the two-qubit case these correlations are clearly visible in the mixed state $\hat\rho_{sym}$, 
 given by equation~\ref{eqn:rho_sym}, which is approached when \emph{common noise} is dominant. 
-Here, we propose directly measuring induced two-qubit correlations to independently verify the coherent structure seen in $\rho_{sym}$. 
+Here, we propose directly measuring induced two-qubit correlations to independently verify the coherent structure seen in $\hat\rho_{sym}$. 
 In~\S~\ref{sec:fisher} we shall see that such a measurement gives an improvement in the uncertainty of the estimated error components. \\
 To quantify the two-qubit correlations, a partial state-tomography method based on~\cite{sackett_experimental_2000} is utilised. This method is common in fidelity estimation of two-qubit entangling gates (further details given in~\S~\ref{sec:Two-Qubit Entangling Gates}).
-The protocol quantifies the overlap of the ``coherence-terms'' between the final mixed state and a chosen Bell state. To quantify the overlap to the mixed state $\rho_{sym}$, the Bell state $\ket{\Psi^+}$ is chosen.\\
+The protocol quantifies the overlap of the ``coherence-terms'' between the final mixed state and a chosen Bell state. To quantify the overlap to the mixed state $\hat\rho_{sym}$, the Bell state $\ket{\Psi^+}$ is chosen.\\
 The circuit for probing this coherence is shown in figure~\ref{fig:parity_protocol} (a): differential rotations of the form $\hat R_{+\phi}(\pi/2) \otimes
 \hat R_{-\phi}(\pi/2)$, with rotation axis $\hat\sigma_\phi=\cos(\phi)\hat\sigma_x + \sin(\phi)\hat\sigma_y$, are applied prior to measurement, and the contrast of the
 resulting fringe (as $\phi$ is varied) is extracted. \\
@@ -743,9 +743,9 @@ Error bars show the standard error of the mean across random sequences,
 %
 The correlated populations exhibit a clear intermediate asymptote at
 $m \approx 100$ Cliffords, corresponding to the initial state $\ket{\da\da}$
-approaching $\rho_{sym}$, equation~\ref{eqn:bell}, with $\mathcal{P}_{SS}\rightarrow \frac{1}{3}$ asymptote highlighted by the red dashed line. The dashed blue line shows the fully depolarised $\mathcal{P}_{SS}\rightarrow\frac{1}{4}$ asymptote, seen clearly by $m \approx 1000$ gates. 
+approaching $\hat\rho_{sym}$, equation~\ref{eqn:bell}, with $\mathcal{P}_{SS}\rightarrow \frac{1}{3}$ asymptote highlighted by the red dashed line. The dashed blue line shows the fully depolarised $\mathcal{P}_{SS}\rightarrow\frac{1}{4}$ asymptote, seen clearly by $m \approx 1000$ gates. 
 The solid lines are found through modelling errors by a combination of local depolarising errors and \emph{common noise}, given by equation~\ref{eqn:app_pops} generalised to include independent state-preparation and measurement error (SPAM), $\varepsilon_{sp}$ (see equation.~\ref{eqn:app_pop_sp} for example). 
-The model is fit using the non-linear Levenberg–Marquardt method, yielding
+The model is fit using the nonlinear Levenberg–Marquardt method, yielding
 extracted parameters
 $\varepsilon_{sp}=0(5)\times10^{-3}$, $\varepsilon_\mathrm{corr}=2.6(2)\times10^{-2}$, $\varepsilon_L=5(6)\times10^{-4}$, and
 $\varepsilon_R=0(6)\times10^{-4}$, confirming that correlated errors dominate with this global field detuning. 
@@ -774,7 +774,7 @@ As the final differential rotation pulse requires local addressing of the ions, 
 Each random sequence is repeated for varying final rotation angle, $\phi$, to produce parity fringes, examples shown in (c) and (d) in figure~\ref{fig:k-copy_par_data} for $m=25$ and $m=1600$ Clifford gates respectively. The contrast is extracted by equation~\ref{eqn:parity_contrast}, and a plot against sequence length is shown in (b).
 The contrast
 asymptote $C\to 1/3$ is observed for
-$m \in [10,100]$, corresponding to the residual coherence of $\rho_{\rm sym}$, equation~\ref{eqn:rho_sym}. 
+$m \in [10,100]$, corresponding to the residual coherence of $\hat\rho_{\rm sym}$, equation~\ref{eqn:rho_sym}. 
 The parity contrast data is fit (solid line) according to
 equation~\ref{eqn:parity_contrast} to extract error per Cliffords of,
 $\varepsilon_\mathrm{corr}=2.1(2)\times10^{-2}$ and $\varepsilon_L=\varepsilon_R=3.9(3)\times10^{-4}$. These extracted errors are of similar magnitude to those found by $Z$-measurements as demonstrated in the previous section. Importantly, this parity method cannot distinguish local errors on the left and right qubit, but rather reports the sum, $\varepsilon_L + \varepsilon_R$. We have explicitly assumed here that $\varepsilon_L = \varepsilon_R$. As discussed in~\S~\ref{sec:fisher}, it would be advantageous to combine both parity and $Z$-measurements to further improve the uncertainties in estimated parameters. Demonstrating this experimentally is left for future work.
@@ -835,7 +835,7 @@ In this experiment we use the Clifford decomposition for which $\kappa=2.17$ $\p
 \varepsilon_\mathrm{corr} = \varepsilon_\mathrm{corr,0} + \varepsilon_{\delta\phi}.
 \end{equation}
 The baseline correlated error is therefore the only parameter to fit. With $\varepsilon_\mathrm{corr,0}= 1.71(4)\times10^{-3}$, we find good agreement between the model and data. 
-The local depolarising error on both qubits remains relatively constant, with the left qubit having a larger local error compared to the right qubit. We believe this asymmetry in local error is due to the global 729-nm beam not being centrally aligned to both qubits. The uncertainty in extracted error is found through Levenberg-Marquadt non-linear fit; it can be seen that the uncertainty in the depolarising errors increases substantially with the total correlated error. This may be explained by the available Fisher information gained by the chosen logarithmic sampling strategy, as explored in section~\ref{sec:fisher}. Figure~\ref{fig:ch4_fisher_2} (a) supports that we expect an increase in depolarising parameter uncertainty for $\varepsilon_\mathrm{corr} \gg (\varepsilon_L + \varepsilon_R)$.
+The local depolarising error on both qubits remains relatively constant, with the left qubit having a larger local error compared to the right qubit. We believe this asymmetry in local error is due to the global 729-nm beam not being centrally aligned to both qubits. The uncertainty in extracted error is found through Levenberg-Marquadt nonlinear fit; it can be seen that the uncertainty in the depolarising errors increases substantially with the total correlated error. This may be explained by the available Fisher information gained by the chosen logarithmic sampling strategy, as explored in section~\ref{sec:fisher}. Figure~\ref{fig:ch4_fisher_2} (a) supports that we expect an increase in depolarising parameter uncertainty for $\varepsilon_\mathrm{corr} \gg (\varepsilon_L + \varepsilon_R)$.
 
 
 \subsubsection{Laser detuning scan}
@@ -875,7 +875,7 @@ To convert this to an error contribution to a single qubit Clifford gate, we int
         quadratically with laser detuning, while the local depolarising errors
         (blue points) remain approximately constant.
         Error bars are the
-        extracted standard deviations from a non-linear Levenberg–Marquardt fit
+        extracted standard deviations from a nonlinear Levenberg–Marquardt fit
         of the underlying correlated populations. The solid red line is fit according to equation~\ref{eqn:detuning_model}.
         The red shaded region
         signifies the 68\% confidence, generated through covariance-based
@@ -913,7 +913,7 @@ $\kappa_\delta = 15.9(7)$, and $\delta_0 = 2\pi \times 0.80(5)~\unit{\kilo\hertz
     \end{center}
     \caption{
         Correlated and uncorrelated errors are injected via a single-addressed Stark-shift beam, and quantified through fitting the correlated success populations. The four addressing configurations are depicted visually above the plot. The wide beam signifies the on-resonance global drive which executes the parallel single-qubit rotations, while the narrow beams represent the off-resonant Stark shift beams addressing single-qubits (black circles). In~(a) the errors are correlated between qubits, while panel~(b) shows the extracted errors after independent errors are injected.
-        Error bars are the extracted standard deviations from a non-linear Levenberg–Marquardt fit of the underlying correlated populations. Panel (c) shows the calibration of Stark shift against total beam power used to infer the injected error.
+        Error bars are the extracted standard deviations from a nonlinear Levenberg–Marquardt fit of the underlying correlated populations. Panel (c) shows the calibration of Stark shift against total beam power used to infer the injected error.
         }
     \label{fig:k-copy_ss}
 \end{figure}
@@ -1058,7 +1058,7 @@ The number of relevant irreps does not increase, however, the multiplicity does 
 Some headway can be made if we consider the \emph{common noise} error mode discussed throughout this chapter.
 A simple relation can be found for the asymptotic states, namely, under \textit{common noise} the state is driven to the maximally mixed state on the trace subspace, as this is the SU(2)$^{\otimes k}$-invariant state on the symmetric irrep. This state is given by,
 \begin{equation}
-\rho_\mathrm{sym} = \frac{1}{k+1}\sum_{l=0}^k\ket{D_l^k}\bra{D_l^k},
+\hat\rho_\mathrm{sym} = \frac{1}{k+1}\sum_{l=0}^k\ket{D_l^k}\bra{D_l^k},
 \end{equation}
 where $\ket{D_l^k}$ is the Dicke state for $l$ excitations (here successful recoveries of target state), out of $k$-qubits. From this expression we see that an asymptote of $\mathcal{P}_{SS...S}\lvert_{m\rightarrow\infty}=1/(k+1)$ is expected under \textit{common noise}, while the maximally mixed state under local depolarisation leads to the familiar asymptote of $\mathcal{P}_{SS...S}\lvert_{m\rightarrow\infty}=1/(2^k)$. This result suggests that the presence of \textit{common noise} affecting many qubits may be simply observed, however, without the explicit representation structure, it cannot be easily quantified.\\
 We confirm this asymptote experimentally with data shown in figure~\ref{fig:3q}. 

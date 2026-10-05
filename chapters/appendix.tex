@@ -20,7 +20,7 @@
         A_3(t) &= \frac{i}{6\hbar^3}\int_{0}^{t}\int_{0}^{t_1}\int_{0}^{t_2}dt_1dt_2dt_3\ \big(\big[\hat H(t_1),\left[\hat H(t_2),\hat H(t_3)\right]\big]+\big[\hat H(t_3),\left[\hat H(t_2),\hat H(t_1)\right]\big]\big),
     \end{align}
     where we can see that if the Hamiltonian fails to commute with itself at different times, the higher-order Magnus terms become relevant.
-    This may be understood as the continuous analogy of the Baker-Campbell-Hausdorff formula. It is particularly useful in this thesis to understand the origin of the geometric phase in the MS gate scheme, and the non-linear bosonic interactions generated in the ``two-SDF'' protocol given in~\S~\ref{sec:two-sdf}.
+    This may be understood as the continuous analogy of the Baker-Campbell-Hausdorff formula. It is particularly useful in this thesis to understand the origin of the geometric phase in the MS gate scheme, and the nonlinear bosonic interactions generated in the ``two-SDF'' protocol given in~\S~\ref{sec:two-sdf}.
 
 \subsection{AC Stark Shift}
 \label{app:stark_shift}
@@ -77,6 +77,7 @@
     This geometric phase is utilised in the M{\o}lmer-S{\o}rensen scheme to perform two-qubit entangling gates.
 
 \subsection{``Two-SDF'' Dynamics}
+\label{app:two-sdf}
     Here we analyse the ``two-SDF'' Hamiltonian given in equation~\ref{eqn:two-sdf} using the Magnus expansion. We recover effective Hamiltonians for both Gaussian interactions, as well as for tri-squeezing. \\
     The ``two-SDF'' Hamiltonian is reproduced for convenience here,
     \begin{align}
@@ -106,14 +107,14 @@
     \begin{equation}
         S_i(t) = \frac{i\Omega_i^2}{4}\left(\frac{\sin(\Delta_i t)}{\Delta_i^2} - \frac{t}{\Delta_i}\right)
     \end{equation}
-    are recognisable from section~\ref{sec:geometric_phase} as geometric phase factors.
+    are recognisable from section~\ref{app:geometric_phase} as geometric phase factors.
     Taking the assumption that $t\gg \frac{1}{\Delta_i}$, we get a linearly growing geometric phase term,
     $S_i(t) \approx \frac{-i\Omega_i^2t}{4\Delta_i}$.
     In the case that this geometric phase acts globally on the
     system, they may be ignored. If the accumulated phase is spin, or oscillator
     state dependent, then interesting dynamics may be observed, however these
     effects are out of the scope of this thesis. \\
-    The remaining cross-terms contain the 2nd order non-linear bosonic interactions we are interested in emulating. 
+    The remaining cross-terms contain the 2nd order nonlinear bosonic interactions we are interested in emulating. 
     We set the two detunings relative to one another by, $\Delta_\beta = m\Delta_\alpha$.
     Expanding the commutator of the cross terms we find for general $m$ the following interactions, grouped by their effect on the oscillator state,
     \begin{align}
@@ -157,7 +158,7 @@
 We derive the fidelity of a noisy gate implementation with respect to the ideal unitary.\\
 A quantum channel,
 \begin{equation}
-    \mathcal{E}: \rho \mapsto \rho,
+    \mathcal{E}: \hat\rho \mapsto \hat\rho,
 \end{equation}
 which executes ideal unitary, $U$, with some error, has 
 an average operation fidelity given by, 
@@ -359,7 +360,7 @@ interest. Further, we may still explore the expected asymptotic decays due to th
 
 We may recover a simple diagonal Liouville form in the case of stochastic $ZZ$ noise, given by,
 \begin{equation}
-\mathcal{E}_{ZZ}(\rho) = (1-p_{ZZ})\rho + p_{ZZ} (Z\otimes Z)\rho(Z\otimes Z),
+\mathcal{E}_{ZZ}(\hat\rho) = (1-p_{ZZ})\hat\rho + p_{ZZ} (Z\otimes Z)\hat\rho(Z\otimes Z),
 \end{equation}
 where $p_{ZZ}$ is the probability of a correlated phase flip error on both qubits.
 In the Shur basis the following sector decays are found for the stochastic $ZZ$ error,
@@ -385,15 +386,15 @@ operator, $S^{(2)}=\mathrm{SWAP}$, and we will assume the observable acts
 only on the first copy, giving $\hat{O}^1 = \hat{O}\otimes\mathbb{I}$. The
 identity is then,
 \begin{align}
-    \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
+    \mathrm{Tr}[\hat{O}^1S^{(2)}\hat\rho^{\otimes 2}]&\\
     &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1,k_2}} \bra{i_1}\hat{O}\ket{k_1}\delta_{i_2,k_2}
-    \bra{k_1, k_2}S^{(2)}\ket{j_1,j_2}\bra{j_1}\rho\ket{i_1}\bra{j_2}\rho\ket{i_2}\\
+    \bra{k_1, k_2}S^{(2)}\ket{j_1,j_2}\bra{j_1}\hat\rho\ket{i_1}\bra{j_2}\hat\rho\ket{i_2}\\
     &= \sum_{\substack{i_1,i_2\\j_1,j_2\\k_1, k_2}} \hat{O}_{i_1, k_1}\delta_{i_2,k_2}\delta_{k_1,j_2}\delta_{k_2,j_1}\rho_{j_1,i_1}\rho_{j_2,i_2}
 \end{align}
 and contracting the Kronecker deltas, we find,
 \begin{align}
-    \mathrm{Tr}[\hat{O}^1S^{(2)}\rho^{\otimes 2}]&\\
+    \mathrm{Tr}[\hat{O}^1S^{(2)}\hat\rho^{\otimes 2}]&\\
     &= \sum_{\substack{i_1,j_1, j_1}} \hat{O}_{i_1, j_2}\rho_{j_1,i_1}\rho_{j_2,j_1}\\
-    &= \mathrm{Tr}[\hat{O}\rho^2],
+    &= \mathrm{Tr}[\hat{O}\hat\rho^2],
 \end{align}
 with the last equality following from the definition of matrix multiplication. \\

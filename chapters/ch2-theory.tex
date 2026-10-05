@@ -230,19 +230,19 @@ potential, while the axial confinement is provided by a static axial potential.
 Both potentials are considered to be ideal quadrupolar electric potential. The combined potential is given as,
 \begin{equation}
     \label{eqn:potential}
-    \Phi(x,y,z,t) = \frac{V_{\rm DC}}{2d^2}(2z^2-x^2-y^2)+\frac{V_{\rm RF}}{2\rho^2}\cos(\Omega_{\rm RF}t)(x^2-y^2),
+    \Phi(x,y,z,t) = \frac{V_{\rm DC}}{2d^2}(2z^2-x^2-y^2)+\frac{V_{\rm RF}}{2\hat\rho^2}\cos(\Omega_{\rm RF}t)(x^2-y^2),
 \end{equation}
-where $V_{\rm DC}$ is the voltage applied to axial ``endcap'' electrodes which are distance $d$ from the trapping point. $V_{\rm RF}$ is the RF voltage with frequency $\Omega_{\rm RF}$ applied to the radial RF electrodes which are distance $\rho$ from the trapping point. This potential considers a highly symmetric field configuration with the axial potential confining in the $z$ direction while equally anti-confining in both radial directions.
+where $V_{\rm DC}$ is the voltage applied to axial ``endcap'' electrodes which are distance $d$ from the trapping point. $V_{\rm RF}$ is the RF voltage with frequency $\Omega_{\rm RF}$ applied to the radial RF electrodes which are distance $\hat\rho$ from the trapping point. This potential considers a highly symmetric field configuration with the axial potential confining in the $z$ direction while equally anti-confining in both radial directions.
 While the radial potential has no no axial component, and initially confines in $x$ and anti-confines in $y$, but switches periodically to confining in $y$ and anti-confining in $x$.\\
 From this potential the equation of motion in the radial $x$ for a trapped ion with charge $+e$ is,
 \begin{equation}
-    m\frac{d^2x}{d t^2} =  \left(\frac{eV_{\rm DC}}{d^2}-\frac{eV_{\rm RF}}{\rho^2}\cos(\Omega_{\rm RF}t)\right)x,
+    m\frac{d^2x}{d t^2} =  \left(\frac{eV_{\rm DC}}{d^2}-\frac{eV_{\rm RF}}{\hat\rho^2}\cos(\Omega_{\rm RF}t)\right)x,
 \end{equation}
 where $m$ is the mass of the ion. This motion is thus described by the Mathieu equation,
 \begin{equation}
     \frac{d^2x}{d \tau^2} + (a - 2q\cos(2\tau))x = 0,
 \end{equation}
-where we have defined $\tau = \frac{\Omega_{\rm RF}t}{2}$ $a=-\frac{4eV_{\rm DC}}{m\Omega_{\rm RF}^2d^2}$, and $q=-\frac{2eV_{\rm RF}}{m\Omega_{\rm RF}^2\rho^2}$. 
+where we have defined $\tau = \frac{\Omega_{\rm RF}t}{2}$ $a=-\frac{4eV_{\rm DC}}{m\Omega_{\rm RF}^2d^2}$, and $q=-\frac{2eV_{\rm RF}}{m\Omega_{\rm RF}^2\hat\rho^2}$. 
 Analysis of the two parameters, $a$, $q$, of the Mathieu equation yield regions of stability (motional amplitude converges) and instability (motional amplitude diverges). For the ``lowest stability region'', the regime relevant to our trap, the motion is stable when $|a|,q^2\ll 1$~\cite{leibfried_quantum_2003}.
 In this regime the ion dynamics are well approximated by the motion,
 \begin{equation}
@@ -273,7 +273,7 @@ The radial terms are given by,
 \end{equation}
 where $\omega_r$ is the radial trapping frequency in the limit of $q^2\gg a$, 
 \begin{equation}
-    \omega_{r} = \frac{eV_{\rm RF}}{\sqrt{2}m\Omega_{\rm RF}\rho^2}.
+    \omega_{r} = \frac{eV_{\rm RF}}{\sqrt{2}m\Omega_{\rm RF}\hat\rho^2}.
 \end{equation}
 The axial potential then acts to ``defocus'' the radial confinement, with an
 increased axial frequency leading to a reduced radial. This equal defocussing of
@@ -419,6 +419,7 @@ To further analyse the dynamics, the interaction Hamiltonian is transformed to t
 
 
 \subsection{Resolved Sideband Interactions}
+\label{sec:resolved_sidebands}
 \begin{figure}
     \begin{center}
     \noindent\includegraphics[width=\linewidth]{
@@ -472,7 +473,7 @@ They also provide a method to directly entangle the spin and motional subsystems
 \label{sec:SDF}
 
 Here we introduce a fundamental interaction used throughout this thesis --- the spin dependent force, or SDF.
-The SDF is used in this thesis for three applications: For two-qubit entanglement via a shared motional mode (\S~\ref{sec:Geometric Phase Gates} and~\S~\ref{sec:Two-Qubit Entangling Gates}), for motional state tomography (\S~\ref{sec:tomography}), and for driving effective non-linear bosonic interactions (\S~\ref{sec:two-sdf}).\\
+The SDF is used in this thesis for three applications: For two-qubit entanglement via a shared motional mode (\S~\ref{sec:Geometric Phase Gates} and~\S~\ref{sec:Two-Qubit Entangling Gates}), for motional state tomography (\S~\ref{sec:tomography}), and for driving effective nonlinear bosonic interactions (\S~\ref{sec:two-sdf}).\\
 As the name suggests, we consider displacements, of the form given in equation~\ref{eqn:displace_H}, with conditioning dependent on an ancillary qubit state, described by the Hamiltonian,
 \begin{equation}
     \label{eqn:SDF}
