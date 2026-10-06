@@ -15,6 +15,11 @@
 \usepackage{braket}
 \usepackage{pgfornament}
 
+\usepackage[automake,acronym]{glossaries-extra}
+\usepackage{glossary-mcols}
+\makeglossaries
+\input{chapters/glossary}
+
 %%%%% SELECT YOUR DRAFT OPTIONS
 % Three options going on here; use in any combination.  But remember to turn the first two off before
 % generating a PDF to send to the printer!
@@ -195,8 +200,13 @@
 % Uncomment to generate a list of tables:
 %\listoftables
 %	\mtcaddchapter
-
-
+\glsaddall[types=\acronymtype]
+\printglossary[
+    type=\acronymtype,
+    title={List of Abbreviations},
+    style=mcolindex,
+    nonumberlist
+]
 % The Roman pages, like the Roman Empire, must come to its inevitable close.
 \end{romanpages}
 
