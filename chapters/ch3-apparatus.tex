@@ -20,8 +20,8 @@
     use cases from time standards, to analytic chemistry, to quantum computing,
     there are naturally many systems and theses' apparatus chapters in existence
     today. As such, we structure this chapter in the following way: 
-    Following on from the standard requirements of an ion trap system, provided
-    at the beginning of chapter~\ref{ch:theory},
+    \todo{Outdated} Following on from the standard requirements of an ion trap system, provided
+    at the beginning of Chapter~\ref{ch:theory},
     we discuss the unique motivation and design specifications of our system; 
     we then present an abstract schematic of the system in
     its current form, highlighting the constituent subsystems, and the optical
@@ -48,18 +48,18 @@
     $\mathbb{Z}_2$ gauge theories encoded via the spin and motional degrees of freedom of a
     two-ion chain~\cite{bazavan_synthetic_2023, saner_real-time_2025}. However, hard
     limitations of both scaling these demonstrations to longer ion chains, and
-    of interaction strength due to availible optical intensity, were often
+    of interaction strength due to available optical intensity, were often
     restrictive. To solve both these issues, a new apparatus has been designed,
-    constructed, and characterised, motivated by these applications. Colloquilly
+    constructed, and characterised, motivated by these applications. Colloquially
     the system is named \textit{``FastGates''}, owing to its
     experimental objectives, and we shall refer to it as such throughout this
     chapter. \\
     These objectives give the following specific control requirements:
     \begin{itemize}
         \item Storage of medium length (5-10) qubit registers,~\S~\ref{sec:The Ion Trap}.
-        \item Individual internal state control of each qubit,~\S~\ref{sec:Single Addressing System}.
         \item Stable motional modes for storing quantum information,~\S~\ref{sec:Trap RF Chain}.
         \item Dual high-numerical-aperture (NA) optical access for high-intensity standing waves,~\S~\ref{sec:Vacuum System}.
+        \item Individual internal state control of each qubit,~\S~\ref{sec:Single Addressing System}.
     \end{itemize}
     As the lifetime of such an apparatus extends past a single PhD generation,
     this thesis serves as a point-in-time description of the system, and where
@@ -71,7 +71,7 @@
     \begin{figure*}
         \begin{center}
         \includegraphics[width=\linewidth]{figures/pdf_figure/ch3/schematic_v2.pdf}
-        \caption{Block diagram schematic of the \textit{FastGates} apparatus.
+        \caption{\todo{point to glossary?} Block diagram schematic of the \textit{FastGates} apparatus.
         Blocks resemble discrete subsystems, which shall be discussed within
         this chapter. Lines resemble relevant optical (free-space or in-fibre),
         RF, DC, and communication paths between subsystems.
@@ -102,11 +102,11 @@
         \end{center}
         \caption{
             Schematics of the \emph{NPL} trap chip used in this experiment.
-            \textbf{a)} A photograph of the trap chip used in the \emph{FastGates} experiment before being placed under vacuum. The top ``atomic shield'' can be seen here.
-            \textbf{b)} A front view of the trap chip. Axial confinement is provided by a subset of the segmented DC electrodes. Radial confinement is provided by the RF rails. The trap chip and leadless chip carrier (LCC) are highlighted.
-            \textbf{c)} A schematic of the electrode geometries and labelling for the front-face of the trap chip. A similar arrangement exists for the back-face however with the RF rail on the diagonally opposite electrode.
-            \textbf{d)} A cross-sectional view of the trap. The red point here represents the ions, the gold are the RF and DC electrodes, and the grey is the silica substrate. It can be seen that the ion is $350\times\sqrt{2}/2 \simeq 250 \mu$m away from the nearest electrode. The numerical aperture of the ion plane due to the electrodes is $\sim 0.71$.
-            Figures b) and d) adapted from Ref.~\cite{choonee_silicon_2017}, other panels adapted from private communication with the \emph{NPL} team.
+            (a) A photograph of the trap chip used in the \emph{FastGates} experiment before being placed under vacuum. The top ``atomic shield'' can be seen here.
+            (b) A front view of the trap chip. Axial confinement is provided by a subset of the segmented DC electrodes. Radial confinement is provided by the radio-frequency voltage (RF) rails. The trap chip and leadless chip carrier (LCC) are highlighted.
+            (c) A schematic of the electrode geometries and labelling for the front-face of the trap chip. A similar arrangement exists for the back-face however with the RF rail on the diagonally opposite electrode.
+            (d) A cross-sectional view of the trap. The red point here represents the ions, the gold are the RF and DC electrodes, and the grey is the silica substrate. It can be seen that the ion is $350\times\sqrt{2}/2 \simeq 250 \mu$m away from the nearest electrode. The numerical aperture of the ion plane due to the electrodes is $\sim 0.71$.
+            Figures (b) and (d) adapted from Reference~\cite{choonee_silicon_2017}, other panels adapted from private communication with the \emph{NPL} team.
         \label{fig:trap}}
     \end{figure}
 
@@ -136,18 +136,18 @@
     and back surfaces of the trap chip is made through vias and wire bonds to
     the intermediate substrate~\cite{wilpers_compact_2013}. The trap chip 
     is a monolithic double-sided silicon device with gold plated electrodes on
-    the front (Fr) and back (Ba) surfaces. These two layers are shown
-    schematically in the bottom panel of $(c)$. The electrode schematic for the
+    the front ($Fr$) and back ($Ba$) surfaces. These two layers are shown
+    schematically in the bottom panel of (c). The electrode schematic for the
     front surface is shown, and the electrode indexing convention is
     highlighted. Electrodes recessed from the ion due to the RF rail are named
-    ``compensation''-electrodes (co), while electrodes on the opposite side
+    ``compensation''-electrodes ($co$), while electrodes on the opposite side
     provide the strong DC potential required for axial
-    confinement\footnote{Note: Compensation electrodes co1 and co11 on both
+    confinement\footnote{Note: Compensation electrodes $co1$ and $co11$ on both
     front and back surfaces are grounded on the trap package, and so are not
     available for use. There is a continuity fault on front dc11 and so this
     electrode is also not available for use.}.
     We typically
-    trap ions centered on electrode dc5. Panel $(d)$ shows a cross-sectional view of the
+    trap ions centered on electrode dc5. Panel (d) shows a cross-sectional view of the
     trapping region, highlighting the ion position between the front and back
     surface electrodes. The dual RF rails and DC electrodes are shown in gold,
     and the undercut silicon bulk is highlighted in dark grey.\\
@@ -174,9 +174,10 @@
     % Central frequency using ion
 
     To utilise radial motional modes for low error quantum gates, we require the
-    radio frequency (RF) field that produces the desired trapping
-    pseudopotential to be both frequency and amplitude stable. Furthermore, as the natural time scale for two-qubit gate durations is $\tau = 2\pi/\omega_m$ (see~\S~\ref{sec:Geometric Phase Gates}), where $\omega_m$ is the motional mode angular frequency, then greater motional mode frequency is desired for fast entanglement.
-    From equation~\ref{eqn:pseudo_pot}, it can be seen that radial motional mode frequency is proportional to RF voltage, and inversely proportional to the frequency.
+    RF field that produces the desired trapping
+    pseudopotential to be both frequency and amplitude stable. Furthermore,
+    from equation~\ref{eqn:pseudo_pot}, it can be seen that radial motional mode frequency is proportional to RF voltage, and inversely proportional to the RF frequency.
+    If using the motion to enable two-qubit gates (\S~\ref{sec:Geometric Phase Gates}), adiabatic excitation with respect to the motional mode period yields a characteristic time scale of $\tau = 2\pi/\omega_m$ for the gate duration. Therefore higher RF voltages are desirable for faster entangling operations.\\
     The \emph{NPL} trap used in the \emph{FastGates} apparatus is rated for a max peak-to-peak voltage of $400$~Vpp on the RF
     electrodes. To target high motional mode frequencies, saturating this maximum voltage is desirable, however, for safe operation, typically the trap is provided a maximum RF voltage $V_{RF}=360$~Vpp.
     % See OneNote 2026-05-18 13.35 dBm +17 dB = 30.35 dBm -> 20.8 Vpp
@@ -193,14 +194,14 @@
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch3/SSB_chain.pdf}
         \end{center}
-        \caption{Characterisation of the RF chain. \textbf{a)} SSB spectra for AM and PM, given as fractional noise, measured after the \emph{Urukul}. \textbf{b)} Measured after the \emph{Squareatron}. \textbf{c)} Measured after the amplifier.}
+        \caption{\todo{d should be FM not PM} Characterisation of the RF chain. (a) SSB spectra for AM and FM, given as fractional noise, measured after the \emph{Urukul}. (b) Measured after the \emph{Squareatron}. (c) Measured after the amplifier.}
             \label{fig:SSB_chain}
     \end{figure}
     \begin{figure}
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch3/res_comb.pdf}
         \end{center}
-        \caption{Expected SSB after the resonator, and estimated mode frequency noise. \textbf{a)} Resonator circuit diagram. \textbf{b)} Resonator lineshape, given by magnitude of the transfer function $|H(f)|$. \textbf{c)} Expected AM and FM fractional noise spectra after the resonator. \textbf{d)} Integrated RMS noise of radial motional mode frequency due to the RF chain.}
+        \caption{Expected SSB after the resonator, and estimated mode frequency noise. (a) Resonator circuit diagram. (b) Resonator lineshape, given by magnitude of the transfer function $|H(f)|$. (c) Expected AM and FM fractional noise spectra after the resonator. (d) Integrated RMS noise of radial motional mode frequency due to the RF chain.}
             \label{fig:res_H}
     \end{figure}
     The frequency source is a direct-digital-synthesiser (DDS), named \emph{Urukul}~\cite{kasprowicz_urukul_2022}, part
@@ -220,20 +221,20 @@
     \end{equation}
     where $S_{\phi}(f)$ is the phase noise PSD (which is the Fourier transform of the Autocorrelation function) $f$ is the offset frequency, and $f_0$ is the carrier frequency. $S_y(f)$ has units of
     $\left[\frac{1}{\unit{\hertz}}\right]$. AM noise is quoted as the single sideband (SSB) power, $S_\alpha$, in a 1~Hz bandwidth at an offset frequency, $f$, from the carrier, normalised to the total power of the carrier, and is here given in units of $\left[\frac{\mathrm{dBc}}{\unit{\hertz}}\right]$. \\
-    Figure~\ref{fig:SSB_chain}, panel $(a)$ displays the \emph{Urukul} AM and FM spectra. The \emph{Urukul} is phase referenced to the master FPGA board (\emph{Kasli}), which is in turn phase locked to an external $10~\unit{\mega\hertz}$ atomic clock\footnote{\todo{ToDo: Abaqus atomic clock PN}}. It can be seen that AM noise dominates up $\sim 1$~MHz, suggesting that this will be the limiting error source for motional mode stability.
+    Figure~\ref{fig:SSB_chain}, panel (a) displays the \emph{Urukul} AM and FM spectra. The \emph{Urukul} is phase referenced to the master FPGA board (\emph{Kasli}), which is in turn phase locked to an external $10~\unit{\mega\hertz}$ atomic clock\footnote{\todo{ToDo: Abaqus atomic clock PN}}. It can be seen that AM noise dominates up $\sim 1$~MHz, suggesting that this will be the limiting error source for motional mode stability.
     The AM noise may be reduced by using a nonlinear voltage clamp. We use an ``ultra-low noise limiting amplifier'' named
     \emph{Squareatron} developed previously in the group, and further refined by \emph{Oxford Ionics}. 
     \emph{Squareatron} takes an input RF signal and converts to a stable amplitude square-wave output which is subsequently bandpassed around the desired RF frequency to recover the sinusoidal signal, but with significantly reduced AM noise.
-    The AM and FM after the \emph{Squareatron} is shown in panel $(b)$.
+    The AM and FM after the \emph{Squareatron} is shown in panel (b).
     It can be seen that between $1~\unit{\kilo\hertz}$ and $1~\unit{\mega\hertz}$, AM is considerably suppressed. There appears to be an increase in AM at higher frequencies \todo{ToDo: explore this further}. The \emph{Squareatron} has a $17$~dBm output power, which is attenuated by $-20$~dB before an amplification stage to reach the desired power for the trap. Highlighted in the above chain schematic is the option to input a parametric excitation signal (P.E.), which we shall discuss further in~\S~\ref{sec:Micromotion}. For the following measurements, the P.E. branch was removed.
-    AM and FM introduced by the low-noise amplifier\footnote{Mini-Circuits ZHL-1-2W-S+}, can be seen in panel $(c)$. Most notably an increase in AM is seen between $1~\unit{\kilo\hertz}$ and $10~\unit{\kilo\hertz}$.\\
+    AM and FM introduced by the low-noise amplifier\footnote{Mini-Circuits ZHL-1-2W-S+}, can be seen in panel (c). Most notably an increase in AM is seen between $1~\unit{\kilo\hertz}$ and $10~\unit{\kilo\hertz}$.\\
     To impedance match the 50~$\Omega$ line from the amplifier to
     the small capacitance  of the trap electrodes and vacuum feedthrough, a resonant 
     matching circuit is used.
     This ``resonator'' has three main effects on our system:
     \begin{enumerate}
     \item The source $50~\unit{\ohm}$ is matched to the (almost) purely capacitive load.
-    \item The voltage step up provides the neccesarry amplitude for high motional mode frequencies.
+    \item The voltage step up provides the necessary amplitude for high motional mode frequencies.
     \item The input RF is bandpassed around the desired trapping frequency.
     \end{enumerate}
     The latter two points are practically useful, especially the bandpass effect
@@ -242,7 +243,7 @@
     noise can be a significant source of low frequency motional mode
     instability. Opting for good passive stability, a PCB based design\footnote{This style
     PCB resonator has been used around the Oxford Ion Trapping Group for some
-    time, and is based originally on a design by Tom Harty.} with good thermal
+    time, and is based originally on a design by Tom Harty~\cite{harty_high-fidelity_2013}.} with good thermal
     management was seen as preferable to large helical resonators, which are
     often used in ion trap experiments for their high Q factors.
     Aiming for a
@@ -258,8 +259,8 @@
     $C_T=4~\unit{\pico\farad}$~\cite{wilpers_compact_2013}, the cable between the
     resonator and the vacuum feedthrough contributes $\sim
     4~\unit{\pico\farad}$, and the remaining presented capacitance is expected
-    to originate from the feedthrough and in-vacuum RF line. In vacuum, the RF line is a \emph{Kapton} coated $0.4~\unit{mm}$ diameter single strand copper wire, which connects to an in-vacuum distribution PCB. The RF connection to the trap LCC is made by \emph{fuzz button} vias.\\
-    Measuring the motional mode frequency of a trapped ion while varying the trap RF frequency (see~\S~\ref{sec:Motional Mode Stability}), yields a resonator quality factor 
+    to originate from the feedthrough and in-vacuum RF line. In vacuum, the RF line is a \emph{Kapton} coated $0.4~\unit{mm}$ diameter single strand copper wire, which connects to an in-vacuum distribution PCB. The RF connection to the trap LCC is made by \emph{Fuzz button}\footnote{\emph{Custom Interconnects}} vias.\\
+    \todo{Outdated - or need plot} Measuring the motional mode frequency of a trapped ion while varying the trap RF frequency (see~\S~\ref{sec:Motional Mode Stability}), yields a resonator quality factor 
     $Q=57.88(6)$, and central
     frequency $34.659(1)~\unit{\mega\hertz}$.
     The effect of the resonator on the AM and FM noise can be calculated through
@@ -281,17 +282,17 @@
     \end{equation}
     Given the approximate capacitance and inductance values of the resonator and
     trap, the analytic $|H(f)|$ is plotted in Figure~\ref{fig:res_H} panel
-    $(b)$, and shows acceptable agreement with the measured quality factor and central
+    (b), and shows acceptable agreement with the measured quality factor and central
     frequency (here $Q = 69$ and $f_0=36.8\unit{\mega\hertz}$) with the discrepancy of quality factor expected to originate from excess resistance in the inductor not accounted for in the model. Final AM and FM
     spectra are calculated through considering both upper ($+\Delta f$) and
-    lower sidebands ($-\Delta f$), as shown in panel $(b)$, following reference~\cite{danielson_am_2018}. We
+    lower sidebands ($-\Delta f$), as shown in panel (b), following reference~\cite{danielson_am_2018}. We
     find that for both AM$\rightarrow$AM and FM$\rightarrow$FM (where
     ``$\rightarrow$'' represents the transform from input noise type to output
     noise type) the input PSD are
     low pass filtered with a cut-off frequency of $\sim 0.25$~MHz.
     We also consider the cross term, FM$\rightarrow$AM, which here we expect to
     be non-negligible at higher offset frequencies due to the assymmetry of the
-    resonator lineshape. Panel $(c)$ shows the expected fractional noise after
+    resonator lineshape. Panel (c) shows the expected fractional noise after
     the resonator, with total FM noise (orange line), total AM noise (blue
     line), and contributions from AM$\rightarrow$AM (dashed green),
     FM$\rightarrow$AM (dashed red). Integrating the AM and FM fractional noise
@@ -299,7 +300,7 @@
     $f_{max}$, gives the expected fractional RMS noise on the radial mode
     frequency of the ions. Assuming a mode frequency of $w_r =
     3~\unit{\mega\hertz}$ the RMS, $\sigma_r$, is shown in
-    Figure~\ref{fig:res_H} panel $(d)$ as a function of $f_{max}$, with $f_{min}
+    Figure~\ref{fig:res_H} panel (d) as a function of $f_{max}$, with $f_{min}
     = 10$~Hz. It can be seen that the expected noise is dominated by the AM
     contribution, and in the frequency range considered, corresponds to a mode
     frequency instability of $\sigma_r = 60~\unit{\hertz}$. This analysis
@@ -309,10 +310,11 @@
     such as voltage noise on the DC electrodes, or fluctuating stray electric
     fields, which we do not consider here. \\
     Here we have characterised both AM and FM noise on the RF chain and
-    estimated the expected contribution to motional mode instability. Further
-    characterisations of the motional mode stability using the ion as a sensor
-    \todo{outdated}
-    is discussed in~\S~\ref{sec:Motional Mode Stability}.\\
+    estimated the expected contribution to motional mode instability. 
+    % Further
+    % characterisations of the motional mode stability using the ion as a sensor
+    % \todo{outdated}
+    % is discussed in~\S~\ref{sec:Motional Mode Stability}.\\
     % Q factor measurement 66.7 OneNote 2025-11-05
     % Remeasure Q factor and central frequency with ion as a probe.
     
@@ -324,7 +326,7 @@
     % Quote values we use.
 % Pre reqs:
     % NPL trap geometry
-    Static fields are required for reshaping the trapping psuedo-potential. This is useful for setting desired mode frequency splittings, for shuttling ions, and for
+    Static fields are required for reshaping the trapping pseudopotential. This is useful for setting desired mode frequency splittings, for shuttling ions, and for
     compensating stray electric fields. As shown in Figure~\ref{fig:trap}, the
     \emph{NPL} trap has $40$ independently controllable DC electrodes. A further DC bias voltage can be applied directly to the silicon bulk.  
     DC voltage is supplied to the LCC through the following chain:
@@ -339,10 +341,10 @@
     The Fastino outputs are filtered by a passive cascaded RC low pass filters with resistances, $R=2k$, and capacitances $C_1 = 2.2~\unit{\nano\farad}$ and $C_2 = 4.7~\unit{\nano\farad}$\footnote{For in-vacuum use. 1206 NPO 4.7nF 100V, SRT 1206A472JBCB} yielding a $-3$~dB ``cut-off'' frequency of $7.4~\unit{\kilo\hertz}$. The low pass filter circuit is shown in the above schematic, with the first stage on an external-to-vacuum PCB (Ext. Filt), and the 
     final shunt capacitor on an in-vacuum PCB (Vac. Filt)\footnote{Vacuum compatible PCB using Rogers RT6002. Filter boards were designed by Mariella Minder.} within close proximity of the trap chip to mitigate RF pickup on the DC lines. The feedthrough to the vacuum system has 51 pins\footnote{\emph{Allectra} 51-way Micro-D} with non-DC pins used to provide ground connections.
     On the external filter board, one channel, corresponding to electrode \textit{Ba co4}, has a capacitively coupled in AC signal. This originates from a DDS (\emph{Urukul}) and is used to resonantly excite the motional modes of the ion chain for characterisation and calibration purposes (see~\S~\ref{sec:tickle}).
-    The in-vacuum PCB is connected to the trap chip via a custom PEEK interposer with embedded \emph{Fuzz buttons} vias\footnote{\emph{Custom Interconnects} Au/BeCu 0.025" diameter x 0.104" length Fuzz Button}.\\
+    The in-vacuum PCB is connected to the trap chip via a custom interposer made of PEEK polymer, with embedded \emph{Fuzz button} vias\footnote{\emph{Custom Interconnects} Au/BeCu 0.025" diameter x 0.104" length Fuzz Button}.\\
     The ion is confined in the ``operation'' zone, seen in
-    Figure~\ref{fig:trap} $(c)$. The axial trapping is provided by electrodes
-    \textit{Ba dc5} and \textit{Fr dc5}, where $Ba$ and $Fr$ correspond to the back and front plane of the trap respectively.
+    Figure~\ref{fig:trap} (c). The axial trapping is provided by electrodes
+    \textit{Ba dc5} and \textit{Fr dc5}.
     The DAC can provide up to $10~\unit{\volt}$ to these electrodes to produce an axial frequency of $1.6~\unit{\mega\hertz}$.
 
 \section{Magnetic Field}
@@ -360,7 +362,7 @@
     and two-qubit gates. A permanent magnet array of Samarium Cobalt\footnote{\emph{Bunting Magnets} E643SM and E644SM.},
     Sm$_2$Co$_{17}$, is used in a Helmholtz configuration to create a stable magnetic
     field of $\simeq 5~\unit{\gauss}$\footnote{Designed and constructed by Sophie Howarth.}. Samarium Cobalt was chosen for its low temperature
-    coefficient of remenance, -0.03\%/K.\\
+    coefficient of remanence, -0.03\%/K.\\
     The ion is shielded from unwanted external magnetic fields by a custom designed MuMetal enclosure\footnote{\emph{Magnetic Shields} custom
     design.}, with an internal dimension of $650\times 650\times 650~\unit{\milli\meter}$. The shielding consists of two layers of
     MuMetal shielding with internal shield thickness of $1.5\unit{\milli\meter}$ and external shield thickness of $2.0\unit{\milli\meter}$. The factory quoted
@@ -428,7 +430,7 @@
     353ND}, or the PCB solder. Regardless, the ion pump and TSP
     maintain UHV at the desired $<10^{-11}$~mbar (the TSP
     is fired every 4 weeks at 41~A for 60 seconds to provide a fresh Ti layer).\\
-    Figure~\ref{fig:trap_package} $(a)$ shows the beam geometries with respect
+    Figure~\ref{fig:trap_package} (a) shows the beam geometries with respect
     to the ion chain axis. The quadrupole 729-nm beam has high-NA ($\mathrm{NA}=0.6$) access
     perpendicular to the ion chain axis, while 373-nm, 397-nm, 423-nm, 854-nm and 866-nm
     beams have low-NA ($\mathrm{NA}<0.05$) access at an angle of $45^{\circ}$ to the ion chain axis.
@@ -437,8 +439,8 @@
     respect to the 423-nm photoionisation laser, which is accounted for in the
     set laser frequency (given $12^\circ$ angle between atomic and 423-nm
     beam, and 500~K mean temperature, expect $+126~\unit{\mega\hertz}$ frequency
-    shift). Figure~\ref{fig:trap_package} $(b)$ shows the custom trap housing including NA=0.6 access for the 729-nm beams, and in-vacuum mirrors (prisms) to redirect the low-NA beams to the trap center. The low-NA beams enter the housing via one of the four beam access channels parallel to the trap chip plane, and are reflected through the trap slit. The exiting beam is reflected by a second mirror out of the housing to prevent scattered light incident on the ion chain.
-    Figure~\ref{fig:trap_package} $(c)$ shows an exploded view of the trap housing with components labelled. The trap chip is interfaced to an in-vacuum PCB (described in~\S~\ref{sec:Trap DC Voltages}) via a custom PEEK interposer with embedded \emph{Fuzzbutton} vias (one for each DC and RF channel). The trap chip is held in place by 4 steel clamp arms, which attach to a steel base plate which provides mechanical stability and houses the lower in-vacuum prisms. A top steel plate houses the upper prisms. The tube oven is mounted on two steel clamps which are electrically isolated from the base plate by a PEEK spacer. The trap housing is fastened to the vacuum can by 4 steel arms attached to alternating side ports of the octagonal chamber~\footnote{Using \emph{Kimball Groove grabbers} P/N 53-482610}. Figure~\ref{fig:HNA} shows a cross section of the vacuum chamber and recessed dual high-NA objectives. 
+    shift). Figure~\ref{fig:trap_package} (b) shows the custom trap housing including NA=0.6 access for the 729-nm beams, and in-vacuum mirrors (prisms) to redirect the low-NA beams to the trap center. The low-NA beams enter the housing via one of the four beam access channels parallel to the trap chip plane, and are reflected through the trap slit. The exiting beam is reflected by a second mirror out of the housing to prevent scattered light incident on the ion chain.
+    Figure~\ref{fig:trap_package} (c) shows an exploded view of the trap housing with components labelled. The trap chip is interfaced to an in-vacuum PCB (described in~\S~\ref{sec:Trap DC Voltages}) via a custom PEEK interposer with the embedded \emph{Fuzz button} vias (one for each DC and RF channel). The trap chip is held in place by 4 steel clamp arms, which attach to a steel base plate which provides mechanical stability and houses the lower in-vacuum prisms. A top steel plate houses the upper prisms. The tube oven is mounted on two steel clamps which are electrically isolated from the base plate by a PEEK spacer. The trap housing is fastened to the vacuum can by 4 steel arms attached to alternating side ports of the octagonal chamber~\footnote{Using \emph{Kimball Groove grabbers} P/N 53-482610}. Figure~\ref{fig:HNA} shows a cross section of the vacuum chamber and recessed dual high-NA objectives. 
     Two recessed CF100 viewports\footnote{\emph{UK Atomic
     Energy Authority} P/N VPR100015} are required to bring the custom objectives\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} to the designed working distance of 24.4~mm from the ion chain. 
 
@@ -543,7 +545,7 @@
     The low-noise photodiodes used were designed by David
     Nadlinger (\emph{QLNPD}), and the feedback system controller, known as \emph{SUServo}, was written by
     Peter Drmota.\\
-    Beam pointing drifts are mitigated through careful mechanical design of the optical paths for passive stability, and through automated intermittant beam pointing calibrations using the ion as a sensor (see~\S~\ref{sec:Beam Pointing Calibration}).\\
+    \todo{outdated} Beam pointing drifts are mitigated through careful mechanical design of the optical paths for passive stability, and through automated intermittant beam pointing calibrations using the ion as a sensor (see~\S~\ref{sec:Beam Pointing Calibration}).\\
     
 \begin{figure}
   \begin{center}
@@ -657,7 +659,7 @@
     birefringent filter, a tunable Fabry-P\'erot etalon, and the surrounding
     bow-tie cavity. To lock the tunable etalon to one longitudinal cavity mode, an actively stabilised ``dither'' phase-lock loop is used. This dither consists of periodically varying
     the etalon spacing with a frequency of around 20~kHz. 
-    This dither frequency direclty phase modulates the light, which leads to the creation of
+    This dither frequency directly phase modulates the light, which leads to the creation of
     sidebands which can interact with the ion causing 
     errors in gates. This dither frequency (and harmonics of it), can be observed 
     via composite pulse experiments on the ion, and are discussed in~\S~\ref{sec:Coherence}.\\
@@ -795,7 +797,7 @@
     $-1^{st}$ order. Two lenses\footnote{\todo{P/N}} in a $4f$ configuration
     re-image the deflection origin of the first AOD\footnote{\todo{P/N}} onto
     the second AOD with the second AOD angled for maximum diffraction efficiency
-    into the $+1^{st}$ order. The cAOD arrangment is termed ``crossed'' as the
+    into the $+1^{st}$ order. The cAOD arrangement is termed ``crossed'' as the
     second AOD is rotated by some angle $\alpha$ with respect to the first, so
     that the deflection from the second AOD has some orthogonal component to
     that of the first. 
