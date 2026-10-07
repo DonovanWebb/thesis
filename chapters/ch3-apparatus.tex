@@ -20,7 +20,7 @@
     use cases from time standards, to analytic chemistry, to quantum computing,
     there are naturally many systems and theses' apparatus chapters in existence
     today. As such, we structure this chapter in the following way: 
-    Following on from the standard control requirements of an ion trap system, provided
+    Following on from the standard control requirements of an ion-trap system, provided
     by Chapter~\ref{ch:theory},
     we discuss the unique motivation and design specifications of our system; 
     we then present an abstract schematic of the system in
@@ -42,7 +42,7 @@
     \end{enumerate}
     The first topic is explored in Chapter~\ref{ch:k-copy}, the second in Chapter~\ref{ch:QEM}.The latter two research directions were further explored within our group on a
     previous apparatus, leading to state-of-the-art two-qubit entanglement rates
-    on the ion trap platform~\cite{schafer_fast_2018,saner_breaking_2023}, creation
+    on the ion-trap platform~\cite{schafer_fast_2018,saner_breaking_2023}, creation
     of highly non-classical motional
     states~\cite{bazavan_squeezing_2024,saner_generating_2024}, and a simulation of
     $\mathbb{Z}_2$ gauge theories encoded via the spin and motional degrees of freedom of a
@@ -222,7 +222,7 @@
     $\left[\frac{1}{\unit{\hertz}}\right]$. AM noise is quoted as the single sideband (SSB) power, $S_\alpha$, in a 1~Hz bandwidth at an offset frequency, $f$, from the carrier, normalised to the total power of the carrier, and is here given in units of $\left[\frac{\mathrm{dBc}}{\unit{\hertz}}\right]$. \\
     Figure~\ref{fig:SSB_chain}, panel (a) displays the \emph{Urukul} AM and FM spectra. The \emph{Urukul} is phase referenced to the master FPGA board (\emph{Kasli}), which is in turn phase locked to an external $10~\unit{\mega\hertz}$ atomic clock\footnote{\todo{ToDo: Abaqus atomic clock PN}}. It can be seen that AM noise dominates up $\sim 1$~MHz, suggesting that this will be the limiting error source for motional mode stability.
     The AM noise may be reduced by using a nonlinear voltage clamp. We use an ``ultra-low noise limiting amplifier'' named
-    \emph{Squareatron} developed previously in the group, and further refined by \emph{Oxford Ionics}. 
+    \emph{Squareatron} developed previously in the Oxford group, and further refined by \emph{Oxford Ionics}. 
     \emph{Squareatron} takes an input RF signal and converts to a stable amplitude square-wave output which is subsequently bandpassed around the desired RF frequency to recover the sinusoidal signal, but with significantly reduced AM noise.
     The AM and FM after the \emph{Squareatron} is shown in panel (b).
     It can be seen that between $1~\unit{\kilo\hertz}$ and $1~\unit{\mega\hertz}$, AM is considerably suppressed. There appears to be an increase in AM at higher frequencies \todo{ToDo: explore this further}. The \emph{Squareatron} has a $17$~dBm output power, which is attenuated by $-20$~dB before an amplification stage to reach the desired power for the trap. Highlighted in the above chain schematic is the option to input a parametric excitation signal (P.E.), which we shall discuss further in~\S~\ref{sec:Micromotion}. For the following measurements, the P.E. branch was removed.
@@ -244,7 +244,7 @@
     PCB resonator has been used around the Oxford Ion Trapping Group for some
     time, and is based originally on a design by Tom Harty~\cite{harty_high-fidelity_2013}.} with good thermal
     management was seen as preferable to large helical resonators, which are
-    often used in ion trap experiments for their high Q factors.
+    often used in ion-trap experiments for their high Q factors.
     Aiming for a
     moderate Q factor of $\sim 70$ allows for a good voltage step up, and some
     bandpass filtering, without being overly sensitive to thermal and mechanical
@@ -412,10 +412,10 @@
     Ultra-High Vacuum (UHV) is required to prevent ion loss.
     However, UHV equipment is often bulky, and puts constraints on the access
     and visibility of the ion chain. Here, we describe the custom vacuum
-    system, allowing for multiple beam access geometries including dual high-numerical-aperture (NA) objectives required for single addressed optical standing waves.  The vacuum system was
+    system, allowing for multiple beam access geometries including dual high-numerical-aperture (NA) objectives required for single-ion addressed optical standing waves.  The vacuum system was
     designed by Sebastian Saner, Christopher Ballance, and Mariella Minder, and constructed by
     Sebastian Saner, Fabian Pokorny, and myself.\\
-    A residual pressure of $<10^{-11}$ mbar is desired. For this strict
+    To mitigate ion loss from collisions with background gases, a residual pressure of $<10^{-11}$ mbar is desired. For this strict
     requirement, care must be taken in selecting in-vacuum materials, and 
     thorough cleaning and baking procedures must be followed. A summary of tactics that were
     useful in the construction of the vacuum system can be found
@@ -473,14 +473,14 @@
   \label{fig:readout}
 \end{figure}
 
-    To image the ion chain, and readout the qubit states, fluorescent scatter of incident 397-nm light is collected. Here we briefly describe the imaging system, while~\S~\ref{sec:Measurement} describes the qubit readout procedure and fidelity. The imaging system is designed to provide high spatial resolution of the ion chain, while also providing a large field of view to accommodate long ion chains. The imaging system must also be compatible with the high-NA objectives used for single addressed optical standing waves.
+    To image the ion chain, and readout the qubit states, fluorescent scatter of incident 397-nm light is collected. Here we briefly describe the imaging system, while~\S~\ref{sec:Measurement} describes the qubit readout procedure and fidelity. The imaging system is designed to provide high spatial resolution of the ion chain, while also providing a large field of view to accommodate long ion chains. The imaging system must also be compatible with the high-NA objectives used for single-ion addressed optical standing waves.
     Figure~\ref{fig:readout} shows the optical path schematic of the imaging system, with both a
     a high quantum efficiency ($\simeq 70\%$ at $397~\unit{\nano\meter}$) 
     CMOS camera\footnote{\emph{Hamamatsu Orca-Fusion
     BT} C15440-20UP} for spatially selective qubit readout on a multi-ion chain, and 
     a photon multiplier tube (PMT)\footnote{\emph{Hamamatsu} Photon counting head H10682-210}, for experiments requiring time resolved photon counting (e.g. micromotion compensation,~\S~\ref{sec:Micromotion}).
     Typical signals of both devices can be seen in the right panels of Figure~\ref{fig:readout}. 
-    The optical path consists of a high numerical aperture objective\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} (effective focal length, $f=33~\unit{\milli\meter}$), $\mathrm{NA}=0.6$, a dichroic mirror\footnote{\todo{\emph{Thorlabs} TODO}} (transmission: $397~\unit{\nano\meter}$; reflection: $729~\unit{\nano\meter}$), a relay lens\footnote{\emph{Thorlabs} Achromat Doublet, ACT508-200-A-ML} ($f=200~\unit{\milli\meter}$), a $90:10$ plate beamsplitter\footnote{\todo{\emph{Thorlabs} TODO}}, and the camera and PMT. \\
+    The optical path consists of a high numerical aperture objective\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} (effective focal length, $f=33~\unit{\milli\meter}$),  a dichroic mirror\footnote{\todo{\emph{Thorlabs} TODO}} (transmission: $397~\unit{\nano\meter}$; reflection: $729~\unit{\nano\meter}$), a relay lens\footnote{\emph{Thorlabs} Achromat Doublet, ACT508-200-A-ML} ($f=200~\unit{\milli\meter}$), a $90:10$ plate beamsplitter\footnote{\todo{\emph{Thorlabs} TODO}}, and the camera and PMT. \\
     The objective lens is custom designed to compensate for aberrations due to the recessed vacuum viewport, however, due to the large NA, accurate alignment of all degrees of freedom of the objective is critical. As such, the NA is attached to a 5-axis alignment stage\footnote{\emph{Newport ULTRAlign} M-562-XYZ, M-36, SM-13}, with z-axis focus controlled by a piezo micrometer\footnote{\emph{Newport CONEX-TRA12CC}} for fine adjustment of the ion focus with the MuMetal box closed (requires $<\unit{\micro\meter}$ precision).\\
     Given the chosen lens focal lengths, we expect a magnification of $\times 6$ from the ion plane to the imaging plane. With an expected ion separation of $5~\unit{\micro\meter}$, and the camera pixel pitch of $6.5~\unit{\micro\meter}$, we expect around 4.5 pixels between ions, which, if the system is well aligned, is sufficient for low cross-talk spatial readout of qubits.
     % Could add alignment tactics
@@ -640,7 +640,7 @@
     The final mirrors prior to the vacuum system are
     motorised\footnote{\emph{Newport Picomotor} piezo mirror mount P/N 8821}, so that beam alignment to the ions
     can be optimised when the MuMetal enclosure is closed. Practically we find
-    that these beams rarely need to be realigned (few months), unless there is a
+    that these beams rarely need to be realigned (on the timescale of months), unless there is a
     significant ambient temperature change of a few degrees Celsius.\\
 
 
@@ -666,13 +666,11 @@
     Entangling Gates}). This transition is also used after Doppler cooling for
     resolved sideband cooling to prepare the motional mode close to its ground
     state (as discussed in~\S~\ref{sec:Cooling}).
-    This transition is narrow linewidth due the the long lived
-    3D\textsubscript{5/2} level, and so, for power efficiency, a
-    narrow linewidth laser must be used. For the ``fast entangling gates'' use case, high intensity electric-fields are required at the ion to drive sideband
-    transitions, this will be discussed further in the single-addressing and
-    two-qubit gate sections, but here it is sufficient to say we require >100 mW
-    of light at the ion plane.  Here we describe the 729-nm system 
-    consisting of a Ti:Sapph laser system pumped by an Nd:YAG 532-nm laser.\\
+    This transition has a narrow linewidth due the the long lived
+    3D\textsubscript{5/2} level ($\tau\approx1.1~\unit{\second}$)~\cite{barton_measurement_nodate}, and so, for power efficiency, a
+    narrow linewidth laser must be used. For the ``fast entangling gates'' use case, high-intensity electric fields are required at the ion to drive sideband
+    transitions.  Here, we describe the 729-nm system 
+    consisting of a Ti:Sapph laser system pumped by an LBO-doubled Nd:YAG laser at 532-nm.\\
     An \emph{M Squared Solstis} Ti:Sapph is pumped via 18~W of 532-nm light
     from a \emph{Coherent Verdi-V} system to produce around 5~W of
     729-nm light.  The Ti:Sapph is engineered to operate with a stable $<50$~kHz
@@ -680,7 +678,7 @@
     make them amenable in research environments to create frequency tunable
     laser systems. They also often have lower intrinsic phase noise than diode lasers at the same wavelength, which is favourable for our application.
     For single mode operation, the \emph{Solstis} employs multiple intracavity frequency selective
-    elements which consist of (in order of coarse frequency selectivity), a
+    elements which consist of (in order from coarsest to finest frequency selectivity): the Ti:Sapph gain profile, a
     birefringent filter, a tunable Fabry-P\'erot etalon, and the surrounding
     bow-tie cavity. To lock the tunable etalon to one longitudinal cavity mode, an actively stabilised ``dither'' phase-lock loop is used. This dither consists of periodically varying
     the etalon spacing with a frequency of around 20~kHz. 
@@ -724,7 +722,7 @@
     Figure~\ref{fig:729} displays the other beam paths for our 729-nm system.
     Some light is picked off and sent to a wavemeter to continuously monitor the
     frequency. However, the majority is coupled to two output fibres for our
-    experiment and another within the group. The 729-nm light is transported from
+    experiment and another within the Oxford group. The 729-nm light is transported from
     a dedicated laser lab to a the trap apparatus lab by a 10~m
     single-mode-PM fibre\footnote{\todo{\emph{SK} ...}}.  The fibre
     introduces phase noise due to mechanical and thermal pertubations along the 10~m
@@ -732,7 +730,7 @@
     the form of thick foam tubing along the fibre length, as well as active
     stabilisation by a fibre-noise-cancellation (FNC) technique~\cite{ma_delivering_1994}, is used\footnote{FNC control consists of \emph{Sinara Stabilizer} and \emph{Pounder}
     mezzanine board with PID software 
-    developed by Ayush Agrawal.}. The efficacy of the FNC system is characterised in section~\ref{sec:Coherence} by measuring the spin coherence time of the ion.\\
+    developed by Ayush Agrawal.}. The required hardware for FNC is shown boxed in Figure~\ref{fig:729}. \\
 
 
 \subsection{Single-ion Addressing System}
@@ -743,7 +741,7 @@
             }
         \end{center}
         \caption{
-            Schematic of the constructed compact single-ion addressing apparatus using crossed acousto-optic deflectors. The red beam represents the 729-nm field, with Gaussian waist changes (not to scale) indicating where in the optical train the beam is expanded or focussed. An approximately $1.5~\unit{\micro\meter}$ waist is formed at the ion-position. This schematic is reproduced with permission from I. R. {\O}vergaard transfer of status~\cite{oevergaard_transfer_2025}.
+            Schematic of the constructed compact single-ion addressing apparatus using crossed acousto-optic deflectors. The red beam represents the 729-nm field, with Gaussian waist changes (not to scale) indicating where in the optical train the beam is expanded or focussed. An approximately $1.5~\unit{\micro\meter}$ waist is formed at the ion-position. This schematic is reproduced with permission from I. R. {\O}vergaard Transfer of Status report~\cite{oevergaard_transfer_2025}.
             }
         \label{fig:AOD}
     \end{figure}
@@ -761,42 +759,37 @@
     Selectively driving qubits and qumodes in a multi-ion register is a
     requirement for scalable QC. Our apparatus uses an optical single-ion
     addressing system to spatially select one or two ions in the chain.
-    Spatial selectivity using narrow diameter beams is further advantageous as
-    the focussed beam has greatly increased optical intensity compared to a
-    globally addressing field, and so drives much stronger interactions, and
-    makes available much faster
-    gates.
+    Spatial selectivity using tightly focused beams offers the additional advantage of substantially higher optical intensity than a globally addressing field. This enables stronger interactions and, consequently, faster gate operations.
     % Cross talk errors link here?
-    A unique design feature of our system is the ability to produce an array of single ion addressing standing waves with individually controllable spatial phase, thus enabling any-to-any connectivity for fast engangling gates based on the scheme demonstrated in reference~\cite{saner_breaking_2023}. \\
+    A unique design feature of our system is the ability to produce an array of single-ion-addressing standing waves with individually controllable spatial phases, thus enabling any-to-any connectivity for fast engangling gates based on the scheme demonstrated in reference~\cite{saner_breaking_2023}. \\
     %
-    The design and construction of the single addressing system was led by Iver Romvig
+    The design and construction of the single-ion addressing system was led by Iver Romvig
     {\O}vergaard and, as of writing, has been in constant use in the experiment
-    for around 1 year. Here we shall quote the design specification and relevant
-    details of the single addressing system. In~\S~\ref{sec:Single
-    Addressing char} we present the characterisation data upon installation.
+    for around one year. In this section, we quote the design specifications and relevant
+    details of the single-ion addressing system. In~\S~\ref{sec:Single
+    Addressing char}, we present the characterisation data upon installation.
     Further technical information can be found in I. R. {\O}vergaard's Transfer
-    report~\cite{oevergaard_transfer_2025}, availible upon request. \\
+    of Status report~\cite{oevergaard_transfer_2025}, availible upon request. \\
 
-    Multiple methods for single ion addressing have been developed in the ion
-    trap community, including waveguide arrays~\cite{sotirova_high-fidelity_2024,
+    Multiple methods for single-ion addressing have been developed in the ion-trap community, including waveguide arrays~\cite{sotirova_high-fidelity_2024,
     mehta_integrated_2020}, micro-electronic-mechanical mirror arrays~\cite{crain_individual_2014, wang_high-fidelity_2020}, spatial-light-modulators~\cite{mazzanti_alignment_2024}, and
     acousto-optic deflectors~\cite{pogorelov_compact_2021, pernthaler_single_2019}. Each method has its own advantages and
     disadvantages in terms of switching speed, resolution, ease of hardware integration, and
-    scalability, and so the choice of hardware is a matter of experimental
+    scalability. Hence, the choice of hardware is a matter of experimental
     preference, and constraints from the remaining ion-trap apparatus.
-    We require:
+    For our use cases, we require the following:
     \begin{itemize}
-        \item Addressing of up to two ions in a $\approx10$ ion chain with low crosstalk to neighbouring ions.
-        \item Fast reconfigureability, $\approx 1~\unit{\micro\second}$, of the beam position within a single experimental shot (i.e. between different gates within a single circuit execution).
+        \item Addressing of up to two ions in a $\approx10$-ion chain, with low crosstalk to neighbouring ions.
+        \item Fast reconfigureability ($\approx 1~\unit{\micro\second}$) of the beam position within a single experimental shot (i.e. between different gates within a single circuit execution).
         \item Good optical power efficiency to ensure high intensity electric fields at the ion. 
         \item Flexibility in beam positioning to allow for fine tuning of the overlap of two counterpropagating beams used to create the standing wave.
-        \item Individual phase control of each addressed beam to stabilise the standing wave phase at the ion plane.
-        \item Beam position stability to avoid power fluctuations.
-        \item A compact design to fit within the magnetic shielded region of the experiment.
-        \item Good telecentricity (fixed beam $k$-vector across the scanned area) to avoid unwanted travelling wave component in a standing wave gate scheme.
+        \item Individual phase control of each addressed beam to stabilise the standing-wave phase at the ion plane.
+        \item Beam-position stability to avoid power fluctuations.
+        \item A compact design to fit within the magnetically shielded region of the experiment.
+        \item Good telecentricity (a fixed beam $k$-vector across the scanned area) to avoid unwanted travelling-wave components in a standing-wave gate scheme.
         \item Zero frequency shift of the spatially tunable beam at the ion plane.
     \end{itemize}
-    Crossed Acousto-Optic Deflectors (cAODs) are a popular choice for single ion addressing, offering fast rise times ($< 1~\unit{\micro\second}$), and good resolution over a large scanning area ($\approx 500$ resolvable spots with $2^\circ$ angular range) with zero frequency shift along the addressing axis. AODs operate through the same mechanism as AOMs, but are optimised for beam deflection rather than frequency modulation. As an addressing system
+    Crossed Acousto-Optic Deflectors (cAODs) are a popular choice for single-ion addressing, offering fast rise times ($< 1~\unit{\micro\second}$), and good resolution over a large scanning area ($\approx 500$ resolvable spots over a $2^\circ$ angular range), with zero frequency shift along the addressing axis. AODs operate through the same mechanism as AOMs, but are optimised for beam deflection rather than frequency modulation. As an addressing system
     cAODs have poor scaling of power efficiency with the number of addressed spots, and so are not ideal for large scale systems. As we are interested in addressing $\leq 2$ ions at a time, this is not a significant issue for our system.\\
     %
     \begin{figure}
@@ -808,8 +801,8 @@
             Spots generated by cAOD with wedge angle $\alpha$, when supplying
             two frequencies to each AOD. The black points have no over-all
             frequency shift, and are aligned to the ion-chain. This schematic is
-            reproduced with permission from I. R. {\O}vergaard transfer of
-            status~\cite{oevergaard_transfer_2025}.
+            reproduced with permission from I. R. {\O}vergaard Transfer of
+            Status report~\cite{oevergaard_transfer_2025}.
             }
         \label{fig:AOD_alpha}
     \end{figure}
@@ -828,7 +821,7 @@
     When the two AODs are driven with RF tones of the same
     frequency, $f$, the high efficiency diffracted order combinations are:
     (0,0), ($-f$,0), (0,$+f$), ($-f$, $+f$). The last combination of $(-f, +f)$
-    has zero overall frequency shift yet retains some frequency dependent
+    has zero overall frequency shift yet retains some frequency-dependent
     deflection angle, which is suitable for addressing ions in a 1D line. When
     two frequencies, $f_1$ and $f_2$, are supplied to the cAODs, two spots are
     formed at the ion plane. This arrangement is required for addressed
@@ -869,10 +862,10 @@
 \subsection{Global Addressing System}
 \label{sec:Global Addressing System}
 % Elliptical beam
-The single addressing provides the utility of spatially selecting a few ions to
+The single-ion addressing provides the utility of spatially selecting a few ions to
 drive with the 729-nm light, however, the power efficiency scales as $O(n^2)$,
-with $n$ being the number of addressed spots. As such, we limit the single addressing to simultaneously illuminate only one or two ions at a time. It is therefore convenient to also
-have a global beam that has dimensions larger than the ion chain to address all the ions in parallel. This global branch is currently counterpropagating to the single addressing path, and shares the same optical path as the imaging system (see Figure~\ref{fig:readout}). To increase
+with $n$ being the number of addressed spots. As such, we limit the single-ion addressing to simultaneously illuminate only one or two ions at a time. It is therefore convenient to also
+have a global beam that has dimensions larger than the ion chain to address all the ions in parallel. This global branch is currently counterpropagating to the single-ion addressing path, and shares the same optical path as the imaging system (see Figure~\ref{fig:readout}). To increase
 the beam intensity at the ions, the global branch uses an anamorphic prism
 pair\footnote{\emph{ThorLabs} PS883-B} to elliptically shape the beam, with a
 4:1 aspect ratio, with major axis along the ion chain direction.  The beam is focussed onto the ion plane using an \todo{$f=xx$} lens\footnote{\todo{P/N}}, resulting
@@ -918,13 +911,13 @@ cross section.}. As with the other beams directed to the ion, we use a final pie
     The second ionisation stage couples $4\mathrm{s}4\mathrm{p}\rightarrow \mathrm{continuum}$ through
     a 373-nm UV laser source (although the exact wavelength does not matter as
     long as <389.8-nm).
-    We practically see no loading of other
+    Practically, we do not observe loading of other
     Calcium isotopes, and only see rare non-fluorescent ions (once every few
     weeks) after collisions with residual gas (we suspect this is
     $\mathrm{CaH}^+$). \\
-    The 373-nm laser causes charge build-up on the trap electrodes, which can
-    affect the trapping potential, and so 
-    a physical shutter, controlled by a TTL signal, is used to block
+    We note that the 373-nm laser can cause charge build-up on the trap electrodes, which 
+    affects the trapping potential. 
+    A physical shutter, controlled by a TTL signal, is used to block
     the beam when not actively loading ions.\\
 
 \section{Outlook}
