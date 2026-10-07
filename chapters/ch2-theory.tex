@@ -156,9 +156,9 @@ For a travelling monochromatic optical field (almost always from a laser) the tr
 \begin{equation}
     \hat H_I = \frac{\hbar\Omega}{2}(\hat\sigma_+ + \hat\sigma_-)\left(e^{i(\vec k\cdot \vec R - \omega t + \phi)} + e^{-i(\vec k\cdot \vec R - \omega t +\phi)}\right),
 \end{equation}
-where $\Omega$ is the Rabi frequency, $\vec R$ is the ion position, $\omega$ is the optical frequency, and $\phi$ is the optical phase.
+where $\Omega$ is the Rabi frequency, $\vec k$ is the wave vector, $\vec R$ is the ion position, $\omega$ is the optical frequency, and $\phi$ is the optical phase.
 The Rabi frequency contains the specifics of the physical light-matter interaction, $\hbar\Omega\propto\bra{\ua}\hat H_I\ket{\da}$.
-Assuming the phase variation of the optical field across the electrons spatial extent is small, the perturbation can be expanded around the ion position, $R$, for small relative electron position $r$, to generate a series
+Assuming the phase variation of the optical field across the electrons spatial extent is small, the perturbation can be expanded around the ion position, $R$, for small relative electron position, to generate a series
 of electric and magnetic multipole interactions. For the chosen optical qubit transition the electric dipole interaction is forbidden. Therefore, in this thesis we exclusively consider the electric quadrupole interaction.
 
 For a plane travelling optical field given by,
@@ -207,13 +207,12 @@ P_\ua &= |\bra{\ua}\hat R_x(\Omega t)\ket{\da}|^2\\
 where $P_\ua$ is the population observed in $\ket{\ua}$.
 
 \subsubsection{AC Stark Shifts}
+\label{sec:ac_stark}
 
 When considering the optical interaction given in
 equation~\ref{eqn:light_matter} for a large detuning $|\Delta| \gg \Omega$, the
 Hamiltonian remains time dependent, and does not self-commute at different
-times. The Magnus expansion is utilised to evaluate the dynamics. Details are
-given in Appendix~\ref{app:stark_shift}, with the resulting dynamics
-approximating $\hat\sigma_z$ rotations of the form,
+times. The Magnus expansion is utilised to evaluate the dynamics. Details of the expansion are given in Appendix~\ref{app:magnus}. The unitary dynamics are well approximated by $\hat\sigma_z$ rotations of the form,
 \begin{equation}
 \hat R_z := e^{-i\theta\hat\sigma_z/2}, ~~~~ \theta = \frac{\Omega^2t}{2\Delta}.
 \end{equation}
@@ -223,13 +222,12 @@ transition. As such, for a given desired interaction and beam power, these Stark
 shift rotations are calibrated and accounted for by updating the target rotation
 axis of subsequent pulses.\\
 
-This concludes the spin-only control of our system. To access two-body
-interactions, such as two-qubit entangling gates, we must first introduce the
-shared motion of the qubits.
+Having established spin-only control of a single qubit, we now consider motional control as a prerequisite for two-qubit entanglement. For trapped-ion qubits encoded in low-lying electronic states, the direct Coulomb interaction is effectively independent of the internal qubit state, motivating the use of shared motion and state-dependent forces to mediate entanglement. 
+
 
 \section{Motion}
 The potential used to trap the ions also dictates their motion. 
-Here, we describe the motion of a single trapped ion in a radio-frequency (RF) Paul trap, before introducing the resulting qumodes and two representations used to describe their states.
+Here, we describe the motion of a single trapped ion in a radio-frequency (RF) Paul trap, before introducing the resulting qumodes.
 
 \subsection{Linear Paul Trap}
 \label{sec:trap_charge}
@@ -411,10 +409,7 @@ Considering the loop-closure times, $T_n$, the oscillatory term of the phase dis
 \begin{equation}
     \Phi(T_n) = \frac{n\pi\Omega_D^2}{2\delta^2}.
 \end{equation}
-In this example, the geometric phase is globally acting, and as such can be safely ignored. This geometric phase is utilised spin-dependently in the final section of this chapter to induce two-qubit entanglement via a shared motional mode coupling the two qubits.
-
-
-
+In this example, the geometric phase is globally acting, and as such can be safely ignored. This geometric phase is utilised spin-dependently in the final section of this chapter to induce two-qubit entanglement via a shared motional mode.
 
 \section{Spin-Motion}
 \label{sec:Motional Coupling}
@@ -574,7 +569,14 @@ with angle,
 \end{equation}
 As such, the phase accumulated is independent of the initial motional state (assuming we are in the resolved sideband regime), meaning the gate is robust to imperfect cooling of the participating motional mode.
 
-Considering the initial spin-state $\ket{\da\da}$, the maximally entangled two-qubit Bell state is generated after applying $R_{xx}\left(\frac{\pi}{2}\right)$, 
+The phase space dynamics for this entangling gate are shown in
+Figure~\ref{fig:ms_trajectories}. The initial state is expressed in the
+$x$-basis as $\ket{\da\da}=\frac{1}{2}(\ket{++}+\ket{+-}+\ket{-+}+\ket{--})$,
+with the trajectories associated with $\ket{++}$ and $\ket{--}$ tracing closed
+loops in phase space, while spin-component 
+$\ket{+-}$ and $\ket{-+}$ remain at the origin.
+
+Starting from the initial separable spin state $\ket{\da\da}$, application of $\hat R_{xx}(\pi/2)$ generates the maximally entangled two-qubit Bell state,
 \begin{equation}
     \hat R_{xx}\left(\frac{\pi}{2}\right) \ket{\da\da} = \frac{1}{\sqrt{2}}(\ket{\da\da}-i\ket{\ua\ua}).
 \end{equation}
@@ -584,9 +586,3 @@ Setting $\theta = \pi/2$ and ensuring the duration is an integer number of loop 
 \delta_g &= 2\sqrt{n}\Omega_{\rm SDF},\\
 T_n &= \frac{\pi\sqrt{n}}{\Omega_{\rm SDF}}.
 \end{align}
-The phase space dynamics for this entangling gate are shown in
-Figure~\ref{fig:ms_trajectories}. The initial state is expressed in the
-$x$-basis as $\ket{\da\da}=\frac{1}{2}(\ket{++}+\ket{+-}+\ket{-+}+\ket{--})$,
-with the trajectories associated with $\ket{++}$ and $\ket{--}$ tracing closed
-loops in phase space, while spin-component 
-$\ket{+-}$ and $\ket{-+}$ remain at the origin.
