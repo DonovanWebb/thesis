@@ -20,14 +20,14 @@
     use cases from time standards, to analytic chemistry, to quantum computing,
     there are naturally many systems and theses' apparatus chapters in existence
     today. As such, we structure this chapter in the following way: 
-    \todo{Outdated} Following on from the standard requirements of an ion trap system, provided
-    at the beginning of Chapter~\ref{ch:theory},
+    Following on from the standard control requirements of an ion trap system, provided
+    by Chapter~\ref{ch:theory},
     we discuss the unique motivation and design specifications of our system; 
     we then present an abstract schematic of the system in
     its current form, highlighting the constituent subsystems, and the optical
     and electrical signal paths; 
     the remaining sections of this chapter contain
-    technical details, perhaps more relevant to the practicing experimental
+    technical details, perhaps more relevant to the practising experimental
     student, and the hardware enthusiastic.\\
 
 \section{Specification}
@@ -40,7 +40,7 @@
         \item Hybrid system quantum computing and simulation utilising the spin and motional degrees of freedom of the confined ions.
         \item Fast two-qubit entangling gates via phase stabilised optical standing waves.
     \end{enumerate}
-    These latter two research directions were explored within our group on a
+    The first topic is explored in Chapter~\ref{ch:k-copy}, the second in Chapter~\ref{ch:QEM}.The latter two research directions were further explored within our group on a
     previous apparatus, leading to state-of-the-art two-qubit entanglement rates
     on the ion trap platform~\cite{schafer_fast_2018,saner_breaking_2023}, creation
     of highly non-classical motional
@@ -152,8 +152,7 @@
     surface electrodes. The dual RF rails and DC electrodes are shown in gold,
     and the undercut silicon bulk is highlighted in dark grey.\\
     The next two subsections describe the source of RF and DC voltages to the trap
-    electrodes. The physical mounting of the trap in the vacuum system is
-    discussed in~\S~\ref{sec:Vacuum System}, and the optical access to the
+    electrodes. The physical mounting of the trap in the vacuum system, and the optical access to the
     trap is discussed in~\S~\ref{sec:Vacuum System}.\\
     %Figure like Milne would be nice here - but showing zig-zag for 5 ions is hard...
     % Giving details of trap potentials, frequencies, and voltages in a table would be nice
@@ -194,7 +193,7 @@
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch3/SSB_chain.pdf}
         \end{center}
-        \caption{\todo{d should be FM not PM} Characterisation of the RF chain. (a) SSB spectra for AM and FM, given as fractional noise, measured after the \emph{Urukul}. (b) Measured after the \emph{Squareatron}. (c) Measured after the amplifier.}
+        \caption{Characterisation of the RF chain. (a) SSB spectra for AM and FM, given as fractional noise, measured after the \emph{Urukul}. (b) Measured after the \emph{Squareatron}. (c) Measured after the amplifier.}
             \label{fig:SSB_chain}
     \end{figure}
     \begin{figure}
@@ -266,9 +265,10 @@
     The effect of the resonator on the AM and FM noise can be calculated through
     the transfer function, $H(f)$, of the resonator circuit. 
     Capacitors ($C2$ and $C3$) are used to provide a pick-off (p.o.) voltage
-    which can be monitored, and if required, used in a closed feedback loop. We
-    however have not attempted this as of yet, and shall ignore the effect of
-    the pick-off capacitors for this analysis. The transfer function of the simplified
+    which can be monitored, and if required, used in a closed feedback loop. 
+    However, we have yet implemented this, and shall ignore the effect of
+    the pick-off capacitors here. 
+    The transfer function of the simplified
     circuit is then given by,
     \begin{equation}
         H(f) = \frac{V_{out}}{V_{in}} = \frac{Z_p}{Z_s + Z_p},
@@ -340,7 +340,8 @@
     ecosystem, provide the initial $41$ DC channels. 
     The Fastino outputs are filtered by a passive cascaded RC low pass filters with resistances, $R=2k$, and capacitances $C_1 = 2.2~\unit{\nano\farad}$ and $C_2 = 4.7~\unit{\nano\farad}$\footnote{For in-vacuum use. 1206 NPO 4.7nF 100V, SRT 1206A472JBCB} yielding a $-3$~dB ``cut-off'' frequency of $7.4~\unit{\kilo\hertz}$. The low pass filter circuit is shown in the above schematic, with the first stage on an external-to-vacuum PCB (Ext. Filt), and the 
     final shunt capacitor on an in-vacuum PCB (Vac. Filt)\footnote{Vacuum compatible PCB using Rogers RT6002. Filter boards were designed by Mariella Minder.} within close proximity of the trap chip to mitigate RF pickup on the DC lines. The feedthrough to the vacuum system has 51 pins\footnote{\emph{Allectra} 51-way Micro-D} with non-DC pins used to provide ground connections.
-    On the external filter board, one channel, corresponding to electrode \textit{Ba co4}, has a capacitively coupled in AC signal. This originates from a DDS (\emph{Urukul}) and is used to resonantly excite the motional modes of the ion chain for characterisation and calibration purposes (see~\S~\ref{sec:tickle}).
+    On the external filter board, an AC signal is capacitively coupled onto the channel corresponding to electrode \textit{Ba co4}.
+    This originates from a DDS (\emph{Urukul}) and is used to resonantly excite the motional modes of the ion chain for characterisation and calibration purposes (see~\S~\ref{sec:tickle}).
     The in-vacuum PCB is connected to the trap chip via a custom interposer made of PEEK polymer, with embedded \emph{Fuzz button} vias\footnote{\emph{Custom Interconnects} Au/BeCu 0.025" diameter x 0.104" length Fuzz Button}.\\
     The ion is confined in the ``operation'' zone, seen in
     Figure~\ref{fig:trap} (c). The axial trapping is provided by electrodes
@@ -408,7 +409,7 @@
   \label{fig:HNA}
 \end{figure}
 
-    Ultra High Vacuum (UHV) is required to prevent ion loss.
+    Ultra-High Vacuum (UHV) is required to prevent ion loss.
     However, UHV equipment is often bulky, and puts constraints on the access
     and visibility of the ion chain. Here, we describe the custom vacuum
     system, allowing for multiple beam access geometries including dual high-numerical-aperture (NA) objectives required for single addressed optical standing waves.  The vacuum system was
@@ -440,7 +441,17 @@
     set laser frequency (given $12^\circ$ angle between atomic and 423-nm
     beam, and 500~K mean temperature, expect $+126~\unit{\mega\hertz}$ frequency
     shift). Figure~\ref{fig:trap_package} (b) shows the custom trap housing including NA=0.6 access for the 729-nm beams, and in-vacuum mirrors (prisms) to redirect the low-NA beams to the trap center. The low-NA beams enter the housing via one of the four beam access channels parallel to the trap chip plane, and are reflected through the trap slit. The exiting beam is reflected by a second mirror out of the housing to prevent scattered light incident on the ion chain.
-    Figure~\ref{fig:trap_package} (c) shows an exploded view of the trap housing with components labelled. The trap chip is interfaced to an in-vacuum PCB (described in~\S~\ref{sec:Trap DC Voltages}) via a custom PEEK interposer with the embedded \emph{Fuzz button} vias (one for each DC and RF channel). The trap chip is held in place by 4 steel clamp arms, which attach to a steel base plate which provides mechanical stability and houses the lower in-vacuum prisms. A top steel plate houses the upper prisms. The tube oven is mounted on two steel clamps which are electrically isolated from the base plate by a PEEK spacer. The trap housing is fastened to the vacuum can by 4 steel arms attached to alternating side ports of the octagonal chamber~\footnote{Using \emph{Kimball Groove grabbers} P/N 53-482610}. Figure~\ref{fig:HNA} shows a cross section of the vacuum chamber and recessed dual high-NA objectives. 
+    Figure~\ref{fig:trap_package} (c) shows an exploded view of the trap housing with components labelled. The trap chip is interfaced to an in-vacuum PCB (described in~\S~\ref{sec:Trap DC Voltages}) via a custom PEEK interposer with the embedded \emph{Fuzz button} vias (one for each DC and RF channel). 
+    The trap chip is held in place by four steel clamp arms, which attach to a
+    steel base plate, providing mechanical stability and housing for the lower
+    in-vacuum prisms. 
+    A top steel plate houses the upper prisms. The tube oven
+    is mounted on two steel clamps which are electrically isolated from the base
+    plate by a PEEK spacer. The trap housing is fastened to the vacuum can by 4
+    steel arms attached to alternating side ports of the octagonal
+    chamber~\footnote{Using \emph{Kimball Groove grabbers} P/N 53-482610}.
+    Figure~\ref{fig:HNA} shows a cross section of the vacuum chamber and
+    recessed dual high-NA objectives. 
     Two recessed CF100 viewports\footnote{\emph{UK Atomic
     Energy Authority} P/N VPR100015} are required to bring the custom objectives\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} to the designed working distance of 24.4~mm from the ion chain. 
 
@@ -489,16 +500,29 @@
     % Calcium level structure
     % 5 G field
 
-    Singly charged group 2 elements are popular in ion trap
-    experiments due to their single outer electron resulting in Hydrogen-like
-    energy levels. In this thesis we use \ca.\\
-    \ca  has
-    no nuclear spin giving the
-    (relatively) simple level structure shown in Figure~\ref{fig:ion} with the relevant laser transitions used in our apparatus indicated. Details on the ion choice, and utility of the lasers is given in~\S~\ref{sec:Transitions}, here we only describe the hardware and feedback control to provide this stabilised light.\\
-    The relevant wavelengths are the following:
-    The qubit is defined by the quadrupole transition at 729-nm. Access to other excited levels, outside of our defined two level system, are crucial for ion trap quantum logic to enable qubit readout via state selective fluorescence (397-nm, and 866-nm transitions), and state preparation via optical pumping (866-nm, and 854-nm transitions). Access to two additional transitions in neutral calcium for isotope selective ionisation, 423-nm and 373-nm, are also required~\cite{lucas_isotope-selective_2004}.\\
-    This section begins with a description of laser frequency and power stabilisation techniques common to multiple laser systems used in this thesis. Following this, the specific systems are described, starting with 
-    the diode lasers, which drive all but the 729-nm transition. Subsequently, the Ti:Sapph 729-nm source is discussed. Finally, the global and single addressed beam arrangements for the 729-nm system are described.\\
+    Singly charged alkaline-earth elements are widely used in ion-trap
+    experiments owing to their single valence electron and correspondingly
+    Hydrogen-like electronic structure. In this thesis, we use \ca , which has
+    zero nuclear spin and therefore exhibits the relatively simple (no
+    hyperfine) level structure shown in Figure~\ref{fig:ion}. The laser
+    transitions relevant to our apparatus are also indicated.
+    Details on the ion choice, and utility of the lasers is given
+    in~\S~\ref{sec:Transitions}, here we only describe the hardware and feedback
+    control to provide this stabilised light.\\
+    The relevant wavelengths are as follows. The qubit is defined by the 729-nm
+    electric-quadrupole transition. Additional excited-state transitions outside
+    the two-level qubit manifold are required for trapped-ion quantum logic,
+    enabling qubit readout by state-selective fluorescence via the 397-nm and
+    866-nm transitions, and state preparation by optical pumping via the 866-nm
+    and 854-nm transitions. Two further transitions in neutral calcium, at
+    423-nm and 373-nm, are used for isotope-selective
+    ionisation~\cite{lucas_isotope-selective_2004}.\\
+    We begin this section by describing the frequency- and power-stabilisation
+    techniques common to several of the laser systems used in this thesis. We
+    then describe the specific systems, beginning with the diode lasers that
+    drive all transitions except the 729-nm transition. Next, we discuss the
+    729-nm Ti:sapphire laser system. Finally, we describe the global and
+    individual-ion addressing beam configurations used for the 729-nm light.\\
 
 \subsection{Frequency Stabilisation}
     % PDH scheme
@@ -527,9 +551,10 @@
     transitions, the concepts and techniques used to achieve this stability are similar. Generally, a closed loop consisting of measurement of the optical frequency of the laser and feedback to the laser control is required. In this work, stable external optical cavities are used for referencing the laser frequency. Specifically, 
     we use the Pound-Drever-Hall (PDH) 
     technique to generate the error signal for the feedback loop. The PDH technique is well described in the literature~\cite{drever_laser_1983, oswald_characterization_2022, black_introduction_2001}, and so here we only give a brief overview of the technique to contextualise the required hardware introduced in the following sections.\\
-    The conceptual goal of the PDH technique is to measure the frequency difference between the laser and a resonant frequency of a stable optical cavity to generate an error signal, preferably linear over typical frequency excursions (while \emph{locked}). This error signal can then be modified by some controller (typically PID), to directly infer how to tune the laser controls to minimise this error signal, often termed \emph{locking} the laser to the cavity. Further, the error signal should be insensitive to amplitude noise on the laser light, to avoid amplitude to frequency noise conversion due to the feedback loop (in contrast, side-of-fringe stabilisation is sensitive to amplitude drifts).\\ Practically this scheme consists of phase modulation of the incident laser light, here by electro-optical modulators (EOMs), to generate sidebands, which are used as phase references to compare the phase of the incoming laser field to that of the phase of the field inside the cavity. Figure~\ref{fig:PDH} shows a schematic of the PDH scheme, highlighting the beam paths and closed loop. The phase modulated light is directed onto the cavity, with the total return signal being some combination of the reflected sidebands, carrier, and the cavity leakage field, with the latter providing the phase of the electric field inside the cavity. The reflected light is directed onto a fast photodetector, and the signal is demodulated with the same oscillator signal used to drive the EOM, but delayed by some chosen phase. The resulting signal is low pass filtered to remove high frequency components, yielding the final error signal, an example of which is seen in the upper right panel of Figure~\ref{fig:PDH}. The central region is anti-symmetric and linear, centered on the desired lock point. Using a tuned controller for feedback to the laser controller, this provides a stable lock of the laser to the cavity.\\
-    As the cavity is used as a frequency reference, both a high finesse and stable optical lengths are desirable. The gradient of the PDH error signal is proportioanl to finesse, leading to increased signal to noise with higher finesse (see Ref.~\cite{oswald_characterization_2022} for more details). Optical length deviations are minimised through mounting the cavity in a vacuum chamber, and taking care in isolating it from temperature fluctuations and vibrations.\\
-    Particular details of the PDH hardware and control loops are given in the following sections for each laser system. \\
+    The conceptual goal of the PDH technique is to measure the frequency difference between the laser and a resonant frequency of a stable optical cavity to generate an error signal, preferably linear over typical frequency excursions (while \emph{locked}). This error signal can then be modified by some controller (typically PID), to directly infer how to tune the laser controls to minimise this error signal, often termed \emph{locking} the laser to the cavity. Further, the error signal should be insensitive to amplitude noise on the laser light, to avoid amplitude to frequency noise conversion due to the feedback loop (in contrast, side-of-fringe stabilisation is sensitive to amplitude drifts).\\ 
+    This scheme consists of phase modulation of the incident laser light to generate frequency sidebands about the carrier. These sidebands act as phase references to the carrier field inside the cavity. In practice, the modulation is produced using an electro-optical modulator (EOM) driven by an RF voltage.
+    Figure~\ref{fig:PDH} shows a schematic of the PDH scheme, highlighting the beam paths and closed loop. The phase modulated light is directed onto the cavity, with the total return signal being some combination of the reflected sidebands, carrier, and the cavity leakage field, with the latter providing the phase of the electric field inside the cavity. The reflected light is directed onto a fast photodetector, and the signal is demodulated with the same oscillator signal used to drive the EOM, but delayed by some chosen phase. The resulting signal is low pass filtered to remove high frequency components, yielding the final error signal, an example of which is seen in the upper right panel of Figure~\ref{fig:PDH}. The central region is anti-symmetric and linear, centered on the desired lock point. Using a tuned controller for feedback to the laser controller, this provides a stable lock of the laser to the cavity.\\
+    As the cavity is used as a frequency reference, both a high finesse and stable optical lengths are desirable. The gradient of the PDH error signal is proportioanl to finesse, leading to increased signal to noise with higher finesse (see Ref.~\cite{oswald_characterization_2022} for more details). Optical length deviations are minimised through mounting the cavity in a vacuum chamber, and taking care in isolating it from temperature fluctuations and vibrations. Details of the PDH hardware and control loops used in this apparatus are given in the following sections. \\
 
 \subsection{Intensity Stabilisation}
 \label{sec:Intensity Stabilisation}
@@ -541,8 +566,8 @@
     position. The former is mitigated through a closed feedback loop between a
     pick-off photodiode signal before the ion monitoring the optical power, and
     the drive RF amplitude of an upstream AOM. 
-    For all beams, this optical pick off is one of the last elements before the beam enters the vacuum system to reduce the impact of lossy elements between the stabilise point and the ion position.
-    The low-noise photodiodes used were designed by David
+    For all beams, this optical pick-off is one of the last elements before the beam enters the vacuum system to reduce the impact of lossy elements between the stabilise point and the ion position.
+    The low-noise photodiodes used for the \emph{FastGates} apparatus were designed by David
     Nadlinger (\emph{QLNPD}), and the feedback system controller, known as \emph{SUServo}, was written by
     Peter Drmota.\\
     \todo{outdated} Beam pointing drifts are mitigated through careful mechanical design of the optical paths for passive stability, and through automated intermittant beam pointing calibrations using the ion as a sensor (see~\S~\ref{sec:Beam Pointing Calibration}).\\
@@ -569,7 +594,7 @@
     shown in Figure~\ref{fig:diode_paths}. The laser diode
     heads\footnote{\emph{Toptica} diodes. 854/866: MDL DL pro; 397: MDL DL pro
     HP; 423: DL pro}, controllers\footnote{\emph{Toptica} DLC Pro with PDH
-    boards}, and splitterboards\footnote{Designed by \emph{OITG Cavities} group}
+    boards}, and splitterboards\footnote{Designed by the \emph{Oxford Ion-Trapping Group, Cavities} subgroup}
     (fig~\ref{fig:diode_paths} (a)) are housed in a single 19" rack. The
     splitterboard distributes the light between two ion-trap experiments, the
     PDH lock cavity (fig~\ref{fig:diode_paths} (c)), and a diagnostic wavemeter
@@ -586,11 +611,11 @@
     reflected cavity light to a fast photodiode\footnote{\emph{Thorlabs} PDA10A2}.
     The beatnote due to the carrier and PDH sidebands are mixed down and
     low-passed by the \emph{Toptica} PDH module to produce the signature
-    antisymmetric PDH trace. Gains for PID controllers of both the diode current
+    antisymmetric PDH trace, as seen in the upper-right panel of Figure~\ref{fig:PDH}. The gains for PID controllers of both the diode current
     and voltage are set to stabilise the optical frequency.\\
     The light from
     the ``laser'' laboratory is carried to the ``trap'' laboratory using 16~m
-    polarisation maintaining fibres\footnote{\todo{\emph{Schafter-Kirchoff} ...}}. In
+    polarisation maintaining (PM) fibres\footnote{\todo{\emph{Schafter-Kirchoff} ...}}. In
     the ``trap'' laboratory we use AOMs in a double pass configuration for both
     frequency shifting and power stabilising the light
     (fig~\ref{fig:diode_paths} (d) and (e)). \\
@@ -683,7 +708,7 @@
             }
         \label{fig:Cavity Drift}
     \end{figure}
-    Referencing the \emph{Solstis} output with an external cavity and using PDH feedback can greatly suppress phase noise. Here an ulta high finesse cavity\footnote{\emph{Stable Laser Systems} P/N 6020-4} is used, with a schematic of the 729-nm system 
+    Referencing the \emph{Solstis} output with an external cavity and using PDH feedback can greatly suppress phase noise. Here, an ultra-high-finesse cavity\footnote{\emph{Stable Laser Systems} P/N 6020-4} is used, with a schematic of the 729-nm system 
     shown in Figure~\ref{fig:729}.  
     As opposed to the simpler controller implemented for the diode lasers, the 729-nm uses a cascaded PID lock with a fast feedback loop to the AOM situated after the Solstis, and an intermediate and slow feedback loop to piezos controlling the Solstis cavity length.
     % Give params here and topology of the cascaded PID loops.
@@ -701,7 +726,7 @@
     frequency. However, the majority is coupled to two output fibres for our
     experiment and another within the group. The 729-nm light is transported from
     a dedicated laser lab to a the trap apparatus lab by a 10~m
-    single-mode-polarisation-maintaining fibre\footnote{\todo{\emph{SK} ...}}.  The fibre
+    single-mode-PM fibre\footnote{\todo{\emph{SK} ...}}.  The fibre
     introduces phase noise due to mechanical and thermal pertubations along the 10~m
     length. To remove this introduced noise, passive stabilisation in
     the form of thick foam tubing along the fibre length, as well as active
@@ -791,8 +816,7 @@
     Figure~\ref{fig:AOD} shows a schematic of the constructed addressing
     system. Due to space constraints within the magnetic shielded region, the
     optical elements are located on two height levels with a periscope steering
-    the beam between them. The beam is delivered via single-mode polarisation
-    maintaining fibre to the upper level where it is steered through the first
+    the beam between them. The beam is delivered via single-mode PM fibre to the upper level where it is steered through the first
     AOD, with beam angle optimised for maximum diffraction efficiency into the
     $-1^{st}$ order. Two lenses\footnote{\todo{P/N}} in a $4f$ configuration
     re-image the deflection origin of the first AOD\footnote{\todo{P/N}} onto

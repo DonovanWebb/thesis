@@ -6,16 +6,17 @@
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch2/register.pdf}
         \end{center}
-        \caption{ A schematic representation of the hybrid qubit-qumode register in the trapped-ion system. With $N$ physical ions, with qubits encoded in the electronic levels, and qumodes encoded in the secular motion of the ion chain, there are $N$-qubits and $3N$-qumodes available.
+        \caption{ A schematic representation of the hybrid qubit-qumode register in the trapped-ion system. 
+        A system of $N$ physical ions, with qubits encoded in the electronic levels and qumodes in the secular motion of the ion chain, provides $N$ qubits and $3N$ qumodes. 
         }
     \label{fig:spin_motion}
     \end{figure}
 
 This thesis considers control over a hybrid spin-motion system, as shown
 schematically in Figure~\ref{fig:spin_motion}. For an $N$-ion chain, we have access to $N$-qubits, defined by
-electronic transitions of the ions, and $3N$-qumodes, emerging from the collective motion
+electronic transitions of the ions, and $3N$-qumodes (quantum-harmonic oscillators), emerging from the collective motion
 of the ion chain.\\
-In this chapter we lay out the foundational concepts and interactions that will
+In this chapter, we lay out the foundational concepts and interactions that will
 be used throughout this thesis. We begin by considering the choice of ion, \ca, and
 its relevant optical transitions. We then abstract the electronic levels of the
 ion to a single two-level system, the qubit, and discuss coherent control using
@@ -53,22 +54,26 @@ entangling gates via the shared motional modes.
     quantum-computing with long coherence times enabling deep circuits. However,
     practically the extra hyperfine splitting adds experimental complexity,
     requiring more control for state-preparation, and more channels for leakage
-    errors. Thus, to ease the control requirements, a species without hyperfine
-    structure was selected allowing for focus of the constructed apparatus to be
-    instead spent on the planned demonstrations of hybrid control of a multi-ion
-    chain. The choice of species is further restricted by the desire to use
+    errors. 
+    Thus, to ease the control requirements, a species without hyperfine structure is selected, allowing the focus of the constructed apparatus to be directed instead towards the planned demonstrations of hybrid control of a multi-ion chain.
+    The choice of species is further restricted by the desire to use
     visible wavelengths for the light-matter interactions, and an optical
     qubit-transition with reasonable excited state lifetimes. We require the
     wavelength associated with the qubit frequency to have commercially
     available narrow-linewidth lasers with power outputs of $\approx
     5~\unit{\watt}$. Given those conditions, we selected \ca, with a qubit defined by the
-    optical transition at 729-nm, between the ground manifold $\ket{4S_{1/2}}$ and the excited manifold $\ket{3D_{5/2}}$. This optical transition is dipole forbidden by the symmetries of the $\ket{4S_{1/2}}$ and $\ket{3D_{5/2}}$ electron wavefunctions, as such the excited $\ket{3D_{5/2}}$ manifold is metastable with a natural
+    optical transition at 729-nm, between the ground manifold $\ket{4S_{1/2}}$
+    and the excited manifold $\ket{3D_{5/2}}$. 
+    This optical transition is electric-dipole
+    forbidden due to the symmetries of the $\ket{4S_{1/2}}$ and $\ket{3D_{5/2}}$
+    electronic wavefunctions. Consequently, the excited $\ket{3D_{5/2}}$ manifold is 
+    metastable, with a natural
     lifetime of $\tau \approx 1.1~\unit{\second}$~\cite{barton_measurement_nodate}. 
-    we shall refer to the transition between the two manifolds as either the
+    We shall refer to the transition between the two manifolds as either the
     quadrupole transition, or the 729-nm transition.
     The energy levels for
-    \ca are shown in Figure~\ref{fig:ion}, with the wavelengths of laser
-    highlighted to drive a selection of transitions. \\
+    \ca are shown in Figure~\ref{fig:ion}, 
+    with the laser wavelengths used to drive selected transitions highlighted.\\
     The 397-nm and 866-nm lasers are used to form a dissipative closed-cycle transition useful for both state-dependent fluorescence (\S~\ref{sec:Measurement}), and for laser cooling (\S~\ref{sec:Cooling}). The 854-nm laser is used to deshelve the electron from the $\ket{3D_{5/2}}$ manifold for qubit state preparation (\S~\ref{sec:Stateprep}). Details on these lasers can be found in~\S~\ref{sec:Laser systems}.\\
 
     \begin{figure}
@@ -102,7 +107,7 @@ entangling gates via the shared motional modes.
     The quantising magnetic field is set perpendicular to the 729-nm laser beam access. As such, the coupling strength of the various quadrupole transitions for a linear-polarised optical field is set exclusively by the angle, $\gamma$, between the magnetic field axis and the optical polarisation axis. This relationship is plotted in Figure~\ref{fig:quadrupole}.
     Figure~\ref{fig:quadrupole}~(a), shows the relative coupling strength
     (here given as Rabi frequency, which is discussed in~\S~\ref{sec:qubit_control}) of each transition as the angle $\gamma$ is varied.
-    To maximise the coupling of one transition, and suppress other possible transitions, the polarisation of the 729-nm laser can be set to $\gamma = \frac{\pi}{2}$. This would be a good choice if high-strength coupling interactions are desired to minimise off-resonant driving of spectator interactions. If it is desirable to access multiple quadrupole transitions the setting $\gamma = \frac{\pi}{4}$ is a convenient choice.
+    To maximise the coupling of one transition, and suppress other possible transitions, the polarisation of the 729-nm laser can be set to $\gamma = \frac{\pi}{2}$. This would be a good choice if high-strength coupling interactions are desired to minimise off-resonant driving of spectator interactions. If it is desirable to access multiple quadrupole transitions, setting $\gamma = \frac{\pi}{4}$ is a convenient choice.
     At the magnetic field strength of $\approx 5~\unit{\gauss}$, the relative frequency splitting and strengths of the interactions are shown for $\gamma = \frac{\pi}{2}$ and $\gamma=\frac{\pi}{4}$ in panels (b) and (c) respectively.\\
 
 
@@ -110,8 +115,7 @@ entangling gates via the shared motional modes.
 \subsection{The Qubit}
 
 The particular choice of qubit, highlighted in Figure~\ref{fig:ion},
-$\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ 
-with $\ket{\da}:=\ket{4S_{1/2},~m_j = -1/2}$, $\ket{\ua}:=\ket{3D_{5/2},~m_j = -5/2}$, is convenient as the 729-nm polarisation when set to $\gamma=\frac{\pi}{2}$ can maximise its coupling. Furthermore, due to the dipole selection rule, $|\Delta m_j| \leq 1$,
+$\ket{\da}:=\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{\ua}:=\ket{3D_{5/2},~m_j = -5/2}$, is convenient as the 729-nm polarisation when set to $\gamma=\frac{\pi}{2}$ can maximise its coupling. Furthermore, due to the dipole selection rule, $|\Delta m_j| \leq 1$,
 a closed-cycle transition for sideband cooling (details in \S~\ref{sec:Cooling}) is available using this excited $\ket{3D_{5/2}}$ state. \\
 The computational eigenstates of the qubit, $\ket{\da}$, $\ket{\ua}$, have eigenvalues,
 \begin{equation}
@@ -142,19 +146,19 @@ For a travelling monochromatic optical field (almost always from a laser) the tr
 where $\Omega$ is the Rabi frequency, $\vec R$ is the ion position, $\omega$ is the optical frequency, and $\phi$ is the optical phase.
 The Rabi frequency contains the specifics of the physical light-matter interaction, $\hbar\Omega\propto\bra{\ua}\hat H_I\ket{\da}$.
 Assuming the phase variation of the optical field across the electrons spatial extent is small, the perturbation can be expanded around the ion position, $R$, for small relative electron position $r$, to generate a series
-of electric and magnetic multipole interactions. For the qubit transition considered here the electric dipole interaction is forbidden, as such in this thesis we exclusively consider the electric quadrupole interaction.\\
+of electric and magnetic multipole interactions. For the chosen optical qubit transition the electric dipole interaction is forbidden. Therefore, in this thesis we exclusively consider the electric quadrupole interaction.\\
 For a plane travelling optical field given by,
 \begin{equation}
-    \vec E = E_0 \epsilon \cos(\vec k\cdot \vec R - \omega t + \phi),
+    \vec E = E_0 \vec\epsilon \cos(\vec k\cdot \vec R - \omega t + \phi),
 \end{equation}
-the quadrupole Rabi frequency is given by,
+where $\vec\epsilon$ is the polarisation vector, and the quadrupole Rabi frequency is given by,
 \begin{equation}
     \Omega_{\rm EQ} = \frac{1}{6\hbar}\sum_{i,j=\{x,y,z\}}\bra{\da}Q_{ij}\ket{\ua}\partial_i E_j\rvert_R
 \end{equation}
 where $Q_{ij}$ is the quadrupole tensor~\cite{james_quantum_1998}\footnote{For reference, the simpler electric dipole interaction has Rabi frequency is given by
 $\Omega_{\rm ED} = \frac{1}{\hbar}\sum_j\bra{\da}d_j\ket{\ua}E_j$, where $d_j$ is the dipole moment}. Apart from the dependence on polarisation and $k$-vector discussed in Figure~\ref{fig:quadrupole}, the details of the quadrupole derived Rabi-frequency are not relevant for the remainder of this section, and a general Rabi frequency, denoted by $\Omega$, is instead considered.\\
-
-To evaluate the dynamics of $\hat H_I$ we go to a frame rotating at the qubit frequency, $\omega_0$. This interaction picture with respect to $\hat H_s$ is $\tilde H_I = \hat U_s^\dagger \hat H_I \hat U_s$ with $\hat U_s = e^{-i\hat H_s t/\hbar}$. Defining a relative detuning between the qubit and optical frequency as $\delta = \omega - \omega_0$, and neglecting fast oscillating terms (making the rotating wave approximation) with frequency $\omega + \omega_0$, the Hamiltonian is approximated by, 
+To evaluate the dynamics of $\hat H_I$ we go to a frame rotating at the qubit frequency, $\omega_0$. This interaction picture with respect to $\hat H_s$ is $\tilde H_I = \hat U_s^\dagger \hat H_I \hat U_s$ with $\hat U_s = e^{-i\hat H_s t/\hbar}$. 
+Defining the detuning between the qubit and optical frequencies as $\delta = \omega-\omega_0$, and neglecting the rapidly oscillating terms at frequency $\omega+\omega_0$ under the rotating-wave approximation, the Hamiltonian is approximated as,
 \begin{equation}
     \label{eqn:light_matter}
     \tilde H_I \approx \frac{\hbar\Omega}{2}\hat\sigma_+ e^{i(\vec k\cdot \vec R - \delta t + \phi)} + {\rm h.c.}~~.
@@ -171,7 +175,7 @@ When the optical field frequency is tuned to the qubit resonance, $\delta = 0$, 
 \end{equation}
 where $\hat\sigma_\phi = \cos(\phi)\hat\sigma_x -\sin(\phi)\hat\sigma_y$.
 Exponentiating\footnote{Using identity $e^{-i\theta \vec{n}\cdot\vec{\sigma}/2}
-=\hat I \cos\left(\frac{\theta}{2}\right)-i(\vec{n}\cdot\vec{\sigma})\sin\left(\frac{\theta}{2}\right)$}, this yields the unitary propagator,
+=\hat I \cos\left(\frac{\theta}{2}\right)-i(\vec{n}\cdot\vec{\sigma})\sin\left(\frac{\theta}{2}\right)$, where $\vec n$ is rotation-axis unit vector, and $\vec\sigma$ is the Pauli vector.}, this yields the unitary propagator,
 \begin{equation}
     \hat R_\phi(\theta) := \hat U(t, 0) = \begin{pmatrix}
         \cos(\theta/2) & -ie^{i\phi}\sin(\theta/2) \\
@@ -197,8 +201,7 @@ approximating $\hat\sigma_z$ rotations of the form,
 \begin{equation}
 \hat R_z := e^{-i\theta\hat\sigma_z/2}, ~~~~ \theta = \frac{\Omega^2t}{2\Delta}.
 \end{equation}
-
-In this thesis these $\hat R_z$ rotations are often caused unintentionally due to
+In this thesis, these $\hat R_z$ rotations are often caused unintentionally due to
 off-resonant coupling of other electronic transitions when addressing the qubit
 transition. As such, for a given desired interaction and beam power, these Stark
 shift rotations are calibrated and accounted for by updating the target rotation
@@ -209,9 +212,8 @@ interactions, such as two-qubit entangling gates, we must first introduce the
 shared motion of the qubits.
 
 \section{Motion}
-The potential used to trap the ions also dictates their motion. Here we outline
-the motion of a single trapped ion in a radio-frequency (RF) Paul trap, and go on to
-define the emergent qumodes, and two representations to describe their state.
+The potential used to trap the ions also dictates their motion. 
+Here, we describe the motion of a single trapped ion in a radio-frequency (RF) Paul trap, before introducing the resulting qumodes and two representations used to describe their states.
 
 \subsection{Linear Paul Trap}
 \label{sec:trap_charge}
@@ -224,7 +226,7 @@ achieve stable trapping, either a supplementary oscillating electric field, as u
 traps~\cite{paul_electromagnetic_1990}, or a static magnetic field, as used in Penning
 traps~\cite{dehmelt_experiments_1990}, is required.\\
 
-In this thesis we use an RF Paul trap (hardware details in~\S~\ref{sec:The Ion
+In this thesis, we use an RF Paul trap (hardware details in~\S~\ref{sec:The Ion
 Trap}). Radial confinement is provided by an oscillating radial electric
 potential, while the axial confinement is provided by a static axial potential.
 Both potentials are considered to be ideal quadrupolar electric potential. The combined potential is given as,
@@ -233,7 +235,7 @@ Both potentials are considered to be ideal quadrupolar electric potential. The c
     \Phi(x,y,z,t) = \frac{V_{\rm DC}}{2d^2}(2z^2-x^2-y^2)+\frac{V_{\rm RF}}{2\hat\rho^2}\cos(\Omega_{\rm RF}t)(x^2-y^2),
 \end{equation}
 where $V_{\rm DC}$ is the voltage applied to axial ``endcap'' electrodes which are distance $d$ from the trapping point. $V_{\rm RF}$ is the RF voltage with frequency $\Omega_{\rm RF}$ applied to the radial RF electrodes which are distance $\hat\rho$ from the trapping point. This potential considers a highly symmetric field configuration with the axial potential confining in the $z$ direction while equally anti-confining in both radial directions.
-While the radial potential has no no axial component, and initially confines in $x$ and anti-confines in $y$, but switches periodically to confining in $y$ and anti-confining in $x$.\\
+The radial potential has no axial component and periodically alternates between confinement in $x$ with anti-confinement in $y$, and confinement in $y$ with anti-confinement in $x$.\\
 From this potential the equation of motion in the radial $x$ for a trapped ion with charge $+e$ is,
 \begin{equation}
     m\frac{d^2x}{d t^2} =  \left(\frac{eV_{\rm DC}}{d^2}-\frac{eV_{\rm RF}}{\hat\rho^2}\cos(\Omega_{\rm RF}t)\right)x,
@@ -242,9 +244,9 @@ where $m$ is the mass of the ion. This motion is thus described by the Mathieu e
 \begin{equation}
     \frac{d^2x}{d \tau^2} + (a - 2q\cos(2\tau))x = 0,
 \end{equation}
-where we have defined $\tau = \frac{\Omega_{\rm RF}t}{2}$ $a=-\frac{4eV_{\rm DC}}{m\Omega_{\rm RF}^2d^2}$, and $q=-\frac{2eV_{\rm RF}}{m\Omega_{\rm RF}^2\hat\rho^2}$. 
+where we have defined $\tau = \frac{\Omega_{\rm RF}t}{2}$, $a=-\frac{4eV_{\rm DC}}{m\Omega_{\rm RF}^2d^2}$, and $q=-\frac{2eV_{\rm RF}}{m\Omega_{\rm RF}^2\hat\rho^2}$. 
 Analysis of the two parameters, $a$, $q$, of the Mathieu equation yield regions of stability (motional amplitude converges) and instability (motional amplitude diverges). For the ``lowest stability region'', the regime relevant to our trap, the motion is stable when $|a|,q^2\ll 1$~\cite{leibfried_quantum_2003}.
-In this regime the ion dynamics are well approximated by the motion,
+In this regime, the ion dynamics are well approximated by the motion,
 \begin{equation}
     x(t) \approx x_{\rm eq} +  x_{\rm sec}(t)\left(1+\frac{q}{2}\cos(\Omega_{\rm RF}t)\right),
 \end{equation}
@@ -280,7 +282,7 @@ increased axial frequency leading to a reduced radial. This equal defocussing of
 the two radials is due to the assumed electrode symmetry of the idealised
 potential in equation~\ref{eqn:potential}. If the static potential acts
 asymmetrically on the two radial dimensions, this breaks the degeneracy of the
-radial modes. In this thesis we enforce a strong DC radial asymmetry to ensure
+radial modes. In this thesis, we enforce a strong DC radial asymmetry to ensure
 the two radial modes are well frequency separated (electrode configuration
 details in~\S~\ref{sec:Trap DC Voltages}).\\
 For $N$ ions there are $3N$ common secular motional modes, with mode frequencies
@@ -290,12 +292,13 @@ ions~\cite{james_quantum_1998}.
 \subsection{The Qumode}
 \label{sec:qumode}
 
-This secular motion is well approximated by simple harmonic oscillations for amplitudes small compared to the length scale of any anharmonicities in the pseudopotential. When the motion is suitably damped to a temperature of order the mode frequency, $T\sim \hbar \omega_x/k_B$, a quantised description of the oscillator is required. 
-The quantum harmonic oscillator (qumode) is given by,
+This secular motion is well approximated by simple harmonic oscillations for amplitudes small compared to the length scale of any anharmonicities in the pseudopotential. 
+A quantised description of the oscillator is required when the motion is suitably damped to a temperature of order the mode frequency, $T\sim \hbar \omega_x/k_B$, where $\omega_x$ is the mode frequency, and $k_B$ is the Boltzmann constant.
+The qumode is then given by,
 \begin{equation}
     \hat H_{\rm osc} = \frac{1}{2m}\hat p^2 + \frac{1}{2}m\omega_x^2\hat x^2,
 \end{equation}
-where $m$ is the ion mass, $\omega_x$ is the motional mode frequency, and $\hat x$, $\hat p$ are the position and momentum operators respectively. A description of the oscillator state may be given in phase space using the $\hat x$ and $\hat p$ operators.
+where $m$ is the ion mass, and $\hat x$, $\hat p$ are the position and momentum operators respectively. A description of the oscillator state may be given in phase space using the $\hat x$ and $\hat p$ operators.\\
 In the phonon, or Fock-state, representation, the creation and annihilation operators, $\hat a^\dagger$ and $\hat a$,
 are related to this picture by,
 \begin{align}
@@ -313,7 +316,7 @@ The oscillator Hamiltonian is then given succinctly by,
 \begin{equation}
     \hat H_{\rm osc} = \hbar \omega_x \left(\hat n + \frac{1}{2}\right).
 \end{equation}
-In this thesis we will denote an oscillators state either in this Fock-state basis, where,
+In this thesis, we will denote an oscillators state either in this Fock-state basis, where,
 $\ket{n}=\frac{\hat a^{\dagger n}}{\sqrt{n!}} \ket{0}$, or in a coherent-state basis, $\ket{\beta} = \hat D(\beta)\ket{0}$, where $\hat D(\beta)$ is the displacement operator which we shall explore in the following section.
 
 \begin{figure}
@@ -344,7 +347,7 @@ Going into the interaction picture with respect to $\hat H_{\rm osc}$, we find,
 \begin{equation}
     \tilde H_I = -\hbar \Omega_D\cos(\omega t + \phi) (\hat a^\dagger e^{i\omega_x t}+\hat ae^{-i\omega_x t}),
 \end{equation}
-where $\Omega_D = \frac{ex_0E_0}{\hbar}$. Expanding the oscillating field and assuming $\omega+ \omega_x \gg \Omega_D$, the fast oscillating terms are neglected giving,
+where $\Omega_D = \frac{ex_0E_0}{\hbar}$. Expanding the oscillating field and assuming $\omega+ \omega_x \gg \Omega_D$, the fast oscillating terms may be neglected by the rotating-wave approximation yielding,
 \begin{equation}
     \label{eqn:displace_H}
     \tilde H_I \approx \hat H_{\rm D} := -\frac{\hbar \Omega_D}{2}(\hat a^\dagger e^{-i(\delta t+\phi)}+\hat ae^{i(\delta t+\phi)}),
@@ -355,8 +358,8 @@ In the case of resonant driving, $\delta = 0$, the Hamiltonian becomes time-inde
     \hat D(\beta) := \hat U(t) &= e^{i\frac{\Omega_D t}{2}(\hat a^\dagger e^{-i\phi}+\hat a e^{i\phi})},\\
     &= e^{\beta \hat a^\dagger - \beta^*\hat a},
 \end{align}
-where the second expression is the conventional displacement operator,
-$\hat D(\beta)$, where here $\beta = \frac{\Omega_D t}{2}ie^{-i\phi}$. The
+recognising the second expression as the conventional displacement operator,
+$\hat D(\beta)$, with $\beta = \frac{\Omega_D t}{2}ie^{-i\phi}$. The
 displacement operator is used in the coherent state representation of the
 oscillator, $\ket{\beta} = \hat D(\beta)\ket{0}$, where $\ket{\beta}$ is the eigenstate of the annihilation operator, $\hat a\ket{\beta} = \beta\ket{\beta}$.  The action of the displacement
 operator may be visualised in phase space, shown for resonance in
@@ -388,7 +391,7 @@ Considering the loop-closure times, $T_n$, the oscillatory term of the phase dis
     \Phi(T_n) = \frac{n\pi\Omega_D^2}{2\delta^2}.
 \end{equation}
 
-In this example the geometric phase is globally acting, and as such can be safely ignored. This geometric phase is utilised spin-dependently in the final section of this chapter to induce two-qubit entanglement via a shared motional mode coupling the two qubits.
+In this example, the geometric phase is globally acting, and as such can be safely ignored. This geometric phase is utilised spin-dependently in the final section of this chapter to induce two-qubit entanglement via a shared motional mode coupling the two qubits.
 
 
 
@@ -396,8 +399,8 @@ In this example the geometric phase is globally acting, and as such can be safel
 \section{Spin-Motion}
 \label{sec:Motional Coupling}
 
-In this section we explore light-matter interactions that couple the spin and motional subsystems.
-Reconsider the spin transition Hamiltonian, $\tilde H_I$, in equation~\ref{eqn:light_matter}, but now including quantised secular ion motion in the $x$-direction given by equation~\ref{eqn:x_ladder}, around an equilibrium position, $\vec R = R_{\rm eq} + x_0(\hat a^\dagger + \hat a)\hat{e_x}$, where $\hat e_x$ is the $x$ unit vector.
+In this section, we explore light-matter interactions that couple the spin and motional subsystems.
+Reconsider the spin transition Hamiltonian, $\tilde H_I$, in equation~\ref{eqn:light_matter}, now including quantised secular ion motion in the $x$-direction given by equation~\ref{eqn:x_ladder}, around an equilibrium position, $\vec R = R_{\rm eq} + x_0(\hat a^\dagger + \hat a)\hat{e_x}$, where $\hat e_x$ is the $x$ unit vector.
 The interaction Hamiltonian is then given by\footnote{Keeping in mind this Hamiltonian is already in the interaction picture with respect to the spin, $\hat H_s$, and is neglecting fast oscillating terms},
 \begin{equation}
     \tilde H_I \approx \hat H_{\rm osc} + \frac{\hbar\Omega}{2}\left(\hat\sigma_+ e^{i\eta(\hat a^\dagger+\hat a )}e^{-i(\delta t - \phi)} + {\rm h.c.} \right),
@@ -406,9 +409,8 @@ where the equilibrium position has been absorbed into the global phase, and we
 have defined $\eta = |\vec k|x_0\cos(\gamma)$, the Lamb-Dicke parameter, with $\gamma$
 being the angle between the $k$-vector of optical field and the mode vector $\hat e_x$. 
 The Lamb-Dicke parameter relates the excitation wavelength to the extent
-of the ground state oscillator wavefunction, $x_0$. The parameter also quantifies the
-strength of light coupling to motional change, it may be expressed in terms of
-photon recoil energy, $E_R=\frac{\hbar^2 k^2}{2m}$, to oscillator energy,
+of the ground-state oscillator wavefunction, $x_0$. The parameter also quantifies the
+strength of the coupling between the incident light and the ion's motion; it may be expressed as the ratio of photon recoil energy, $E_R=\frac{\hbar^2 k^2}{2m}$, to oscillator energy,
 $E_{\rm osc}=\hbar\omega_x$, as $\eta^2 = \frac{E_R}{E_{\rm osc}}$.\\
 For the wavelength (729-nm) and mode frequencies ($\approx 3~\unit{\mega\hertz}$) considered in this thesis, the Lamb-Dicke parameter is of order $\eta \approx 0.05$.
 
@@ -442,20 +444,20 @@ Three resonant regimes are then apparent:\\
 Taking $\delta = 0$, and assuming $\eta\Omega \ll \omega_x$ (adiabatic driving) the non-motional term is brought into resonance, and terms linear in $\eta$ may be neglected. This ``carrier'' interaction is identical (up to first order) to the Hamiltonian considered above for Rabi oscillations.\\
 The two remaining resonance conditions are termed sidebands, with $\delta = +\omega_x + \Delta $, and $\delta = -\omega_x - \Delta$, with $\Delta \ll \omega_x$, yielding the blue-sideband (BSB) and red-sideband (RSB) respectively.
 To ensure off-resonant carrier excitations are negligible, it is required that $\Omega \ll \omega_x$.
-In this case the sideband Hamiltonians are written as,
+In this case, the sideband Hamiltonians are written as,
 \begin{align}
     \hat H_{\rm BSB} &= \frac{i\hbar \eta\Omega}{2}\left( \hat\sigma_+\hat a^\dagger e^{-i(\Delta t-\phi)} - \hat\sigma_-\hat a e^{i(\Delta t -\phi)}\right),\\
     \hat H_{\rm RSB} &= \frac{i\hbar \eta\Omega}{2}\left(\hat\sigma_+\hat a e^{i(\Delta t + \phi)} - \hat\sigma_-\hat a^\dagger e^{-i(\Delta t +\phi)}\right),
 \end{align}
 with the subscript labelling either BSB or RSB interactions.
 When $\Delta = 0$, the RSB is the Jaynes-Cummings Hamiltonian
-familiar from cavity QED, driving oscillations of a single quanta of energy between a two-level system
-and a photon in a cavity mode, coupling the two states $\ket{\da,n}\leftrightarrow\ket{\ua,n-1}$, as,
+familiar from cavity QED. It describes the coherent exchange of a single quantum of energy between a two-level system
+and a bosonic mode, coupling the two states $\ket{\da,n}\leftrightarrow\ket{\ua,n-1}$. The resulting dynamic evolution is,
 \begin{equation}
 R_{\rm RSB}(\Omega^{(n)}_{\rm RSB}t) :=e^{-i\hat H_{\rm RSB}t/2}\ket{\da, n} = \cos\left(\frac{\Omega^{(n)}_{\rm RSB}t}{2}\right)\ket{\da,n} + \sin\left(\frac{\Omega^{(n)}_{\rm RSB}t}{2}\right)\ket{\ua,n-1},
 \end{equation}
-where we have assumed $\phi=0$, and $\Omega^{(n)}_{\rm RSB} = \sqrt{n}\eta\Omega$ is the $n$-dependent modified RSB Rabi-frequency.\\
-The BSB is described by the anti-Jaynes-Cummings Hamiltonian, where pairs of quanta are simultaneously created or annihilated, akin to pair-creation in two-mode squeezing interactions, coupling the two states $\ket{\da,n}\leftrightarrow\ket{\ua,n+1}$, as,
+where we have assumed $\phi=0$, and $\Omega^{(n)}_{\rm RSB} = \sqrt{n}\eta\Omega$ is the $n$-dependent modified RSB Rabi frequency.\\
+The resonant BSB is described by the anti-Jaynes-Cummings Hamiltonian, corresponding to the simultaneous creation or annihilation of pairs of quanta, akin to pair-creation in two-mode squeezing interactions. This coherently couples the states $\ket{\da,n}\leftrightarrow\ket{\ua,n+1}$, with the dynamic evolution given by,
 \begin{equation}
 R_{\rm BSB}(\Omega^{(n)}_{\rm BSB}t) := e^{-i\hat H_{\rm BSB}t/2}\ket{\da, n} = \cos\left(\frac{\Omega^{(n)}_{\rm BSB}t}{2}\right)\ket{\da,n} + \sin\left(\frac{\Omega^{(n)}_{\rm BSB}t}{2}\right)\ket{\ua,n+1},
 \end{equation}
@@ -472,18 +474,18 @@ They also provide a method to directly entangle the spin and motional subsystems
 \subsection{The Spin-Dependent Force}
 \label{sec:SDF}
 
-Here we introduce a fundamental interaction used throughout this thesis --- the spin dependent force, or SDF.
+Here we introduce a fundamental interaction used throughout this thesis --- the spin-dependent force, or SDF.
 The SDF is used in this thesis for three applications: For two-qubit entanglement via a shared motional mode (\S~\ref{sec:Geometric Phase Gates} and~\S~\ref{sec:Two-Qubit Entangling Gates}), for motional state tomography (\S~\ref{sec:tomography}), and for driving effective nonlinear bosonic interactions (\S~\ref{sec:two-sdf}).\\
-As the name suggests, we consider displacements, of the form given in equation~\ref{eqn:displace_H}, with conditioning dependent on an ancillary qubit state, described by the Hamiltonian,
+As the name suggests, we consider displacements of the form given in equation~\ref{eqn:displace_H}, with conditioning dependent on an ancillary qubit state, described by the Hamiltonian,
 \begin{equation}
     \label{eqn:SDF}
     \hat H_{\rm SDF} = \hat\sigma_{\phi_s}\hat H_{\rm D},
 \end{equation}
-with the spin-conditioning given by spin phase, $\phi_s$, as $\hat\sigma_{\phi_s} =  \cos(\phi_s)\hat\sigma_x - \sin(\phi_s)\hat\sigma_y$.\\
-In this section we analyse how to generate an effective SDF using a combination of RSB and BSB fields.
+with the spin-conditioning in the $xy$-plane, given by spin phase, $\phi_s$.\\
+In this section, we analyse how to generate an effective SDF using a combination of RSB and BSB fields.
 In the next section we discuss using the SDF and the resulting spin-dependent geometric phase to realise two-qubit entangling gates.\\
 
-In this thesis the SDF is realised by the optical Mølmer-Sørensen (MS) scheme~\cite{sorensen_entanglement_2000} via a bichromatic laser field. Bichromatic refers to the simultaneous
+In this thesis, the SDF is realised by the optical Mølmer-Sørensen (MS) scheme~\cite{sorensen_entanglement_2000} via a bichromatic laser field. Bichromatic refers to the simultaneous
 application of two frequency tones. The tones are set symmetrically detuned around the carrier transition, $\omega_1 = \omega_0 + \omega_x + \Delta$, $\omega_2 = \omega_0 - \omega_x - \Delta$. The bichromatic Hamiltonian is then given by,
 \begin{equation}
     \hat H_{\rm bi}(t) = \hat H_{\rm RSB}(t) + \hat H_{\rm BSB}(t).
@@ -511,14 +513,14 @@ which is equivalent to equation~\ref{eqn:SDF} with $\Omega_D \rightarrow \Omega_
 \label{sec:Geometric Phase Gates}
 
 To generate two-qubit entanglement we utilise the ``MS gate'' method~\cite{molmer_multiparticle_1999}: the SDF is applied simultaneously to two qubits, and a common motional mode. The MS gate
-relies on the spin dependent geometric phase accumulated during the motional
+relies on the spin-dependent geometric phase accumulated during the motional
 displacement~\cite{ozeri_tutorial_2011}. To ensure there is no remaining spin-motion entanglement the SDF is driven off-resonantly by $\Delta$ for an integer loop duration $T_n$, as described in~\S~\ref{sec:driving_motion}, such that the motional state returns to the initial state no matter the two-qubit spin state.\\
 Here we assume the spin phase, $\phi_s = 0$, so the SDF is conditioned on $\hat \sigma_x$, and to simplify the analysis we assume the motional phase, $\phi_m = 0$.
 If applied to two qubits, the spin conditioning is the collective spin operator $\hat S_{x}=\hat\sigma_x\otimes \hat I + \hat I\otimes\hat\sigma_x$, yielding the two-qubit and single-qumode Hamiltonian,
 \begin{equation}
     \hat H_{\rm MS}(t) = \frac{\hbar \Omega_{\rm SDF}}{2}\hat S_{x}(\hat a^\dagger e^{-i\Delta t}+\hat a e^{i\Delta t}).
 \end{equation}
-As with the analysis of the geometric phase of the non-spin-conditioned displacement, we analyse this time dependent Hamiltonian by the Magnus expansion, to find,
+As with the analysis of the geometric phase of the non-spin-conditioned displacement, we analyse this time dependent Hamiltonian by the Magnus expansion to find,
 \begin{equation}
     \hat U_{\rm MS}(t) = \hat D(\beta(t)\hat S_{x})e^{-i\Phi(t)\hat S_{x}^2},
 \end{equation}
