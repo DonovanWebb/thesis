@@ -9,7 +9,8 @@ molecule they compose, crystals, light, the vacuum, and many other parts of our
 reality. That is to say, given a choice, bet things obey quantum mechanics. 
 It was recognised in the 1980s that quantum mechanics and information must be unified for fully unlocking the burgeoning field of computation~\cite{benioff_computer_1980, feynman_simulating_1982}. Motivated with the intuition that if reality is described by QM, then surely
 quantum objects will offer more efficient strategies to simulate reality, the idea of the \emph{Quantum Comptuter} was formed. We will elaborate this concept, but first 
-we donate a paragraph to the classical computers that have gone before.\\
+we donate a paragraph to the classical computers that have gone before.
+
 % Classical Computing
 What is the goal of computing? We will define ``compute'' as modelling some physical system with another,
 disparate, physical system. This could be an analogue simulator with continuous
@@ -22,7 +23,8 @@ provided enough time and memory~\cite{turing_computable_1937, church_unsolvable_
 useful tool. With sufficient understanding of the physical system we wish to model, we
 may observe \emph{simulated} behaviour without requiring control over the actual
 system. 
-A profound result in the study of digital universal simulators is the small set of elementary operations required for this universality, for example, the boolean set \{AND,OR,NOT\}, are sufficient to simulate any function to an arbitrary precision.\\
+A profound result in the study of digital universal simulators is the small set of elementary operations required for this universality, for example, the boolean set \{AND,OR,NOT\}, are sufficient to simulate any function to an arbitrary precision.
+
 % Why we need QC
 However, \emph{universal} does not mean \emph{practical} ---  although a physical device
 is able to simulate anything, it may still not be feasible for an operator to ``code''
@@ -31,11 +33,13 @@ for yourself.}, or for a useful result to be returned in reasonable
 time --- i.e. is tractable\footnote{factor a 2048-bit number for a few billion years to confirm this for
 yourself.}. Regardless, highly advanced and operable computers have been
 constructed and have successfully modelled and transformed almost all aspects
-of modern life. \\
+of modern life. 
+
 Unfortunately, many problems intractable using classical computers are of great
 practical importance, for example accurately modelling chemical systems for
 industrial, and drug design, and simulating solid-state systems for fundamental
-material, and physical research.\\
+material, and physical research.
+
 Both these examples intentionally fall into the simulation of quantum systems.
 Models of quantum systems are notoriously expensive to encode, 
 fundamentally due to
@@ -44,7 +48,8 @@ described by the superposition of all possible $d$ basis states, where $d$ is
 the system dimension. Given an underlying number, $n$, of $q$-level subsystems that compose the system, we find the dimension exponentially scales as $d=q^n$. Each basis state of the $n$-body system will have some
 associated amplitude and phase, resulting in $2q^n-2$ real
 parameters required to track and accurately model the pure quantum state. This
-exponential scaling is not kind to a digital computer.\\
+exponential scaling is not kind to a digital computer.
+
 % What is QC
 Returning to the 1980s, it was realised that this exponential scaling could provide the very resources required to simulate other quantum systems. Can we construct a Turing
 machine that utilises the resource scaling of a quantum system~\cite{deutsch_quantum_1985}\footnote{As an
@@ -52,7 +57,8 @@ aside, the implications of quantum mechanics on information
 extend further than purely mimicking other dynamic systems -- using and
 distributing quantum objects also allows for dominant strategies in
 cryptography~\cite{bennett_quantum_2014}, and some competitive (although currently esoteric)
-games~\cite{drmota_experimental_2025}.} --- a quantum computer (QC)? \\
+games~\cite{drmota_experimental_2025}.} --- a quantum computer (QC)? 
+
 The ingredients for such a device are well
 known~\cite{divincenzo_physical_2000}, and have been demonstrated on multiple
 physical platforms to date. Theoretical work is placing ever-more lenient
@@ -79,14 +85,17 @@ This is the strategy of both the ``neutral-atom'', and ``trapped-ion''
 platforms, with the latter choosing to remove or add a few electrons to more
 easily manipulate the position of the atoms in space\footnote{We note that the
 neutral-atom platform has made significant progress in the spatial control of atoms in optical tweezer traps, however, the trap depths between the two platforms is incomparable.}. The trapped-ion platform also has access to the motion of the ions, which may be used as continuous variable quantum resources --- so called qumodes --- that
-can be coherently controlled, and initialised to highly non-classical states.\\
+can be coherently controlled, and initialised to highly non-classical states.
+
 Photons are another ``natural'' choice for the quantum-resource. They may either be treated also as continuous quantum systems, or have some discrete level system encoded, such as a qubit. The photonic qubit is unique in being a ``flying-qubit'': photons are
-able to transmit information over long distances, lending them particular interest in their use for interconnecting distant quantum computers.\\
+able to transmit information over long distances, lending them particular interest in their use for interconnecting distant quantum computers.
+
 The final class of platforms is that of
 ``manufactured'' quantum systems, such as superconducting circuits, quantum dots, and NV centers;
 benefiting from control over the level structure, and owing to their solid
 state, presumably allowing for easier integration into existing semiconductor
-fabrication techniques.\\
+fabrication techniques.
+
 At this time, it is unclear whether one of these platforms,
 or an entirely new architecture, will be the first to reach a scaled device.
 Each have their own advantages and unique technical challenges, and each are in
@@ -99,7 +108,7 @@ For useful quantum computation and simulation, we require access to a sufficient
 with sufficiently accurate control with which to traverse it. How do we scale the ion-trap
 platform to provide those resources? In principle, we know \emph{how}, but the required engineering and control presents unique and technical challenges. I identify three
 specific challenges associated to scaling, that motivate the work presented in this thesis:
-increasing the available quantum resources, controlling those resources, and characterising and mitigating the errors that arise as the system grows.\\
+increasing the available quantum resources, controlling those resources, and characterising and mitigating the errors that arise as the system grows.
 
 \subsubsection{Challenge I: Scaling Quantum Resources}
 We need larger Hilbert spaces --- to solve a ``useful'' computation, such as
@@ -139,7 +148,7 @@ frequency and spatial selectivity. This technical constraint is that of
 ``control-signal delivery'', a common problem to both classical and quantum
 computing. Trapped-ion systems require hardware for delivering spatially, and spectrally selective electronic control, and optical-beam
 delivery, both of which are under active development to enable
-scalability~\cite{malinowski_how_2023,mehta_integrated_2020}.\\
+scalability~\cite{malinowski_how_2023,mehta_integrated_2020}.
 
 \subsubsection{Challenge III: Scaling with Imperfect Systems}
 The last specific challenge we discuss is that of unwanted evolution due to \emph{noise}.
@@ -160,7 +169,8 @@ and thus full descriptions require vast amounts of information. So we often sit
 in two regimes: we may either fully characterise few-body
 interactions~\cite{chuang_prescription_1997}, or we must use abstracted, and
 system-wide metrics to gauge performance of the scaled
-system~\cite{erhard_characterizing_2019,mckay_benchmarking_2023}.\\
+system~\cite{erhard_characterizing_2019,mckay_benchmarking_2023}.
+
 When noise is suitably suppressed
 through hardware engineering, we may then utilise algorithmic techniques to be
 robust to the remaining imperfections. Foremost, analogous to classical
@@ -170,7 +180,8 @@ overhead in both register size and circuit depth, only recently in reach of
 experimental platforms, but only for small numbers of logical qubits~\cite{steane_overhead_2003}. A
 complimentary method for suppressing the impact of errors is through myriad
 error mitigation techniques, using repeat measurements to infer error-suppressed
-algorithmic outputs~\cite{cai_quantum_2023}. \\
+algorithmic outputs~\cite{cai_quantum_2023}. 
+
 Therefore, even with imperfect physical qubits or qumodes, it appears to still be physically possible to construct useful, universal quantum computers.
 
 

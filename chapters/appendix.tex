@@ -78,7 +78,8 @@
 
 \subsection{``Two-SDF'' Dynamics}
 \label{app:two-sdf}
-    Here we analyse the ``two-SDF'' Hamiltonian given in equation~\ref{eqn:two-sdf} using the Magnus expansion. We recover effective Hamiltonians for both Gaussian interactions, as well as for tri-squeezing. \\
+    Here we analyse the ``two-SDF'' Hamiltonian given in equation~\ref{eqn:two-sdf} using the Magnus expansion. We recover effective Hamiltonians for both Gaussian interactions, as well as for tri-squeezing. 
+
     The ``two-SDF'' Hamiltonian is reproduced for convenience here,
     \begin{align}
       \hat H_\mathrm{2SDF}(t)  &= \hat H_\alpha(t) + \hat H_\beta(t)\\
@@ -87,7 +88,8 @@
       &~+ 
       \frac{\hbar \Omega_{\beta}}{2}\hat\sigma_{\beta} \left(\hat a_\beta e^{i(\Delta_\beta t + \phi_\beta)} + \hat a_\beta^\dagger e^{-i(\Delta_\beta t + \phi_\beta)}\right).
     \end{align}
-    The first three terms of the corresponding Magnus expansion are found by inserting $\hat H_\mathrm{2SDF}$ into equations~\ref{eqn:magnus_A}. We shall later rationalise that with certain values of SDF magnitudes, detunings, and phases, we may arbitrarily suppress the higher order terms.\\
+    The first three terms of the corresponding Magnus expansion are found by inserting $\hat H_\mathrm{2SDF}$ into equations~\ref{eqn:magnus_A}. We shall later rationalise that with certain values of SDF magnitudes, detunings, and phases, we may arbitrarily suppress the higher order terms.
+
     The $A_1$ term appears as separable fast
     oscillations in phase space due to each SDF, 
     \begin{equation}
@@ -96,13 +98,15 @@
         \right)\right).
     \end{equation}
     This is effectively the first-order only dynamics of the displacement operator leading to excursions in phase-space. The effects of this term may be entirely suppressed at certain gate durations, $A_1(T)=0$, where $T$ is an integer multiple of both
-    $\tau_\alpha = 2\pi/\Delta_\alpha$ and $\tau_\beta = 2\pi/\Delta_\beta$. Excursions may also be made arbitrarily small by ensuring $\Omega_i \ll \Delta_i$. \\
+    $\tau_\alpha = 2\pi/\Delta_\alpha$ and $\tau_\beta = 2\pi/\Delta_\beta$. Excursions may also be made arbitrarily small by ensuring $\Omega_i \ll \Delta_i$. 
+
     The commutator in the $A_2$ term may be expanded to reveal four relevant components,
     \begin{equation}
     A_2(t) = S_\alpha(t) + S_\beta(t) + X_\mathrm{pair}(t) + X_\mathrm{exch}(t),
     \end{equation}
     where $S$ denotes ``self-terms'', and $X$ ``cross-terms'' of the two simultaneously applied SDFs.
-    We label the first cross-term ``pair'' due to the pair creation and annihilation of excitations, and the second group, ``exch'' is labelled due to driving the exchange of excitation. \\
+    We label the first cross-term ``pair'' due to the pair creation and annihilation of excitations, and the second group, ``exch'' is labelled due to driving the exchange of excitation. 
+
     The self-terms, with the form,
     \begin{equation}
         S_i(t) = \frac{i\Omega_i^2}{4}\left(\frac{\sin(\Delta_i t)}{\Delta_i^2} - \frac{t}{\Delta_i}\right)
@@ -113,7 +117,8 @@
     In the case that this geometric phase acts globally on the
     system, they may be ignored. If the accumulated phase is spin, or oscillator
     state dependent, then interesting dynamics may be observed, however these
-    effects are out of the scope of this thesis. \\
+    effects are out of the scope of this thesis. 
+
     The remaining cross-terms contain the 2nd order nonlinear bosonic interactions we are interested in emulating. 
     We set the two detunings relative to one another by, $\Delta_\beta = m\Delta_\alpha$.
     Expanding the commutator of the cross terms we find for general $m$ the following interactions, grouped by their effect on the oscillator state,
@@ -128,34 +133,40 @@
     \end{align}
     We now may find the effective Hamiltonians governing the dynamic evolution for certain resonance conditions.
     We can convert from the generator form, $A(T)$, to familiar effective 
-    time-independent Hamiltonian, $\hat H_\mathrm{eff}$ for a given time, $T$, by $\hat H_\mathrm{eff} = \frac{i\hbar}{T}A(T)$.\\
+    time-independent Hamiltonian, $\hat H_\mathrm{eff}$ for a given time, $T$, by $\hat H_\mathrm{eff} = \frac{i\hbar}{T}A(T)$.
+
     Taking the limit, $m=-1$, we find $F(-1,t)=0$ and $J(-1,t) = -2it$, leading to a time-linear term $X_\mathrm{pair}$,
     with effective Hamiltonian,
     \begin{equation}
         \hat H_\mathrm{eff, pair} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma\left(\hat a_\alpha \hat a_\beta e^{i\phi_p'}+\hat a_\alpha^\dagger \hat a_\beta^\dagger e^{-i\phi_p'}\right),
     \end{equation}
-    where $\Omega_2 = \frac{\Omega_\alpha\Omega_\beta}{\Delta}$, and $\phi_p' = \phi_\alpha +\phi_\beta + \frac{\pi}{2}$. For $a_\alpha^\dagger = a_\beta^\dagger$ this is the squeezing interaction, whereas for $a_\alpha^\dagger \neq a_\beta^\dagger$ this is two-mode squeezing.\\
+    where $\Omega_2 = \frac{\Omega_\alpha\Omega_\beta}{\Delta}$, and $\phi_p' = \phi_\alpha +\phi_\beta + \frac{\pi}{2}$. For $a_\alpha^\dagger = a_\beta^\dagger$ this is the squeezing interaction, whereas for $a_\alpha^\dagger \neq a_\beta^\dagger$ this is two-mode squeezing.
+
     Taking the limit, $m=+1$, we find $J(1,t)=0$ and $F(1,t) = -2it\left(1-\mathrm{sinc}(\Delta t)\right)$. If we consider the secular term only, we find the time-linear term $X_\mathrm{exch}$. Now considering the anticommutation relationships between ladder operators we find for $a_\alpha^\dagger = a_\beta^\dagger$, an effective Hamiltonian,
     \begin{equation}
         \hat H_\mathrm{eff, parity} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma\sin(\phi_m) (2\hat a_\alpha^\dagger \hat a_\alpha +1),
     \end{equation}
-    which is the parity, or in this case ``dispersive'' Hamiltonian due to the spin-conditioning.\\
+    which is the parity, or in this case ``dispersive'' Hamiltonian due to the spin-conditioning.
+
     Finally, considering $a_\alpha^\dagger \neq a_\beta^\dagger$, we recover the beamsplitter interaction, with effective Hamiltonian,
     \begin{equation}
         \hat H_\mathrm{eff, bs} = \frac{\varepsilon_{\alpha\beta\gamma}\hbar \Omega_2}{2}\hat\sigma_\gamma \left(\hat a_\alpha \hat a_\beta^\dagger e^{i\phi_m'}+\hat a_\alpha^\dagger \hat a_\beta e^{-i\phi_m'}\right),
     \end{equation}
-    with $\phi_m' = \phi_\alpha - \phi_\beta + \frac{\pi}{2}$.\\
+    with $\phi_m' = \phi_\alpha - \phi_\beta + \frac{\pi}{2}$.
+
     Similar arguments hold for the higher order terms, where, for example, we recover the tri-squeezing interaction for $m=-2$, with effective Hamiltonian of the form,
     \begin{equation}
         \hat H_\mathrm{eff, tri} = \frac{\hbar \Omega_3}{2}\hat\sigma_\beta \left(\hat a_\alpha^3 e^{i\phi}+\hat a_\alpha^{\dagger 3}  e^{-i\phi}\right),
     \end{equation}
-    with $\Omega_3 = \frac{\Omega_\alpha^2\Omega_\beta}{2\Delta^2}$.\\
+    with $\Omega_3 = \frac{\Omega_\alpha^2\Omega_\beta}{2\Delta^2}$.
+
     For further details on the use of these higher order effective interactions refer to the following two theses:\cite{bazavan_easy_nodate,saner_quantum_2026}.
 
 
 \section{Gate Fidelity}
 \label{sec:fidelity}
-We derive the fidelity of a noisy gate implementation with respect to the ideal unitary.\\
+We derive the fidelity of a noisy gate implementation with respect to the ideal unitary.
+
 A quantum channel,
 \begin{equation}
     \mathcal{E}: \hat\rho \mapsto \hat\rho,
@@ -172,7 +183,8 @@ If we further assume that the error channel is unitary, as is the case of a detu
     \label{eqn:fid_unitary}
     F(V,U) = \frac{1}{d(d+1)} \left( |\text{Tr}(U^\dagger V)|^2 + d \right),
 \end{equation}
- where $V$ is the error unitary, and $d$ is the dimension of the Hilbert space. \\
+ where $V$ is the error unitary, and $d$ is the dimension of the Hilbert space. 
+
 Here we shall give a derivation of this result, by considering the symmetry imposed by the Haar measure.
 The standard fidelity of two unitaries following from equation~\ref{eqn:fid} is given by
 \begin{equation}
@@ -202,7 +214,8 @@ Incorporating this result into the fidelity expression, we find
 \begin{equation}
     F(V,U) = \frac{1}{d(d+1)} \text{Tr}\left[ (W \otimes W^\dagger)(\mathbb{I} + S) \right],
 \end{equation}
-where we can evaluate the two terms using the identities $\text{Tr}(A \otimes B) = \text{Tr}(A)\text{Tr}(B)$ and $\text{Tr}((A \otimes B)S) = \text{Tr}(AB)$, the latter of which is highly relevant to the mechanism of virtual distillation, described in chapter~\ref{ch:virtual_distillation}. This results in the final expression for the fidelity of a unitary error channel with respect to a target unitary, given above by equation~\ref{eqn:fid_unitary}.\\
+where we can evaluate the two terms using the identities $\text{Tr}(A \otimes B) = \text{Tr}(A)\text{Tr}(B)$ and $\text{Tr}((A \otimes B)S) = \text{Tr}(AB)$, the latter of which is highly relevant to the mechanism of virtual distillation, described in chapter~\ref{ch:virtual_distillation}. This results in the final expression for the fidelity of a unitary error channel with respect to a target unitary, given above by equation~\ref{eqn:fid_unitary}.
+
 
 \section{Irreducible Representations of $Cl_1$}
 \label{app:reps}
@@ -235,7 +248,8 @@ From Schur's lemma, equation~\ref{eqn:commute} implies the twirled error channel
 \begin{equation}\label{eqn:block-diag}
     \tilde\Lambda=\bigoplus_\lambda(I_\lambda\otimes \mathcal M_{\lambda}),
 \end{equation}
-where $\mathcal{M}_\lambda$ is the multiplicity matrix of dimensions $m_\lambda\times m_\lambda.$\\
+where $\mathcal{M}_\lambda$ is the multiplicity matrix of dimensions $m_\lambda\times m_\lambda.$
+
 
 \begin{table}[]
     \centering
@@ -279,7 +293,8 @@ Two group elements $g,h\in G$ are said to be in the same conjugacy class if they
 \begin{equation}
 g = khk^{-1},
 \end{equation}
-for all $k\in G$.\\
+for all $k\in G$.
+
 With this definition, the 24 single qubit Clifford elements are divided into five permutation classes, shown in Table~\ref{table:conj}, with a representative name and example member following each class.
 These classes make obvious the known isomorphism between $Cl_1$ and the symmetric group S$_4$ (modulo phase).
 Character tables~\cite{lee_character_2025}, are useful tools in representation theory, to uniquely describe irreps 
@@ -292,11 +307,13 @@ where $r_\lambda$ is the irreducible component of the representation of $G$ acti
 r_\lambda(g)_{i,j} = \mathrm{Tr}[B_i^\dagger g B_j g^\dagger],
 \end{equation}
 where $B_i$ are the orthonormal basis vectors for irrep $\lambda$.
-Taking the two-qubit sub-representations reproduced in Table~\ref{table:irreps}, the character table calculated is shown in Table~\ref{table:character}. We can see that the left, right, and antisymmetric sub-representations form a multiplicity of the $3D$-irrep labelled $3$, while the trace sub-representation is a multiplicity of the $1D$ trivial irrep.\\
+Taking the two-qubit sub-representations reproduced in Table~\ref{table:irreps}, the character table calculated is shown in Table~\ref{table:character}. We can see that the left, right, and antisymmetric sub-representations form a multiplicity of the $3D$-irrep labelled $3$, while the trace sub-representation is a multiplicity of the $1D$ trivial irrep.
+
 
 \subsection{Projectors of $Cl_1^{\otimes 2}$}
 \label{sec:k-copy_projector}
-We outline the method of recovering the $\alpha$ parameters described in~\S~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver Romvig {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here. \\
+We outline the method of recovering the $\alpha$ parameters described in~\S~\ref{sec:common_noise} using projectors onto the irrep spaces. A special thanks to Iver Romvig {\O}vergaard who performed this analysis applied to the \emph{common noise} channel and gave permission for reproducing the results here. 
+
 The decay due to a single rotation acting identically on both qubits which, in the Pauli-transfer matrix (PTM) representation, can be written as $\Lambda^\mathcal{P}=\mathrm{diag}(1, R, R, R\otimes R)$, 
 where superscript $\mathcal{P}$ represents the block diagonal matrix is ordered by the two-qubit Pauli basis $\mathcal{P}=\{I\otimes I, \vec\sigma\otimes I , I\otimes\vec\sigma, \vec\sigma\otimes\vec\sigma\}$, with $\vec\sigma = \{\hat\sigma_x, \hat\sigma_y, \hat\sigma_z\}$, and
 $R=R(\vec{n}, \theta)\in SO(3)$ describes a rotation by $\theta$ around $\vec{n}$. Finding the vector $\vec\alpha$ can now be done using Schur's lemma for the case of no mixing between irrep spaces:
@@ -397,4 +414,4 @@ and contracting the Kronecker deltas, we find,
     &= \sum_{\substack{i_1,j_1, j_1}} \hat{O}_{i_1, j_2}\rho_{j_1,i_1}\rho_{j_2,j_1}\\
     &= \mathrm{Tr}[\hat{O}\hat\rho^2],
 \end{align}
-with the last equality following from the definition of matrix multiplication. \\
+with the last equality following from the definition of matrix multiplication. 

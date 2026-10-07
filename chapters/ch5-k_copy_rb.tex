@@ -8,11 +8,13 @@ Crucially, errors
 which induce correlations across multiple qubits, termed spatial correlations or crosstalk errors~\cite{zou_spatially_2024, sarovar_detecting_2020}, require mitigation and correction strategies built on noise
 models that faithfully represent their correlated structure~\cite{layden_efficient_2020}; assuming
 globally depolarising noise models (white noise), can lead to systematic underestimation of logical error rates~\cite{aharonov_fault-tolerant_2006, preskill_sufficient_2013}, or systematic bias of the corrected observable outcome~\cite{foldager_can_2024}.
-In reference~\cite{clemens_quantum_2004} the threshold for several error correcting codes was shown to be correlation-dependent, with some larger codes having expected failure probabilities increased by several orders of magnitude when exposed to highly correlated noise. Furthermore, in~\S~\ref{sec:vd_corr}, we experimentally demonstrate that virtual distillation, an error mitigation technique, is entirely ineffective against perfectly correlated errors.\\
+In reference~\cite{clemens_quantum_2004} the threshold for several error correcting codes was shown to be correlation-dependent, with some larger codes having expected failure probabilities increased by several orders of magnitude when exposed to highly correlated noise. Furthermore, in~\S~\ref{sec:vd_corr}, we experimentally demonstrate that virtual distillation, an error mitigation technique, is entirely ineffective against perfectly correlated errors.
+
 In this chapter we introduce a scalable method for characterising correlated errors in multi-qubit systems: \emph{k-copy randomised benchmarking}. 
 This work extends the widely adopted single-qubit
 Clifford randomised benchmarking (RB) protocol~\cite{magesan_scalable_2011,knill_randomized_2008,dankert_exact_2009} (discussed in~\S~\ref{sec:standard_rb}) to capture and quantify correlated errors in scaled multi-qubit registers.
-We introduce a novel method to parallelise RB, and utilise the extracted symmetry resolved dynamics to provide evidence of, and quantify various multi-qubit error channels. \\
+We introduce a novel method to parallelise RB, and utilise the extracted symmetry resolved dynamics to provide evidence of, and quantify various multi-qubit error channels. 
+
 This chapter is structured as follows: we start by giving an overview on the problem of \emph{characterisation}, and what techniques already exist to address it. We then outline the \emph{k-copy} protocol and discuss the relevant symmetric subspace structure. We derive the population dynamics when subject to simple noise models and discuss variations of the protocol that isolate specific subspaces. We provide experimental demonstrations of the protocol on a trapped-ion processor through injecting known correlated and uncorrelated errors. We end this chapter by demonstrating the scalability of the protocol on an 8-qubit register, and discuss the limitations and potential of this method for further scaling to larger systems.
 
 % ==========================================================================
@@ -34,10 +36,13 @@ The CPTP map is rich in information, capturing all Markovian (those which do not
 The goal then shifts to how to extract useful information in predicting the behaviour of a system executing a circuit, without full channel reconstruction. Now, two strategies emerge: 
 1) we make assumptions on the underlying noise model, or 
 2) we actively simplify the structure of the error channel through averaging. The first strategy leads to techniques such as 
-noise learning~\cite{flammia_efficient_2020,harper_efficient_2020} and the latter leads to random circuit methods, such as randomised benchmarking (RB)~\cite{magesan_scalable_2011, magesan_characterizing_2012, erhard_characterizing_2019}. Both approaches dramatically reduce the number of parameters required to describe the system, and the number of measurements required to extract them. \\
+noise learning~\cite{flammia_efficient_2020,harper_efficient_2020} and the latter leads to random circuit methods, such as randomised benchmarking (RB)~\cite{magesan_scalable_2011, magesan_characterizing_2012, erhard_characterizing_2019}. Both approaches dramatically reduce the number of parameters required to describe the system, and the number of measurements required to extract them. 
+
 The assumptions on the noise model are cleanly motivated by considering the modularity of quantum circuits, and how errors may violate this modularity.
-Following the description of imperfect computation and crosstalk errors given in references~\cite{hashim_practical_2025}, and~\cite{sarovar_detecting_2020}, respectively, we define the following models of QIPs: \emph{Ideal QIPs}, \emph{Markovian QIPs} (containing the subset of \emph{Crosstalk-Free Markovian QIPs}), and \emph{Non-Markovian QIPs}.\\
-The most desirable, yet technically unfeasible, is the \emph{Ideal QIP} --- described by a closed quantum system where the qubits comprise a quantum state represented by a single vector in Hilbert space. The state is isolated from the environment and may be decomposed into a collection of subsystems that remain uncoupled unless explicit multi-qubit operations are applied. Operations are all unitary evolutions, conveniently described by single and two-qubit unitaries, which we term \emph{gates}. Errors may exist, but are limited to reversible unitary interactions.\\ 
+Following the description of imperfect computation and crosstalk errors given in references~\cite{hashim_practical_2025}, and~\cite{sarovar_detecting_2020}, respectively, we define the following models of QIPs: \emph{Ideal QIPs}, \emph{Markovian QIPs} (containing the subset of \emph{Crosstalk-Free Markovian QIPs}), and \emph{Non-Markovian QIPs}.
+
+The most desirable, yet technically unfeasible, is the \emph{Ideal QIP} --- described by a closed quantum system where the qubits comprise a quantum state represented by a single vector in Hilbert space. The state is isolated from the environment and may be decomposed into a collection of subsystems that remain uncoupled unless explicit multi-qubit operations are applied. Operations are all unitary evolutions, conveniently described by single and two-qubit unitaries, which we term \emph{gates}. Errors may exist, but are limited to reversible unitary interactions.\
+
 \emph{Markovian QIPs} include external and control field noise due to an environment with no history, i.e. a source of Markovian noise. We must depart from the quantum state vector and unitary evolution description, and instead use density matrices and CPTP maps to describe the state and dynamics of the QIP.
 We highlight a subset of these models, termed \emph{Crosstalk-Free Markovian QIP}, where the dynamics of distinct subsystems are governed by locally acting CPTP maps. To satisfy this condition, operations are said to be \emph{local} and \emph{independent}~\cite{sarovar_detecting_2020}.
 \begin{itemize}
@@ -62,8 +67,10 @@ many-qubit deep circuit, using only characterisations of each gate in a
 universal gate set applied to small subsystems. If these criteria are not met,
 to accurately predict the behaviour of a deep circuit, each unique layer must be
 characterised, which is intractable. 
-\\
-The last class of models, included for completeness, are \emph{Non-Markovian QIP}, where we relax the assumption that the environment exhibits no hysteresis. In this case, any instantaneous state may still be able to be described by a density matrix, however the dynamics can no longer be described by the application of a sequence of CPTP maps. To accurately characterise the system, full process tomography would need to be implemented for each possible circuit. \\ 
+
+
+The last class of models, included for completeness, are \emph{Non-Markovian QIP}, where we relax the assumption that the environment exhibits no hysteresis. In this case, any instantaneous state may still be able to be described by a density matrix, however the dynamics can no longer be described by the application of a sequence of CPTP maps. To accurately characterise the system, full process tomography would need to be implemented for each possible circuit.
+
 Practically, to ensure we can reasonably characterise our physical systems, and predict their performance on novel circuits, we must design and appropriately isolate hardware to be well approximated by the \emph{Crosstalk-Free Markovian} models. The next section provides some background on existing techniques to verify crosstalk-free performance, and provide some quantification when the assumption is violated.
 
 
@@ -96,19 +103,23 @@ Practically, to ensure we can reasonably characterise our physical systems, and 
 
 
 Existing approaches to correlated-noise characterisation span a trade-off
-between expressiveness and scalability. The most expressive, and arguably least scalable, are tomographic techniques, such as gate set tomography~\cite{nielsen_gate_2021} or the crosstalk-sensitive variation~\cite{rudinger_experimental_2021}. Here, the implicit assumption that the noise environment is Markovian is sufficient, and no other assumptions of underlying noise models are required. These techniques are valuable in producing detailed CPTP maps that inform not only the presence of crosstalk, but also offer evidence on the underlying noise process. Demonstrations are however limited to small system sizes of two-qubits in~\cite{rudinger_experimental_2021}.\\
-Noise learning protocols are substantially more scalable by imposing a restricted set of noise models, and fitting experimental data to these models. Correlated-noise specific variations of this approach~\cite{harper_efficient_2020,harper_learning_2023} apply repeated random circuits that act to simplify the action of noise channels to Pauli type errors, and then through measurements and stastitical inference, likely Pauli error models are found, and crosstalk-free violating errors may be quantified. Noise learning can also be adaptable by first fitting simple models, for example when twirling over random circuits yields structured error channels, and progressively increasing the complexity of the inferred model when arbitrary circuits are run on the same device~\cite{nielsen_efficient_2021}. This nested-model approach provides a framework for robust characterisation of the system, however, demonstrations are still currently limited to small systems. \\
+between expressiveness and scalability. The most expressive, and arguably least scalable, are tomographic techniques, such as gate set tomography~\cite{nielsen_gate_2021} or the crosstalk-sensitive variation~\cite{rudinger_experimental_2021}. Here, the implicit assumption that the noise environment is Markovian is sufficient, and no other assumptions of underlying noise models are required. These techniques are valuable in producing detailed CPTP maps that inform not only the presence of crosstalk, but also offer evidence on the underlying noise process. Demonstrations are however limited to small system sizes of two-qubits in~\cite{rudinger_experimental_2021}.
+
+Noise learning protocols are substantially more scalable by imposing a restricted set of noise models, and fitting experimental data to these models. Correlated-noise specific variations of this approach~\cite{harper_efficient_2020,harper_learning_2023} apply repeated random circuits that act to simplify the action of noise channels to Pauli type errors, and then through measurements and stastitical inference, likely Pauli error models are found, and crosstalk-free violating errors may be quantified. Noise learning can also be adaptable by first fitting simple models, for example when twirling over random circuits yields structured error channels, and progressively increasing the complexity of the inferred model when arbitrary circuits are run on the same device~\cite{nielsen_efficient_2021}. This nested-model approach provides a framework for robust characterisation of the system, however, demonstrations are still currently limited to small systems. 
+
 Similar to enforcing Pauli-type errors, randomised benchmarking techniques average the action of noise channels to impose structure on general error channels. This is achieved by twirling the action of the channel over deep circuits comprised of a chosen gate group. Clifford twirling techniques, notably the standard RB protocol~\cite{magesan_scalable_2011,knill_randomized_2008,dankert_exact_2009}, have been adapted for detecting crosstalk induced correlations by simultaneous RB~\cite{gambetta_characterization_2012}, and correlated RB~\cite{mckay_correlated_2020} protocols.
 Correlated RB uses independent local twirling of multiple system copies to extract multi-qubit survival decay rates with Clifford sequence length. The weight and locality of correlated errors may then be inferred through
 a distance of the measured channel from a product (uncorrelated) channel.
-Other, non-Clifford twirled RB protocols, such as cycle-benchmarking~\cite{erhard_characterizing_2019} and the Error Per Layered Gate protocol (EPLG)~\cite{mckay_benchmarking_2023} apply parallel gate sequences on multiple subsystems to extract some error applied per layer, that can then be used to infer error contributions due to correlated-noise channels. These methods have been shown to scale to 10s of qubits, and provide system level diagnostics of device performance.\\
+Other, non-Clifford twirled RB protocols, such as cycle-benchmarking~\cite{erhard_characterizing_2019} and the Error Per Layered Gate protocol (EPLG)~\cite{mckay_benchmarking_2023} apply parallel gate sequences on multiple subsystems to extract some error applied per layer, that can then be used to infer error contributions due to correlated-noise channels. These methods have been shown to scale to 10s of qubits, and provide system level diagnostics of device performance.
+
 We note two further streams of current research, first the application of RB in
 determining the unitarity of noise~\cite{wallman_estimating_2015}, and the
 extension of this work to quantifying bipartite unitary
 noise~\cite{girling_estimation_2022}, which can induce correlations across the
 qubit register. Second, the use of custom circuits designed to probe
 crosstalk-free violations~\cite{rudinger_probing_2019,
-sarovar_detecting_2020,gulacsi_characterizing_2025}. \\
+sarovar_detecting_2020,gulacsi_characterizing_2025}. 
+
 The present protocol we have developed, and demonstrated experimentally, sits firmly in the RB methodology. It however differs from simultaneous and correlated RB by providing not only a quantification of crosstalk-free violating noise, but also providing evidence for the action of the error channel on a multi-qubit system. This extra information is inferred through direct observation of population decay and coupling between the subspaces enforced by twirling over the diagonally applied single-qubit Clifford group.
 The inspiration of this work comes from correlation spectroscopy~\cite{clements_lifetime-limited_2020, hainzer_correlation_2024}
 and subspace-leakage techniques~\cite{sutherland_subspace_2025,helsen_new_2019}. Correlation spectroscopy demonstrates that common-mode noise can be
@@ -116,7 +127,8 @@ revealed through its action on collective and differential degrees of
 freedom, while subspace-leakage approaches provide a framework for defining error models not by full CPTP maps, but rather by their action on a discrete set of physically relevant subspaces.
 In such settings, symmetry is
 not merely a simplifying assumption providing structure to arbitrary channels, but rather it is the very mechanism that separates
-crosstalk-free violating errors from local noise. The next section details the subspaces enforced by diagonally applied single-qubit Clifford twirling, and provides the protocol for \emph{k-copy} RB.\\
+crosstalk-free violating errors from local noise. The next section details the subspaces enforced by diagonally applied single-qubit Clifford twirling, and provides the protocol for \emph{k-copy} RB.
+
 
 % ==========================================================================
 \section{The \emph{k-copy} RB scheme}
@@ -162,14 +174,16 @@ in~\S~\ref{app:combined_model}.
 % A description of the required quantum circuit and result post-processing
 The \emph{k-copy} RB protocol is implemented through standard single-qubit Clifford RB sequence (see~\S~\ref{sec:standard_rb}) applied simultaneously to multiple qubits, with the same randomly sampled Clifford applied to each qubit at every step, as shown in Figure~\ref{fig:k-copy_circuit}. A single sequence is composed of $m-1$ parallel gates sampled randomly from the Clifford group. As in standard RB, the final applied layer is an inverting Clifford, which is selected to rotate the final state back to the initial computational eigenstate. The full sequence of random Clifford gates is then equivalent to the identity operation with some unknown noise overlaid\footnote{Note: To further symmetrise state preparation and measurement errors, we may allow the final target state to be randomised between $\ket{\da}$ and $\ket{\ua}$ for each sequence~\cite{knill_randomized_2008}.}.
 Practically, each gate layer can be executed using a global field, or through parallel local control lines addressing each qubit. A final $\langle Z\rangle$ measurement is made in parallel on all qubits to probe the successful execution of the Clifford sequence. Qubits measured in the target state are labelled $S$, and qubits measured in the opposite state are labelled $F$, for success and failure respectively. To approximate ideal twirling, $r$ random circuits are trialled for each length $m$, and each circuit is repeated $s$ times to reduce shot noise.
-To retain information on multi-qubit correlations, for every experimental shot, data from each qubit pair $(i,j)$ is assigned to one of four outcomes, $\mathcal{P}_{SS}^{(i,j)}$, $\mathcal{P}_{SF}^{(i,j)}$, $\mathcal{P}_{FS}^{(i,j)}$, or $\mathcal{P}_{FF}^{(i,j)}$, where $S$ and $F$ denote success and failure. As with other RB protocols, the success probabilities versus sequence length are then fit to explicitly defined decay curves inferred by the action of the twirled error models. \\
+To retain information on multi-qubit correlations, for every experimental shot, data from each qubit pair $(i,j)$ is assigned to one of four outcomes, $\mathcal{P}_{SS}^{(i,j)}$, $\mathcal{P}_{SF}^{(i,j)}$, $\mathcal{P}_{FS}^{(i,j)}$, or $\mathcal{P}_{FF}^{(i,j)}$, where $S$ and $F$ denote success and failure. As with other RB protocols, the success probabilities versus sequence length are then fit to explicitly defined decay curves inferred by the action of the twirled error models. 
+
 By limiting the analysis to pairwise comparisons, the \emph{k-copy} protocol is both efficient in the number of trials required on the device, and in the postprocessing of the recovered data. For a register of $k$ qubits, the same shot record contains outcomes for all $k(k-1)/2$ pairs. 
 The two-body error models are derived in the following sections for prevalent noise mechanisms in both ion trapping and superconducting information processors. 
 
 \subsection{Representations of $Cl_1^{\otimes2}$}
 \label{sec:reps}
 To understand the symmetries enforced by twirling over the $Cl_1^{\otimes2}$ gate-set, it is first useful to understand the structure of the Clifford group. The ``structure'' of a group can be efficiently described by the concepts of representations, and irreducible representations (irreps).
-In Appendix~\ref{app:reps} we outline why twirling over the group leads to this natural language of irreps, however, here we limit its application to that of a convenient basis in which to describe CPTP error maps. We shall refer to this as working in the Schur basis.\\
+In Appendix~\ref{app:reps} we outline why twirling over the group leads to this natural language of irreps, however, here we limit its application to that of a convenient basis in which to describe CPTP error maps. We shall refer to this as working in the Schur basis.
+
 %======================================
 \begin{table}[]
     \centering
@@ -194,7 +208,8 @@ In Appendix~\ref{app:reps} we outline why twirling over the group leads to this 
     \label{table:irreps}
 \end{table}
 The 2-copy single-qubit Clifford group, analysed in detail in references~\cite{helsen_representations_2018, wallman_randomized_2014}, decomposes
-the general $16$-dimensional two qubit space into 4 irreps with dimensions $\{1,2,3,3'\}$, (the notation $3'$ is used to contrast the other $3-$dimensional irrep), and multiplicities $\{2,1,3,1\}$. The sub-representations are summarised in Table~\ref{table:irreps}. In Appendix~\S~\ref{app:char_table} we confirm the multiplicity of these sub-representations by their character on the conjugacy classes of the Clifford group.\\
+the general $16$-dimensional two qubit space into 4 irreps with dimensions $\{1,2,3,3'\}$, (the notation $3'$ is used to contrast the other $3-$dimensional irrep), and multiplicities $\{2,1,3,1\}$. The sub-representations are summarised in Table~\ref{table:irreps}. In Appendix~\S~\ref{app:char_table} we confirm the multiplicity of these sub-representations by their character on the conjugacy classes of the Clifford group.
+
 Given that the structure of a general twirled map is enforced to be block diagonal in the Schur basis (see 
 equation~\ref{eqn:block-diag}), we can do a simple count to find generally how many parameters are required to fully describe the CPTP map. Accounting for the multiplicities, and the constraint that the map is trace preserving, we find that at most $2^2+ 3^2 + 1 + 1 - 2 = 13$ independent scalars are needed to
 describe $\tilde\Lambda$. The diagonal terms, here labelled
@@ -216,7 +231,8 @@ m_{R\rightarrow {\rm as}},
 m_{{\rm as}\rightarrow L},
 m_{{\rm as}\rightarrow R}
 )$
-describe coupling between the multiplicity spaces.\\
+describe coupling between the multiplicity spaces.
+
 In practice, different physical error mechanisms populate only subsets of the coefficients in $\vec\alpha$ and $\vec m$, leading to simplified dynamics with characteristic signatures of the underlying process. Table~\ref{table:off-diag} provides possible physical mechanisms capable of coupling isotypic representation subspaces. We devote some time in the next two sections to describing noise due to fluctuations of a common field, and to local depolarising type errors. In Appendix~\ref{sec:app_zz_noise} we discuss a $ZZ$-type noise model, relevant to the superconducting qubit platform.
 
 \subsection{Common random unitary noise}
@@ -259,14 +275,16 @@ in Liouville form diagonal in the Schur basis, $\mathcal{S}$, (ordered by Table~
     \alpha_{\rm dt} I_2, 
     \alpha_{\rm so} I_3\right), 
 \end{equation}
-where $I_d$ is the $d$-dimensional identity.\\
+where $I_d$ is the $d$-dimensional identity.
+
 We term noise due to common small-angle single-qubit rotations acting on $k$-qubits \emph{common noise}. For two qubits the general form is given by the separable channel,
 \begin{equation}\label{eqn:rotation_channel}
     \mathcal{E}_\mathcal{A}(\hat\rho)=\sum_{a\in \mathcal{A}} p_a(U_a\otimes U_a)\hat\rho(U_a\otimes U_a)^\dagger,
 \end{equation}
 where $\mathcal{A}$ specifies the ensemble of unitaries applied with probabilities $p_a$, with $\sum_{a \in\mathcal{A}}p_a=1$, and $U_a(\theta_a,\hat{n}_a)=e^{-i(\theta_a/2)\hat n_a\cdot\hat\sigma}$, with rotation angle, $\theta_a$, axis, $\hat n_a$, and Pauli vector, $\hat\sigma$.
 A subset of error channels following this description cannot be described by a product channel map on a bipartite system, and so violate the \emph{local} condition given in equation~\ref{eqn:k-copy_local}. These errors therefore cannot be modelled by a crosstalk-free Markovian QIP although originating from separable channels.
-This is an important distinction: non-product channels are not limited to direct entangling noise.\\
+This is an important distinction: non-product channels are not limited to direct entangling noise.
+
 To find the twirled error channel of the common unitary channel, $\tilde\Lambda^\mathcal{S}(\mathcal{E}_\mathcal{A})$, we first consider the effect of twirling on a single common unitary channel, $\mathcal{E}_a(\hat\rho) = (U_a\otimes U_a)\hat\rho(U_a\otimes U_a)$. We outline two approaches to find $\tilde\Lambda^\mathcal{S}(\mathcal{E}_a)$:\\ 
 First, as the basis sets for the relevant
 sub-representations are known (see Table~\ref{table:irreps}), and as the single qubit
@@ -274,8 +292,10 @@ Clifford group only contains 24 elements, we may construct the common unitary
 channel in the Pauli transfer matrix (PTM) representation\cite{hashim_practical_2025,gilchrist_vectorization_2009},  and, using equation~\ref{eqn:twirl}, we may explicitly calculate the twirled channel
 $\tilde\Lambda^\mathcal{P}(\mathcal{E}_a)$ utilising a symbolic computation
 program\footnote{Such as \emph{Mathematica} by \emph{Wolfram Research, Inc.}, or the \emph{Python} package \emph{SymPy}.}. Here the superscript $\mathcal{P}$ denotes we are working in the Pauli basis.
-The $\alpha$ parameters are then simply read from the diagonal elements after transforming the PTM representation to the known basis operators for the sub-representations, i.e. transforming to $\tilde\Lambda^\mathcal{S}(\mathcal{E}_a)$.\\
-The second approach utilises the symmetries of the irrep spaces, and the separability of the error channel to construct the PTM projectors onto the irrep spaces. This method is outlined in Appendix~\ref{sec:k-copy_projector}, and provides further insight into the symmetries each irrep possesses, and the naming convention for the sub-representations.\\
+The $\alpha$ parameters are then simply read from the diagonal elements after transforming the PTM representation to the known basis operators for the sub-representations, i.e. transforming to $\tilde\Lambda^\mathcal{S}(\mathcal{E}_a)$.
+
+The second approach utilises the symmetries of the irrep spaces, and the separability of the error channel to construct the PTM projectors onto the irrep spaces. This method is outlined in Appendix~\ref{sec:k-copy_projector}, and provides further insight into the symmetries each irrep possesses, and the naming convention for the sub-representations.
+
 Both approaches ultimately yield the $\vec\alpha$ parameters,
 \begin{align}
     \alpha_{L}&=\alpha_R=\alpha_{\rm as}=\frac{1}{3}(1+2c),\\
@@ -394,7 +414,7 @@ we find the observed decay of each qubit is now separable into a local, and corr
     \label{fig:k-copy sim}
 \end{figure}
 
-Here we consider the asymptotic structure of the correlated decay curves given in~\ref{eqn:app_pops}. Under dominant local depolarisation, the two-qubit state will approach the maximally mixed state, $\hat\rho\rightarrow I_4/4$, indicated by the asymptote
+Here, we consider the asymptotic structure of the correlated decay curves given in~\ref{eqn:app_pops}. Under dominant local depolarisation, the two-qubit state will approach the maximally mixed state, $\hat\rho\rightarrow I_4/4$, indicated by the asymptote
 $\mathcal{P}_{SS}\lvert_{m\to\infty} = 1/4$, as seen in Figure~\ref{fig:k-copy sim} (a).
 Under dominant \emph{common noise}, with decay profile seen in (b), an asymptote of
 $\mathcal{P}_{SS}\lvert_{m\to\infty} = 1/3$ is approached due to the invariance of the trace sector, $\alpha_{\rm tr}$.
@@ -402,7 +422,8 @@ Panel (c) shows the case where both local depolarising and \emph{common noise} i
 the fully depolarised state. This intermediate asymptote is the central
 experimental signature of correlated noise exploited throughout this
 chapter, and is explored experimentally in~\S~\ref{sec:k-copy_exp_Z} below.
-\\
+
+
 The mixed state reached after the application of \emph{common noise} to the initial state $\ket{\da\da}$ can be understood by directly inspecting the space of possible pure two qubit states reached through common only rotations. The general pure state after common rotations is the separable identical two-qubit states,
 \begin{equation}
 \begin{split}
@@ -439,7 +460,8 @@ the alternative strategy of a coherence-sensitive probe developed in
     \label{fig:k-copy_abstract}
 \end{figure}
 The distinction between correlated and uncorrelated noise is illustrated
-schematically in Figure~\ref{fig:k-copy_abstract}. We consider a particularly simple unitary noise mechanism to highlight the qualitative difference of information gained between standard and \emph{k-copy} RB. \\
+schematically in Figure~\ref{fig:k-copy_abstract}. We consider a particularly simple unitary noise mechanism to highlight the qualitative difference of information gained between standard and \emph{k-copy} RB. 
+
 After each Clifford gate we consider an independent unitary rotation errors on each qubit, and a common unitary rotation error on 
 qubits $i=3$ and $i=4$. Each unitary rotation axis is randomly drawn (isotropically from SO(3)), and the angle of the rotation is small. The error channels are explicitly included in the circuit diagram in (a). 
 The state of the qubits after the twirling procedure, and before measurement, are shown in (b). We see that all qubits are no longer in the eigenstate initial eigenstate (depicted as qubit pointing up) due to the unitary noise. 
@@ -489,7 +511,8 @@ Relevant to this work, the correlated survival populations with state preparatio
 \end{split}
 \end{equation}
 Similar forms exist for populations, $\mathcal{P}_{SF}$, $\mathcal{P}_{FS}$, and $\mathcal{P}_{FF}$.
-Significantly, this state preparation error does not add projection on the antisymmetric or symmetric off-diagonal sectors, which would introduce another exponential component into the observed decay curves. \\
+Significantly, this state preparation error does not add projection on the antisymmetric or symmetric off-diagonal sectors, which would introduce another exponential component into the observed decay curves. 
+
 Correlated state preparation errors may be considered by adapting equation~\ref{eqn:app_state_prep} to a two-qubit stochastic error channel, such as correlated spin-flips given by
 \begin{equation}
 \label{eqn:corr_state_prep}
@@ -519,12 +542,15 @@ where $A_{sp}^{\rm corr}=1-2\varepsilon_{sp}^{\rm corr}$. These correlations thu
 Correlated errors lead to multi-qubit correlations. In the two-qubit case these correlations are clearly visible in the mixed state $\hat\rho_{sym}$, 
 given by equation~\ref{eqn:rho_sym}, which is approached when \emph{common noise} is dominant. 
 Here, we propose directly measuring induced two-qubit correlations to independently verify the coherent structure seen in $\hat\rho_{sym}$. 
-In~\S~\ref{sec:fisher} we shall see that such a measurement gives an improvement in the uncertainty of the estimated error components. \\
+In~\S~\ref{sec:fisher} we shall see that such a measurement gives an improvement in the uncertainty of the estimated error components. 
+
 To quantify the two-qubit correlations, a partial state-tomography method based on~\cite{sackett_experimental_2000} is utilised. This method is common in fidelity estimation of two-qubit entangling gates (further details given in~\S~\ref{sec:Two-Qubit Entangling Gates}).
-The protocol quantifies the overlap of the ``coherence-terms'' between the final mixed state and a chosen Bell state. To quantify the overlap to the mixed state $\hat\rho_{sym}$, the Bell state $\ket{\Psi^+}$ is chosen.\\
+The protocol quantifies the overlap of the ``coherence-terms'' between the final mixed state and a chosen Bell state. To quantify the overlap to the mixed state $\hat\rho_{sym}$, the Bell state $\ket{\Psi^+}$ is chosen.
+
 The circuit for probing this coherence is shown in Figure~\ref{fig:parity_protocol} (a): differential rotations of the form $\hat R_{+\phi}(\pi/2) \otimes
 \hat R_{-\phi}(\pi/2)$, with rotation axis $\hat\sigma_\phi=\cos(\phi)\hat\sigma_x + \sin(\phi)\hat\sigma_y$, are applied prior to measurement, and the contrast of the
-resulting fringe (as $\phi$ is varied) is extracted. \\
+resulting fringe (as $\phi$ is varied) is extracted. 
+
 Figure~\ref{fig:parity_protocol}(b) show the expected contrast of parity measurements as a function of Clifford sequence length. The analytic model of the parity contrast can be simply calculated by extending equation~\ref{eqn:rb_meas} to include the final differential rotation, in transfer matrix form, $\Lambda_\Pi$,
 \begin{equation}\label{eqn:app_parcontrast}
 \begin{split}
@@ -539,7 +565,8 @@ Evaluating $\Pi(\phi)$ for \emph{common} and depolarising noise, we find the par
 \end{equation}
 with $\alpha_{\rm tr}$ and $\alpha_{\rm dt}$ given by equation~\ref{eqn:app_bases}.
 This method is demonstrated experimentally in~\S~\ref{sec:k-copy_exp_parity} below.
-\\
+
+
 Furthermore, we may now isolate some $\alpha$ decay parameters by 
 combining the contrast measurements with the computational state measurements made in \emph{k-copy} RB. Namely, if we define the computational parity, $\Pi_Z$, as
 \begin{equation}
@@ -666,7 +693,7 @@ collected in reasonable time on our apparatus. Again, we see that including
 measurements using the parity protocol dramatically reduces the required number of 
 samples in the regime of $\varepsilon_L \gg \varepsilon_\mathrm{corr}$ (top left corner of plots).\\
 
-Here we have shown that the Fisher information gathered in an experimentally realistic \emph{k-copy} protocol is sufficient to accurately determine the underlying error per Cliffords, $\theta=\{\varepsilon_L, \varepsilon_R, \varepsilon_\mathrm{corr}\}$, over many orders of magnitude of local and \emph{common} errors. We shall show experimentally in~\S~\ref{sec:noise_injection} that in the presence of experimental imperfections, and the fitting protocol (Levenberg-Marquadt), whose effects are not considered in this analysis, the proposed protocol still sufficiently recovers the magnitudes of the expected error per Cliffords with known noise injection.
+Here, we have shown that the Fisher information gathered in an experimentally realistic \emph{k-copy} protocol is sufficient to accurately determine the underlying error per Cliffords, $\theta=\{\varepsilon_L, \varepsilon_R, \varepsilon_\mathrm{corr}\}$, over many orders of magnitude of local and \emph{common} errors. We shall show experimentally in~\S~\ref{sec:noise_injection} that in the presence of experimental imperfections, and the fitting protocol (Levenberg-Marquadt), whose effects are not considered in this analysis, the proposed protocol still sufficiently recovers the magnitudes of the expected error per Cliffords with known noise injection.
 
 
 
@@ -674,7 +701,8 @@ Here we have shown that the Fisher information gathered in an experimentally rea
 \label{sec:results}
 
 The results presented here constitute the first project-data output from
-the newly commissioned \emph{FastGates} apparatus. \\
+the newly commissioned \emph{FastGates} apparatus. 
+
 Experimentally demonstrating the \emph{k-copy} RB protocol verifies the
 underlying assumptions on the error models we considered, and the efficacy of twirling on these channels.
 It provides evidence that this method is indeed simply executed on a physical
@@ -695,14 +723,16 @@ Qubit Gates}.
 The two-qubit coherence and Stark shift measurements use the
 individual addressing system, detailed in~\S~\ref{sec:Single Addressing
 System}, while all other measurements use the global elliptical beam, detailed
-in~\S~\ref{sec:Global Addressing System}.\\
+in~\S~\ref{sec:Global Addressing System}.
+
 The single-qubit Clifford gate set is
 decomposed into native $\pi/2$ single-qubit rotations of the form
 $\hat R_x(\pi/2)$, $\hat R_y(\pi/2)$, and $\hat R_z(\pi/2)$ (defined in~\S~\ref{sec:rabi_oscillations}). $\hat R_x$ and $\hat R_y$ rotations are
 performed natively on resonance with the qubit transition, with relative
 phase set by modulating the 729-nm beam via an
 acousto-optic modulator (AOM), while $\hat R_z$ rotations are performed
-virtually by updating the phase of subsequent $\hat R_\phi$ rotations. Two decomposition strategies are used in this work. Only the average numbers of physical $\hat R_x(\pi/2)$ and $\hat R_y(\pi/2)$-gates that compose the Clifford are relevant here. The first uses an average of $\kappa=2.17$ $\hat R_\phi(\pi/2)$-gates~\cite{epstein_investigating_2014}~\footnote{Decomposed into $\hat R_x(\pi/2), \hat R_y(\pi/2)$ gates.}, while the second uses $\kappa=1.167$ gates\footnote{Decomposed into $\hat R_x(\pi/2), \hat R_y(\pi/2), \hat R_z(\pi/2)$ gates.}.\\
+virtually by updating the phase of subsequent $\hat R_\phi$ rotations. Two decomposition strategies are used in this work. Only the average numbers of physical $\hat R_x(\pi/2)$ and $\hat R_y(\pi/2)$-gates that compose the Clifford are relevant here. The first uses an average of $\kappa=2.17$ $\hat R_\phi(\pi/2)$-gates~\cite{epstein_investigating_2014}~\footnote{Decomposed into $\hat R_x(\pi/2), \hat R_y(\pi/2)$ gates.}, while the second uses $\kappa=1.167$ gates\footnote{Decomposed into $\hat R_x(\pi/2), \hat R_y(\pi/2), \hat R_z(\pi/2)$ gates.}.
+
 We begin by reproducing the multi-exponential decays seen in simulation, Figure~\ref{fig:k-copy sim}, followed by parity measurements to observe the coherence of the intermediate symmetric state described in~\S~\ref{sec:parity}. We then present data with known injected errors through phase and detuning offsets to show the ability for \emph{k-copy} RB to discern correlated and uncorrelated errors for a range of magnitudes. We finish this section with evidence for scaling the protocol to more than two qubits. We show both data for three-qubit decay profiles, and pairwise analysis of an eight-ion chain with dominant correlated errors due to global drive field inhomogeneity.
 
 
@@ -722,7 +752,8 @@ We begin by reproducing the multi-exponential decays seen in simulation, Figure~
 The \emph{k-copy} RB protocol, with circuit diagram shown in Figure~\ref{fig:k-copy_circuit}, is executed on two qubits using a global field. 
 To ensure a visually clear intermediate asymptote is seen, we set a fixed $10~\unit{\kilo\hertz}$ frequency
 detuning of the 729-nm laser compared to the bare qubit. As single qubits gates are calibrated for on-resonance pulses, this detuning will be a large \emph{common noise} source.
-The Clifford sequence length is log-sampled up to $m=3200$ total gates to capture both the intermediate asymptote due to this common unitary error, and the final decay to the fully depolarised state. \\
+The Clifford sequence length is log-sampled up to $m=3200$ total gates to capture both the intermediate asymptote due to this common unitary error, and the final decay to the fully depolarised state. 
+
 The recovered multi-exponential decay from the correlated success and failure rates of the two qubits is shown in Figure~\ref{fig:k-copy_asymp}(c). Each solid point is inferred through $r=50$ randomisations and $s=50$ shots per randomisation.
 %
 For each random sequence $j$, the population $\mathcal{P}_{SS,j}$ is estimated from the $s$ binary measurement outcomes,
@@ -751,7 +782,8 @@ extracted parameters
 $\varepsilon_{sp}=0(5)\times10^{-3}$, $\varepsilon_\mathrm{corr}=2.6(2)\times10^{-2}$, $\varepsilon_L=5(6)\times10^{-4}$, and
 $\varepsilon_R=0(6)\times10^{-4}$, confirming that correlated errors dominate with this global field detuning. 
 \footnote{The large relative uncertainty of both local depolarising rates is due to the large covariance between $\varepsilon_L$ and $\varepsilon_R$. The fitting may be constrained to the sum of local errors, to find $\varepsilon_L + \varepsilon_R = 5(1)\times10^{-4}$. However, 
-if precision measurements of this local error is of interest, either $r$, and $s$ could be increased, or the local error contributions could be isolated as discussed in~\S~\ref{sec:k-copy_singlet}.}\\
+if precision measurements of this local error is of interest, either $r$, and $s$ could be increased, or the local error contributions could be isolated as discussed in~\S~\ref{sec:k-copy_singlet}.}
+
 From the same shot data record we recover the single-qubit populations required for standard RB, as described in~\S~\ref{sec:standard_rb}. To match the naming of the relevant participating irreps, we label the two qubits $L$ and $R$ for left and right, respectively. 
 The standard RB single exponential decay curves are shown in (a) and (b), with extracted single-qubit error per Cliffords of $\varepsilon_c^{(L)} = 2.6(2)\times10^{-2} $ and $\varepsilon_c^{(R)}=2.6(2)\times10^{-2}$. As expected, \emph{k-copy} RB provides evidence for this standard error per Clifford to be decomposed to local and correlated components, given by equation~\ref{eqn:L+corr}.
 
@@ -796,7 +828,8 @@ To verify the ability for \emph{k-copy} RB to discern correlated and uncorrelate
 \subsubsection{Laser phase jitter}
 \label{sec:phase_jitter}
 
-We first inject correlated errors via phase noise on a common drive field. This noise mechanism is prevalent in many platforms that use a common oscillator, such as laser, microwave, or radio-frequency (RF) fields to resonantly drive qubit transitions. \\
+We first inject correlated errors via phase noise on a common drive field. This noise mechanism is prevalent in many platforms that use a common oscillator, such as laser, microwave, or radio-frequency (RF) fields to resonantly drive qubit transitions. 
+
 The injected error magnitude is inferred through considering the ideal and noisy unitary channel. 
 A unitary qubit rotation is given by,
 \begin{equation}
@@ -849,7 +882,8 @@ A fixed detuning of the global drive, under the action of \emph{k-copy} Clifford
 We demonstrate this by scanning the 729-nm
 laser frequency used for single-qubit rotations away from the bare qubit
 resonance.
-As with the previous section, we consider the fidelity of the error channel compared to the ideal $\pi/2$ $\hat{\sigma}_x$ single qubit rotation.\\ 
+As with the previous section, we consider the fidelity of the error channel compared to the ideal $\pi/2$ $\hat{\sigma}_x$ single qubit rotation.\
+
 A coherent
 detuning error is written as,
 \begin{equation}
@@ -933,7 +967,8 @@ $\varepsilon_\mathrm{inj}$, is then inferred by,
 \end{equation}
 where the phase error, given in radians is,
 $\phi = P\tau\gamma$, with $P$ being the power in the single addressing beam, and $\tau$ the duration of the Stark-shift pulse. 
-In these experiments, the duration of the Stark-shift pulse is fixed to $\tau=20~\unit{\micro\second}$, while the total power of the beam is varied to supply a known error.\\
+In these experiments, the duration of the Stark-shift pulse is fixed to $\tau=20~\unit{\micro\second}$, while the total power of the beam is varied to supply a known error.
+
 Two experimental sequences were run, the first, shown
 in Figure~\ref{fig:k-copy_ss}(a), implements stochastic \textit{common noise} through
 applying either two spots shifting both ions, or no Stark shift, with a $50:50$
@@ -990,7 +1025,8 @@ pairwise outcomes are extracted from the same shot record --- no additional
 trials on the quantum register are required, although classical
 post-processing scales with the number of pair combinations. The protocol
 itself requires only synchronised application of identical single-qubit
-Clifford sequences and spatially resolved readout.\\
+Clifford sequences and spatially resolved readout.
+
 This scaling is demonstrated on an eight-ion chain, with parallel single-qubit
 rotations driven by an elliptical 729-nm beam. We expect to
 observe structured errors due to the Gaussian intensity profile of the beam. To
@@ -1013,8 +1049,10 @@ the inner ion, $i=4$, leading to an expected per Clifford error of (using fideli
 \begin{equation}
 \varepsilon_{c,max} = \frac{2}{3}\kappa \left(\alpha\frac{\pi}{4}\right)^2=5.08(2)\times10^{-3},
 \end{equation}
-where, here the Clifford decomposition used gives $\kappa=1.167$, and the fractional Rabi frequency difference is given by the above calibration curve, $\alpha=0.103(6)$.\\
-As with the single qubit Stark-shift dataset, we ensure that correlated errors dominate to improve the fitting sensitivity. This is done through a fixed phase noise error corresponding to $\varepsilon_{\rm corr,0} = 1.3\times10^{-2}$. In the following data, we subtract this baseline offset to highlight the excess correlated noise due to the beam structure, $\varepsilon_{\rm corr}^>=\varepsilon_{\rm corr}-\varepsilon_{\rm corr,0}$.\\
+where, here the Clifford decomposition used gives $\kappa=1.167$, and the fractional Rabi frequency difference is given by the above calibration curve, $\alpha=0.103(6)$.
+
+As with the single qubit Stark-shift dataset, we ensure that correlated errors dominate to improve the fitting sensitivity. This is done through a fixed phase noise error corresponding to $\varepsilon_{\rm corr,0} = 1.3\times10^{-2}$. In the following data, we subtract this baseline offset to highlight the excess correlated noise due to the beam structure, $\varepsilon_{\rm corr}^>=\varepsilon_{\rm corr}-\varepsilon_{\rm corr,0}$.
+
 Figure~\ref{fig:k-copy_8_ion} shows the 
 extracted pairwise correlations. The excess correlated error is shown in (a), with the largest values seen for the outer ion pairs, agreeing with the expected maximum error of $\varepsilon_{\rm corr, max}^>=\varepsilon_{c, max}$. Panel (b) shows the sum of the local depolarisation error per Cliffords on both qubits, with the largest values now corresponding to pairs consisting of one central ion, and one outer ion. We plot the ratio of excess correlated error and depolarisation errors in panel (c) to further highlight the error distribution due to the beam shape.
 % ==========================================================================
@@ -1061,7 +1099,8 @@ A simple relation can be found for the asymptotic states, namely, under \textit{
 \begin{equation}
 \hat\rho_\mathrm{sym} = \frac{1}{k+1}\sum_{l=0}^k\ket{D_l^k}\bra{D_l^k},
 \end{equation}
-where $\ket{D_l^k}$ is the Dicke state for $l$ excitations (here successful recoveries of target state), out of $k$-qubits. From this expression we see that an asymptote of $\mathcal{P}_{SS...S}\lvert_{m\rightarrow\infty}=1/(k+1)$ is expected under \textit{common noise}, while the maximally mixed state under local depolarisation leads to the familiar asymptote of $\mathcal{P}_{SS...S}\lvert_{m\rightarrow\infty}=1/(2^k)$. This result suggests that the presence of \textit{common noise} affecting many qubits may be simply observed, however, without the explicit representation structure, it cannot be easily quantified.\\
+where $\ket{D_l^k}$ is the Dicke state for $l$ excitations (here successful recoveries of target state), out of $k$-qubits. From this expression we see that an asymptote of $\mathcal{P}_{SS...S}\lvert_{m\rightarrow\infty}=1/(k+1)$ is expected under \textit{common noise}, while the maximally mixed state under local depolarisation leads to the familiar asymptote of $\mathcal{P}_{SS...S}\lvert_{m\rightarrow\infty}=1/(2^k)$. This result suggests that the presence of \textit{common noise} affecting many qubits may be simply observed, however, without the explicit representation structure, it cannot be easily quantified.
+
 We confirm this asymptote experimentally with data shown in Figure~\ref{fig:3q}. 
 For three-qubits, we leverage symbolic computation to diagonalise the resulting PTM representation of \textit{common noise} and recover the analytic decay used in this fit. This direct diagonalisation approach is possible for this small system, and with the highly structured \emph{common noise} error channel, however, for a full treatment of $k$-body error under $Cl_1^{\otimes k}$ twirling, we suspect the sub-representation structure will need to be found.
 
@@ -1079,7 +1118,8 @@ For three-qubits, we leverage symbolic computation to diagonalise the resulting 
 
 One avenue for future work is captured by the above limitations section: scaling the analysis to multi-body errors through studying the sub-representation structure of the single qubit Clifford group applied diagonally to $k$-qubits. We propose two further dimensions in which to extend the \emph{k-copy} analysis: \\
 First, the subsystem on which the local twirling is applied could be extended to $>1$-qubit.
-As an example, the two-qubit Clifford group~\cite{corcoles_process_2013} or the SLeRB~\cite{sutherland_subspace_2025} protocol could be applied in parallel to $k$-copies of 2-qubit subsystems. This would reveal correlated errors and leakage  that reduce the fidelity of two-qubit entangling gates.\\
+As an example, the two-qubit Clifford group~\cite{corcoles_process_2013} or the SLeRB~\cite{sutherland_subspace_2025} protocol could be applied in parallel to $k$-copies of 2-qubit subsystems. This would reveal correlated errors and leakage  that reduce the fidelity of two-qubit entangling gates.
+
 Second, we may utilise this method to probe correlations in time.
 As the protocol uses exclusively single-qubit rotations, with no explicit
 coupling made between qubits by the ideal circuit, we could apply some time
