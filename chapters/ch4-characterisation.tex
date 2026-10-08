@@ -2,11 +2,11 @@
 \label{ch:characterisation}
 \minitoc
 
-    Before we can proceed with our planned experiments involving the motion and
-    spin of the ions, the apparatus must be characterised. This characterisation
-    serves two purposes: it allows us to benchmark the performance of our
-    system, and it reveals any current limitations
-    that must be addressed before we can successfully carry out the experiments.\\
+    Before proceeding to the planned experiments in the next two chapters,
+    involving multi-ion chains and control over both spin and
+    motion, we first characterise the apparatus. This serves two purposes: to
+    benchmark the performance of the system and to identify any limitations that
+    must be addressed.
 
     We split this chapter into interactions involving only the spin, then those
     focussed only on the motion, and finally we describe spin-motion
@@ -71,10 +71,11 @@
 \end{table}
 
     To utilise two levels of the ion as a qubit, the electronic state must first be prepared into the qubit manifold. Here, the ion is prepared into the $\ket{\downarrow}=\ket{4S_{1/2},~m_j=-1/2}$ state. 
-    This is done via optical pumping by pulsing the quadrupole transition $\ket{4S_{1/2},~m_j = +1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -3/2}$,
-    followed by deshelving pulses using the 854-nm, 866-nm
-    lasers on resonance.  The 729-nm laser pulse duration and intensity is set to invert the populations, i.e. perform a $\pi$-pulse. Details for laser parameters are summarised in Table~\ref{tab:state_prep_parameters}. These three pulses are repeated $N$ times sequentially. Figure~\ref{fig:stateprep} shows the state preparation error with increasing $N$. The error is found by applying a $\pi$-pulse on the state preparation transition directly after the state preparation sequence and measuring the population in the $\ket{\downarrow}$ state, $P_\da$. Any population not in $P_\da$ indicates either residual population in the $\ket{4S_{1/2},~m_j = +1/2}$ state, or trapped in the metastable $D$ levels. After $N=7$ pulses there is a state preparation error of $<10^{-3}$. The state preparation error is likely limited by accidental excitation of the $\ket{4S_{1/2},~m_j = -1/2}$ state to the $D_{5/2}$ level. This may be due to off-resonant excitation of another transition, or due to spectral purity of the 729-nm laser. 
-
+    This is done via optical pumping through $\hat R_x(\pi)$-pulses on the quadrupole transition $\ket{4S_{1/2},~m_j = +1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -3/2}$,
+    followed by deshelving pulses using the 854-nm and 866-nm
+    lasers on resonance.  Details for the laser parameters are summarised in Table~\ref{tab:state_prep_parameters}. This sequence selectively pumps population out of the state $\ket{4S_{1/2},~m_j=+1/2}$.
+    The $\pi$ and deshelving pulses are repeated $N$ times to further reduce residual population not within the target qubit state, $\ket{\da}$. Figure~\ref{fig:stateprep} shows the state preparation error with increasing $N$. After the deshelve pulse, any population not in $\ket{\da}$ will be in the other $4S_{1/2}$ state. This residual population is shelved to the $3D_{5/2}$-manifold by applying another $\hat R_x(\pi)$-pulse on the same ``optical-pump'' transition. Subsequent readout using state-dependent fluorescence now reveals the population that was successfully prepared in $\ket{\da}$.
+    After $N=7$ pulses there is a state preparation error of $<10^{-3}$. This measurement is limited by systematic errors of the final $\pi$-pulse (as characterised in~\S~\ref{sec:standard_rb}), however, as characterised, this state-preparation is sufficient for our planned experiments.
 
 
 \subsection{Measurement}
@@ -151,7 +152,7 @@
     % Possible transitions
     % Calibrating gate times
 
-Single-qubit rotations driven by optical fields, as described in~\S~\ref{sec:rabi_oscillations}, along with two-qubit gates are required for universal discrete variable quantum computation. \\
+Single-qubit rotations driven by optical fields, as described in~\S~\ref{sec:rabi_oscillations}, along with two-qubit gates are required for universal discrete variable quantum computation~\cite{divincenzo_two-bit_1995}. \\
 
 We divide errors affecting single-qubit gates into two categories: unitary, and non-unitary. The unitary error component is labelled ``systematic'' if there exists simple (and accessible) control parameters to suppress such errors. 
 We outline in the next section robust phase estimation (RPE), the calibration routine used to reduce systematic errors. 
@@ -161,14 +162,14 @@ In contrast, reducing non-unitary errors require improved isolation between the 
 \label{sec:RPE}
 
 Many gate calibrations can be formulated as phase estimation tasks. A
-single-qubit rotation may be generally represented by $R_{\vec n}(\theta)$,
+single-qubit rotation may be generally represented by $\hat R_{\vec n}(\theta)$,
 where $\vec n$ is some given axis around which the state evolves with rotation
 angle $\theta=\omega t$, where the angle is accumulated over time by rate
 $\omega$. For a gate we specify this axis and total angle, with deviations to the
 ideal setting being a systematic error.
 
 Suppose we can set axis $\vec n$, and
-the interaction duration $t$ arbitrarily well, the task of calibration is then
+the interaction duration $t$ arbitrarily well (these are good assumptions given the phase coherence of the 729-nm laser, and the timing resolution of our control system), the task of calibration is then
 limited to how precisely we can measure $\omega$. We further assume some
 statistical uncertainty for a practical phase measurement, $\sigma_\theta$, that is
 independent of the magnitude of $\theta$.
@@ -186,7 +187,7 @@ RPE protocol provides an algorithm for determining which branch the measured $\t
 
 The protocol is as follows:
 \begin{enumerate}
-\item Select some duration $t_0$ such that $\theta_0=\omega t_0 \in (-\pi, \pi]$, and determine parameter $k_\mathrm{max}=\left\lfloor \log_2\left(\frac{\tau}{t_0}\right)\right\rfloor$, to set the maximum probe duration, $t_\mathrm{max}=2^k_\mathrm{max} t_0$, below the coherence time, $\tau$.
+\item Select some duration $t_0$ such that $\theta_0=\omega t_0 \in (-\pi, \pi]$, and determine parameter $k_\mathrm{max}=\left\lfloor \log_2\left(\frac{\tau}{t_0}\right)\right\rfloor$, to set the maximum probe duration, $t_\mathrm{max}=2^{k_\mathrm{max}} t_0$, below the coherence time, $\tau$.
 \item For $k\in\{0,1,...,k_\mathrm{max}\}$, measure total phase $\theta_{k,\mathrm{tot}}$ wrapped to $(-\pi, \pi]$.
 \item Infer candidate base-duration phases for each $k$ as $\theta_{k,0}^{j} = \frac{\theta_{k,\mathrm{tot}}+2\pi j}{2^k}$ for $j\in \{0,1,...,2^k-1\}$.
 \item The branch for $\theta_{k,0}$ is then recursively selected to be the closest $\theta_{k,0}^{(j)}$ to the determined $\theta_{k-1,0}$.
@@ -203,8 +204,8 @@ $\delta$, between the qubit precession and a the reference frequency of a near r
 the idle Hamiltonian, $\hat H_z = -\hbar\frac{\delta}{2}\hat\sigma_z$. The phase
 accumulated due to the application of $\hat H_z$ for a fixed time, $T$, is
 $\theta = \delta T$. This phase may be measured through RPE using Ramsey
-spectroscopy. The sequence starts with an initial $R_x(\frac{\pi}{2})$ pulse,
-then a delay with duration $2^kt_0$, followed by a final $R_\phi(\frac{\pi}{2})$
+spectroscopy. The sequence starts with an initial $\hat R_x(\frac{\pi}{2})$ pulse,
+then a delay with duration $2^kt_0$, followed by a final $\hat R_\phi(\frac{\pi}{2})$
 pulse with variable rotation axis $\vec n = \cos(\phi)\hat\sigma_x +
 \sin(\phi)\hat\sigma_y$. Varying the final axis angle, $\phi$, for a given probe
 duration reveals the familiar Ramsey fringes, with phase offset given by
@@ -218,7 +219,7 @@ bare-qubit frequency. The Stark shifts due to the two $\frac{\pi}{2}$-pulses wil
 give some systematic offset between the bare-qubit frequency and the calibrated
 laser frequency, however are negligible for long Ramsey probe durations.
 
-Resonant $R_x(\theta)$ gates are then driven by setting the relative detuning to
+Resonant $\hat R_x(\theta)$ gates are then driven by setting the relative detuning to
 $\delta = 0$. This works well for gates using low optical intensity, however, if
 high intensity is required (e.g. for motional-sideband pulses), a further
 calibration of the beam-induced Stark-shift is required. In the case that the
@@ -255,11 +256,11 @@ the bare qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.
         \label{fig:Long Flop}
     \end{figure}
 
-    With the resonant frequency well calibrated, the pulse durations for various gates must be set. Here we outline the calibration routine for a $R_x(\frac{\pi}{2})$-gate, although this may be adapted for gate angles correspond to integer fractions of $2\pi$.
+    With the resonant frequency well calibrated, the pulse durations for various gates must be set. Here we outline the calibration routine for a $\hat R_x(\frac{\pi}{2})$-gate, although this may be adapted for gate angles correspond to integer fractions of $2\pi$.
 
     We use a modified version of the RPE protocol to determine optimal gate durations. This protocol converges with a sufficiently close initial value for pulse duration $T_{\pi/2}$, and so a simple calibration using resonant Rabi oscillations is first described.
 
-    The qubit is prepared in the computational eigenstate $\ket{\downarrow}$, followed by an on-resonant 729-nm carrier pulse inducing $R_x(\Omega t)$ rotations. The final state population is measured as a function of pulse duration to observe familiar Rabi oscillations. Figure~\ref{fig:Long Flop} displays these oscillations when using a global-addressing beam with a total power of $1~\unit{\milli\watt}$. Here each point corresponds to the average of 200 samples.
+    The qubit is prepared in the computational eigenstate $\ket{\downarrow}$, followed by an on-resonant 729-nm carrier pulse inducing $\hat R_x(\Omega t)$ rotations. The final state population is measured as a function of pulse duration to observe familiar Rabi oscillations. Figure~\ref{fig:Long Flop} displays these oscillations when using a global-addressing beam with a total power of $1~\unit{\milli\watt}$. Here each point corresponds to the average of 200 samples.
     The Rabi frequency, $\Omega$, and decay rate, $\lambda$, are determined through fitting the recovered populations to the model,
     \begin{equation}
         \label{eqn:decay_rabi}
@@ -276,9 +277,9 @@ the bare qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.
     RPE provides a higher-precision calibration, that may account for
     non-square-pulse profiles. The protocol is simply adapted from the RPE
     method described above by setting the initial base probe as a single
-    $R_x(\frac{\pi}{2})$-pulse, with duration $t_0 = T_{\pi/2}$. The pulse is
+    $\hat R_x(\frac{\pi}{2})$-pulse, with duration $t_0 = T_{\pi/2}$. The pulse is
     repeated $2^k$ times up to $k_\mathrm{max}$ (inferred from characteristic decay time $\tau
-    = \frac{1}{\lambda}$) applications of the $R_x(\frac{\pi}{2})$-pulse. The phase angle in the $yz$-plane is determined through applying an additional $R_x(\theta_f)$ rotation with angle $\theta_f \in [0,\frac{\pi}{2},\pi,\frac{3\pi}{2}]$, before measurement. 
+    = \frac{1}{\lambda}$) applications of the $\hat R_x(\frac{\pi}{2})$-pulse. The phase angle in the $yz$-plane is determined through applying an additional $\hat R_x(\theta_f)$ rotation with angle $\theta_f \in [0,\frac{\pi}{2},\pi,\frac{3\pi}{2}]$, before measurement. 
     The
     final base phase accumulated, $\theta_0$, is determined after applying the
     phase unwrapping protocol given above. Any deviation between this measured
@@ -407,15 +408,15 @@ the bare qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.
     \end{figure}
     This scheme is applied experimentally to characterise the performance of the calibrated single-qubit gates.
     The 24 Clifford gates are decomposed into
-    sequences of $R_x(\pm \frac{\pi}{2})$ and $R_x(\pm \frac{\pi}{2})$, with an average of 2.17 $\frac{\pi}{2}$-pulses per Clifford gate.
-    Figure~\ref{fig:rbm}~(b) shows the average survival populations for a log-sampled range of sequence lengths up to $m_\mathrm{max} = 2048$ Clifford gates. Each point corresponds to an average over $r=50$ randomisations, and $s=50$ sample repeats per randomisation. The solid line follows equation~\ref{eq:RBM_decay}, with fit parameters, $\varepsilon_c=1.9(1)\times10^{-3}$, and $\varepsilon_\mathrm{sp}=3(1)\times10^{-3}$. The dashed line is the expected asymptote for a fully depolarised qubit. Error bars show the standard error of the average survivals for each random sequence for a given length $m$. From $\varepsilon_c$, we find a single $R_x(\frac{\pi}{2})$ average fidelity of $\mathcal{F}_{\pi/2}=1-\frac{\varepsilon_c}{2.17}=99.913(2)\%$.
+    sequences of $\hat R_x(\pm \frac{\pi}{2})$ and $\hat R_x(\pm \frac{\pi}{2})$, with an average of 2.17 $\frac{\pi}{2}$-pulses per Clifford gate.
+    Figure~\ref{fig:rbm}~(b) shows the average survival populations for a log-sampled range of sequence lengths up to $m_\mathrm{max} = 2048$ Clifford gates. Each point corresponds to an average over $r=50$ randomisations, and $s=50$ sample repeats per randomisation. The solid line follows equation~\ref{eq:RBM_decay}, with fit parameters, $\varepsilon_c=1.9(1)\times10^{-3}$, and $\varepsilon_\mathrm{sp}=3(1)\times10^{-3}$. The dashed line is the expected asymptote for a fully depolarised qubit. Error bars show the standard error of the average survivals for each random sequence for a given length $m$. From $\varepsilon_c$, we find a single $\hat R_x(\frac{\pi}{2})$ average fidelity of $\mathcal{F}_{\pi/2}=1-\frac{\varepsilon_c}{2.17}=99.913(2)\%$.
     The measured SPAM is consistent with the independently characterised state preparation (\S~\ref{sec:Stateprep}) and measurement (\S~\ref{sec:Measurement}) errors of $\sim 10^{-3}$, and $\sim 10^{-4}$ respectively.\\
 
     We attribute the single-qubit rotation error to the finite-temperature of the radial modes. Expanding the light-matter interaction Hamiltonian given in equation~\ref{eqn:LD_regime} to second order in the Lamb-Dicke parameter, the carrier Rabi frequency is modulated depending on motional Fock state, $n$, as~\cite{leibfried_quantum_2003},
     \begin{equation}
     \Omega_n\approx \Omega\left(1-\eta^2\left(n+\frac{1}{2}\right)\right),
     \end{equation}
-    where $\eta$ is the Lamb-Dicke parameter. For a thermal distribution each shot will result in a different rotation angle leading to a thermal dephasing error. For small rotation errors, the fidelity averaged over the Haar measure (see Appendix~\ref{sec:fidelity}) is given to first order by $\mathcal{F} =1-\frac{1}{3}\langle \theta^2\rangle$. If targetting an $R_x(\frac{\pi}{2})$-gate, the expected fidelity due to thermal errors is then,
+    where $\eta$ is the Lamb-Dicke parameter. For a thermal distribution each shot will result in a different rotation angle leading to a thermal dephasing error. For small rotation errors, the fidelity averaged over the Haar measure (see Appendix~\ref{sec:fidelity}) is given to first order by $\mathcal{F} =1-\frac{1}{3}\langle \theta^2\rangle$. If targetting an $\hat R_x(\frac{\pi}{2})$-gate, the expected fidelity due to thermal errors is then,
     \begin{equation}
         \mathcal{F}_{\pi/2}(\bar{n})=1-\frac{1}{12}\pi^2\eta^4 (2\bar{n}^2 + \bar{n}).
     \end{equation}
@@ -458,18 +459,20 @@ the bare qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.
     The Ramsey sequence is as follows:
     \begin{enumerate}
         \item Prepare the qubit in $\ket{\downarrow}$. 
-        \item A $R_y(\pi/2)$-pulse is applied. preparing the state $\ket{+} = \frac{1}{\sqrt{2}}(\ket{\downarrow} + \ket{\uparrow})$.
+        \item A $\hat R_y(\pi/2)$-pulse is applied, preparing the state $\ket{+} = \frac{1}{\sqrt{2}}(\ket{\downarrow} + \ket{\uparrow})$.
         \item The system is left to evolve for Ramsey delay, $t_{\rm RAM}$.
-        \item A variable $R_\phi(\pi/2)$-pulse is applied.
+        \item A variable $\hat R_\phi(\pi/2)$-pulse is applied.
         \item The population of $\ket{\downarrow}$ is measured.
         \item Repeat steps 1-5 for different values of $\phi$ to find the contrast of the Ramsey fringe.
         \item Repeat steps 1-6 for different values of $t_{\rm RAM}$ to find the decay in contrast with time. 
     \end{enumerate}
+    This Ramsey fringe is given by,
+    \begin{equation}
+    P_\da(\phi)=\frac{1}{2}\left(1+2\mathrm{Re}\left(\rho_{\da,\ua}e^{i\phi}\right)\right),
+    \end{equation}
+    where $\rho_{\da,\ua}$ is the off-diagonal ``coherence'' matrix element, we wish to quantify. The contrast, $C=2|\rho_{\da,\ua}|$, is then defined by twice the oscillation amplitude.
 
-    This Ramsey fringe contrast is directly proportional to the coherence of the resulting noisy state, $\hat\rho$, given by matrix element, $\rho_{\da,\ua}$. 
-
-    Figure~\ref{fig:coherence_times} shows the coherence time of
-    three quadrupole transitions:\\
+    Figure~\ref{fig:coherence_times} shows the decay of Ramsey contrast with delay duration for three quadrupole transitions:\\
     $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=\lbrace -5/2,
     -3/2, +3/2\rbrace }$. These transitions have magnetic field
     sensitivities of $\Delta\mu/h = \{2.799, 1.119,
@@ -501,7 +504,7 @@ the bare qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.
         \end{center}
         \caption{
             Characterisation of the single-ion addressing system using the ion as a probe. a) The normalised intensity of the 
-            focussed 729-nm beam at the ion-plane. The $1/e^2$-waist is highlighted by the contour. b) Demonstration of spatial selective addressing by scanning the beam across a 5-ion chain while applying $R_x(\pi)$-gates calibrated for ion 3. The probability of observing $\ket{\downarrow}$, $P_\downarrow$ is shown for each ion.
+            focussed 729-nm beam at the ion-plane. The $1/e^2$-waist is highlighted by the contour. b) Demonstration of spatial selective addressing by scanning the beam across a 5-ion chain while applying $\hat R_x(\pi)$-gates calibrated for ion 3. The probability of observing $\ket{\downarrow}$, $P_\downarrow$ is shown for each ion.
             }
         \label{fig:sa_char}
     \end{figure}
@@ -554,7 +557,7 @@ intensity crosstalks of $\{0.12(4), 0.35(2),-,7.99(3),3.53(1)\}\times10^{-4}$ re
 
 To highlight this spatial selectivity, we show the beam scanning across the 5-ion chain with a fixed pulse duration.
 For reference, above this plot we show fluorescence of the 5-ion chain as viewed by the imaging camera. 
-The fixed Rabi-pulse duration is calibrated to be a $R_x(\pi)$-pulse when acting
+The fixed Rabi-pulse duration is calibrated to be a $\hat R_x(\pi)$-pulse when acting
 on the central ion. Figure~\ref{fig:sa_char}~(b) shows the measured populations,
 $P_\downarrow$, as a function of beam position along the axial ion-chain
 direction. The points correspond to populations averaged over $200$ samples,
@@ -574,7 +577,7 @@ misalignments and limited bandwidths of the AODs.\\
 The achieved waist of $\approx 1.5~\unit{\micro\meter}$ allows for high
 intensity fields at the qubits, exemplified here by the low
 $20~\unit{\micro\watt}$ 729-nm beam power required for driving $\approx
-1~\unit{\micro\second}$ $R_x(\frac{\pi}{2})$ gates. The low intensity crosstalk
+1~\unit{\micro\second}$ $\hat R_x(\frac{\pi}{2})$ gates. The low intensity crosstalk
 of $<10^{-3}$ for neighbouring ions is sufficient for the projects demonstrated
 in this thesis. If lower crosstalk errors are required, it is likely this may be
 reduced to $<10^{-4}$ solely through further optimisation of beam alignment
@@ -603,10 +606,10 @@ sequences~\cite{fang_crosstalk_2022}.
     Motion of ions trapped in the same potential can be described by a set of
     normal modes~\cite{james_quantum_1998}. These modes are labelled with respect
     to the ion chain geometry: axial modes oscillate parallel with the chain,
-    and radial modes oscillate perpendicular to the chain. Due to the geometry
-    of the 729-nm beam access with respect to the ion chain (see
-~\S~\ref{sec:Vacuum System}), only the radial modes can be addressed in
-    our system. For the \emph{NPL} trap (see~\S~\ref{sec:The Ion Trap}),
+    and radial modes oscillate perpendicular to the chain. 
+    Due to the geometry
+    of the 729-nm beam access relative to the ion chain (see
+    ~\S~\ref{sec:Vacuum System}), only the radial modes have a significant projection onto the beam in our system. Consequently, only the radial modes can be efficiently used for quantum information. For the \emph{NPL} trap (see~\S~\ref{sec:The Ion Trap}),
     the radial modes frequencies are non-degenerate. In our system, for a single
     ion, the mode frequencies are approximately $\omega_{\rm upper}
     =2\pi\times2.9$~\unit{\MHz}, $\omega_{\rm lower} = 2\pi\times2.0$~\unit{\MHz},
@@ -787,7 +790,7 @@ sequences~\cite{fang_crosstalk_2022}.
     We use the RSB of the transition $\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ as the subsequent deshelve and spontaneous decay from $\ket{4P_{3/2},~m_j=-3/2}$ to $\ket{4S_{1/2},~m_j=-1/2}$ forms a closed cycle, lessening the need for state-preparation pulses throughout the sideband-cooling sequence.\\
 
     To verify the efficacy of our sideband cooling, thermometry
-    experiments are performed by probing Fock state populations. This is done using on resonance RSB pulses and effective BSB pulses composed of a $R_x(\pi)$-RSB-$R_x(\pi)$ pulse
+    experiments are performed by probing Fock state populations. This is done using on resonance RSB pulses and effective BSB pulses composed of a $\hat R_x(\pi)$-RSB-$\hat R_x(\pi)$ pulse
     sequences. The spin population dynamics are measured as RSB
     pulse length, $t$, is varied. In the case of Fock state $\ket{0}$, there should be full contrast 
     ``BSB'' oscillations, and no visible oscillations when probed with RSB pulses. A thermal
@@ -944,11 +947,11 @@ sequences~\cite{fang_crosstalk_2022}.
     The Ramsey contrast decays is measured by the following sequence:
     \begin{enumerate}
     \item Prepare the ground state of both qubit and qumode, $\ket{\downarrow, 0}$. The qubit is first prepared via optical pumping, and the qumode is subsequently prepared by Doppler and resolved sideband cooling.
-    \item A $R_y(\pi/2)$-pulse is applied on the carrier transition, preparing the state $(\ket{\downarrow, 0} + \ket{\uparrow, 0})/\sqrt{2}$.
-    \item A RSB $R_\mathrm{RSB}(\pi)$-pulse is applied, preparing the state $\ket{\psi_{0m}}=(\ket{\downarrow, 0} + \ket{\downarrow, 1})/\sqrt{2}$.
+    \item A $\hat R_y(\pi/2)$-pulse is applied on the carrier transition, preparing the state $(\ket{\downarrow, 0} + \ket{\uparrow, 0})/\sqrt{2}$.
+    \item A RSB $\hat R_\mathrm{RSB}(\pi)$-pulse is applied, preparing the state $\ket{\psi_{01}}=(\ket{\downarrow, 0} + \ket{\downarrow, 1})/\sqrt{2}$.
     \item The system is left to evolve for Ramsey delay, $t_{\rm RAM}$.
-    \item A RSB $R_\mathrm{RSB}(\pi)$-pulse is applied to map accumulated phase onto the qubit state.
-    \item A variable carrier $R_\phi(\pi/2)$-pulse is applied.
+    \item A RSB $\hat R_\mathrm{RSB}(\pi)$-pulse is applied to map accumulated phase onto the qubit state.
+    \item A variable carrier $\hat R_\phi(\pi/2)$-pulse is applied.
     \item The population of $\ket{\downarrow}$ is measured.
     \item Repeat steps 1-7 for different values of $\phi$ to find the contrast of the Ramsey fringe.
     \item Repeat steps 1-8 for different values of $t_{\rm RAM}$ to find the decay in contrast with time.
@@ -999,14 +1002,13 @@ sequences~\cite{fang_crosstalk_2022}.
     The effect of dephasing and heating noise depends strongly on the state of
     the motional mode, as such, this metric of Fock state coherence time
     provides evidence of adequate performance of the qumode, but does not
-    rigourously determine the error channel acting on the oscillator.
+    rigorously determine the error channel acting on the oscillator.
     However, this measurement suggests that the coherence of the qumode is
     sufficient for the short hybrid sequences we plan to explore with the
     apparatus. 
 
     If this coherence time is not adequate for future projects, there are three
-    possible mitigations. First, we may explore the dependence of motional mode
-    frequency on coherence time, effectively probing the electric-field noise
+    possible mitigations. First, we may explore the dependence of motional coherence time on the mode frequency, effectively probing the electric-field noise
     spectrum to find quieter regions. Second, we can decrease the impact of any
     incoherent noise by reducing the duration of motional interactions, however
     emergent off-resonant coherent errors will then require mitigation. Third,
@@ -1138,7 +1140,7 @@ sequences~\cite{fang_crosstalk_2022}.
 
     To complete the demonstration of elementary operations required for
     universal qubit control, we characterise the performance of two-qubit
-    entangling gates, $R_{xx}(\theta)$, via the MS interaction on our apparatus.
+    entangling gates, $\hat R_{xx}(\theta)$, via the MS interaction on our apparatus.
 
     This interaction, as discuss in~\S~\ref{sec:Geometric Phase Gates}, is
     implemented through a detuned SDF.
@@ -1158,14 +1160,11 @@ sequences~\cite{fang_crosstalk_2022}.
     from the gate under test. Random circuit methods such as two-qubit Clifford
     RB~\cite{gaebler_randomized_2012}, or cyclic
     benchmarking~\cite{erhard_characterizing_2019} could also be used to gain
-    single-value performance metrics insensitive to state-preparation errors. In
-    this thesis we use a state tomographic
-    technique~\cite{sackett_experimental_2000}, which although does not
-    rigorously characterise the action of the gate on arbitrary initial states,
-    is quick to implement, and only requires a single additional
-    $R_x(\frac{\pi}{2})$-pulse.
+    single-value performance metrics insensitive to state-preparation errors. 
+    In this thesis, we use a state-tomographic technique~\cite{sackett_experimental_2000} to provide a quantitative benchmark for the gate fidelity.
+    Although it does not rigorously characterise the action of the gate on arbitrary initial states, it is quick to implement and requires only a single additional $\hat R_x(\frac{\pi}{2})$ pulse.
 
-    A single $R_{\phi_s\phi_s}(\frac{\pi}{2})$ two-qubit entangling gate, where
+    A single $\hat R_{\phi_s\phi_s}(\frac{\pi}{2})$ two-qubit entangling gate, where
     $\phi_s$ is some fixed angle in the $xy$-plane, is applied to the initial
     state $\ket{\da\da}$. This gate targets the creation of the 
     maximally-entangled state $\ket{\Phi^+_{\phi_0}} = 1/\sqrt{2} \left( \ket{\downarrow\downarrow} +
@@ -1185,12 +1184,12 @@ sequences~\cite{fang_crosstalk_2022}.
     required~\cite{sackett_experimental_2000}.
     The first bracketed term of
     equation~\ref{eq:Fidelity}, denoted $A$, is measured by performing projective measurements
-    of the two ions after the applied $R_{\phi_s\phi_s}(\frac{\pi}{2})$. The extracted
+    of the two ions after the applied $\hat R_{\phi_s\phi_s}(\frac{\pi}{2})$. The extracted
     two-qubit joint populations directly recover this population term, $A=
     P_{\da\da} + P_{\ua\ua}$, where $P_{ij}$ is the population of the two ions
     in state $\ket{i}\ket{j}$.
     The coherence terms in the second bracket are measured by applying a global analysis
-    $R_\phi(\pi/2)$ pulse to the two ions with variable phase $\phi$. The final
+    $\hat R_\phi(\pi/2)$ pulse to the two ions with variable phase $\phi$. The final
     spin populations are combined to a parity measurement, defined as $\Pi =
     P_{\da\da} + P_{\ua\ua} - P_{\da\ua} - P_{\ua\da}$. Varying $\phi$, the
     observed parity relates to the matrix elements of $\hat\rho$ as,
@@ -1244,7 +1243,7 @@ sequences~\cite{fang_crosstalk_2022}.
     relevant to the two-qubit entangling gates. This, along with developing an
     automated gate-tuning algorithm for our apparatus, is left to future work.
     The current fidelities observed here are sufficient for the projects outlined in this
-    thesis. In~\S~\ref{sec:vd_exp} we calibrate $R_{xx}(\frac{\pi}{4})$ gates
+    thesis. In~\S~\ref{sec:vd_exp} we calibrate $\hat R_{xx}(\frac{\pi}{4})$ gates
     using this state-fidelity approach.
 
 \begin{table}[]
@@ -1254,8 +1253,8 @@ sequences~\cite{fang_crosstalk_2022}.
          \hline\hline
          State Prep &99.96(2)& \S~\ref{sec:Stateprep}\\
          Measurement &$ < 99.7(3)$& \S~\ref{sec:standard_rb}\\
-         $R_x(\pi/2)$ & 99.913(2) & \S~\ref{sec:standard_rb}\\
-         $R_{xx}(\pi/2)$ & 98.3(4) & \S~\ref{sec:Two-Qubit Entangling Gates}\\
+         $\hat R_x(\pi/2)$ & 99.913(2) & \S~\ref{sec:standard_rb}\\
+         $\hat R_{xx}(\pi/2)$ & 98.3(4) & \S~\ref{sec:Two-Qubit Entangling Gates}\\
     \end{tabular}
     \caption{
         Summary of qubit-operation fidelities presented in this chapter.

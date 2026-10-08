@@ -200,41 +200,46 @@
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch3/SSB_chain.pdf}
         \end{center}
-        \caption{Characterisation of the RF chain. (a) SSB spectra for AM and FM, given as fractional noise, measured after the \emph{Urukul}. (b) Measured after the \emph{Squareatron}. (c) Measured after the amplifier.}
+        \caption{Characterisation of the RF chain. (a) PSD of fractional AM and FM fluctuations measured after the \emph{Urukul}. (b) Measured after the \emph{Squareatron}. (c) Measured after the amplifier. Measurements were made by using a $50~\Omega$ termination on a phase-noise amplifier.}
             \label{fig:SSB_chain}
     \end{figure}
     \begin{figure}
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch3/res_comb.pdf}
         \end{center}
-        \caption{\todo{write appendix on how this was calculated} Expected SSB after the resonator, and estimated mode frequency noise. (a) Resonator circuit diagram. (b) Resonator lineshape, given by magnitude of the transfer function $|H(f)|$. (c) Expected AM and FM fractional noise spectra after the resonator. (d) Integrated RMS noise of radial motional mode frequency due to the RF chain.}
+        \caption{\todo{write appendix on how this was calculated} Expected fractional PSD after the resonator, and estimated mode frequency noise. (a) Resonator circuit diagram. (b) Resonator line shape, given by magnitude of the transfer function $|H(f)|$. (c) Expected AM and FM fractional noise spectra after the resonator. (d) Integrated RMS noise of radial motional mode frequency due to the RF chain.}
             \label{fig:res_H}
     \end{figure}
-    The frequency source is a direct-digital-synthesiser (DDS), named \emph{Urukul}~\cite{kasprowicz_urukul_2022}, part
-    of the \emph{Artiq Sinara}~\cite{kasprowicz_artiq_2020} hardware ecosystem. \emph{Urukul} is used extensively in our lab for driving acousto-optic modulators (AOMs) and here used as the source drive of our trap RF.
-    The \emph{Urukul} is operated at maximum output power, $+10$~dBm, and with a frequency $\sim 35$~MHz (set by resonator, discussed below).
+
     As can be seen in equation~\ref{eqn:pseudo_pot}, amplitude and frequency instability will directly lead to radial mode instability.
     Expanding for small amplitude, $dV_{RF}$, and drive frequency, $d\Omega_{RF}$, errors we find the motional mode frequency, $\omega_r'$, is related to the ideal frequency, $\omega_r$, by 
     \begin{equation}
-    \omega_r' = \omega_r(1 + dV_{RF}/V_{RF} - d\Omega_{RF}/\Omega_{RF}),
+    \omega_r' = \omega_r(1 + \delta V_{RF}/V_{RF} - \delta\Omega_{RF}/\Omega_{RF}),
     \end{equation}
     where we can see both errors affect the motional mode frequency linearly.
-    The instability of the oscillator can limit motional mode coherence time (see~\S~\ref{sec:Motional Coherence} for characterisation with the ion). We measure noise originating from both amplitude modulation (AM) and frequency modulation (FM) across the RF chain using a phase noise analyser\footnote{Rhode and Schwartz FSWP PNA}.
+    The instability of the oscillator can limit motional mode coherence time (see~\S~\ref{sec:Motional Coherence} for characterisation with the ion). We measure noise originating from both amplitude modulation (AM) and frequency modulation (FM) across the RF chain using a phase noise analyser\footnote{Rhode and Schwartz FSWP PNA}. 
     This was done to verify low-noise operation of the individual devices, and to estimate expected motional mode errors due to the inherent noise on the RF chain. 
 
-    We quote FM as the fractional frequency stability power spectral density (PSD), 
+    We quote FM as the power spectral density (PSD) of the fractional frequency stability, 
     \begin{equation}
     S_y(f) = \frac{f^2}{f_0^2} S_{\phi}(f),
     \end{equation}
-    where $S_{\phi}(f)$ is the phase noise PSD (which is the Fourier transform of the Autocorrelation function) $f$ is the offset frequency, and $f_0$ is the carrier frequency. $S_y(f)$ has units of
-    $\left[\frac{1}{\unit{\hertz}}\right]$. AM noise is quoted as the single sideband (SSB) power, $S_\alpha$, in a 1~Hz bandwidth at an offset frequency, $f$, from the carrier, normalised to the total power of the carrier, and is here given in units of $\left[\frac{\mathrm{dBc}}{\unit{\hertz}}\right]$. 
+    where $y(t)=\delta\Omega_{RF}(t)/\Omega_{RF}$, $S_{\phi}(f)$ is the phase noise PSD (which is the Fourier transform of the autocorrelation function), $f$ is the offset frequency, and $f_0$ is the carrier frequency. AM noise is quoted as the PSDF of the fractional amplitude stability,
+    \begin{equation}
+    S_a(f) = 2\times10^{L_a(f)/10},
+    \end{equation}
+    where $a(t)=\delta V_{RF}(t)/V_{RF}$, and $L_a(f)$ is the single sideband (SSB) power, in a 1~Hz bandwidth at an offset frequency, $f$, from the carrier, normalised to the total power of the carrier. Both $S_y$ and $S_a$ are given in units $\left[\unit{\hertz}^{-1}\right]$. We use these fractional PSD to immediately evaluate the impact of the measured spectra on the radial mode frequencies for a given frequency band.
 
-    Figure~\ref{fig:SSB_chain}, panel (a) displays the \emph{Urukul} AM and FM spectra. The \emph{Urukul} is phase referenced to the master FPGA board (\emph{Kasli}), which is in turn phase locked to an external $10~\unit{\mega\hertz}$ atomic clock\footnote{\todo{ToDo: Abaqus atomic clock PN}}. It can be seen that AM noise dominates up $\sim 1$~MHz, suggesting that this will be the limiting error source for motional mode stability.
+    The frequency source is a direct-digital-synthesiser (DDS), named \emph{Urukul}~\cite{kasprowicz_urukul_2022}, part
+    of the \emph{Artiq Sinara}~\cite{kasprowicz_artiq_2020} hardware ecosystem. \emph{Urukul} is used extensively in our lab for driving acousto-optic modulators (AOMs) and here used as the source drive of our trap RF.
+    The \emph{Urukul} is operated at maximum output power, $+10$~dBm, and with a frequency $\sim 35$~MHz (set by the resonator, discussed below).
+
+    Figure~\ref{fig:SSB_chain}, panel (a) displays the \emph{Urukul} AM and FM spectra. The \emph{Urukul} is phase referenced to the master FPGA board (\emph{Kasli}), which is in turn phase locked to an external $10~\unit{\mega\hertz}$ atomic clock\footnote{\todo{ToDo: Abaqus atomic clock PN}}. It can be seen that AM noise component dominates up $\sim 1$~MHz, suggesting that this will be the limiting error source for motional mode stability.
     The AM noise may be reduced by using a nonlinear voltage clamp. We use an ``ultra-low noise limiting amplifier'' named
     \emph{Squareatron} developed previously in the Oxford group, and further refined by \emph{Oxford Ionics}. 
     \emph{Squareatron} takes an input RF signal and converts to a stable amplitude square-wave output which is subsequently bandpassed around the desired RF frequency to recover the sinusoidal signal, but with significantly reduced AM noise.
     The AM and FM after the \emph{Squareatron} is shown in panel (b).
-    It can be seen that between $1~\unit{\kilo\hertz}$ and $1~\unit{\mega\hertz}$, AM is considerably suppressed. There appears to be an increase in AM at higher frequencies \todo{ToDo: explore this further}. The \emph{Squareatron} has a $17$~dBm output power, which is attenuated by $-20$~dB before an amplification stage to reach the desired power for the trap. Highlighted in the above chain schematic is the option to input a parametric excitation signal (P.E.), \todo{Outdated, add citation to DPN paper} which we shall discuss further in~\S~\ref{sec:Micromotion}. For the following measurements, the P.E. branch was removed.
+    It can be seen that between $1~\unit{\kilo\hertz}$ and $1~\unit{\mega\hertz}$, AM is considerably suppressed. There is an increase in AM at frequencies over $1~\unit{\mega\hertz}$, which although unexpected, will not greatly affect mode frequencies due to subsequent bandpass filtering. The \emph{Squareatron} has a $17$~dBm output power, which is attenuated by $-20$~dB before an amplification stage to reach the desired power for the trap. Highlighted in the above chain schematic is the option to input a parametric excitation signal (P.E.), which we use for quantifying excess micromotion via the technique given in Reference~\cite{nadlinger_micromotion_2021}. For the following measurements, the P.E. branch was removed.
     AM and FM introduced by the low-noise amplifier\footnote{Mini-Circuits ZHL-1-2W-S+}, can be seen in panel (c). Most notably an increase in AM is seen between $1~\unit{\kilo\hertz}$ and $10~\unit{\kilo\hertz}$.
 
     To impedance match the 50~$\Omega$ line from the amplifier to
@@ -261,7 +266,7 @@
     noise.  
     The circuit diagram of the constructed resonator~\footnote{Credit to Emily
     Hirsch for construction of the recent resonator.} is shown in
-    figure~\ref{fig:res_H} (a). The inductor, $L\sim 0.8~\unit{\micro\henry}$, is hand-wound copper wire with a toroidal iron powder core\footnote{Micrometals T80-6}, and the capacitors are low tempco C0G rated ceramic, $C=5.4~\unit{\pico\farad}$.
+    figure~\ref{fig:res_H} (a). The inductor, $L\sim 0.8~\unit{\micro\henry}$, is hand-wound copper wire with a toroidal iron powder core\footnote{Micrometals T80-6}, and the capacitors are low temperature-coefficient C0G rated ceramic, $C=5.4~\unit{\pico\farad}$.
     The vacuum can
     feedthrough and trap were measured to present an $\sim
     18~\unit{\pico\farad}$ load. The trap itself presents a
@@ -270,13 +275,14 @@
     4~\unit{\pico\farad}$, and the remaining presented capacitance is expected
     to originate from the feedthrough and in-vacuum RF line. In vacuum, the RF line is a \emph{Kapton} coated $0.4~\unit{mm}$ diameter single strand copper wire, which connects to an in-vacuum distribution PCB. The RF connection to the trap LCC is made by \emph{Fuzz button}\footnote{\emph{Custom Interconnects}} vias.
 
-    \todo{Outdated - or need plot} Measuring the motional mode frequency of a trapped ion while varying the trap RF frequency (see~\S~\ref{sec:Motional Mode Stability}), yields a resonator quality factor 
+    The quality factor is quantified experimentally through motional mode frequency measurements of a single trapped ion while varying the trap RF frequency (see~\S~\ref{sec:tickle}). The mode frequency is proportional to the RF amplitude, and so by fitting a Lorentzian to a mode-frequency versus RF detuning scan, we find a resonator quality factor 
     $Q=57.88(6)$, and central
     frequency $34.659(1)~\unit{\mega\hertz}$.
-    The effect of the resonator on the AM and FM noise can be calculated through
-    the transfer function, $H(f)$, of the resonator circuit. 
+
+    Directly measuring the RF signal after the resonator without disrupting the impedance matching between the source and capacitive load is challenging.
+    Instead, we analyse the effect of the resonator on the AM and FM noise by calculating the ideal transfer function, $H(f)$, of the resonator circuit. 
     Capacitors ($C2$ and $C3$) are used to provide a pick-off (p.o.) voltage
-    which can be monitored, and if required, used in a closed feedback loop. 
+    which can be monitored for closed feedback amplitude stabilisation. 
     However, we have yet implemented this, and shall ignore the effect of
     the pick-off capacitors here. 
     The transfer function of the simplified
@@ -294,7 +300,8 @@
     Given the approximate capacitance and inductance values of the resonator and
     trap, the analytic $|H(f)|$ is plotted in Figure~\ref{fig:res_H} panel
     (b), and shows acceptable agreement with the measured quality factor and central
-    frequency (here $Q = 69$ and $f_0=36.8\unit{\mega\hertz}$) with the discrepancy of quality factor expected to originate from excess resistance in the inductor not accounted for in the model. Final AM and FM
+    frequency (here $Q = 69$ and $f_0=36.8\unit{\mega\hertz}$) with the discrepancy of quality factor expected to originate from excess resistance in the inductor not accounted for in the model. 
+    The resulting AM and FM
     spectra are calculated through considering both upper ($+\Delta f$) and
     lower sidebands ($-\Delta f$), as shown in panel (b), following reference~\cite{danielson_am_2018}. We
     find that for both AM$\rightarrow$AM and FM$\rightarrow$FM (where
@@ -302,35 +309,26 @@
     noise type) the input PSD are
     low pass filtered with a cut-off frequency of $\sim 0.25$~MHz.
     We also consider the cross term, FM$\rightarrow$AM, which here we expect to
-    be non-negligible at higher offset frequencies due to the assymmetry of the
-    resonator lineshape. Panel (c) shows the expected fractional noise after
+    be non-negligible at higher offset frequencies due to the asymmetry seen by the upper and lower modulation sidebands, as seen by the resonator line shape\footnote{We note that AM$\rightarrow$FM is also possible, however here contributes a negligible motional mode frequency error component.}. Panel (c) shows the expected fractional noise after
     the resonator, with total FM noise (orange line), total AM noise (blue
     line), and contributions from AM$\rightarrow$AM (dashed green),
     FM$\rightarrow$AM (dashed red). Integrating the AM and FM fractional noise
-    spectra between some chosen range of offset frequencies, $f_{min}$ and
-    $f_{max}$, gives the expected fractional RMS noise on the radial mode
+    spectra over a specified offset-frequencies band provides an estimate of the fractional RMS noise on the radial mode
     frequency of the ions. Assuming a mode frequency of $w_r =
     3~\unit{\mega\hertz}$ the RMS, $\sigma_r$, is shown in
-    Figure~\ref{fig:res_H} panel (d) as a function of $f_{max}$, with $f_{min}
+    Figure~\ref{fig:res_H} panel (d) as a function of upper frequency, $f_{max}$, and lower frequency, $f_{min}
     = 10$~Hz. It can be seen that the expected noise is dominated by the AM
     contribution, and in the frequency range considered, corresponds to a mode
-    frequency instability of $\sigma_r = 60~\unit{\hertz}$. This analysis
-    excludes any noise less than $10~\unit{\hertz}$, and environmental noise coupled in by the resonator, which may be a significant
+    frequency instability of $\sigma_r \approx 30~\unit{\hertz}$. This analysis
+    excludes slow drift frequency noise less than $10~\unit{\hertz}$, and environmental noise coupled in by the resonator, which may be a significant
     contribution at low frequencies due to thermal and mechanical noise. The
     motional modes will also be subject to noise from other coupling mechanisms,
     such as voltage noise on the DC electrodes, or fluctuating stray electric
     fields, which we do not consider here. 
+    \todo{Quick outlook here...}
 
     Here, we have characterised both AM and FM noise on the RF chain and
     estimated the expected contribution to motional mode instability. 
-    % Further
-    % characterisations of the motional mode stability using the ion as a sensor
-    % \todo{outdated}
-    % is discussed in~\S~\ref{sec:Motional Mode Stability}.
-
-    % Q factor measurement 66.7 OneNote 2025-11-05
-    % Remeasure Q factor and central frequency with ion as a probe.
-    
 
 \subsection{Trap DC Voltages}
 \label{sec:Trap DC Voltages}
@@ -966,6 +964,6 @@ cross section.}. As with the other beams directed to the ion, we use a final pie
     the beam when not actively loading ions.
 
 
-\section{Outlook}
-\todo{Does this section need a bit of a closing word?}
-\subsection{Limitations}
+% \section{Outlook}
+% \todo{Does this section need a bit of a closing word?}
+% \subsection{Limitations}
