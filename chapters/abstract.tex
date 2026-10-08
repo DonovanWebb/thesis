@@ -1,1 +1,25 @@
-\todo{Write abstract here.}
+Scaling quantum processors requires increasing the accessible quantum resources whilst retaining sufficient control over them. 
+%
+The trapped-ion platform shows great promise for realising scaled devices, however, the use of common trapping and control fields can introduce structured multi-body error channels that lead to unintended correlations. 
+%
+In this thesis, we explore the impact of correlated errors using a recently commissioned experimental platform, including a single-ion addressing system for selective control of the electronic and motional states on up to 10 ions.
+
+Methods for characterising, simplifying, and suppressing errors are crucial to retain control of scaled systems. 
+%
+Complete error characterisation is prohibitively expensive as registers grow, therefore abstracted or aggregated metrics are required that capture relevant noise processes.
+%
+To quantify correlation-inducing errors on scaled systems, we develop \emph{k-copy} randomised benchmarking. This method utilises symmetries enforced by structured noisy fields to discern resulting correlated and local error components.
+%
+We use this method, to quantify spatially correlated errors on an eight-ion register caused by a globally addressing control field.
+%
+Such correlated errors are particularly damaging to error correction and mitigation techniques that assume local, depolarising errors.
+%
+We explore this impact on virtual distillation, an error mitigation protocol using multiple identical noisy copies to estimate noise-suppressed expectation values. We an error suppression of $\times2.8(7)$ under dominant local noise, whilst under dominant common-mode correlating errors, the suppression is reduced to $\times1.20(9)$. We show that purely common-mode errors are entirely unaffected by virtual distillation.
+%
+These results highlight the importance of resolving error structure, not simply overall error rates on the constituent subsystems. Furthermore, this exemplifies the need to decorrelate errors through hardware design or algorithmic noise tailoring.
+
+We also explore a complementary route to scaling the available quantum resources: using the motion of the ions for information processing. 
+%
+Building on previous demonstrations of hybrid qubit-qumode control in trapped-ions, we demonstrate an elementary method to generate spin-conditioned bosonic interactions, now using the single-ion addressing system which will enable scaling to multiple ions, and access to many qumodes.
+%
+The work presented in this thesis develops an experimental platform for studying larger qubit-qumode registers, and methods to characterise and mitigate emergent correlated errors.
