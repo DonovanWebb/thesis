@@ -132,13 +132,13 @@ The computational eigenstates of the qubit, $\ket{\da}$, $\ket{\ua}$, have eigen
 \begin{equation}
     \hat \sigma_z \ket{\da} = -\ket{\da},~~~~~\hat \sigma_z \ket{\ua} = +\ket{\ua},
 \end{equation}
-and the dynamics of the system are giving by the spin Hamiltonian,
+and the dynamics of the system are given by the spin Hamiltonian,
 \begin{equation}
     \hat H_s = \frac{\hbar\omega_0}{2} \hat\sigma_z,
 \end{equation}
 where $\omega_0$ is the qubit transition frequency.
 
-We define transition elements $\hat\sigma_+ = \ket{\ua}\bra{\da}$, and $\hat\sigma_- = \ket{\da}\bra{\ua}$.
+We define the transition operators $\hat\sigma_+ = \ket{\ua}\bra{\da}$, and $\hat\sigma_- = \ket{\da}\bra{\ua}$.
 The next section outlines how to physically realise such transitions.
 
 
@@ -158,7 +158,7 @@ For a travelling monochromatic optical field (almost always from a laser) the tr
 \end{equation}
 where $\Omega$ is the Rabi frequency, $\vec k$ is the wave vector, $\vec R$ is the ion position, $\omega$ is the optical frequency, and $\phi$ is the optical phase.
 The Rabi frequency contains the specifics of the physical light-matter interaction, $\hbar\Omega\propto\bra{\ua}\hat H_I\ket{\da}$.
-Assuming the phase variation of the optical field across the electrons spatial extent is small, the perturbation can be expanded around the ion position, $R$, for small relative electron position, to generate a series
+Assuming the phase variation of the optical field across the electrons spatial extent is small, the perturbation can be expanded around the ion position, $\vec R$, for small relative electron position, to generate a series
 of electric and magnetic multipole interactions. For the chosen optical qubit transition the electric dipole interaction is forbidden. Therefore, in this thesis we exclusively consider the electric quadrupole interaction.
 
 For a plane travelling optical field given by,
@@ -167,7 +167,7 @@ For a plane travelling optical field given by,
 \end{equation}
 where $\vec\epsilon$ is the polarisation vector, and the quadrupole Rabi frequency is given by,
 \begin{equation}
-    \Omega_{\rm EQ} = \frac{1}{6\hbar}\sum_{i,j=\{x,y,z\}}\bra{\da}Q_{ij}\ket{\ua}\partial_i E_j\rvert_R
+    \Omega_{\rm EQ} = \frac{1}{6\hbar}\sum_{i,j=\{x,y,z\}}\bra{\da}Q_{ij}\ket{\ua}\partial_i E_j\rvert_{\vec R}
 \end{equation}
 where $Q_{ij}$ is the quadrupole tensor~\cite{james_quantum_1998}\footnote{For reference, the simpler electric dipole interaction has Rabi frequency is given by
 $\Omega_{\rm ED} = \frac{1}{\hbar}\sum_j\bra{\da}d_j\ket{\ua}E_j$, where $d_j$ is the dipole moment}. Apart from the dependence on polarisation and $k$-vector discussed in Figure~\ref{fig:quadrupole}, the details of the quadrupole derived Rabi-frequency are not relevant for the remainder of this section, and a general Rabi frequency, denoted by $\Omega$, is instead considered.
@@ -421,7 +421,7 @@ In this example, the geometric phase is globally acting, and as such can be safe
 \label{sec:Motional Coupling}
 
 In this section, we explore light-matter interactions that couple the spin and motional subsystems.
-Reconsider the spin transition Hamiltonian, $\tilde H_I$, in equation~\ref{eqn:light_matter}, now including quantised secular ion motion in the $x$-direction given by equation~\ref{eqn:x_ladder}, around an equilibrium position, $\vec R = R_{\rm eq} + x_0(\hat a^\dagger + \hat a)\hat{e_x}$, where $\hat e_x$ is the $x$ unit vector.
+Reconsider the spin transition Hamiltonian, $\tilde H_I$, in equation~\ref{eqn:light_matter}, now including quantised secular ion motion in the $x$-direction given by equation~\ref{eqn:x_ladder}, around an equilibrium position, $\vec R = \vec R_{\rm eq} + x_0(\hat a^\dagger + \hat a)\hat{e_x}$, where $\hat e_x$ is the $x$ unit vector.
 The interaction Hamiltonian is then given by\footnote{Keeping in mind this Hamiltonian is already in the interaction picture with respect to the spin, $\hat H_s$, and is neglecting fast oscillating terms},
 \begin{equation}
     \tilde H_I \approx \hat H_{\rm osc} + \frac{\hbar\Omega}{2}\left(\hat\sigma_+ e^{i\eta(\hat a^\dagger+\hat a )}e^{-i(\delta t - \phi)} + {\rm h.c.} \right),
@@ -481,13 +481,13 @@ When $\Delta = 0$, the RSB is the Jaynes-Cummings Hamiltonian
 familiar from cavity QED. It describes the coherent exchange of a single quantum of energy between a two-level system
 and a bosonic mode, coupling the two states $\ket{\da,n}\leftrightarrow\ket{\ua,n-1}$. The resulting dynamic evolution is,
 \begin{equation}
-R_{\rm RSB}(\Omega^{(n)}_{\rm RSB}t) :=e^{-i\hat H_{\rm RSB}t/2}\ket{\da, n} = \cos\left(\frac{\Omega^{(n)}_{\rm RSB}t}{2}\right)\ket{\da,n} + \sin\left(\frac{\Omega^{(n)}_{\rm RSB}t}{2}\right)\ket{\ua,n-1},
+\hat R_{\rm RSB}(\Omega^{(n)}_{\rm RSB}t) :=e^{-i\hat H_{\rm RSB}t/2}\ket{\da, n} = \cos\left(\frac{\Omega^{(n)}_{\rm RSB}t}{2}\right)\ket{\da,n} + \sin\left(\frac{\Omega^{(n)}_{\rm RSB}t}{2}\right)\ket{\ua,n-1},
 \end{equation}
 where we have assumed $\phi=0$, and $\Omega^{(n)}_{\rm RSB} = \sqrt{n}\eta\Omega$ is the $n$-dependent modified RSB Rabi frequency.
 
 The resonant BSB is described by the anti-Jaynes-Cummings Hamiltonian, corresponding to the simultaneous creation or annihilation of pairs of quanta, akin to pair-creation in two-mode squeezing interactions. This coherently couples the states $\ket{\da,n}\leftrightarrow\ket{\ua,n+1}$, with the dynamic evolution given by,
 \begin{equation}
-R_{\rm BSB}(\Omega^{(n)}_{\rm BSB}t) := e^{-i\hat H_{\rm BSB}t/2}\ket{\da, n} = \cos\left(\frac{\Omega^{(n)}_{\rm BSB}t}{2}\right)\ket{\da,n} + \sin\left(\frac{\Omega^{(n)}_{\rm BSB}t}{2}\right)\ket{\ua,n+1},
+\hat R_{\rm BSB}(\Omega^{(n)}_{\rm BSB}t) := e^{-i\hat H_{\rm BSB}t/2}\ket{\da, n} = \cos\left(\frac{\Omega^{(n)}_{\rm BSB}t}{2}\right)\ket{\da,n} + \sin\left(\frac{\Omega^{(n)}_{\rm BSB}t}{2}\right)\ket{\ua,n+1},
 \end{equation}
 where $\Omega^{(n)}_{\rm BSB} = \sqrt{n+1}\eta\Omega$ is the $n$-dependent modified BSB Rabi-frequency.
 
@@ -509,7 +509,7 @@ The SDF is used in this thesis for three applications: For two-qubit entanglemen
 As the name suggests, we consider displacements of the form given in equation~\ref{eqn:displace_H}, with conditioning dependent on an ancillary qubit state, described by the Hamiltonian,
 \begin{equation}
     \label{eqn:SDF}
-    \hat H_{\rm SDF} = \hat\sigma_{\phi_s}\hat H_{\rm D},
+    \hat H_{\rm SDF} = \hat\sigma_{\phi_s}\otimes\hat H_{\rm D},
 \end{equation}
 with the spin-conditioning in the $xy$-plane, given by spin phase, $\phi_s$.
 
@@ -567,9 +567,9 @@ Considering the loop closure time $T_n = \frac{2\pi n}{|\delta|}$, the dynamics 
 \begin{equation}
     \hat H_{\rm eff} = \frac{\pi\hbar\Omega_{\rm SDF}^2}{4\Delta}\hat S_x^2.
 \end{equation}
-Taking $\hat S_x^2 = 2(\hat I + \sigma_x\otimes\sigma_x)$, the spin-conditioning has a global and two-body phase component. The global phase may be ignored, leaving the final propagator as,
+Taking $\hat S_x^2 = 2(\hat I + \hat\sigma_x\otimes\hat\sigma_x)$, the spin-conditioning has a global and two-body phase component. The global phase may be ignored, leaving the final propagator as,
 \begin{equation}
-    R_{xx}(\theta) := e^{-i\theta\hat\sigma_x\otimes\hat\sigma_x/2},
+    \hat R_{xx}(\theta) := e^{-i\theta\hat\sigma_x\otimes\hat\sigma_x/2},
 \end{equation}
 with angle,
 \begin{equation}

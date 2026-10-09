@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import graph_style
+import fig_helper as fh
 from scipy.optimize import curve_fit
-
 
 graph_style.set_graph_style(0.75)
 
@@ -10,7 +10,7 @@ date = "2025-05-27"
 # rid = 31565  # 20,000 counts
 rid = 31590  # 100,000 counts
 
-data_dict = graph_style.load_data(rid, date)
+data_dict = fh.load_data(rid, date)
 # for x in data_dict["datasets"].keys():
 # print(x)
 
@@ -100,11 +100,12 @@ ax.text(
 )
 
 ax.set_xlabel("Camera Counts")
-ax.set_ylabel("Probability")
+ax.set_ylabel("Probability Density")
 ax.set_xlim(0, max_tot)
 ax.set_yscale("log")
+ax.grid(False)
 # plt.show()
-plt.savefig("readout_hist.pdf")
+plt.savefig("../../pdf_figure/ch4/readout_hist.pdf", bbox_inches="tight")
 
 """
 # Two ions:

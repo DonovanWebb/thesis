@@ -16,7 +16,7 @@ This work extends the widely adopted single-qubit
 Clifford randomised benchmarking (RB) protocol~\cite{magesan_scalable_2011,knill_randomized_2008,dankert_exact_2009} (discussed in~\S~\ref{sec:standard_rb}) to capture and quantify correlated errors in scaled multi-qubit registers.
 We introduce a novel method to parallelise RB, and utilise the extracted symmetry resolved dynamics to provide evidence of, and quantify various multi-qubit error channels. 
 
-This chapter is structured as follows: we start by giving an overview on the problem of \emph{characterisation}, and what techniques already exist to address it. We then outline the \emph{k-copy} protocol and discuss the relevant symmetric subspace structure. The population dynamics when subject to simple noise models are derived, and we discuss variations of the protocol that isolate specific subspaces. Experimental verification of the protocol is demonstrated on a trapped-ion processor through injecting known correlated and uncorrelated errors. This chapter is concluded by demonstrating the scalability of the protocol on an 8-qubit register, and a discussion on the limitations and potential of this method for further scaling to larger systems.
+This chapter is structured as follows: we start by giving an overview on the problem of \emph{characterisation}, and what techniques already exist to address it. We then outline the \emph{k-copy} protocol and discuss the relevant symmetric subspace structure. The population dynamics when subject to simple noise models are derived, and we discuss variations of the protocol that isolate specific subspaces. Experimental verification of the protocol is demonstrated on a trapped-ion processor through injecting known correlated and uncorrelated errors. This chapter is concluded by demonstrating the scalability of the protocol on an eight-qubit register, and a discussion on the limitations and potential of this method for further scaling to larger systems.
 
 \section{Errors and Characterisation}
 \label{sec:k-copy_char}
@@ -998,7 +998,7 @@ residual error baseline. We see good agreement between the expected linear error
         }
     \end{center}
     \caption{
-        Correlated and local error per Cliffords measured for all qubit pairs after applying \emph{k-copy} RB to an 8 ion chain. 
+        Correlated and local error per Cliffords measured for all qubit pairs after applying \emph{k-copy} RB to an eight-ion chain. 
         Noise is dominated by position dependent duration of $\hat R_x(\pi/2)$ gates consistent with inhomogeneous illumination by the global drive.
         Panel~(a) displays the extracted excess correlated errors, $\varepsilon_\mathrm{corr}^{>(i,j)}$ for each qubit pair, $(i,j)$. 
         Panel~(b) displays the sum of both independent depolarising errors, $(\varepsilon_L+\varepsilon_R)^{(i,j)}$. Panel~(c) displays the ratio of excess correlated noise to the sum of local errors given in~(b). This plot highlights the outer qubits are dominated by spatially correlated errors.
@@ -1120,28 +1120,3 @@ However, as we execute parallel sequences on two copies, we can also set
 $\Delta t$ to be significantly shorter than the random sequence length. In this
 regime, we could, for example, probe the frequency and coherence of noise on the
 common drive field used to execute the parallel gates. This would provide evidence and quantify violations of the Markovian QIP model, without full process tomography, as discussed in~\S~\ref{sec:k-copy_char}.
-
-% 3-body common noise:
-% \begin{align}
-%         \alpha_1 &= (1 - \varepsilon_1)^m,\\
-%         \alpha_2 &= (1 - \varepsilon_2)^m,\\
-%         \alpha_3 &= (1 - \varepsilon_3)^m,\\
-%         \beta &= \alpha_1\alpha_2 + \alpha_1\alpha_3 + \alpha_2\alpha_3,\\
-%         \alpha_\mathrm{corr1} &= (1 - \varepsilon_\mathrm{corr})^m,\\
-%         \alpha_\mathrm{corr2} &= (1 - 3\varepsilon_\mathrm{corr})^m,\\
-%         \alpha_\mathrm{corr3} &= (1 - 6\varepsilon_\mathrm{corr})^m,
-% \end{align}
-% \begin{align}
-%         M_1 &= \beta,\\
-%         M_2 &= 3(\alpha_1 + \alpha_2 + \alpha_3)  \alpha_\mathrm{corr1},\\
-%         M_3 &= 2\beta\alpha_\mathrm{corr2},\\
-%         M_4 &= \frac{6}{5}\alpha_1\alpha_2\alpha_3\alpha_\mathrm{corr3},\\
-%         M_5 &= \frac{9}{5}\alpha_1\alpha_2\alpha_3\alpha_\mathrm{corr1},
-% \end{align}
-% \begin{align}
-%         \mathcal{P}_{SSS} &= \frac{1}{8} + \frac{1}{24}(M_1 + M_2 + M_3 + M_4 + M_5),\\
-%         \mathcal{P}_{FFF} &= \frac{1}{8} + \frac{1}{24}(M_1 - M_2 + M_3 - M_4 - M_5),\\
-%         \mathcal{P}_{[SSF]} &= \frac{3}{8} + \frac{1}{24}(-M_1 + M_2 - M_3 - 3M_4-3M_5),\\
-%         \mathcal{P}_{[SFF]} &= \frac{3}{8} + \frac{1}{24}(-M_1 - M_2 - M_3 + 3M_4 + 3M_5),
-% \end{align}
-%

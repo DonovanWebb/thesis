@@ -37,6 +37,27 @@
     % Available transitions
     % pi-pulses
 
+\begin{table}
+    \begin{center}
+    \begin{tabular}{|c|l|}
+        \hline
+        Parameter & Value \\
+        \hline
+        729-nm laser power & 1~\unit{\mW}\\
+        729-nm pulse duration & 5~\unit{\us} \\
+        854-nm laser power & 60~\unit{\uW}, $250\times I_{\rm SAT}$\\
+        854-nm pulse duration & 40~\unit{\us} \\
+        866-nm laser power & 15~\unit{\uW}, $70\times I_{\rm SAT}$\\
+        866-nm pulse duration & 30~\unit{\us} \\
+        \hline
+    \end{tabular}
+    \end{center}
+    \caption{
+        Experimental parameters used for state preparation of the ion into the $\ket{\downarrow} = \ket{4S_{1/2},~m_j = -1/2}$ state. All lasers frequencies are set to be resonant with the corresponding transition frequencies. For relevant laser powers the estimated corresponding intensity is given in terms of saturation intensities, $I_{\rm SAT}$, of the transition.
+        }
+    \label{tab:state_prep_parameters}
+\end{table}
+
     \begin{figure}
         \begin{center}
         \noindent\includegraphics[width=0.667\linewidth]{
@@ -49,33 +70,12 @@
         \label{fig:stateprep}
     \end{figure}
 
-\begin{table}
-    \begin{center}
-    \begin{tabular}{|c|l|}
-        \hline
-        Parameter & Value \\
-        \hline
-        729-nm laser power & 1000~\unit{\uW}\\
-        729-nm pulse duration & 5~\unit{\us} \\
-        854-nm laser power & 60~\unit{\uW}, $250\times I_{\rm SAT}$\\
-        854-nm pulse duration & 40~\unit{\us} \\
-        866-nm laser power & 15~\unit{\uW}, $\sim 70\times I_{\rm SAT}$\\
-        866-nm pulse duration & 30~\unit{\us} \\
-        \hline
-    \end{tabular}
-    \end{center}
-    \caption{
-        Experimental parameters used for state preparation of the ion into the $\ket{\downarrow} = \ket{4S_{1/2},~m_j = -1/2}$ state. All lasers frequencies are set to be resonant with the corresponding transition frequencies.
-        }
-    \label{tab:state_prep_parameters}
-\end{table}
-
     To utilise two levels of the ion as a qubit, the electronic state must first be prepared into the qubit manifold. Here, the ion is prepared into the $\ket{\downarrow}=\ket{4S_{1/2},~m_j=-1/2}$ state. 
     This is done via optical pumping through $\hat R_x(\pi)$-pulses on the quadrupole transition $\ket{4S_{1/2},~m_j = +1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -3/2}$,
     followed by deshelving pulses using the 854-nm and 866-nm
     lasers on resonance.  Details for the laser parameters are summarised in Table~\ref{tab:state_prep_parameters}. This sequence selectively pumps population out of the state $\ket{4S_{1/2},~m_j=+1/2}$.
-    The $\pi$ and deshelving pulses are repeated $N$ times to further reduce residual population not within the target qubit state, $\ket{\da}$. Figure~\ref{fig:stateprep} shows the state preparation error with increasing $N$. After the deshelve pulse, any population not in $\ket{\da}$ will be in the other $4S_{1/2}$ state. This residual population is shelved to the $3D_{5/2}$-manifold by applying another $\hat R_x(\pi)$-pulse on the same ``optical-pump'' transition. Subsequent readout using state-dependent fluorescence now reveals the population that was successfully prepared in $\ket{\da}$.
-    After $N=7$ pulses there is a state preparation error of $<10^{-3}$. This measurement is limited by systematic errors of the final $\pi$-pulse (as characterised in~\S~\ref{sec:standard_rb}), however, as characterised, this state-preparation is sufficient for our planned experiments.
+    The $\hat R_x(\pi)$ and deshelving pulses are repeated $N$ times to further reduce residual population not within the target qubit state, $\ket{\da}$. Figure~\ref{fig:stateprep} shows the state preparation error with increasing $N$. After the deshelve pulse, any population not in $\ket{\da}$ will be in the other $4S_{1/2}$ state. This residual population is shelved to the $3D_{5/2}$-manifold by applying another $\hat R_x(\pi)$-pulse on the same ``optical-pump'' transition. Subsequent readout using state-dependent fluorescence now reveals the population that was successfully prepared in $\ket{\da}$.
+    After $N=7$ pulses there is a state preparation error of $<10^{-3}$. This measurement is limited by systematic errors of the final $\hat R_x(\pi)$-pulse (as characterised in~\S~\ref{sec:standard_rb}), however, as characterised, this state-preparation is sufficient for our planned experiments.
 
 
 \subsection{Measurement}
@@ -95,27 +95,6 @@
         \label{fig:readout_histogram}
     \end{figure}
 
-    \begin{table}
-        \begin{center}
-        \begin{tabular}{|c|l|}
-            \hline
-            Parameter & Value \\
-            \hline
-            397-nm laser power & 3~\unit{\uW}, $1\times I_{\rm SAT}$ \\
-            397-nm laser detuning & -17.5~\unit{\MHz}\\
-            866-nm laser power & 15~\unit{\uW}, $\sim 70\times I_{\rm SAT}$\\
-            866-nm laser detuning & 0~\unit{\MHz} \\
-            Doppler cooling duration & 1~\unit{\ms}\\
-            Readout duration & 100~\unit{\us} \\
-            Camera threshold & 137 counts \\
-            \hline
-        \end{tabular}
-        \end{center}
-        \caption{
-            Experimental parameters used for Doppler cooling and state-selective fluorescence of the ion. 
-            }
-        \label{tab:397_parameters}
-    \end{table}
 
     To measure the qubit state, the 397-nm and 866-nm lasers
     are applied, and the scattered 397-nm photons are imaged by the objective onto a camera (see~\S~\ref{sec:Imaging System}). 397-nm light will only be scattered if the qubit is in $\ket{\downarrow}$.
@@ -124,6 +103,27 @@
     This efficiency allows the 397-nm beam to be red-detuned to Doppler cooling parameters (see~\S~\ref{sec:Cooling}), while still maintaining low readout duration (100~\unit{\us}) and low readout error. 
     Cooling during readout increases the experiment's repetition rate by reducing the amount of dedicated cooling time required.
 
+    \begin{table}
+        \begin{center}
+        \begin{tabular}{|c|l|}
+            \hline
+            Parameter & Value \\
+            \hline
+            397-nm laser power & 3~\unit{\uW}, $1\times I_{\rm SAT}$ \\
+            397-nm laser detuning & -17.5~\unit{\MHz}\\
+            866-nm laser power & 15~\unit{\uW}, $70\times I_{\rm SAT}$\\
+            866-nm laser detuning & 0~\unit{\MHz} \\
+            Doppler cooling duration & 1~\unit{\ms}\\
+            Readout duration & 100~\unit{\us} \\
+            Camera threshold & 137 counts \\
+            \hline
+        \end{tabular}
+        \end{center}
+        \caption{
+            Experimental parameters used for Doppler cooling and state-selective fluorescence of the ion. For relevant laser powers the estimated corresponding intensity is given in terms of saturation intensities, $I_{\rm SAT}$, of the transition.
+            }
+        \label{tab:397_parameters}
+    \end{table}
     The parameters used for readout are
     summarised in Table~\ref{tab:397_parameters}, and a typical histogram of
     readout counts for one ion can be seen in
@@ -206,7 +206,7 @@ accumulated due to the application of $\hat H_z$ for a fixed time, $T$, is
 $\theta = \delta T$. This phase may be measured through RPE using Ramsey
 spectroscopy. The sequence starts with an initial $\hat R_x(\frac{\pi}{2})$ pulse,
 then a delay with duration $2^kt_0$, followed by a final $\hat R_\phi(\frac{\pi}{2})$
-pulse with variable rotation axis $\vec n = \cos(\phi)\hat\sigma_x +
+pulse with variable rotation axis $\sigma_\phi = \cos(\phi)\hat\sigma_x -
 \sin(\phi)\hat\sigma_y$. Varying the final axis angle, $\phi$, for a given probe
 duration reveals the familiar Ramsey fringes, with phase offset given by
 $\theta$. For sample-efficient data collection, the phases
@@ -741,11 +741,11 @@ sequences~\cite{fang_crosstalk_2022}.
             an interleaved state preparation sequence to ensure there is no
             population trapped outside the closed cooling cycle. The RSB
             length is linearly increased with pulse number $N$, up to the
-            expected RSB $R(\pi)$-pulse duration for $n=1$.  
+            expected $\hat R_{\rm RSB}(\pi)$-pulse duration for $n=1$.  
             (b, c) Thermometry scans after Doppler and sideband cooling.
             The red points are the populations measured via on-resonance RSB
             pulses, and the blue points are the populations after a sequence of
-            $R(\pi)$-RSB-$R(\pi)$ with varying RSB probe durations. The solid
+            $\hat R_x(\pi)-\hat R_{\rm RSB}(\theta(t))-\hat R_x(\pi)$ with varying RSB probe durations. The solid
             lines are fits to a thermal Fock state distribution, with truncation
             at $n = 100$. The extracted mean occupation number is $\bar{n} =
             0.03(1)$, and $\eta\Omega/(2\pi) = 11.6(1)$~\unit{\kHz}. 
@@ -758,8 +758,8 @@ sequences~\cite{fang_crosstalk_2022}.
             \hline
             Parameter & Value \\
             \hline
-            729-nm laser power & 3.0~\unit{\mW}\\
-            729-nm laser detuning & -4.0~\unit{\MHz}*\\
+            729-nm laser power & 3~\unit{\mW}\\
+            729-nm laser detuning & -4~\unit{\MHz}\\
             729-nm pulse duration $N = 1$ & 2.5~\unit{\us}\\
             729-nm pulse duration $N = N_{\rm max}$ & 33~\unit{\us}  \\
             Repumping 866-nm duration & 14~\unit{\us}\\
@@ -769,8 +769,8 @@ sequences~\cite{fang_crosstalk_2022}.
         \end{tabular}
         \end{center}
         \caption{
-            *729-nm detuning is relative to the $\ket{4S_{1/2},~m_j=-1/2} \leftrightarrow \ket{3D_{5/2},~m_j=-5/2}$ transition frequency.\\
-            Experimental parameters used for sideband cooling. Other parameters for the repump and deshelve pulses are the same as for state preparation, see Table~\ref{tab:state_prep_parameters}. The 729-nm laser is detuned to the RSB resonance for the upper radial mode, $\omega_{\rm upper}/2\pi = 4.0$~\unit{\MHz}, and the pulse duration for $N=N_{\rm max}$ is chosen to be the expected RSB $R(\pi)$-pulse duration for $n=1$. 
+            Experimental parameters used for sideband cooling. 
+            The 729-nm detuning is relative to the qubit transition. Other parameters for the repump and deshelve pulses are the same as for state preparation, see Table~\ref{tab:state_prep_parameters}. The 729-nm laser is detuned to the RSB resonance for the upper radial mode, $\omega_{\rm upper}/2\pi = 4.0$~\unit{\MHz}, and the pulse duration for $N=N_{\rm max}$ is chosen to be the expected $\hat R_{\rm RSB}(\pi)$-pulse duration for $n=1$. 
             }
         \label{tab:sbc_parameters}
     \end{table}
@@ -782,7 +782,7 @@ sequences~\cite{fang_crosstalk_2022}.
     sideband technique employed consists of RSB pulses on the 729-nm transition, followed by
     deshelving, and repumping pulses on the 854-nm and 866-nm transitions
     respectively. 
-    For efficient cooling, initial short 729-nm pulses are applied to preferentially excite the thermal population with high phonon number, as the pulse duration for RSB $R(\pi)$ is proportional to $\sqrt{n}$, where $n$ is the phonon number.  The RSB pulse length is linearly increased to the expected RSB $R(\pi)$-pulse duration for $n=1$.
+    For efficient cooling, initial short 729-nm pulses are applied to preferentially excite the thermal population with high phonon number, as the pulse duration for $\hat R_{\rm RSB}(\pi)$ is proportional to $\sqrt{n}$, where $n$ is the phonon number.  The RSB pulse length is linearly increased to the expected $\hat R_{\rm RSB}(\pi)$-pulse duration for $n=1$.
 
     An example pulse sequence for a single experimental shot using sideband cooling, can be seen in
     Figure~\ref{fig:SBC} (a). Experimental parameters used are summarised in Table~\ref{tab:sbc_parameters}.
@@ -790,7 +790,7 @@ sequences~\cite{fang_crosstalk_2022}.
     We use the RSB of the transition $\ket{4S_{1/2},~m_j = -1/2} \leftrightarrow \ket{3D_{5/2},~m_j = -5/2}$ as the subsequent deshelve and spontaneous decay from $\ket{4P_{3/2},~m_j=-3/2}$ to $\ket{4S_{1/2},~m_j=-1/2}$ forms a closed cycle, lessening the need for state-preparation pulses throughout the sideband-cooling sequence.\\
 
     To verify the efficacy of our sideband cooling, thermometry
-    experiments are performed by probing Fock state populations. This is done using on resonance RSB pulses and effective BSB pulses composed of a $\hat R_x(\pi)$-RSB-$\hat R_x(\pi)$ pulse
+    experiments are performed by probing Fock state populations. This is done using on resonance RSB pulses and effective BSB pulses composed of a $\hat R_x(\pi)-\hat R_{\rm RSB}(\theta(t))-\hat R_x(\pi)$ pulse
     sequences. The spin population dynamics are measured as RSB
     pulse length, $t$, is varied. In the case of Fock state $\ket{0}$, there should be full contrast 
     ``BSB'' oscillations, and no visible oscillations when probed with RSB pulses. A thermal
@@ -1252,7 +1252,7 @@ sequences~\cite{fang_crosstalk_2022}.
          Operation & Fidelity & Section \\
          \hline\hline
          State Prep &99.96(2)& \S~\ref{sec:Stateprep}\\
-         Measurement &$ < 99.7(3)$& \S~\ref{sec:standard_rb}\\
+         Measurement &$ \ge 99.7(3)$& \S~\ref{sec:standard_rb}\\
          $\hat R_x(\pi/2)$ & 99.913(2) & \S~\ref{sec:standard_rb}\\
          $\hat R_{xx}(\pi/2)$ & 98.3(4) & \S~\ref{sec:Two-Qubit Entangling Gates}\\
     \end{tabular}

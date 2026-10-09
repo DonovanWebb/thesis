@@ -168,3 +168,4 @@ main.gls
 main.ist
 .vscode/ltex.disabledRules.en-GB.txt
 .vscode/ltex.hiddenFalsePositives.en-GB.txt
+figures/make_figure/ch3/__pycache__/graph_style.cpython-312.pyc
