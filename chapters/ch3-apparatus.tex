@@ -73,13 +73,14 @@
     \begin{figure*}
         \begin{center}
         \includegraphics[width=\linewidth]{figures/pdf_figure/ch3/schematic_v2.pdf}
-        \caption{\todo{point to glossary?} Block diagram schematic of the \textit{FastGates} apparatus.
+        \caption{Block diagram schematic of the \textit{FastGates} apparatus.
         Blocks resemble discrete subsystems, which shall be discussed within
         this chapter. Lines resemble relevant optical (free-space or in-fibre),
         RF, DC, and communication paths between subsystems.
         Block location signifies whether the device is in-vacuum,
         within the magnetic shielded (MuMetal) box, within the ``trap lab'', or
-        within the ``laser lab''.  }
+        within the ``laser lab''. Acronyms are provided in the 
+        \hyperref[gloss]{List of Abbreviations}. }
         \label{fig:apparatus}
         \end{center}
     \end{figure*}
@@ -207,7 +208,7 @@
         \begin{center}
         \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch3/res_comb.pdf}
         \end{center}
-        \caption{\todo{write appendix on how this was calculated} Expected fractional PSD after the resonator, and estimated mode frequency noise. (a) Resonator circuit diagram. (b) Resonator line shape, given by magnitude of the transfer function $|H(f)|$. (c) Expected AM and FM fractional noise spectra after the resonator. (d) Integrated RMS noise of radial motional mode frequency due to the RF chain.}
+        \caption{Expected fractional PSD after the resonator, and estimated mode frequency noise. (a) Resonator circuit diagram. (b) Resonator line shape, given by magnitude of the transfer function $|H(f)|$. (c) Expected AM and FM fractional noise spectra after the resonator. (d) Integrated RMS noise of radial motional mode frequency due to the RF chain.}
             \label{fig:res_H}
     \end{figure}
 
@@ -234,7 +235,7 @@
     of the \emph{Artiq Sinara}~\cite{kasprowicz_artiq_2020} hardware ecosystem. \emph{Urukul} is used extensively in our lab for driving acousto-optic modulators (AOMs) and here used as the source drive of our trap RF.
     The \emph{Urukul} is operated at maximum output power, $+10$~dBm, and with a frequency $\sim 35$~MHz (set by the resonator, discussed below).
 
-    Figure~\ref{fig:SSB_chain}, panel (a) displays the \emph{Urukul} AM and FM spectra. The \emph{Urukul} is phase referenced to the master FPGA board (\emph{Kasli}), which is in turn phase locked to an external $10~\unit{\mega\hertz}$ atomic clock\footnote{\todo{ToDo: Abaqus atomic clock PN}}. It can be seen that AM noise component dominates up $\sim 1$~MHz, suggesting that this will be the limiting error source for motional mode stability.
+    Figure~\ref{fig:SSB_chain}, panel (a) displays the \emph{Urukul} AM and FM spectra. The \emph{Urukul} is phase referenced to the master FPGA board (\emph{Kasli}), which is in turn phase locked to an external $10~\unit{\mega\hertz}$ atomic clock. It can be seen that AM noise component dominates up $\sim 1$~MHz, suggesting that this will be the limiting error source for motional mode stability.
     The AM noise may be reduced by using a nonlinear voltage clamp. We use an ``ultra-low noise limiting amplifier'' named
     \emph{Squareatron} developed previously in the Oxford group, and further refined by \emph{Oxford Ionics}. 
     \emph{Squareatron} takes an input RF signal and converts to a stable amplitude square-wave output which is subsequently bandpassed around the desired RF frequency to recover the sinusoidal signal, but with significantly reduced AM noise.
@@ -320,15 +321,11 @@
     = 10$~Hz. It can be seen that the expected noise is dominated by the AM
     contribution, and in the frequency range considered, corresponds to a mode
     frequency instability of $\sigma_r \approx 30~\unit{\hertz}$. This analysis
-    excludes slow drift frequency noise less than $10~\unit{\hertz}$, and environmental noise coupled in by the resonator, which may be a significant
+    assumes the mode frequency responds linearly to noise at all considered frequencies, it excludes slow drift frequency noise less than $10~\unit{\hertz}$, and is not sensitive to environmental noise coupled in by the resonator. The latter of which may be a significant
     contribution at low frequencies due to thermal and mechanical noise. The
     motional modes will also be subject to noise from other coupling mechanisms,
     such as voltage noise on the DC electrodes, or fluctuating stray electric
-    fields, which we do not consider here. 
-    \todo{Quick outlook here...}
-
-    Here, we have characterised both AM and FM noise on the RF chain and
-    estimated the expected contribution to motional mode instability. 
+    fields, which we do not consider here. Nevertheless, this quantitative analysis suggests negligible noise on the trap RF line, and so it is likely not a limiting error source for motional mode coherence (measured in~\S~\ref{sec:Motional Coherence}).
 
 \subsection{Trap DC Voltages}
 \label{sec:Trap DC Voltages}
@@ -497,7 +494,7 @@
     BT} C15440-20UP} for spatially selective qubit readout on a multi-ion chain, and 
     a photon multiplier tube (PMT)\footnote{\emph{Hamamatsu} Photon counting head H10682-210}, for experiments requiring time resolved photon counting.
     Typical signals of both devices can be seen in the right panels of Figure~\ref{fig:readout}. 
-    The optical path consists of a high numerical aperture objective\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} (effective focal length, $f=33~\unit{\milli\meter}$),  a dichroic mirror\footnote{\todo{\emph{Thorlabs} TODO}} (transmission: $397~\unit{\nano\meter}$; reflection: $729~\unit{\nano\meter}$), a relay lens\footnote{\emph{Thorlabs} Achromat Doublet, ACT508-200-A-ML} ($f=200~\unit{\milli\meter}$), a $90:10$ plate beamsplitter\footnote{\todo{\emph{Thorlabs} TODO}}, and the camera and PMT. 
+    The optical path consists of a high numerical aperture objective\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} (effective focal length, $f=33~\unit{\milli\meter}$),  a dichroic mirror\footnote{\emph{ThorLabs} DMSP550L} (transmission: $397~\unit{\nano\meter}$; reflection: $729~\unit{\nano\meter}$), a relay lens\footnote{\emph{ThorLabs} Achromat Doublet, ACT508-200-A-ML} ($f=200~\unit{\milli\meter}$), a $90:10$ plate beamsplitter, and the camera and PMT. 
 
     The objective lens is custom designed to compensate for aberrations due to the recessed vacuum viewport, however, due to the large NA, accurate alignment of all degrees of freedom of the objective is critical. As such, the NA is attached to a 5-axis alignment stage\footnote{\emph{Newport ULTRAlign} M-562-XYZ, M-36, SM-13}, with z-axis focus controlled by a piezo micrometer\footnote{\emph{Newport CONEX-TRA12CC}} for fine adjustment of the ion focus with the MuMetal box closed (requires $<\unit{\micro\meter}$ precision).
 
@@ -636,7 +633,7 @@
     cavity\footnote{\emph{Stable Laser Systems} SLS-6010-1-4bore} under vacuum and
     temperature control, two lenses for matching the collimated input beam to the
     cavity mode, and a beamsplitter and $\lambda/4$ waveplate for directing the
-    reflected cavity light to a fast photodiode\footnote{\emph{Thorlabs} PDA10A2}.
+    reflected cavity light to a fast photodiode\footnote{\emph{ThorLabs} PDA10A2}.
     The beatnote due to the carrier and PDH sidebands are mixed down and
     low-passed by the \emph{Toptica} PDH module to produce the signature
     antisymmetric PDH trace, as seen in the upper-right panel of Figure~\ref{fig:PDH}. The gains for PID controllers of both the diode current
@@ -644,7 +641,7 @@
 
     The light from
     the ``laser'' laboratory is carried to the ``trap'' laboratory using 16~m
-    polarisation maintaining (PM) fibres\footnote{\todo{\emph{Schafter-Kirchoff} ...}}. In
+    polarisation maintaining (PM) fibres\footnote{\emph{Schafter-Kirchoff} (854/866-n) PMC-780-5.3-NA012-3-APC-1600-P, (397-nm) PMC-E-360Si-2.3-NA012-3-APC.EC-1600-P.}. In
     the ``trap'' laboratory we use AOMs in a double pass configuration for both
     frequency shifting and power stabilising the light
     (fig~\ref{fig:diode_paths} (d) and (e)). 
@@ -660,11 +657,11 @@
     plane after initial rough alignment. To ensure the two beams overlap at the
     ion plane, care was taken for the beam propagation to be perpendicular to
     both the lens and vacuum viewport window, and a parabolic mirror
-    outcoupler\footnote{\emph{Thorlabs} RC02APC-F01} (rather than a lens) was
+    outcoupler\footnote{\emph{ThorLabs} RC02APC-F01} (rather than a lens) was
     used inside the MuMetal box.
 
     The 854-nm and 866-nm light is combined after
-    their respective double and single pass AOMs, and coupled into a 3~m PM\footnote{\todo{\emph{SK} ...}}
+    their respective double and single pass AOMs, and coupled into a 3~m PM\footnote{\emph{Schafter-Kirchoff} PMC-780-5.3-NA012-3-APC-300-P}
     fibre carrying the light into the enclosure.
 
     Light from both the PI and the 397/854/866-nm paths are directed onto the
@@ -760,8 +757,8 @@
     Some light is picked off and sent to a wavemeter to continuously monitor the
     frequency. However, the majority is coupled to two output fibres for our
     experiment and another within the Oxford group. The 729-nm light is transported from
-    a dedicated laser lab to a the trap apparatus lab by a 10~m
-    single-mode-PM fibre\footnote{\todo{\emph{SK} ...}}.  The fibre
+    a dedicated laser lab to a the trap apparatus lab by a 12~m
+    single-mode-PM fibre\footnote{\emph{Schafter Kirchoff} PMC-630Si-3-18/10-1200}.  The fibre
     introduces phase noise due to mechanical and thermal pertubations along the 10~m
     length. To remove this introduced noise, passive stabilisation in
     the form of thick foam tubing along the fibre length, as well as active
@@ -851,8 +848,8 @@
     optical elements are located on two height levels with a periscope steering
     the beam between them. The beam is delivered via single-mode PM fibre to the upper level where it is steered through the first
     AOD, with beam angle optimised for maximum diffraction efficiency into the
-    $-1^{st}$ order. Two lenses\footnote{\todo{P/N}} in a $4f$ configuration
-    re-image the deflection origin of the first AOD\footnote{\todo{P/N}} onto
+    $-1^{st}$ order. Two $f=35~\unit{\milli\meter}$ lenses in a $4f$ configuration
+    re-image the deflection origin of the first AOD\footnote{\emph{ISOMET} OAD1343-T75S-9} onto
     the second AOD with the second AOD angled for maximum diffraction efficiency
     into the $+1^{st}$ order. The cAOD arrangement is termed ``crossed'' as the
     second AOD is rotated by some angle $\alpha$ with respect to the first, so
@@ -876,15 +873,15 @@
     displacing the off-axis beams from the ion chain, as shown schematically in Figure~\ref{fig:AOD_alpha}.
 
     To translate this deflection angle into some physical displacement at the ion
-    plane, a telecentric scanning lens\footnote{\todo{P/N}} is used. The
+    plane, a telecentric scanning lens\footnote{\emph{ThorLabs} LSM03-VIS} is used. The
     telecentricity ensures that the beam $k$-vector is fixed across the
     scanned area, which is important for standing wave gate schemes to avoid
     unwanted travelling wave components. At the intermediate focus after the
     scanning lens, the unwanted orders are blocked by an adjustable slit
     aperture and the beam polarisation is cleaned and selected using a
     polarisation filter and half-wave plate. A plate beam
-    splitter\footnote{\todo{P/N}} is used within the persicope to pick off $\approx
-    5\%$ of the light for monitoring on a photodiode\footnote{\todo{P/N}}. This photodiode is
+    splitter is used within the persicope to pick off $\approx
+    5\%$ of the light for monitoring on a photodiode\footnote{\emph{ThorLabs} SM05PD1A}. This photodiode is
     used for an intensity-stabilising feedback loop as
     discussed in~\S~\ref{sec:Intensity Stabilisation}. The scan lens, in
     combination with a relay lens, forms a beam expander to increase the beam NA
@@ -909,19 +906,20 @@ with $n$ being the number of addressed spots. As such, we limit the single-ion a
 have a global beam that has dimensions larger than the ion chain to address all the ions in parallel. This global branch is currently counterpropagating to the single-ion addressing path, and shares the same optical path as the imaging system (see Figure~\ref{fig:readout}). To increase
 the beam intensity at the ions, the global branch uses an anamorphic prism
 pair\footnote{\emph{ThorLabs} PS883-B} to elliptically shape the beam, with a
-4:1 aspect ratio, with major axis along the ion chain direction.  The beam is focussed onto the ion plane using an \todo{$f=xx$} lens\footnote{\todo{P/N}}, resulting
+4:1 aspect ratio, with major axis along the ion chain direction.  The beam is focussed onto the ion plane by the high-NA objective, 
+with an effective focal length $f=34.35~\unit{\milli\meter}$ at 729-nm, resulting
 in a major axis beam waist radius of $52(3)~\unit{\micro\meter}$\footnote{The
 beam profile was measured by extracting per-ion Rabi frequencies while driving
 on resonance quadrupole transitions (see~\S~\ref{sec:Single Qubit Gates}) and
 assuming a Gaussian
 cross section.}. As with the other beams directed to the ion, we use a final piezo controlled mirror\footnote{\emph{ThorLabs POLARIS}-K2S2P} for fine alignment and control when the MuMetal enclosure is closed.
 
-\section{Control System}
-% Main points:
-    % Artiq and Sinara
-    % FPGA control
-    % Timing resolution
-    \todo{Could tie up loose end here of control FPGA blocks.}
+% \section{Control System}
+% % Main points:
+%     % Artiq and Sinara
+%     % FPGA control
+%     % Timing resolution
+%     \todo{Could tie up loose end here of control FPGA blocks.}
 
 \section{Ion Loading}
 % Main points:
