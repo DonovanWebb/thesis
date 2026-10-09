@@ -200,10 +200,12 @@ Exponentiating\footnote{Using identity $e^{-i\theta \vec{n}\cdot\vec{\sigma}/2}
 \end{equation}
 which is a rotation on the Bloch sphere by angle $\theta = \Omega t$, around the Bloch vector, $\hat\sigma_\phi$. Varying phase $\phi$ then sets the rotation axis in the $xy$-plane, with $\hat R_x(\theta):=e^{-i\theta\hat\sigma_x/2}$ defined for $\phi=0$. 
 Applying single qubit rotations to the initial state $\ket{\da}$ and observing the spin populations results in spin-state transfers, termed Rabi oscillations,
+\begin{subequations}
 \begin{align}
 P_\ua &= |\bra{\ua}\hat R_x(\Omega t)\ket{\da}|^2\\
 &= \sin^2\left(\frac{\Omega t}{2}\right),
 \end{align}
+\end{subequations}
 where $P_\ua$ is the population observed in $\ket{\ua}$.
 
 \subsubsection{AC Stark Shifts}
@@ -318,11 +320,13 @@ where $m$ is the ion mass, and $\hat x$, $\hat p$ are the position and momentum 
 
 In the phonon, or Fock-state, representation, the creation and annihilation operators, $\hat a^\dagger$ and $\hat a$,
 are related to this picture by,
-\begin{align}
+\begin{subequations}
     \label{eqn:x_ladder}
+\begin{align}
     \hat x &= x_0 (\hat a^\dagger + \hat a),\\
     \hat p &= ip_0 (\hat a^\dagger - \hat a),
 \end{align}
+\end{subequations}
 where $x_0=\sqrt{\frac{\hbar}{2m\omega_x}}$ is the ground state wave-packet extent, and $p_0 = \sqrt{\frac{\hbar m \omega_x}{2}}$ is the ground state momenta.
 These ladder operators provide an alternative basis to describe the oscillator state. They act on the oscillator energy levels as,
 \begin{equation}
@@ -372,10 +376,12 @@ where $\Omega_D = \frac{ex_0E_0}{\hbar}$. Expanding the oscillating field and as
 where $\delta = \omega - \omega_x$.
 
 In the case of resonant driving, $\delta = 0$, the Hamiltonian becomes time-independent, and we recover the propagator,
+\begin{subequations}
 \begin{align}
     \hat D(\beta) := \hat U(t) &= e^{i\frac{\Omega_D t}{2}(\hat a^\dagger e^{-i\phi}+\hat a e^{i\phi})},\\
     &= e^{\beta \hat a^\dagger - \beta^*\hat a},
 \end{align}
+\end{subequations}
 recognising the second expression as the conventional displacement operator,
 $\hat D(\beta)$, with $\beta = \frac{\Omega_D t}{2}ie^{-i\phi}$. The
 displacement operator is used in the coherent state representation of the
@@ -464,10 +470,12 @@ Taking $\delta = 0$, and assuming $\eta\Omega \ll \omega_x$ (adiabatic driving) 
 The two remaining resonance conditions are termed sidebands, with $\delta = +\omega_x + \Delta $, and $\delta = -\omega_x - \Delta$, with $\Delta \ll \omega_x$, yielding the blue-sideband (BSB) and red-sideband (RSB) respectively.
 To ensure off-resonant carrier excitations are negligible, it is required that $\Omega \ll \omega_x$.
 In this case, the sideband Hamiltonians are written as,
+\begin{subequations}
 \begin{align}
     \hat H_{\rm BSB} &= \frac{i\hbar \eta\Omega}{2}\left( \hat\sigma_+\hat a^\dagger e^{-i(\Delta t-\phi)} - \hat\sigma_-\hat a e^{i(\Delta t -\phi)}\right),\\
     \hat H_{\rm RSB} &= \frac{i\hbar \eta\Omega}{2}\left(\hat\sigma_+\hat a e^{i(\Delta t + \phi)} - \hat\sigma_-\hat a^\dagger e^{-i(\Delta t +\phi)}\right),
 \end{align}
+\end{subequations}
 with the subscript labelling either BSB or RSB interactions.
 When $\Delta = 0$, the RSB is the Jaynes-Cummings Hamiltonian
 familiar from cavity QED. It describes the coherent exchange of a single quantum of energy between a two-level system
@@ -581,8 +589,10 @@ Starting from the initial separable spin state $\ket{\da\da}$, application of $\
     \hat R_{xx}\left(\frac{\pi}{2}\right) \ket{\da\da} = \frac{1}{\sqrt{2}}(\ket{\da\da}-i\ket{\ua\ua}).
 \end{equation}
 Setting $\theta = \pi/2$ and ensuring the duration is an integer number of loop periods restricts the gate detuning to $\Delta = \delta_g$ and $T = T_n$ with,
-\begin{align}
+\begin{subequations}
     \label{eqn:nloop}
+\begin{align}
 \delta_g &= 2\sqrt{n}\Omega_{\rm SDF},\\
 T_n &= \frac{\pi\sqrt{n}}{\Omega_{\rm SDF}}.
 \end{align}
+\end{subequations}
