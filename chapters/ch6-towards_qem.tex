@@ -1,30 +1,23 @@
 \chapter{Towards Hybrid System Control and Quantum Error Mitigation}
-% or
-% \chapter{Future Directions: Hybrid Quantum Control and Error Mitigation}
 \label{ch:QEM}
 \minitoc
-Having established and characterised the experimental
-apparatus and demonstrated its application to \emph{k-copy} randomised
-benchmarking, in this chapter we consider future research goals utilising the
-multi-qubit arrays enabled through the \emph{NPL} trap (\S~\ref{sec:The Ion Trap}),
-the individual-ion addressing system (\S~\ref{sec:Single Addressing System}), and
-the developed control over both the qubits, which encode discrete variables, and the
-motional modes, which encode continuous variables. 
+
+Having established and characterised the experimental apparatus and demonstrated its application to \emph{k-copy} randomised benchmarking, we now turn to future research directions. These build on the multi-qubit arrays enabled by the \emph{NPL} trap (\S~\ref{sec:The Ion Trap}) and individual-ion addressing system (\S~\ref{sec:Single Addressing System}), together with the developed control over qubits encoding discrete variables and motional modes encoding continuous variables.
 
 In the chapter we establish a set of unitary operations required for
 universal continuous-variable (CV)
-control of the ion motion and discuss the extensions to hybrid spin-oscillator
+control of the ion motion and discuss its extension to hybrid spin-oscillator
 systems.
 Following on from recent
 progress in spin-conditioned bosonic operations demonstrated within our
 group~\cite{bazavan_squeezing_2026,saner_generating_2026, bazavan_easy_2024,
 saner_quantum_2026, shinbrough_applications_2026, saner_aharonovbohm_2026}, we are interested in developing the
-required addressing capabilities to scale to multiple qubits and motional modes. 
+required addressing capabilities to scale to multiple qubits and qumodes. 
 We outline the method we use to generate such spin-oscillator
 interactions experimentally, and demonstrate the generation of a single-mode squeezed state
-on the new apparatus. We then outline the next steps required for demonstrating
+on the new apparatus. We then outline the next steps required for realising
 the remaining single- and two-mode interactions, and future experiments
-this will enable. 
+this control will enable. 
 
 In the second half of this chapter we consider an error mitigation technique
 applicable to both discrete and continuous systems. Developing this, and
@@ -40,7 +33,7 @@ impact of error channels that induce multi-qubit correlations on the efficacy of
 particularly focussing on correlated noise due to a common
 fluctuating control field as discussed in the
 Chapter~\ref{ch:k-copy}~\S~\ref{sec:common_noise}. The \emph{k-copy}
-protocol developed in that chapter is utilised to quantify this unfavourable error, and inform
+protocol we developed is utilised to quantify this unfavourable error, and inform
 predictions on the performance of virtual distillation in this context. The section is concluded with a discussion on the application of virtual
 distillation to larger system sizes, and to hybrid systems, presenting a scalable method within reach of our
 apparatus.
@@ -50,7 +43,12 @@ apparatus.
 CV quantum computation~\cite{lloyd_quantum_1999} offers an alternative strategy for encoding quantum information, utilising
 quantum harmonic oscillators, termed \emph{qumodes},
 as the fundamental quantum object, rather than discrete variable (DV) systems, e.g. the two-level qubit. A single ideal qumode possesses an infinite dimensional Hilbert space, allowing for high (in this case arbitrarily high) density encoding of information in physical information carriers. This opens an alternative avenue for scaling QIPs, requiring dramatically fewer physical carriers compared to qubit-only systems. The inclusion of both CV and DV subsystems, termed the hybrid model~\cite{liu_hybrid_2026}, retains the convenient control and readout of discrete qubits while providing the larger state space and native interactions available to qumodes. The hybrid system is a promising avenue for quantum simulation, with the ability to encode spins with physical two-level systems, whilst encoding bosons efficiently using bosonic physical systems~\cite{saner_aharonovbohm_2026, crane_hybrid_2024}.
-For computation the large state space of hybrid systems allows for highly resource efficient circuit decompositions. For example, reference~\cite{brenner_factoring_2025} considers a factoring algorithm whose required physical resources are independent of the number to be factored. Remarkably, this scheme requires only a single qubit and three oscillators, however requires prohibitively large energy states of the oscillator.
+For computation the large state space of hybrid systems allows for highly
+resource efficient circuit decompositions. For example,
+Reference~\cite{brenner_factoring_2025} considers a factoring algorithm whose
+required physical resources are independent of the number to be factored.
+Remarkably, this scheme requires only a single qubit and three oscillators;
+however, it requires prohibitively large energy states of the oscillator.
 Practically, we will not be able to realise arbitrarily high energy oscillator states, but it is still an open question of what information density is possible in experimentally accessible quantum oscillators.
 
 Hybrid spin-oscillator computation has been studied in the context of
@@ -98,13 +96,13 @@ well-placed for studying methods for scaling hybrid-system control.
         \end{tabular}
         \end{center}
         \caption{
-            An example set of unitary interactions to compose a universal gate set for continuous variable computation. The name for the CV interaction, the bosonic operator component of the Hamiltonian, if it is Gaussian, and the number of oscillators it acts on are given. These CV interactions are accessible and may be extended to hybrid-interactions (CV-DV) by using the protocol presented in reference~\cite{sutherland_universal_2021}, here termed the ``Two-SDF'' method. The required relative detuning setting, $m$, the resulting spin conditioning, $\hat\sigma$, and the effective coupling strength $\Omega_\mathrm{eff}$ are shown here. The first row is a single SDF with strength
+            An example set of unitary interactions to compose a universal gate-set for continuous variable computation. These CV operations are promoted to hybrid spin-oscillator interactions through using the ``two-SDF'' implementation, described in Reference~\cite{sutherland_universal_2021}. The name for the bosonic operator component of the Hamiltonian, if it is Gaussian, and the number of oscillators it acts on are given. The required relative detuning setting, $m$, the resulting spin conditioning, $\hat\sigma$, and the effective coupling strength $\Omega_\mathrm{eff}$ are shown here. The first row is a single SDF with strength
             $\Omega_\alpha$. The other coupling strengths are found via the 2nd and 3rd terms of the Magnus expansion: $\Omega_2=\Omega_\alpha\Omega_{\alpha'}/\Delta$, $\Omega_3=\Omega_{\alpha}^2\Omega_{\alpha'}/\Delta^2$.
             }
         \label{tab:gateset}
     \end{table}
 
-    For any computing paradigm, we must establish a set of interactions required for universal computing (i.e. Turing complete). In DV-only systems, quantum universality may be realised by a finite set of Clifford operations plus one non-Clifford gate~\cite{nielsen_quantum_2010, aaronson_improved_2004}. CV-only universality can analogously be realised by a finite set of Gaussian operations plus one non-Gaussian gate~\cite{braunstein_quantum_2005,lloyd_quantum_1999}.
+    For any computing paradigm, we must establish a set of interactions required for universal computing (i.e. a Turing-complete gate-set). In DV-only systems, quantum universality may be realised by a finite set of Clifford operations plus one non-Clifford gate~\cite{nielsen_quantum_2010, aaronson_improved_2004}. CV-only universality can analogously be realised by a finite set of Gaussian operations plus one non-Gaussian gate~\cite{braunstein_quantum_2005,lloyd_quantum_1999}.
     The term Gaussian is understood in the position-momentum representation of the qumode, as discussed in~\S~\ref{sec:qumode}, where the bare oscillator Hamiltonian is given by,
     \begin{equation}
         \hat H_{\rm osc} = \frac{1}{2m}\hat p^2 + \frac{1}{2}m\omega_x^2\hat x^2,
@@ -112,19 +110,20 @@ well-placed for studying methods for scaling hybrid-system control.
     with $\hat x$ and $\hat p$ quadratures expressible in terms of creation and annihilation operators, as given in equation~\ref{eqn:x_ladder}.
     Gaussian operators are then the set of interactions containing at most quadratic terms in $\hat x$ and $\hat p$, therefore mapping Gaussian input states to Gaussian output states. 
 
-    The condition for universality of a hybrid CV-DV is somewhat ambiguous as both the CV and DV subsystems are themselves sufficient for computational universality\footnote{We note that ``universality'' is perhaps misleading terminology. We specifically mean here the ability to simulate any other physical system, i.e. Turing complete. However, we note that universal is also used in the context that the gate-set is sufficient to access any state in the corresponding Hilbert space to an arbitrary level of accuracy. These two criteria are not synonymous --- the latter in fact encompasses Turing universality.}, however this presents an opportunity: the freedom in selecting the chosen gate-set for universality, combining both Clifford, non-Clifford, Gaussian, non-Gaussian, and spin-oscillator interactions together, allows for selecting efficient, native, and simply accessed interactions of the physical platform. 
-    We consider the over-complete instruction set presented in Table~\ref{tab:gateset}, consisting of spin-conditioned Gaussian and non-Gaussian interactions. The total Hamiltonian is given by,
+    The condition for universality of a hybrid CV-DV is somewhat ambiguous as both the CV and DV subsystems are themselves sufficient for computational universality\footnote{We note that ``universality'' is perhaps misleading terminology. We specifically mean here the ability to simulate any other physical system, i.e. Turing complete. However, we note that universal is also used in the context that the gate-set is sufficient to access any state in the corresponding Hilbert space to an arbitrary level of accuracy. These two criteria are not synonymous --- the latter in fact encompasses Turing universality.}, however this presents an opportunity: the freedom in selecting the chosen gate-set for universality, combining both Clifford, non-Clifford, Gaussian, non-Gaussian, and spin-oscillator interactions together. This allows for circuits to be decomposed efficiently into native, and simply accessed interactions of the physical platform. 
+    We consider the over-complete instruction set presented in Table~\ref{tab:gateset}, consisting of spin-conditioned Gaussian and non-Gaussian interactions. The general Hamiltonian for these interactions is given by,
     \begin{equation}
         \hat H = \hat H_s\otimes \hat I_{\rm osc} + \hat I_s\otimes \hat H_{\rm osc} + \hat H_I^{\rm (s)}\otimes\hat H_I^{\rm (osc)},
     \end{equation} 
     where $\hat H_s$ and $\hat H_{\rm osc}$ are the bare Hamiltonians describing the qubit and qumode, and the interaction Hamiltonian is split into spin-only, $\hat H_I^{\rm (s)}$, and motional-only, $\hat H_I^{\rm (osc)}$, acting components. These interaction components are provided in the table.
 
-    This set of interactions on the bosonic subsystems already enable computational universality, however the spin-conditioning provides a bridge between CV and DV subsystems, enabling readout and control to be implemented on auxiliary qubits.
-    Specifically, we consider a cubic CV instruction set~\cite{lloyd_quantum_1999, eriksson_universal_2024, hillmann_universal_2020}, taking the Gaussian operations and supplementing with a non-Gaussian ``trisqueezing'' gate, with Hamiltonian,
+    These interactions on the bosonic subsystems are sufficient to achieve computational universality. They constitute a cubic CV instruction set~\cite{lloyd_quantum_1999, eriksson_universal_2024, hillmann_universal_2020}, extending the Gaussian operations with the non-Gaussian ``trisqueezing'' gate, described by the Hamiltonian,
     \begin{equation}
         \hat H_T \propto \hat a^3 + \hat a^{\dagger 3}.
     \end{equation}
-    Spin-conditioned trisqueezing has been shown previously in our group~\cite{bazavan_squeezing_2026}, utilising the protocol given in reference~\cite{sutherland_universal_2021}, here termed the ``two-SDF'' method.
+    However, the implicit spin conditioning imposed by the ``two-SDF'' method provides a bridge between the CV and DV subsystems, allowing readout and control to be implemented through auxiliary qubits.
+
+    Spin-conditioned trisqueezing has been shown previously in our group~\cite{bazavan_squeezing_2026}, utilising the protocol given in Reference~\cite{sutherland_universal_2021}, here termed the ``two-SDF'' method.
 
     The remaining nonlinear Gaussian operations; squeezing, parity, and beam-splitter, may be generated through the same ``two-SDF'' mechanism, which we shall detail in the following section, and have also been previously demonstrated~\cite{bazavan_squeezing_2026,saner_aharonovbohm_2026,bazavan_easy_2024,saner_quantum_2026}.
 
@@ -133,20 +132,10 @@ well-placed for studying methods for scaling hybrid-system control.
     As highlighted in this section, the required unitaries for universal hybrid CV-DV control may all be accessed by a common protocol: The ``two-SDF'' method. This greatly simplifies experimental hardware and control complexity. 
     We shall give an overview of this method in the following section, and provide a practical route and demonstration utilising four optical frequencies with fixed relative detunings and phases.
 
-
-    % The squeezing operation, given by Hamiltonian,
-    % \begin{equation}
-    %     H_T \propto a^2 + a\dagger^2,
-    % \end{equation}
-    % leads to a reduction in variance along one quadrature in position-momentum space, at a cost of increase orthogonal variance. Squeezing has been shown spin-independently through parametric excitation of the trapping field~\cite{}, and has been demonstrated with spin-conditioning through exciting higher order motional sidebands~\cite{}, through static Stark-shift curvatures due to an optical tweezer~\cite{leindecker_state_2026}, by non-commuting sideband interactions~\cite{syndney_optimal}, and by non-commuting SDFs~\cite{bazavan_squeezing_2026}, of which the latter protocol we shall use here.
-    
-    % \todo{
-    %       - Could give flow fields for single-mode operators (could be a nice figure,
-    % and I like that representation).\\}
     \subsubsection{Gate Implementation}
     \label{sec:two-sdf}
     To implement the unitaries given in Table~\ref{tab:gateset} with spin-dependent control, 
-    we use the ``two-SDF'' method proposed in reference~\cite{sutherland_universal_2021}. The nonlinear bosonic interactions are effectively driven through applying two simultaneous linear spin-dependent forces with non-commuting spin conditioning, on a single qubit. 
+    we use the ``two-SDF'' method. The nonlinear bosonic interactions are effectively driven through applying two simultaneous linear spin-dependent forces with non-commuting spin conditioning, on a single qubit. 
     The two simultaneous SDFs, with Hamiltonians and parameters labelled by subscripts $\alpha$, and $\beta$, are applied off-resonantly relative to motional modes with creation operators $\hat a_\alpha^\dagger$ and $\hat a_\beta^\dagger$, respectively. The resulting Hamiltonian is given generally by,
     \begin{align}
     \label{eqn:two-sdf}
@@ -158,14 +147,14 @@ well-placed for studying methods for scaling hybrid-system control.
     \end{align}
     where the individual SDF strengths are $\Omega_i$, the detuning from each mode is $\Delta_i$, the motional phase is $\phi_i$, and we ensure the spin-conditioning anticommute $\{\hat\sigma_\alpha, \hat\sigma_\beta\} = 0$, $[\hat\sigma_\alpha, \hat\sigma_\beta] = 2i\epsilon_{\alpha\beta\gamma}\hat\sigma_\gamma$,
     where $\epsilon_{\alpha\beta\gamma}$ is the Levi-Civita symbols.
-    The unitary dynamics of $\hat H_\mathrm{2SDF}$ may be evaluated by the Magnus expansion~\cite{magnus_exponential_1954}, with details given in references~\cite{sutherland_universal_2021,bazavan_easy_2024,saner_quantum_2026}, and in Appendix~\ref{app:magnus}. 
-    To lend some intuition on the resulting physics, we highlight the main ideas here: The Magnus expansion expresses the generator of the unitary evolution as an infinite series of terms, with successive terms proportional to increasingly higher-order nested commutators of the Hamiltonian evaluated at different times. Due to the non-commuting spin conditioning, this series does not truncate, leading to arbitrarily high nonlinear bosonic interactions effectively driven via the application of only two linear SDFs.
+    The unitary dynamics of $\hat H_\mathrm{2SDF}$ may be evaluated by the Magnus expansion~\cite{magnus_exponential_1954}, with details given in References~\cite{sutherland_universal_2021,bazavan_easy_2024,saner_quantum_2026}, and in Appendix~\ref{app:magnus}. 
+    To lend some intuition on the resulting physics, we highlight the main ideas here. The Magnus expansion expresses the generator of the unitary evolution as an infinite series of terms, with successive terms proportional to increasingly higher-order nested commutators of the Hamiltonian evaluated at different times. Due to the non-commuting spin conditioning, this series does not truncate, leading to arbitrarily high nonlinear bosonic interactions effectively driven via the application of only two linear SDFs.
 
     To utilise specific nonlinear terms within this infinite series, matching
     the desired interactions given in Table~\ref{tab:gateset}, we constrain the
     relative detunings of the two SDFs to $\Delta_\beta = m \Delta_\alpha$,
-    where $m$ is some integer given in the table. This immediately brings
-    components of the Magnus terms matching the desired nonlinear $\hat H_\mathrm{osc}$ into resonance. Any undesired higher-order terms that are also brought
+    where $m$ is some integer. This immediately brings
+    components of the Magnus terms matching the desired nonlinear $\hat H_I^\mathrm{(osc)}$ into resonance. Any undesired higher-order terms that are also brought
     into resonance can be arbitrarily suppressed by increasing the detuning, as the effective coupling of
     the $n$th-order Magnus term scales as $\Omega_\mathrm{eff}\propto
     \Omega_\alpha^n/\Delta^{n-1}$ (relabelling $\Delta_\alpha=\Delta$ and assuming
@@ -177,7 +166,7 @@ well-placed for studying methods for scaling hybrid-system control.
         \label{eqn:H_sqz}
         \hat H_\mathrm{eff,sqz} = \frac{\hbar\Omega_2}{2} \epsilon_{\alpha\beta\gamma}\hat\sigma_\gamma (\hat a^2e^{i\phi_p'} + \hat a^{\dagger 2}e^{-i\phi_p'}),
     \end{equation}
-    where $\Omega_2=\frac{\Omega_\alpha\Omega_\beta}{\Delta}$ is an effective coupling strength,  and phase $\phi_p' = \phi_\alpha+\phi_\beta+\frac{\pi}{2}$. The derivation and forms of the other spin-conditioned effective nonlinear bosonic interactions are given in Appendix~\ref{app:magnus}. 
+    where $\Omega_2=\frac{\Omega_\alpha\Omega_\beta}{\Delta}$ is an effective coupling strength,  and phase $\phi_p' = \phi_\alpha+\phi_\beta+\frac{\pi}{2}$. The derivation and forms of the other spin-conditioned effective nonlinear bosonic interactions are given in Appendix~\ref{app:two-sdf}. 
 
     Frequency and spin-conditioning control of two SDFs therefore allow for the generation of the entire hybrid CV-DV gate-set proposed in Table~\ref{tab:gateset}. 
     After a discussion on how we can characterise the oscillator state, we shall present the experimental setup for generating these interactions, and demonstrate the creation of a squeezed state by this method.
@@ -201,12 +190,10 @@ well-placed for studying methods for scaling hybrid-system control.
     \label{fig:tomography}
     \end{figure}
 
-    With the above methods we may generate non-classical bosonic states, now we
-    provide a method for characterising them.
+    Having described the methods used to generate non-classical bosonic states, we now introduce a method for characterising them.
 
-    In contrast to a two-level system, the state of an oscillator may not be
-    directly read out through state dependent fluorescence. This is due to the much larger state-space of
-    the qumode, and the technical difficulty in direct motional readout on the ion-trap platform. To solve these issues, a modular readout scheme is used, involving indirect readout of the oscillator state via a discrete collection of controlled unitaries subject to an ancillary qubit, and computational basis measurements of that ancilla.
+    In contrast to a two-level system, the state of an oscillator requires substantially more information to generally characterise. Furthermore, on the trapped-ion platform, unlike the qubit, a convenient state-dependent readout method is not directly accessible.
+    Instead, we use a modular readout scheme by indirect measurement of the oscillator state via the application of a discrete set of unitaries conditioned on an ancillary qubit, followed by computational-basis measurements of the ancilla.
 
     The information is mapped to the ancilla by a Hadamard test~\cite{cleve_quantum_1998}, shown in
     Figure~\ref{fig:tomography} (a). Here the expectation value of the operator $\hat O$ on the oscillator, $\langle \hat O\rangle=\mathrm{Tr}(\hat O\hat\rho_\mathrm{osc})$, 
@@ -223,15 +210,15 @@ well-placed for studying methods for scaling hybrid-system control.
     \end{align}
     where $\theta$ may be set to $0$ or $\pi/2$ to recover the real or imaginary part of the characteristic function respectively.
     Each measurement provides only 1-bit of information on the (continuous) oscillator state, thus to approximate a useful reconstruction, 
-    many samples with a range of $\beta$ values must be collected.
+    many samples, with a range of $\beta$-values must be collected.
 
-    Once the characteristic function has been measure, it can be converted to other familiar representations of the oscillator, such as in the Fock-state basis, or Wigner representation~\cite{wigner_quantum_1932, cahill_density_1969, vogel_determination_1989}. In this work, we shall keep to the conveniently measured characteristic function.
+    Once the characteristic function has been measured, it can be converted to other familiar representations of the oscillator, such as the Fock-state basis, or Wigner representation~\cite{wigner_quantum_1932, cahill_density_1969, vogel_determination_1989}. In this work, we shall keep to the conveniently measured characteristic function.
 
     To give two concrete examples, the vacuum state characteristic function is the circularly symmetric Gaussian state,
     \begin{equation}
-        \chi_\mathrm{0} = \mathrm{exp}\left(\frac{-|\beta|^2}{2}\right),
+        \chi_\mathrm{0} = \mathrm{exp}\left(\frac{-|\beta|^2}{2}\right).
     \end{equation}
-    while the squeezed state, generated by application of the Hamiltonian in equation~\ref{eqn:H_sqz} to the vacuum state, breaks this symmetry due to a contraction on one axis, and a corresponding expansion on the other~\cite{lo_spinmotion_2015},
+    The squeezed state, generated by application of the Hamiltonian in equation~\ref{eqn:H_sqz} to the vacuum state, breaks this symmetry due to a contraction on one axis, and a corresponding expansion on the other~\cite{lo_spinmotion_2015},
     \begin{equation}
         \label{eqn:sqz_char}
         \chi_\mathrm{S} = \mathrm{exp}\left(\frac{-|\beta|^2}{2}\left(e^{2r}\cos^2(\phi)+e^{-2r}\sin^2(\phi)
@@ -242,16 +229,16 @@ well-placed for studying methods for scaling hybrid-system control.
 
     Experimentally, $\hat\sigma_x$ conditioned SDFs are simply accessed by the bichromatic field method discussed in \S~\ref{sec:SDF}. The Hadamard test circuit is then decomposed to native gates, shown in
     Figure~\ref{fig:tomography} (b), first described in
-    reference~\cite{fluhmann_direct_2020}. The proceeding $I$ or
+    Reference~\cite{fluhmann_direct_2020}. The proceeding $\hat I$ or
     $\hat R_y(\pi/2)$ set the quadrature to measure; $\mathrm{Re}(\chi)$ or $\mathrm{Im}(\chi)$
     respectively.
     This circuit provides a practical method for characterising a single qumode,
     which we shall use in the following experimental demonstration. 
     Similar to the constraints of state characterisation discussed in
     \S~\ref{sec:k-copy_char}, full tomographic reconstruction is
-    intractable for multiple-qumodes due to the large state-space, even with
-    reasonably truncated oscillator representations (e.g. imposing a Fock-state
-    cut-off). In the case of characterising systems consisting of multiple
+    intractable for multiple-qumodes due to the large state-space. Even when enforcing
+    reasonably truncation of the oscillator representation (e.g. imposing a Fock-state
+    cut-off), this task scales poorly with the number of qumodes. In the case of characterising systems consisting of multiple
     qubits and qumodes, either reduced tomography~\cite{he_efficient_2024}, or simplified metrics of performance~\cite{valahu_benchmarking_2024} must be used.
     
 \subsection{Experimental Demonstration}
@@ -285,8 +272,8 @@ well-placed for studying methods for scaling hybrid-system control.
 \end{figure}
 \subsubsection{Two Spin Dependent Forces}
     The individual SDFs are generated by the same bichromatic field method
-    described in \S~\ref{sec:SDF} --- i.e. simultaneous off-resonant blue-
-    (BSB) and red-sidebands (RSB) of motional mode $\omega_\alpha$ are applied.
+    described in \S~\ref{sec:SDF_Calib} --- i.e. off-resonant blue-
+    (BSB) and red-sidebands (RSB) of motional mode $\omega_\alpha$ are applied simultaneously.
     To generate two simultaneous SDFs, we then require four optical fields with, frequency, phase, and
     amplitude control. The four required frequencies of the ``quadchromatic''
     field are shown schematically in Figure~\ref{fig:2-SDF} with respect to the
@@ -302,7 +289,7 @@ well-placed for studying methods for scaling hybrid-system control.
     respect to some fixed time point.
     As discussed in \S~\ref{sec:SDF}, the spin phase of the SDFs is set by
     the absolute phase of the RSB and BSB, $\hat\sigma_\phi =
-    \cos(\phi_s)\hat\sigma_x + \sin(\phi_s)\hat\sigma_y$. 
+    \cos(\phi_s)\hat\sigma_x - \sin(\phi_s)\hat\sigma_y$. 
     To ensure the spin conditioning of the two SDFs fully anti-commute, 
     we require
     $\pi/2$ phase difference between the two spin phases,
@@ -311,7 +298,7 @@ well-placed for studying methods for scaling hybrid-system control.
         \phi_{\alpha, s} - \phi_{\beta,s} = \frac{\phi_{\alpha,\mathrm{RSB}}+\phi_{\alpha,\mathrm{BSB}}}{2}-\frac{\phi_{\beta,\mathrm{RSB}}+\phi_{\beta,\mathrm{BSB}}}{2}=\frac{\pi}{2}.
     \end{equation}
     In the following demonstration we set $\phi_{\alpha,\mathrm{RSB}}=
-    \phi_{\alpha,\mathrm{BSB}}=\pi/2,\phi_{\beta,\mathrm{RSB}}=\phi_{\beta,\mathrm{BSB}}=0$,
+    \phi_{\alpha,\mathrm{BSB}}=\pi/2,~\phi_{\beta,\mathrm{RSB}}=\phi_{\beta,\mathrm{BSB}}=0$,
     however we note that for composing multiple hybrid operations into a
     circuit, the resulting motional phase of the SDFs can lead to further
     constraints on the chosen RSB and BSB phases.
@@ -319,20 +306,17 @@ well-placed for studying methods for scaling hybrid-system control.
     The intensity of the quadchromatic field is ramped on and off with a rise
     envelope of $\sin^2(\pi t/(2t_\mathrm{ramp}))$ applied via the AWG, where
     $t_\mathrm{ramp}$ is the ramp duration. This ramp suppresses excess off-resonant
-    excitations of the $A_1$ phase loop term given in the previous section (further details in Appendix~\ref{app:magnus}), and
-    so we must select ramp duration based on the characteristic scale,
-    $t_\mathrm{ramp}\gtrsim\frac{1}{\Delta}$. 
+    excitations of the $A_1$ phase loop term given in Appendix~\ref{app:two-sdf}, when $t_{\rm ramp}$ exceeds the characteristic timescale 
+    $\frac{1}{\Delta}$. 
 
-    We aim to balance the power in each of the 4 tones. This may be calibrated
-    using an optical pick-off before addressing the ion, directed onto a fast
-    photodiode, and measuring the beatnote contrast when applying any pair of
-    tones. In the following squeezing demonstration, we balance the tones
-    comprising the individual SDFs, but do not explicitly balance the power
-    between SDFs, as the desired interaction scales as
-    $\Omega_\alpha\Omega_\beta$, any imbalance leads to non-optimal interaction
-    efficiency, but unlike imbalance of the RSB and BSB, does not increase
-    coherent error terms.
-    We observe that the duty cycle of the SP AOM can dramatically shift the
+    We aim to balance the powers in each of the four tones
+    to avoid any coherent error arising from unbalanced RSB and BSB in an SDF, and to optimise the power efficiency of the resulting effecting interaction, as 
+    $\Omega_{\rm 2} = \Omega_\alpha\Omega_\beta/\Delta$.
+    This power balancing is calibrated using an optical pick-off taken before the beam addresses the ion and directed onto a fast photodiode. The beatnote contrast is then measured when applying each pair of tones.
+    
+    In the following squeezing demonstration, we balance the tones
+    comprising the individual SDFs, but do not yet explicitly balance the power
+    between SDFs. We observe that the duty cycle of the SP AOM can dramatically shift the
     power imbalance between all four tones, and so we take care ensuring that
     the total RMS power to drive one-, two-, and four-tones is the same as for
     the idle (no optical pulse) setting of the SP AOM, thus the only transient
@@ -345,9 +329,7 @@ well-placed for studying methods for scaling hybrid-system control.
 
 
     We demonstrate the effective squeezing interaction on a single ion and radial
-    motional mode. We are limited to using the
-    radial modes due to the geometry of the single addressing system with respect to
-    the trap. For this demonstration, the upper radial mode is used, with frequency
+    motional mode. For this demonstration, the upper radial mode is used, with frequency
     $\omega_\mathrm{upper}=2\pi\times 2.87~\unit{\mega\hertz}$, and motional coherence $\tau_\mathrm{upper}=18.0(8)~\unit{\milli\second}$ 
     given in
     \S~\ref{sec:Motional Coherence}.
@@ -360,12 +342,14 @@ well-placed for studying methods for scaling hybrid-system control.
     anti-commuting spin conditioning by setting the relative phases of the
     quadchromatic field according to equation~\ref{eqn:spin_phase}, we realise a
     $\hat\sigma_z$-conditioned squeezing interaction, given by
-    equation~\ref{eqn:H_sqz}.
-    As the spin-state is prepared in an eigenstate of the spin-conditioned squeezing, we expect squeezing on the qumode, without any change to the qubit state. We use a total quadchromatic beam power of $53~\unit{\micro\watt}$, and set the base detuning, $\Delta=2\pi\times 50~\unit{\kilo\hertz}$. We suppress excess excitation of the off-resonant error terms by using a ramp of $t_\mathrm{ramp}=40~\unit{\micro\second}$.
+    equation~\ref{eqn:H_sqz}to remain
+    Upon application of the spin-conditioned squeezing, we expect the qubit state to remain unchanged, since the spin-state is an eigenstate of $\hat\sigma_z$, while 
+    the qumode is progressively squeezed with time.
+    We use a total quadchromatic beam power of $53~\unit{\micro\watt}$, and set the base detuning to $\Delta=2\pi\times 50~\unit{\kilo\hertz}$. We suppress excess excitation of the off-resonant error terms by using a ramp of $t_\mathrm{ramp}=40~\unit{\micro\second}$.
 
     The state is characterised by the tomography method given in
     \S~\ref{sec:tomography}, with a $35\times 35$ sampling-grid of displacement
-    values, $\beta$, and $N = 300$ repeat samples to reduce shot noise. The full dataset for one of the tomographic scans takes around 1 hour to collect, and so we interleave mode calibration experiments (\S~\ref{sec:tickle}) to run every 5 minutes.
+    values, $\beta$, and $N = 300$ repeat samples to reduce shot noise. The full dataset for one of the tomographic scans takes around 1 hour to collect, and so, to track any drifts of the motional frequency over this time, we interleave mode calibration experiments (\S~\ref{sec:tickle}) to run every 5 minutes.
 
     The on-resonance splitting SDF used for tomography must have its strength, $\Omega_\mathrm{SDF}$, calibrated to infer the magnitude of $\beta$ applied. We use
     a total bichromatic beam power of $40~\unit{\micro\watt}$, and through fitting the 
@@ -386,24 +370,27 @@ well-placed for studying methods for scaling hybrid-system control.
         }
     \label{fig:squeezing}
 \end{figure}
-    With these settings, the characteristic function for a squeezed state is measured, and the resulting real part is shown in Figure~\ref{fig:squeezing} (a). We can see a contraction along one phase-space axis, and expansion along the orthogonal axis, together with a small phase-space tilt, likely due to imprecise phase tracking between the squeezing interaction and the displacement probe.
+    With these settings, the characteristic function for a squeezed state is measured, and the resulting real part for a squeezing duration of $t_{\rm sqz} = 190~\unit{\micro\second}$ is shown in Figure~\ref{fig:squeezing} (a), where
+    $t_{\rm sqz}$ is the FWHM duration of the quadchromatic pulse.
+    We can see a contraction along one phase-space axis, and expansion along the orthogonal axis, together with a small phase-space tilt, likely due to imprecise phase tracking between the squeezing interaction and the displacement probe.
     Fitting the data to equation~\ref{eqn:sqz_char} we may extract both the
     squeezing axis, $\phi_s$, and the strength, $r$, where $r$ is given by,
     \begin{equation}
     r=|\Omega_\mathrm{eff,S}|t=\frac{\Omega_\alpha\Omega_\beta}{\Delta}t.
     \end{equation}
     An example fit is shown in
-    panel (b), with extracted $r=0.90(2)$, for a quadchromatic FWHM pulse
-    duration of $t_\mathrm{sqz}=190~\unit{\micro\second}$. Panel (c) displays
-    the squeezing strength as a function of $t_\mathrm{sqz}$, with fit values given by the points, and the black line is a linear fit. Assuming that the two SDF strengths are well-balanced, $\Omega_\alpha=\Omega_\beta$, and taking the $53~\unit{\micro\watt}$ used for the quadchromatic field compared to the SDF strength calibration at $40~\unit{\micro\watt}$, we find an expected squeezing strength of $\Omega_\mathrm{eff,S} = 2\pi\times 0.86(9)~\unit{\kilo\hertz}$. This is shown as the red dashed line and shaded region.
-    The fitted strength of $\Omega_\mathrm{eff,S}= 2\pi\times 0.74(1)~\unit{\kilo\hertz}$ is lower than the expected, suggesting that either we are not sufficiently balancing the strengths of the two simultaneous SDFs, the spin-conditioning is not fully anti-commuting, or that the power stabilisation routine for 4-tones is inaccurate. Further exploration is needed, including careful quantification of the individual SDF strengths constituting the quadchromatic field. However, this preliminary result confirms that the motional coherence, and stability of the single-addressing system is sufficient to create, and characterise non-classical motional states using the apparatus developed for this thesis.
+    panel (b), with extracted $r=0.90(2)$. Panel (c) displays
+    the squeezing strength as a function of $t_\mathrm{sqz}$, with fit values given by the points, and the black line is a linear fit. 
 
-    % \todo{Comment on heating rate}
+    Assuming the two SDF strengths are well balanced, $\Omega_\alpha=\Omega_\beta$, and using the $53~\unit{\micro\watt}$ power of the quadchromatic field relative to the $40~\unit{\micro\watt}$ used for the SDF-strength calibration, we obtain an expected squeezing strength of $\Omega_\mathrm{eff,S}=2\pi\times0.86(9)~\unit{\kilo\hertz}$. This expectation is shown by the red dashed line and shaded region.
+    The fitted strength, $\Omega_\mathrm{eff,S}=2\pi\times0.74(1)~\unit{\kilo\hertz}$, is lower than expected. This discrepancy suggests that the two simultaneous SDFs may not be sufficiently well balanced, that the spin conditioning may not be fully anticommuting, or that the four-tone power-stabilisation routine is inaccurate.
+    Further exploration is needed, including careful quantification of the individual SDF strengths constituting the quadchromatic field. 
+    However, this preliminary result confirms that the motional coherence, and stability of the single-addressing system is sufficient to create, and characterise non-classical motional states on the new experimental platform.
 
 \subsection{Outlook}
     Hybrid systems offer access to large Hilbert spaces, even with modest ion numbers.
     In this section we outlined a convenient set of native interactions for universal hybrid qubit-qumode gates. We experimentally demonstrate the squeezing interaction generated via the ``two-SDF'' method of
-    reference~\cite{sutherland_universal_2021}. This demonstration replicated previous work using the ``two-SDF'' method~\cite{bazavan_squeezing_2026}, however now shown on the newly built apparatus utilising a single-ion addressing system, and applied to the radial motional modes.\
+    Reference~\cite{sutherland_universal_2021}. This demonstration replicated previous work using the ``two-SDF'' method~\cite{bazavan_squeezing_2026}, however now shown on the newly built apparatus utilising a single-ion addressing system, and applied to the radial motional modes.\
 
     Enabled by the single-addressing, and improved motional coherence times of
     the new system, we are particularly interested in exploring short hybrid
@@ -415,7 +402,7 @@ well-placed for studying methods for scaling hybrid-system control.
     \subsubsection{Limitations}
     Using a single multi-ion chain to access multiple qubits and qumodes for
     scaling hybrid QC on the trapped-ion platform will be ultimately limited by
-    spectral crowding of the motional modes, i.e. the average frequency spacing
+    spectral crowding of the motional modes, i.e.~the average frequency spacing
     between neighbouring modes decreases as the number of accessible modes
     increases\cite{james_quantum_1998, schwerdt_scalable_2024}. 
 
@@ -570,7 +557,7 @@ effectively approximates the pure state closest to $\hat\rho$, with the underlyi
 assumption that the dominant eigenvector of $\hat\rho$ approximates the ideal pure
 state, $\hat\rho_\mathrm{id}=\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}}$. 
 The validity of this approximation is explored in detail in
-reference~\cite{koczor_dominant_2021}, where they derive a bound for the
+Reference~\cite{koczor_dominant_2021}, where they derive a bound for the
 deviation between the ideal state and dominant eigenvector, termed the
 ``coherent mismatch'', $c$. This error provides the noise-floor for purification
 based techniques. Favourably, for many error models and circuit types, $c$ is
@@ -594,7 +581,7 @@ Inserting this expansion into equation~\ref{eqn:purification}, we find,
 \end{equation}
 with normalisation factor $\mathcal{N} = \lambda_\mathrm{id}^k  + \sum_{i=1}^{2^N-1}\lambda_i^k$. The exponentiation acts to relatively attenuate all error eigenvalues compared to $\lambda_\mathrm{id}$, with the large $k$ limit recovering the pure ideal state, $\lim_{k\rightarrow\infty}\hat\rho_\mathrm{pur}(k)=\ket{\psi_\mathrm{id}}\bra{\psi_\mathrm{id}}$.
 
-The remaining question is: how can we experimentally access $\hat\rho_\mathrm{pur}(k)$? In references~\cite{koczor_exponential_2021,huggins_virtual_2021}, it is shown that the expectation value of the purified state with respect to the applied operator $\hat O$ is,
+The remaining question is: how can we experimentally access $\hat\rho_\mathrm{pur}(k)$? In References~\cite{koczor_exponential_2021,huggins_virtual_2021}, it is shown that the expectation value of the purified state with respect to the applied operator $\hat O$ is,
 \begin{equation}
     \label{eqn:pure_observable}
     \langle\hat{O}\rangle_\mathrm{pur}=\mathrm{Tr}[\hat{O}\hat\rho_\mathrm{pur}(k)]=\frac{\mathrm{Tr}[\hat{O}\hat\rho^k]}{\mathrm{Tr}[\hat\rho^k]},
@@ -668,7 +655,7 @@ The second method, known as the ``$B$-matrix''~\cite{huggins_virtual_2021}, is s
 \begin{equation}
     [\hat S^{(2)}, \hat Z_2 \hat S^{(2)}] = 0.
 \end{equation}
-Thus, the two observables possess a common eigenbasis and may be simultaneously diagonalised by a single matrix\footnote{Note, we use a different convention than reference~\cite{huggins_virtual_2021}. This is done for a simpler decomposition to native gates on our apparatus.}, 
+Thus, the two observables possess a common eigenbasis and may be simultaneously diagonalised by a single matrix\footnote{Note, we use a different convention than Reference~\cite{huggins_virtual_2021}. This is done for a simpler decomposition to native gates on our apparatus.}, 
 \begin{equation}
     \label{eqn:bmatrix}
         \hat B =
