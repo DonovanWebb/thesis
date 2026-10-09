@@ -42,7 +42,7 @@
         \item Hybrid system quantum computing and simulation utilising the spin and motional degrees of freedom of the confined ions.
         \item Fast two-qubit entangling gates via phase stabilised optical standing waves.
     \end{enumerate}
-    The first topic is explored in Chapter~\ref{ch:k-copy}, the second in Chapter~\ref{ch:QEM}.The latter two research directions were further explored within our group on a
+    The first topic is explored in Chapter~\ref{ch:k-copy}, the second in Chapter~\ref{ch:QEM}. The latter two research directions were further explored within our group on a
     previous apparatus, leading to state-of-the-art two-qubit entanglement rates
     on the ion-trap platform~\cite{schafer_fast_2018,saner_breaking_2023}, creation
     of highly non-classical motional
@@ -108,7 +108,7 @@
             (a) A photograph of the trap chip used in the \emph{FastGates} experiment before being placed under vacuum. The top ``atomic shield'' can be seen here.
             (b) A front view of the trap chip. Axial confinement is provided by a subset of the segmented DC electrodes. Radial confinement is provided by the radio-frequency voltage (RF) rails. The trap chip and leadless chip carrier (LCC) are highlighted.
             (c) A schematic of the electrode geometries and labelling for the front-face of the trap chip. A similar arrangement exists for the back-face however with the RF rail on the diagonally opposite electrode.
-            (d) A cross-sectional view of the trap. The red point here represents the ions, the gold are the RF and DC electrodes, and the grey is the silica substrate. It can be seen that the ion is $350\times\sqrt{2}/2 \simeq 250 \mu$m away from the nearest electrode. The numerical aperture of the ion plane due to the electrodes is $\sim 0.71$.
+            (d) A cross-sectional view of the trap. The red point here represents the ions, gold represents the RF and DC electrodes, and the grey is the silica substrate. It can be seen that the ion is $350\times\sqrt{2}/2 \simeq 250 \mu$m away from the nearest electrode. The numerical aperture of the ion plane due to the electrodes is $\sim 0.71$.
             Figures (b) and (d) adapted from Reference~\cite{choonee_silicon_2017}, other panels adapted from private communication with the \emph{NPL} team.
         \label{fig:trap}}
     \end{figure}
@@ -123,7 +123,7 @@
     the manufacturing of complex multi-zone devices with many DC electrodes, amenable to ion shuttling~\cite{kaushal_shuttling-based_2020, sterk_closed-loop_2022}, and hence furthering progress towards Quantum CCD
     type architectures~\cite{kielpinski_architecture_2002}. However, this
     surface-style geometry typically comes with two costs: the depth of the
-    trapping potential is often greatly reduced due to anharmonicity~\cite{home_normal_2011}, and the close proximity of the
+    trapping potential is often greatly reduced due to anharmonicity~\cite{home_normal_2011}, and the proximity of the
     surface to the ion can be a large contributor to motional heating
     rates~\cite{wineland_experimental_1998, turchette_heating_2000, brownnutt_ion-trap_2015, boldin_measuring_2018}. 
 
@@ -139,7 +139,7 @@
     Al\textsubscript{3}N\textsubscript{4} substrate. The connection to the front
     and back surfaces of the trap chip is made through vias and wire bonds to
     the intermediate substrate~\cite{wilpers_compact_2013}. The trap chip 
-    is a monolithic double-sided silicon device with gold plated electrodes on
+    is a monolithic double-sided silicon device with gold-plated electrodes on
     the front ($Fr$) and back ($Ba$) surfaces. These two layers are shown
     schematically in the bottom panel of (c). The electrode schematic for the
     front surface is shown, and the electrode indexing convention is
@@ -182,7 +182,7 @@
     RF field that produces the desired trapping
     pseudopotential to be both frequency and amplitude stable. Furthermore,
     from equation~\ref{eqn:pseudo_pot}, it can be seen that radial motional mode frequency is proportional to RF voltage, and inversely proportional to the RF frequency.
-    If using the motion to enable two-qubit gates (\S~\ref{sec:Geometric Phase Gates}), adiabatic excitation with respect to the motional mode period yields a characteristic time scale of $\tau = 2\pi/\omega_m$ for the gate duration. Therefore higher RF voltages are desirable for faster entangling operations.
+    If using the motion to enable two-qubit gates (\S~\ref{sec:Geometric Phase Gates}), adiabatic excitation with respect to the motional mode period yields a characteristic timescale of $\tau = 2\pi/\omega_m$ for the gate duration. Therefore, higher RF voltages are desirable for faster entangling operations.
 
     The \emph{NPL} trap used in the \emph{FastGates} apparatus is rated for a max peak-to-peak voltage of $400$~Vpp on the RF
     electrodes. To target high motional mode frequencies, saturating this maximum voltage is desirable, however, for safe operation, typically the trap is provided a maximum RF voltage $V_{RF}=360$~Vpp.
@@ -344,7 +344,7 @@
     \end{center}
 
     \noindent and embedded within the schematic~\ref{fig:apparatus}. Two
-    multi-channel DACs, known as \emph{Fastino}, part of the \emph{Artiq Sinara} hardware
+    multichannel DACs, known as \emph{Fastino}, part of the \emph{Artiq Sinara} hardware
     ecosystem, provide the initial $41$ DC channels. 
     The Fastino outputs are filtered by a passive cascaded RC low pass filters with resistances, $R=2k$, and capacitances $C_1 = 2.2~\unit{\nano\farad}$ and $C_2 = 4.7~\unit{\nano\farad}$\footnote{For in-vacuum use. 1206 NPO 4.7nF 100V, SRT 1206A472JBCB} yielding a $-3$~dB ``cut-off'' frequency of $7.4~\unit{\kilo\hertz}$. The low pass filter circuit is shown in the above schematic, with the first stage on an external-to-vacuum PCB (Ext. Filt), and the 
     final shunt capacitor on an in-vacuum PCB (Vac. Filt)\footnote{Vacuum compatible PCB using Rogers RT6002. Filter boards were designed by Mariella Minder.} within close proximity of the trap chip to mitigate RF pickup on the DC lines. The feedthrough to the vacuum system has 51 pins\footnote{\emph{Allectra} 51-way Micro-D} with non-DC pins used to provide ground connections.
@@ -414,7 +414,7 @@
    \noindent\includegraphics[width=\linewidth]{figures/pdf_figure/ch3/HNA_package.pdf}
   \end{center}
   \caption{
-    Cross section of the vacuum chamber and dual-high-NA objective sandwich. Lower right inset shows the vacuum chamber housed in the MuMetal enclosure, with dashed lines indicating the cross section region.
+    Cross-section of the vacuum chamber and dual-high-NA objective sandwich. Lower right inset shows the vacuum chamber housed in the MuMetal enclosure, with dashed lines indicating the cross-section region.
     Custom recessed CF-100 viewports are used to provide optical access for the high-NA objectives (working distance $= 24.4~\unit{mm}$).
     }
   \label{fig:HNA}
@@ -438,7 +438,7 @@
     spherical chamber with ion pump\footnote{Agilent VacIon Plus 20 Pump}, ion
     gauge\footnote{Agilent UHV-24P Ion gauge} and Titanium sublimator pump
     (TSP)\footnote{Scanwel custom housing} attached. 
-    After the final system bake, a He leak test was performed and 
+    After the final system bake, a Helium leak test was performed and 
     no external leaks were found. We do observe a gradual pressure increase that we suspect is either due
     to the in-vacuum optics, the optics epoxy adhesive\footnote{EPO-TEK
     353ND}, or the PCB solder. Regardless, the ion pump and TSP
@@ -457,14 +457,13 @@
     shift). Figure~\ref{fig:trap_package} (b) shows the custom trap housing including NA=0.6 access for the 729-nm beams, and in-vacuum mirrors (prisms) to redirect the low-NA beams to the trap center. The low-NA beams enter the housing via one of the four beam access channels parallel to the trap chip plane, and are reflected through the trap slit. The exiting beam is reflected by a second mirror out of the housing to prevent scattered light incident on the ion chain.
     Figure~\ref{fig:trap_package} (c) shows an exploded view of the trap housing with components labelled. The trap chip is interfaced to an in-vacuum PCB (described in~\S~\ref{sec:Trap DC Voltages}) via a custom PEEK interposer with the embedded \emph{Fuzz button} vias (one for each DC and RF channel). 
     The trap chip is held in place by four steel clamp arms, which attach to a
-    steel base plate, providing mechanical stability and housing for the lower
+    steel baseplate, providing mechanical stability and housing for the lower
     in-vacuum prisms. 
     A top steel plate houses the upper prisms. The tube oven
-    is mounted on two steel clamps which are electrically isolated from the base
-    plate by a PEEK spacer. The trap housing is fastened to the vacuum can by four
+    is mounted on two steel clamps which are electrically isolated from the baseplate by a PEEK spacer. The trap housing is fastened to the vacuum can using four
     steel arms attached to alternating side ports of the octagonal
     chamber~\footnote{Using \emph{Kimball Groove grabbers} P/N 53-482610}.
-    Figure~\ref{fig:HNA} shows a cross section of the vacuum chamber and
+    Figure~\ref{fig:HNA} shows a cross-section of the vacuum chamber and
     recessed dual high-NA objectives. 
     Two recessed CF100 viewports\footnote{\emph{UK Atomic
     Energy Authority} P/N VPR100015} are required to bring the custom objectives\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} to the designed working distance of 24.4~mm from the ion chain. 
@@ -482,14 +481,13 @@
   \begin{center}
    \noindent\includegraphics[width=0.9\linewidth]{figures/pdf_figure/ch3/readout.pdf}
   \end{center}
-  \caption{Optical path for fluorescent imaging of the ions using both a CMOS camera and a Photon-multiplier tube. Insets on right hand side show typical signal for: spatial resolution of eight ions in a linear chain (top), time resolution of detected photons from the ion chain (bottom).
+  \caption{Optical path for fluorescent imaging of the ions using both a CMOS camera and a Photon-multiplier tube. Insets on right-hand side show typical signal for: spatial resolution of eight ions in a linear chain (top), time resolution of detected photons from the ion chain (bottom).
     }
   \label{fig:readout}
 \end{figure}
 
     To image the ion chain, and readout the qubit states, fluorescent scatter of incident 397-nm light is collected. Here we briefly describe the imaging system, while~\S~\ref{sec:Measurement} describes the qubit readout procedure and fidelity. The imaging system is designed to provide high spatial resolution of the ion chain, while also providing a large field of view to accommodate long ion chains. The imaging system must also be compatible with the high-NA objectives used for single-ion addressed optical standing waves.
-    Figure~\ref{fig:readout} shows the optical path schematic of the imaging system, with both a
-    a high quantum efficiency ($\simeq 70\%$ at $397~\unit{\nano\meter}$) 
+    Figure~\ref{fig:readout} shows the optical path schematic of the imaging system, with both a high quantum efficiency ($\simeq 70\%$ at $397~\unit{\nano\meter}$) 
     CMOS camera\footnote{\emph{Hamamatsu Orca-Fusion
     BT} C15440-20UP} for spatially selective qubit readout on a multi-ion chain, and 
     a photon multiplier tube (PMT)\footnote{\emph{Hamamatsu} Photon counting head H10682-210}, for experiments requiring time resolved photon counting.
@@ -574,9 +572,9 @@
     The conceptual goal of the PDH technique is to measure the frequency difference between the laser and a resonant frequency of a stable optical cavity to generate an error signal, preferably linear over typical frequency excursions (while \emph{locked}). This error signal can then be modified by some controller (typically PID), to directly infer how to tune the laser controls to minimise this error signal, often termed \emph{locking} the laser to the cavity. Further, the error signal should be insensitive to amplitude noise on the laser light, to avoid amplitude to frequency noise conversion due to the feedback loop (in contrast, side-of-fringe stabilisation is sensitive to amplitude drifts).
 
     This scheme consists of phase modulation of the incident laser light to generate frequency sidebands about the carrier. These sidebands act as phase references to the carrier field inside the cavity. In practice, the modulation is produced using an electro-optical modulator (EOM) driven by an RF voltage.
-    Figure~\ref{fig:PDH} shows a schematic of the PDH scheme, highlighting the beam paths and closed loop. The phase modulated light is directed onto the cavity, with the total return signal being some combination of the reflected sidebands, carrier, and the cavity leakage field, with the latter providing the phase of the electric field inside the cavity. The reflected light is directed onto a fast photodetector, and the signal is demodulated with the same oscillator signal used to drive the EOM, but delayed by some chosen phase. The resulting signal is low pass filtered to remove high frequency components, yielding the final error signal, an example of which is seen in the upper right panel of Figure~\ref{fig:PDH}. The central region is anti-symmetric and linear, centred on the desired lock point. Using a tuned controller for feedback to the laser controller, this provides a stable lock of the laser to the cavity.
+    Figure~\ref{fig:PDH} shows a schematic of the PDH scheme, highlighting the beam paths and closed loop. The phase modulated light is directed onto the cavity, with the total return signal being some combination of the reflected sidebands, carrier, and the cavity leakage field, with the latter providing the phase of the electric field inside the cavity. The reflected light is directed onto a fast photodetector, and the signal is demodulated with the same oscillator signal used to drive the EOM, but delayed by some chosen phase. The resulting signal is low pass filtered to remove high frequency components, yielding the final error signal, an example of which is seen in the upper right panel of Figure~\ref{fig:PDH}. The central region is antisymmetric and linear, centred on the desired lock point. Using a tuned controller for feedback to the laser controller, this provides a stable lock of the laser to the cavity.
 
-    As the cavity is used as a frequency reference, both a high finesse and stable optical lengths are desirable. The gradient of the PDH error signal is proportional to finesse, leading to increased signal to noise with higher finesse (see Ref.~\cite{oswald_characterization_2022} for more details). Optical length deviations are minimised through mounting the cavity in a vacuum chamber, and taking care in isolating it from temperature fluctuations and vibrations. Details of the PDH hardware and control loops used in this apparatus are given in the following sections. 
+    As the cavity is used as a frequency reference, both a high finesse and stable optical lengths are desirable. The gradient of the PDH error signal is proportional to finesse, leading to increased signal-to-noise with higher finesse (see Ref.~\cite{oswald_characterization_2022} for more details). Optical length deviations are minimised through mounting the cavity in a vacuum chamber, and taking care in isolating it from temperature fluctuations and vibrations. Details of the PDH hardware and control loops used in this apparatus are given in the following sections. 
 
 
 \subsection{Intensity Stabilisation}
@@ -697,7 +695,7 @@
     Entangling Gates}). This transition is also used after Doppler cooling for
     resolved sideband cooling to prepare the motional mode close to its ground
     state (as discussed in~\S~\ref{sec:Cooling}).
-    This transition has a narrow linewidth due the the long lived
+    This transition has a narrow linewidth due the long-lived
     3D\textsubscript{5/2} level ($\tau\approx1.1~\unit{\second}$)~\cite{barton_measurement_2000}, and so, for power efficiency, a
     narrow linewidth laser must be used. For the ``fast entangling gates'' use case, high-intensity electric fields are required at the ion to drive sideband
     transitions.  Here, we describe the 729-nm system 
@@ -712,10 +710,10 @@
     For single mode operation, the \emph{Solstis} employs multiple intracavity frequency selective
     elements which consist of (in order from coarsest to finest frequency selectivity): the Ti:Sapph gain profile, a
     birefringent filter, a tunable Fabry-P\'erot etalon, and the surrounding
-    bow-tie cavity. To lock the tunable etalon to one longitudinal cavity mode, an actively stabilised ``dither'' phase-lock loop is used. This dither consists of periodically varying
-    the etalon spacing with a frequency of around 20~kHz. 
-    This dither frequency directly phase modulates the light, which leads to the creation of
-    sidebands which can interact with the ion causing 
+    bow-tie cavity. To lock the tunable etalon to one longitudinal cavity mode, an actively stabilised ``dither'' phase-lock loop is used. The dither is produced by periodically varying
+    the etalon spacing with a frequency of around $20~\unit{\kilo\hertz}$. 
+    The dither directly phase-modulates the light, leading to the creation of
+    sidebands that can interact with the ion causing 
     errors in gates. This dither frequency (and harmonics of it), can be observed 
     via composite pulse experiments on the ion, and are discussed in~\S~\ref{sec:Coherence}.
 
@@ -757,7 +755,7 @@
     Some light is picked off and sent to a wavemeter to continuously monitor the
     frequency. However, the majority is coupled to two output fibres for our
     experiment and another within the Oxford group. The 729-nm light is transported from
-    a dedicated laser lab to a the trap apparatus lab by a 12~m
+    a dedicated laser lab to the trap apparatus lab by a 12~m
     single-mode-PM fibre\footnote{\emph{Schafter Kirchoff} PMC-630Si-3-18/10-1200}.  The fibre
     introduces phase noise due to mechanical and thermal pertubations along the 10~m
     length. To remove this introduced noise, passive stabilisation in
@@ -818,7 +816,7 @@
         \item Addressing of up to two ions in a $\approx10$-ion chain, with low crosstalk to neighbouring ions.
         \item Fast reconfigurability ($\approx 1~\unit{\micro\second}$) of the beam position within a single experimental shot (i.e. between different gates within a single circuit execution).
         \item Good optical power efficiency to ensure high intensity electric fields at the ion. 
-        \item Flexibility in beam positioning to allow for fine tuning of the overlap of two counter-propagating beams used to create the standing wave.
+        \item Flexibility in beam positioning to allow for fine-tuning of the overlap of two counter-propagating beams used to create the standing wave.
         \item Individual phase control of each addressed beam to stabilise the standing-wave phase at the ion plane.
         \item Beam-position stability to avoid power fluctuations.
         \item A compact design to fit within the magnetically shielded region of the experiment.
@@ -912,7 +910,7 @@ in a major axis beam waist radius of $52(3)~\unit{\micro\meter}$\footnote{The
 beam profile was measured by extracting per-ion Rabi frequencies while driving
 on resonance quadrupole transitions (see~\S~\ref{sec:Single Qubit Gates}) and
 assuming a Gaussian
-cross section.}. As with the other beams directed to the ion, we use a final piezo controlled mirror\footnote{\emph{ThorLabs POLARIS}-K2S2P} for fine alignment and control when the MuMetal enclosure is closed.
+cross-section.}. As with the other beams directed to the ion, we use a final piezo controlled mirror\footnote{\emph{ThorLabs POLARIS}-K2S2P} for fine alignment and control when the MuMetal enclosure is closed.
 
 % \section{Control System}
 % % Main points:

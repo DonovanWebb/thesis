@@ -15,7 +15,7 @@ This work extends the widely adopted single-qubit
 Clifford randomised benchmarking (RB) protocol~\cite{magesan_scalable_2011,knill_randomized_2008,dankert_exact_2009} (discussed in~\S~\ref{sec:standard_rb}) to capture and quantify correlated errors in scaled multi-qubit registers.
 We introduce a novel method to parallelise RB, and utilise the extracted symmetry resolved dynamics to provide evidence of, and quantify various multi-qubit error channels. 
 
-This chapter is structured as follows: we start by giving an overview on the problem of \emph{characterisation}, and what techniques already exist to address it. We then outline the \emph{k-copy} protocol and discuss the relevant symmetric subspace structure. We derive the population dynamics when subject to simple noise models and discuss variations of the protocol that isolate specific subspaces. We provide experimental demonstrations of the protocol on a trapped-ion processor through injecting known correlated and uncorrelated errors. We end this chapter by demonstrating the scalability of the protocol on an 8-qubit register, and discuss the limitations and potential of this method for further scaling to larger systems.
+This chapter is structured as follows: we start by giving an overview on the problem of \emph{characterisation}, and what techniques already exist to address it. We then outline the \emph{k-copy} protocol and discuss the relevant symmetric subspace structure. The population dynamics when subject to simple noise models are derived, and we discuss variations of the protocol that isolate specific subspaces. We provide experimental demonstrations of the protocol on a trapped-ion processor through injecting known correlated and uncorrelated errors. This chapter is concluded by demonstrating the scalability of the protocol on an 8-qubit register, and a discussion on the limitations and potential of this method for further scaling to larger systems.
 
 % ==========================================================================
 \section{Errors and Characterisation}
@@ -211,7 +211,7 @@ In practice, different physical error mechanisms populate only subsets of the co
 
 \subsection{Common random unitary noise}
 \label{sec:common_noise}
-It can be seen that the error channels that lead to couplings neatly discern the physical origin of the noise channel. For example, in transmon superconducting qubit platforms, always on $ZZ$-couplings are a dominant crosstalk error source~\cite{zhao_quantum_2022, fors_comprehensive_2024, alghadeer_crosstalk_2026}, and so the couplings between single qubit subspaces and the antisymmetric subspace can be quantified; in the neutral atom platform, correlated non-unital errors may be observed if the physical qubit separation is of similar order to the qubit transition wavelength~\cite{rivas_quantifying_2015}; however, in ion trap platforms, environmental noise is often dominated by magnetic and electric field fluctuations, which may act globally on all qubits if they are stored in the same trapping potential. These field fluctuations induce both common\footnote{Here ``common'' explicitly means applying identical rotations to each qubit.} and independent single-qubit rotations, but do not couple irrep subspaces together (i.e $m =0$ for $m\in \vec m$). 
+It can be seen that the error channels that lead to couplings neatly discern the physical origin of the noise channel. For example, in transmon superconducting qubit platforms, always on $ZZ$-couplings are a dominant crosstalk error source~\cite{zhao_quantum_2022, fors_comprehensive_2024, alghadeer_crosstalk_2026}, and so the couplings between single qubit subspaces and the antisymmetric subspace can be quantified; in the neutral atom platform, correlated non-unital errors may be observed if the physical qubit separation is of similar order to the qubit transition wavelength~\cite{rivas_quantifying_2015}; however, in ion trap platforms, environmental noise is often dominated by magnetic and electric field fluctuations, which may act globally on all qubits if they are stored in the same trapping potential. These field fluctuations induce both common\footnote{Here ``common'' explicitly means applying identical rotations to each qubit.} and independent single-qubit rotations, but do not couple irrep subspaces together (i.e. $m =0$ for $m\in \vec m$). 
 \begin{table}
 \centering
 \begin{tabular}{c|c|c}
@@ -498,7 +498,7 @@ The subspaces involving both qubits non-trivially are now unaffected by the stat
 \begin{equation}
     \mathcal{P}_{SS} =  \frac{1}{4}+\frac{A_{sp}^{\rm corr}}{4}\alpha_L^m+\frac{A_{sp}^{\rm corr}}{4}\alpha_R^m + \frac{1}{6}\alpha_{\rm dt}^m+\frac{1}{12}\alpha_{\rm tr}^m,
 \end{equation}
-where $A_{sp}^{\rm corr}=1-2\varepsilon_{sp}^{\rm corr}$. These correlations thus appear similar to \textit{common noise} errors in the invariance of $\alpha_{\rm tr}$ to this channel. Therefore correlated state prep errors can lead to a systematic bias in quantification of correlated error per Clifford if not accounted for in the fit by an initial state preparation error offset.
+where $A_{sp}^{\rm corr}=1-2\varepsilon_{sp}^{\rm corr}$. These correlations thus appear similar to \textit{common noise} errors in the invariance of $\alpha_{\rm tr}$ to this channel. Therefore, correlated state prep errors can lead to a systematic bias in quantification of correlated error per Clifford if not accounted for in the fit by an initial state preparation error offset.
 
 \section{Parity contrast: an independent probe of coherence}
 \label{sec:parity}
@@ -707,7 +707,7 @@ phase set by modulating the 729-nm beam via an
 acousto-optic modulator (AOM), while $\hat R_z$ rotations are performed
 virtually by updating the phase of subsequent $\hat R_\phi$ rotations. Two decomposition strategies are used in this work. Only the average numbers of physical $\hat R_x(\pi/2)$ and $\hat R_y(\pi/2)$-gates that compose the Clifford are relevant here. The first uses an average of $\kappa=2.17$ $\hat R_\phi(\pi/2)$-gates~\cite{epstein_investigating_2014}~\footnote{Decomposed into $\hat R_x(\pi/2), \hat R_y(\pi/2)$ gates.}, while the second uses $\kappa=1.167$ gates\footnote{Decomposed into $\hat R_x(\pi/2), \hat R_y(\pi/2), \hat R_z(\pi/2)$ gates.}.
 
-We begin by reproducing the multi-exponential decays seen in simulation, Figure~\ref{fig:k-copy sim}, followed by parity measurements to observe the coherence of the intermediate symmetric state described in~\S~\ref{sec:parity}. We then present data with known injected errors through phase and detuning offsets to show the ability for \emph{k-copy} RB to discern correlated and uncorrelated errors for a range of magnitudes. We finish this section with evidence for scaling the protocol to more than two qubits. We show both data for three-qubit decay profiles, and pairwise analysis of an eight-ion chain with dominant correlated errors due to global drive field inhomogeneity.
+We begin by reproducing the multi-exponential decays seen in simulation, Figure~\ref{fig:k-copy sim}, followed by parity measurements to observe the coherence of the intermediate symmetric state described in~\S~\ref{sec:parity}. We then present data with known injected errors through phase and detuning offsets to show the ability for \emph{k-copy} RB to discern correlated and uncorrelated errors for a range of magnitudes. We finish this section with evidence for scaling the protocol to more than two qubits, showing both data for three-qubit decay profiles, and pairwise analysis of an eight-ion chain with dominant correlated errors due to global drive field inhomogeneity.
 
 
 \subsection{$Z$-basis measurements}
@@ -811,7 +811,7 @@ A unitary qubit rotation is given by,
 \end{equation}
 where $\theta$ is the rotation angle, and $\vec n \cdot \vec \sigma$ is the rotation axis. 
 We decompose the single-qubit Clifford gate set into a series of resonant $\theta=\pi/2$ qubit rotations around axes 
-$\hat{\sigma}_x$ and $\hat{\sigma}_z$. Practically, phase noise on either the qubit frequency or drive field will introduce some deviation of this rotation axis. We shall consider the effect of zero-mean phase noise on $\hat{\sigma}_x$ rotations, leading to an erroneous rotations axis,
+$\hat{\sigma}_x$ and $\hat{\sigma}_z$. Practically, phase noise on either the qubit frequency or drive field will introduce some deviation of this rotation axis. We shall consider the effect of zero-mean phase noise on $\hat{\sigma}_x$ rotations, leading to an erroneous rotation axis,
 \begin{equation}
 \hat{\sigma}_{\delta\phi} = \cos(\delta\phi)\hat{\sigma}_x + \sin(\delta\phi)\hat{\sigma}_y,
 \end{equation}
@@ -973,7 +973,7 @@ residual error baseline. These straight line fits show good agreement between me
         }
     \end{center}
     \caption{
-        Variation of $\hat R_x(\pi)$-pulse gate duration along eight ion chain due to the Gaussian waist of the global addressing beam. Ion labels, $i$, are given on the upper axis, and equilibrium position given on the lower. The dotted line is fit using equation~\ref{eqn:beam_waist} to extract a waist radius of $27.7(9)~\unit{\micro\meter}$.
+        Variation of $\hat R_x(\pi)$-pulse gate duration along the eight ion chain due to the Gaussian waist of the global addressing beam. Ion labels, $i$, are given on the upper axis, and equilibrium position given on the lower. The dotted line is fit using equation~\ref{eqn:beam_waist} to extract a waist radius of $27.7(9)~\unit{\micro\meter}$.
         }
     \label{fig:k-copy_8_gate_time}
 \end{figure}

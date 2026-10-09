@@ -262,7 +262,7 @@ well-placed for studying methods for scaling hybrid-system control.
     bosonic states~\cite{saner_generating_2026},
     beam-splitter~\cite{saner_aharonovbohm_2026}, and two-mode squeezing
     interactions. However, due to the constraints of the previous experimental
-    apparatus we were limited to global addressing fields, preventing the
+    apparatus we were limited to globally addressing fields, preventing the
     application of these hybrid interactions to more than two qubits. Here we
     demonstrate the creation and characterisation of a squeezed state on the
     newly constructed apparatus, described in Chapter~\ref{ch:apparatus},
@@ -347,7 +347,7 @@ well-placed for studying methods for scaling hybrid-system control.
     We demonstrate the effective squeezing interaction on a single ion and radial
     motional mode. We are limited to using the
     radial modes due to the geometry of the single addressing system with respect to
-    the trap. We use the upper radial mode with frequency
+    the trap. For this demonstration, the upper radial mode is used, with frequency
     $\omega_\mathrm{upper}=2\pi\times 2.87~\unit{\mega\hertz}$, and motional coherence $\tau_\mathrm{upper}=18.0(8)~\unit{\milli\second}$ 
     given in
     \S~\ref{sec:Motional Coherence}.
@@ -395,7 +395,7 @@ well-placed for studying methods for scaling hybrid-system control.
     An example fit is shown in
     panel (b), with extracted $r=0.90(2)$, for a quadchromatic FWHM pulse
     duration of $t_\mathrm{sqz}=190~\unit{\micro\second}$. Panel (c) displays
-    the squeezing strength as a function of $t_\mathrm{sqz}$, with fit values given by the points, and the black line is a linear fit. Assuming that the two SDF strengths are well balanced, $\Omega_\alpha=\Omega_\beta$, and taking the $53~\unit{\micro\watt}$ used for the quadchromatic field compared to the SDF strength calibration at $40~\unit{\micro\watt}$, we find an expected squeezing strength of $\Omega_\mathrm{eff,S} = 2\pi\times 0.86(9)~\unit{\kilo\hertz}$. This is shown as the red dashed line and shaded region.
+    the squeezing strength as a function of $t_\mathrm{sqz}$, with fit values given by the points, and the black line is a linear fit. Assuming that the two SDF strengths are well-balanced, $\Omega_\alpha=\Omega_\beta$, and taking the $53~\unit{\micro\watt}$ used for the quadchromatic field compared to the SDF strength calibration at $40~\unit{\micro\watt}$, we find an expected squeezing strength of $\Omega_\mathrm{eff,S} = 2\pi\times 0.86(9)~\unit{\kilo\hertz}$. This is shown as the red dashed line and shaded region.
     The fitted strength of $\Omega_\mathrm{eff,S}= 2\pi\times 0.74(1)~\unit{\kilo\hertz}$ is lower than the expected, suggesting that either we are not sufficiently balancing the strengths of the two simultaneous SDFs, the spin-conditioning is not fully anti-commuting, or that the power stabilisation routine for 4-tones is inaccurate. Further exploration is needed, including careful quantification of the individual SDF strengths constituting the quadchromatic field. However, this preliminary result confirms that the motional coherence, and stability of the single-addressing system is sufficient to create, and characterise non-classical motional states using the apparatus developed for this thesis.
 
     % \todo{Comment on heating rate}
@@ -453,7 +453,7 @@ In this section, we explore a resource-efficient error mitigation technique, kno
 as virtual distillation, that can dramatically suppress the effect of errors on
 the final measured outcome for expectation value problems.
 
-This sections starts with outlining the goals of quantum error mitigation (QEM),
+This section starts with outlining the goals of quantum error mitigation (QEM),
 with the following section giving details on the virtual distillation method. We
 then present an experimental demonstration suppressing errors on two-copies of a single qubit system. 
 We finish this section with a discussion on future plans, and the extension of virtual distillation to hybrid
@@ -464,7 +464,7 @@ CV-DV systems.
 Noise coupled to a quantum system results in unintended coherent, and incoherent
 evolution. Deviations of the realised state from the target state are known as
 errors, and, if left unchecked, lead to the failure of quantum algorithms. 
-This failure can either be due to a reduction of signal to noise ratio, or a
+This failure can either be due to a reduction of signal-to-noise ratio, or a
 bias in the measured expectation value, resulting in misleading conclusions. 
 Ultimately, the goal of quantum error correction (QEC) is to detect and correct
 these errors on the logical state level through embedding information in larger Hilbert spaces~\cite{terhal_quantum_2015}.
@@ -600,7 +600,7 @@ The remaining question is: how can we experimentally access $\hat\rho_\mathrm{pu
     \langle\hat{O}\rangle_\mathrm{pur}=\mathrm{Tr}[\hat{O}\hat\rho_\mathrm{pur}(k)]=\frac{\mathrm{Tr}[\hat{O}\hat\rho^k]}{\mathrm{Tr}[\hat\rho^k]},
 \end{equation}
 and crucially may be estimated without ever physically preparing $\hat\rho_\mathrm{pur}(k)$.  
-Instead the numerator and denominator may be found through preparing $k$-copies
+Instead, the numerator and denominator may be found through preparing $k$-copies
 of the noisy state, applying a so-called ``derangement'' operation to entangle all copies
 together, and measuring the desired observable on one of the copies. This can be
 understood through the following identity\footnote{Huggins~\cite{huggins_virtual_2021} provides a proof of the identity, which we give an example for the case $k=2$ in Appendix~\ref{app:derange}.} providing the numerator,
@@ -668,7 +668,7 @@ The second method, known as the ``$B$-matrix''~\cite{huggins_virtual_2021}, is s
 \begin{equation}
     [\hat S^{(2)}, \hat Z_2 \hat S^{(2)}] = 0.
 \end{equation}
-Thus the two observables possess a common eigenbasis and may be simultaneously diagonalised by a single matrix\footnote{Note, we use a different convention than reference~\cite{huggins_virtual_2021}. This is done for a simpler decomposition to native gates on our apparatus.}, 
+Thus, the two observables possess a common eigenbasis and may be simultaneously diagonalised by a single matrix\footnote{Note, we use a different convention than reference~\cite{huggins_virtual_2021}. This is done for a simpler decomposition to native gates on our apparatus.}, 
 \begin{equation}
     \label{eqn:bmatrix}
         \hat B =

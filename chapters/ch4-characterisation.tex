@@ -175,7 +175,7 @@ statistical uncertainty for a practical phase measurement, $\sigma_\theta$, that
 independent of the magnitude of $\theta$.
 The uncertainty of angular frequency $\sigma_\omega=\frac{\sigma_\theta}{t}$ is thus 
 inversely proportional to duration $t$ --- longer probe durations provide 
-more information. This improved signal to noise is understood by the coherent
+more information. This improved signal-to-noise is understood by the coherent
 accumulation of phase over time due to an underlying $\omega$.
 
 However, there
@@ -200,7 +200,7 @@ calibrations, which we outline below.
 \subsubsection{Transition Frequency Calibration}
 
 Rotations around the $\hat\sigma_z$ axis, correspond to a relative detuning,
-$\delta$, between the qubit precession and a the reference frequency of a near resonant drive field, given by
+$\delta$, between the qubit precession and the reference frequency of a near resonant drive field, given by
 the idle Hamiltonian, $\hat H_z = -\hbar\frac{\delta}{2}\hat\sigma_z$. The phase
 accumulated due to the application of $\hat H_z$ for a fixed time, $T$, is
 $\theta = \delta T$. This phase may be measured through RPE using Ramsey
@@ -305,11 +305,11 @@ the bare qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.
             }
         \end{center}
         \caption{
-            Standard randomised benchmarking applied to a single qubit. Panel a)
+            Standard randomised benchmarking applied to a single qubit. Panel (a)
             shows the required circuit for a random sequence of Clifford gates,
             $C_i$, of total length $m-1$, with a final inverting Clifford,
             $C_\mathrm{inv}$, and a random Pauli gate, $P$, before measurement
-            in the computational basis. Panel b) shows the survival probability,
+            in the computational basis. Panel (b) shows the survival probability,
             $\mathcal{P}_S$, versus Clifford sequence length, $m$.
             Each point is found by averaging over $r=50$ and $s=50$ repeats for each
             $m$. The solid line is a fit using the decay model given by
@@ -484,7 +484,7 @@ the bare qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.
     decays indicates comparatively slow drifts. Neither exponential nor Gaussian
     well describe the measured decays here due to the strong
     periodic structure above the exponential decay. This suggests a strong
-    narrow-band coherent component to the noise. At the time scale of $\approx
+    narrowband coherent component to the noise. At the timescale of $\approx
     20~\unit{\milli\second}$ we expect to see the effects of UK mains hum, which
     likely cause this structure. Regardless, fitting the exponential envelope
     suggests a coherence time of $17(4)~\unit{\milli\second}$ for the qubit
@@ -503,8 +503,8 @@ the bare qubit and the calibrated resonant $\frac{\pi}{2}$-pulses.
             }
         \end{center}
         \caption{
-            Characterisation of the single-ion addressing system using the ion as a probe. a) The normalised intensity of the 
-            focussed 729-nm beam at the ion-plane. The $1/e^2$-waist is highlighted by the contour. b) Demonstration of spatial selective addressing by scanning the beam across a 5-ion chain while applying $\hat R_x(\pi)$-gates calibrated for ion 3. The probability of observing $\ket{\downarrow}$, $P_\downarrow$ is shown for each ion.
+            Characterisation of the single-ion addressing system using the ion as a probe. (a) The normalised intensity of the 
+            focussed 729-nm beam at the ion-plane. The $1/e^2$-waist is highlighted by the contour. (b) Demonstration of spatial selective addressing by scanning the beam across a 5-ion chain while applying $\hat R_x(\pi)$-gates calibrated for ion 3. The probability of observing $\ket{\downarrow}$, $P_\downarrow$ is shown for each ion.
             }
         \label{fig:sa_char}
     \end{figure}
@@ -525,7 +525,7 @@ oscillations on a single-trapped ion while scanning the beam position in a 2D
 grid. To efficiently measure this 2D array, a fixed Rabi pulse duration is used,
 although we note that similar measurements can be made with adaptive pulse
 durations, or through using RPE type protocols to improve the sensitivity of
-these measurement. To avoid ambiguity of the accumulated phase, we ensure that
+these measurements. To avoid ambiguity of the accumulated phase, we ensure that
 at the point of maximum field amplitude the accumulated phase does not wrap,
 $\theta_\mathrm{max} < \pi$.
 The relative optical intensity may then be extracted by considering
@@ -739,7 +739,7 @@ sequences~\cite{fang_crosstalk_2022}.
             RSB pulses with varying durations $t(N)$, and the purple blocks are
             deshelving pulses. After every 5 sideband cooling pulses, there is
             an interleaved state preparation sequence to ensure there is no
-            population trapped outside of the closed cooling cycle. The RSB
+            population trapped outside the closed cooling cycle. The RSB
             length is linearly increased with pulse number $N$, up to the
             expected RSB $R(\pi)$-pulse duration for $n=1$.  
             (b, c) Thermometry scans after Doppler and sideband cooling.
@@ -916,15 +916,15 @@ sequences~\cite{fang_crosstalk_2022}.
         }
     \end{center}
     \caption{
-        a) Motional coherence time measured by Ramsey interferometry using Fock
+        (a) Motional coherence time measured by Ramsey interferometry using Fock
         states $\ket{0}$ and $\ket{1}$. Points are populations measured in
         $\ket{\downarrow}$ after the Ramsey sequence with varying delay time.
         The black dashed line is an exponential decay fit, with $\frac{1}{e}$
         coherence time $\tau = 18.0(8)$~\unit{\ms}, and initial contrast $C_0 =
         0.90(2)$. The red line corresponds to the expected decay due to the
-        independently measured heating rate of $\dot{\bar{n}}=33(3)$~q/s. b)~Displays 
+        independently measured heating rate of $\dot{\bar{n}}=33(3)$~q/s. (b)~Displays 
         the residual oscillations after subtracting the expected
-        heating-rate profile. c)~Displays the PSD of the residual oscillations,
+        heating-rate profile. (c)~Displays the PSD of the residual oscillations,
         with the dashed red line signifying $50~\unit{\hertz}$.
         }
     \label{fig:motional_coherence}
@@ -944,7 +944,7 @@ sequences~\cite{fang_crosstalk_2022}.
     quantify decoherence, however with different
     sensitivities to both dephasing and heating. 
 
-    The Ramsey contrast decays is measured by the following sequence:
+    The Ramsey contrast decay is measured by the following sequence:
     \begin{enumerate}
     \item Prepare the ground state of both qubit and qumode, $\ket{\downarrow, 0}$. The qubit is first prepared via optical pumping, and the qumode is subsequently prepared by Doppler and resolved sideband cooling.
     \item A $\hat R_y(\pi/2)$-pulse is applied on the carrier transition, preparing the state $(\ket{\downarrow, 0} + \ket{\uparrow, 0})/\sqrt{2}$.
@@ -1142,7 +1142,7 @@ sequences~\cite{fang_crosstalk_2022}.
     universal qubit control, we characterise the performance of two-qubit
     entangling gates, $\hat R_{xx}(\theta)$, via the MS interaction on our apparatus.
 
-    This interaction, as discuss in~\S~\ref{sec:Geometric Phase Gates}, is
+    This interaction, as discussed in~\S~\ref{sec:Geometric Phase Gates}, is
     implemented through a detuned SDF.
     To reduce the sensitivity to incoherent motional errors such as heating and dephasing, a multi-loop 
     sequence is used. Specifically, we use a ``Walsh-modulated two-loop'' sequence consisting of two complete loops in phase space with the motional phase of the SDF flipped by $\pi$ for the second loop~\cite{hayes_coherent_2012}. The two-loop gate requires
@@ -1155,7 +1155,7 @@ sequences~\cite{fang_crosstalk_2022}.
     The two-qubit gate performance can be characterised many different ways.
     Ideally a process tomography method would be used to fully characterise the
     CPTP map implemented by the noisy two-qubit
-    gate~\cite{chuang_prescription_1997}. However such a method requires
+    gate~\cite{chuang_prescription_1997}. However, such a method requires
     near-perfect state-initialisation to correctly discern dynamics originating
     from the gate under test. Random circuit methods such as two-qubit Clifford
     RB~\cite{gaebler_randomized_2012}, or cyclic
@@ -1180,7 +1180,7 @@ sequences~\cite{fang_crosstalk_2022}.
         \label{eq:Fidelity}
     \end{equation}
     where the matrix elements are given by $\rho_{ij,kl} = \braket{ij|\hat\rho|kl}$.
-    Thus to extract this fidelity, only partial state tomography is
+    Thus, to extract this fidelity, only partial state tomography is
     required~\cite{sackett_experimental_2000}.
     The first bracketed term of
     equation~\ref{eq:Fidelity}, denoted $A$, is measured by performing projective measurements
@@ -1223,7 +1223,7 @@ sequences~\cite{fang_crosstalk_2022}.
     in panels (b) and (c) respectively. A contrast of $C=0.97(1)$, and
     population of $A=0.987(2)$ is found, resulting in a state fidelity,
     $\mathcal{F}=0.980(6)$.
-    Each population point in these figures are found by taking the
+    Each population point in these figures is found by taking the
     average of 200 shots of the gate sequence.
 
     Similar fidelities were measured when applying the interaction by the single-ion addressing system on

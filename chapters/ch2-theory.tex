@@ -202,7 +202,7 @@ which is a rotation on the Bloch sphere by angle $\theta = \Omega t$, around the
 Applying single qubit rotations to the initial state $\ket{\da}$ and observing the spin populations results in spin-state transfers, termed Rabi oscillations,
 \begin{align}
 P_\ua &= |\bra{\ua}\hat R_x(\Omega t)\ket{\da}|^2\\
-&= \sin^2\left(\frac{\Omega t}{2}\right).
+&= \sin^2\left(\frac{\Omega t}{2}\right),
 \end{align}
 where $P_\ua$ is the population observed in $\ket{\ua}$.
 
@@ -393,7 +393,7 @@ The first term is the displacement operator, the second is an accumulation of gl
 The displacement parameter $\beta$ is given by,
 \begin{equation}
     \label{eqn:beta}
-    \beta(T) = \frac{\Omega_D}{\delta}\sin\left(\frac{\delta T}{2}\right)ie^{-i(\delta T/2 + \phi)}.
+    \beta(T) = \frac{\Omega_D}{\delta}\sin\left(\frac{\delta T}{2}\right)ie^{-i(\delta T/2 + \phi)},
 \end{equation}
 with a trajectory tracing a circle of radius $\frac{\Omega_D}{2|\delta|}$, returning to the
 initial motional state with periodicity $T_n = \frac{2\pi n}{|\delta|}$, for integer $n$.
@@ -451,7 +451,7 @@ To further analyse the dynamics, the interaction Hamiltonian is transformed to t
     \label{fig:sidebands}
 \end{figure}
 
-The resolved motional sideband regime is well approximated when the motional wavefunction extent $\sqrt{\langle \hat x^2\rangle}$ is small compared to the optical wavelength, $\eta^2(2\hat n+1)\ll~1$. In this ``Lamb-Dicke'' regime, the interaction Hamiltonian can be expand in terms of $\eta$ as (here only to first order), 
+The resolved motional sideband regime is well approximated when the motional wavefunction extent $\sqrt{\langle \hat x^2\rangle}$ is small compared to the optical wavelength, $\eta^2(2\hat n+1)\ll~1$. In this ``Lamb-Dicke'' regime, the interaction Hamiltonian can be expanded in terms of $\eta$ as (here only to first order), 
 \begin{equation}
     \label{eqn:LD_regime}
  \hat H_{\rm LD} = \frac{\hbar\Omega}{2}\hat\sigma_+ \left(\hat I+ i\eta(\hat a^\dagger e^{i\omega_x t}+\hat a e^{-i\omega_x t} ) + O(\eta^2)\right)e^{-i(\delta t - \phi)} + {\rm h.c.} ,
@@ -506,9 +506,9 @@ As the name suggests, we consider displacements of the form given in equation~\r
 with the spin-conditioning in the $xy$-plane, given by spin phase, $\phi_s$.
 
 In this section, we analyse how to generate an effective SDF using a combination of RSB and BSB fields.
-In the next section we discuss using the SDF and the resulting spin-dependent geometric phase to realise two-qubit entangling gates.\\
+Using this SDF and the resulting spin-dependent geometric phase, we discuss how to realise two-qubit entangling gates.\\
 
-In this thesis, the SDF is realised by the optical Mølmer-Sørensen (MS) scheme~\cite{sorensen_entanglement_2000} via a bichromatic laser field. Bichromatic refers to the simultaneous
+In this thesis, the SDF is driven by the optical Mølmer-Sørensen (MS) scheme~\cite{sorensen_entanglement_2000} via a bichromatic laser field. Bichromatic refers to the simultaneous
 application of two frequency tones. The tones are set symmetrically detuned around the carrier transition, $\omega_1 = \omega_0 + \omega_x + \Delta$, $\omega_2 = \omega_0 - \omega_x - \Delta$. The bichromatic Hamiltonian is then given by,
 \begin{equation}
     \hat H_{\rm bi}(t) = \hat H_{\rm RSB}(t) + \hat H_{\rm BSB}(t).
