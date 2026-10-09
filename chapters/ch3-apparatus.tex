@@ -134,7 +134,7 @@
     through utilising a micro-fabricated 3D trap geometry with greater ion-surface distances than typical planar traps.
     Details on its design and characterisations can be found in Ref.~\cite{see_fabrication_2013,
     wilpers_monolithic_2012, choonee_silicon_2017}. Figure~\ref{fig:trap} shows the electrode geometry of the trap and the relevant length scales.
-    The trap package consistes of an outer leadless chip carrier (LCC) with outer
+    The trap package consists of an outer leadless chip carrier (LCC) with outer
     pads routing DC, RF, and ground connections to an intermediate
     Al\textsubscript{3}N\textsubscript{4} substrate. The connection to the front
     and back surfaces of the trap chip is made through vias and wire bonds to
@@ -151,7 +151,7 @@
     available for use. There is a continuity fault on front dc11 and so this
     electrode is also not available for use.}.
     We typically
-    trap ions centered on electrode dc5. Panel (d) shows a cross-sectional view of the
+    trap ions centred on electrode dc5. Panel (d) shows a cross-sectional view of the
     trapping region, highlighting the ion position between the front and back
     surface electrodes. The dual RF rails and DC electrodes are shown in gold,
     and the undercut silicon bulk is highlighted in dark grey.
@@ -225,7 +225,7 @@
     \begin{equation}
     S_y(f) = \frac{f^2}{f_0^2} S_{\phi}(f),
     \end{equation}
-    where $y(t)=\delta\Omega_{RF}(t)/\Omega_{RF}$, $S_{\phi}(f)$ is the phase noise PSD (which is the Fourier transform of the autocorrelation function), $f$ is the offset frequency, and $f_0$ is the carrier frequency. AM noise is quoted as the PSDF of the fractional amplitude stability,
+    where $y(t)=\delta\Omega_{RF}(t)/\Omega_{RF}$, $S_{\phi}(f)$ is the phase noise PSD (which is the Fourier transform of the autocorrelation function), $f$ is the offset frequency, and $f_0$ is the carrier frequency. AM noise is quoted as the PSD of the fractional amplitude stability,
     \begin{equation}
     S_a(f) = 2\times10^{L_a(f)/10},
     \end{equation}
@@ -511,7 +511,7 @@
     % What frequency control do we need on each? PDH lock, AOM etc.
     % Table of all AOMs and offset frequencies
     % Table of laser powers in mW and with aimed saturation intensities for doppler idle, cooling, readout, and laser linewidths.
-    % Intesity stabilisation using SUServo
+    % Intensity stabilisation using SUServo
 % Pre reqs:
     % Calcium level structure
     % 5 G field
@@ -574,9 +574,9 @@
     The conceptual goal of the PDH technique is to measure the frequency difference between the laser and a resonant frequency of a stable optical cavity to generate an error signal, preferably linear over typical frequency excursions (while \emph{locked}). This error signal can then be modified by some controller (typically PID), to directly infer how to tune the laser controls to minimise this error signal, often termed \emph{locking} the laser to the cavity. Further, the error signal should be insensitive to amplitude noise on the laser light, to avoid amplitude to frequency noise conversion due to the feedback loop (in contrast, side-of-fringe stabilisation is sensitive to amplitude drifts).
 
     This scheme consists of phase modulation of the incident laser light to generate frequency sidebands about the carrier. These sidebands act as phase references to the carrier field inside the cavity. In practice, the modulation is produced using an electro-optical modulator (EOM) driven by an RF voltage.
-    Figure~\ref{fig:PDH} shows a schematic of the PDH scheme, highlighting the beam paths and closed loop. The phase modulated light is directed onto the cavity, with the total return signal being some combination of the reflected sidebands, carrier, and the cavity leakage field, with the latter providing the phase of the electric field inside the cavity. The reflected light is directed onto a fast photodetector, and the signal is demodulated with the same oscillator signal used to drive the EOM, but delayed by some chosen phase. The resulting signal is low pass filtered to remove high frequency components, yielding the final error signal, an example of which is seen in the upper right panel of Figure~\ref{fig:PDH}. The central region is anti-symmetric and linear, centered on the desired lock point. Using a tuned controller for feedback to the laser controller, this provides a stable lock of the laser to the cavity.
+    Figure~\ref{fig:PDH} shows a schematic of the PDH scheme, highlighting the beam paths and closed loop. The phase modulated light is directed onto the cavity, with the total return signal being some combination of the reflected sidebands, carrier, and the cavity leakage field, with the latter providing the phase of the electric field inside the cavity. The reflected light is directed onto a fast photodetector, and the signal is demodulated with the same oscillator signal used to drive the EOM, but delayed by some chosen phase. The resulting signal is low pass filtered to remove high frequency components, yielding the final error signal, an example of which is seen in the upper right panel of Figure~\ref{fig:PDH}. The central region is anti-symmetric and linear, centred on the desired lock point. Using a tuned controller for feedback to the laser controller, this provides a stable lock of the laser to the cavity.
 
-    As the cavity is used as a frequency reference, both a high finesse and stable optical lengths are desirable. The gradient of the PDH error signal is proportioanl to finesse, leading to increased signal to noise with higher finesse (see Ref.~\cite{oswald_characterization_2022} for more details). Optical length deviations are minimised through mounting the cavity in a vacuum chamber, and taking care in isolating it from temperature fluctuations and vibrations. Details of the PDH hardware and control loops used in this apparatus are given in the following sections. 
+    As the cavity is used as a frequency reference, both a high finesse and stable optical lengths are desirable. The gradient of the PDH error signal is proportional to finesse, leading to increased signal to noise with higher finesse (see Ref.~\cite{oswald_characterization_2022} for more details). Optical length deviations are minimised through mounting the cavity in a vacuum chamber, and taking care in isolating it from temperature fluctuations and vibrations. Details of the PDH hardware and control loops used in this apparatus are given in the following sections. 
 
 
 \subsection{Intensity Stabilisation}
@@ -594,7 +594,7 @@
     Nadlinger (\emph{QLNPD}), and the feedback system controller, known as \emph{SUServo}, was written by
     Peter Drmota.
 
-    % \todo{outdated} Beam pointing drifts are mitigated through careful mechanical design of the optical paths for passive stability, and through automated intermittant beam pointing calibrations using the ion as a sensor (see~\S~\ref{sec:Beam Pointing Calibration}).
+    % \todo{outdated} Beam pointing drifts are mitigated through careful mechanical design of the optical paths for passive stability, and through automated intermittent beam pointing calibrations using the ion as a sensor (see~\S~\ref{sec:Beam Pointing Calibration}).
 
     
 \begin{figure}
@@ -625,7 +625,7 @@
     PDH lock cavity (fig~\ref{fig:diode_paths} (c)), and a diagnostic wavemeter
     for checking wavelength and lock status\footnote{\emph{HighFinesse} WS7}.
     The splitterboard also houses an Electro-optic modulator (EOM) module for
-    applying both offset and PDH sidebands for an offset PDH lock. The offset sidebands may be arbitarily set (within the $\unit{\giga\hertz}$ range of the EOM) to provide a continuous choice of laser lock frequencies between cavity modes, rather than maintaining a fixed offset between the laser output frequency and the discrete cavity mode frequencies. For 397-nm
+    applying both offset and PDH sidebands for an offset PDH lock. The offset sidebands may be arbitrarily set (within the $\unit{\giga\hertz}$ range of the EOM) to provide a continuous choice of laser lock frequencies between cavity modes, rather than maintaining a fixed offset between the laser output frequency and the discrete cavity mode frequencies. For 397-nm
     and 423-nm, resonant free space EOMs\footnote{\emph{Qubig} PM7-VIS-25 and PM9-VIS-2.25}
     are used, for 854-nm and 866-nm broadband fibre EOMs\footnote{\emph{EOSPACE} PM-0s5-05-PFA-PFA-850} are used
     for convenience. The path on the reference cavity board
@@ -796,7 +796,7 @@
     addressing system to spatially select one or two ions in the chain.
     Spatial selectivity using tightly focused beams offers the additional advantage of substantially higher optical intensity than a globally addressing field. This enables stronger interactions and, consequently, faster gate operations.
     % Cross talk errors link here?
-    A unique design feature of our system is the ability to produce an array of single-ion-addressing standing waves with individually controllable spatial phases, thus enabling any-to-any connectivity for fast engangling gates based on the scheme demonstrated in reference~\cite{saner_breaking_2023}. 
+    A unique design feature of our system is the ability to produce an array of single-ion-addressing standing waves with individually controllable spatial phases, thus enabling any-to-any connectivity for fast entangling gates based on the scheme demonstrated in reference~\cite{saner_breaking_2023}. 
 
     %
     The design and construction of the single-ion addressing system was led by Iver Romvig
@@ -805,7 +805,7 @@
     details of the single-ion addressing system. In~\S~\ref{sec:Single
     Addressing char}, we present the characterisation data upon installation.
     Further technical information can be found in I. R. {\O}vergaard's Transfer
-    of Status report~\cite{oevergaard_transfer_2025}, availible upon request. \\
+    of Status report~\cite{oevergaard_transfer_2025}, available upon request. \\
 
     Multiple methods for single-ion addressing have been developed in the ion-trap community, including waveguide arrays~\cite{sotirova_high-fidelity_2024,
     mehta_integrated_2020}, micro-electronic-mechanical mirror arrays~\cite{crain_individual_2014, wang_high-fidelity_2020}, spatial-light-modulators~\cite{mazzanti_alignment_2024}, and
@@ -816,9 +816,9 @@
     For our use cases, we require the following:
     \begin{itemize}
         \item Addressing of up to two ions in a $\approx10$-ion chain, with low crosstalk to neighbouring ions.
-        \item Fast reconfigureability ($\approx 1~\unit{\micro\second}$) of the beam position within a single experimental shot (i.e. between different gates within a single circuit execution).
+        \item Fast reconfigurability ($\approx 1~\unit{\micro\second}$) of the beam position within a single experimental shot (i.e. between different gates within a single circuit execution).
         \item Good optical power efficiency to ensure high intensity electric fields at the ion. 
-        \item Flexibility in beam positioning to allow for fine tuning of the overlap of two counterpropagating beams used to create the standing wave.
+        \item Flexibility in beam positioning to allow for fine tuning of the overlap of two counter-propagating beams used to create the standing wave.
         \item Individual phase control of each addressed beam to stabilise the standing-wave phase at the ion plane.
         \item Beam-position stability to avoid power fluctuations.
         \item A compact design to fit within the magnetically shielded region of the experiment.
@@ -880,7 +880,7 @@
     scanning lens, the unwanted orders are blocked by an adjustable slit
     aperture and the beam polarisation is cleaned and selected using a
     polarisation filter and half-wave plate. A plate beam
-    splitter is used within the persicope to pick off $\approx
+    splitter is used within the periscope to pick off $\approx
     5\%$ of the light for monitoring on a photodiode\footnote{\emph{ThorLabs} SM05PD1A}. This photodiode is
     used for an intensity-stabilising feedback loop as
     discussed in~\S~\ref{sec:Intensity Stabilisation}. The scan lens, in
@@ -895,7 +895,7 @@
     trapped ion. The same beam was then tested in a five-ion chain, where the
     average nearest-neighbour intensity crosstalk was measured to be $4.16(2)\times
     10^{-4}$, with crosstalk defined as the relative intensity at the probe
-    position compared to the addressed postion. 
+    position compared to the addressed position. 
 
 \subsection{Global Addressing System}
 \label{sec:Global Addressing System}
@@ -903,7 +903,7 @@
 The single-ion addressing provides the utility of spatially selecting a few ions to
 drive with the 729-nm light, however, the power efficiency scales as $O(n^2)$,
 with $n$ being the number of addressed spots. As such, we limit the single-ion addressing to simultaneously illuminate only one or two ions at a time. It is therefore convenient to also
-have a global beam that has dimensions larger than the ion chain to address all the ions in parallel. This global branch is currently counterpropagating to the single-ion addressing path, and shares the same optical path as the imaging system (see Figure~\ref{fig:readout}). To increase
+have a global beam that has dimensions larger than the ion chain to address all the ions in parallel. This global branch is currently counter-propagating to the single-ion addressing path, and shares the same optical path as the imaging system (see Figure~\ref{fig:readout}). To increase
 the beam intensity at the ions, the global branch uses an anamorphic prism
 pair\footnote{\emph{ThorLabs} PS883-B} to elliptically shape the beam, with a
 4:1 aspect ratio, with major axis along the ion chain direction.  The beam is focussed onto the ion plane by the high-NA objective, 
