@@ -47,10 +47,41 @@
 % Either way, you'll have to choose and configure an appropriate bibliography format...
 
 % The science-type option: numerical in-text citation with references in order of appearance.
-% \usepackage[style=numeric-comp, sorting=none, backend=biber, doi=false, isbn=false, url=false, date=year]{biblatex}
-% \AtEveryBibitem{\clearfield{issue}}
-% \AtEveryBibitem{\clearfield{pages}}
-% \AtEveryBibitem{\clearfield{language}}
+\usepackage[
+    style=numeric-comp, 
+    sorting=none, 
+    backend=biber, 
+    doi=false, 
+    isbn=false, 
+    url=false, 
+    date=year,
+    giveninits=true]{biblatex}
+
+\DeclareFieldFormat[misc, thesis, book]{date}{\mkbibparens{#1}}
+
+% Remove [quant-ph] from arxiv notes
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldsource=note,
+        match=\regexp{\s*\[[^\]]+\]},
+        replace={}]
+    }
+  }
+}
+% Use note if journal not present (for arxiv)
+\AtEveryBibitem{%
+  \iffieldundef{journaltitle}
+    {}
+    {\clearfield{note}}%
+}
+
+\AtEveryBibitem{\clearfield{issue}}
+\AtEveryBibitem{\clearfield{pages}}
+\AtEveryBibitem{%
+  \clearlist{language}%
+  \clearfield{langid}%
+}
 \newcommand*{\bibtitle}{References}
 
 % The humanities-type option: author-year in-text citation with an alphabetical works cited.
@@ -61,34 +92,12 @@
 % \renewcommand*{\bibfont}{\raggedright\small}
 
 % Change this to the name of your .bib file (usually exported from a citation manager like Zotero or EndNote).
-% \addbibresource{bibliography.bib}
-
-\usepackage[
-    style=numeric-comp,
-    sorting=none,
-    backend=biber,
-    doi=false,
-    isbn=false,
-    url=false,
-    date=year
-]{biblatex}
-
 \addbibresource{bibliography.bib}
 
-\usepackage{hyperref}
-
-% \DeclareFieldFormat{title}{%
-%   \iffieldundef{doi}
-%     {#1}
-%     {\href{https://doi.org/\thefield{doi}}{#1}}%
-% }
-% \DeclareFieldFormat{title}{%
-%   \iffieldundef{url}
-%     {#1}
-%     {\href{\thefield{url}}{#1}}%
-% }
-\DeclareFieldFormat{title}{%
-  \href{https://doi.org/\thefield{doi}}{#1}%
+\DeclareFieldFormat[article,misc]{title}{%
+  \iffieldundef{doi}
+    {#1}
+    {\href{https://doi.org/\thefield{doi}}{#1}}%
 }
 
 % Uncomment this if you want equation numbers per section (2.3.12), instead of per chapter (2.18):

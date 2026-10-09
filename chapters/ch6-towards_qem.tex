@@ -17,8 +17,8 @@ control of the ion motion and discuss the extensions to hybrid spin-oscillator
 systems.
 Following on from recent
 progress in spin-conditioned bosonic operations demonstrated within our
-group~\cite{bazavan_squeezing_2024,saner_generating_2024, bazavan_easy_nodate,
-saner_quantum_2026, shinbrough_applications_2026, saner_real-time_2025}, we are interested in developing the
+group~\cite{bazavan_squeezing_2026,saner_generating_2026, bazavan_easy_2024,
+saner_quantum_2026, shinbrough_applications_2026, saner_aharonovbohm_2026}, we are interested in developing the
 required addressing capabilities to scale to multiple qubits and motional modes. 
 We outline the method we use to generate such spin-oscillator
 interactions experimentally, and demonstrate the generation of a single-mode squeezed state
@@ -49,8 +49,8 @@ apparatus.
 \label{sec:CVQC}
 CV quantum computation~\cite{lloyd_quantum_1999} offers an alternative strategy for encoding quantum information, utilising
 quantum harmonic oscillators, termed \emph{qumodes},
-as the fundamental quantum object, rather than discrete variable (DV) systems, e.g. the two-level qubit. A single ideal qumode possesses an infinite dimensional Hilbert space, allowing for high (in this case arbitrarily high) density encoding of information in physical information carriers. This opens an alternative avenue for scaling QIPs, requiring dramatically fewer physical carriers compared to qubit-only systems. The inclusion of both CV and DV subsystems, termed the hybrid model~\cite{liu_hybrid_2026}, retains the convenient control and readout of discrete qubits while providing the larger state space and native interactions available to qumodes. The hybrid system is a promising avenue for quantum simulation, with the ability to encode spins with physical two-level systems, whilst encoding bosons efficiently using bosonic physical systems~\cite{saner_real-time_2025}.
-For computation the large state space of hybrid systems allows for highly resource efficient circuit decompositions. For example, reference~\cite{brenner_factoring_2024} considers a factoring algorithm whose required physical resources are independent of the number to be factored. Remarkably, this scheme requires only a single qubit and three oscillators, however requires prohibitively large energy states of the oscillator.
+as the fundamental quantum object, rather than discrete variable (DV) systems, e.g. the two-level qubit. A single ideal qumode possesses an infinite dimensional Hilbert space, allowing for high (in this case arbitrarily high) density encoding of information in physical information carriers. This opens an alternative avenue for scaling QIPs, requiring dramatically fewer physical carriers compared to qubit-only systems. The inclusion of both CV and DV subsystems, termed the hybrid model~\cite{liu_hybrid_2026}, retains the convenient control and readout of discrete qubits while providing the larger state space and native interactions available to qumodes. The hybrid system is a promising avenue for quantum simulation, with the ability to encode spins with physical two-level systems, whilst encoding bosons efficiently using bosonic physical systems~\cite{saner_aharonovbohm_2026, crane_hybrid_2024}.
+For computation the large state space of hybrid systems allows for highly resource efficient circuit decompositions. For example, reference~\cite{brenner_factoring_2025} considers a factoring algorithm whose required physical resources are independent of the number to be factored. Remarkably, this scheme requires only a single qubit and three oscillators, however requires prohibitively large energy states of the oscillator.
 Practically, we will not be able to realise arbitrarily high energy oscillator states, but it is still an open question of what information density is possible in experimentally accessible quantum oscillators.
 
 Hybrid spin-oscillator computation has been studied in the context of
@@ -124,9 +124,9 @@ well-placed for studying methods for scaling hybrid-system control.
     \begin{equation}
         \hat H_T \propto \hat a^3 + \hat a^{\dagger 3}.
     \end{equation}
-    Spin-conditioned trisqueezing has been shown previously in our group~\cite{bazavan_squeezing_2024}, utilising the protocol given in reference~\cite{sutherland_universal_2021}, here termed the ``two-SDF'' method.
+    Spin-conditioned trisqueezing has been shown previously in our group~\cite{bazavan_squeezing_2026}, utilising the protocol given in reference~\cite{sutherland_universal_2021}, here termed the ``two-SDF'' method.
 
-    The remaining nonlinear Gaussian operations; squeezing, parity, and beam-splitter, may be generated through the same ``two-SDF'' mechanism, which we shall detail in the following section, and have also been previously demonstrated~\cite{bazavan_squeezing_2024,saner_real-time_2025,bazavan_easy_nodate,saner_quantum_2026}.
+    The remaining nonlinear Gaussian operations; squeezing, parity, and beam-splitter, may be generated through the same ``two-SDF'' mechanism, which we shall detail in the following section, and have also been previously demonstrated~\cite{bazavan_squeezing_2026,saner_aharonovbohm_2026,bazavan_easy_2024,saner_quantum_2026}.
 
     The displacement operation can be realised either spin-independently by RF fields near resonance to the motional-mode frequencies (\S~\ref{sec:trap_charge}), or spin-conditioned using various SDF implementations, such as by the MS method using bichromatic fields (\S~\ref{sec:SDF}), or by static Stark-shift gradients due to an optical tweezer~\cite{leindecker_state-dependent_2026}.\\
 
@@ -138,7 +138,7 @@ well-placed for studying methods for scaling hybrid-system control.
     % \begin{equation}
     %     H_T \propto a^2 + a\dagger^2,
     % \end{equation}
-    % leads to a reduction in variance along one quadrature in position-momentum space, at a cost of increase orthogonal variance. Squeezing has been shown spin-independently through parametric excitation of the trapping field~\cite{}, and has been demonstrated with spin-conditioning through exciting higher order motional sidebands~\cite{}, through static Stark-shift curvatures due to an optical tweezer~\cite{leindecker_state_2026}, by non-commuting sideband interactions~\cite{syndney_optimal}, and by non-commuting SDFs~\cite{bazavan_squeezing_2024}, of which the latter protocol we shall use here.
+    % leads to a reduction in variance along one quadrature in position-momentum space, at a cost of increase orthogonal variance. Squeezing has been shown spin-independently through parametric excitation of the trapping field~\cite{}, and has been demonstrated with spin-conditioning through exciting higher order motional sidebands~\cite{}, through static Stark-shift curvatures due to an optical tweezer~\cite{leindecker_state_2026}, by non-commuting sideband interactions~\cite{syndney_optimal}, and by non-commuting SDFs~\cite{bazavan_squeezing_2026}, of which the latter protocol we shall use here.
     
     % \todo{
     %       - Could give flow fields for single-mode operators (could be a nice figure,
@@ -158,7 +158,7 @@ well-placed for studying methods for scaling hybrid-system control.
     \end{align}
     where the individual SDF strengths are $\Omega_i$, the detuning from each mode is $\Delta_i$, the motional phase is $\phi_i$, and we ensure the spin-conditioning anticommute $\{\hat\sigma_\alpha, \hat\sigma_\beta\} = 0$, $[\hat\sigma_\alpha, \hat\sigma_\beta] = 2i\epsilon_{\alpha\beta\gamma}\hat\sigma_\gamma$,
     where $\epsilon_{\alpha\beta\gamma}$ is the Levi-Civita symbols.
-    The unitary dynamics of $\hat H_\mathrm{2SDF}$ may be evaluated by the Magnus expansion~\cite{magnus_exponential_1954}, with details given in references~\cite{sutherland_universal_2021,bazavan_easy_nodate,saner_quantum_2026}, and in Appendix~\ref{app:magnus}. 
+    The unitary dynamics of $\hat H_\mathrm{2SDF}$ may be evaluated by the Magnus expansion~\cite{magnus_exponential_1954}, with details given in references~\cite{sutherland_universal_2021,bazavan_easy_2024,saner_quantum_2026}, and in Appendix~\ref{app:magnus}. 
     To lend some intuition on the resulting physics, we highlight the main ideas here: The Magnus expansion expresses the generator of the unitary evolution as an infinite series of terms, with successive terms proportional to increasingly higher-order nested commutators of the Hamiltonian evaluated at different times. Due to the non-commuting spin conditioning, this series does not truncate, leading to arbitrarily high nonlinear bosonic interactions effectively driven via the application of only two linear SDFs.
 
     To utilise specific nonlinear terms within this infinite series, matching
@@ -258,9 +258,9 @@ well-placed for studying methods for scaling hybrid-system control.
     % - Point to motional coherence time. Was dephasing dominated, improved by grounding 
 
     In our group, we have previously demonstrated higher order
-    squeezing~\cite{bazavan_squeezing_2024}, superpositions of nonlinear
-    bosonic states~\cite{saner_generating_2024},
-    beam-splitter~\cite{saner_real-time_2025}, and two-mode squeezing
+    squeezing~\cite{bazavan_squeezing_2026}, superpositions of nonlinear
+    bosonic states~\cite{saner_generating_2026},
+    beam-splitter~\cite{saner_aharonovbohm_2026}, and two-mode squeezing
     interactions. However, due to the constraints of the previous experimental
     apparatus we were limited to global addressing fields, preventing the
     application of these hybrid interactions to more than two qubits. Here we
@@ -403,7 +403,7 @@ well-placed for studying methods for scaling hybrid-system control.
 \subsection{Outlook}
     Hybrid systems offer access to large Hilbert spaces, even with modest ion numbers.
     In this section we outlined a convenient set of native interactions for universal hybrid qubit-qumode gates. We experimentally demonstrate the squeezing interaction generated via the ``two-SDF'' method of
-    reference~\cite{sutherland_universal_2021}. This demonstration replicated previous work using the ``two-SDF'' method~\cite{bazavan_squeezing_2024}, however now shown on the newly built apparatus utilising a single-ion addressing system, and applied to the radial motional modes.\
+    reference~\cite{sutherland_universal_2021}. This demonstration replicated previous work using the ``two-SDF'' method~\cite{bazavan_squeezing_2026}, however now shown on the newly built apparatus utilising a single-ion addressing system, and applied to the radial motional modes.\
 
     Enabled by the single-addressing, and improved motional coherence times of
     the new system, we are particularly interested in exploring short hybrid
@@ -555,7 +555,7 @@ circuit appended to the state-preparation circuit under test, and a reasonable
 resource overhead of $k\times$ more physical qubits (or qumodes) for a
 $k$-exponential decrease in error bias. 
 
-Virtual distillation has been previously demonstrated experimentally on the super-conducting platform to suppress errors in chemical simulations~\cite{obrien_purification-based_2022}, and in neutral atoms to suppress residual thermal effects on observables of motional states~\cite{cotler_quantum_2019}. The first example uses discrete-variable encoding, while the latter uses continuous-variable systems. Both examples used two-copies of the noisy state to approximate the purified state for measurement. The performance of the virtual distillation protocol is highly dependent on the presence of correlated errors between subsystems. Different experimental platforms have different dominant error channels. Therefore, it is important to verify the efficacy of virtual distillation on the ion-trap platform, especially in the presence of spatially correlated errors, which are prevalent when using global optical or microwave control fields.
+Virtual distillation has been previously demonstrated experimentally on the super-conducting platform to suppress errors in chemical simulations~\cite{obrien_purification-based_2023}, and in neutral atoms to suppress residual thermal effects on observables of motional states~\cite{cotler_quantum_2019}. The first example uses discrete-variable encoding, while the latter uses continuous-variable systems. Both examples used two-copies of the noisy state to approximate the purified state for measurement. The performance of the virtual distillation protocol is highly dependent on the presence of correlated errors between subsystems. Different experimental platforms have different dominant error channels. Therefore, it is important to verify the efficacy of virtual distillation on the ion-trap platform, especially in the presence of spatially correlated errors, which are prevalent when using global optical or microwave control fields.
 
 With the apparatus constructed for this
 thesis, we may begin to explore error suppression using virtual distillation with multiple copies under realistic noise. The following section gives
@@ -965,7 +965,7 @@ Quantum error mitigation is accessible to near-term quantum computers, under som
 \end{table}
     For $n$ copies of noisy state, $\hat\rho$, the controlled derangement can be
     decomposed to a minimum of $n-1$ controlled-SWAP
-    gates~\cite{araki_space-time_2025}. Using accessible native gates, these
+    gates~\cite{araki_space-time_2025-1}. Using accessible native gates, these
     controlled-SWAP are decomposed to $n_\mathrm{2Q} = 11$
     $\hat R_{xx}(\frac{\pi}{4})$ gates and at most $n_\mathrm{1Q} = 7$ single qubit
     $\hat R_x(\frac{\pi}{2})$ rotations. Assuming that we can implement
@@ -1056,6 +1056,6 @@ Quantum error mitigation is accessible to near-term quantum computers, under som
     copies or through random circuit compositions~\cite{wallman_noise_2016}. Furthermore,
     physically separating the copies using networked modules can ensure that
     errors originating from external environmental factors are no longer
-    common-mode between copies~\cite{araki_space-time_2025}. 
+    common-mode between copies~\cite{araki_space-time_2025-1}. 
 
 

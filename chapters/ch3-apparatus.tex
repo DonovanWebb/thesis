@@ -46,9 +46,9 @@
     previous apparatus, leading to state-of-the-art two-qubit entanglement rates
     on the ion-trap platform~\cite{schafer_fast_2018,saner_breaking_2023}, creation
     of highly non-classical motional
-    states~\cite{bazavan_squeezing_2024,saner_generating_2024}, and a simulation of
+    states~\cite{bazavan_squeezing_2026,saner_generating_2026}, and a simulation of
     $\mathbb{Z}_2$ gauge theories encoded via the spin and motional degrees of freedom of a
-    two-ion chain~\cite{bazavan_synthetic_2023, saner_real-time_2025}. However, hard
+    two-ion chain~\cite{bazavan_synthetic_2024,saner_aharonovbohm_2026}. However, hard
     limitations of both scaling these demonstrations to longer ion chains, and
     of interaction strength due to available optical intensity, were often
     restrictive. To solve both these issues, a new apparatus has been designed,
@@ -495,7 +495,7 @@
     a high quantum efficiency ($\simeq 70\%$ at $397~\unit{\nano\meter}$) 
     CMOS camera\footnote{\emph{Hamamatsu Orca-Fusion
     BT} C15440-20UP} for spatially selective qubit readout on a multi-ion chain, and 
-    a photon multiplier tube (PMT)\footnote{\emph{Hamamatsu} Photon counting head H10682-210}, for experiments requiring time resolved photon counting (e.g. micromotion compensation,~\S~\ref{sec:Micromotion}).
+    a photon multiplier tube (PMT)\footnote{\emph{Hamamatsu} Photon counting head H10682-210}, for experiments requiring time resolved photon counting.
     Typical signals of both devices can be seen in the right panels of Figure~\ref{fig:readout}. 
     The optical path consists of a high numerical aperture objective\footnote{\emph{Photon Gear, inc.} Custom 18WD Atom Imager} (effective focal length, $f=33~\unit{\milli\meter}$),  a dichroic mirror\footnote{\todo{\emph{Thorlabs} TODO}} (transmission: $397~\unit{\nano\meter}$; reflection: $729~\unit{\nano\meter}$), a relay lens\footnote{\emph{Thorlabs} Achromat Doublet, ACT508-200-A-ML} ($f=200~\unit{\milli\meter}$), a $90:10$ plate beamsplitter\footnote{\todo{\emph{Thorlabs} TODO}}, and the camera and PMT. 
 
@@ -597,7 +597,7 @@
     Nadlinger (\emph{QLNPD}), and the feedback system controller, known as \emph{SUServo}, was written by
     Peter Drmota.
 
-    \todo{outdated} Beam pointing drifts are mitigated through careful mechanical design of the optical paths for passive stability, and through automated intermittant beam pointing calibrations using the ion as a sensor (see~\S~\ref{sec:Beam Pointing Calibration}).
+    % \todo{outdated} Beam pointing drifts are mitigated through careful mechanical design of the optical paths for passive stability, and through automated intermittant beam pointing calibrations using the ion as a sensor (see~\S~\ref{sec:Beam Pointing Calibration}).
 
     
 \begin{figure}
@@ -701,7 +701,7 @@
     resolved sideband cooling to prepare the motional mode close to its ground
     state (as discussed in~\S~\ref{sec:Cooling}).
     This transition has a narrow linewidth due the the long lived
-    3D\textsubscript{5/2} level ($\tau\approx1.1~\unit{\second}$)~\cite{barton_measurement_nodate}, and so, for power efficiency, a
+    3D\textsubscript{5/2} level ($\tau\approx1.1~\unit{\second}$)~\cite{barton_measurement_2000}, and so, for power efficiency, a
     narrow linewidth laser must be used. For the ``fast entangling gates'' use case, high-intensity electric fields are required at the ion to drive sideband
     transitions.  Here, we describe the 729-nm system 
     consisting of a Ti:Sapph laser system pumped by an LBO-doubled Nd:YAG laser at 532-nm.
@@ -812,7 +812,7 @@
 
     Multiple methods for single-ion addressing have been developed in the ion-trap community, including waveguide arrays~\cite{sotirova_high-fidelity_2024,
     mehta_integrated_2020}, micro-electronic-mechanical mirror arrays~\cite{crain_individual_2014, wang_high-fidelity_2020}, spatial-light-modulators~\cite{mazzanti_alignment_2024}, and
-    acousto-optic deflectors~\cite{pogorelov_compact_2021, pernthaler_single_2019}. Each method has its own advantages and
+    acousto-optic deflectors~\cite{pogorelov_compact_2021,pernthaler_single_nodate}. Each method has its own advantages and
     disadvantages in terms of switching speed, resolution, ease of hardware integration, and
     scalability. Hence, the choice of hardware is a matter of experimental
     preference, and constraints from the remaining ion-trap apparatus.
